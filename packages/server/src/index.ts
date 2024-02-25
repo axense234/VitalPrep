@@ -19,9 +19,10 @@ import authenticationRouter from "./routers/authentication";
 import ingredientsRouter from "./routers/ingredients";
 import utensilsRouter from "./routers/utensils";
 import usersRouter from "./routers/users";
-// import foldersRouter from "./routes/folders";
-// import testRouter from "./routes/test";
-// import styleOptionsRouter from "./routes/styleOptions";
+import recipesRouter from "./routers/recipes";
+import dayTemplatesRouter from "./routers/dayTemplates";
+import instanceTemplatesRouter from "./routers/instanceTemplates";
+import mealPrepLogsRouter from "./routers/mealPrepLogs";
 
 dotenv.config();
 
@@ -56,6 +57,10 @@ app.use("/", [
   ingredientsRouter,
   utensilsRouter,
   usersRouter,
+  recipesRouter,
+  dayTemplatesRouter,
+  instanceTemplatesRouter,
+  mealPrepLogsRouter,
 ]);
 
 app.use(errorHandlerMiddleware);

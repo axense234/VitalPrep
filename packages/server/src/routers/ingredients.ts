@@ -12,7 +12,7 @@ import authenticationMiddleware from "../middleware/authentication";
 
 const router = express.Router();
 
-router.get("/utensils", authenticationMiddleware, getAllIngredients);
+router.get("/ingredients", authenticationMiddleware, getAllIngredients);
 
 router.get(
   "/ingredients/:ingredientId",
