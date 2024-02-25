@@ -1,0 +1,167 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       String @id @default(uuid())
+  username String @default("Username")
+  imageUrl String @default("https://res.cloudinary.com/birthdayreminder/image/upload/v1708852560/VitalPrep/defaultprofileimage_tzrh3w.jpg")
+  email    String @unique @default("exampleemail@provider.com")
+  password String @default("password")
+  age      Int    @default(0)
+
+  notificationSettings   NotificationSettings @relation(fields: [notificationSettingsId], references: [id], onDelete: Cascade)
+  notificationSettingsId String               @unique
+
+  utensils          Utensil[]
+  ingredients       Ingredient[]
+  recipes           Recipe[]
+  dayTemplates      DayTemplate[]
+  instanceTemplates InstanceTemplate[]
+  mealPrepPlans     MealPrepPlan[]
+  mealPrepLogs      MealPrepLog[]
+}
+
+model NotificationSettings {
+  id                   String  @id @default(uuid())
+  allowedNotifications Boolean @default(true)
+  notificationImageUrl String  @default("")
+  notificationStyle    String  @default("Default")
+
+  user User?
+}
+
+model MealPrepLog {
+  id              String   @id @default(uuid())
+  name            String   @default("Meal Prep Log")
+  imageUrl        String   @default("https://res.cloudinary.com/birthdayreminder/image/upload/v1708849818/VitalPrep/vector-set-foam-container_60352-1353_or48cz.jpg")
+  date            DateTime @default(dbgenerated())
+  completed       Boolean  @default(true)
+  cookingDuration Int      @default(0)
+
+  instanceTemplate   InstanceTemplate @relation(fields: [instanceTemplateId], references: [id])
+  instanceTemplateId String
+
+  user   User?   @relation(fields: [userId], references: [id])
+  userId String?
+}
+
+model MealPrepPlan {
+  id        String  @id @default(uuid())
+  name      String  @default("Meal Prep Plan")
+  imageUrl  String  @default("https://res.cloudinary.com/birthdayreminder/image/upload/v1708851067/VitalPrep/Default_Day_Instance_Image_Plan_obbwd9.jpg")
+  activated Boolean @default(true)
+
+  instanceTemplates        InstanceTemplate[]
+  instanceTemplatesTimings DateTime[]
+
+  macros   Macros @relation(fields: [macrosId], references: [id], onDelete: Cascade)
+  macrosId String @unique
+
+  user   User?   @relation(fields: [userId], references: [id])
+  userId String?
+}
+
+model InstanceTemplate {
+  id       String @id @default(uuid())
+  name     String @default("Instance Template")
+  imageUrl String @default("https://res.cloudinary.com/birthdayreminder/image/upload/v1708849818/VitalPrep/vector-set-foam-container_60352-1353_or48cz.jpg")
+
+  dayTemplates  DayTemplate[]
+  mealPrepPlans MealPrepPlan[]
+  mealPrepLogs  MealPrepLog[]
+
+  macros   Macros @relation(fields: [macrosId], references: [id], onDelete: Cascade)
+  macrosId String @unique
+
+  user   User?   @relation(fields: [userId], references: [id])
+  userId String?
+}
+
+model DayTemplate {
+  id       String @id @default(uuid())
+  name     String @default("Day Template")
+  imageUrl String @default("https://res.cloudinary.com/birthdayreminder/image/upload/v1708849436/VitalPrep/Default_Day_Instance_Image_xs53xh.jpg")
+
+  recipes           Recipe[]
+  instanceTemplates InstanceTemplate[]
+
+  macros   Macros @relation(fields: [macrosId], references: [id], onDelete: Cascade)
+  macrosId String @unique
+
+  user   User?   @relation(fields: [userId], references: [id])
+  userId String?
+}
+
+model Recipe {
+  id       String @id @default(uuid())
+  name     String @default("Recipe")
+  imageUrl String @default("https://res.cloudinary.com/birthdayreminder/image/upload/v1708848563/VitalPrep/depositphotos_86878174-stock-illustration-simple-doodle-of-a-bowl_skeven.webp")
+
+  ingredients  Ingredient[]
+  utensils     Utensil[]
+  dayTemplates DayTemplate[]
+
+  macros   Macros @relation(fields: [macrosId], references: [id], onDelete: Cascade)
+  macrosId String @unique
+
+  recipeTutorial   RecipeTutorial @relation(fields: [recipeTutorialId], references: [id], onDelete: Cascade)
+  recipeTutorialId String         @unique
+
+  user   User?   @relation(fields: [userId], references: [id])
+  userId String?
+}
+
+model RecipeTutorial {
+  id              String @id @default(uuid())
+  writtenTutorial String @default("")
+  videoTutorial   String @default("")
+
+  recipe Recipe?
+}
+
+model Ingredient {
+  id       String  @id @default(uuid())
+  name     String  @default("Ingredient")
+  imageUrl String  @default("https://res.cloudinary.com/birthdayreminder/image/upload/v1708848204/VitalPrep/doodle-carrot-hand-drawn-black-white-outline-carrot-line-art-vegetable-stock-vector_502320-1096_oenebb.jpg")
+  enabled  Boolean @default(true)
+
+  recipes Recipe[]
+
+  macros   Macros @relation(fields: [macrosId], references: [id], onDelete: Cascade)
+  macrosId String @unique
+
+  user   User?   @relation(fields: [userId], references: [id])
+  userId String?
+}
+
+model Macros {
+  id            String @id @default(uuid())
+  calories      Int    @default(0)
+  proteinAmount Int    @default(0)
+  carbsAmount   Int    @default(0)
+  fatsAmount    Int    @default(0)
+
+  ingredient       Ingredient?
+  recipe           Recipe?
+  dayTemplate      DayTemplate?
+  instanceTemplate InstanceTemplate?
+  mealPrepPlan     MealPrepPlan?
+}
+
+model Utensil {
+  id       String  @id @default(uuid())
+  name     String  @default("Utensil")
+  imageUrl String  @default("https://res.cloudinary.com/birthdayreminder/image/upload/v1708848218/VitalPrep/frying-pan-with-food-hand-drawn-doodle-vector-41700255_ni2nh1.jpg")
+  enabled  Boolean @default(true)
+
+  recipes Recipe[]
+
+  user   User?   @relation(fields: [userId], references: [id])
+  userId String?
+}
