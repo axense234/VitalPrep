@@ -9,7 +9,16 @@ import { Ingredient } from "@prisma/client";
 import { deleteCache, getOrSetCache, setCache } from "../utils/redis";
 
 const getAllIngredients = async (req: Request, res: Response) => {
-  const foundIngredients = await IngredientClient.findMany({});
+  const foundIngredients = await getOrSetCache("ingredients", async () => {
+    const ingredients = await IngredientClient.findMany({
+      include: {
+        macros: true,
+        recipes: true,
+        user: true,
+      },
+    });
+    return ingredients as Ingredient[];
+  });
 
   if (foundIngredients.length < 1) {
     return res
@@ -25,7 +34,7 @@ const getAllIngredients = async (req: Request, res: Response) => {
 };
 
 const getIngredientById = async (req: Request, res: Response) => {
-  const { ingredientId } = req.params;
+  const { ingredientId, userId } = req.params;
 
   if (!ingredientId) {
     return res
@@ -34,7 +43,7 @@ const getIngredientById = async (req: Request, res: Response) => {
   }
 
   const foundIngredient = await getOrSetCache(
-    `ingredients:${ingredientId}`,
+    `${userId}:ingredients:${ingredientId}`,
     async () => {
       const ingredient = await IngredientClient.findUnique({
         where: { id: ingredientId },
@@ -87,11 +96,13 @@ const createIngredient = async (req: Request, res: Response) => {
       ingredient: {},
     });
   }
-
   await deleteCache(`ingredients`);
-  await deleteCache("users");
-  await deleteCache(`users:${createdIngredient.userId}`);
-  await setCache(`ingredients:${createdIngredient.id}`, createdIngredient);
+  await deleteCache(`${createdIngredient.userId}:ingredients`);
+
+  await setCache(
+    `${createdIngredient.userId}:ingredients:${createdIngredient.id}`,
+    createdIngredient
+  );
 
   return res.status(StatusCodes.CREATED).json({
     message: `Successfully created ingredient with id:${createdIngredient.id}.`,
@@ -109,6 +120,12 @@ const updateIngredient = async (req: Request, res: Response) => {
       .json({ message: "Please enter an ingredient id!", ingredient: {} });
   }
 
+  if (!ingredientBody) {
+    return res
+      .status(StatusCodes.BAD_REQUEST)
+      .json({ message: "Please enter a request body!", ingredient: {} });
+  }
+
   const updatedIngredient = await IngredientClient.update({
     where: { id: ingredientId },
     data: { ...ingredientBody },
@@ -121,12 +138,18 @@ const updateIngredient = async (req: Request, res: Response) => {
 
   if (!updatedIngredient) {
     return res.status(StatusCodes.NOT_FOUND).json({
-      message: `Could not find ingredient with id:${ingredientId}...`,
+      message: `Could not update ingredient with id:${ingredientId}...`,
       ingredient: {},
     });
   }
 
-  await setCache(`ingredients:${updatedIngredient.id}`, updatedIngredient);
+  await deleteCache(`ingredients`);
+  await deleteCache(`${updatedIngredient.userId}:ingredients`);
+
+  await setCache(
+    `${updatedIngredient.userId}:ingredients:${updatedIngredient.id}`,
+    updatedIngredient
+  );
 
   return res.status(StatusCodes.OK).json({
     message: `Successfully updated ingredient with id:${ingredientId}.`,
@@ -153,15 +176,18 @@ const deleteIngredient = async (req: Request, res: Response) => {
   });
 
   if (!deletedIngredient) {
-    return res
-      .status(StatusCodes.NOT_FOUND)
-      .json({
-        message: `Could not find ingredient with id:${ingredientId}...`,
-        ingredient: {},
-      });
+    return res.status(StatusCodes.NOT_FOUND).json({
+      message: `Could not delete ingredient with id:${ingredientId}...`,
+      ingredient: {},
+    });
   }
 
-  await deleteCache(`ingredients:${deletedIngredient.id}`);
+  await deleteCache(`ingredients`);
+  await deleteCache(`${deletedIngredient.userId}:ingredients`);
+
+  await deleteCache(
+    `${deletedIngredient.userId}:ingredients:${deletedIngredient.id}`
+  );
 
   return res.status(StatusCodes.OK).json({
     message: `Successfully deleted ingredient with id:${ingredientId}.`,

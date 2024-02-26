@@ -13,6 +13,6 @@ router.post("/users/signup", signupUser);
 
 router.post("/users/login", loginUser);
 
-router.post("/users/signout", signoutUser);
+router.post("/users/signout/:userId", signoutUser);
 
 export default router;

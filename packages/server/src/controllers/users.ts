@@ -56,7 +56,7 @@ const getUserById = async (req: Request, res: Response) => {
   if (!userId) {
     return res
       .status(StatusCodes.BAD_REQUEST)
-      .json({ message: "Please enter a user id!", user: {} });
+      .json({ message: "Please enter an user id!", user: {} });
   }
 
   const foundUser = await getOrSetCache(`users:${userId}`, async () => {
@@ -96,7 +96,13 @@ const updateUserById = async (req: Request, res: Response) => {
   if (!userId) {
     return res
       .status(StatusCodes.BAD_REQUEST)
-      .json({ message: "Please enter a user id!", user: {} });
+      .json({ message: "Please enter an user id!", user: {} });
+  }
+
+  if (!userBody) {
+    return res
+      .status(StatusCodes.BAD_REQUEST)
+      .json({ message: "Please enter a request body!", user: {} });
   }
 
   const updatedUser = await UserClient.update({
@@ -116,16 +122,16 @@ const updateUserById = async (req: Request, res: Response) => {
 
   if (!updatedUser) {
     return res.status(StatusCodes.NOT_FOUND).json({
-      message: `Could not find user with id:${userId}...`,
+      message: `Could not update user with id:${userId}...`,
       user: {},
     });
   }
 
-  await setCache(`users:${userId}`, updatedUser);
   await deleteCache("users");
+  await setCache(`users:${userId}`, updatedUser);
 
   return res.status(StatusCodes.OK).json({
-    message: `Successfully found user updated with id:${userId}.`,
+    message: `Successfully updated user with id:${userId}.`,
     user: updatedUser,
   });
 };
@@ -139,26 +145,39 @@ const deleteUserById = async (req: Request, res: Response) => {
       .json({ message: "Please enter a user id!", user: {} });
   }
 
-  await IngredientClient.deleteMany({ where: { userId } });
-  await UtensilClient.deleteMany({ where: { userId } });
-  await RecipeClient.deleteMany({ where: { userId } });
-  await DayTemplateClient.deleteMany({ where: { userId } });
-  await InstanceTemplateClient.deleteMany({ where: { userId } });
-  await MealPrepPlanClient.deleteMany({ where: { userId } });
-  await MealPrepLogClient.deleteMany({ where: { userId } });
-
   const deletedUser = await UserClient.delete({
     where: { id: userId },
   });
 
   if (!deletedUser) {
     return res.status(StatusCodes.NOT_FOUND).json({
-      message: `Could not find user with id:${userId}...`,
+      message: `Could not delete user with id:${userId}...`,
       user: {},
     });
   }
 
-  await deleteCache("jwt-vitalprep");
+  await IngredientClient.deleteMany({ where: { userId } });
+  await deleteCache(`${userId}:ingredients`);
+
+  await UtensilClient.deleteMany({ where: { userId } });
+  await deleteCache(`${userId}:utensils`);
+
+  await RecipeClient.deleteMany({ where: { userId } });
+  await deleteCache(`${userId}:recipes`);
+
+  await DayTemplateClient.deleteMany({ where: { userId } });
+  await deleteCache(`${userId}:dayTemplates`);
+
+  await InstanceTemplateClient.deleteMany({ where: { userId } });
+  await deleteCache(`${userId}:instanceTemplates`);
+
+  await MealPrepPlanClient.deleteMany({ where: { userId } });
+  await deleteCache(`${userId}:mealPrepPlans`);
+
+  await MealPrepLogClient.deleteMany({ where: { userId } });
+  await deleteCache(`${userId}:mealPrepLogs`);
+
+  await deleteCache(`${userId}:jwt-vitalprep`);
   await deleteCache(`users:${userId}`);
 
   return res.status(StatusCodes.OK).json({

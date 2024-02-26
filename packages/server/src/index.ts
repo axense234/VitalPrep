@@ -23,6 +23,7 @@ import recipesRouter from "./routers/recipes";
 import dayTemplatesRouter from "./routers/dayTemplates";
 import instanceTemplatesRouter from "./routers/instanceTemplates";
 import mealPrepLogsRouter from "./routers/mealPrepLogs";
+import mealPrepPlansRouter from "./routers/mealPrepPlans";
 
 dotenv.config();
 
@@ -38,11 +39,15 @@ app.use(morgan("dev"));
 
 app.set("trust proxy", 1);
 
+const maxRateLimit: number = process.env.MAX_RATE_LIMIT
+  ? parseInt(process.env.MAX_RATE_LIMIT)
+  : 5000;
+
 // Limit each IP to request a lot in 15 mins
 app.use(
   rateLimiter({
     windowMs: 15 * 60 * 1000,
-    max: 1000,
+    max: isNaN(maxRateLimit) ? 5000 : maxRateLimit,
   })
 );
 
@@ -61,6 +66,7 @@ app.use("/", [
   dayTemplatesRouter,
   instanceTemplatesRouter,
   mealPrepLogsRouter,
+  mealPrepPlansRouter,
 ]);
 
 app.use(errorHandlerMiddleware);

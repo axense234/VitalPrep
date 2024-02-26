@@ -19,7 +19,7 @@ router.get(
 );
 
 router.get(
-  "/instanceTemplates/:instanceTemplateId",
+  "/:userId/instanceTemplates/:instanceTemplateId",
   authenticationMiddleware,
   getInstanceTemplateById
 );

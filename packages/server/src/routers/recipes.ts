@@ -14,9 +14,13 @@ const router = express.Router();
 
 router.get("/recipes", authenticationMiddleware, getAllRecipes);
 
-router.get("/recipes/:recipeId", authenticationMiddleware, getRecipeById);
+router.get(
+  "/:userId/recipes/:recipeId",
+  authenticationMiddleware,
+  getRecipeById
+);
 
-router.post("/ingredients/create", authenticationMiddleware, createRecipe);
+router.post("/recipes/create", authenticationMiddleware, createRecipe);
 
 router.patch(
   "/recipes/update/:recipeId",

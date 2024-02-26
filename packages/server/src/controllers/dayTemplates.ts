@@ -9,7 +9,17 @@ import { DayTemplate, Recipe } from "@prisma/client";
 import { deleteCache, getOrSetCache, setCache } from "../utils/redis";
 
 const getAllDayTemplates = async (req: Request, res: Response) => {
-  const foundDayTemplates = await DayTemplateClient.findMany({});
+  const foundDayTemplates = await getOrSetCache("dayTemplates", async () => {
+    const dayTemplates = await DayTemplateClient.findMany({
+      include: {
+        macros: true,
+        recipes: true,
+        instanceTemplates: true,
+        user: true,
+      },
+    });
+    return dayTemplates as DayTemplate[];
+  });
 
   if (foundDayTemplates.length < 1) {
     return res
@@ -25,7 +35,7 @@ const getAllDayTemplates = async (req: Request, res: Response) => {
 };
 
 const getDayTemplateById = async (req: Request, res: Response) => {
-  const { dayTemplateId } = req.params;
+  const { dayTemplateId, userId } = req.params;
 
   if (!dayTemplateId) {
     return res
@@ -34,7 +44,7 @@ const getDayTemplateById = async (req: Request, res: Response) => {
   }
 
   const foundDayTemplate = await getOrSetCache(
-    `dayTemplates:${dayTemplateId}`,
+    `${userId}:dayTemplates:${dayTemplateId}`,
     async () => {
       const dayTemplate = await DayTemplateClient.findUnique({
         where: { id: dayTemplateId },
@@ -105,7 +115,12 @@ const createDayTemplate = async (req: Request, res: Response) => {
   }
 
   await deleteCache(`dayTemplates`);
-  await setCache(`dayTemplates:${createdDayTemplate.id}`, createdDayTemplate);
+  await deleteCache(`${createdDayTemplate.id}:dayTemplates`);
+
+  await setCache(
+    `${createdDayTemplate.userId}:dayTemplates:${createdDayTemplate.id}`,
+    createdDayTemplate
+  );
 
   return res.status(StatusCodes.CREATED).json({
     message: `Successfully created day template with id:${createdDayTemplate.id}.`,
@@ -149,12 +164,18 @@ const updateDayTemplate = async (req: Request, res: Response) => {
 
   if (!updatedDayTemplate) {
     return res.status(StatusCodes.NOT_FOUND).json({
-      message: `Could not find day template with id:${dayTemplateId}...`,
+      message: `Could not update day template with id:${dayTemplateId}...`,
       dayTemplate: {},
     });
   }
 
-  await setCache(`dayTemplates:${updatedDayTemplate.id}`, updatedDayTemplate);
+  await deleteCache(`dayTemplates`);
+  await deleteCache(`${updatedDayTemplate.userId}:dayTemplates`);
+
+  await setCache(
+    `${updatedDayTemplate.userId}:dayTemplates:${updatedDayTemplate.id}`,
+    updatedDayTemplate
+  );
 
   return res.status(StatusCodes.OK).json({
     message: `Successfully updated day template with id:${dayTemplateId}.`,
@@ -183,12 +204,17 @@ const deleteDayTemplate = async (req: Request, res: Response) => {
 
   if (!deletedDayTemplate) {
     return res.status(StatusCodes.NOT_FOUND).json({
-      message: `Could not find day template with id:${dayTemplateId}...`,
+      message: `Could not delete day template with id:${dayTemplateId}...`,
       dayTemplate: {},
     });
   }
 
-  await deleteCache(`dayTemplate:${deletedDayTemplate.id}`);
+  await deleteCache(`dayTemplates`);
+  await deleteCache(`${deletedDayTemplate.userId}:dayTemplates`);
+
+  await deleteCache(
+    `${deletedDayTemplate.userId}:dayTemplates:${deletedDayTemplate.id}`
+  );
 
   return res.status(StatusCodes.OK).json({
     message: `Successfully deleted day template with id:${dayTemplateId}.`,

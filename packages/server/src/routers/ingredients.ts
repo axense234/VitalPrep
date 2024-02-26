@@ -15,7 +15,7 @@ const router = express.Router();
 router.get("/ingredients", authenticationMiddleware, getAllIngredients);
 
 router.get(
-  "/ingredients/:ingredientId",
+  "/:userId/ingredients/:ingredientId",
   authenticationMiddleware,
   getIngredientById
 );

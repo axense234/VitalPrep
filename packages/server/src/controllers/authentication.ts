@@ -20,13 +20,13 @@ const signupUser = async (req: Request, res: Response) => {
   if (!createdUser) {
     return res
       .status(StatusCodes.BAD_REQUEST)
-      .json({ message: "Could not create author!" });
+      .json({ message: "Could not create user!" });
   }
 
   const token = createJWT(createdUser.id, createdUser.username);
 
   await deleteCache(`users`);
-  await setCache("jwt-vitalprep", token);
+  await setCache(`${createdUser.id}:jwt-vitalprep`, token);
   await setCache(`users:${createdUser.id}`, createdUser);
 
   return res.status(StatusCodes.CREATED).json({
@@ -42,7 +42,7 @@ const loginUser = async (req: Request, res: Response) => {
   if (!password || !email) {
     return res
       .status(StatusCodes.BAD_REQUEST)
-      .json({ msg: "Please enter both password and email!" });
+      .json({ message: "Please enter both password and email!" });
   }
 
   const foundUser = await UserClient.findUnique({ where: { email } });
@@ -50,17 +50,19 @@ const loginUser = async (req: Request, res: Response) => {
   if (!foundUser) {
     return res
       .status(StatusCodes.NOT_FOUND)
-      .json({ msg: `Could not find any users with the email:${email}...` });
+      .json({ message: `Could not find any users with the email:${email}...` });
   }
 
   const passMatch = await comparePasswords(password, foundUser.password);
 
   if (!passMatch) {
-    return res.status(StatusCodes.UNAUTHORIZED).json({ msg: "Wrong pass!" });
+    return res
+      .status(StatusCodes.UNAUTHORIZED)
+      .json({ message: "Passwords do not match!" });
   }
 
   const token = createJWT(foundUser.id, foundUser.username);
-  await setCache("jwt-vitalprep", token);
+  await setCache(`${foundUser.id}:jwt-vitalprep`, token);
 
   return res.status(StatusCodes.OK).json({
     message: `Successfully logged in as ${foundUser.username}!`,
@@ -70,11 +72,11 @@ const loginUser = async (req: Request, res: Response) => {
 };
 
 const signoutUser = async (req: Request, res: Response) => {
-  await deleteCache("jwt-vitalprep");
+  const { userId } = req.params;
+  await deleteCache(`${userId}:jwt-vitalprep`);
   return res
     .status(StatusCodes.OK)
     .json({ message: "Successfully signed out!" });
 };
 
-// EXPORTS
 export { signupUser, loginUser, signoutUser };

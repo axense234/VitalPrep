@@ -4,12 +4,26 @@ import { Response, Request } from "express";
 import { StatusCodes } from "http-status-codes";
 // Prisma
 import { InstanceTemplateClient } from "../db/postgres";
-import { DayTemplate, InstanceTemplate, Recipe } from "@prisma/client";
+import { DayTemplate, InstanceTemplate } from "@prisma/client";
 // Utils
 import { deleteCache, getOrSetCache, setCache } from "../utils/redis";
 
 const getAllInstanceTemplates = async (req: Request, res: Response) => {
-  const foundInstanceTemplates = await InstanceTemplateClient.findMany({});
+  const foundInstanceTemplates = await getOrSetCache(
+    "instanceTemplates",
+    async () => {
+      const instanceTemplates = await InstanceTemplateClient.findMany({
+        include: {
+          macros: true,
+          dayTemplates: true,
+          mealPrepPlans: true,
+          mealPrepLogs: true,
+          user: true,
+        },
+      });
+      return instanceTemplates as InstanceTemplate[];
+    }
+  );
 
   if (foundInstanceTemplates.length < 1) {
     return res.status(StatusCodes.NOT_FOUND).json({
@@ -26,7 +40,7 @@ const getAllInstanceTemplates = async (req: Request, res: Response) => {
 };
 
 const getInstanceTemplateById = async (req: Request, res: Response) => {
-  const { instanceTemplateId } = req.params;
+  const { instanceTemplateId, userId } = req.params;
 
   if (!instanceTemplateId) {
     return res.status(StatusCodes.BAD_REQUEST).json({
@@ -36,7 +50,7 @@ const getInstanceTemplateById = async (req: Request, res: Response) => {
   }
 
   const foundInstanceTemplate = await getOrSetCache(
-    `instanceTemplates:${instanceTemplateId}`,
+    `${userId}:instanceTemplates:${instanceTemplateId}`,
     async () => {
       const instanceTemplate = await InstanceTemplateClient.findUnique({
         where: { id: instanceTemplateId },
@@ -86,7 +100,7 @@ const createInstanceTemplate = async (req: Request, res: Response) => {
   const createdInstanceTemplate = await InstanceTemplateClient.create({
     data: {
       ...instanceTemplateBody,
-      recipes: {
+      dayTemplates: {
         connect: dayTemplates.map((dayTemplate) => ({
           id: dayTemplate.id,
         })),
@@ -109,8 +123,10 @@ const createInstanceTemplate = async (req: Request, res: Response) => {
   }
 
   await deleteCache(`instanceTemplates`);
+  await deleteCache(`${createdInstanceTemplate.userId}:instanceTemplates`);
+
   await setCache(
-    `instanceTemplates:${createdInstanceTemplate.id}`,
+    `${createdInstanceTemplate.userId}:instanceTemplates:${createdInstanceTemplate.id}`,
     createdInstanceTemplate
   );
 
@@ -137,13 +153,13 @@ const updateInstanceTemplate = async (req: Request, res: Response) => {
       .json({ message: "Please enter a request body!", instanceTemplate: {} });
   }
 
-  const dayTemplates = instanceTemplateBody.recipes as Recipe[];
+  const dayTemplates = instanceTemplateBody.dayTemplates as DayTemplate[];
 
   const updatedInstanceTemplate = await InstanceTemplateClient.update({
     where: { id: instanceTemplateId },
     data: {
       ...instanceTemplateBody,
-      recipes: {
+      dayTemplates: {
         connect: dayTemplates.map((dayTemplate) => ({ id: dayTemplate.id })),
       },
     },
@@ -158,13 +174,16 @@ const updateInstanceTemplate = async (req: Request, res: Response) => {
 
   if (!updatedInstanceTemplate) {
     return res.status(StatusCodes.NOT_FOUND).json({
-      message: `Could not find instance template with id:${instanceTemplateId}...`,
+      message: `Could not update instance template with id:${instanceTemplateId}...`,
       instanceTemplate: {},
     });
   }
 
+  await deleteCache(`instanceTemplates`);
+  await deleteCache(`${updatedInstanceTemplate.userId}:instanceTemplates`);
+
   await setCache(
-    `instanceTemplates:${updatedInstanceTemplate.id}`,
+    `${updatedInstanceTemplate.userId}:instanceTemplates:${updatedInstanceTemplate.id}`,
     updatedInstanceTemplate
   );
 
@@ -197,12 +216,17 @@ const deleteInstanceTemplate = async (req: Request, res: Response) => {
 
   if (!deletedInstanceTemplate) {
     return res.status(StatusCodes.NOT_FOUND).json({
-      message: `Could not find instance template with id:${instanceTemplateId}...`,
+      message: `Could not delete instance template with id:${instanceTemplateId}...`,
       instanceTemplate: {},
     });
   }
 
-  await deleteCache(`instanceTemplate:${deletedInstanceTemplate.id}`);
+  await deleteCache(`instanceTemplates`);
+  await deleteCache(`${deletedInstanceTemplate.userId}:instanceTemplates`);
+
+  await deleteCache(
+    `${deletedInstanceTemplate.userId}:instanceTemplates:${deletedInstanceTemplate.id}`
+  );
 
   return res.status(StatusCodes.OK).json({
     message: `Successfully deleted instance template with id:${instanceTemplateId}.`,

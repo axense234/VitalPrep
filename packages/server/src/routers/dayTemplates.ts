@@ -15,7 +15,7 @@ const router = express.Router();
 router.get("/dayTemplates", authenticationMiddleware, getAllDayTemplates);
 
 router.get(
-  "/dayTemplates/:dayTemplateId",
+  "/:userId/dayTemplates/:dayTemplateId",
   authenticationMiddleware,
   getDayTemplateById
 );

@@ -9,7 +9,15 @@ import { InstanceTemplate, MealPrepLog } from "@prisma/client";
 import { deleteCache, getOrSetCache, setCache } from "../utils/redis";
 
 const getAllMealPrepLogs = async (req: Request, res: Response) => {
-  const foundMealPrepLogs = await MealPrepLogClient.findMany({});
+  const foundMealPrepLogs = await getOrSetCache("mealPrepLogs", async () => {
+    const mealPrepLogs = await MealPrepLogClient.findMany({
+      include: {
+        instanceTemplate: true,
+        user: true,
+      },
+    });
+    return mealPrepLogs as MealPrepLog[];
+  });
 
   if (foundMealPrepLogs.length < 1) {
     return res.status(StatusCodes.NOT_FOUND).json({
@@ -26,7 +34,7 @@ const getAllMealPrepLogs = async (req: Request, res: Response) => {
 };
 
 const getMealPrepLogById = async (req: Request, res: Response) => {
-  const { mealPrepLogId } = req.params;
+  const { mealPrepLogId, userId } = req.params;
 
   if (!mealPrepLogId) {
     return res
@@ -35,7 +43,7 @@ const getMealPrepLogById = async (req: Request, res: Response) => {
   }
 
   const foundMealPrepLog = await getOrSetCache(
-    `mealPrepLogs:${mealPrepLogId}`,
+    `${userId}:mealPrepLogs:${mealPrepLogId}`,
     async () => {
       const mealPrepLog = await MealPrepLogClient.findUnique({
         where: { id: mealPrepLogId },
@@ -100,8 +108,12 @@ const createMealPrepLog = async (req: Request, res: Response) => {
   }
 
   await deleteCache(`mealPrepLogs`);
-  await setCache(`mealPrepLogs:${createdMealPrepLog.id}`, createdMealPrepLog);
   await deleteCache(`${createdMealPrepLog.userId}:mealPrepLogs`);
+
+  await setCache(
+    `${createdMealPrepLog.userId}:mealPrepLogs:${createdMealPrepLog.id}`,
+    createdMealPrepLog
+  );
 
   return res.status(StatusCodes.CREATED).json({
     message: `Successfully created meal prep log with id:${createdMealPrepLog.id}.`,
@@ -143,12 +155,18 @@ const updateMealPrepLog = async (req: Request, res: Response) => {
 
   if (!updatedMealPrepLog) {
     return res.status(StatusCodes.NOT_FOUND).json({
-      message: `Could not find meal prep log with id:${mealPrepLogId}...`,
+      message: `Could not update meal prep log with id:${mealPrepLogId}...`,
       mealPrepLog: {},
     });
   }
 
-  await setCache(`mealPrepLogs:${updatedMealPrepLog.id}`, updatedMealPrepLog);
+  await deleteCache(`mealPrepLogs`);
+  await deleteCache(`${updatedMealPrepLog.userId}:mealPrepLogs`);
+
+  await setCache(
+    `${updatedMealPrepLog.userId}:mealPrepLogs:${updatedMealPrepLog.id}`,
+    updatedMealPrepLog
+  );
 
   return res.status(StatusCodes.OK).json({
     message: `Successfully updated meal prep log with id:${mealPrepLogId}.`,
@@ -175,12 +193,17 @@ const deleteMealPrepLog = async (req: Request, res: Response) => {
 
   if (!deletedMealPrepLog) {
     return res.status(StatusCodes.NOT_FOUND).json({
-      message: `Could not find meal prep log with id:${mealPrepLogId}...`,
+      message: `Could not delete meal prep log with id:${mealPrepLogId}...`,
       mealPrepLog: {},
     });
   }
 
-  await deleteCache(`mealPrepLogs:${deletedMealPrepLog.id}`);
+  await deleteCache(`mealPrepLogs`);
+  await deleteCache(`${deletedMealPrepLog.userId}:mealPrepLogs`);
+
+  await deleteCache(
+    `${deletedMealPrepLog.userId}:mealPrepLogs:${deletedMealPrepLog.id}`
+  );
 
   return res.status(StatusCodes.OK).json({
     message: `Successfully deleted meal prep log with id:${mealPrepLogId}.`,

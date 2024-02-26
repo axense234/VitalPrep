@@ -9,7 +9,19 @@ import { Ingredient, Recipe, Utensil } from "@prisma/client";
 import { deleteCache, getOrSetCache, setCache } from "../utils/redis";
 
 const getAllRecipes = async (req: Request, res: Response) => {
-  const foundRecipes = await RecipeClient.findMany({});
+  const foundRecipes = await getOrSetCache("recipes", async () => {
+    const recipes = await RecipeClient.findMany({
+      include: {
+        macros: true,
+        utensils: true,
+        ingredients: true,
+        dayTemplates: true,
+        recipeTutorial: true,
+        user: true,
+      },
+    });
+    return recipes as Recipe[];
+  });
 
   if (foundRecipes.length < 1) {
     return res
@@ -25,7 +37,7 @@ const getAllRecipes = async (req: Request, res: Response) => {
 };
 
 const getRecipeById = async (req: Request, res: Response) => {
-  const { recipeId } = req.params;
+  const { recipeId, userId } = req.params;
 
   if (!recipeId) {
     return res
@@ -33,20 +45,23 @@ const getRecipeById = async (req: Request, res: Response) => {
       .json({ message: "Please enter a recipe id!", recipe: {} });
   }
 
-  const foundRecipe = await getOrSetCache(`recipes:${recipeId}`, async () => {
-    const recipe = await RecipeClient.findUnique({
-      where: { id: recipeId },
-      include: {
-        macros: true,
-        utensils: true,
-        ingredients: true,
-        dayTemplates: true,
-        recipeTutorial: true,
-        user: true,
-      },
-    });
-    return recipe as Recipe;
-  });
+  const foundRecipe = await getOrSetCache(
+    `${userId}:recipes:${recipeId}`,
+    async () => {
+      const recipe = await RecipeClient.findUnique({
+        where: { id: recipeId },
+        include: {
+          macros: true,
+          utensils: true,
+          ingredients: true,
+          dayTemplates: true,
+          recipeTutorial: true,
+          user: true,
+        },
+      });
+      return recipe as Recipe;
+    }
+  );
 
   if (!foundRecipe) {
     return res.status(StatusCodes.NOT_FOUND).json({
@@ -82,7 +97,7 @@ const createRecipe = async (req: Request, res: Response) => {
   }
 
   const ingredients = recipeBody.ingredients as Ingredient[];
-  const utensil = recipeBody.utensils as Utensil[];
+  const utensils = recipeBody.utensils as Utensil[];
 
   const createdRecipe = await RecipeClient.create({
     data: {
@@ -93,7 +108,7 @@ const createRecipe = async (req: Request, res: Response) => {
         })),
       },
       utensils: {
-        connect: utensil.map((utensil) => ({
+        connect: utensils.map((utensil) => ({
           id: utensil.id,
         })),
       },
@@ -116,9 +131,12 @@ const createRecipe = async (req: Request, res: Response) => {
   }
 
   await deleteCache(`recipes`);
-  await deleteCache("users");
-  await deleteCache(`users:${createdRecipe.userId}`);
-  await setCache(`recipes:${createdRecipe.id}`, createdRecipe);
+  await deleteCache(`${createdRecipe.userId}:recipes`);
+
+  await setCache(
+    `${createdRecipe.userId}:recipes:${createdRecipe.id}`,
+    createdRecipe
+  );
 
   return res.status(StatusCodes.CREATED).json({
     message: `Successfully created recipe with id:${createdRecipe.id}.`,
@@ -172,12 +190,18 @@ const updateRecipe = async (req: Request, res: Response) => {
 
   if (!updatedRecipe) {
     return res.status(StatusCodes.NOT_FOUND).json({
-      message: `Could not find recipe with id:${recipeId}...`,
+      message: `Could not update recipe with id:${recipeId}...`,
       recipe: {},
     });
   }
 
-  await setCache(`recipes:${updatedRecipe.id}`, updatedRecipe);
+  await deleteCache(`recipes`);
+  await deleteCache(`${updatedRecipe.userId}:recipes`);
+
+  await setCache(
+    `${updatedRecipe.userId}:recipes:${updatedRecipe.id}`,
+    updatedRecipe
+  );
 
   return res.status(StatusCodes.OK).json({
     message: `Successfully updated recipe with id:${recipeId}.`,
@@ -208,12 +232,15 @@ const deleteRecipe = async (req: Request, res: Response) => {
 
   if (!deletedRecipe) {
     return res.status(StatusCodes.NOT_FOUND).json({
-      message: `Could not find recipe with id:${recipeId}...`,
+      message: `Could not delete recipe with id:${recipeId}...`,
       recipe: {},
     });
   }
 
-  await deleteCache(`recipes:${deletedRecipe.id}`);
+  await deleteCache(`recipes`);
+  await deleteCache(`${deletedRecipe.userId}:recipes`);
+
+  await deleteCache(`${deletedRecipe.userId}:recipes:${deletedRecipe.id}`);
 
   return res.status(StatusCodes.OK).json({
     message: `Successfully deleted recipe with id:${recipeId}.`,

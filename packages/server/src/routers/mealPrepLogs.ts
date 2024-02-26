@@ -15,7 +15,7 @@ const router = express.Router();
 router.get("/mealPrepLogs", authenticationMiddleware, getAllMealPrepLogs);
 
 router.get(
-  "/mealPrepLogs/:mealPrepLogId",
+  "/:userId/mealPrepLogs/:mealPrepLogId",
   authenticationMiddleware,
   getMealPrepLogById
 );

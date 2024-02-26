@@ -9,7 +9,15 @@ import { Utensil } from "@prisma/client";
 import { deleteCache, getOrSetCache, setCache } from "../utils/redis";
 
 const getAllUtensils = async (req: Request, res: Response) => {
-  const foundUtensils = await UtensilClient.findMany({});
+  const foundUtensils = await getOrSetCache("utensils", async () => {
+    const utensils = await UtensilClient.findMany({
+      include: {
+        recipes: true,
+        user: true,
+      },
+    });
+    return utensils as Utensil[];
+  });
 
   if (foundUtensils.length < 1) {
     return res
@@ -25,16 +33,16 @@ const getAllUtensils = async (req: Request, res: Response) => {
 };
 
 const getUtensilById = async (req: Request, res: Response) => {
-  const { utensilId } = req.params;
+  const { utensilId, userId } = req.params;
 
   if (!utensilId) {
     return res
       .status(StatusCodes.BAD_REQUEST)
-      .json({ message: "Please enter a utensil id!", utensil: {} });
+      .json({ message: "Please enter an utensil id!", utensil: {} });
   }
 
   const foundUtensil = await getOrSetCache(
-    `utensils:${utensilId}`,
+    `${userId}:utensils:${utensilId}`,
     async () => {
       const utensil = await UtensilClient.findUnique({
         where: { id: utensilId },
@@ -87,9 +95,12 @@ const createUtensil = async (req: Request, res: Response) => {
   }
 
   await deleteCache(`utensils`);
-  await deleteCache("users");
-  await deleteCache(`users:${createdUtensil.userId}`);
-  await setCache(`utensils:${createdUtensil.id}`, createdUtensil);
+  await deleteCache(`${createdUtensil.userId}:utensils`);
+
+  await setCache(
+    `${createdUtensil.userId}:utensils:${createdUtensil.id}`,
+    createdUtensil
+  );
 
   return res.status(StatusCodes.CREATED).json({
     message: `Successfully created utensil with id:${createdUtensil.id}.`,
@@ -105,6 +116,12 @@ const updateUtensil = async (req: Request, res: Response) => {
     return res
       .status(StatusCodes.BAD_REQUEST)
       .json({ message: "Please enter a utensil id!", utensil: {} });
+  }
+
+  if (!utensilBody) {
+    return res
+      .status(StatusCodes.BAD_REQUEST)
+      .json({ message: "Please enter a request body!", utensil: {} });
   }
 
   const updatedUtensil = await UtensilClient.update({
@@ -123,7 +140,13 @@ const updateUtensil = async (req: Request, res: Response) => {
     });
   }
 
-  await setCache(`utensils:${updatedUtensil.id}`, updatedUtensil);
+  await deleteCache(`utensils`);
+  await deleteCache(`${updatedUtensil.userId}:utensils`);
+
+  await setCache(
+    `${updatedUtensil.userId}:utensils:${updatedUtensil.id}`,
+    updatedUtensil
+  );
 
   return res.status(StatusCodes.OK).json({
     message: `Successfully updated utensil with id:${utensilId}.`,
@@ -137,7 +160,7 @@ const deleteUtensil = async (req: Request, res: Response) => {
   if (!utensilId) {
     return res
       .status(StatusCodes.BAD_REQUEST)
-      .json({ message: "Please enter a utensil id!", utensil: {} });
+      .json({ message: "Please enter an utensil id!", utensil: {} });
   }
 
   const deletedUtensil = await UtensilClient.delete({
@@ -155,7 +178,10 @@ const deleteUtensil = async (req: Request, res: Response) => {
     });
   }
 
-  await deleteCache(`utensils:${deletedUtensil.id}`);
+  await deleteCache(`utensils`);
+  await deleteCache(`${deletedUtensil.userId}:utensils`);
+
+  await deleteCache(`${deletedUtensil.userId}:utensils:${deletedUtensil.id}`);
 
   return res.status(StatusCodes.OK).json({
     message: `Successfully deleted utensil with id:${utensilId}.`,
