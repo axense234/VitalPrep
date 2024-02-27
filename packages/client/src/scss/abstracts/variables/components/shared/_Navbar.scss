@@ -1,0 +1,8 @@
+@use "../../general" as *;
+
+$maxNavbarHeight: 8.25rem;
+$navbarPadding: 1rem 4rem;
+$navbarBackgroundColor: map-get(
+  $map: $colors,
+  $key: primary-1,
+);

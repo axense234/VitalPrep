@@ -1,0 +1,12 @@
+@use "../../abstracts" as *;
+
+.navbarMenuContainer {
+  @include flexCenter(row);
+  width: $navbarMenuDimensions;
+  height: $navbarMenuDimensions;
+  color: $navbarMenuColor;
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+}

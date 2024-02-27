@@ -1,0 +1,10 @@
+@use "../../abstracts" as *;
+
+.navbarContainer {
+  @include flexCenter(row);
+  justify-content: space-between;
+  width: 100%;
+  max-height: $maxNavbarHeight;
+  padding: $navbarPadding;
+  background-color: $navbarBackgroundColor;
+}

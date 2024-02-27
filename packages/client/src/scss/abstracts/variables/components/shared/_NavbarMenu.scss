@@ -1,0 +1,7 @@
+@use "../../general" as *;
+
+$navbarMenuDimensions: 65px;
+$navbarMenuColor: map-get(
+  $map: $colors,
+  $key: tan-color-extra-light,
+);
