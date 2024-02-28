@@ -14,12 +14,25 @@ $colors: (
   "secondary-color-1.4": #423217,
   "secondary-color-2.4": #012433,
   "secondary-color-3.4": #8b0000,
-  "secondary-color-light-2.4": #054c6a,
+  "secondary-color-light-2.4": #646aff,
   "silver-0": #c0c0c0,
   "tan-color": #d2b48c,
   "tan-color-light": #cfbea7,
-  "tan-color-extra-light": #dbd3c8,
+  "tan-color-extra-light": #ddd9d5,
   "error-color": #ff3300,
+  "black-100-1": #120a06,
+  "black-75-1": #120a06,
+  "black-50-1": #120a06,
+  "black-25-1": #120a06,
+  "black-10-1": #120a06,
+  "black-5-1": #120a06,
+);
+
+$fontSizes: (
+  "p-laptop": 21px,
+  "h1-laptop": 119px,
+  "h2-laptop": 88.4px,
+  "h3-laptop": 66.3px,
 );
 
 $screenSizes: (

@@ -1,0 +1,17 @@
+@use "../functions" as *;
+@use "../variables" as *;
+
+@mixin paragraphLaptop() {
+  font-family: "EB Garamond", serif;
+  font-size: getFontSize("p-laptop");
+}
+
+@mixin h1Laptop() {
+  font-family: "Cabin", sans-serif;
+  font-size: getFontSize("h1-laptop");
+}
+
+@mixin h3Laptop() {
+  font-family: "Cabin", sans-serif;
+  font-size: getFontSize("h3-laptop");
+}

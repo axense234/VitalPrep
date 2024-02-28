@@ -1,0 +1,10 @@
+@use "../../general" as *;
+
+$primaryButtonInitialHeight: 48px;
+$primaryButtonInitialWidth: 216px;
+$primaryButtonInitialFontSize: 21px;
+$primaryButtonInitialFontFamily: "Cabin", sans-serif;
+$primaryButtonInitialColor: map-get(
+  $map: $colors,
+  $key: tan-color-extra-light,
+);

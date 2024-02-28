@@ -1,5 +1,5 @@
 // Data
-import { homePageUrl, logoUrl } from "@/data";
+import { homePageUrl, logoReservedDimensions, logoUrl } from "@/data";
 // React
 import { FC } from "react";
 // Next
@@ -11,7 +11,12 @@ import logoStyles from "../../scss/components/shared/Logo.module.scss";
 const Logo: FC = () => {
   return (
     <Link href={homePageUrl} title="Home" className={logoStyles.logoContainer}>
-      <Image src={logoUrl} alt="Logo" width={100} height={100} />
+      <Image
+        src={logoUrl}
+        alt="Logo"
+        width={logoReservedDimensions}
+        height={logoReservedDimensions}
+      />
     </Link>
   );
 };

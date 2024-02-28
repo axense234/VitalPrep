@@ -3,6 +3,7 @@
 .logoContainer {
   @include flexCenter(column);
   border-radius: 50%;
+  width: $logoDimensions;
 
   img {
     width: 100%;

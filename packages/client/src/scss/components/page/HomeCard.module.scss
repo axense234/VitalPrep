@@ -1,0 +1,5 @@
+@use "../../abstracts" as *;
+
+.homeCardContainer {
+  @include flexCenter(column);
+}

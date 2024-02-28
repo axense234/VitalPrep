@@ -1,0 +1,17 @@
+@use "../../abstracts" as *;
+
+.primaryButton {
+  @include flexCenter(row);
+  height: $primaryButtonInitialHeight;
+  width: $primaryButtonInitialWidth;
+  font-size: $primaryButtonInitialFontSize;
+  font-family: $primaryButtonInitialFontFamily;
+  color: $primaryButtonInitialColor;
+  letter-spacing: 1.5px;
+  border: 2px solid getColor("black-100-1");
+}
+
+.primaryButtonLink {
+  @include flexCenter(row);
+  text-decoration: none;
+}

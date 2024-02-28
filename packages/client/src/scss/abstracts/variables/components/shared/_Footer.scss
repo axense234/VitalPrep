@@ -1,0 +1,13 @@
+@use "../../general" as *;
+
+$footerDistanceBetweenLogoAndCopyright: 1rem;
+$footerDistanceBetweenContactInfoSections: 2rem;
+$footerDistanceBetweenSections: 4rem;
+$maxFooterHeight: 33.25rem;
+$footerPadding: 4rem 16rem;
+$numberOfFooterPageLinksPerRow: 4;
+$rowGapOfFooterPageLinks: 1.5rem;
+$footerBackgroundColor: map-get(
+  $map: $colors,
+  $key: primary-1,
+);

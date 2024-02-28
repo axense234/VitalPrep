@@ -1,0 +1,74 @@
+@use "../../abstracts" as *;
+
+.footerContainer {
+  @include flexCenter(column);
+  width: 100%;
+  max-height: $maxFooterHeight;
+  padding: $footerPadding;
+  background-color: $footerBackgroundColor;
+  border: 1px solid black;
+  margin-top: auto;
+  gap: $footerDistanceBetweenSections;
+}
+
+.footerPageLinksList {
+  @include flexCenter(row);
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+  list-style: none;
+  flex-wrap: wrap;
+  row-gap: $rowGapOfFooterPageLinks;
+
+  li {
+    @include flexCenter(row);
+    flex: 1 0 100% / $numberOfFooterPageLinksPerRow;
+    max-width: 100% / $numberOfFooterPageLinksPerRow;
+    justify-content: flex-start;
+  }
+}
+
+.footerPageLink {
+  @include flexCenter(row);
+  text-decoration: none;
+
+  p {
+    width: 100%;
+    height: 100%;
+    color: getColor("tan-color");
+    @include paragraphLaptop();
+  }
+}
+
+.footerContact {
+  @include flexCenter(row);
+  justify-content: space-between;
+  width: 100%;
+
+  p,
+  span {
+    color: getColor("tan-color");
+    @include paragraphLaptop();
+  }
+
+  span {
+    margin-left: $footerDistanceBetweenContactInfoSections;
+    color: getColor("secondary-color-light-2.4");
+  }
+}
+
+.footerBar {
+  @include flexCenter(row);
+  width: 100%;
+  justify-content: space-between;
+}
+
+.footerCopyright {
+  @include flexCenter(column);
+  gap: $footerDistanceBetweenLogoAndCopyright;
+
+  p {
+    color: getColor("tan-color");
+    @include paragraphLaptop();
+  }
+}
