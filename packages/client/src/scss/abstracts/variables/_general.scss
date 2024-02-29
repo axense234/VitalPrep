@@ -2,7 +2,7 @@ $colors: (
   "primary-1": #432517,
   "primary-2": #013220,
   "primary-3": #ff8c00,
-  "secondary-color-1.1": #421d17,
+  "secondary-color-1-1": #421d17,
   "secondary-color-2.1": #013310,
   "secondary-color-3.1": #ff6000,
   "secondary-color-1.2": #422c17,
@@ -45,3 +45,6 @@ $screenSizes: (
   "mobileM": 375px,
   "mobileS": 320px,
 );
+
+$titleOutlinePozitiveCoeficient: 1.5px;
+$titleOutlineNegativeCoeficient: -1.5px;

@@ -10,6 +10,10 @@
   font-family: "Cabin", sans-serif;
   font-size: getFontSize("h1-laptop");
 }
+@mixin h2Laptop() {
+  font-family: "Cabin", sans-serif;
+  font-size: getFontSize("h2-laptop");
+}
 
 @mixin h3Laptop() {
   font-family: "Cabin", sans-serif;

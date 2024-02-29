@@ -4,10 +4,19 @@
   @include flexCenter(column);
   border-radius: 50%;
   width: $logoDimensions;
+  transition: transform 0.135s linear;
+
+  &:hover {
+    transform: scale(1.05);
+  }
 
   img {
     width: 100%;
     height: 100%;
     border-radius: 50%;
+
+    &:hover {
+      transform: scale(1.05);
+    }
   }
 }

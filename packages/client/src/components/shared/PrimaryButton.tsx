@@ -9,6 +9,8 @@ import Link from "next/link";
 
 const PrimaryButton: FC<PrimaryButtonProps> = ({
   backgroundColor,
+  fontSize,
+  width,
   height,
   content,
   fontFamily,
@@ -25,7 +27,7 @@ const PrimaryButton: FC<PrimaryButtonProps> = ({
       >
         <button
           className={primaryButtonStyles.primaryButton}
-          style={{ backgroundColor, fontFamily, height }}
+          style={{ backgroundColor, fontFamily, height, fontSize, width }}
         >
           {content}
         </button>
@@ -35,7 +37,7 @@ const PrimaryButton: FC<PrimaryButtonProps> = ({
   if (type === "functional") {
     <button
       className={primaryButtonStyles.primaryButton}
-      style={{ backgroundColor, fontFamily, height }}
+      style={{ backgroundColor, fontFamily, height, fontSize, width }}
     >
       {content}
     </button>;

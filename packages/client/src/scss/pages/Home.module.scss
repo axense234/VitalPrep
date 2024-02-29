@@ -3,3 +3,10 @@
 .homeContainer {
   @include pageLayout();
 }
+
+.homeCardsContainer {
+  @include flexCenter(column);
+  row-gap: $homeCardsContainerRowGap;
+  background-image: url($homeCardsContainerBackgroundImageUrl);
+  padding: $homeCardsContainerPadding;
+}

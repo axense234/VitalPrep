@@ -7,30 +7,33 @@
   background-image: url($pageTitleBackgroundImageUrl);
   background-repeat: no-repeat;
   background-size: cover;
+  border-bottom: 1.5px solid getColor("black-100-1");
 
   .img {
     width: 100%;
     height: 100%;
-    border: 2px solid red;
   }
 
-  h1 {
-    @include h1Laptop();
-    color: getColor("tan-color-extra-light");
-    text-shadow:
-      $titleOutlineNegativeCoeficient $titleOutlineNegativeCoeficient 0 black,
-      $titleOutlinePozitiveCoeficient $titleOutlineNegativeCoeficient 0 black,
-      $titleOutlineNegativeCoeficient $titleOutlinePozitiveCoeficient 0 black,
-      $titleOutlinePozitiveCoeficient $titleOutlinePozitiveCoeficient 0 black;
-  }
+  #{&}__header {
+    margin-bottom: $pageTitleHeaderMarginBottom;
+    h1 {
+      @include h1Laptop();
+      color: getColor("tan-color-extra-light");
+      text-shadow:
+        $titleOutlineNegativeCoeficient $titleOutlineNegativeCoeficient 0 black,
+        $titleOutlinePozitiveCoeficient $titleOutlineNegativeCoeficient 0 black,
+        $titleOutlineNegativeCoeficient $titleOutlinePozitiveCoeficient 0 black,
+        $titleOutlinePozitiveCoeficient $titleOutlinePozitiveCoeficient 0 black;
+    }
 
-  h3 {
-    @include h3Laptop();
-    color: getColor("tan-color-extra-light");
-    text-shadow:
-      $titleOutlineNegativeCoeficient $titleOutlineNegativeCoeficient 0 black,
-      $titleOutlinePozitiveCoeficient $titleOutlineNegativeCoeficient 0 black,
-      $titleOutlineNegativeCoeficient $titleOutlinePozitiveCoeficient 0 black,
-      $titleOutlinePozitiveCoeficient $titleOutlinePozitiveCoeficient 0 black;
+    h3 {
+      @include h3Laptop();
+      color: getColor("tan-color-extra-light");
+      text-shadow:
+        $titleOutlineNegativeCoeficient $titleOutlineNegativeCoeficient 0 black,
+        $titleOutlinePozitiveCoeficient $titleOutlineNegativeCoeficient 0 black,
+        $titleOutlineNegativeCoeficient $titleOutlinePozitiveCoeficient 0 black,
+        $titleOutlinePozitiveCoeficient $titleOutlinePozitiveCoeficient 0 black;
+    }
   }
 }

@@ -10,10 +10,47 @@ import { GrContact } from "react-icons/gr";
 import MetaProps from "./core/interfaces/MetaProps";
 import PageLink from "./core/types/PageLink";
 import SocialMediaIconProps from "./core/interfaces/SocialMediaIconProps";
+import HomeCardContent from "./core/types/HomeCardContent";
 
 export const homePageUrl = "/";
 export const sitePhoneNumber = "0754189293(fake)";
 export const siteEmail = "thisemaildoesnotexit@nothing.com";
+
+export const homeCardsContent: HomeCardContent[] = [
+  {
+    id: 1,
+    information:
+      "VitalPrep is a complex meal prep helper app that helps people create meal prep plans and to follow those respective plans.",
+    title: "What is Vital Prep??",
+    type: "introduction",
+    backgroundColor: "#422c17",
+  },
+  {
+    id: 2,
+    information:
+      "Meal Prep, short for meal preparation, is the practice of planning and preparing meals in advance, typically for a period of several days to a week.",
+    title: "What is a Meal Prep?",
+    type: "generic",
+    backgroundColor: "#432517",
+  },
+  {
+    id: 3,
+    information:
+      "Meal Prep saves time, money, and ensures healthier eating habits by preparing meals in advance for convenience and consistency. It also helps those who want to lose/gain weight by making them prepare their own meals, which on average are way healthier than processed foods.",
+    title: "Why would i want to meal prep?",
+    type: "generic",
+    backgroundColor: "#423217",
+  },
+  {
+    id: 4,
+    information:
+      "Meal Prep difficulty varies based on complexity, dietary needs and kitchen skills. \n If you have never done a meal prep before please checkout the Getting Started Page. If you want to get started right away you can do so by adding a few Ingredients then creating a Recipe using the Create Tool Page.",
+    title: "How hard is it to Meal Prep?",
+    type: "withLinks",
+    withLinksCardReferenceId: 1,
+    backgroundColor: "#421d17",
+  },
+];
 
 export const pageLinks: PageLink[] = [
   {

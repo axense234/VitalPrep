@@ -56,11 +56,11 @@ const FooterPageLink: FC<PageLink> = ({ linkDest, linkTitle, linkType }) => {
 const FooterContact = () => {
   return (
     <div className={footerStyles.footerContact}>
-      <p>
+      <p title="Phone Number" aria-label="Phone Number">
         Phone Number:
         <span>{sitePhoneNumber}</span>
       </p>
-      <p>
+      <p title="Email" aria-label="Email">
         Email:
         <span>{siteEmail}</span>
       </p>

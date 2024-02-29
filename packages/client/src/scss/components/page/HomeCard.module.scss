@@ -2,4 +2,44 @@
 
 .homeCardContainer {
   @include flexCenter(column);
+  padding: $homeCardContainerPadding;
+  background-color: $homeCardContainerDefaultBackgroundColor;
+  width: 100%;
+  gap: $homeCardContainerDistanceBetweenTitleAndInformation;
+  border-top: 1.5px solid getColor("black-100-1");
+  border-bottom: 1.5px solid getColor("black-100-1");
+
+  h1 {
+    @include h2Laptop();
+    text-align: center;
+    letter-spacing: 3.5px;
+    color: getColor("tan-color-extra-light");
+    text-shadow:
+      $titleOutlineNegativeCoeficient $titleOutlineNegativeCoeficient 0 black,
+      $titleOutlinePozitiveCoeficient $titleOutlineNegativeCoeficient 0 black,
+      $titleOutlineNegativeCoeficient $titleOutlinePozitiveCoeficient 0 black,
+      $titleOutlinePozitiveCoeficient $titleOutlinePozitiveCoeficient 0 black;
+  }
+
+  p {
+    width: 100%;
+    font-size: $homeCardContainerInformationFontSize;
+    text-align: center;
+    font-family: "EB Garamond", serif;
+    color: getColor("tan-color-extra-light");
+  }
+
+  a {
+    text-decoration: none;
+    color: getColor("secondary-color-light-2.4");
+
+    &:hover {
+      font-style: italic;
+      text-decoration: underline;
+    }
+  }
+
+  button {
+    margin-top: $homeCardContainerButtonMarginTop;
+  }
 }

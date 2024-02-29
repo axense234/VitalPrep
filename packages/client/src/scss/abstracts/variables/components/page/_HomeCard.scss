@@ -1,0 +1,10 @@
+@use "../../general" as *;
+
+$homeCardContainerPadding: 18rem;
+$homeCardContainerDefaultBackgroundColor: map-get(
+  $map: $colors,
+  $key: "secondary-color-1.2",
+);
+$homeCardContainerInformationFontSize: 48px;
+$homeCardContainerDistanceBetweenTitleAndInformation: 4rem;
+$homeCardContainerButtonMarginTop: 32px;
