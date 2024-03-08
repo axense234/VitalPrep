@@ -40,7 +40,7 @@ const FooterPageLinks = () => {
   );
 };
 
-const FooterPageLink: FC<PageLink> = ({ linkDest, linkTitle, linkType }) => {
+const FooterPageLink: FC<PageLink> = ({ linkDest, linkTitle, reactIcon }) => {
   return (
     <Link
       className={footerStyles.footerPageLink}

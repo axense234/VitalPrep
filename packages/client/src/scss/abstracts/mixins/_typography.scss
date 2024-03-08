@@ -19,3 +19,18 @@
   font-family: "Cabin", sans-serif;
   font-size: getFontSize("h3-laptop");
 }
+
+@mixin h4Laptop() {
+  font-family: "Cabin", sans-serif;
+  font-size: getFontSize("h4-laptop");
+}
+
+@mixin h5Laptop() {
+  font-family: "Cabin", sans-serif;
+  font-size: getFontSize("h5-laptop");
+}
+
+@mixin h6Laptop() {
+  font-family: "Cabin", sans-serif;
+  font-size: getFontSize("h6-laptop");
+}

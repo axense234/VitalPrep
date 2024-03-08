@@ -1,13 +1,27 @@
 // Types
 import HomeCardProps from "@/core/interfaces/HomeCardProps";
 // SCSS
-import homeCardStyles from "../../scss/components/page/HomeCard.module.scss";
+import homeCardsStyles from "../../scss/components/page/HomeCards.module.scss";
 // React
 import { FC } from "react";
 // Components
 import PrimaryButton from "../shared/PrimaryButton";
 // Next
 import Link from "next/link";
+// Data
+import { homeCardsContent } from "@/data";
+
+const HomeCards = () => {
+  return (
+    <ul className={homeCardsStyles.homeCardsContainer}>
+      {homeCardsContent.map((homeCardContent) => {
+        return (
+          <HomeCard {...homeCardContent} key={homeCardContent.id as number} />
+        );
+      })}
+    </ul>
+  );
+};
 
 const HomeCard: FC<HomeCardProps> = ({
   information,
@@ -19,7 +33,7 @@ const HomeCard: FC<HomeCardProps> = ({
   if (type === "generic") {
     return (
       <section
-        className={homeCardStyles.homeCardContainer}
+        className={homeCardsStyles.homeCardContainer}
         style={{ backgroundColor }}
       >
         <h1>{title}</h1>
@@ -31,7 +45,7 @@ const HomeCard: FC<HomeCardProps> = ({
   if (type === "introduction") {
     return (
       <section
-        className={homeCardStyles.homeCardContainer}
+        className={homeCardsStyles.homeCardContainer}
         style={{ backgroundColor }}
       >
         <h1>{title}</h1>
@@ -55,7 +69,7 @@ const HomeCard: FC<HomeCardProps> = ({
       case 1:
         return (
           <section
-            className={homeCardStyles.homeCardContainer}
+            className={homeCardsStyles.homeCardContainer}
             style={{ backgroundColor }}
           >
             <h1>{title}</h1>
@@ -78,4 +92,4 @@ const HomeCard: FC<HomeCardProps> = ({
   return null;
 };
 
-export default HomeCard;
+export default HomeCards;

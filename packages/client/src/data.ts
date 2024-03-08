@@ -11,6 +11,7 @@ import MetaProps from "./core/interfaces/MetaProps";
 import PageLink from "./core/types/PageLink";
 import SocialMediaIconProps from "./core/interfaces/SocialMediaIconProps";
 import HomeCardContent from "./core/types/HomeCardContent";
+import LogoImageUrl from "./core/types/LogoImageUrl";
 
 export const homePageUrl = "/";
 export const sitePhoneNumber = "0754189293(fake)";
@@ -164,9 +165,21 @@ export const socialMediaIcons: SocialMediaIconProps[] = [
 ];
 
 export const socialMediaIconReservedDimensions = 35;
-export const logoReservedDimensions = 100;
 export const logoUrl =
   "https://res.cloudinary.com/birthdayreminder/image/upload/v1709049629/VitalPrep/Ellipse_1_sevedf.png";
+
+export const logoImageUrls: LogoImageUrl[] = [
+  {
+    id: 1,
+    imageUrl:
+      "https://res.cloudinary.com/birthdayreminder/image/upload/v1709049629/VitalPrep/Ellipse_1_sevedf.png",
+  },
+  {
+    id: 2,
+    imageUrl:
+      "https://res.cloudinary.com/birthdayreminder/image/upload/v1709916489/VitalPrep/Ellipse_2_nsiztb.png",
+  },
+];
 
 export const metaDefaultProps: MetaProps = {
   title: "VitalPrep - Meal Prep Helper",

@@ -7,7 +7,7 @@ import NavbarMenu from "./NavbarMenu";
 const Navbar = () => {
   return (
     <nav className={navbarStyles.navbarContainer}>
-      <Logo />
+      <Logo dimensions={100} logoImageUrlIndex={1} />
       <NavbarMenu />
     </nav>
   );

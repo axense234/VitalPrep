@@ -1,5 +1,12 @@
 @use "../../abstracts" as *;
 
+.homeCardsContainer {
+  @include flexCenter(column);
+  row-gap: $homeCardsContainerRowGap;
+  background-image: url($homeCardsContainerBackgroundImageUrl);
+  padding: $homeCardsContainerPadding;
+}
+
 .homeCardContainer {
   @include flexCenter(column);
   padding: $homeCardContainerPadding;

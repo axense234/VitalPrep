@@ -6,6 +6,8 @@
   height: $navbarMenuDimensions;
   color: $navbarMenuColor;
   transition: transform 0.135s linear;
+  background-color: inherit;
+  border: none;
 
   svg {
     width: 100%;

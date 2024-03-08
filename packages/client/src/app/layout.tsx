@@ -9,6 +9,7 @@ import ReduxProvider from "@/components/others/ReduxProvider";
 // Components
 import Navbar from "@/components/shared/Navbar";
 import Footer from "@/components/shared/Footer";
+import Sidebar from "@/components/shared/Sidebar";
 
 export async function generateMetadata(): Promise<Metadata> {
   return metaDefaultProps;
@@ -21,6 +22,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
         <div className="app-container">
           <ReduxProvider>
             <Navbar />
+            <Sidebar />
             {children}
             <Footer />
           </ReduxProvider>

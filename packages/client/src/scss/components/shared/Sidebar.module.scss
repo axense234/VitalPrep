@@ -1,0 +1,87 @@
+@use "../../abstracts" as *;
+
+.sidebarContainer {
+  @include flexCenter(column);
+  justify-content: flex-start;
+  height: 100%;
+  width: $sidebarContainerWidth;
+  border-left: 1.5px solid getColor("black-100-1");
+  position: fixed;
+  top: 0;
+  right: 0;
+  background-color: getColor("secondary-color-3.2");
+  gap: 2rem;
+}
+
+.sidebarHeader {
+  @include flexCenter(column);
+  align-items: flex-start;
+  gap: $sidebarHeaderGap;
+  position: relative;
+  width: 100%;
+
+  button {
+    @include flexCenter(row);
+    margin-top: 1rem;
+    margin-left: 1rem;
+    border: none;
+    width: $sidebarHeaderCloseSidebarButtonDimensions;
+    height: $sidebarHeaderCloseSidebarButtonDimensions;
+    background-color: inherit;
+
+    svg {
+      width: 100%;
+      height: 100%;
+      color: getColor("secondary-color-3.4");
+    }
+  }
+
+  h3 {
+    @include h3Laptop();
+    letter-spacing: 3.5px;
+    color: getColor("black-100-1");
+    text-align: center;
+    width: 100%;
+  }
+}
+
+.sidebarPageLinks {
+  @include flexCenter(column);
+  list-style: none;
+  width: 100%;
+  padding: $sidebarPageLinksPadding;
+  gap: $sidebarPageLinksGap;
+
+  li {
+    @include flexCenter(row);
+    width: 100%;
+  }
+}
+
+.sidebarPageLink {
+  @include flexCenter(row);
+  width: 100%;
+  justify-content: flex-start;
+  text-decoration: none;
+  gap: $sidebarPageLinkDistanceBetweenIconAndTitle;
+
+  svg {
+    width: $sidebarPageLinkDimensions;
+    height: $sidebarPageLinkDimensions;
+    color: getColor("secondary-color-2.4");
+  }
+
+  p {
+    font-size: $sidebarPageLinkTitleFontSize;
+    font-weight: 550;
+    color: getColor("black-100-1");
+  }
+}
+
+.sidebarFooter {
+  @include flexCenter(row);
+  width: 100%;
+  margin-top: auto;
+  justify-content: space-between;
+  padding: $sidebarFooterPadding;
+}
