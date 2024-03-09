@@ -1,5 +1,5 @@
 // SCSS
-import homeStyles from "../scss/pages/Home.module.scss";
+import homeStyles from "../../../scss/pages/Home.module.scss";
 // Components
 import PageTitle from "@/components/shared/PageTitle";
 import HomeCards from "@/components/page/HomeCards";

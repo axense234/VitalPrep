@@ -1,5 +1,5 @@
 // React Icons
-import { FaHome, FaInfoCircle, FaQuestion } from "react-icons/fa";
+import { FaGithub, FaHome, FaInfoCircle, FaQuestion } from "react-icons/fa";
 import { IoIosPaper } from "react-icons/io";
 import { MdCreate } from "react-icons/md";
 import { CiLogout, CiSettings, CiViewList } from "react-icons/ci";
@@ -11,11 +11,41 @@ import MetaProps from "./core/interfaces/MetaProps";
 import PageLink from "./core/types/PageLink";
 import SocialMediaIconProps from "./core/interfaces/SocialMediaIconProps";
 import HomeCardContent from "./core/types/HomeCardContent";
-import LogoImageUrl from "./core/types/LogoImageUrl";
+import ImageUrl from "./core/types/LogoImageUrl";
+import OAuthOptionContent from "./core/types/OAuthOptionContent";
+import { FcGoogle } from "react-icons/fc";
 
-export const homePageUrl = "/";
+export const homePageUrl = "/home";
 export const sitePhoneNumber = "0754189293(fake)";
 export const siteEmail = "thisemaildoesnotexit@nothing.com";
+
+export const OAuthOptionsContent: OAuthOptionContent[] = [
+  {
+    id: 1,
+    textContent: "Sign Up with Google",
+    reactIcon: FcGoogle({}),
+    optionType: "google",
+  },
+  {
+    id: 2,
+    textContent: "Sign Up with Github",
+    reactIcon: FaGithub({}),
+    optionType: "github",
+  },
+];
+
+export const authFormPageTemplateImageUrls: ImageUrl[] = [
+  {
+    id: 1,
+    imageUrl:
+      "https://res.cloudinary.com/birthdayreminder/image/upload/v1709992754/VitalPrep/wallpaperflare.com_wallpaper_3_dss9dm.jpg",
+  },
+  {
+    id: 1,
+    imageUrl:
+      "https://res.cloudinary.com/birthdayreminder/image/upload/v1709992770/VitalPrep/ingredients-cooking-preparation-spices_nniqsv.jpg",
+  },
+];
 
 export const homeCardsContent: HomeCardContent[] = [
   {
@@ -168,7 +198,7 @@ export const socialMediaIconReservedDimensions = 35;
 export const logoUrl =
   "https://res.cloudinary.com/birthdayreminder/image/upload/v1709049629/VitalPrep/Ellipse_1_sevedf.png";
 
-export const logoImageUrls: LogoImageUrl[] = [
+export const logoImageUrls: ImageUrl[] = [
   {
     id: 1,
     imageUrl:

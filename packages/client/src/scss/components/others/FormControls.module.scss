@@ -1,0 +1,142 @@
+@use "../../abstracts" as *;
+
+.textFormControlContainer {
+  @include flexCenter(column);
+  align-items: flex-start;
+  width: 100%;
+
+  label {
+    font-family: "EB Garamond", serif;
+    font-weight: bolder;
+    font-size: 22px;
+  }
+
+  input {
+    background-color: getColor("tan-color");
+    border: 1.5px solid getColor("black-100-1");
+    width: 100%;
+    height: 24px;
+    font-size: 1rem;
+    padding: 0;
+  }
+}
+
+.imageFormControlContainer {
+  @include flexCenter(column);
+  align-items: flex-start;
+  width: 100%;
+  gap: 8px;
+
+  label {
+    @include flexCenter(row);
+    gap: 8px;
+
+    span {
+      font-family: "EB Garamond", serif;
+      font-weight: bolder;
+      font-size: 22px;
+    }
+
+    svg {
+      width: 16px;
+      height: 16px;
+    }
+  }
+}
+
+.imageInputContainer {
+  @include flexCenter(row);
+  position: relative;
+  border-radius: 50%;
+  width: 30%;
+  border: 1.5px solid getColor("black-100-1");
+
+  img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+  }
+}
+
+.imageInputOverlay {
+  @include flexCenter(row);
+  position: absolute;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: rgba($color: getColor("black-100-1"), $alpha: 0.5);
+  transition: opacity 0.135s linear;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  svg {
+    font-size: 2rem;
+  }
+
+  input {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    opacity: 0;
+  }
+}
+
+.checkboxFormControlContainer {
+  @include flexCenter(row);
+  justify-content: space-between;
+  width: 100%;
+
+  label {
+    font-family: "EB Garamond", serif;
+    font-weight: bolder;
+    font-size: 22px;
+  }
+
+  input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 24px;
+    height: 24px;
+    border: 1.5px solid getColor("black-100-1");
+    background-color: getColor("tan-color");
+    cursor: pointer;
+  }
+
+  input[type="checkbox"]:checked {
+    appearance: auto;
+  }
+}
+
+.recaptchaFormControlContainer {
+  @include flexCenter(row);
+  width: 100%;
+  justify-content: space-between;
+  padding: 0 32px;
+  background-color: getColor("tan-color-extra-light");
+  height: 64px;
+  border: 1.5px solid getColor("black-100-1");
+
+  img {
+    width: 56px !important;
+    height: 56px !important;
+  }
+
+  input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 24px;
+    height: 24px;
+    border: 1.5px solid grey;
+    background-color: getColor("tan-color-extra-light");
+    cursor: pointer;
+  }
+
+  input[type="checkbox"]:checked {
+    appearance: auto;
+  }
+}

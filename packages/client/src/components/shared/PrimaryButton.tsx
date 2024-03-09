@@ -35,12 +35,14 @@ const PrimaryButton: FC<PrimaryButtonProps> = ({
     );
 
   if (type === "functional") {
-    <button
-      className={primaryButtonStyles.primaryButton}
-      style={{ backgroundColor, fontFamily, height, fontSize, width }}
-    >
-      {content}
-    </button>;
+    return (
+      <button
+        className={primaryButtonStyles.primaryButton}
+        style={{ backgroundColor, fontFamily, height, fontSize, width }}
+      >
+        {content}
+      </button>
+    );
   }
 
   return null;

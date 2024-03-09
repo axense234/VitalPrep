@@ -1,0 +1,14 @@
+@use "../../abstracts" as *;
+
+.formContainer {
+  @include flexCenter(column);
+  justify-content: flex-start;
+  width: 100%;
+  max-width: 320px;
+  gap: 24px;
+
+  button {
+    align-self: flex-start;
+    margin-top: 96px;
+  }
+}
