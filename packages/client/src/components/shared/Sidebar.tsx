@@ -5,7 +5,7 @@ import sidebarStyles from "../../scss/components/shared/Sidebar.module.scss";
 // Types
 import PageLink from "@/core/types/PageLink";
 // React
-import { FC } from "react";
+import { FC, useEffect, useRef } from "react";
 // Next
 import Link from "next/link";
 // Data
@@ -23,14 +23,20 @@ import {
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 
 const Sidebar = () => {
+  const sidebarRef = useRef<HTMLElement>(null);
   const isSidebarOpened = useAppSelector(selectIsSidebarOpened);
 
-  if (!isSidebarOpened) {
-    return null;
-  }
+  useEffect(() => {
+    const sidebar = sidebarRef.current as HTMLElement;
+    if (isSidebarOpened) {
+      sidebar.style.transform = "translateX(0%)";
+    } else {
+      sidebar.style.transform = "translateX(150%)";
+    }
+  }, [isSidebarOpened]);
 
   return (
-    <aside className={sidebarStyles.sidebarContainer}>
+    <aside className={sidebarStyles.sidebarContainer} ref={sidebarRef}>
       <SidebarHeader />
       <SidebarPageLinks />
       <SidebarFooter />

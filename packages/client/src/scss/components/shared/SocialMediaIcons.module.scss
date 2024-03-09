@@ -12,7 +12,7 @@
   width: $socialMediaIconDimensions;
   height: $socialMediaIconDimensions;
   text-decoration: none;
-  transition: transform 0.135s linear;
+  transition: $crispyTransformTransition;
 
   &:hover {
     transform: scale(1.25);

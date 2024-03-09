@@ -5,7 +5,7 @@
   width: $navbarMenuDimensions;
   height: $navbarMenuDimensions;
   color: $navbarMenuColor;
-  transition: transform 0.135s linear;
+  transition: $crispyTransformTransition;
   background-color: inherit;
   border: none;
 

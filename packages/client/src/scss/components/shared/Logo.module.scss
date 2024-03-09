@@ -4,7 +4,7 @@
   @include flexCenter(column);
   border-radius: 50%;
   width: $logoDimensions;
-  transition: transform 0.135s linear;
+  transition: $crispyTransformTransition;
 
   &:hover {
     transform: scale(1.05);

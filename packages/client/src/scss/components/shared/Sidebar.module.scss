@@ -11,6 +11,8 @@
   right: 0;
   background-color: getColor("secondary-color-3.2");
   gap: 2rem;
+  transform: translateX(150%);
+  transition: $crispyTransformTransition;
 }
 
 .sidebarHeader {
@@ -28,6 +30,12 @@
     width: $sidebarHeaderCloseSidebarButtonDimensions;
     height: $sidebarHeaderCloseSidebarButtonDimensions;
     background-color: inherit;
+    transition: $crispyTransformTransition;
+    cursor: crosshair;
+
+    &:hover {
+      transform: rotate(45deg);
+    }
 
     svg {
       width: 100%;
@@ -74,7 +82,16 @@
   p {
     font-size: $sidebarPageLinkTitleFontSize;
     font-weight: 550;
+    width: 100%;
     color: getColor("black-100-1");
+    transition:
+      $crispyTransformTransition,
+      color 0.135s linear;
+
+    &:hover {
+      transform: translateX(10px);
+      color: getColor("secondary-color-light-2.4");
+    }
   }
 }
 
