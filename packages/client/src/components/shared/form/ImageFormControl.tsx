@@ -8,13 +8,19 @@ import ImageFormControlProps from "@/core/interfaces/form/ImageFormControlProps"
 import Image from "next/image";
 // React Icons
 import { FaPlus } from "react-icons/fa";
+// React Spinners
+import { ClockLoader, MoonLoader } from "react-spinners";
 
 const ImageFormControl: FC<ImageFormControlProps> = ({
   defaultImageUsedUrl,
   direction,
   labelColor,
   labelContent,
+  entityPropertyLoadingStatus,
+  entityProperty,
+  onEntityPropertyValueChange,
 }) => {
+  console.log(entityPropertyLoadingStatus);
   return (
     <div
       className={formControlsStyles.imageFormControlContainer}
@@ -24,16 +30,32 @@ const ImageFormControl: FC<ImageFormControlProps> = ({
         <span>{labelContent}</span>
       </label>
       <div className={formControlsStyles.imageInputContainer} tabIndex={0}>
-        <div className={formControlsStyles.imageInputOverlay}>
-          <FaPlus />
-          <input type="file" id="imageInput" name="imageInput" />
-        </div>
-        <Image
-          src={defaultImageUsedUrl}
-          alt={labelContent}
-          width={100}
-          height={100}
-        />
+        {entityPropertyLoadingStatus !== "PENDING" && (
+          <div className={formControlsStyles.imageInputOverlay}>
+            <FaPlus />
+            <input
+              type="file"
+              id="imageInput"
+              name="imageInput"
+              onChange={onEntityPropertyValueChange}
+            />
+          </div>
+        )}
+        {entityPropertyLoadingStatus !== "PENDING" ? (
+          <Image
+            src={(entityProperty as string) || defaultImageUsedUrl}
+            alt={labelContent}
+            width={100}
+            height={100}
+          />
+        ) : (
+          <ClockLoader
+            size={75}
+            color="#000"
+            title="Loading..."
+            aria-label="Loading..."
+          />
+        )}
       </div>
     </div>
   );

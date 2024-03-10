@@ -12,10 +12,41 @@ import { deleteCache, setCache } from "../utils/redis";
 const signupUser = async (req: Request, res: Response) => {
   const userBody = req.body;
 
+  if (!userBody) {
+    return res
+      .status(StatusCodes.BAD_REQUEST)
+      .json({ message: "Enter an userbody!" });
+  }
+
+  if (!userBody.username) {
+    return res
+      .status(StatusCodes.BAD_REQUEST)
+      .json({ message: "Please enter an username!" });
+  }
+
+  if (!userBody.email) {
+    return res
+      .status(StatusCodes.BAD_REQUEST)
+      .json({ message: "Please enter an email!" });
+  }
+
+  if (!userBody.password) {
+    return res
+      .status(StatusCodes.BAD_REQUEST)
+      .json({ message: "Please enter a password!" });
+  }
+
   const encryptedPass = await encryptPassword(userBody.password);
   userBody.password = encryptedPass;
 
-  const createdUser = await UserClient.create({ data: { ...userBody } });
+  const createdUser = await UserClient.create({
+    data: {
+      ...userBody,
+      notificationSettings: {
+        create: {},
+      },
+    },
+  });
 
   if (!createdUser) {
     return res
@@ -24,6 +55,7 @@ const signupUser = async (req: Request, res: Response) => {
   }
 
   const token = createJWT(createdUser.id, createdUser.username);
+  console.log(createdUser.id);
 
   await deleteCache(`users`);
   await setCache(`${createdUser.id}:jwt-vitalprep`, token);

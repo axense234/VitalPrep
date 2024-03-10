@@ -18,9 +18,16 @@ const authenticationMiddleware = async (
   next: NextFunction
 ) => {
   const authHeader = req.headers.authorization as string;
+  const userId = req.query.userId;
 
-  const token = await getOrSetCache("jwt-notesapi", () => {
-    if (!authHeader || (!authHeader.startsWith("Bearer ") && token)) {
+  if (!userId) {
+    return res
+      .status(StatusCodes.BAD_REQUEST)
+      .json({ msg: "Please provide an userId!" });
+  }
+
+  const token = await getOrSetCache(`${userId}:jwt-vitalprep`, () => {
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
       return null;
     }
 

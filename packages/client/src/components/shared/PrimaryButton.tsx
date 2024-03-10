@@ -16,6 +16,8 @@ const PrimaryButton: FC<PrimaryButtonProps> = ({
   fontFamily,
   linkDest,
   type,
+  disabled,
+  onClickFunction,
 }) => {
   if (type === "link")
     return (
@@ -28,6 +30,7 @@ const PrimaryButton: FC<PrimaryButtonProps> = ({
         <button
           className={primaryButtonStyles.primaryButton}
           style={{ backgroundColor, fontFamily, height, fontSize, width }}
+          disabled={disabled}
         >
           {content}
         </button>
@@ -38,7 +41,18 @@ const PrimaryButton: FC<PrimaryButtonProps> = ({
     return (
       <button
         className={primaryButtonStyles.primaryButton}
-        style={{ backgroundColor, fontFamily, height, fontSize, width }}
+        type="submit"
+        style={{
+          backgroundColor,
+          fontFamily,
+          height,
+          fontSize,
+          width,
+          filter: disabled ? "brightness(0.5)" : "brightness(1)",
+          cursor: disabled ? "initial" : "pointer",
+        }}
+        disabled={disabled}
+        onClick={onClickFunction}
       >
         {content}
       </button>

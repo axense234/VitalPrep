@@ -1,20 +1,57 @@
+"use client";
+
 // Components
 import OAuthOptions from "@/components/shared/OAuthOptions";
 import AuthFormControls from "./AuthFormControls";
+import FormModal from "./modals/FormModal";
 // SCSS
 import authFormPageTemplateStyles from "../../scss/components/shared/AuthFormPageTemplate.module.scss";
 // Types
 import AuthFormPageTemplateProps from "@/core/interfaces/AuthFormPageTemplateProps";
 // React
-import { FC } from "react";
+import { FC, useEffect, useRef } from "react";
 // Next
 import Image from "next/image";
 // Data
 import { authFormPageTemplateImageUrls } from "@/data";
+// Redux
+import { useAppDispatch, useAppSelector } from "@/hooks/redux";
+import {
+  changeShowFormModal,
+  selectLoadingCreateProfile,
+  selectLoadingLoginProfile,
+  selectShowFormModal,
+  selectTemplateModalMessage,
+} from "@/redux/slices/generalSlice";
 
 const AuthFormPageTemplate: FC<AuthFormPageTemplateProps> = ({ type }) => {
+  const dispatch = useAppDispatch();
+  const showFormModal = useAppSelector(selectShowFormModal);
+
+  const modalMessage = useAppSelector(selectTemplateModalMessage);
+  const loadingCreateProfile = useAppSelector(selectLoadingCreateProfile);
+  const loadingLoginProfile = useAppSelector(selectLoadingLoginProfile);
+
   let pageTitleUsed = "Title";
   let pageImageUrlUsed = authFormPageTemplateImageUrls[0].imageUrl;
+
+  useEffect(() => {
+    if (loadingCreateProfile === "FAILED") {
+      dispatch(changeShowFormModal(true));
+    }
+  }, [loadingCreateProfile]);
+
+  useEffect(() => {
+    let timeout: NodeJS.Timeout;
+    if (showFormModal) {
+      timeout = setTimeout(() => {
+        dispatch(changeShowFormModal(false));
+      }, 5000);
+    }
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [showFormModal]);
 
   switch (type) {
     case "login":
@@ -32,6 +69,11 @@ const AuthFormPageTemplate: FC<AuthFormPageTemplateProps> = ({ type }) => {
   return (
     <div className={authFormPageTemplateStyles.authContainer}>
       <section className={authFormPageTemplateStyles.formContainer}>
+        <FormModal
+          modalMessage={modalMessage}
+          showModal={showFormModal}
+          closeModal={() => dispatch(changeShowFormModal(false))}
+        />
         <div className={authFormPageTemplateStyles.formContainerContentWrapper}>
           <div className={authFormPageTemplateStyles.formContainerContent}>
             <h4>{pageTitleUsed}</h4>

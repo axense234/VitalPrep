@@ -10,6 +10,9 @@ const TextFormControl: FC<TextFormControlProps> = ({
   labelColor,
   labelContent,
   type,
+  required,
+  entityProperty,
+  onEntityPropertyValueChange,
 }) => {
   return (
     <div
@@ -24,6 +27,9 @@ const TextFormControl: FC<TextFormControlProps> = ({
         name={labelContent}
         min={8}
         style={{ width: type === "number" ? "50%" : "100%" }}
+        value={entityProperty}
+        onChange={onEntityPropertyValueChange}
+        required
       />
     </div>
   );
