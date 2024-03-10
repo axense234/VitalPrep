@@ -43,7 +43,7 @@ const AuthFormPageTemplate: FC<AuthFormPageTemplateProps> = ({ type }) => {
       <Image
         alt={`${pageTitleUsed} Image`}
         src={pageImageUrlUsed}
-        width={1920}
+        width={1500}
         height={1080}
       />
     </div>

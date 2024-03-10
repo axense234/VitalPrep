@@ -41,9 +41,9 @@ export const authFormPageTemplateImageUrls: ImageUrl[] = [
       "https://res.cloudinary.com/birthdayreminder/image/upload/v1709992754/VitalPrep/wallpaperflare.com_wallpaper_3_dss9dm.jpg",
   },
   {
-    id: 1,
+    id: 2,
     imageUrl:
-      "https://res.cloudinary.com/birthdayreminder/image/upload/v1709992770/VitalPrep/ingredients-cooking-preparation-spices_nniqsv.jpg",
+      "https://res.cloudinary.com/birthdayreminder/image/upload/v1710063057/VitalPrep/bamboo-bamboo-whisk-board-bowls_dehtz1.jpg",
   },
 ];
 

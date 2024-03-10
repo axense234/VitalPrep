@@ -23,7 +23,7 @@ const ImageFormControl: FC<ImageFormControlProps> = ({
       <label htmlFor={labelContent} style={{ color: labelColor }}>
         <span>{labelContent}</span>
       </label>
-      <div className={formControlsStyles.imageInputContainer}>
+      <div className={formControlsStyles.imageInputContainer} tabIndex={0}>
         <div className={formControlsStyles.imageInputOverlay}>
           <FaPlus />
           <input type="file" id="imageInput" name="imageInput" />
