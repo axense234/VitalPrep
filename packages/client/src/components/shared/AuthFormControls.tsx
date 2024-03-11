@@ -41,8 +41,6 @@ const AuthFormControls: FC<AuthFormControlsProps> = ({ type }) => {
   const loadingCloudinaryImage = useAppSelector(selectLoadingCloudinaryImage);
   const templateImageUrl = useAppSelector(selectTemplateImageUrl);
 
-  console.log(templateProfile);
-
   useEffect(() => {
     if (loadingCloudinaryImage === "SUCCEDED") {
       dispatch(

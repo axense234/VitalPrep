@@ -1,3 +1,5 @@
+"use client";
+
 // Data
 import { OAuthOptionsContent } from "@/data";
 // Types
@@ -7,6 +9,7 @@ import OAuthOptionsProps from "@/core/interfaces/OAuthOptionsProps";
 import { FC } from "react";
 // SCSS
 import OAuthOptionsStyles from "../../scss/components/shared/OAuthOptions.module.scss";
+import { signIn } from "next-auth/react";
 
 const OAuthOptions: FC<OAuthOptionsProps> = ({ type }) => {
   return (
@@ -36,6 +39,7 @@ const OAuthOptionsButton: FC<OAuthOptionContent> = ({
       className={OAuthOptionsStyles.authButton}
       title={textContent}
       aria-label={textContent}
+      onClick={() => signIn(optionType)}
     >
       {reactIcon}
       <span>{textContent}</span>

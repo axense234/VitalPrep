@@ -9,7 +9,10 @@ import { User } from "@prisma/client";
 import axiosInstance from "@/utils/axios";
 // Axios
 import axios, { AxiosError } from "axios";
+// Config
 import { baseSiteUrl } from "@/config";
+// Next Auth
+import { getSession } from "next-auth/react";
 
 type ObjectKeyValueType = {
   key: string;
@@ -31,6 +34,7 @@ type InitialStateType = {
   templateProfile: UserTemplate;
   loadingCreateProfile: "IDLE" | "PENDING" | "SUCCEDED" | "FAILED";
   loadingLoginProfile: "IDLE" | "PENDING" | "SUCCEDED" | "FAILED";
+  loadingGetProfile: "IDLE" | "PENDING" | "SUCCEDED" | "FAILED";
 };
 
 type CreateCloudinaryImageTemplate = {
@@ -44,6 +48,32 @@ type CreateCloudinaryImageTemplate = {
     | "instanceTemplates"
     | "mealPrepPlans";
 };
+
+export const getProfileOAuth = createAsyncThunk(
+  "general/getProfileOAuth",
+  async () => {
+    try {
+      const session = await getSession();
+      return session?.user;
+    } catch (error) {
+      console.log(error);
+      throw new Error("Something is wrong with the user's session.");
+    }
+  }
+);
+
+export const getProfileJWT = createAsyncThunk(
+  "general/getProfileJWT",
+  async () => {
+    try {
+      const userId = localStorage.getItem("userId");
+      const { data } = await axiosInstance.get(`/users/${userId}`);
+      return data.user as User;
+    } catch (error) {
+      return error as AxiosError;
+    }
+  }
+);
 
 export const signupUser = createAsyncThunk<User | AxiosError, UserTemplate>(
   "general/signupUser",
@@ -131,6 +161,7 @@ const initialState: InitialStateType = {
   },
   loadingCreateProfile: "IDLE",
   loadingLoginProfile: "IDLE",
+  loadingGetProfile: "IDLE",
 };
 
 const generalSlice = createSlice({
@@ -146,6 +177,18 @@ const generalSlice = createSlice({
         [action.payload.key]: action.payload.value,
       };
     },
+    manipulateLoadingCreateProfile(
+      state,
+      action: PayloadAction<"IDLE" | "SUCCEDED" | "FAILED" | "PENDING">
+    ) {
+      state.loadingCreateProfile = action.payload;
+    },
+    manipulateLoadingLoginProfile(
+      state,
+      action: PayloadAction<"IDLE" | "SUCCEDED" | "FAILED" | "PENDING">
+    ) {
+      state.loadingLoginProfile = action.payload;
+    },
     changeShowFormModal(state, action: PayloadAction<boolean>) {
       state.showFormModal = action.payload;
     },
@@ -155,6 +198,29 @@ const generalSlice = createSlice({
   },
   extraReducers(builder) {
     builder
+      .addCase(getProfileOAuth.pending, (state, action) => {
+        state.loadingGetProfile = "PENDING";
+        state.templateModalMessage = `Trying to find your account`;
+      })
+      .addCase(getProfileOAuth.fulfilled, (state, action) => {
+        const user = action.payload;
+        console.log(user);
+        if (user) {
+          if (user.name) {
+            state.profile.username = user.name;
+          }
+          if (user.email) {
+            state.profile.email = user.email;
+          }
+          if (user.image) {
+            state.profile.imageUrl = user.image;
+          }
+          state.templateModalMessage = `Found your account, redirecting`;
+        } else if (!user) {
+          state.loadingGetProfile = "FAILED";
+          state.templateModalMessage = "Failed to get user";
+        }
+      })
       .addCase(signupUser.pending, (state, action) => {
         state.loadingCreateProfile = "PENDING";
         state.templateModalMessage = `Trying to create an account`;
@@ -240,11 +306,16 @@ export const selectShowFormModal = (state: State) =>
 export const selectShowGeneralModal = (state: State) =>
   state.general.showGeneralModal;
 
+export const selectLoadingGetProfile = (state: State) =>
+  state.general.loadingGetProfile;
+
 export const {
   changeIsSidebarOpened,
   updateTemplateProfile,
   changeShowFormModal,
   changeShowGeneralModal,
+  manipulateLoadingCreateProfile,
+  manipulateLoadingLoginProfile,
 } = generalSlice.actions;
 
 export default generalSlice.reducer;

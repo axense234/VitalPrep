@@ -12,6 +12,7 @@ import AuthFormPageTemplateProps from "@/core/interfaces/AuthFormPageTemplatePro
 import { FC, useEffect } from "react";
 // Next
 import Image from "next/image";
+import Link from "next/link";
 // Data
 import { authFormPageTemplateImageUrls } from "@/data";
 // Redux
@@ -19,22 +20,26 @@ import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import {
   changeShowFormModal,
   changeShowGeneralModal,
+  manipulateLoadingCreateProfile,
+  manipulateLoadingLoginProfile,
   selectLoadingCreateProfile,
+  selectLoadingGetProfile,
   selectLoadingLoginProfile,
   selectShowFormModal,
   selectShowGeneralModal,
   selectTemplateModalMessage,
 } from "@/redux/slices/generalSlice";
-import Link from "next/link";
 
 const AuthFormPageTemplate: FC<AuthFormPageTemplateProps> = ({ type }) => {
   const dispatch = useAppDispatch();
+
   const showFormModal = useAppSelector(selectShowFormModal);
   const showGeneralModal = useAppSelector(selectShowGeneralModal);
-
   const modalMessage = useAppSelector(selectTemplateModalMessage);
+
   const loadingCreateProfile = useAppSelector(selectLoadingCreateProfile);
   const loadingLoginProfile = useAppSelector(selectLoadingLoginProfile);
+  const loadingGetProfile = useAppSelector(selectLoadingGetProfile);
 
   let pageTitleUsed = "Title";
   let pageImageUrlUsed = authFormPageTemplateImageUrls[0].imageUrl;
@@ -45,9 +50,20 @@ const AuthFormPageTemplate: FC<AuthFormPageTemplateProps> = ({ type }) => {
   };
 
   const isRequestPending =
-    type === "signup"
+    (type === "signup"
       ? loadingCreateProfile === "PENDING"
-      : loadingLoginProfile === "PENDING";
+      : loadingLoginProfile === "PENDING") || loadingGetProfile === "PENDING";
+
+  useEffect(() => {
+    dispatch(manipulateLoadingCreateProfile("IDLE"));
+    dispatch(manipulateLoadingLoginProfile("IDLE"));
+  }, []);
+
+  useEffect(() => {
+    if (loadingGetProfile === "PENDING") {
+      dispatch(changeShowGeneralModal(true));
+    }
+  }, [loadingGetProfile]);
 
   useEffect(() => {
     if (loadingCreateProfile === "FAILED") {
@@ -72,24 +88,23 @@ const AuthFormPageTemplate: FC<AuthFormPageTemplateProps> = ({ type }) => {
   }, [loadingLoginProfile]);
 
   useEffect(() => {
-    let timeout: NodeJS.Timeout;
+    let firstTimeout: NodeJS.Timeout;
+    let secondTimeout: NodeJS.Timeout;
     if (showFormModal) {
-      timeout = setTimeout(() => {
+      firstTimeout = setTimeout(() => {
         dispatch(changeShowFormModal(false));
       }, 5000);
-      return () => {
-        clearTimeout(timeout);
-      };
     }
     if (showGeneralModal) {
-      timeout = setTimeout(() => {
+      secondTimeout = setTimeout(() => {
         dispatch(changeShowGeneralModal(false));
       }, 5000);
-      return () => {
-        clearTimeout(timeout);
-      };
     }
-  }, [showFormModal]);
+    return () => {
+      clearTimeout(firstTimeout);
+      clearTimeout(secondTimeout);
+    };
+  }, [showFormModal, showGeneralModal]);
 
   switch (type) {
     case "login":

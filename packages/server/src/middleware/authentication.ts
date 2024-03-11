@@ -18,7 +18,7 @@ const authenticationMiddleware = async (
   next: NextFunction
 ) => {
   const authHeader = req.headers.authorization as string;
-  const userId = req.query.userId;
+  const userId = req.query.userId || req.params.userId;
 
   if (!userId) {
     return res
