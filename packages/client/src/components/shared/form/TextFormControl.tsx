@@ -26,10 +26,13 @@ const TextFormControl: FC<TextFormControlProps> = ({
         type={type}
         name={labelContent}
         min={8}
+        max={110}
+        minLength={3}
+        maxLength={40}
         style={{ width: type === "number" ? "50%" : "100%" }}
         value={entityProperty}
         onChange={onEntityPropertyValueChange}
-        required
+        required={required}
       />
     </div>
   );

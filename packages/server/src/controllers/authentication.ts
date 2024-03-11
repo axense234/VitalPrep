@@ -9,6 +9,8 @@ import { encryptPassword, comparePasswords } from "../utils/bcrypt";
 import { createJWT } from "../utils/jwt";
 import { deleteCache, setCache } from "../utils/redis";
 
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 const signupUser = async (req: Request, res: Response) => {
   const userBody = req.body;
 
@@ -30,10 +32,27 @@ const signupUser = async (req: Request, res: Response) => {
       .json({ message: "Please enter an email!" });
   }
 
+  if (!emailRegex.test(userBody.email)) {
+    return res
+      .status(StatusCodes.BAD_REQUEST)
+      .json({ message: "Please enter a valid email!" });
+  }
+
   if (!userBody.password) {
     return res
       .status(StatusCodes.BAD_REQUEST)
       .json({ message: "Please enter a password!" });
+  }
+
+  if (
+    userBody.age === null ||
+    userBody.age > 110 ||
+    userBody.age < 8 ||
+    Number.isNaN(userBody.age)
+  ) {
+    return res
+      .status(StatusCodes.BAD_REQUEST)
+      .json({ message: "Please enter a valid age!" });
   }
 
   const encryptedPass = await encryptPassword(userBody.password);
@@ -75,6 +94,12 @@ const loginUser = async (req: Request, res: Response) => {
     return res
       .status(StatusCodes.BAD_REQUEST)
       .json({ message: "Please enter both password and email!" });
+  }
+
+  if (!emailRegex.test(email)) {
+    return res
+      .status(StatusCodes.BAD_REQUEST)
+      .json({ message: "Please enter a valid email!" });
   }
 
   const foundUser = await UserClient.findUnique({ where: { email } });

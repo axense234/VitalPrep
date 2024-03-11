@@ -9,6 +9,7 @@ import { User } from "@prisma/client";
 import axiosInstance from "@/utils/axios";
 // Axios
 import axios, { AxiosError } from "axios";
+import { baseSiteUrl } from "@/config";
 
 type ObjectKeyValueType = {
   key: string;
@@ -22,6 +23,7 @@ type InitialStateType = {
   templateImageUrl: string;
   templateModalMessage: string;
   showFormModal: boolean;
+  showGeneralModal: boolean;
 
   // Auth
   loadingProfile: "IDLE" | "PENDING" | "SUCCEDED" | "FAILED";
@@ -47,9 +49,19 @@ export const signupUser = createAsyncThunk<User | AxiosError, UserTemplate>(
   "general/signupUser",
   async (userTemplate) => {
     try {
-      console.log(userTemplate);
       const { data } = await axiosInstance.post("/users/signup", userTemplate);
-      console.log(data);
+      return data.user as User;
+    } catch (error) {
+      return error as AxiosError;
+    }
+  }
+);
+
+export const loginUser = createAsyncThunk<User | AxiosError, UserTemplate>(
+  "general/loginUser",
+  async (userTemplate) => {
+    try {
+      const { data } = await axiosInstance.post("/users/login", userTemplate);
       return data.user as User;
     } catch (error) {
       return error as AxiosError;
@@ -82,6 +94,7 @@ const initialState: InitialStateType = {
   templateImageUrl: "",
   templateModalMessage: "",
   showFormModal: false,
+  showGeneralModal: false,
 
   // Auth
   loadingProfile: "IDLE",
@@ -136,11 +149,15 @@ const generalSlice = createSlice({
     changeShowFormModal(state, action: PayloadAction<boolean>) {
       state.showFormModal = action.payload;
     },
+    changeShowGeneralModal(state, action: PayloadAction<boolean>) {
+      state.showGeneralModal = action.payload;
+    },
   },
   extraReducers(builder) {
     builder
       .addCase(signupUser.pending, (state, action) => {
         state.loadingCreateProfile = "PENDING";
+        state.templateModalMessage = `Trying to create an account`;
       })
       .addCase(signupUser.fulfilled, (state, action) => {
         const user = action.payload as UserType;
@@ -149,9 +166,38 @@ const generalSlice = createSlice({
         if (!axiosError.response) {
           state.profile = user;
           state.loadingCreateProfile = "SUCCEDED";
+          state.templateModalMessage = `Successfully signed up user: ${user.username}`;
+          state.showGeneralModal = false;
+          setTimeout(() => {
+            window.location.href = `${baseSiteUrl}/home`;
+          }, 1500);
         } else {
           const errorData = axiosError.response.data as { message: string };
           state.loadingCreateProfile = "FAILED";
+          state.showGeneralModal = false;
+          state.templateModalMessage = errorData.message;
+        }
+      })
+      .addCase(loginUser.pending, (state, action) => {
+        state.loadingLoginProfile = "PENDING";
+        state.templateModalMessage = "Trying to log in";
+      })
+      .addCase(loginUser.fulfilled, (state, action) => {
+        const user = action.payload as UserType;
+        const axiosError = action.payload as AxiosError;
+
+        if (!axiosError.response) {
+          state.profile = user;
+          state.loadingLoginProfile = "SUCCEDED";
+          state.templateModalMessage = `Successfully logged in as user: ${user.username}`;
+          state.showGeneralModal = false;
+          setTimeout(() => {
+            window.location.href = `${baseSiteUrl}/home`;
+          }, 1500);
+        } else {
+          const errorData = axiosError.response.data as { message: string };
+          state.showGeneralModal = false;
+          state.loadingLoginProfile = "FAILED";
           state.templateModalMessage = errorData.message;
         }
       })
@@ -191,10 +237,14 @@ export const selectLoadingLoginProfile = (state: State) =>
 export const selectShowFormModal = (state: State) =>
   state.general.showFormModal;
 
+export const selectShowGeneralModal = (state: State) =>
+  state.general.showGeneralModal;
+
 export const {
   changeIsSidebarOpened,
   updateTemplateProfile,
   changeShowFormModal,
+  changeShowGeneralModal,
 } = generalSlice.actions;
 
 export default generalSlice.reducer;

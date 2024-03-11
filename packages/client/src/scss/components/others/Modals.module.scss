@@ -1,11 +1,9 @@
 @use "../../abstracts" as *;
 
-.formModalContainer {
+.popupModalContainer {
   @include flexCenter(column);
   position: absolute;
   top: 0;
-  border: 1.5px solid getColor("black-100-1");
-  border-top: none;
   width: 100%;
   max-width: $authFormPageTemplateFormWidth;
   padding: 0.75rem 0.5rem;
@@ -14,8 +12,9 @@
   opacity: 0;
   transform: translateY(-100%);
   transition:
-    opacity 0.2s linear,
-    transform 0.135s ease-in;
+    opacity 0.135s linear,
+    transform 0.135s linear;
+  gap: 8px;
 
   svg {
     align-self: flex-end;
@@ -33,5 +32,6 @@
     letter-spacing: 1.25px;
     font-size: 20px;
     color: getColor("tan-color-extra-light");
+    text-align: center;
   }
 }

@@ -16,7 +16,10 @@ import ReCAPTCHAControl from "./form/ReCAPTCHAControl";
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import {
   createCloudinaryImage,
+  loginUser,
   selectLoadingCloudinaryImage,
+  selectLoadingCreateProfile,
+  selectLoadingLoginProfile,
   selectTemplateImageUrl,
   selectTemplateProfile,
   signupUser,
@@ -26,6 +29,14 @@ import {
 const AuthFormControls: FC<AuthFormControlsProps> = ({ type }) => {
   const dispatch = useAppDispatch();
   const templateProfile = useAppSelector(selectTemplateProfile);
+
+  const loadingCreateProfile = useAppSelector(selectLoadingCreateProfile);
+  const loadingLoginProfile = useAppSelector(selectLoadingLoginProfile);
+
+  const isRequestPending =
+    type === "signup"
+      ? loadingCreateProfile === "PENDING"
+      : loadingLoginProfile === "PENDING";
 
   const loadingCloudinaryImage = useAppSelector(selectLoadingCloudinaryImage);
   const templateImageUrl = useAppSelector(selectTemplateImageUrl);
@@ -130,7 +141,7 @@ const AuthFormControls: FC<AuthFormControlsProps> = ({ type }) => {
           fontSize={21}
           height={40}
           width={128}
-          disabled={loadingCloudinaryImage === "PENDING"}
+          disabled={loadingCloudinaryImage === "PENDING" || isRequestPending}
           onClickFunction={(e) => {
             e.preventDefault();
             dispatch(signupUser(templateProfile));
@@ -175,13 +186,17 @@ const AuthFormControls: FC<AuthFormControlsProps> = ({ type }) => {
           fontSize={21}
           height={40}
           width={128}
-          disabled={false}
+          disabled={isRequestPending}
+          onClickFunction={(e) => {
+            e.preventDefault();
+            dispatch(loginUser(templateProfile));
+          }}
         />
       </form>
     );
   }
 
-  return <h1>Hello</h1>;
+  return null;
 };
 
 export default AuthFormControls;
