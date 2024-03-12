@@ -76,33 +76,43 @@ export const getProfileJWT = createAsyncThunk(
   }
 );
 
-export const signupUserOAuthFull = createAsyncThunk<any, "google" | "github">(
+export const signupUserOAuth = createAsyncThunk(
   "general/signupUserOAuthFull",
-  async (providerName) => {
+  async () => {
     try {
-      await signIn(providerName, { redirect: false });
-      const userSession = await getSession();
-      console.log(userSession);
-      return userSession?.user;
+      const session = await getSession();
+      if (session && session.user) {
+        const userTemplate = { ...defaultTemplateProfile } as UserTemplate;
+        userTemplate.username = (session.user.name as string) || "User";
+        userTemplate.email =
+          (session.user.email as string) || "email@provider.com";
+        userTemplate.imageUrl =
+          (session.user.image as string) || userTemplate.imageUrl;
+        const { data } = await axiosInstance.post(
+          "/users/signup?throughOAuth=true",
+          userTemplate
+        );
+        return data.user as User;
+      }
     } catch (error) {
       console.log(error);
-      throw new Error("Invalid signup user oauth function call.");
+      return error as AxiosError;
     }
   }
 );
 
-export const signupUserOAuth = createAsyncThunk<null, "google" | "github">(
-  "general/signupUserOAuth",
-  async (providerName) => {
-    try {
-      await signIn(providerName);
-      return null;
-    } catch (error) {
-      console.log(error);
-      throw new Error("Invalid signup user oauth function call.");
-    }
+export const signinUserThroughOAuth = createAsyncThunk<
+  null,
+  "google" | "github"
+>("general/signupUserOAuth", async (providerName) => {
+  try {
+    await signIn(providerName);
+    return null;
+  } catch (error) {
+    console.log(error);
+    throw new Error("Invalid signup user oauth function call.");
   }
-);
+});
 
 export const signupUser = createAsyncThunk<User | AxiosError, UserTemplate>(
   "general/signupUser",
@@ -198,14 +208,35 @@ const generalSlice = createSlice({
   },
   extraReducers(builder) {
     builder
-      .addCase(signupUserOAuthFull.pending, (state, action) => {
-        console.log(action.payload);
+      .addCase(signupUserOAuth.pending, (state, action) => {
+        state.loadingCreateProfile = "PENDING";
       })
-      .addCase(signupUserOAuthFull.fulfilled, (state, action) => {
-        console.log(action.payload);
+      .addCase(signupUserOAuth.fulfilled, (state, action) => {
+        const user = action.payload as UserType;
+        const axiosError = action.payload as AxiosError;
+
+        if (!axiosError.response) {
+          state.profile = user;
+          state.loadingCreateProfile = "SUCCEDED";
+          state.templateModalMessage = `Successfully signed up user: ${user.username}`;
+          state.showGeneralModal = false;
+          setTimeout(() => {
+            window.location.href = `${baseSiteUrl}/home`;
+          }, 1500);
+        } else {
+          const errorData = axiosError.response.data as { message: string };
+          state.loadingCreateProfile = "FAILED";
+          state.showGeneralModal = false;
+          state.templateModalMessage = errorData.message;
+        }
       })
-      .addCase(signupUserOAuthFull.rejected, (state, action) => {
-        console.log(action.payload);
+      .addCase(signinUserThroughOAuth.pending, (state, action) => {
+        state.loadingLoginProfile = "PENDING";
+        state.templateModalMessage = `Trying to create your account`;
+      })
+      .addCase(signinUserThroughOAuth.fulfilled, (state, action) => {
+        state.loadingLoginProfile = "SUCCEDED";
+        state.templateModalMessage = `Successfully logged in`;
       })
       .addCase(getProfileOAuth.pending, (state, action) => {
         state.loadingGetProfile = "PENDING";
@@ -233,7 +264,7 @@ const generalSlice = createSlice({
       })
       .addCase(signupUser.pending, (state, action) => {
         state.loadingCreateProfile = "PENDING";
-        state.templateModalMessage = `Trying to create an account`;
+        state.templateModalMessage = `Trying to create your account`;
       })
       .addCase(signupUser.fulfilled, (state, action) => {
         const user = action.payload as UserType;

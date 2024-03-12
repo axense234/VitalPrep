@@ -13,6 +13,7 @@ const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const signupUser = async (req: Request, res: Response) => {
   const userBody = req.body;
+  const throughOAuth = Boolean(req.query.throughOAuth);
 
   if (!userBody) {
     return res
@@ -38,7 +39,7 @@ const signupUser = async (req: Request, res: Response) => {
       .json({ message: "Please enter a valid email!" });
   }
 
-  if (!userBody.password) {
+  if (!userBody.password && !throughOAuth) {
     return res
       .status(StatusCodes.BAD_REQUEST)
       .json({ message: "Please enter a password!" });
@@ -53,6 +54,14 @@ const signupUser = async (req: Request, res: Response) => {
     return res
       .status(StatusCodes.BAD_REQUEST)
       .json({ message: "Please enter a valid age!" });
+  }
+
+  if (throughOAuth) {
+    // WARNING
+    // MAJOR SECURITY WORKAROUND
+    // DID THIS ONLY BECAUSE I SUCK
+    // LET'S HOPE NOONE READS THIS LINE AND STARTS USING IT FOR MISCHEVIOUS PURPOSES
+    userBody.password = userBody.email + userBody.age + userBody.username;
   }
 
   const encryptedPass = await encryptPassword(userBody.password);

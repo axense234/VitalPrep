@@ -6,19 +6,15 @@ import { OAuthOptionsContent } from "@/data";
 import OAuthOptionContent from "@/core/types/OAuthOptionContent";
 import OAuthOptionsProps from "@/core/interfaces/OAuthOptionsProps";
 // React
-import { FC } from "react";
+import { FC, useEffect } from "react";
 // SCSS
 import OAuthOptionsStyles from "../../scss/components/shared/OAuthOptions.module.scss";
 // Next Auth
-import { signIn } from "next-auth/react";
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import {
-  getProfileJWT,
-  getProfileOAuth,
-  selectTemplateProfile,
-  signupUser,
+  selectLoadingLoginProfile,
+  signinUserThroughOAuth,
   signupUserOAuth,
-  signupUserOAuthFull,
 } from "@/redux/slices/generalSlice";
 
 const OAuthOptions: FC<OAuthOptionsProps> = ({ type }) => {
@@ -29,7 +25,7 @@ const OAuthOptions: FC<OAuthOptionsProps> = ({ type }) => {
         {OAuthOptionsContent.map((option) => {
           return (
             <li key={option.id}>
-              <OAuthOptionsButton {...option} />
+              <OAuthOptionsButton {...option} pageType={type} />
             </li>
           );
         })}
@@ -43,8 +39,16 @@ const OAuthOptionsButton: FC<OAuthOptionContent> = ({
   optionType,
   textContent,
   reactIcon,
+  pageType,
 }) => {
   const dispatch = useAppDispatch();
+  const loadingLoginProfile = useAppSelector(selectLoadingLoginProfile);
+
+  useEffect(() => {
+    if (loadingLoginProfile === "SUCCEDED" && pageType !== "login") {
+      dispatch(signupUserOAuth());
+    }
+  }, [loadingLoginProfile]);
 
   return (
     <button
@@ -52,7 +56,7 @@ const OAuthOptionsButton: FC<OAuthOptionContent> = ({
       title={textContent}
       aria-label={textContent}
       onClick={() => {
-        dispatch(signupUserOAuthFull(optionType));
+        dispatch(signinUserThroughOAuth(optionType));
       }}
     >
       {reactIcon}

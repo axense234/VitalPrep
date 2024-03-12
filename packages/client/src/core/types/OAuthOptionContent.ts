@@ -5,6 +5,7 @@ type OAuthOptionContent = {
   reactIcon: ReactElement;
   textContent: string;
   optionType: "google" | "github";
+  pageType?: "login" | "signup";
 };
 
 export default OAuthOptionContent;
