@@ -1,3 +1,5 @@
+"use client";
+
 // Data
 import { pageLinks, siteEmail, sitePhoneNumber } from "@/data";
 // SCSS
@@ -11,6 +13,7 @@ import PageLink from "@/core/types/PageLink";
 import { FC } from "react";
 // Next
 import Link from "next/link";
+import { signOut } from "next-auth/react";
 
 const Footer = () => {
   return (
@@ -40,7 +43,21 @@ const FooterPageLinks = () => {
   );
 };
 
-const FooterPageLink: FC<PageLink> = ({ linkDest, linkTitle, reactIcon }) => {
+const FooterPageLink: FC<PageLink> = ({ linkDest, linkTitle, linkType }) => {
+  if (linkType === "logout") {
+    return (
+      <button
+        className={footerStyles.footerPageLink}
+        title={linkTitle}
+        aria-label={linkTitle}
+        onClick={() =>
+          signOut({ redirect: true, callbackUrl: "http://localhost:3000/" })
+        }
+      >
+        <p>{linkTitle}</p>
+      </button>
+    );
+  }
   return (
     <Link
       className={footerStyles.footerPageLink}
@@ -72,7 +89,7 @@ const FooterBar = () => {
   return (
     <div className={footerStyles.footerBar}>
       <div className={footerStyles.footerCopyright}>
-        <Logo />
+        <Logo dimensions={100} logoImageUrlIndex={1} />
         <p>axense's Team Copyright &copy; 2024</p>
       </div>
       <SocialMediaIcons />

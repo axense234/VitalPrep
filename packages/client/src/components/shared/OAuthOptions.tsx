@@ -9,7 +9,17 @@ import OAuthOptionsProps from "@/core/interfaces/OAuthOptionsProps";
 import { FC } from "react";
 // SCSS
 import OAuthOptionsStyles from "../../scss/components/shared/OAuthOptions.module.scss";
+// Next Auth
 import { signIn } from "next-auth/react";
+import { useAppDispatch, useAppSelector } from "@/hooks/redux";
+import {
+  getProfileJWT,
+  getProfileOAuth,
+  selectTemplateProfile,
+  signupUser,
+  signupUserOAuth,
+  signupUserOAuthFull,
+} from "@/redux/slices/generalSlice";
 
 const OAuthOptions: FC<OAuthOptionsProps> = ({ type }) => {
   return (
@@ -34,12 +44,16 @@ const OAuthOptionsButton: FC<OAuthOptionContent> = ({
   textContent,
   reactIcon,
 }) => {
+  const dispatch = useAppDispatch();
+
   return (
     <button
       className={OAuthOptionsStyles.authButton}
       title={textContent}
       aria-label={textContent}
-      onClick={() => signIn(optionType)}
+      onClick={() => {
+        dispatch(signupUserOAuthFull(optionType));
+      }}
     >
       {reactIcon}
       <span>{textContent}</span>

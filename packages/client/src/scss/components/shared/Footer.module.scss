@@ -30,9 +30,12 @@
 
 .footerPageLink {
   @include flexCenter(row);
+  justify-content: flex-start;
   text-decoration: none;
   width: 100%;
   height: 100%;
+  background-color: inherit;
+  border: none;
 
   p {
     transition:
@@ -41,6 +44,7 @@
     width: 100%;
     height: 100%;
     color: getColor("tan-color");
+    text-align: start;
     @include paragraphLaptop();
 
     &:hover {

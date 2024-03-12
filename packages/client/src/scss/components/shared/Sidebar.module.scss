@@ -72,6 +72,8 @@
   justify-content: flex-start;
   text-decoration: none;
   gap: $sidebarPageLinkDistanceBetweenIconAndTitle;
+  background-color: inherit;
+  border: none;
 
   svg {
     width: $sidebarPageLinkDimensions;
@@ -83,6 +85,7 @@
     font-size: $sidebarPageLinkTitleFontSize;
     font-weight: 550;
     width: 100%;
+    text-align: start;
     color: getColor("black-100-1");
     transition:
       $crispyTransformTransition,

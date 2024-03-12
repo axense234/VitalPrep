@@ -21,6 +21,8 @@ import {
 } from "@/redux/slices/generalSlice";
 // Hooks
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
+// Next Auth
+import { signOut } from "next-auth/react";
 
 const Sidebar = () => {
   const sidebarRef = useRef<HTMLElement>(null);
@@ -71,7 +73,27 @@ const SidebarPageLinks = () => {
   );
 };
 
-const SidebarPageLink: FC<PageLink> = ({ linkDest, linkTitle, reactIcon }) => {
+const SidebarPageLink: FC<PageLink> = ({
+  linkDest,
+  linkTitle,
+  reactIcon,
+  linkType,
+}) => {
+  if (linkType === "logout") {
+    return (
+      <button
+        title={linkTitle}
+        aria-label={linkTitle}
+        className={sidebarStyles.sidebarPageLink}
+        onClick={() =>
+          signOut({ redirect: true, callbackUrl: "http://localhost:3000/" })
+        }
+      >
+        {reactIcon}
+        <p>{linkTitle}</p>
+      </button>
+    );
+  }
   return (
     <Link
       href={linkDest}

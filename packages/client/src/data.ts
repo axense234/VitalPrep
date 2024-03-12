@@ -19,6 +19,39 @@ export const homePageUrl = "/home";
 export const sitePhoneNumber = "0754189293(fake)";
 export const siteEmail = "thisemaildoesnotexit@nothing.com";
 
+export const defaultProfile = {
+  id: "",
+  username: "",
+  email: "",
+  password: "",
+  imageUrl:
+    "https://res.cloudinary.com/birthdayreminder/image/upload/v1708852560/VitalPrep/defaultprofileimage_tzrh3w.jpg",
+  age: 8,
+  ingredients: [],
+  utensils: [],
+  recipes: [],
+  dayTemplates: [],
+  instanceTemplates: [],
+  mealPrepPlans: [],
+  mealPrepLogs: [],
+  notificationSettings: {
+    id: "",
+    allowedNotifications: true,
+    notificationImageUrl: "",
+    notificationStyle: "default",
+  },
+  notificationSettingsId: "",
+};
+
+export const defaultTemplateProfile = {
+  username: "",
+  email: "",
+  password: "",
+  imageUrl:
+    "https://res.cloudinary.com/birthdayreminder/image/upload/v1708852560/VitalPrep/defaultprofileimage_tzrh3w.jpg",
+  age: 8,
+};
+
 export const OAuthOptionsContent: OAuthOptionContent[] = [
   {
     id: 1,

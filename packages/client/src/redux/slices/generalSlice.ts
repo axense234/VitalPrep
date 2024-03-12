@@ -12,7 +12,8 @@ import axios, { AxiosError } from "axios";
 // Config
 import { baseSiteUrl } from "@/config";
 // Next Auth
-import { getSession } from "next-auth/react";
+import { getSession, signIn } from "next-auth/react";
+import { defaultProfile, defaultTemplateProfile } from "@/data";
 
 type ObjectKeyValueType = {
   key: string;
@@ -75,6 +76,34 @@ export const getProfileJWT = createAsyncThunk(
   }
 );
 
+export const signupUserOAuthFull = createAsyncThunk<any, "google" | "github">(
+  "general/signupUserOAuthFull",
+  async (providerName) => {
+    try {
+      await signIn(providerName, { redirect: false });
+      const userSession = await getSession();
+      console.log(userSession);
+      return userSession?.user;
+    } catch (error) {
+      console.log(error);
+      throw new Error("Invalid signup user oauth function call.");
+    }
+  }
+);
+
+export const signupUserOAuth = createAsyncThunk<null, "google" | "github">(
+  "general/signupUserOAuth",
+  async (providerName) => {
+    try {
+      await signIn(providerName);
+      return null;
+    } catch (error) {
+      console.log(error);
+      throw new Error("Invalid signup user oauth function call.");
+    }
+  }
+);
+
 export const signupUser = createAsyncThunk<User | AxiosError, UserTemplate>(
   "general/signupUser",
   async (userTemplate) => {
@@ -128,37 +157,8 @@ const initialState: InitialStateType = {
 
   // Auth
   loadingProfile: "IDLE",
-  profile: {
-    id: "",
-    username: "",
-    email: "",
-    password: "",
-    imageUrl:
-      "https://res.cloudinary.com/birthdayreminder/image/upload/v1708852560/VitalPrep/defaultprofileimage_tzrh3w.jpg",
-    age: 8,
-    ingredients: [],
-    utensils: [],
-    recipes: [],
-    dayTemplates: [],
-    instanceTemplates: [],
-    mealPrepPlans: [],
-    mealPrepLogs: [],
-    notificationSettings: {
-      id: "",
-      allowedNotifications: true,
-      notificationImageUrl: "",
-      notificationStyle: "default",
-    },
-    notificationSettingsId: "",
-  },
-  templateProfile: {
-    username: "",
-    email: "",
-    password: "",
-    imageUrl:
-      "https://res.cloudinary.com/birthdayreminder/image/upload/v1708852560/VitalPrep/defaultprofileimage_tzrh3w.jpg",
-    age: 8,
-  },
+  profile: defaultProfile,
+  templateProfile: defaultTemplateProfile,
   loadingCreateProfile: "IDLE",
   loadingLoginProfile: "IDLE",
   loadingGetProfile: "IDLE",
@@ -198,6 +198,15 @@ const generalSlice = createSlice({
   },
   extraReducers(builder) {
     builder
+      .addCase(signupUserOAuthFull.pending, (state, action) => {
+        console.log(action.payload);
+      })
+      .addCase(signupUserOAuthFull.fulfilled, (state, action) => {
+        console.log(action.payload);
+      })
+      .addCase(signupUserOAuthFull.rejected, (state, action) => {
+        console.log(action.payload);
+      })
       .addCase(getProfileOAuth.pending, (state, action) => {
         state.loadingGetProfile = "PENDING";
         state.templateModalMessage = `Trying to find your account`;
