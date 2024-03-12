@@ -52,7 +52,9 @@ const AuthFormPageTemplate: FC<AuthFormPageTemplateProps> = ({ type }) => {
   const isRequestPending =
     (type === "signup"
       ? loadingCreateProfile === "PENDING"
-      : loadingLoginProfile === "PENDING") || loadingGetProfile === "PENDING";
+      : loadingLoginProfile === "PENDING") ||
+    loadingGetProfile === "PENDING" ||
+    loadingGetProfile === "SUCCEDED";
 
   useEffect(() => {
     dispatch(manipulateLoadingCreateProfile("IDLE"));

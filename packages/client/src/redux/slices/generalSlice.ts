@@ -215,6 +215,7 @@ const generalSlice = createSlice({
           if (user.image) {
             state.profile.imageUrl = user.image;
           }
+          state.loadingGetProfile = "SUCCEDED";
           state.templateModalMessage = `Found your account, redirecting`;
         } else if (!user) {
           state.loadingGetProfile = "FAILED";

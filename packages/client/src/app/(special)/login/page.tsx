@@ -2,22 +2,11 @@
 
 // Components
 import AuthFormPageTemplate from "@/components/shared/AuthFormPageTemplate";
-// Redux
-import { useAppDispatch } from "@/hooks/redux";
-import { getProfileOAuth, getProfileJWT } from "@/redux/slices/generalSlice";
-// Next Auth
-import { authenticationClient } from "@/utils/auth";
-// React
-import { useEffect } from "react";
+// Hooks
+import useAuthorization from "@/hooks/useAuthorization";
 
 const Login = () => {
-  authenticationClient();
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(getProfileOAuth());
-    dispatch(getProfileJWT());
-  }, []);
+  useAuthorization();
 
   return <AuthFormPageTemplate type="login" />;
 };
