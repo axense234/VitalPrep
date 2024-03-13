@@ -17,6 +17,7 @@ import Logo from "./Logo";
 import SocialMediaIcons from "./SocialMediaIcons";
 import {
   changeIsSidebarOpened,
+  logoutUser,
   selectIsSidebarOpened,
 } from "@/redux/slices/generalSlice";
 // Hooks
@@ -79,15 +80,14 @@ const SidebarPageLink: FC<PageLink> = ({
   reactIcon,
   linkType,
 }) => {
+  const dispatch = useAppDispatch();
   if (linkType === "logout") {
     return (
       <button
         title={linkTitle}
         aria-label={linkTitle}
         className={sidebarStyles.sidebarPageLink}
-        onClick={() =>
-          signOut({ redirect: true, callbackUrl: "http://localhost:3000/" })
-        }
+        onClick={() => dispatch(logoutUser())}
       >
         {reactIcon}
         <p>{linkTitle}</p>

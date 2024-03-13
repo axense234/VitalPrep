@@ -20,7 +20,6 @@ const ImageFormControl: FC<ImageFormControlProps> = ({
   entityProperty,
   onEntityPropertyValueChange,
 }) => {
-  console.log(entityPropertyLoadingStatus);
   return (
     <div
       className={formControlsStyles.imageFormControlContainer}

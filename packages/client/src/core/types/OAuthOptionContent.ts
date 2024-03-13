@@ -3,7 +3,8 @@ import { ReactElement } from "react";
 type OAuthOptionContent = {
   id?: number;
   reactIcon: ReactElement;
-  textContent: string;
+  signupTextContent: string;
+  loginTextContent: string;
   optionType: "google" | "github";
   pageType?: "login" | "signup";
 };

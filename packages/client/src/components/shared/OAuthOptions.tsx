@@ -11,8 +11,9 @@ import { FC, useEffect } from "react";
 import OAuthOptionsStyles from "../../scss/components/shared/OAuthOptions.module.scss";
 // Next Auth
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
+// Redux
 import {
-  selectLoadingLoginProfile,
+  selectLoadingLoginOAuthProfile,
   signinUserThroughOAuth,
   signupUserOAuth,
 } from "@/redux/slices/generalSlice";
@@ -37,30 +38,39 @@ const OAuthOptions: FC<OAuthOptionsProps> = ({ type }) => {
 
 const OAuthOptionsButton: FC<OAuthOptionContent> = ({
   optionType,
-  textContent,
+  loginTextContent,
+  signupTextContent,
   reactIcon,
   pageType,
 }) => {
   const dispatch = useAppDispatch();
-  const loadingLoginProfile = useAppSelector(selectLoadingLoginProfile);
+  const loadingLoginOAuthProfile = useAppSelector(
+    selectLoadingLoginOAuthProfile
+  );
 
   useEffect(() => {
-    if (loadingLoginProfile === "SUCCEDED" && pageType !== "login") {
+    if (loadingLoginOAuthProfile === "SUCCEDED" && pageType === "signup") {
       dispatch(signupUserOAuth());
     }
-  }, [loadingLoginProfile]);
+  }, [loadingLoginOAuthProfile]);
 
   return (
     <button
       className={OAuthOptionsStyles.authButton}
-      title={textContent}
-      aria-label={textContent}
+      title={pageType === "login" ? loginTextContent : signupTextContent}
+      aria-label={pageType === "login" ? loginTextContent : signupTextContent}
       onClick={() => {
-        dispatch(signinUserThroughOAuth(optionType));
+        dispatch(
+          signinUserThroughOAuth({
+            providerName: optionType,
+            usedOnlyForSignin: pageType === "login",
+          })
+        );
       }}
+      type="button"
     >
       {reactIcon}
-      <span>{textContent}</span>
+      <span>{pageType === "login" ? loginTextContent : signupTextContent}</span>
     </button>
   );
 };

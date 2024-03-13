@@ -55,13 +55,15 @@ export const defaultTemplateProfile = {
 export const OAuthOptionsContent: OAuthOptionContent[] = [
   {
     id: 1,
-    textContent: "Sign In with Google",
+    signupTextContent: "Sign Up with Google",
+    loginTextContent: "Log In with Google",
     reactIcon: FcGoogle({}),
     optionType: "google",
   },
   {
     id: 2,
-    textContent: "Sign In with Github",
+    signupTextContent: "Sign Up with Github",
+    loginTextContent: "Log In with Github",
     reactIcon: FaGithub({}),
     optionType: "github",
   },

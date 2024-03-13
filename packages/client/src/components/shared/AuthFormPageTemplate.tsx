@@ -22,8 +22,11 @@ import {
   changeShowGeneralModal,
   manipulateLoadingCreateProfile,
   manipulateLoadingLoginProfile,
+  selectLoadingCreateOAuthProfile,
   selectLoadingCreateProfile,
+  selectLoadingGetOAuthProfile,
   selectLoadingGetProfile,
+  selectLoadingLoginOAuthProfile,
   selectLoadingLoginProfile,
   selectShowFormModal,
   selectShowGeneralModal,
@@ -38,8 +41,15 @@ const AuthFormPageTemplate: FC<AuthFormPageTemplateProps> = ({ type }) => {
   const modalMessage = useAppSelector(selectTemplateModalMessage);
 
   const loadingCreateProfile = useAppSelector(selectLoadingCreateProfile);
+  const loadingCreateOAuthProfile = useAppSelector(
+    selectLoadingCreateOAuthProfile
+  );
   const loadingLoginProfile = useAppSelector(selectLoadingLoginProfile);
+  const loadingLoginOAuthProfile = useAppSelector(
+    selectLoadingLoginOAuthProfile
+  );
   const loadingGetProfile = useAppSelector(selectLoadingGetProfile);
+  const loadingGetOAuthProfile = useAppSelector(selectLoadingGetOAuthProfile);
 
   let pageTitleUsed = "Title";
   let pageImageUrlUsed = authFormPageTemplateImageUrls[0].imageUrl;
@@ -51,10 +61,14 @@ const AuthFormPageTemplate: FC<AuthFormPageTemplateProps> = ({ type }) => {
 
   const isRequestPending =
     (type === "signup"
-      ? loadingCreateProfile === "PENDING"
-      : loadingLoginProfile === "PENDING") ||
+      ? loadingCreateProfile === "PENDING" ||
+        loadingCreateOAuthProfile === "PENDING"
+      : loadingLoginProfile === "PENDING" ||
+        loadingLoginOAuthProfile === "PENDING") ||
     loadingGetProfile === "PENDING" ||
-    loadingGetProfile === "SUCCEDED";
+    loadingGetProfile === "SUCCEDED" ||
+    loadingGetOAuthProfile === "PENDING" ||
+    loadingGetOAuthProfile === "SUCCEDED";
 
   useEffect(() => {
     dispatch(manipulateLoadingCreateProfile("IDLE"));
@@ -62,32 +76,45 @@ const AuthFormPageTemplate: FC<AuthFormPageTemplateProps> = ({ type }) => {
   }, []);
 
   useEffect(() => {
-    if (loadingGetProfile === "PENDING") {
+    if (
+      loadingGetProfile === "PENDING" ||
+      loadingGetOAuthProfile === "PENDING"
+    ) {
       dispatch(changeShowGeneralModal(true));
     }
-  }, [loadingGetProfile]);
+  }, [loadingGetProfile, loadingGetOAuthProfile]);
 
   useEffect(() => {
-    if (loadingCreateProfile === "FAILED") {
+    if (
+      loadingCreateProfile === "FAILED" ||
+      loadingCreateOAuthProfile === "FAILED"
+    ) {
       dispatch(changeShowFormModal(true));
     } else if (
       loadingCreateProfile === "SUCCEDED" ||
-      loadingCreateProfile === "PENDING"
+      loadingCreateProfile === "PENDING" ||
+      loadingCreateOAuthProfile === "SUCCEDED" ||
+      loadingCreateOAuthProfile === "PENDING"
     ) {
       dispatch(changeShowGeneralModal(true));
     }
-  }, [loadingCreateProfile]);
+  }, [loadingCreateProfile, loadingCreateOAuthProfile]);
 
   useEffect(() => {
-    if (loadingLoginProfile === "FAILED") {
+    if (
+      loadingLoginProfile === "FAILED" ||
+      loadingLoginOAuthProfile === "FAILED"
+    ) {
       dispatch(changeShowFormModal(true));
     } else if (
       loadingLoginProfile === "SUCCEDED" ||
-      loadingLoginProfile === "PENDING"
+      loadingLoginProfile === "PENDING" ||
+      loadingLoginOAuthProfile === "SUCCEDED" ||
+      loadingLoginOAuthProfile === "PENDING"
     ) {
       dispatch(changeShowGeneralModal(true));
     }
-  }, [loadingLoginProfile]);
+  }, [loadingLoginProfile, loadingLoginOAuthProfile]);
 
   useEffect(() => {
     let firstTimeout: NodeJS.Timeout;

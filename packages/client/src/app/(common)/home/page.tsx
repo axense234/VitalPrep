@@ -9,7 +9,7 @@ import HomeCards from "@/components/page/HomeCards";
 import useAuthorization from "@/hooks/useAuthorization";
 
 const Home = () => {
-  useAuthorization();
+  useAuthorization("common");
 
   return (
     <div className={homeStyles.homeContainer}>

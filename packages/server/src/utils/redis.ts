@@ -1,10 +1,11 @@
 // Redis
 import { redisClient } from "../db/redis";
 
-const DEF_EXP_TIME = 7200;
+const DEF_EXP_TIME = 12 * 3600;
 
 const getOrSetCache = async (key, cb) => {
   const data = await redisClient.get(key);
+
   if (data !== null) {
     return JSON.parse(data);
   }

@@ -1,9 +1,10 @@
 // React
-import { FC, useEffect } from "react";
+import { useEffect } from "react";
 // Redux
 import {
-  getProfileOAuth,
   getProfileJWT,
+  getProfileOAuth,
+  selectLoadingGetOAuthProfile,
   selectLoadingGetProfile,
   selectProfile,
 } from "@/redux/slices/generalSlice";
@@ -13,22 +14,32 @@ import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 
-const useAuthorization = () => {
+const useAuthorization = (pageType: "login" | "signup" | "common") => {
   const dispatch = useAppDispatch();
   const pathname = usePathname();
   const router = useRouter();
-  const loadingGetProfile = useAppSelector(selectLoadingGetProfile);
 
-  useRedirect(
-    pathname,
-    router,
-    loadingGetProfile === "SUCCEDED" || loadingGetProfile === "FAILED"
-  );
+  const loadingGetProfile = useAppSelector(selectLoadingGetProfile);
+  const loadingGetOAuthProfile = useAppSelector(selectLoadingGetOAuthProfile);
+
+  const canRedirect =
+    loadingGetProfile === "SUCCEDED" ||
+    loadingGetProfile === "FAILED" ||
+    loadingGetOAuthProfile === "SUCCEDED";
+
+  useRedirect(pathname, router, canRedirect);
 
   useEffect(() => {
-    dispatch(getProfileOAuth());
-    dispatch(getProfileJWT());
-  }, []);
+    if (loadingGetOAuthProfile === "FAILED" && loadingGetProfile === "IDLE") {
+      dispatch(getProfileJWT());
+    }
+  }, [loadingGetOAuthProfile, loadingGetProfile]);
+
+  useEffect(() => {
+    if (loadingGetProfile === "IDLE" && pageType !== "signup") {
+      dispatch(getProfileOAuth());
+    }
+  }, [loadingGetProfile]);
 };
 
 export const useRedirect = (
@@ -50,7 +61,7 @@ export const useRedirect = (
         router.push("/");
       }
     }
-  }, [pathname, router, loading]);
+  }, [pathname, router, loading, profile]);
 };
 
 export default useAuthorization;

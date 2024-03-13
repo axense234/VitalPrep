@@ -14,6 +14,8 @@ import { FC } from "react";
 // Next
 import Link from "next/link";
 import { signOut } from "next-auth/react";
+import { useAppDispatch } from "@/hooks/redux";
+import { logoutUser } from "@/redux/slices/generalSlice";
 
 const Footer = () => {
   return (
@@ -44,15 +46,14 @@ const FooterPageLinks = () => {
 };
 
 const FooterPageLink: FC<PageLink> = ({ linkDest, linkTitle, linkType }) => {
+  const dispatch = useAppDispatch();
   if (linkType === "logout") {
     return (
       <button
         className={footerStyles.footerPageLink}
         title={linkTitle}
         aria-label={linkTitle}
-        onClick={() =>
-          signOut({ redirect: true, callbackUrl: "http://localhost:3000/" })
-        }
+        onClick={() => dispatch(logoutUser())}
       >
         <p>{linkTitle}</p>
       </button>

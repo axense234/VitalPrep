@@ -10,7 +10,6 @@ const errorHandlerMiddleware: ErrorRequestHandler = (err, req, res, next) => {
     message: err.message || "Unexpected error.",
     code: (typeof err.code === "string" ? 500 : err.code || err.status) || 500,
   };
-  console.log(err);
 
   if (err.code === "P2002") {
     customError.message = "Please provide an unique email!";
@@ -23,7 +22,6 @@ const errorHandlerMiddleware: ErrorRequestHandler = (err, req, res, next) => {
   }
 
   if (err instanceof PrismaClientValidationError) {
-    console.log(err);
     customError.message = "Please enter a valid request body!";
     customError.code = StatusCodes.BAD_REQUEST;
   }

@@ -23,7 +23,7 @@ const authenticationMiddleware = async (
   if (!userId) {
     return res
       .status(StatusCodes.BAD_REQUEST)
-      .json({ msg: "Please provide an userId!" });
+      .json({ message: "Please provide an userId!" });
   }
 
   const token = await getOrSetCache(`${userId}:jwt-vitalprep`, () => {
@@ -37,14 +37,16 @@ const authenticationMiddleware = async (
   if (!token) {
     return res
       .status(StatusCodes.BAD_REQUEST)
-      .json({ msg: "Please provide a jwt!" });
+      .json({ message: "Please provide a jwt!" });
   }
 
   try {
     req.user = verifyJWT(token);
     next();
   } catch (error) {
-    return res.status(StatusCodes.UNAUTHORIZED).json({ msg: "Expired jwt." });
+    return res
+      .status(StatusCodes.UNAUTHORIZED)
+      .json({ message: "Expired jwt." });
   }
 };
 

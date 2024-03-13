@@ -4,6 +4,9 @@ import * as dotenv from "dotenv";
 require("express-async-errors");
 
 // DB Connections,Middleware,Routes,Swagegr
+import notFoundMiddleware from "./middleware/notFound";
+import errorHandlerMiddleware from "./middleware/errorHandler";
+
 import cors from "cors";
 import rateLimiter from "express-rate-limit";
 import helmet from "helmet";
@@ -11,9 +14,6 @@ import morgan from "morgan";
 
 import { connectToPostgres } from "./db/postgres";
 import { connectToRedis } from "./db/redis";
-
-import notFoundMiddleware from "./middleware/notFound";
-import errorHandlerMiddleware from "./middleware/errorHandler";
 
 import authenticationRouter from "./routers/authentication";
 import ingredientsRouter from "./routers/ingredients";
@@ -60,7 +60,7 @@ app.use(
 const PORT = process.env.PORT || 4000;
 
 app.get("/", (req: Request, res: Response) => {
-  return res.status(200).json({ msg: "Hello" });
+  return res.status(200).json({ message: "Hello" });
 });
 
 app.use("/", [
