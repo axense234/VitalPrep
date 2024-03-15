@@ -6,17 +6,13 @@ import { OAuthOptionsContent } from "@/data";
 import OAuthOptionContent from "@/core/types/OAuthOptionContent";
 import OAuthOptionsProps from "@/core/interfaces/OAuthOptionsProps";
 // React
-import { FC, useEffect } from "react";
+import { FC } from "react";
 // SCSS
 import OAuthOptionsStyles from "../../scss/components/shared/OAuthOptions.module.scss";
 // Next Auth
-import { useAppDispatch, useAppSelector } from "@/hooks/redux";
+import { useAppDispatch } from "@/hooks/redux";
 // Redux
-import {
-  selectLoadingLoginOAuthProfile,
-  signinUserThroughOAuth,
-  signupUserOAuth,
-} from "@/redux/slices/generalSlice";
+import { signinUserThroughOAuth } from "@/redux/slices/generalSlice";
 
 const OAuthOptions: FC<OAuthOptionsProps> = ({ type }) => {
   return (
@@ -38,39 +34,36 @@ const OAuthOptions: FC<OAuthOptionsProps> = ({ type }) => {
 
 const OAuthOptionsButton: FC<OAuthOptionContent> = ({
   optionType,
-  loginTextContent,
-  signupTextContent,
+  signUpTextContent,
+  logInTextContent,
   reactIcon,
   pageType,
 }) => {
   const dispatch = useAppDispatch();
-  const loadingLoginOAuthProfile = useAppSelector(
-    selectLoadingLoginOAuthProfile
-  );
-
-  useEffect(() => {
-    if (loadingLoginOAuthProfile === "SUCCEDED" && pageType === "signup") {
-      dispatch(signupUserOAuth());
-    }
-  }, [loadingLoginOAuthProfile]);
+  const buttonTextContent =
+    pageType === "signup" ? signUpTextContent : logInTextContent;
 
   return (
     <button
       className={OAuthOptionsStyles.authButton}
-      title={pageType === "login" ? loginTextContent : signupTextContent}
-      aria-label={pageType === "login" ? loginTextContent : signupTextContent}
+      title={buttonTextContent}
+      aria-label={buttonTextContent}
       onClick={() => {
+        {
+          pageType === "signup" &&
+            localStorage.setItem("createVitalPrepAccount", "create");
+        }
         dispatch(
           signinUserThroughOAuth({
             providerName: optionType,
-            usedOnlyForSignin: pageType === "login",
+            pageType: pageType as "signup" | "login",
           })
         );
       }}
       type="button"
     >
       {reactIcon}
-      <span>{pageType === "login" ? loginTextContent : signupTextContent}</span>
+      <span>{buttonTextContent}</span>
     </button>
   );
 };

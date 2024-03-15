@@ -9,7 +9,7 @@ import authFormPageTemplateStyles from "../../scss/components/shared/AuthFormPag
 // Types
 import AuthFormPageTemplateProps from "@/core/interfaces/AuthFormPageTemplateProps";
 // React
-import { FC, useEffect } from "react";
+import { FC } from "react";
 // Next
 import Image from "next/image";
 import Link from "next/link";
@@ -20,36 +20,14 @@ import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import {
   changeShowFormModal,
   changeShowGeneralModal,
-  manipulateLoadingCreateProfile,
-  manipulateLoadingLoginProfile,
-  selectLoadingCreateOAuthProfile,
-  selectLoadingCreateProfile,
-  selectLoadingGetOAuthProfile,
-  selectLoadingGetProfile,
-  selectLoadingLoginOAuthProfile,
-  selectLoadingLoginProfile,
   selectShowFormModal,
   selectShowGeneralModal,
-  selectTemplateModalMessage,
 } from "@/redux/slices/generalSlice";
 
 const AuthFormPageTemplate: FC<AuthFormPageTemplateProps> = ({ type }) => {
   const dispatch = useAppDispatch();
-
   const showFormModal = useAppSelector(selectShowFormModal);
   const showGeneralModal = useAppSelector(selectShowGeneralModal);
-  const modalMessage = useAppSelector(selectTemplateModalMessage);
-
-  const loadingCreateProfile = useAppSelector(selectLoadingCreateProfile);
-  const loadingCreateOAuthProfile = useAppSelector(
-    selectLoadingCreateOAuthProfile
-  );
-  const loadingLoginProfile = useAppSelector(selectLoadingLoginProfile);
-  const loadingLoginOAuthProfile = useAppSelector(
-    selectLoadingLoginOAuthProfile
-  );
-  const loadingGetProfile = useAppSelector(selectLoadingGetProfile);
-  const loadingGetOAuthProfile = useAppSelector(selectLoadingGetOAuthProfile);
 
   let pageTitleUsed = "Title";
   let pageImageUrlUsed = authFormPageTemplateImageUrls[0].imageUrl;
@@ -58,82 +36,6 @@ const AuthFormPageTemplate: FC<AuthFormPageTemplateProps> = ({ type }) => {
     textContent: "Text Content",
     linkDest: "/",
   };
-
-  const isRequestPending =
-    (type === "signup"
-      ? loadingCreateProfile === "PENDING" ||
-        loadingCreateOAuthProfile === "PENDING"
-      : loadingLoginProfile === "PENDING" ||
-        loadingLoginOAuthProfile === "PENDING") ||
-    loadingGetProfile === "PENDING" ||
-    loadingGetProfile === "SUCCEDED" ||
-    loadingGetOAuthProfile === "PENDING" ||
-    loadingGetOAuthProfile === "SUCCEDED";
-
-  useEffect(() => {
-    dispatch(manipulateLoadingCreateProfile("IDLE"));
-    dispatch(manipulateLoadingLoginProfile("IDLE"));
-  }, []);
-
-  useEffect(() => {
-    if (
-      loadingGetProfile === "PENDING" ||
-      loadingGetOAuthProfile === "PENDING"
-    ) {
-      dispatch(changeShowGeneralModal(true));
-    }
-  }, [loadingGetProfile, loadingGetOAuthProfile]);
-
-  useEffect(() => {
-    if (
-      loadingCreateProfile === "FAILED" ||
-      loadingCreateOAuthProfile === "FAILED"
-    ) {
-      dispatch(changeShowFormModal(true));
-    } else if (
-      loadingCreateProfile === "SUCCEDED" ||
-      loadingCreateProfile === "PENDING" ||
-      loadingCreateOAuthProfile === "SUCCEDED" ||
-      loadingCreateOAuthProfile === "PENDING"
-    ) {
-      dispatch(changeShowGeneralModal(true));
-    }
-  }, [loadingCreateProfile, loadingCreateOAuthProfile]);
-
-  useEffect(() => {
-    if (
-      loadingLoginProfile === "FAILED" ||
-      loadingLoginOAuthProfile === "FAILED"
-    ) {
-      dispatch(changeShowFormModal(true));
-    } else if (
-      loadingLoginProfile === "SUCCEDED" ||
-      loadingLoginProfile === "PENDING" ||
-      loadingLoginOAuthProfile === "SUCCEDED" ||
-      loadingLoginOAuthProfile === "PENDING"
-    ) {
-      dispatch(changeShowGeneralModal(true));
-    }
-  }, [loadingLoginProfile, loadingLoginOAuthProfile]);
-
-  useEffect(() => {
-    let firstTimeout: NodeJS.Timeout;
-    let secondTimeout: NodeJS.Timeout;
-    if (showFormModal) {
-      firstTimeout = setTimeout(() => {
-        dispatch(changeShowFormModal(false));
-      }, 5000);
-    }
-    if (showGeneralModal) {
-      secondTimeout = setTimeout(() => {
-        dispatch(changeShowGeneralModal(false));
-      }, 5000);
-    }
-    return () => {
-      clearTimeout(firstTimeout);
-      clearTimeout(secondTimeout);
-    };
-  }, [showFormModal, showGeneralModal]);
 
   switch (type) {
     case "login":
@@ -157,20 +59,19 @@ const AuthFormPageTemplate: FC<AuthFormPageTemplateProps> = ({ type }) => {
   return (
     <div className={authFormPageTemplateStyles.authContainer}>
       <PopupModal
-        modalMessage={modalMessage}
-        showModal={showGeneralModal}
         modalColor="#cfbea7"
         textColor="#120a06"
-        usedForLoading={isRequestPending}
         hasBorder={true}
         closeModal={() => dispatch(changeShowGeneralModal(false))}
+        modalType="general"
+        showModal={showGeneralModal}
       />
       <section className={authFormPageTemplateStyles.formContainer}>
         <PopupModal
-          modalMessage={modalMessage}
-          showModal={showFormModal}
           hasBorder={false}
           closeModal={() => dispatch(changeShowFormModal(false))}
+          modalType="form"
+          showModal={showFormModal}
         />
         <div className={authFormPageTemplateStyles.formContainerContentWrapper}>
           <div className={authFormPageTemplateStyles.formContainerContent}>

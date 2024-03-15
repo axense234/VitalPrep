@@ -1,11 +1,10 @@
 import { MouseEventHandler } from "react";
 
 export default interface PopupMOdalProps {
-  modalMessage: string;
+  showModal: boolean;
   modalColor?: string;
   textColor?: string;
-  showModal: boolean;
   hasBorder?: boolean;
-  usedForLoading?: boolean;
-  closeModal?: MouseEventHandler<SVGElement> | undefined;
+  closeModal: any;
+  modalType: "form" | "general";
 }

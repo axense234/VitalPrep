@@ -36,10 +36,10 @@ const useAuthorization = (pageType: "login" | "signup" | "common") => {
   }, [loadingGetOAuthProfile, loadingGetProfile]);
 
   useEffect(() => {
-    if (loadingGetProfile === "IDLE" && pageType !== "signup") {
+    if (loadingGetProfile === "IDLE") {
       dispatch(getProfileOAuth());
     }
-  }, [loadingGetProfile]);
+  }, [loadingGetProfile, pageType]);
 };
 
 export const useRedirect = (

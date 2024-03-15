@@ -17,10 +17,6 @@ router.get("/users/:userId", authenticationMiddleware, getUserById);
 
 router.patch("/users/update/:userId", authenticationMiddleware, updateUserById);
 
-router.delete(
-  "/users/delete/:userId",
-  authenticationMiddleware,
-  deleteUserById
-);
+router.delete("/users/delete/:userId", deleteUserById);
 
 export default router;

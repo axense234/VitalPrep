@@ -179,6 +179,7 @@ const deleteUserById = async (req: Request, res: Response) => {
 
   await deleteCache(`${userId}:jwt-vitalprep`);
   await deleteCache(`users:${userId}`);
+  await deleteCache("users");
 
   return res.status(StatusCodes.OK).json({
     message: `Successfully deleted user with id:${userId}.`,

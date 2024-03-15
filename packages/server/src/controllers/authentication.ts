@@ -33,6 +33,8 @@ const signupUser = async (req: Request, res: Response) => {
       .json({ message: "Please enter an email!" });
   }
 
+  console.log(userBody.email);
+
   if (!emailRegex.test(userBody.email)) {
     return res
       .status(StatusCodes.BAD_REQUEST)
