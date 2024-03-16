@@ -44,6 +44,11 @@
   max-width: $authButtonMaxWidth;
   padding: $authButtonPadding;
   border: 2px solid getColor("black-100-1");
+  transition: $crispyTransformTransition;
+
+  &:hover {
+    transform: scale(1.05);
+  }
 
   svg {
     width: 35px;

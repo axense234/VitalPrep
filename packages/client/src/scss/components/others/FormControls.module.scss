@@ -20,6 +20,11 @@
     padding: 0.5rem;
     font-weight: 550;
     word-wrap: break-word;
+    transition: background-color 0.135s linear;
+
+    &:hover {
+      background-color: getColor("tan-color-dark");
+    }
   }
 }
 
@@ -106,6 +111,12 @@
     border: 1.5px solid getColor("black-100-1");
     background-color: getColor("tan-color");
     cursor: pointer;
+
+    transition: background-color 0.135s linear;
+
+    &:hover {
+      background-color: getColor("tan-color-dark");
+    }
   }
 
   input[type="checkbox"]:checked {
@@ -113,32 +124,37 @@
   }
 }
 
-.recaptchaFormControlContainer {
-  @include flexCenter(row);
+.reCAPTCHA {
   width: 100%;
-  justify-content: space-between;
-  padding: 0 32px;
-  background-color: getColor("tan-color-extra-light");
-  height: 64px;
-  border: 1.5px solid getColor("black-100-1");
-
-  img {
-    width: 56px !important;
-    height: 56px !important;
-  }
-
-  input[type="checkbox"] {
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    width: 24px;
-    height: 24px;
-    border: 1.5px solid grey;
-    background-color: getColor("tan-color-extra-light");
-    cursor: pointer;
-  }
-
-  input[type="checkbox"]:checked {
-    appearance: auto;
-  }
 }
+
+// Using react-google-recaptcha so im not using those rules
+// .recaptchaFormControlContainer {
+//   @include flexCenter(row);
+//   width: 100%;
+//   justify-content: space-between;
+//   padding: 0 32px;
+//   background-color: getColor("tan-color-extra-light");
+//   height: 64px;
+//   border: 1.5px solid getColor("black-100-1");
+
+//   img {
+//     width: 56px !important;
+//     height: 56px !important;
+//   }
+
+//   input[type="checkbox"] {
+//     appearance: none;
+//     -webkit-appearance: none;
+//     -moz-appearance: none;
+//     width: 24px;
+//     height: 24px;
+//     border: 1.5px solid grey;
+//     background-color: getColor("tan-color-extra-light");
+//     cursor: pointer;
+//   }
+
+//   input[type="checkbox"]:checked {
+//     appearance: auto;
+//   }
+// }

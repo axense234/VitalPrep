@@ -12,20 +12,21 @@ import axios, { AxiosError } from "axios";
 // Config
 import { baseSiteUrl } from "@/config";
 // Next Auth
-import { SignInResponse, getSession, signIn, signOut } from "next-auth/react";
+import { getSession, signIn, signOut } from "next-auth/react";
 // Data
 import { defaultProfile, defaultTemplateProfile } from "@/data";
-import { Session } from "next-auth";
 
 type ObjectKeyValueType = {
   key: string;
   value: any;
 };
 
+type LoadingStateType = "IDLE" | "PENDING" | "SUCCEDED" | "FAILED";
+
 type InitialStateType = {
   // General
   isSidebarOpened: boolean;
-  loadingCloudinaryImage: "IDLE" | "PENDING" | "SUCCEDED" | "FAILED";
+  loadingCloudinaryImage: LoadingStateType;
   templateImageUrl: string;
   templateModalMessage: string;
   showFormModal: boolean;
@@ -33,15 +34,17 @@ type InitialStateType = {
   isModalUsedWhenLoading: boolean;
 
   // Auth
-  loadingProfile: "IDLE" | "PENDING" | "SUCCEDED" | "FAILED";
   profile: UserType;
   templateProfile: UserTemplate;
-  loadingCreateProfile: "IDLE" | "PENDING" | "SUCCEDED" | "FAILED";
-  loadingCreateOAuthProfile: "IDLE" | "PENDING" | "SUCCEDED" | "FAILED";
-  loadingLoginProfile: "IDLE" | "PENDING" | "SUCCEDED" | "FAILED";
-  loadingLoginOAuthProfile: "IDLE" | "PENDING" | "SUCCEDED" | "FAILED";
-  loadingGetProfile: "IDLE" | "PENDING" | "SUCCEDED" | "FAILED";
-  loadingGetOAuthProfile: "IDLE" | "PENDING" | "SUCCEDED" | "FAILED";
+  isUserABot: boolean;
+
+  loadingProfile: LoadingStateType;
+  loadingCreateProfile: LoadingStateType;
+  loadingCreateOAuthProfile: LoadingStateType;
+  loadingLoginProfile: LoadingStateType;
+  loadingLoginOAuthProfile: LoadingStateType;
+  loadingGetProfile: LoadingStateType;
+  loadingGetOAuthProfile: LoadingStateType;
 };
 
 type CreateCloudinaryImageTemplate = {
@@ -72,9 +75,10 @@ const initialState: InitialStateType = {
   isModalUsedWhenLoading: false,
 
   // Auth
-  loadingProfile: "IDLE",
   profile: defaultProfile,
   templateProfile: defaultTemplateProfile,
+  isUserABot: true,
+  loadingProfile: "IDLE",
   loadingCreateProfile: "IDLE",
   loadingLoginProfile: "IDLE",
   loadingGetProfile: "IDLE",
@@ -204,7 +208,7 @@ export const createCloudinaryImage = createAsyncThunk<
     formData.append("file", imageFile);
     formData.append("upload_preset", `vitalprep-${entity}`);
     const { data } = await axios.post(
-      "https://api.cloudinary.com/v1_1/birthdayreminder/image/upload",
+      process.env.NEXT_AUTH_CLOUDINARY_UPLOAD_IMAGE_URL as string,
       formData
     );
     return data.secure_url;
@@ -217,6 +221,9 @@ const generalSlice = createSlice({
   name: "general",
   initialState,
   reducers: {
+    changeIsUserABot(state, action: PayloadAction<boolean>) {
+      state.isUserABot = action.payload;
+    },
     changeIsSidebarOpened(state, action: PayloadAction<boolean>) {
       state.isSidebarOpened = action.payload;
     },
@@ -228,13 +235,13 @@ const generalSlice = createSlice({
     },
     manipulateLoadingCreateProfile(
       state,
-      action: PayloadAction<"IDLE" | "SUCCEDED" | "FAILED" | "PENDING">
+      action: PayloadAction<LoadingStateType>
     ) {
       state.loadingCreateProfile = action.payload;
     },
     manipulateLoadingLoginProfile(
       state,
-      action: PayloadAction<"IDLE" | "SUCCEDED" | "FAILED" | "PENDING">
+      action: PayloadAction<LoadingStateType>
     ) {
       state.loadingLoginProfile = action.payload;
     },
@@ -448,6 +455,8 @@ export const selectLoadingGetOAuthProfile = (state: State) =>
 export const selectIsModalUsedWhenLoading = (state: State) =>
   state.general.isModalUsedWhenLoading;
 
+export const selectIsUserABot = (state: State) => state.general.isUserABot;
+
 export const {
   changeIsSidebarOpened,
   updateTemplateProfile,
@@ -455,6 +464,7 @@ export const {
   changeShowGeneralModal,
   manipulateLoadingCreateProfile,
   manipulateLoadingLoginProfile,
+  changeIsUserABot,
 } = generalSlice.actions;
 
 export default generalSlice.reducer;

@@ -19,6 +19,9 @@ export const homePageUrl = "/home";
 export const sitePhoneNumber = "0754189293(fake)";
 export const siteEmail = "thisemaildoesnotexit@nothing.com";
 
+export const defaultProfileImageUrl =
+  "https://res.cloudinary.com/birthdayreminder/image/upload/v1708852560/VitalPrep/defaultprofileimage_tzrh3w.jpg";
+
 export const defaultProfile = {
   id: "",
   username: "",

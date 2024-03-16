@@ -1,22 +1,21 @@
 "use client";
-
 // React
 import { FC, useEffect } from "react";
-// Types
-import AuthFormControlsProps from "@/core/interfaces/AuthFormControlsProps";
 // SCSS
 import authFormControlsStyles from "../../scss/components/shared/AuthFormControls.module.scss";
 // Components
+import AuthFormControlsProps from "@/core/interfaces/AuthFormControlsProps";
 import PrimaryButton from "./PrimaryButton";
 import TextFormControl from "./form/TextFormControl";
 import ImageFormControl from "./form/ImageFormControl";
 import CheckboxFormControl from "./form/CheckboxFormControl";
 import ReCAPTCHAControl from "./form/ReCAPTCHAControl";
-// Redux Toolkit
+// Redux
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import {
   createCloudinaryImage,
   loginUser,
+  selectIsUserABot,
   selectLoadingCloudinaryImage,
   selectLoadingCreateProfile,
   selectLoadingLoginProfile,
@@ -25,10 +24,14 @@ import {
   signupUser,
   updateTemplateProfile,
 } from "@/redux/slices/generalSlice";
+// Data
+import { defaultProfileImageUrl } from "@/data";
 
-const AuthFormControls: FC<AuthFormControlsProps> = ({ type }) => {
+export const AuthFormControls: FC<AuthFormControlsProps> = ({ type }) => {
   const dispatch = useAppDispatch();
   const templateProfile = useAppSelector(selectTemplateProfile);
+
+  const isUserABot = useAppSelector(selectIsUserABot);
 
   const loadingCreateProfile = useAppSelector(selectLoadingCreateProfile);
   const loadingLoginProfile = useAppSelector(selectLoadingLoginProfile);
@@ -95,7 +98,7 @@ const AuthFormControls: FC<AuthFormControlsProps> = ({ type }) => {
           labelColor="#120A06"
           labelContent="Profile Image:"
           direction="column"
-          defaultImageUsedUrl="https://res.cloudinary.com/birthdayreminder/image/upload/v1708852560/VitalPrep/defaultprofileimage_tzrh3w.jpg"
+          defaultImageUsedUrl={defaultProfileImageUrl}
           entityPropertyLoadingStatus={loadingCloudinaryImage}
           entityProperty={templateProfile.imageUrl as string}
           onEntityPropertyValueChange={(e) => {
@@ -133,13 +136,18 @@ const AuthFormControls: FC<AuthFormControlsProps> = ({ type }) => {
         <ReCAPTCHAControl />
         <PrimaryButton
           type="functional"
+          onHoverContent={isUserABot ? "Confirm you are not a robot!" : ""}
           backgroundColor="#043301"
           content="Sign Up"
           fontFamily="Cabin"
           fontSize={21}
           height={40}
           width={128}
-          disabled={loadingCloudinaryImage === "PENDING" || isRequestPending}
+          disabled={
+            loadingCloudinaryImage === "PENDING" ||
+            isRequestPending ||
+            isUserABot
+          }
           onClickFunction={(e) => {
             e.preventDefault();
             dispatch(signupUser(templateProfile));

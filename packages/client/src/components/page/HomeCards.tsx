@@ -59,6 +59,7 @@ const HomeCard: FC<HomeCardProps> = ({
           height={48}
           type="link"
           linkDest="/create-tool"
+          disabled={false}
         />
       </section>
     );

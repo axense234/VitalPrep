@@ -17,6 +17,7 @@ const PrimaryButton: FC<PrimaryButtonProps> = ({
   linkDest,
   type,
   disabled,
+  onHoverContent,
   onClickFunction,
 }) => {
   if (type === "link")
@@ -41,6 +42,8 @@ const PrimaryButton: FC<PrimaryButtonProps> = ({
     return (
       <button
         className={primaryButtonStyles.primaryButton}
+        title={onHoverContent || content}
+        aria-label={onHoverContent || content}
         type="submit"
         style={{
           backgroundColor,

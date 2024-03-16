@@ -9,6 +9,11 @@
   color: $primaryButtonInitialColor;
   letter-spacing: 1.5px;
   border: 1.5px solid getColor("black-100-1");
+  transition: $crispyTransformTransition;
+
+  &:hover {
+    transform: scale(1.05);
+  }
 }
 
 .primaryButtonLink {

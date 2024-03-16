@@ -1,22 +1,30 @@
-// Next
-import Image from "next/image";
+"use client";
+// React Google Recaptcha
+import ReCAPTCHA from "react-google-recaptcha";
+// Redux
+import { useAppDispatch } from "@/hooks/redux";
+import { changeIsUserABot } from "@/redux/slices/generalSlice";
 // SCSS
-import formControlsStyles from "../../../scss/components/others/FormControls.module.scss";
+import formControlStyles from "../../../scss/components/others/FormControls.module.scss";
 
 const ReCAPTCHAControl = () => {
+  const dispatch = useAppDispatch();
+
+  const onSuccess = (token: string | null) => {
+    console.log(token);
+    if (token === null) {
+      dispatch(changeIsUserABot(true));
+    } else {
+      dispatch(changeIsUserABot(false));
+    }
+  };
+
   return (
-    <div className={formControlsStyles.recaptchaFormControlContainer}>
-      <input type="checkbox" name="reCAPTCHA" id="reCAPTCHA" />
-      <label htmlFor="reCAPTCHA">I'm not a robot</label>
-      <Image
-        src={
-          "https://res.cloudinary.com/birthdayreminder/image/upload/v1710010174/VitalPrep/RecaptchaLogo.svg_yprqt7.png"
-        }
-        alt="reCAPTCHA"
-        width={40}
-        height={40}
-      />
-    </div>
+    <ReCAPTCHA
+      sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY as string}
+      onChange={(token) => onSuccess(token)}
+      className={formControlStyles.reCAPTCHA}
+    />
   );
 };
 

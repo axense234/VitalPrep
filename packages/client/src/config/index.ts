@@ -2,10 +2,12 @@ const env = process.env.NODE_ENV;
 
 const baseServerUrl =
   env === "development" || env === "test"
-    ? "http://localhost:4000"
-    : "http://localhost:4000";
+    ? process.env.NEXT_PUBLIC_TESTING_SERVER_SITE_URL
+    : process.env.NEXT_PUBLIC_PRODUCTION_SERVER_SITE_URL;
 
 const baseSiteUrl =
-  env === "development" ? "http://localhost:3000" : "http://localhost:3000";
+  env === "development"
+    ? process.env.NEXT_PUBLIC_TESTING_CLIENT_SITE_URL
+    : process.env.NEXT_PUBLIC_PRODUCTION_CLIENT_SITE_URL;
 
 export { baseServerUrl, baseSiteUrl };
