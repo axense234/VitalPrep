@@ -59,7 +59,7 @@ app.use(
 
 const PORT = process.env.PORT || 4000;
 
-app.get("/", (req: Request, res: Response) => {
+app.get("/health", (req: Request, res: Response) => {
   return res.status(200).json({ message: "Hello" });
 });
 
