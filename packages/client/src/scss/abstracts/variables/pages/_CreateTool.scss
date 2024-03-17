@@ -1,0 +1,9 @@
+@use "../general" as *;
+
+$createToolOptionsContainerHeight: 400px;
+$createToolOptionsBackgroundColor: map-get(
+  $map: $colors,
+  $key: "secondary-color-1.2",
+);
+$createToolOptionsPadding: 48px;
+$createToolOptionFontSize: 32px;

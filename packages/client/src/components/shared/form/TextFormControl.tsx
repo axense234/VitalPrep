@@ -13,11 +13,15 @@ const TextFormControl: FC<TextFormControlProps> = ({
   required,
   entityProperty,
   onEntityPropertyValueChange,
+  inputHeight,
 }) => {
   return (
     <div
       className={formControlsStyles.textFormControlContainer}
-      style={{ flexDirection: direction }}
+      style={{
+        flexDirection: direction,
+        justifyContent: direction === "row" ? "space-between" : "center",
+      }}
     >
       <label htmlFor={labelContent} style={{ color: labelColor }}>
         {labelContent}
@@ -29,7 +33,10 @@ const TextFormControl: FC<TextFormControlProps> = ({
         max={110}
         minLength={3}
         maxLength={40}
-        style={{ width: type === "number" ? "50%" : "100%" }}
+        style={{
+          width: type === "number" ? "50%" : "100%",
+          height: inputHeight || 24,
+        }}
         value={entityProperty}
         onChange={onEntityPropertyValueChange}
         required={required}

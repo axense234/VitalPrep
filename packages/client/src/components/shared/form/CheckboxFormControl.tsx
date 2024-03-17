@@ -9,6 +9,8 @@ const CheckboxFormControl: FC<CheckboxFormControlProps> = ({
   direction,
   labelColor,
   labelContent,
+  entityProperty,
+  onEntityPropertyValueChange,
 }) => {
   return (
     <div
@@ -18,7 +20,13 @@ const CheckboxFormControl: FC<CheckboxFormControlProps> = ({
       <label htmlFor={labelContent} style={{ color: labelColor }}>
         {labelContent}
       </label>
-      <input type="checkbox" name={labelContent} id={labelContent} />
+      <input
+        type="checkbox"
+        name={labelContent}
+        id={labelContent}
+        value={entityProperty}
+        onChange={onEntityPropertyValueChange}
+      />
     </div>
   );
 };

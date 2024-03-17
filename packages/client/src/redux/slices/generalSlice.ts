@@ -33,6 +33,8 @@ type InitialStateType = {
   showGeneralModal: boolean;
   isModalUsedWhenLoading: boolean;
 
+  selectedCreateToolOption: string;
+
   // Auth
   profile: UserType;
   templateProfile: UserTemplate;
@@ -73,6 +75,8 @@ const initialState: InitialStateType = {
   showFormModal: false,
   showGeneralModal: false,
   isModalUsedWhenLoading: false,
+
+  selectedCreateToolOption: "ingredient",
 
   // Auth
   profile: defaultProfile,
@@ -221,6 +225,9 @@ const generalSlice = createSlice({
   name: "general",
   initialState,
   reducers: {
+    setSelectedCreateToolOption(state, action: PayloadAction<string>) {
+      state.selectedCreateToolOption = action.payload;
+    },
     changeIsUserABot(state, action: PayloadAction<boolean>) {
       state.isUserABot = action.payload;
     },
@@ -457,6 +464,9 @@ export const selectIsModalUsedWhenLoading = (state: State) =>
 
 export const selectIsUserABot = (state: State) => state.general.isUserABot;
 
+export const selectSelectedCreateToolOption = (state: State) =>
+  state.general.selectedCreateToolOption;
+
 export const {
   changeIsSidebarOpened,
   updateTemplateProfile,
@@ -465,6 +475,7 @@ export const {
   manipulateLoadingCreateProfile,
   manipulateLoadingLoginProfile,
   changeIsUserABot,
+  setSelectedCreateToolOption,
 } = generalSlice.actions;
 
 export default generalSlice.reducer;

@@ -9,6 +9,7 @@ export default interface PrimaryButtonProps {
   fontFamily: "Cabin" | "EB Garamond";
   fontSize: number;
   backgroundColor: string;
+  textColor?: string;
   height: number;
   width: number;
   disabled: boolean;

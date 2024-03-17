@@ -23,7 +23,10 @@ const ImageFormControl: FC<ImageFormControlProps> = ({
   return (
     <div
       className={formControlsStyles.imageFormControlContainer}
-      style={{ flexDirection: direction }}
+      style={{
+        flexDirection: direction,
+        justifyContent: direction === "row" ? "space-between" : "center",
+      }}
     >
       <label htmlFor={labelContent} style={{ color: labelColor }}>
         <span>{labelContent}</span>

@@ -1,0 +1,62 @@
+@use "../abstracts" as *;
+
+.createToolContainer {
+  @include pageLayout();
+}
+
+.createToolOptions {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 24px;
+  list-style: none;
+  border: 1px solid black;
+  width: 100%;
+  height: $createToolOptionsContainerHeight;
+  background-color: $createToolOptionsBackgroundColor;
+  padding: $createToolOptionsPadding;
+
+  li {
+    @include flexCenter(row);
+    border: 1.5px solid getColor("black-100-1");
+  }
+}
+
+.createToolOption {
+  @include flexCenter(row);
+  width: 100%;
+  height: 100%;
+  border: none;
+
+  font-size: $createToolOptionFontSize;
+  font-weight: 800;
+}
+
+.createToolInterface {
+  @include flexCenter(column);
+  width: 100%;
+  background-image: url($authFormPageTemplateFormBackgroundUrl);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.createInterface {
+  @include flexCenter(column);
+  width: 100%;
+  gap: 96px;
+  padding: 128px 0px;
+
+  h2 {
+    @include h2Laptop();
+    letter-spacing: 4.5px;
+    color: getColor("black-100-1");
+  }
+}
+
+.createInterfaceForm {
+  @include flexCenter(column);
+  width: 100%;
+  gap: 32px;
+  padding: 0px 256px;
+  border: 1px solid black;
+}

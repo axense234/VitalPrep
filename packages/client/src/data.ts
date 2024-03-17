@@ -6,6 +6,7 @@ import { CiLogout, CiSettings, CiViewList } from "react-icons/ci";
 import { IoPerson } from "react-icons/io5";
 import { TbManualGearbox } from "react-icons/tb";
 import { GrContact } from "react-icons/gr";
+import { FcGoogle } from "react-icons/fc";
 // Types
 import MetaProps from "./core/interfaces/MetaProps";
 import PageLink from "./core/types/PageLink";
@@ -13,7 +14,8 @@ import SocialMediaIconProps from "./core/interfaces/SocialMediaIconProps";
 import HomeCardContent from "./core/types/HomeCardContent";
 import ImageUrl from "./core/types/LogoImageUrl";
 import OAuthOptionContent from "./core/types/OAuthOptionContent";
-import { FcGoogle } from "react-icons/fc";
+import CreateToolOption from "./core/types/CreateToolOption";
+import IngredientTemplate from "./core/types/entity/mutation/IngredientTemplate";
 
 export const homePageUrl = "/home";
 export const sitePhoneNumber = "0754189293(fake)";
@@ -21,6 +23,54 @@ export const siteEmail = "thisemaildoesnotexit@nothing.com";
 
 export const defaultProfileImageUrl =
   "https://res.cloudinary.com/birthdayreminder/image/upload/v1708852560/VitalPrep/defaultprofileimage_tzrh3w.jpg";
+
+export const defaultIngredientImageUrl =
+  "https://res.cloudinary.com/birthdayreminder/image/upload/v1708848204/VitalPrep/doodle-carrot-hand-drawn-black-white-outline-carrot-line-art-vegetable-stock-vector_502320-1096_oenebb.jpg";
+
+export const createToolOptions: CreateToolOption[] = [
+  {
+    id: 1,
+    label: "Ingredient",
+    optionValue: "ingredient",
+    associatedColor: "#FFAE00",
+    associatedTextColor: "#120A06",
+  },
+  {
+    id: 2,
+    label: "Utensil",
+    optionValue: "utensil",
+    associatedColor: "#FF6000",
+    associatedTextColor: "#120A06",
+  },
+  {
+    id: 3,
+    label: "Recipe",
+    optionValue: "recipe",
+    associatedColor: "#8B0000",
+    associatedTextColor: "#DDD9D5",
+  },
+  {
+    id: 4,
+    label: "Day Template",
+    optionValue: "dayTemplate",
+    associatedColor: "#013310",
+    associatedTextColor: "#DDD9D5",
+  },
+  {
+    id: 5,
+    label: "Instance Template",
+    optionValue: "instanceTemplate",
+    associatedColor: "#012433",
+    associatedTextColor: "#DDD9D5",
+  },
+  {
+    id: 6,
+    label: "Meal Prep Plan",
+    optionValue: "mealPrepPlan",
+    associatedColor: "#42171C",
+    associatedTextColor: "#DDD9D5",
+  },
+];
 
 export const defaultProfile = {
   id: "",
@@ -53,6 +103,15 @@ export const defaultTemplateProfile = {
   imageUrl:
     "https://res.cloudinary.com/birthdayreminder/image/upload/v1708852560/VitalPrep/defaultprofileimage_tzrh3w.jpg",
   age: 8,
+};
+
+export const defaultTemplateIngredient: IngredientTemplate = {
+  name: "",
+  imageUrl: "",
+  calories: 200,
+  carbs: 20,
+  proteins: 20,
+  fats: 2,
 };
 
 export const OAuthOptionsContent: OAuthOptionContent[] = [
@@ -138,62 +197,69 @@ export const pageLinks: PageLink[] = [
   },
   {
     id: 3,
+    linkDest: "/create-tool",
+    reactIcon: MdCreate({}),
+    linkTitle: "Create Tool",
+    linkType: "normal",
+  },
+  {
+    id: 4,
     linkDest: "/create-log",
     reactIcon: MdCreate({}),
     linkTitle: "Create Log",
     linkType: "normal",
   },
   {
-    id: 4,
+    id: 5,
     linkDest: "/multi-view-tool",
     reactIcon: CiViewList({}),
     linkTitle: "Multi-View Tool",
     linkType: "normal",
   },
   {
-    id: 5,
+    id: 6,
     linkDest: "/profile",
     reactIcon: IoPerson({}),
     linkTitle: "Profile",
     linkType: "normal",
   },
   {
-    id: 6,
+    id: 7,
     linkDest: "/settings",
     reactIcon: CiSettings({}),
     linkTitle: "Settings",
     linkType: "normal",
   },
   {
-    id: 7,
+    id: 8,
     linkDest: "/guide",
     reactIcon: TbManualGearbox({}),
     linkTitle: "Getting Started",
     linkType: "normal",
   },
   {
-    id: 8,
+    id: 9,
     linkDest: "/faq",
     reactIcon: FaQuestion({}),
     linkTitle: "FAQ",
     linkType: "normal",
   },
   {
-    id: 9,
+    id: 10,
     linkDest: "/about",
     reactIcon: FaInfoCircle({}),
     linkTitle: "About",
     linkType: "normal",
   },
   {
-    id: 10,
+    id: 11,
     linkDest: "/contact",
     reactIcon: GrContact({}),
     linkTitle: "Contact",
     linkType: "normal",
   },
   {
-    id: 11,
+    id: 12,
     linkDest: "",
     reactIcon: CiLogout({}),
     linkTitle: "Logout",

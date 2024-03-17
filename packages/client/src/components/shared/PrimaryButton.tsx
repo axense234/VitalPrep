@@ -19,6 +19,7 @@ const PrimaryButton: FC<PrimaryButtonProps> = ({
   disabled,
   onHoverContent,
   onClickFunction,
+  textColor,
 }) => {
   if (type === "link")
     return (
@@ -30,7 +31,15 @@ const PrimaryButton: FC<PrimaryButtonProps> = ({
       >
         <button
           className={primaryButtonStyles.primaryButton}
-          style={{ backgroundColor, fontFamily, height, fontSize, width }}
+          style={{
+            backgroundColor,
+            fontFamily,
+            height,
+            fontSize,
+            width,
+            color: textColor,
+            fontWeight: 600,
+          }}
           disabled={disabled}
         >
           {content}
@@ -53,6 +62,8 @@ const PrimaryButton: FC<PrimaryButtonProps> = ({
           width,
           filter: disabled ? "brightness(0.5)" : "brightness(1)",
           cursor: disabled ? "initial" : "pointer",
+          color: textColor,
+          fontWeight: 600,
         }}
         disabled={disabled}
         onClick={onClickFunction}
