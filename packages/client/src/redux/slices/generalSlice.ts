@@ -208,7 +208,7 @@ export const createCloudinaryImage = createAsyncThunk<
     formData.append("file", imageFile);
     formData.append("upload_preset", `vitalprep-${entity}`);
     const { data } = await axios.post(
-      process.env.NEXT_AUTH_CLOUDINARY_UPLOAD_IMAGE_URL as string,
+      process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_IMAGE_URL as string,
       formData
     );
     return data.secure_url;
