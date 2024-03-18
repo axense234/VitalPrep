@@ -49,10 +49,6 @@ const OAuthOptionsButton: FC<OAuthOptionContent> = ({
       title={buttonTextContent}
       aria-label={buttonTextContent}
       onClick={() => {
-        {
-          pageType === "signup" &&
-            localStorage.setItem("createVitalPrepAccount", "create");
-        }
         dispatch(
           signinUserThroughOAuth({
             providerName: optionType,

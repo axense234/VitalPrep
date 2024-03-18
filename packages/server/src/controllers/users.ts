@@ -51,7 +51,7 @@ const getUserById = async (req: Request, res: Response) => {
   const userIdParams = req.params.userId;
   const userIdCache = req.user.userId;
 
-  const userId = userIdParams === "undefined" ? userIdCache : userIdParams;
+  const userId = userIdParams ? userIdCache : userIdParams;
 
   if (!userId) {
     return res

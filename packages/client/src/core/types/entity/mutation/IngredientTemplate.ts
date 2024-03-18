@@ -9,7 +9,6 @@ type IngredientTemplate = OptionalIngredient<Ingredient> & {
   proteins: number;
   carbs: number;
   fats: number;
-  enabled?: string;
 };
 
 export default IngredientTemplate;

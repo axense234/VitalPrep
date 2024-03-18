@@ -50,6 +50,7 @@ export const createIngredient = createAsyncThunk<
   CreateIngredientBody
 >("ingredients/createIngredient", async ({ templateIngredient, userId }) => {
   try {
+    console.log(templateIngredient);
     const { data } = await axiosInstance.post(
       "/ingredients/create",
       templateIngredient,

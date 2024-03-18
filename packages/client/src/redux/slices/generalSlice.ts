@@ -108,10 +108,13 @@ export const getProfileOAuth = createAsyncThunk(
   async () => {
     try {
       const session = await getSession();
-      return session?.user;
+      const { data } = await axiosInstance.get(`/users/null`, {
+        params: { userEmail: session?.user?.email },
+      });
+      return data.user as User;
     } catch (error) {
       console.log(error);
-      throw new Error("Something is wrong with the user's session.");
+      return error as AxiosError;
     }
   }
 );
@@ -172,9 +175,8 @@ export const signinUserThroughOAuth = createAsyncThunk<
       redirect: true,
       callbackUrl: `${baseSiteUrl}/home`,
     });
-    return pageType as "login" | "signup";
+    return pageType;
   } catch (error) {
-    console.log(error);
     return error;
   }
 });
@@ -269,22 +271,18 @@ const generalSlice = createSlice({
       })
       .addCase(getProfileOAuth.fulfilled, (state, action) => {
         state.isModalUsedWhenLoading = false;
-        const user = action.payload;
-        if (user) {
-          if (user.name) {
-            state.profile.username = user.name;
-          }
-          if (user.email) {
-            state.profile.email = user.email;
-          }
-          if (user.image) {
-            state.profile.imageUrl = user.image;
-          }
-          state.loadingGetOAuthProfile = "SUCCEDED";
+        const user = action.payload as UserType;
+        const axiosError = action.payload as AxiosError;
+
+        if (!axiosError?.response) {
+          state.profile = user;
+          state.loadingGetProfile = "SUCCEDED";
           state.showGeneralModal = true;
           state.templateModalMessage = `Found existing account`;
-        } else if (!user) {
-          state.loadingGetOAuthProfile = "FAILED";
+        } else {
+          state.loadingGetProfile = "FAILED";
+          state.showGeneralModal = true;
+          state.templateModalMessage = "Failed to get account";
         }
       })
       .addCase(getProfileJWT.pending, (state, action) => {
@@ -364,15 +362,21 @@ const generalSlice = createSlice({
         state.isModalUsedWhenLoading = true;
       })
       .addCase(signinUserThroughOAuth.fulfilled, (state, action) => {
-        const pageType = action.payload as "login" | "signup";
+        const pageType = action.payload as "signup" | "login";
+
         state.isModalUsedWhenLoading = false;
         state.loadingLoginOAuthProfile = "SUCCEDED";
         state.showGeneralModal = true;
         if (pageType === "login") {
-          state.templateModalMessage = `Successfully logged in account`;
+          state.templateModalMessage = "Logging in";
+          state.isModalUsedWhenLoading = true;
         } else if (pageType === "signup") {
-          state.templateModalMessage = `Successfully created account`;
+          state.isModalUsedWhenLoading = true;
+          localStorage.setItem("createVitalPrepAccount", "create");
         }
+      })
+      .addCase(signinUserThroughOAuth.rejected, (state, action) => {
+        localStorage.removeItem("createVitalPrepAccount");
       })
       .addCase(loginUser.pending, (state, action) => {
         state.loadingLoginProfile = "PENDING";

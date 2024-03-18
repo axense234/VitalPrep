@@ -3,14 +3,10 @@ import * as dotenv from "dotenv";
 
 dotenv.config();
 
-const createJWT = (authorUID: string, username: string) => {
-  return jwt.sign(
-    { authorUID, username },
-    process.env.JWT_SECRET_KEY as string,
-    {
-      expiresIn: "1d",
-    }
-  );
+const createJWT = (userId: string, username: string) => {
+  return jwt.sign({ userId, username }, process.env.JWT_SECRET_KEY as string, {
+    expiresIn: "1d",
+  });
 };
 
 const verifyJWT = (token: string | void) => {

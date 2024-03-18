@@ -170,7 +170,7 @@ const CreateIngredientInterface = () => {
           direction="row"
           labelColor="#120A06"
           labelContent="Enabled?:"
-          entityProperty={templateIngredient.enabled}
+          entityProperty={String(templateIngredient.enabled)}
           onEntityPropertyValueChange={(e) =>
             dispatch(
               updateTemplateIngredient({

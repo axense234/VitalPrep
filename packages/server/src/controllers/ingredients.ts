@@ -72,6 +72,57 @@ const getIngredientById = async (req: Request, res: Response) => {
 
 const createIngredient = async (req: Request, res: Response) => {
   const ingredientBody = req.body;
+  const userId = req.query.userId;
+
+  if (!ingredientBody) {
+    return res
+      .status(StatusCodes.BAD_REQUEST)
+      .json({ message: "Please enter a request body!", ingredient: {} });
+  }
+
+  if (!ingredientBody.calories) {
+    return res.status(StatusCodes.BAD_REQUEST).json({
+      message: "Please enter the number of calories!",
+      ingredient: {},
+    });
+  }
+
+  if (!ingredientBody.fats) {
+    return res.status(StatusCodes.BAD_REQUEST).json({
+      message: "Please enter the number of fats!",
+      ingredient: {},
+    });
+  }
+
+  if (!ingredientBody.proteins) {
+    return res.status(StatusCodes.BAD_REQUEST).json({
+      message: "Please enter the number of proteins!",
+      ingredient: {},
+    });
+  }
+
+  if (!ingredientBody.carbs) {
+    return res.status(StatusCodes.BAD_REQUEST).json({
+      message: "Please enter the number of carbs!",
+      ingredient: {},
+    });
+  }
+
+  const macrosBody = {
+    calories: ingredientBody.calories,
+    proteinAmount: ingredientBody.proteins,
+    carbsAmount: ingredientBody.carbs,
+    fatsAmount: ingredientBody.fats,
+  };
+
+  delete ingredientBody.calories;
+  delete ingredientBody.proteins;
+  delete ingredientBody.carbs;
+  delete ingredientBody.fats;
+
+  if (userId) {
+    ingredientBody.user = { connect: { id: userId } };
+  }
 
   if (!ingredientBody) {
     return res
@@ -82,6 +133,9 @@ const createIngredient = async (req: Request, res: Response) => {
   const createdIngredient = await IngredientClient.create({
     data: {
       ...ingredientBody,
+      macros: {
+        create: macrosBody,
+      },
     },
     include: {
       macros: true,

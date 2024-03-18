@@ -25,8 +25,6 @@ const PopupModal: FC<PopupModalProps> = ({
 }) => {
   const modalRef = useRef<HTMLDivElement>(null);
 
-  console.log(`${showModal}, ${modalType}`);
-
   useModalTransition(showModal, modalRef);
 
   useEffect(() => {

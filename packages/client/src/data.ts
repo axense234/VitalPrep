@@ -108,6 +108,7 @@ export const defaultTemplateProfile = {
 export const defaultTemplateIngredient: IngredientTemplate = {
   name: "",
   imageUrl: defaultIngredientImageUrl,
+  enabled: false,
   calories: 200,
   carbs: 20,
   proteins: 20,
