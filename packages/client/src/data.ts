@@ -107,7 +107,7 @@ export const defaultTemplateProfile = {
 
 export const defaultTemplateIngredient: IngredientTemplate = {
   name: "",
-  imageUrl: "",
+  imageUrl: defaultIngredientImageUrl,
   calories: 200,
   carbs: 20,
   proteins: 20,

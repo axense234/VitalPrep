@@ -20,14 +20,21 @@ import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import {
   changeShowFormModal,
   changeShowGeneralModal,
+  selectIsModalUsedWhenLoading,
   selectShowFormModal,
   selectShowGeneralModal,
+  selectTemplateModalMessage,
 } from "@/redux/slices/generalSlice";
 
 const AuthFormPageTemplate: FC<AuthFormPageTemplateProps> = ({ type }) => {
   const dispatch = useAppDispatch();
+
   const showFormModal = useAppSelector(selectShowFormModal);
   const showGeneralModal = useAppSelector(selectShowGeneralModal);
+
+  const modalMessage = useAppSelector(selectTemplateModalMessage);
+
+  const isModalUsedWhenLoading = useAppSelector(selectIsModalUsedWhenLoading);
 
   let pageTitleUsed = "Title";
   let pageImageUrlUsed = authFormPageTemplateImageUrls[0].imageUrl;
@@ -65,6 +72,8 @@ const AuthFormPageTemplate: FC<AuthFormPageTemplateProps> = ({ type }) => {
         closeModal={() => dispatch(changeShowGeneralModal(false))}
         modalType="general"
         showModal={showGeneralModal}
+        modalMessage={modalMessage}
+        isModalUsedWhenLoading={isModalUsedWhenLoading}
       />
       <section className={authFormPageTemplateStyles.formContainer}>
         <PopupModal
@@ -72,6 +81,8 @@ const AuthFormPageTemplate: FC<AuthFormPageTemplateProps> = ({ type }) => {
           closeModal={() => dispatch(changeShowFormModal(false))}
           modalType="form"
           showModal={showFormModal}
+          modalMessage={modalMessage}
+          isModalUsedWhenLoading={false}
         />
         <div className={authFormPageTemplateStyles.formContainerContentWrapper}>
           <div className={authFormPageTemplateStyles.formContainerContent}>

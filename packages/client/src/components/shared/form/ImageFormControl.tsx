@@ -19,6 +19,7 @@ const ImageFormControl: FC<ImageFormControlProps> = ({
   entityPropertyLoadingStatus,
   entityProperty,
   onEntityPropertyValueChange,
+  labelFontSize,
 }) => {
   return (
     <div
@@ -29,7 +30,7 @@ const ImageFormControl: FC<ImageFormControlProps> = ({
       }}
     >
       <label htmlFor={labelContent} style={{ color: labelColor }}>
-        <span>{labelContent}</span>
+        <span style={{ fontSize: labelFontSize || 22 }}>{labelContent}</span>
       </label>
       <div className={formControlsStyles.imageInputContainer} tabIndex={0}>
         {entityPropertyLoadingStatus !== "PENDING" && (

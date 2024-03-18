@@ -12,12 +12,6 @@ import popupModalStyles from "../../../scss/components/others/Modals.module.scss
 import useModalTransition from "@/hooks/useModalTransition";
 // React Spinners
 import { BeatLoader } from "react-spinners";
-// Redux
-import { useAppSelector } from "@/hooks/redux";
-import {
-  selectIsModalUsedWhenLoading,
-  selectTemplateModalMessage,
-} from "@/redux/slices/generalSlice";
 
 const PopupModal: FC<PopupModalProps> = ({
   modalColor,
@@ -26,11 +20,10 @@ const PopupModal: FC<PopupModalProps> = ({
   closeModal,
   modalType,
   showModal,
+  isModalUsedWhenLoading,
+  modalMessage,
 }) => {
   const modalRef = useRef<HTMLDivElement>(null);
-
-  const modalMessage = useAppSelector(selectTemplateModalMessage);
-  const isModalUsedWhenLoading = useAppSelector(selectIsModalUsedWhenLoading);
 
   console.log(`${showModal}, ${modalType}`);
 

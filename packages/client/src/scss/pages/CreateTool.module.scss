@@ -22,6 +22,17 @@
   }
 }
 
+.createToolContent {
+  @include flexCenter(column);
+  width: 100%;
+  padding-top: 128px;
+  padding-bottom: 64px;
+  gap: 64px;
+  background-image: url($authFormPageTemplateFormBackgroundUrl);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .createToolOption {
   @include flexCenter(row);
   width: 100%;
@@ -35,9 +46,7 @@
 .createToolInterface {
   @include flexCenter(column);
   width: 100%;
-  background-image: url($authFormPageTemplateFormBackgroundUrl);
-  background-repeat: no-repeat;
-  background-size: cover;
+  position: relative;
 }
 
 .createInterface {
@@ -57,6 +66,10 @@
   @include flexCenter(column);
   width: 100%;
   gap: 32px;
-  padding: 0px 256px;
+  padding: 0px 480px;
   border: 1px solid black;
+
+  button {
+    margin-top: 64px;
+  }
 }

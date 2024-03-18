@@ -12,6 +12,7 @@ import CreateRecipeInterface from "./interfaces/CreateRecipeInterface";
 import CreateDayTemplateInterface from "./interfaces/CreateDayTemplateInterface";
 import CreateInstanceTemplateInterface from "./interfaces/CreateInstanceTemplateInterface";
 import CreateMealPrepPlanInterface from "./interfaces/CreateMealPrepPlanInterface";
+import PopupModal from "@/components/shared/modals/PopupModal";
 
 const CreateToolInterface = () => {
   const selectedCreateToolOption = useAppSelector(

@@ -8,7 +8,9 @@ import PopupModal from "@/components/shared/modals/PopupModal";
 // Redux
 import {
   changeShowGeneralModal,
+  selectIsModalUsedWhenLoading,
   selectShowGeneralModal,
+  selectTemplateModalMessage,
   signupUserOAuth,
 } from "@/redux/slices/generalSlice";
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
@@ -18,6 +20,8 @@ import { useEffect } from "react";
 const SpecialLayout = ({ children }: { children: React.ReactNode }) => {
   const dispatch = useAppDispatch();
   const showGeneralModal = useAppSelector(selectShowGeneralModal);
+  const isModalUsedWhenLoading = useAppSelector(selectIsModalUsedWhenLoading);
+  const modalMessage = useAppSelector(selectTemplateModalMessage);
 
   useEffect(() => {
     const createVitalPrepAccount = localStorage.getItem(
@@ -40,6 +44,8 @@ const SpecialLayout = ({ children }: { children: React.ReactNode }) => {
         closeModal={() => dispatch(changeShowGeneralModal(false))}
         modalType="general"
         showModal={showGeneralModal}
+        isModalUsedWhenLoading={isModalUsedWhenLoading}
+        modalMessage={modalMessage}
       />
       {children}
       <Footer />

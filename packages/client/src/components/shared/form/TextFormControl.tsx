@@ -14,6 +14,7 @@ const TextFormControl: FC<TextFormControlProps> = ({
   entityProperty,
   onEntityPropertyValueChange,
   inputHeight,
+  labelFontSize,
 }) => {
   return (
     <div
@@ -23,14 +24,15 @@ const TextFormControl: FC<TextFormControlProps> = ({
         justifyContent: direction === "row" ? "space-between" : "center",
       }}
     >
-      <label htmlFor={labelContent} style={{ color: labelColor }}>
+      <label
+        htmlFor={labelContent}
+        style={{ color: labelColor, fontSize: labelFontSize || 22 }}
+      >
         {labelContent}
       </label>
       <input
         type={type}
         name={labelContent}
-        min={8}
-        max={110}
         minLength={3}
         maxLength={40}
         style={{

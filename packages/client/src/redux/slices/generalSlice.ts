@@ -304,7 +304,6 @@ const generalSlice = createSlice({
           state.showGeneralModal = true;
           state.templateModalMessage = `Found existing account`;
         } else {
-          localStorage.removeItem("userId");
           state.loadingGetProfile = "FAILED";
           state.showGeneralModal = true;
           state.templateModalMessage = "Failed to get account";

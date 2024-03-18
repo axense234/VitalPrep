@@ -11,13 +11,17 @@ const CheckboxFormControl: FC<CheckboxFormControlProps> = ({
   labelContent,
   entityProperty,
   onEntityPropertyValueChange,
+  labelFontSize,
 }) => {
   return (
     <div
       className={formControlsStyles.checkboxFormControlContainer}
       style={{ flexDirection: direction }}
     >
-      <label htmlFor={labelContent} style={{ color: labelColor }}>
+      <label
+        htmlFor={labelContent}
+        style={{ color: labelColor, fontSize: labelFontSize || 22 }}
+      >
         {labelContent}
       </label>
       <input

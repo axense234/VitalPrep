@@ -30,16 +30,16 @@ const useAuthorization = (pageType: "login" | "signup" | "common") => {
   useRedirect(pathname, router, canRedirect);
 
   useEffect(() => {
-    if (loadingGetOAuthProfile === "FAILED" && loadingGetProfile === "IDLE") {
+    if (loadingGetProfile === "IDLE") {
       dispatch(getProfileJWT());
     }
   }, [loadingGetOAuthProfile, loadingGetProfile]);
 
   useEffect(() => {
-    if (loadingGetProfile === "IDLE") {
+    if (loadingGetOAuthProfile === "IDLE") {
       dispatch(getProfileOAuth());
     }
-  }, [loadingGetProfile, pageType]);
+  }, [loadingGetOAuthProfile]);
 };
 
 export const useRedirect = (

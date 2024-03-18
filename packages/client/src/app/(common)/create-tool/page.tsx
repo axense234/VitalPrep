@@ -14,8 +14,10 @@ const CreateTool = () => {
         titleContent="Create Tool"
         subtitleContent="use it to create stuff"
       />
-      <CreateToolOptions />
-      <CreateToolInterface />
+      <div className={createToolStyles.createToolContent}>
+        <CreateToolOptions />
+        <CreateToolInterface />
+      </div>
     </div>
   );
 };
