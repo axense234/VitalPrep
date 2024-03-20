@@ -7,28 +7,31 @@ import Sidebar from "@/components/shared/Sidebar";
 import PopupModal from "@/components/shared/modals/PopupModal";
 // Redux
 import {
-  changeShowGeneralModal,
-  selectIsModalUsedWhenLoading,
-  selectShowGeneralModal,
-  selectTemplateModalMessage,
+  logoutUser,
+  selectInvalidJWT,
   signupUserOAuth,
 } from "@/redux/slices/generalSlice";
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 // React
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 const SpecialLayout = ({ children }: { children: React.ReactNode }) => {
   const dispatch = useAppDispatch();
-  const showGeneralModal = useAppSelector(selectShowGeneralModal);
-  const isModalUsedWhenLoading = useAppSelector(selectIsModalUsedWhenLoading);
-  const modalMessage = useAppSelector(selectTemplateModalMessage);
+  const isJWTInvalid = useAppSelector(selectInvalidJWT);
+  const hasEffectRun = useRef(false);
+
+  useEffect(() => {
+    if (isJWTInvalid) {
+      dispatch(logoutUser());
+    }
+  }, [isJWTInvalid]);
 
   useEffect(() => {
     const createVitalPrepAccount = localStorage.getItem(
       "createVitalPrepAccount"
     );
-    if (createVitalPrepAccount === "create") {
-      localStorage.removeItem("createVitalPrepAccount");
+    if (createVitalPrepAccount === "create" && !hasEffectRun.current) {
+      hasEffectRun.current = true;
       dispatch(signupUserOAuth());
     }
   }, []);
@@ -41,11 +44,7 @@ const SpecialLayout = ({ children }: { children: React.ReactNode }) => {
         modalColor="#cfbea7"
         textColor="#120a06"
         hasBorder={true}
-        closeModal={() => dispatch(changeShowGeneralModal(false))}
         modalType="general"
-        showModal={showGeneralModal}
-        isModalUsedWhenLoading={isModalUsedWhenLoading}
-        modalMessage={modalMessage}
       />
       {children}
       <Footer />

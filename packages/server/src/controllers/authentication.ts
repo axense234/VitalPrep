@@ -15,6 +15,8 @@ const signupUser = async (req: Request, res: Response) => {
   const userBody = req.body;
   const throughOAuth = Boolean(req.query.throughOAuth);
 
+  console.log("lwpaodapwd");
+
   if (!userBody) {
     return res
       .status(StatusCodes.BAD_REQUEST)

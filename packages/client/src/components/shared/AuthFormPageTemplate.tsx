@@ -69,21 +69,10 @@ const AuthFormPageTemplate: FC<AuthFormPageTemplateProps> = ({ type }) => {
         modalColor="#cfbea7"
         textColor="#120a06"
         hasBorder={true}
-        closeModal={() => dispatch(changeShowGeneralModal(false))}
         modalType="general"
-        showModal={showGeneralModal}
-        modalMessage={modalMessage}
-        isModalUsedWhenLoading={isModalUsedWhenLoading}
       />
       <section className={authFormPageTemplateStyles.formContainer}>
-        <PopupModal
-          hasBorder={false}
-          closeModal={() => dispatch(changeShowFormModal(false))}
-          modalType="form"
-          showModal={showFormModal}
-          modalMessage={modalMessage}
-          isModalUsedWhenLoading={false}
-        />
+        <PopupModal hasBorder={false} modalType="form" />
         <div className={authFormPageTemplateStyles.formContainerContentWrapper}>
           <div className={authFormPageTemplateStyles.formContainerContent}>
             <header>

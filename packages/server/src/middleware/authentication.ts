@@ -3,7 +3,7 @@ import { NextFunction, Request, Response } from "express";
 // Status Codes
 import { StatusCodes } from "http-status-codes";
 // Utils
-import { verifyJWT } from "../utils/jwt";
+import { createJWT, verifyJWT } from "../utils/jwt";
 import { getOrSetCache } from "../utils/redis";
 import { UserClient } from "../db/postgres";
 
@@ -22,25 +22,21 @@ const authenticationMiddleware = async (
   const userId = req.query.userId || req.params.userId;
   const userEmail = req.query.userEmail;
 
-  if (userEmail) {
+  if (userEmail && userEmail !== "undefined" && userEmail !== "null") {
     const foundUser = await UserClient.findUnique({
       where: { email: userEmail as string },
     });
     if (foundUser) {
       req.user = { userId: foundUser.id, username: foundUser.username };
       await getOrSetCache(`${foundUser.id}:jwt-vitalprep`, () => {
-        if (!authHeader || !authHeader.startsWith("Bearer ")) {
-          return null;
-        }
-
-        return authHeader.split(" ")[1];
+        return createJWT(foundUser.id, foundUser.username);
       });
       next();
       return;
     }
   }
 
-  if (!userId) {
+  if (!userId || userId === "null" || userId === "undefined") {
     return res
       .status(StatusCodes.BAD_REQUEST)
       .json({ message: "Please provide an userId!" });
@@ -57,7 +53,7 @@ const authenticationMiddleware = async (
   if (!token) {
     return res
       .status(StatusCodes.BAD_REQUEST)
-      .json({ message: "Please provide a jwt!" });
+      .json({ message: "Please provide a jwt!", type: "jwt" });
   }
 
   try {
@@ -66,7 +62,7 @@ const authenticationMiddleware = async (
   } catch (error) {
     return res
       .status(StatusCodes.UNAUTHORIZED)
-      .json({ message: "Expired jwt." });
+      .json({ message: "Expired jwt.", type: "jwt" });
   }
 };
 

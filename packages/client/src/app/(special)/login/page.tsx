@@ -6,7 +6,7 @@ import AuthFormPageTemplate from "@/components/shared/AuthFormPageTemplate";
 import useAuthorization from "@/hooks/useAuthorization";
 
 const Login = () => {
-  useAuthorization("login");
+  useAuthorization();
 
   return <AuthFormPageTemplate type="login" />;
 };

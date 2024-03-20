@@ -22,12 +22,18 @@ import {
 } from "@/redux/slices/generalSlice";
 // Hooks
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
-// Next Auth
-import { signOut } from "next-auth/react";
+import { usePathname } from "next/navigation";
 
 const Sidebar = () => {
+  const dispatch = useAppDispatch();
   const sidebarRef = useRef<HTMLElement>(null);
   const isSidebarOpened = useAppSelector(selectIsSidebarOpened);
+
+  const pathname = usePathname();
+
+  useEffect(() => {
+    dispatch(changeIsSidebarOpened(false));
+  }, [pathname]);
 
   useEffect(() => {
     const sidebar = sidebarRef.current as HTMLElement;

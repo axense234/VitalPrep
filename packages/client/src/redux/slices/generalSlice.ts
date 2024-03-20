@@ -39,6 +39,7 @@ type InitialStateType = {
   profile: UserType;
   templateProfile: UserTemplate;
   isUserABot: boolean;
+  invalidJWT: boolean;
 
   loadingProfile: LoadingStateType;
   loadingCreateProfile: LoadingStateType;
@@ -82,6 +83,7 @@ const initialState: InitialStateType = {
   profile: defaultProfile,
   templateProfile: defaultTemplateProfile,
   isUserABot: true,
+  invalidJWT: false,
   loadingProfile: "IDLE",
   loadingCreateProfile: "IDLE",
   loadingLoginProfile: "IDLE",
@@ -94,9 +96,10 @@ const initialState: InitialStateType = {
 export const logoutUser = createAsyncThunk("general/logoutUser", async () => {
   try {
     const userId = localStorage.getItem("userId");
-    await axiosInstance.post(`/users/signout/${userId}`);
-    localStorage.removeItem("userId");
-    signOut({ redirect: true, callbackUrl: "http://localhost:3000/" });
+    await axiosInstance.post(`/users/signout/${userId}`).then(() => {
+      localStorage.removeItem("userId");
+    });
+    await signOut({ redirect: true, callbackUrl: "http://localhost:3000/" });
   } catch (error) {
     console.log(error);
     return error as AxiosError;
@@ -108,9 +111,9 @@ export const getProfileOAuth = createAsyncThunk(
   async () => {
     try {
       const session = await getSession();
-      const { data } = await axiosInstance.get(`/users/null`, {
-        params: { userEmail: session?.user?.email },
-      });
+      const { data } = await axiosInstance.get(
+        `/users/null?userEmail=${session?.user?.email}`
+      );
       return data.user as User;
     } catch (error) {
       console.log(error);
@@ -133,36 +136,26 @@ export const getProfileJWT = createAsyncThunk(
   }
 );
 
-export const signupUserOAuth = createAsyncThunk(
+export const signupUserOAuth = createAsyncThunk<User | AxiosError>(
   "general/signupUserOAuth",
   async () => {
-    const waitForSignIn = async () => {
-      const newSession = await getSession();
-      if (newSession && newSession.user) {
-        const userTemplate = { ...defaultTemplateProfile } as UserTemplate;
-        userTemplate.username = (newSession?.user?.name as string) || "User";
-        userTemplate.email =
-          (newSession?.user?.email as string) || "email@provider.com";
-        userTemplate.imageUrl =
-          (newSession?.user?.image as string) || userTemplate.imageUrl;
-        try {
-          const { data } = await axiosInstance.post(
-            "/users/signup",
-            userTemplate,
-            {
-              params: { throughOAuth: true },
-            }
-          );
-          return data.user as User;
-        } catch (error) {
-          console.log(error);
-          return error;
-        }
-      } else {
-        setTimeout(waitForSignIn, 10);
-      }
-    };
-    return await waitForSignIn();
+    try {
+      const session = await getSession();
+      const userTemplate = { ...defaultTemplateProfile } as UserTemplate;
+
+      userTemplate.username = session?.user?.name as string;
+      userTemplate.email = session?.user?.email as string;
+      userTemplate.imageUrl =
+        (session?.user?.image as string) || userTemplate.imageUrl;
+
+      const { data } = await axiosInstance.post("/users/signup", userTemplate, {
+        params: { throughOAuth: true },
+      });
+      return data.user as User;
+    } catch (error) {
+      console.log(error);
+      return error as AxiosError;
+    }
   }
 );
 
@@ -227,6 +220,12 @@ const generalSlice = createSlice({
   name: "general",
   initialState,
   reducers: {
+    setTemplateModalMessage(state, action: PayloadAction<string>) {
+      state.templateModalMessage = action.payload;
+    },
+    changeInvalidJWT(state, action: PayloadAction<boolean>) {
+      state.invalidJWT = action.payload;
+    },
     setSelectedCreateToolOption(state, action: PayloadAction<string>) {
       state.selectedCreateToolOption = action.payload;
     },
@@ -271,17 +270,17 @@ const generalSlice = createSlice({
       })
       .addCase(getProfileOAuth.fulfilled, (state, action) => {
         state.isModalUsedWhenLoading = false;
+        state.invalidJWT = false;
+
         const user = action.payload as UserType;
         const axiosError = action.payload as AxiosError;
 
         if (!axiosError?.response) {
           state.profile = user;
-          state.loadingGetProfile = "SUCCEDED";
-          state.showGeneralModal = true;
+          state.loadingGetOAuthProfile = "SUCCEDED";
           state.templateModalMessage = `Found existing account`;
         } else {
-          state.loadingGetProfile = "FAILED";
-          state.showGeneralModal = true;
+          state.loadingGetOAuthProfile = "FAILED";
           state.templateModalMessage = "Failed to get account";
         }
       })
@@ -293,6 +292,8 @@ const generalSlice = createSlice({
       })
       .addCase(getProfileJWT.fulfilled, (state, action) => {
         state.isModalUsedWhenLoading = false;
+        state.invalidJWT = false;
+
         const user = action.payload as UserType;
         const axiosError = action.payload as AxiosError;
 
@@ -302,6 +303,13 @@ const generalSlice = createSlice({
           state.showGeneralModal = true;
           state.templateModalMessage = `Found existing account`;
         } else {
+          const errorData = axiosError?.response?.data as {
+            message: string;
+            type?: string;
+          };
+          if (errorData.type && errorData.type === "jwt") {
+            state.invalidJWT = true;
+          }
           state.loadingGetProfile = "FAILED";
           state.showGeneralModal = true;
           state.templateModalMessage = "Failed to get account";
@@ -311,8 +319,13 @@ const generalSlice = createSlice({
         state.loadingCreateOAuthProfile = "PENDING";
         state.showGeneralModal = true;
         state.templateModalMessage = "Trying to signup";
+        state.isModalUsedWhenLoading = true;
       })
       .addCase(signupUserOAuth.fulfilled, (state, action) => {
+        localStorage.removeItem("createVitalPrepAccount");
+        state.isModalUsedWhenLoading = false;
+        state.invalidJWT = false;
+
         const user = action.payload as UserType;
         const axiosError = action.payload as AxiosError;
 
@@ -321,13 +334,9 @@ const generalSlice = createSlice({
           state.profile = user;
           state.loadingCreateOAuthProfile = "SUCCEDED";
           state.templateModalMessage = `Successfully signed up user: ${user.username}`;
-          setTimeout(() => {
-            window.location.href = `${baseSiteUrl}/home`;
-          }, 1500);
-          state.showGeneralModal = false;
         } else {
           state.loadingCreateOAuthProfile = "FAILED";
-          state.showGeneralModal = false;
+          state.templateModalMessage = `Failed to sign up user`;
         }
       })
       .addCase(signupUser.pending, (state, action) => {
@@ -338,6 +347,8 @@ const generalSlice = createSlice({
       })
       .addCase(signupUser.fulfilled, (state, action) => {
         state.isModalUsedWhenLoading = false;
+        state.invalidJWT = false;
+
         const user = action.payload as UserType;
         const axiosError = action.payload as AxiosError;
 
@@ -356,12 +367,14 @@ const generalSlice = createSlice({
         }
       })
       .addCase(signinUserThroughOAuth.pending, (state, action) => {
+        state.isModalUsedWhenLoading = true;
         state.loadingLoginOAuthProfile = "PENDING";
         state.showGeneralModal = true;
         state.templateModalMessage = `Trying to create / sign in account`;
-        state.isModalUsedWhenLoading = true;
       })
       .addCase(signinUserThroughOAuth.fulfilled, (state, action) => {
+        state.isModalUsedWhenLoading = true;
+        state.invalidJWT = false;
         const pageType = action.payload as "signup" | "login";
 
         state.isModalUsedWhenLoading = false;
@@ -369,13 +382,12 @@ const generalSlice = createSlice({
         state.showGeneralModal = true;
         if (pageType === "login") {
           state.templateModalMessage = "Logging in";
-          state.isModalUsedWhenLoading = true;
         } else if (pageType === "signup") {
-          state.isModalUsedWhenLoading = true;
           localStorage.setItem("createVitalPrepAccount", "create");
         }
       })
       .addCase(signinUserThroughOAuth.rejected, (state, action) => {
+        state.loadingLoginOAuthProfile = "FAILED";
         localStorage.removeItem("createVitalPrepAccount");
       })
       .addCase(loginUser.pending, (state, action) => {
@@ -386,6 +398,8 @@ const generalSlice = createSlice({
       })
       .addCase(loginUser.fulfilled, (state, action) => {
         state.isModalUsedWhenLoading = false;
+        state.invalidJWT = false;
+
         const user = action.payload as UserType;
         const axiosError = action.payload as AxiosError;
 
@@ -395,13 +409,10 @@ const generalSlice = createSlice({
           state.loadingLoginProfile = "SUCCEDED";
           state.templateModalMessage = `Successfully logged in as user: ${user.username}`;
           state.showGeneralModal = false;
-          setTimeout(() => {
-            window.location.href = `${baseSiteUrl}/home`;
-          }, 1500);
         } else {
           const errorData = axiosError.response.data as { message: string };
-          state.showGeneralModal = false;
           state.loadingLoginProfile = "FAILED";
+          state.showGeneralModal = false;
           state.showFormModal = true;
           state.templateModalMessage = errorData.message;
         }
@@ -410,6 +421,9 @@ const generalSlice = createSlice({
         state.showGeneralModal = true;
         state.templateModalMessage = "Logging out";
         state.isModalUsedWhenLoading = true;
+      })
+      .addCase(logoutUser.fulfilled, (state, action) => {
+        state.invalidJWT = false;
       })
       .addCase(createCloudinaryImage.pending, (state, action) => {
         state.loadingCloudinaryImage = "PENDING";
@@ -470,6 +484,8 @@ export const selectIsUserABot = (state: State) => state.general.isUserABot;
 export const selectSelectedCreateToolOption = (state: State) =>
   state.general.selectedCreateToolOption;
 
+export const selectInvalidJWT = (state: State) => state.general.invalidJWT;
+
 export const {
   changeIsSidebarOpened,
   updateTemplateProfile,
@@ -479,6 +495,8 @@ export const {
   manipulateLoadingLoginProfile,
   changeIsUserABot,
   setSelectedCreateToolOption,
+  changeInvalidJWT,
+  setTemplateModalMessage,
 } = generalSlice.actions;
 
 export default generalSlice.reducer;

@@ -12,18 +12,40 @@ import popupModalStyles from "../../../scss/components/others/Modals.module.scss
 import useModalTransition from "@/hooks/useModalTransition";
 // React Spinners
 import { BeatLoader } from "react-spinners";
+import { useAppDispatch, useAppSelector } from "@/hooks/redux";
+import {
+  changeShowFormModal,
+  changeShowGeneralModal,
+  selectIsModalUsedWhenLoading,
+  selectShowFormModal,
+  selectShowGeneralModal,
+  selectTemplateModalMessage,
+} from "@/redux/slices/generalSlice";
 
 const PopupModal: FC<PopupModalProps> = ({
   modalColor,
   hasBorder,
   textColor,
-  closeModal,
   modalType,
-  showModal,
-  isModalUsedWhenLoading,
-  modalMessage,
 }) => {
+  const dispatch = useAppDispatch();
   const modalRef = useRef<HTMLDivElement>(null);
+
+  const showGeneralModal = useAppSelector(selectShowGeneralModal);
+  const showFormModal = useAppSelector(selectShowFormModal);
+
+  const modalMessage = useAppSelector(selectTemplateModalMessage);
+  const isModalUsedWhenLoading = useAppSelector(selectIsModalUsedWhenLoading);
+
+  const showModal = modalType === "general" ? showGeneralModal : showFormModal;
+
+  const closeModal = () => {
+    if (modalType === "form") {
+      dispatch(changeShowFormModal(false));
+    } else if (modalType === "general") {
+      dispatch(changeShowGeneralModal(false));
+    }
+  };
 
   useModalTransition(showModal, modalRef);
 
@@ -37,7 +59,13 @@ const PopupModal: FC<PopupModalProps> = ({
     return () => {
       clearTimeout(timeout);
     };
-  }, [showModal, closeModal]);
+  }, [showModal, changeShowFormModal, changeShowGeneralModal]);
+
+  useEffect(() => {
+    if (modalType === "form" && modalRef.current && showModal) {
+      modalRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, [showModal, modalRef.current, modalType]);
 
   return (
     <div

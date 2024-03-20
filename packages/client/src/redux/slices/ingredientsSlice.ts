@@ -1,5 +1,7 @@
 // Redux Toolkit
 import IngredientTemplate from "@/core/types/entity/mutation/IngredientTemplate";
+import { State } from "../api/store";
+// Data
 import { defaultTemplateIngredient } from "@/data";
 // Types
 import {
@@ -9,8 +11,9 @@ import {
   createEntityAdapter,
   createSlice,
 } from "@reduxjs/toolkit";
-import { State } from "../api/store";
+// Prisma
 import { Ingredient } from "@prisma/client";
+// Axios
 import { AxiosError } from "axios";
 import axiosInstance from "@/utils/axios";
 
@@ -25,8 +28,7 @@ type InitialStateType = {
   // General
   templateIngredient: IngredientTemplate;
   loadingCreateIngredient: LoadingStateType;
-  showIngredientFormModal: boolean;
-  ingredientModalMessage: string;
+  ingredientFormModalErrorMessage: string;
 };
 
 export const ingredientsAdapter = createEntityAdapter<Ingredient>({
@@ -36,8 +38,7 @@ export const ingredientsAdapter = createEntityAdapter<Ingredient>({
 const initialState = ingredientsAdapter.getInitialState({
   templateIngredient: defaultTemplateIngredient,
   loadingCreateIngredient: "IDLE",
-  showIngredientFormModal: false,
-  ingredientModalMessage: "Default Message",
+  ingredientFormModalErrorMessage: "Default Message",
 }) as EntityState<Ingredient, string> & InitialStateType;
 
 type CreateIngredientBody = {
@@ -66,9 +67,6 @@ const ingredientsSlice = createSlice({
   name: "ingredients",
   initialState,
   reducers: {
-    changeShowIngredientFormModal(state, action: PayloadAction<boolean>) {
-      state.showIngredientFormModal = action.payload;
-    },
     updateTemplateIngredient(state, action: PayloadAction<ObjectKeyValueType>) {
       state.templateIngredient = {
         ...state.templateIngredient,
@@ -88,12 +86,15 @@ const ingredientsSlice = createSlice({
         if (axiosError !== undefined && !axiosError.response) {
           ingredientsAdapter.addOne(state, ingredient);
           state.loadingCreateIngredient = "SUCCEDED";
-          state.ingredientModalMessage = `Successfully created ingredient: ${ingredient.name}`;
         } else {
-          const errorData = axiosError?.response?.data as { message: string };
-          state.showIngredientFormModal = true;
+          const error = axiosError.response?.data as {
+            message: string;
+            type: string;
+          };
+          if (error.type !== "jwt") {
+            state.ingredientFormModalErrorMessage = error.message;
+          }
           state.loadingCreateIngredient = "FAILED";
-          state.ingredientModalMessage = errorData.message;
         }
       });
   },
@@ -110,12 +111,9 @@ export const selectTemplateIngredient = (state: State) =>
 export const selectLoadingCreateIngredient = (state: State) =>
   state.ingredients.loadingCreateIngredient;
 
-export const selectShowIngredientModal = (state: State) =>
-  state.ingredients.showIngredientFormModal;
-export const selectIngredientModalMessage = (state: State) =>
-  state.ingredients.ingredientModalMessage;
+export const selectIngredientFormModalErrorMessage = (state: State) =>
+  state.ingredients.ingredientFormModalErrorMessage;
 
-export const { updateTemplateIngredient, changeShowIngredientFormModal } =
-  ingredientsSlice.actions;
+export const { updateTemplateIngredient } = ingredientsSlice.actions;
 
 export default ingredientsSlice.reducer;

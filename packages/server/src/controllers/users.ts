@@ -53,7 +53,7 @@ const getUserById = async (req: Request, res: Response) => {
 
   const userId = userIdParams ? userIdCache : userIdParams;
 
-  if (!userId) {
+  if (!userId || userId === "null" || userId === "undefined") {
     return res
       .status(StatusCodes.BAD_REQUEST)
       .json({ message: "Please enter an user id!", user: {} });

@@ -80,6 +80,13 @@ const createIngredient = async (req: Request, res: Response) => {
       .json({ message: "Please enter a request body!", ingredient: {} });
   }
 
+  if (!ingredientBody.name) {
+    return res.status(StatusCodes.BAD_REQUEST).json({
+      message: "Please enter the name of the ingredient!",
+      ingredient: {},
+    });
+  }
+
   if (!ingredientBody.calories) {
     return res.status(StatusCodes.BAD_REQUEST).json({
       message: "Please enter the number of calories!",

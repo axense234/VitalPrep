@@ -1,5 +1,5 @@
 // React
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 // Redux
 import {
   getProfileJWT,
@@ -14,10 +14,12 @@ import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 
-const useAuthorization = (pageType: "login" | "signup" | "common") => {
+const useAuthorization = () => {
   const dispatch = useAppDispatch();
   const pathname = usePathname();
   const router = useRouter();
+
+  const hasEffectRun = useRef(false);
 
   const loadingGetProfile = useAppSelector(selectLoadingGetProfile);
   const loadingGetOAuthProfile = useAppSelector(selectLoadingGetOAuthProfile);
@@ -30,13 +32,29 @@ const useAuthorization = (pageType: "login" | "signup" | "common") => {
   useRedirect(pathname, router, canRedirect);
 
   useEffect(() => {
-    if (loadingGetOAuthProfile === "FAILED" && loadingGetProfile === "IDLE") {
+    const createVitalPrepAccount = localStorage.getItem(
+      "createVitalPrepAccount"
+    );
+    if (
+      loadingGetOAuthProfile === "FAILED" &&
+      loadingGetProfile === "IDLE" &&
+      !createVitalPrepAccount
+    ) {
       dispatch(getProfileJWT());
     }
   }, [loadingGetOAuthProfile, loadingGetProfile]);
 
   useEffect(() => {
-    if (loadingGetOAuthProfile === "IDLE" && loadingGetProfile === "IDLE") {
+    const createVitalPrepAccount = localStorage.getItem(
+      "createVitalPrepAccount"
+    );
+    if (
+      loadingGetOAuthProfile === "IDLE" &&
+      loadingGetProfile === "IDLE" &&
+      !hasEffectRun.current &&
+      !createVitalPrepAccount
+    ) {
+      hasEffectRun.current = true;
       dispatch(getProfileOAuth());
     }
   }, [loadingGetOAuthProfile, loadingGetProfile]);
@@ -50,6 +68,7 @@ export const useRedirect = (
   const profile = useAppSelector(selectProfile);
 
   useEffect(() => {
+    console.log("oopsie redirected");
     if (pathname && router && loading) {
       if (
         profile.email &&

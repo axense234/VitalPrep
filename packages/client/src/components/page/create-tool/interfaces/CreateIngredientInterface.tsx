@@ -11,19 +11,20 @@ import { defaultIngredientImageUrl } from "@/data";
 // Redux
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import {
-  changeShowIngredientFormModal,
   createIngredient,
-  selectIngredientModalMessage,
+  selectIngredientFormModalErrorMessage,
   selectLoadingCreateIngredient,
-  selectShowIngredientModal,
   selectTemplateIngredient,
   updateTemplateIngredient,
 } from "@/redux/slices/ingredientsSlice";
 import {
+  changeShowFormModal,
+  changeShowGeneralModal,
   createCloudinaryImage,
   selectLoadingCloudinaryImage,
   selectProfile,
   selectTemplateImageUrl,
+  setTemplateModalMessage,
 } from "@/redux/slices/generalSlice";
 // React
 import { useEffect } from "react";
@@ -32,13 +33,29 @@ const CreateIngredientInterface = () => {
   const dispatch = useAppDispatch();
   const templateIngredient = useAppSelector(selectTemplateIngredient);
   const profile = useAppSelector(selectProfile);
-  const loadingCreateIngredinet = useAppSelector(selectLoadingCreateIngredient);
 
-  const showIngredientFormModal = useAppSelector(selectShowIngredientModal);
-  const ingredientModalMessage = useAppSelector(selectIngredientModalMessage);
+  const loadingCreateIngredient = useAppSelector(selectLoadingCreateIngredient);
+  const ingredientFormModalErrorMessage = useAppSelector(
+    selectIngredientFormModalErrorMessage
+  );
 
   const loadingCloudinaryImage = useAppSelector(selectLoadingCloudinaryImage);
   const templateImageUrl = useAppSelector(selectTemplateImageUrl);
+
+  useEffect(() => {
+    if (loadingCreateIngredient === "SUCCEDED") {
+      dispatch(changeShowGeneralModal(true));
+      dispatch(
+        setTemplateModalMessage(
+          `Successfully created ingredient: ${templateIngredient.name}.`
+        )
+      );
+    } else if (loadingCreateIngredient === "FAILED") {
+      dispatch(changeShowGeneralModal(false));
+      dispatch(changeShowFormModal(true));
+      dispatch(setTemplateModalMessage(ingredientFormModalErrorMessage));
+    }
+  }, [loadingCreateIngredient]);
 
   useEffect(() => {
     if (loadingCloudinaryImage === "SUCCEDED") {
@@ -50,14 +67,7 @@ const CreateIngredientInterface = () => {
 
   return (
     <section className={createToolStyles.createInterface}>
-      <PopupModal
-        hasBorder={false}
-        closeModal={() => dispatch(changeShowIngredientFormModal(false))}
-        modalType="form"
-        showModal={showIngredientFormModal}
-        isModalUsedWhenLoading={false}
-        modalMessage={ingredientModalMessage}
-      />
+      <PopupModal hasBorder={false} modalType="form" />
       <h2>Create Ingredient</h2>
       <form className={createToolStyles.createInterfaceForm}>
         <TextFormControl
@@ -193,7 +203,6 @@ const CreateIngredientInterface = () => {
           disabled={false}
           onClickFunction={(e) => {
             e.preventDefault();
-            console.log(profile);
             dispatch(
               createIngredient({
                 templateIngredient: templateIngredient,

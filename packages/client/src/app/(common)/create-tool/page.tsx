@@ -10,7 +10,7 @@ import CreateToolInterface from "@/components/page/create-tool/CreateToolInterfa
 import useAuthorization from "@/hooks/useAuthorization";
 
 const CreateTool = () => {
-  useAuthorization("common");
+  useAuthorization();
   return (
     <div className={createToolStyles.createToolContainer}>
       <PageTitle
