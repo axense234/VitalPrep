@@ -15,6 +15,7 @@ import {
   selectIngredientFormModalErrorMessage,
   selectLoadingCreateIngredient,
   selectTemplateIngredient,
+  updateLoadingCreateIngredient,
   updateTemplateIngredient,
 } from "@/redux/slices/ingredientsSlice";
 import {
@@ -55,6 +56,12 @@ const CreateIngredientInterface = () => {
       dispatch(changeShowFormModal(true));
       dispatch(setTemplateModalMessage(ingredientFormModalErrorMessage));
     }
+    const timeout = setTimeout(() => {
+      dispatch(updateLoadingCreateIngredient("IDLE"));
+    }, 10);
+    return () => {
+      clearTimeout(timeout);
+    };
   }, [loadingCreateIngredient]);
 
   useEffect(() => {
@@ -200,7 +207,10 @@ const CreateIngredientInterface = () => {
           fontSize={24}
           height={64}
           width={560}
-          disabled={false}
+          disabled={
+            loadingCreateIngredient === "PENDING" ||
+            loadingCloudinaryImage === "PENDING"
+          }
           onClickFunction={(e) => {
             e.preventDefault();
             dispatch(

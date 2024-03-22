@@ -8,9 +8,23 @@ import { Ingredient } from "@prisma/client";
 // Utils
 import { deleteCache, getOrSetCache, setCache } from "../utils/redis";
 
+type IngredientsQueryObject = {
+  userId?: string;
+};
+
 const getAllIngredients = async (req: Request, res: Response) => {
+  const userId = req.query.userId;
+  const getAllUserIngredients = req.query.userIngredients;
+
+  const queryObject: IngredientsQueryObject = {};
+
+  if (getAllUserIngredients) {
+    queryObject.userId = userId as string;
+  }
+
   const foundIngredients = await getOrSetCache("ingredients", async () => {
     const ingredients = await IngredientClient.findMany({
+      where: queryObject,
       include: {
         macros: true,
         recipes: true,

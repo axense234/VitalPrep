@@ -29,6 +29,8 @@ type InitialStateType = {
   templateIngredient: IngredientTemplate;
   loadingCreateIngredient: LoadingStateType;
   ingredientFormModalErrorMessage: string;
+
+  loadingGetUserIngredients: LoadingStateType;
 };
 
 export const ingredientsAdapter = createEntityAdapter<Ingredient>({
@@ -39,6 +41,7 @@ const initialState = ingredientsAdapter.getInitialState({
   templateIngredient: defaultTemplateIngredient,
   loadingCreateIngredient: "IDLE",
   ingredientFormModalErrorMessage: "Default Message",
+  loadingGetUserIngredients: "IDLE",
 }) as EntityState<Ingredient, string> & InitialStateType;
 
 type CreateIngredientBody = {
@@ -63,10 +66,31 @@ export const createIngredient = createAsyncThunk<
   }
 });
 
+export const getAllUserIngredients = createAsyncThunk<
+  Ingredient[] | AxiosError,
+  string
+>("ingredients/getAllUserIngredients", async (userId) => {
+  try {
+    const { data } = await axiosInstance.get(
+      `/ingredients?userId=${userId}&userIngredients=true`
+    );
+    return data.ingredients as Ingredient[];
+  } catch (error) {
+    console.log(error);
+    return error as AxiosError;
+  }
+});
+
 const ingredientsSlice = createSlice({
   name: "ingredients",
   initialState,
   reducers: {
+    updateLoadingCreateIngredient(
+      state,
+      action: PayloadAction<LoadingStateType>
+    ) {
+      state.loadingCreateIngredient = action.payload;
+    },
     updateTemplateIngredient(state, action: PayloadAction<ObjectKeyValueType>) {
       state.templateIngredient = {
         ...state.templateIngredient,
@@ -76,6 +100,19 @@ const ingredientsSlice = createSlice({
   },
   extraReducers(builder) {
     builder
+      .addCase(getAllUserIngredients.pending, (state, action) => {
+        state.loadingGetUserIngredients = "PENDING";
+      })
+      .addCase(getAllUserIngredients.fulfilled, (state, action) => {
+        const ingredients = action.payload as Ingredient[];
+
+        if (ingredients.length >= 1) {
+          state.loadingGetUserIngredients = "SUCCEDED";
+          ingredientsAdapter.upsertMany(state, ingredients);
+        } else {
+          state.loadingGetUserIngredients = "FAILED";
+        }
+      })
       .addCase(createIngredient.pending, (state, action) => {
         state.loadingCreateIngredient = "PENDING";
       })
@@ -103,6 +140,7 @@ const ingredientsSlice = createSlice({
 export const {
   selectAll: selectAllIngredients,
   selectById: selectIngredientById,
+  selectIds: selectAllIngredientsIds,
 } = ingredientsAdapter.getSelectors<State>((state) => state.ingredients);
 
 export const selectTemplateIngredient = (state: State) =>
@@ -114,6 +152,10 @@ export const selectLoadingCreateIngredient = (state: State) =>
 export const selectIngredientFormModalErrorMessage = (state: State) =>
   state.ingredients.ingredientFormModalErrorMessage;
 
-export const { updateTemplateIngredient } = ingredientsSlice.actions;
+export const selectLoadingGetUserIngredients = (state: State) =>
+  state.ingredients.loadingGetUserIngredients;
+
+export const { updateTemplateIngredient, updateLoadingCreateIngredient } =
+  ingredientsSlice.actions;
 
 export default ingredientsSlice.reducer;

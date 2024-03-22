@@ -1,0 +1,9 @@
+@use "../../abstracts" as *;
+
+.ingredientComponent {
+  @include flexCenter(column);
+  width: 100%;
+  height: 100%;
+  border: 2px solid black;
+  background-color: getColor("primary-1");
+}

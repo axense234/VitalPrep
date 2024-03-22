@@ -8,7 +8,20 @@ import { Utensil } from "@prisma/client";
 // Utils
 import { deleteCache, getOrSetCache, setCache } from "../utils/redis";
 
+type UtensilsQueryObject = {
+  userId?: string;
+};
+
 const getAllUtensils = async (req: Request, res: Response) => {
+  const userId = req.query.userId;
+  const getAllUserUtensils = req.query.userUtensils;
+
+  const queryObject: UtensilsQueryObject = {};
+
+  if (getAllUserUtensils) {
+    queryObject.userId = userId as string;
+  }
+
   const foundUtensils = await getOrSetCache("utensils", async () => {
     const utensils = await UtensilClient.findMany({
       include: {
@@ -75,6 +88,12 @@ const createUtensil = async (req: Request, res: Response) => {
     return res
       .status(StatusCodes.BAD_REQUEST)
       .json({ message: "Please enter a request body!", utensil: {} });
+  }
+
+  if (!utensilBody.name) {
+    return res
+      .status(StatusCodes.BAD_REQUEST)
+      .json({ message: "Please enter an utensil name!", utensil: {} });
   }
 
   const createdUtensil = await UtensilClient.create({

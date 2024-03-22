@@ -62,7 +62,7 @@ const PopupModal: FC<PopupModalProps> = ({
   }, [showModal, changeShowFormModal, changeShowGeneralModal]);
 
   useEffect(() => {
-    if (modalType === "form" && modalRef.current && showModal) {
+    if (modalRef.current && showModal) {
       modalRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   }, [showModal, modalRef.current, modalType]);

@@ -16,6 +16,8 @@ import ImageUrl from "./core/types/LogoImageUrl";
 import OAuthOptionContent from "./core/types/OAuthOptionContent";
 import CreateToolOption from "./core/types/CreateToolOption";
 import IngredientTemplate from "./core/types/entity/mutation/IngredientTemplate";
+import UtensilTemplate from "./core/types/entity/mutation/UtensilTemplate";
+import RecipeTemplate from "./core/types/entity/mutation/RecipeTemplate";
 
 export const homePageUrl = "/home";
 export const sitePhoneNumber = "0754189293(fake)";
@@ -26,6 +28,12 @@ export const defaultProfileImageUrl =
 
 export const defaultIngredientImageUrl =
   "https://res.cloudinary.com/birthdayreminder/image/upload/v1708848204/VitalPrep/doodle-carrot-hand-drawn-black-white-outline-carrot-line-art-vegetable-stock-vector_502320-1096_oenebb.jpg";
+
+export const defaultUtensilImageUrl =
+  "https://res.cloudinary.com/birthdayreminder/image/upload/v1708848218/VitalPrep/frying-pan-with-food-hand-drawn-doodle-vector-41700255_ni2nh1.jpg";
+
+export const defaultRecipeImageUrl =
+  "https://res.cloudinary.com/birthdayreminder/image/upload/v1708848563/VitalPrep/depositphotos_86878174-stock-illustration-simple-doodle-of-a-bowl_skeven.webp";
 
 export const createToolOptions: CreateToolOption[] = [
   {
@@ -106,13 +114,28 @@ export const defaultTemplateProfile = {
 };
 
 export const defaultTemplateIngredient: IngredientTemplate = {
-  name: "",
+  name: "Carrot",
   imageUrl: defaultIngredientImageUrl,
   enabled: false,
   calories: 200,
   carbs: 20,
   proteins: 20,
   fats: 2,
+};
+
+export const defaultTemplateUtensil: UtensilTemplate = {
+  name: "Pan",
+  enabled: false,
+  imageUrl: defaultUtensilImageUrl,
+};
+
+export const defaultTemplateRecipe: RecipeTemplate = {
+  name: "Soup",
+  imageUrl: defaultRecipeImageUrl,
+  ingredients: [],
+  utensils: [],
+  writtenTutorial: "",
+  videoTutorial: "",
 };
 
 export const OAuthOptionsContent: OAuthOptionContent[] = [

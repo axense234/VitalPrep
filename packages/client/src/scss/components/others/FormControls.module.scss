@@ -129,33 +129,22 @@
   width: 100%;
 }
 
-// Using react-google-recaptcha so im not using those rules
-// .recaptchaFormControlContainer {
-//   @include flexCenter(row);
-//   width: 100%;
-//   justify-content: space-between;
-//   padding: 0 32px;
-//   background-color: getColor("tan-color-extra-light");
-//   height: 64px;
-//   border: 1.5px solid getColor("black-100-1");
+.selectFormControlContainer {
+  @include flexCenter(column);
+  align-items: flex-start;
+  width: 100%;
 
-//   img {
-//     width: 56px !important;
-//     height: 56px !important;
-//   }
+  label {
+    font-weight: bolder;
+    font-size: 22px;
+  }
 
-//   input[type="checkbox"] {
-//     appearance: none;
-//     -webkit-appearance: none;
-//     -moz-appearance: none;
-//     width: 24px;
-//     height: 24px;
-//     border: 1.5px solid grey;
-//     background-color: getColor("tan-color-extra-light");
-//     cursor: pointer;
-//   }
+  select {
+    @include flexCenter(column);
 
-//   input[type="checkbox"]:checked {
-//     appearance: auto;
-//   }
-// }
+    option {
+      @include flexCenter(row);
+      width: 100%;
+    }
+  }
+}
