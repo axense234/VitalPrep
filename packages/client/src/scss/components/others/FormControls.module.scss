@@ -133,18 +133,24 @@
   @include flexCenter(column);
   align-items: flex-start;
   width: 100%;
+  gap: 8px;
 
   label {
     font-weight: bolder;
     font-size: 22px;
   }
+}
 
-  select {
-    @include flexCenter(column);
+.selectFormControlList {
+  @include flexCenter(column);
+  list-style: none;
+  width: 100%;
+  gap: 1rem;
+  padding: 2rem;
+  border: 1.5px solid getColor("black-100-1");
 
-    option {
-      @include flexCenter(row);
-      width: 100%;
-    }
+  li {
+    @include flexCenter(row);
+    width: 100%;
   }
 }

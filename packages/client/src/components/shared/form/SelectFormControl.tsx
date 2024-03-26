@@ -4,26 +4,58 @@ import SelectFormControlProps from "@/core/interfaces/form/SelectFormControlProp
 import { FC, FunctionComponent } from "react";
 // SCSS
 import formControlsStyles from "../../../scss/components/others/FormControls.module.scss";
-import IngredientComponent from "../entity/IngredientComponent";
+// Components
+import EntityComponent, {
+  EntityComponentProps,
+  EntityType,
+} from "../entity/EntityComponent";
+// React Spinners
 import { ClockLoader } from "react-spinners";
+// Redux
+import { useAppSelector } from "@/hooks/redux";
+import { State } from "@/redux/api/store";
+import { selectIngredientById } from "@/redux/slices/ingredientsSlice";
+import { selectUtensilById } from "@/redux/slices/utensilsSlice";
 
 const SelectFormControl: FC<SelectFormControlProps> = ({
   labelColor,
   labelContent,
-  required,
-  entityProperty,
+  entityPropertyOptions,
+  entityPropertyChosenOptions,
   onEntityPropertyValueChange,
   labelFontSize,
   entityTypeUsed,
   areOptionsLoading,
 }) => {
-  let componentUsedAsOption: FunctionComponent<any> = IngredientComponent;
+  let componentUsedAsOption: FunctionComponent<EntityComponentProps> =
+    EntityComponent;
+  let selectFormControlBackgroundColor: string = "#FFAE00";
+
+  const selectEntityById = (id: string) => {
+    switch (entityTypeUsed) {
+      case "ingredient":
+        return useAppSelector((state: State) =>
+          selectIngredientById(state, id)
+        );
+      case "utensil":
+        return useAppSelector((state: State) => selectUtensilById(state, id));
+      default:
+        break;
+    }
+  };
+
+  const seeIfComponentHasBeenClicked = (id: string) => {
+    return Boolean(
+      entityPropertyChosenOptions.find((idToSearch) => idToSearch === id)
+    );
+  };
 
   switch (entityTypeUsed) {
     case "ingredient":
-      componentUsedAsOption = IngredientComponent;
+      selectFormControlBackgroundColor = "#FFAE00";
       break;
     case "utensil":
+      selectFormControlBackgroundColor = "#FF6000";
       break;
 
     default:
@@ -38,14 +70,22 @@ const SelectFormControl: FC<SelectFormControlProps> = ({
       >
         {labelContent}
       </label>
-      {areOptionsLoading ? (
+      {areOptionsLoading || entityPropertyOptions.length < 1 ? (
         <ClockLoader />
       ) : (
-        <ul className={formControlsStyles.selectFormControlList}>
-          {entityProperty.map((id) => {
+        <ul
+          className={formControlsStyles.selectFormControlList}
+          style={{ backgroundColor: selectFormControlBackgroundColor }}
+        >
+          {entityPropertyOptions.map((id) => {
             return (
-              <li key={id} onClick={onEntityPropertyValueChange}>
-                {componentUsedAsOption({ id: id })}
+              <li key={id} onClick={() => onEntityPropertyValueChange(id)}>
+                {componentUsedAsOption({
+                  id: id,
+                  clicked: seeIfComponentHasBeenClicked(id),
+                  entity: selectEntityById(id) as EntityType,
+                  entityType: entityTypeUsed,
+                })}
               </li>
             );
           })}

@@ -5,6 +5,7 @@ import TextFormControl from "@/components/shared/form/TextFormControl";
 import PrimaryButton from "@/components/shared/PrimaryButton";
 import ImageFormControl from "@/components/shared/form/ImageFormControl";
 import PopupModal from "@/components/shared/modals/PopupModal";
+import SelectFormControl from "@/components/shared/form/SelectFormControl";
 // Data
 import { defaultUtensilImageUrl } from "@/data";
 // React
@@ -14,12 +15,8 @@ import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import {
   createUtensil,
   getAllUserUtensils,
-  selectAllUtensils,
   selectAllUtensilsIds,
   selectLoadingGetUserUtensils,
-  selectTemplateUtensil,
-  selectUtensilFormModalErrorMessage,
-  updateLoadingCreateUtensil,
   updateTemplateUtensil,
 } from "@/redux/slices/utensilsSlice";
 import {
@@ -34,49 +31,79 @@ import {
   setTemplateModalMessage,
 } from "@/redux/slices/generalSlice";
 import {
+  changeShowVideoTutorialContent,
+  changeShowWrittenTutorialContent,
+  createRecipe,
   selectLoadingCreateRecipe,
   selectRecipeFormModalErrorMessage,
+  selectShowVideoTutorialContent,
+  selectShowWrittenTutorialContent,
   selectTemplateRecipe,
   updateLoadingCreateRecipe,
   updateTemplateRecipe,
 } from "@/redux/slices/recipesSlice";
 import {
   getAllUserIngredients,
-  selectAllIngredients,
   selectAllIngredientsIds,
   selectLoadingGetUserIngredients,
 } from "@/redux/slices/ingredientsSlice";
-import SelectFormControl from "@/components/shared/form/SelectFormControl";
+import CheckboxFormControl from "@/components/shared/form/CheckboxFormControl";
 
 const CreateRecipeInterface = () => {
   const dispatch = useAppDispatch();
   const hasEffectRun = useRef(false);
+  const profile = useAppSelector(selectProfile);
+
+  const showVideoTutorialContent = useAppSelector(
+    selectShowVideoTutorialContent
+  );
+  const showWrittenTutorialContent = useAppSelector(
+    selectShowWrittenTutorialContent
+  );
+
+  const recipeFormModalErrorMessage = useAppSelector(
+    selectRecipeFormModalErrorMessage
+  );
+  const templateRecipe = useAppSelector(selectTemplateRecipe);
+  const templateImageUrl = useAppSelector(selectTemplateImageUrl);
 
   const ingredientsIds = useAppSelector(selectAllIngredientsIds);
   const utensilsIds = useAppSelector(selectAllUtensilsIds);
 
-  const templateRecipe = useAppSelector(selectTemplateRecipe);
-  const profile = useAppSelector(selectProfile);
   const loadingGetProfile = useAppSelector(selectLoadingGetProfile);
   const loadingGetOAuthProfile = useAppSelector(selectLoadingGetOAuthProfile);
-
   const loadingCreateRecipe = useAppSelector(selectLoadingCreateRecipe);
-  const recipeFormModalErrorMessage = useAppSelector(
-    selectRecipeFormModalErrorMessage
-  );
-
   const loadingCloudinaryImage = useAppSelector(selectLoadingCloudinaryImage);
-  const templateImageUrl = useAppSelector(selectTemplateImageUrl);
-
   const loadingGetUserIngredients = useAppSelector(
     selectLoadingGetUserIngredients
   );
   const loadingGetUserUtensils = useAppSelector(selectLoadingGetUserUtensils);
-
   const loadingProfile =
     loadingGetProfile === "SUCCEDED"
       ? loadingGetProfile
       : loadingGetOAuthProfile;
+
+  const handleUpdateArrayEntities = (
+    entityIds: string[] = [],
+    entityId: string,
+    entityType: "ingredients" | "utensils"
+  ) => {
+    if (entityIds?.find((id) => id === entityId)) {
+      dispatch(
+        updateTemplateRecipe({
+          key: entityType,
+          value: entityIds.filter((id) => id !== entityId),
+        })
+      );
+    } else {
+      dispatch(
+        updateTemplateRecipe({
+          key: entityType,
+          value: [...entityIds, entityId],
+        })
+      );
+    }
+  };
 
   useEffect(() => {
     if (
@@ -137,7 +164,7 @@ const CreateRecipeInterface = () => {
           labelContent="Recipe Name:"
           onEntityPropertyValueChange={(e) =>
             dispatch(
-              updateTemplateUtensil({ key: "name", value: e.target.value })
+              updateTemplateRecipe({ key: "name", value: e.target.value })
             )
           }
           required={true}
@@ -168,14 +195,14 @@ const CreateRecipeInterface = () => {
           labelColor="#120A06"
           labelContent="Ingredients:"
           required={true}
-          entityProperty={ingredientsIds}
+          entityPropertyOptions={ingredientsIds}
+          entityPropertyChosenOptions={templateRecipe.ingredients || []}
           entityTypeUsed="ingredient"
-          onEntityPropertyValueChange={(e) =>
-            dispatch(
-              updateTemplateRecipe({
-                key: "ingredients",
-                value: e.target.value,
-              })
+          onEntityPropertyValueChange={(id) =>
+            handleUpdateArrayEntities(
+              templateRecipe.ingredients,
+              id,
+              "ingredients"
             )
           }
           labelFontSize={28}
@@ -185,22 +212,49 @@ const CreateRecipeInterface = () => {
           labelColor="#120A06"
           labelContent="Utensils:"
           required={true}
-          entityProperty={utensilsIds}
+          entityPropertyOptions={utensilsIds}
+          entityPropertyChosenOptions={templateRecipe.utensils || []}
           entityTypeUsed="utensil"
-          onEntityPropertyValueChange={(e) =>
-            dispatch(
-              updateTemplateRecipe({
-                key: "utensils",
-                value: e.target.value,
-              })
-            )
+          onEntityPropertyValueChange={(id) =>
+            handleUpdateArrayEntities(templateRecipe.utensils, id, "utensils")
           }
           labelFontSize={28}
           areOptionsLoading={loadingGetUserUtensils === "PENDING"}
         />
+        <div className={createToolStyles.createInterfaceRecipeTutorial}>
+          <h3>Tutorial:</h3>
+          <div
+            className={createToolStyles.createInterfaceRecipeTutorialCheckboxes}
+          >
+            <CheckboxFormControl
+              direction="row"
+              labelColor="#120A06"
+              labelContent="Use Video Tutorial?:"
+              entityProperty={String(showVideoTutorialContent)}
+              onEntityPropertyValueChange={(e) =>
+                dispatch(
+                  changeShowVideoTutorialContent(!showVideoTutorialContent)
+                )
+              }
+              labelFontSize={26}
+            />
+            <CheckboxFormControl
+              direction="row"
+              labelColor="#120A06"
+              labelContent="Use Written Tutorial?:"
+              entityProperty={String(showWrittenTutorialContent)}
+              onEntityPropertyValueChange={() =>
+                dispatch(
+                  changeShowWrittenTutorialContent(!showWrittenTutorialContent)
+                )
+              }
+              labelFontSize={26}
+            />
+          </div>
+        </div>
         <PrimaryButton
-          backgroundColor="#FFAE00"
-          textColor="#120A06"
+          backgroundColor="#8B0000"
+          textColor="#DDD9D5"
           content="Create Recipe"
           type="functional"
           fontFamily="Cabin"
@@ -214,8 +268,8 @@ const CreateRecipeInterface = () => {
           onClickFunction={(e) => {
             e.preventDefault();
             dispatch(
-              createUtensil({
-                templateUtensil: templateRecipe,
+              createRecipe({
+                templateRecipe: templateRecipe,
                 userId: profile.id,
               })
             );

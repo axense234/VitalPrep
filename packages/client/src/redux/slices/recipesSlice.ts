@@ -1,8 +1,7 @@
 // Redux Toolkit
-import UtensilTemplate from "@/core/types/entity/mutation/UtensilTemplate";
 import { State } from "../api/store";
 // Data
-import { defaultTemplateUtensil } from "@/data";
+import { defaultTemplateRecipe, defaultTemplateUtensil } from "@/data";
 // Types
 import {
   EntityState,
@@ -13,7 +12,7 @@ import {
 } from "@reduxjs/toolkit";
 import RecipeTemplate from "@/core/types/entity/mutation/RecipeTemplate";
 // Prisma
-import { Recipe, Utensil } from "@prisma/client";
+import { Recipe } from "@prisma/client";
 // Axios
 import { AxiosError } from "axios";
 import axiosInstance from "@/utils/axios";
@@ -30,6 +29,8 @@ type InitialStateType = {
   templateRecipe: RecipeTemplate;
   loadingCreateRecipe: LoadingStateType;
   recipeFormModalErrorMessage: string;
+  showVideoTutorialContent: boolean;
+  showWrittenTutorialContent: boolean;
 };
 
 export const recipesAdapter = createEntityAdapter<Recipe>({
@@ -37,9 +38,11 @@ export const recipesAdapter = createEntityAdapter<Recipe>({
 });
 
 const initialState = recipesAdapter.getInitialState({
-  templateRecipe: defaultTemplateUtensil,
+  templateRecipe: defaultTemplateRecipe,
   loadingCreateRecipe: "IDLE",
   recipeFormModalErrorMessage: "Default Message",
+  showVideoTutorialContent: false,
+  showWrittenTutorialContent: false,
 }) as EntityState<Recipe, string> & InitialStateType;
 
 type CreateRecipeBody = {
@@ -60,6 +63,7 @@ export const createRecipe = createAsyncThunk<
     );
     return data.recipe as Recipe;
   } catch (error) {
+    console.log(error);
     return error as AxiosError;
   }
 });
@@ -70,6 +74,12 @@ const recipesSlice = createSlice({
   reducers: {
     updateLoadingCreateRecipe(state, action: PayloadAction<LoadingStateType>) {
       state.loadingCreateRecipe = action.payload;
+    },
+    changeShowVideoTutorialContent(state, action: PayloadAction<boolean>) {
+      state.showVideoTutorialContent = action.payload;
+    },
+    changeShowWrittenTutorialContent(state, action: PayloadAction<boolean>) {
+      state.showWrittenTutorialContent = action.payload;
     },
     updateTemplateRecipe(state, action: PayloadAction<ObjectKeyValueType>) {
       state.templateRecipe = {
@@ -116,7 +126,17 @@ export const selectLoadingCreateRecipe = (state: State) =>
 export const selectRecipeFormModalErrorMessage = (state: State) =>
   state.recipes.recipeFormModalErrorMessage;
 
-export const { updateTemplateRecipe, updateLoadingCreateRecipe } =
-  recipesSlice.actions;
+export const selectShowVideoTutorialContent = (state: State) =>
+  state.recipes.showVideoTutorialContent;
+
+export const selectShowWrittenTutorialContent = (state: State) =>
+  state.recipes.showWrittenTutorialContent;
+
+export const {
+  updateTemplateRecipe,
+  updateLoadingCreateRecipe,
+  changeShowVideoTutorialContent,
+  changeShowWrittenTutorialContent,
+} = recipesSlice.actions;
 
 export default recipesSlice.reducer;

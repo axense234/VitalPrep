@@ -127,7 +127,7 @@ const CreateUtensilInterface = () => {
           labelFontSize={28}
         />
         <PrimaryButton
-          backgroundColor="#FFAE00"
+          backgroundColor="#FF6000"
           textColor="#120A06"
           content="Create Utensil"
           type="functional"

@@ -11,6 +11,8 @@ const errorHandlerMiddleware: ErrorRequestHandler = (err, req, res, next) => {
     code: (typeof err.code === "string" ? 500 : err.code || err.status) || 500,
   };
 
+  console.log(err);
+
   if (err.code === "P2002") {
     customError.message = "Please provide an unique email!";
     customError.code = StatusCodes.BAD_REQUEST;

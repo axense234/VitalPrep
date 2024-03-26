@@ -66,10 +66,27 @@
   @include flexCenter(column);
   width: 100%;
   gap: 32px;
-  padding: 0px 480px;
-  border: 1px solid black;
+  padding: 0px 400px;
 
   button {
     margin-top: 64px;
   }
+}
+
+.createInterfaceRecipeTutorial {
+  @include flexCenter(column);
+  width: 100%;
+  align-items: flex-start;
+  gap: 16px;
+
+  h3 {
+    font-size: 28px;
+  }
+}
+
+.createInterfaceRecipeTutorialCheckboxes {
+  @include flexCenter(column);
+  width: 100%;
+  padding-left: 64px;
+  gap: 32px;
 }

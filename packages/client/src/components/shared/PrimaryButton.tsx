@@ -38,7 +38,7 @@ const PrimaryButton: FC<PrimaryButtonProps> = ({
             fontSize,
             width,
             color: textColor,
-            fontWeight: 600,
+            fontWeight: 800,
           }}
           disabled={disabled}
         >
@@ -63,7 +63,7 @@ const PrimaryButton: FC<PrimaryButtonProps> = ({
           filter: disabled ? "brightness(0.5)" : "brightness(1)",
           cursor: disabled ? "initial" : "pointer",
           color: textColor,
-          fontWeight: 600,
+          fontWeight: 800,
         }}
         disabled={disabled}
         onClick={onClickFunction}

@@ -1,13 +1,3 @@
-import {
-  DayTemplate,
-  Ingredient,
-  InstanceTemplate,
-  MealPrepPlan,
-  Recipe,
-  Utensil,
-} from "@prisma/client";
-import { MouseEventHandler } from "react";
-
 export default interface SelectFormControlProps {
   labelColor: "#DDD9D5" | "#120A06";
   labelContent: string;
@@ -24,6 +14,7 @@ export default interface SelectFormControlProps {
     | "mealPrepPlan";
   required: boolean;
 
-  entityProperty: string[];
-  onEntityPropertyValueChange: MouseEventHandler<HTMLLIElement> | undefined;
+  entityPropertyOptions: string[];
+  entityPropertyChosenOptions: string[];
+  onEntityPropertyValueChange: (specifier: any) => void;
 }

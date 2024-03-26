@@ -121,6 +121,13 @@ export const defaultTemplateIngredient: IngredientTemplate = {
   carbs: 20,
   proteins: 20,
   fats: 2,
+  macros: {
+    id: "blah",
+    calories: 200,
+    carbsAmount: 20,
+    proteinAmount: 20,
+    fatsAmount: 2,
+  },
 };
 
 export const defaultTemplateUtensil: UtensilTemplate = {

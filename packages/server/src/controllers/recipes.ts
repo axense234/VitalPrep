@@ -3,8 +3,8 @@ import { Response, Request } from "express";
 // Status Codes
 import { StatusCodes } from "http-status-codes";
 // Prisma
-import { RecipeClient } from "../db/postgres";
-import { Ingredient, Recipe, Utensil } from "@prisma/client";
+import { IngredientClient, RecipeClient, UtensilClient } from "../db/postgres";
+import { Ingredient, Macros, Recipe, Utensil } from "@prisma/client";
 // Utils
 import { deleteCache, getOrSetCache, setCache } from "../utils/redis";
 
@@ -76,8 +76,13 @@ const getRecipeById = async (req: Request, res: Response) => {
   });
 };
 
+type IngredientTemplate = Ingredient & {
+  macros: Macros;
+};
+
 const createRecipe = async (req: Request, res: Response) => {
   const recipeBody = req.body;
+  console.log(recipeBody);
 
   if (!recipeBody) {
     return res
@@ -96,21 +101,50 @@ const createRecipe = async (req: Request, res: Response) => {
     recipeBody.utensils = [];
   }
 
-  const ingredients = recipeBody.ingredients as Ingredient[];
-  const utensils = recipeBody.utensils as Utensil[];
+  const ingredientsIds = recipeBody.ingredients as string[];
+  const utensilsIds = recipeBody.utensils as string[];
+
+  const foundIngredients = (await IngredientClient.findMany({
+    where: { id: { in: ingredientsIds } },
+    include: { macros: true },
+  })) as IngredientTemplate[];
+
+  if (foundIngredients.length < 1) {
+    return res.status(StatusCodes.BAD_REQUEST).json({
+      message: "Could not find the ingredients with the given ids!",
+      ingredients: [],
+    });
+  }
+
+  let recipeMacros = {
+    calories: 0,
+    carbsAmount: 0,
+    fatsAmount: 0,
+    proteinAmount: 0,
+  };
+
+  foundIngredients.forEach((ingredient) => {
+    recipeMacros.calories += ingredient.macros.calories;
+    recipeMacros.proteinAmount += ingredient.macros.proteinAmount;
+    recipeMacros.carbsAmount += ingredient.macros.carbsAmount;
+    recipeMacros.fatsAmount += ingredient.macros.fatsAmount;
+  });
 
   const createdRecipe = await RecipeClient.create({
     data: {
       ...recipeBody,
       ingredients: {
-        connect: ingredients.map((ingredient) => ({
-          id: ingredient.id,
+        connect: ingredientsIds.map((ingredientId) => ({
+          id: ingredientId,
         })),
       },
       utensils: {
-        connect: utensils.map((utensil) => ({
-          id: utensil.id,
+        connect: utensilsIds.map((utensilId) => ({
+          id: utensilId,
         })),
+      },
+      macros: {
+        create: recipeMacros,
       },
     },
     include: {
