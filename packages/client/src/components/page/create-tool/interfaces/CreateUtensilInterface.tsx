@@ -10,6 +10,7 @@ import PopupModal from "@/components/shared/modals/PopupModal";
 import { defaultUtensilImageUrl } from "@/data";
 // Redux
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
+import { selectLoadingCreateUtensil } from "@/redux/slices/utensilsSlice";
 import {
   createUtensil,
   selectTemplateUtensil,
@@ -28,7 +29,6 @@ import {
 } from "@/redux/slices/generalSlice";
 // React
 import { useEffect } from "react";
-import { selectLoadingCreateUtensil } from "@/redux/slices/utensilsSlice";
 
 const CreateUtensilInterface = () => {
   const dispatch = useAppDispatch();

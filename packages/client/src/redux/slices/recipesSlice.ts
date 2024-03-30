@@ -47,26 +47,43 @@ const initialState = recipesAdapter.getInitialState({
 
 type CreateRecipeBody = {
   templateRecipe: RecipeTemplate;
+  showVideoTutorialContent: boolean;
+  showWrittenTutorialContent: boolean;
   userId: string;
 };
 
 export const createRecipe = createAsyncThunk<
   Recipe | AxiosError,
   CreateRecipeBody
->("recipes/createRecipe", async ({ templateRecipe, userId }) => {
-  try {
-    console.log(templateRecipe);
-    const { data } = await axiosInstance.post(
-      "/recipes/create",
-      templateRecipe,
-      { params: { userId: userId } }
-    );
-    return data.recipe as Recipe;
-  } catch (error) {
-    console.log(error);
-    return error as AxiosError;
+>(
+  "recipes/createRecipe",
+  async ({
+    templateRecipe,
+    userId,
+    showWrittenTutorialContent,
+    showVideoTutorialContent,
+  }) => {
+    try {
+      if (!showWrittenTutorialContent) {
+        templateRecipe.writtenTutorial = "";
+      }
+
+      if (!showVideoTutorialContent) {
+        templateRecipe.videoTutorial = "";
+      }
+
+      const { data } = await axiosInstance.post(
+        "/recipes/create",
+        templateRecipe,
+        { params: { userId: userId } }
+      );
+      return data.recipe as Recipe;
+    } catch (error) {
+      console.log(error);
+      return error as AxiosError;
+    }
   }
-});
+);
 
 const recipesSlice = createSlice({
   name: "recipes",

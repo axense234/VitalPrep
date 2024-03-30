@@ -101,6 +101,14 @@ const createRecipe = async (req: Request, res: Response) => {
     recipeBody.utensils = [];
   }
 
+  const recipeTutorial = {
+    writtenTutorial: recipeBody.writtenTutorial || "",
+    videoTutorial: recipeBody.videoTutorial || "",
+  };
+
+  delete recipeBody.writtenTutorial;
+  delete recipeBody.videoTutorial;
+
   const ingredientsIds = recipeBody.ingredients as string[];
   const utensilsIds = recipeBody.utensils as string[];
 
@@ -145,6 +153,9 @@ const createRecipe = async (req: Request, res: Response) => {
       },
       macros: {
         create: recipeMacros,
+      },
+      recipeTutorial: {
+        create: recipeTutorial,
       },
     },
     include: {

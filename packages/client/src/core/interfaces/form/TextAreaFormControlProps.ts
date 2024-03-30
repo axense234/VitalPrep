@@ -1,6 +1,6 @@
 import { ChangeEventHandler } from "react";
 
-export default interface TextFormControlProps {
+export default interface TextAreaFormControlProps {
   labelColor: "#DDD9D5" | "#120A06";
   labelContent: string;
   labelFontSize?: number;
@@ -10,9 +10,7 @@ export default interface TextFormControlProps {
   inputHeight?: number;
 
   direction: "row" | "column";
-  type: "email" | "text" | "password" | "number" | "url";
-  required: boolean;
 
   entityProperty: string | number | undefined;
-  onEntityPropertyValueChange: ChangeEventHandler<HTMLInputElement>;
+  onEntityPropertyValueChange: ChangeEventHandler<HTMLTextAreaElement>;
 }

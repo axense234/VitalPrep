@@ -1,17 +1,15 @@
-// Types
-import TextFormControlProps from "@/core/interfaces/form/TextFormControlProps";
 // React
 import { FC } from "react";
 // SCSS
 import formControlsStyles from "../../../scss/components/others/FormControls.module.scss";
+// Types
+import TextAreaFormControlProps from "@/core/interfaces/form/TextAreaFormControlProps";
 
-const TextFormControl: FC<TextFormControlProps> = ({
+const TextAreaFormControl: FC<TextAreaFormControlProps> = ({
   direction,
+  entityProperty,
   labelColor,
   labelContent,
-  type,
-  required,
-  entityProperty,
   onEntityPropertyValueChange,
   inputHeight,
   labelFontSize,
@@ -19,7 +17,7 @@ const TextFormControl: FC<TextFormControlProps> = ({
 }) => {
   return (
     <div
-      className={formControlsStyles.textFormControlContainer}
+      className={formControlsStyles.textAreaFormControlContainer}
       style={{
         flexDirection: direction,
         justifyContent: direction === "row" ? "space-between" : "center",
@@ -31,21 +29,18 @@ const TextFormControl: FC<TextFormControlProps> = ({
       >
         {labelContent}
       </label>
-      <input
-        type={type}
+      <textarea
         name={labelContent}
         minLength={3}
         maxLength={maxInputLength || 40}
         style={{
-          width: type === "number" ? "50%" : "100%",
           height: inputHeight || 24,
         }}
         value={entityProperty}
         onChange={onEntityPropertyValueChange}
-        required={required}
       />
     </div>
   );
 };
 
-export default TextFormControl;
+export default TextAreaFormControl;

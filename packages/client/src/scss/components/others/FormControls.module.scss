@@ -154,3 +154,45 @@
     width: 100%;
   }
 }
+
+.videoFormControlContainer {
+  @include flexCenter(column);
+  align-items: flex-start;
+  width: 100%;
+  gap: 8px;
+
+  iframe {
+    width: 50%;
+    height: 15rem;
+  }
+}
+
+.textAreaFormControlContainer {
+  @include flexCenter(column);
+  align-items: flex-start;
+  width: 100%;
+  gap: 8px;
+
+  label {
+    font-weight: bolder;
+    font-size: 22px;
+  }
+
+  textarea {
+    background-color: getColor("tan-color");
+    border: 1.5px solid getColor("black-100-1");
+    width: 100%;
+    max-width: 40rem;
+    max-height: 48rem;
+    height: 24px;
+    font-size: 1rem;
+    padding: 0.5rem;
+    font-weight: 550;
+    word-wrap: break-word;
+    transition: background-color 0.135s linear;
+
+    &:hover {
+      background-color: getColor("tan-color-dark");
+    }
+  }
+}

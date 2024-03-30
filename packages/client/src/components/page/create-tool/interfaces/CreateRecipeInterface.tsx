@@ -6,6 +6,7 @@ import PrimaryButton from "@/components/shared/PrimaryButton";
 import ImageFormControl from "@/components/shared/form/ImageFormControl";
 import PopupModal from "@/components/shared/modals/PopupModal";
 import SelectFormControl from "@/components/shared/form/SelectFormControl";
+import CheckboxFormControl from "@/components/shared/form/CheckboxFormControl";
 // Data
 import { defaultUtensilImageUrl } from "@/data";
 // React
@@ -13,11 +14,9 @@ import { useEffect, useRef } from "react";
 // Redux
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import {
-  createUtensil,
   getAllUserUtensils,
   selectAllUtensilsIds,
   selectLoadingGetUserUtensils,
-  updateTemplateUtensil,
 } from "@/redux/slices/utensilsSlice";
 import {
   changeShowFormModal,
@@ -47,7 +46,8 @@ import {
   selectAllIngredientsIds,
   selectLoadingGetUserIngredients,
 } from "@/redux/slices/ingredientsSlice";
-import CheckboxFormControl from "@/components/shared/form/CheckboxFormControl";
+import VideoFormControl from "@/components/shared/form/VideoFormControl";
+import TextAreaFormControl from "@/components/shared/form/TextAreaFormControl";
 
 const CreateRecipeInterface = () => {
   const dispatch = useAppDispatch();
@@ -233,11 +233,39 @@ const CreateRecipeInterface = () => {
               entityProperty={String(showVideoTutorialContent)}
               onEntityPropertyValueChange={(e) =>
                 dispatch(
-                  changeShowVideoTutorialContent(!showVideoTutorialContent)
+                  changeShowVideoTutorialContent(
+                    !Boolean(showVideoTutorialContent)
+                  )
                 )
               }
               labelFontSize={26}
             />
+            {showVideoTutorialContent && (
+              <VideoFormControl
+                direction="row"
+                labelColor="#120A06"
+                labelContent="Recipe Tutorial URL:"
+                inputHeight={36}
+                labelFontSize={26}
+                entityProperty={templateRecipe.videoTutorial}
+                onEntityPropertyValueChange={(e) =>
+                  dispatch(
+                    updateTemplateRecipe({
+                      key: "videoTutorial",
+                      value: e.target.value,
+                    })
+                  )
+                }
+                onEntityPropertyValueUpdate={(urlInput) =>
+                  dispatch(
+                    updateTemplateRecipe({
+                      key: "videoTutorial",
+                      value: urlInput,
+                    })
+                  )
+                }
+              />
+            )}
             <CheckboxFormControl
               direction="row"
               labelColor="#120A06"
@@ -245,11 +273,32 @@ const CreateRecipeInterface = () => {
               entityProperty={String(showWrittenTutorialContent)}
               onEntityPropertyValueChange={() =>
                 dispatch(
-                  changeShowWrittenTutorialContent(!showWrittenTutorialContent)
+                  changeShowWrittenTutorialContent(
+                    !Boolean(showWrittenTutorialContent)
+                  )
                 )
               }
               labelFontSize={26}
             />
+            {showWrittenTutorialContent && (
+              <TextAreaFormControl
+                direction="column"
+                entityProperty={templateRecipe.writtenTutorial}
+                labelColor="#120A06"
+                labelContent="Written Tutorial:"
+                onEntityPropertyValueChange={(e) =>
+                  dispatch(
+                    updateTemplateRecipe({
+                      key: "writtenTutorial",
+                      value: e.target.value,
+                    })
+                  )
+                }
+                inputHeight={36}
+                labelFontSize={26}
+                maxInputLength={1000}
+              />
+            )}
           </div>
         </div>
         <PrimaryButton
@@ -271,6 +320,8 @@ const CreateRecipeInterface = () => {
               createRecipe({
                 templateRecipe: templateRecipe,
                 userId: profile.id,
+                showVideoTutorialContent: showVideoTutorialContent,
+                showWrittenTutorialContent: showVideoTutorialContent,
               })
             );
           }}
