@@ -31,6 +31,8 @@ type InitialStateType = {
   recipeFormModalErrorMessage: string;
   showVideoTutorialContent: boolean;
   showWrittenTutorialContent: boolean;
+
+  loadingGetUserRecipes: LoadingStateType;
 };
 
 export const recipesAdapter = createEntityAdapter<Recipe>({
@@ -43,6 +45,7 @@ const initialState = recipesAdapter.getInitialState({
   recipeFormModalErrorMessage: "Default Message",
   showVideoTutorialContent: false,
   showWrittenTutorialContent: false,
+  loadingGetUserRecipes: "IDLE",
 }) as EntityState<Recipe, string> & InitialStateType;
 
 type CreateRecipeBody = {
@@ -65,11 +68,11 @@ export const createRecipe = createAsyncThunk<
   }) => {
     try {
       if (!showWrittenTutorialContent) {
-        templateRecipe.writtenTutorial = "";
+        templateRecipe = { ...templateRecipe, writtenTutorial: "" };
       }
 
       if (!showVideoTutorialContent) {
-        templateRecipe.videoTutorial = "";
+        templateRecipe = { ...templateRecipe, videoTutorial: "" };
       }
 
       const { data } = await axiosInstance.post(
@@ -84,6 +87,21 @@ export const createRecipe = createAsyncThunk<
     }
   }
 );
+
+export const getAllUserRecipes = createAsyncThunk<
+  Recipe[] | AxiosError,
+  string
+>("recipes/getAllUserRecipes", async (userId) => {
+  try {
+    const { data } = await axiosInstance.get(
+      `/recipes?userId=${userId}&userRecipes=true`
+    );
+    return data.recipes as Recipe[];
+  } catch (error) {
+    console.log(error);
+    return error as AxiosError;
+  }
+});
 
 const recipesSlice = createSlice({
   name: "recipes",
@@ -107,6 +125,19 @@ const recipesSlice = createSlice({
   },
   extraReducers(builder) {
     builder
+      .addCase(getAllUserRecipes.pending, (state, action) => {
+        state.loadingGetUserRecipes = "PENDING";
+      })
+      .addCase(getAllUserRecipes.fulfilled, (state, action) => {
+        const recipes = action.payload as Recipe[];
+
+        if (recipes.length >= 1) {
+          state.loadingGetUserRecipes = "SUCCEDED";
+          recipesAdapter.upsertMany(state, recipes);
+        } else {
+          state.loadingGetUserRecipes = "FAILED";
+        }
+      })
       .addCase(createRecipe.pending, (state, action) => {
         state.loadingCreateRecipe = "PENDING";
       })
@@ -131,8 +162,11 @@ const recipesSlice = createSlice({
   },
 });
 
-export const { selectAll: selectAllRecipes, selectById: selectRecipeById } =
-  recipesAdapter.getSelectors<State>((state) => state.recipes);
+export const {
+  selectAll: selectAllRecipes,
+  selectById: selectRecipeById,
+  selectIds: selectAllRecipesIds,
+} = recipesAdapter.getSelectors<State>((state) => state.recipes);
 
 export const selectTemplateRecipe = (state: State) =>
   state.recipes.templateRecipe;
@@ -148,6 +182,9 @@ export const selectShowVideoTutorialContent = (state: State) =>
 
 export const selectShowWrittenTutorialContent = (state: State) =>
   state.recipes.showWrittenTutorialContent;
+
+export const selectLoadingGetUserRecipes = (state: State) =>
+  state.recipes.loadingGetUserRecipes;
 
 export const {
   updateTemplateRecipe,

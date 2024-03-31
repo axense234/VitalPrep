@@ -1,3 +1,4 @@
+import { ImageOption } from "@/core/types/ImageOption";
 import { ChangeEventHandler } from "react";
 
 export default interface ImageFormControlProps {
@@ -8,7 +9,10 @@ export default interface ImageFormControlProps {
   direction: "row" | "column";
   defaultImageUsedUrl: string;
 
+  imageUrlOptions?: ImageOption[];
+  onEntityPropertyOptionSelected?: (specifier: string) => undefined;
+
   entityPropertyLoadingStatus: "IDLE" | "PENDING" | "SUCCEDED" | "FAILED";
   entityProperty: string;
-  onEntityPropertyValueChange: ChangeEventHandler<HTMLInputElement> | undefined;
+  onEntityPropertyValueChange: ChangeEventHandler<HTMLInputElement>;
 }

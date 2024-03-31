@@ -88,3 +88,26 @@
   padding-left: 64px;
   gap: 32px;
 }
+
+.createInterfaceDayTemplateRecipesContainer {
+  @include flexCenter(column);
+  width: 100%;
+  align-items: flex-start;
+  gap: 16px;
+
+  h3 {
+    font-size: 28px;
+  }
+}
+
+.createInterfaceDayTemplateRecipes {
+  @include flexCenter(column);
+  list-style: none;
+  width: 100%;
+  gap: 16px;
+
+  li {
+    @include flexCenter(row);
+    width: 100%;
+  }
+}

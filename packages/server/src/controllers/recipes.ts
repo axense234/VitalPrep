@@ -8,9 +8,23 @@ import { Ingredient, Macros, Recipe, Utensil } from "@prisma/client";
 // Utils
 import { deleteCache, getOrSetCache, setCache } from "../utils/redis";
 
+type RecipeQueryObject = {
+  userId?: string;
+};
+
 const getAllRecipes = async (req: Request, res: Response) => {
+  const userId = req.query.userId;
+  const getAllUserRecipes = req.query.userRecipes;
+
+  const queryObject: RecipeQueryObject = {};
+
+  if (getAllUserRecipes) {
+    queryObject.userId = userId as string;
+  }
+
   const foundRecipes = await getOrSetCache("recipes", async () => {
     const recipes = await RecipeClient.findMany({
+      where: queryObject,
       include: {
         macros: true,
         utensils: true,
@@ -82,7 +96,11 @@ type IngredientTemplate = Ingredient & {
 
 const createRecipe = async (req: Request, res: Response) => {
   const recipeBody = req.body;
-  console.log(recipeBody);
+  const userId = req.query.userId;
+
+  if (userId) {
+    recipeBody.user = { connect: { id: userId } };
+  }
 
   if (!recipeBody) {
     return res

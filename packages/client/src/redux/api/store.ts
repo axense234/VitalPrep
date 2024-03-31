@@ -5,6 +5,7 @@ import generalSliceReducer from "../slices/generalSlice";
 import ingredientsSliceReducer from "../slices/ingredientsSlice";
 import utensilsSliceReducer from "../slices/utensilsSlice";
 import recipesSliceReducer from "../slices/recipesSlice";
+import dayTemplatesSliceReducer from "../slices/dayTemplatesSlice";
 
 const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ const store = configureStore({
     ingredients: ingredientsSliceReducer,
     utensils: utensilsSliceReducer,
     recipes: recipesSliceReducer,
+    dayTemplates: dayTemplatesSliceReducer,
   },
 });
 

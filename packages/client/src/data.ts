@@ -18,10 +18,57 @@ import CreateToolOption from "./core/types/CreateToolOption";
 import IngredientTemplate from "./core/types/entity/mutation/IngredientTemplate";
 import UtensilTemplate from "./core/types/entity/mutation/UtensilTemplate";
 import RecipeTemplate from "./core/types/entity/mutation/RecipeTemplate";
+import { ImageOption } from "./core/types/ImageOption";
+import DayTemplateTemplate from "./core/types/entity/mutation/DayTemplateTemplate";
 
 export const homePageUrl = "/home";
 export const sitePhoneNumber = "0754189293(fake)";
 export const siteEmail = "thisemaildoesnotexit@nothing.com";
+
+export const defaultCreateDayTemplateImageUrls: ImageOption[] = [
+  {
+    id: 1,
+    imageUrl:
+      "https://res.cloudinary.com/birthdayreminder/image/upload/v1711876222/VitalPrep/Default_Day_Instance_Image_Mon_hakwsj.jpg",
+    titleContent: "Monday",
+  },
+  {
+    id: 2,
+    imageUrl:
+      "https://res.cloudinary.com/birthdayreminder/image/upload/v1711876238/VitalPrep/Default_Day_Instance_Imagejpeg_fvlcgq.jpg",
+    titleContent: "Tuesday",
+  },
+  {
+    id: 3,
+    imageUrl:
+      "https://res.cloudinary.com/birthdayreminder/image/upload/v1711876239/VitalPrep/Default_Day_Instance_Imagejpeg-1_tgx26h.jpg",
+    titleContent: "Wednesday",
+  },
+  {
+    id: 4,
+    imageUrl:
+      "https://res.cloudinary.com/birthdayreminder/image/upload/v1711876240/VitalPrep/Default_Day_Instance_Imagejpeg-2_gz1vqx.jpg",
+    titleContent: "Thursday",
+  },
+  {
+    id: 5,
+    imageUrl:
+      "https://res.cloudinary.com/birthdayreminder/image/upload/v1711876240/VitalPrep/Default_Day_Instance_Imagejpeg-3_tswqd1.jpg",
+    titleContent: "Friday",
+  },
+  {
+    id: 6,
+    imageUrl:
+      "https://res.cloudinary.com/birthdayreminder/image/upload/v1711876241/VitalPrep/Default_Day_Instance_Imagejpeg-4_ij5ffv.jpg",
+    titleContent: "Saturday",
+  },
+  {
+    id: 7,
+    imageUrl:
+      "https://res.cloudinary.com/birthdayreminder/image/upload/v1711876242/VitalPrep/Default_Day_Instance_Imagejpeg-5_ikzec9.jpg",
+    titleContent: "Sunday",
+  },
+];
 
 export const defaultProfileImageUrl =
   "https://res.cloudinary.com/birthdayreminder/image/upload/v1708852560/VitalPrep/defaultprofileimage_tzrh3w.jpg";
@@ -34,6 +81,9 @@ export const defaultUtensilImageUrl =
 
 export const defaultRecipeImageUrl =
   "https://res.cloudinary.com/birthdayreminder/image/upload/v1708848563/VitalPrep/depositphotos_86878174-stock-illustration-simple-doodle-of-a-bowl_skeven.webp";
+
+export const defaultDayTemplateImageUrl =
+  "https://res.cloudinary.com/birthdayreminder/image/upload/v1708849436/VitalPrep/Default_Day_Instance_Image_xs53xh.jpg";
 
 export const createToolOptions: CreateToolOption[] = [
   {
@@ -143,6 +193,12 @@ export const defaultTemplateRecipe: RecipeTemplate = {
   utensils: [],
   writtenTutorial: "",
   videoTutorial: "",
+};
+
+export const defaultTemplateDayTemplate: DayTemplateTemplate = {
+  name: "Chicken Tuesday",
+  recipes: [],
+  imageUrl: defaultDayTemplateImageUrl,
 };
 
 export const OAuthOptionsContent: OAuthOptionContent[] = [

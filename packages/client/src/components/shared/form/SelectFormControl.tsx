@@ -16,6 +16,7 @@ import { useAppSelector } from "@/hooks/redux";
 import { State } from "@/redux/api/store";
 import { selectIngredientById } from "@/redux/slices/ingredientsSlice";
 import { selectUtensilById } from "@/redux/slices/utensilsSlice";
+import { selectRecipeById } from "@/redux/slices/recipesSlice";
 
 const SelectFormControl: FC<SelectFormControlProps> = ({
   labelColor,
@@ -39,6 +40,8 @@ const SelectFormControl: FC<SelectFormControlProps> = ({
         );
       case "utensil":
         return useAppSelector((state: State) => selectUtensilById(state, id));
+      case "recipe":
+        return useAppSelector((state: State) => selectRecipeById(state, id));
       default:
         break;
     }
@@ -57,7 +60,9 @@ const SelectFormControl: FC<SelectFormControlProps> = ({
     case "utensil":
       selectFormControlBackgroundColor = "#FF6000";
       break;
-
+    case "recipe":
+      selectFormControlBackgroundColor = "#8B0000";
+      break;
     default:
       throw new Error("Invalid entity typed used on the select form control!");
   }

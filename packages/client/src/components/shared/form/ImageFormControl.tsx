@@ -1,5 +1,5 @@
 // React
-import { FC } from "react";
+import { ChangeEventHandler, FC } from "react";
 // SCSS
 import formControlsStyles from "../../../scss/components/others/FormControls.module.scss";
 // Types
@@ -9,7 +9,7 @@ import Image from "next/image";
 // React Icons
 import { FaPlus } from "react-icons/fa";
 // React Spinners
-import { ClockLoader, MoonLoader } from "react-spinners";
+import { ClockLoader } from "react-spinners";
 
 const ImageFormControl: FC<ImageFormControlProps> = ({
   defaultImageUsedUrl,
@@ -19,7 +19,9 @@ const ImageFormControl: FC<ImageFormControlProps> = ({
   entityPropertyLoadingStatus,
   entityProperty,
   onEntityPropertyValueChange,
+  onEntityPropertyOptionSelected,
   labelFontSize,
+  imageUrlOptions,
 }) => {
   return (
     <div
@@ -32,6 +34,33 @@ const ImageFormControl: FC<ImageFormControlProps> = ({
       <label htmlFor={labelContent} style={{ color: labelColor }}>
         <span style={{ fontSize: labelFontSize || 22 }}>{labelContent}</span>
       </label>
+      {imageUrlOptions && imageUrlOptions.length > 0 && (
+        <ul className={formControlsStyles.imageUrlOptionsContainer}>
+          {imageUrlOptions?.map((imageUrlOption) => {
+            return (
+              <li
+                key={imageUrlOption.id}
+                onClick={() => {
+                  const onEntityPropertyOptionSelectedTyped =
+                    onEntityPropertyOptionSelected as (
+                      specifier: string
+                    ) => undefined;
+                  onEntityPropertyOptionSelectedTyped(imageUrlOption.imageUrl);
+                }}
+              >
+                <Image
+                  src={imageUrlOption.imageUrl}
+                  alt={imageUrlOption.titleContent}
+                  title={imageUrlOption.titleContent}
+                  aria-label={imageUrlOption.titleContent}
+                  width={100}
+                  height={100}
+                />
+              </li>
+            );
+          })}
+        </ul>
+      )}
       <div className={formControlsStyles.imageInputContainer} tabIndex={0}>
         {entityPropertyLoadingStatus !== "PENDING" && (
           <div className={formControlsStyles.imageInputOverlay}>

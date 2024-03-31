@@ -183,7 +183,7 @@ const CreateRecipeInterface = () => {
             if (e.target.files) {
               dispatch(
                 createCloudinaryImage({
-                  entity: "utensils",
+                  entity: "recipes",
                   imageFile: e.target.files[0],
                 })
               );

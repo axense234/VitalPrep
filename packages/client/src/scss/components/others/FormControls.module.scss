@@ -33,7 +33,7 @@
   @include flexCenter(column);
   align-items: flex-start;
   width: 100%;
-  gap: 8px;
+  gap: 1rem;
 
   label {
     @include flexCenter(row);
@@ -193,6 +193,30 @@
 
     &:hover {
       background-color: getColor("tan-color-dark");
+    }
+  }
+}
+
+.imageUrlOptionsContainer {
+  @include flexCenter(row);
+  list-style: none;
+  justify-content: flex-start;
+  width: 100%;
+  gap: 2rem;
+
+  li {
+    @include flexCenter(row);
+    position: relative;
+    img {
+      transition: $crispyTransformTransition;
+      width: 100%;
+      height: 100%;
+      max-width: 100px;
+      max-height: 100px;
+
+      &:hover {
+        transform: scale(1.2);
+      }
     }
   }
 }
