@@ -17,4 +17,5 @@ export default interface SelectFormControlProps {
   entityPropertyOptions: string[];
   entityPropertyChosenOptions: string[];
   onEntityPropertyValueChange: (specifier: any) => void;
+  showEntityExtraCondition?: (specifier: any) => boolean;
 }

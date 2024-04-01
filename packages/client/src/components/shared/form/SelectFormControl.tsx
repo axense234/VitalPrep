@@ -27,6 +27,7 @@ const SelectFormControl: FC<SelectFormControlProps> = ({
   labelFontSize,
   entityTypeUsed,
   areOptionsLoading,
+  showEntityExtraCondition,
 }) => {
   let componentUsedAsOption: FunctionComponent<EntityComponentProps> =
     EntityComponent;
@@ -48,6 +49,13 @@ const SelectFormControl: FC<SelectFormControlProps> = ({
   };
 
   const seeIfComponentHasBeenClicked = (id: string) => {
+    if (showEntityExtraCondition) {
+      return (
+        Boolean(
+          entityPropertyChosenOptions.find((idToSearch) => idToSearch === id)
+        ) && showEntityExtraCondition(id)
+      );
+    }
     return Boolean(
       entityPropertyChosenOptions.find((idToSearch) => idToSearch === id)
     );

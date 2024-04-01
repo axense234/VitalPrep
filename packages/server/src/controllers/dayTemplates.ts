@@ -3,14 +3,28 @@ import { Response, Request } from "express";
 // Status Codes
 import { StatusCodes } from "http-status-codes";
 // Prisma
-import { DayTemplateClient } from "../db/postgres";
+import { DayTemplateClient, RecipeClient } from "../db/postgres";
 import { DayTemplate, Recipe } from "@prisma/client";
 // Utils
 import { deleteCache, getOrSetCache, setCache } from "../utils/redis";
 
+type DayTemplateQueryObject = {
+  userId?: string;
+};
+
 const getAllDayTemplates = async (req: Request, res: Response) => {
+  const userId = req.query.userId;
+  const getAllUserDayTemplates = req.query.userDayTemplates;
+
+  const queryObject: DayTemplateQueryObject = {};
+
+  if (getAllUserDayTemplates) {
+    queryObject.userId = userId as string;
+  }
+
   const foundDayTemplates = await getOrSetCache("dayTemplates", async () => {
     const dayTemplates = await DayTemplateClient.findMany({
+      where: queryObject,
       include: {
         macros: true,
         recipes: true,
@@ -74,6 +88,11 @@ const getDayTemplateById = async (req: Request, res: Response) => {
 
 const createDayTemplate = async (req: Request, res: Response) => {
   const dayTemplateBody = req.body;
+  const userId = req.query.userId;
+
+  if (userId) {
+    dayTemplateBody.user = { connect: { id: userId } };
+  }
 
   if (!dayTemplateBody) {
     return res
@@ -88,15 +107,44 @@ const createDayTemplate = async (req: Request, res: Response) => {
     });
   }
 
-  const recipes = dayTemplateBody.recipes as Recipe[];
+  const recipesIds = dayTemplateBody.recipes as string[];
+
+  const foundRecipes = await RecipeClient.findMany({
+    where: { id: { in: recipesIds } },
+    include: { macros: true },
+  });
+
+  if (foundRecipes.length < 1) {
+    return res.status(StatusCodes.BAD_REQUEST).json({
+      message: "Could not find the recipes with the given ids!",
+      recipes: [],
+    });
+  }
+
+  let dayTemplateMacros = {
+    calories: 0,
+    carbsAmount: 0,
+    fatsAmount: 0,
+    proteinAmount: 0,
+  };
+
+  foundRecipes.forEach((recipe) => {
+    dayTemplateMacros.calories += recipe.macros.calories;
+    dayTemplateMacros.proteinAmount += recipe.macros.proteinAmount;
+    dayTemplateMacros.carbsAmount += recipe.macros.carbsAmount;
+    dayTemplateMacros.fatsAmount += recipe.macros.fatsAmount;
+  });
 
   const createdDayTemplate = await DayTemplateClient.create({
     data: {
       ...dayTemplateBody,
       recipes: {
-        connect: recipes.map((recipe) => ({
-          id: recipe.id,
+        connect: recipesIds.map((recipe) => ({
+          id: recipe,
         })),
+      },
+      macros: {
+        create: dayTemplateMacros,
       },
     },
     include: {

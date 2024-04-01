@@ -41,6 +41,7 @@ const initialState = dayTemplatesAdapter.getInitialState({
   loadingCreateDayTemplate: "IDLE",
   dayTemplateFormModalErrorMessage: "Default Message",
   numberOfMeals: 0,
+  mealsInOrder: [],
 }) as EntityState<DayTemplate, string> & InitialStateType;
 
 type CreateDayTemplateBody = {

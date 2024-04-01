@@ -44,9 +44,13 @@ import {
 const CreateDayTemplateInterface = () => {
   const dispatch = useAppDispatch();
   const hasEffectRun = useRef(false);
-  const templateDayTemplate = useAppSelector(selectTemplateDayTemplate);
   const profile = useAppSelector(selectProfile);
+  const dayTemplateFormModalErrorMessage = useAppSelector(
+    selectDayTemplateFormModalErrorMessage
+  );
+  const templateImageUrl = useAppSelector(selectTemplateImageUrl);
 
+  const templateDayTemplate = useAppSelector(selectTemplateDayTemplate);
   const recipesIds = useAppSelector(selectAllRecipesIds);
 
   const numberOfMeals = useAppSelector(selectNumberOfMeals);
@@ -60,37 +64,41 @@ const CreateDayTemplateInterface = () => {
   const loadingCreateDayTemplate = useAppSelector(
     selectLoadingCreateDayTemplate
   );
-  const dayTemplateFormModalErrorMessage = useAppSelector(
-    selectDayTemplateFormModalErrorMessage
-  );
-
   const loadingCloudinaryImage = useAppSelector(selectLoadingCloudinaryImage);
-  const templateImageUrl = useAppSelector(selectTemplateImageUrl);
-
   const loadingProfile = useAppSelector(selectLoadingGetProfile);
   const loadingGetUserRecipes = useAppSelector(selectLoadingGetUserRecipes);
 
   const handleUpdateArrayEntities = (
     entityIds: string[] = [],
     entityId: string,
+    entityIndex: number,
     entityType: "ingredients" | "utensils" | "recipes"
   ) => {
-    if (entityIds?.find((id) => id === entityId)) {
+    if (
+      entityIds?.find((id) => id === entityId) &&
+      templateDayTemplate.recipes[entityIndex] === entityId
+    ) {
+      const newEntityIds = [...entityIds];
+      newEntityIds[entityIndex] = "";
       dispatch(
         updateTemplateDayTemplate({
           key: entityType,
-          value: entityIds.filter((id) => id !== entityId),
+          value: newEntityIds,
         })
       );
     } else {
+      const newEntityIds = [...entityIds];
+      newEntityIds[entityIndex] = entityId;
       dispatch(
         updateTemplateDayTemplate({
           key: entityType,
-          value: [entityId],
+          value: newEntityIds,
         })
       );
     }
   };
+
+  console.log(templateDayTemplate.recipes);
 
   useEffect(() => {
     if (
@@ -216,11 +224,17 @@ const CreateDayTemplateInterface = () => {
                         handleUpdateArrayEntities(
                           templateDayTemplate.recipes,
                           id,
+                          mealOption.id - 1,
                           "recipes"
                         )
                       }
                       labelFontSize={28}
                       areOptionsLoading={loadingGetUserRecipes === "PENDING"}
+                      showEntityExtraCondition={(id) => {
+                        return (
+                          templateDayTemplate.recipes[mealOption.id - 1] === id
+                        );
+                      }}
                     />
                   </li>
                 );
