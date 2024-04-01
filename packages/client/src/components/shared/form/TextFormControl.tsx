@@ -34,6 +34,8 @@ const TextFormControl: FC<TextFormControlProps> = ({
       <input
         type={type}
         name={labelContent}
+        min={1}
+        max={100}
         minLength={3}
         maxLength={maxInputLength || 40}
         style={{

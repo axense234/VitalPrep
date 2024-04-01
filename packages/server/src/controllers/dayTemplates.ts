@@ -100,6 +100,12 @@ const createDayTemplate = async (req: Request, res: Response) => {
       .json({ message: "Please enter a request body!", dayTemplate: {} });
   }
 
+  if (!dayTemplateBody.name) {
+    return res
+      .status(StatusCodes.BAD_REQUEST)
+      .json({ message: "Please enter a day template name!", dayTemplate: {} });
+  }
+
   if (!dayTemplateBody.recipes) {
     return res.status(StatusCodes.BAD_REQUEST).json({
       message: "Cannot create day template without any recipes!",
