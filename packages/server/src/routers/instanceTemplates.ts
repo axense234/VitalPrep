@@ -27,19 +27,19 @@ router.get(
 router.post(
   "/instanceTemplates/create",
   authenticationMiddleware,
-  getInstanceTemplateById
+  createInstanceTemplate
 );
 
 router.patch(
   "/instanceTemplates/update/:instanceTemplateId",
   authenticationMiddleware,
-  getInstanceTemplateById
+  updateInstanceTemplate
 );
 
 router.delete(
   "/instanceTemplates/delete/:instanceTemplateId",
   authenticationMiddleware,
-  getInstanceTemplateById
+  deleteInstanceTemplate
 );
 
 export default router;

@@ -71,6 +71,7 @@ model InstanceTemplate {
   id       String @id @default(uuid())
   name     String @default("Instance Template")
   imageUrl String @default("https://res.cloudinary.com/birthdayreminder/image/upload/v1708849818/VitalPrep/vector-set-foam-container_60352-1353_or48cz.jpg")
+  coverage Int    @default(0)
 
   dayTemplates  DayTemplate[]
   mealPrepPlans MealPrepPlan[]

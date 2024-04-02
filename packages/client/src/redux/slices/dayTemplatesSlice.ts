@@ -30,6 +30,8 @@ type InitialStateType = {
   loadingCreateDayTemplate: LoadingStateType;
   dayTemplateFormModalErrorMessage: string;
   numberOfMeals: number;
+
+  loadingGetUserDayTemplates: LoadingStateType;
 };
 
 export const dayTemplatesAdapter = createEntityAdapter<DayTemplate>({
@@ -42,6 +44,7 @@ const initialState = dayTemplatesAdapter.getInitialState({
   dayTemplateFormModalErrorMessage: "Default Message",
   numberOfMeals: 0,
   mealsInOrder: [],
+  loadingGetUserDayTemplates: "IDLE",
 }) as EntityState<DayTemplate, string> & InitialStateType;
 
 type CreateDayTemplateBody = {
@@ -60,6 +63,21 @@ export const createDayTemplate = createAsyncThunk<
       { params: { userId: userId } }
     );
     return data.dayTemplate as DayTemplate;
+  } catch (error) {
+    console.log(error);
+    return error as AxiosError;
+  }
+});
+
+export const getAllUserDayTemplates = createAsyncThunk<
+  DayTemplate[] | AxiosError,
+  string
+>("dayTemplates/getAllUserDayTemplates", async (userId) => {
+  try {
+    const { data } = await axiosInstance.get(
+      `/dayTemplates?userId=${userId}&userDayTemplates=true`
+    );
+    return data.dayTemplates as DayTemplate[];
   } catch (error) {
     console.log(error);
     return error as AxiosError;
@@ -91,6 +109,19 @@ const dayTemplatesSlice = createSlice({
   },
   extraReducers(builder) {
     builder
+      .addCase(getAllUserDayTemplates.pending, (state, action) => {
+        state.loadingGetUserDayTemplates = "PENDING";
+      })
+      .addCase(getAllUserDayTemplates.fulfilled, (state, action) => {
+        const dayTemplates = action.payload as DayTemplate[];
+
+        if (dayTemplates.length >= 1) {
+          state.loadingGetUserDayTemplates = "SUCCEDED";
+          dayTemplatesAdapter.upsertMany(state, dayTemplates);
+        } else {
+          state.loadingGetUserDayTemplates = "FAILED";
+        }
+      })
       .addCase(createDayTemplate.pending, (state, action) => {
         state.loadingCreateDayTemplate = "PENDING";
       })
@@ -118,6 +149,7 @@ const dayTemplatesSlice = createSlice({
 export const {
   selectAll: selectAllDayTemplates,
   selectById: selectDayTemplateById,
+  selectIds: selectAllDayTemplatesIds,
 } = dayTemplatesAdapter.getSelectors<State>((state) => state.dayTemplates);
 
 export const selectTemplateDayTemplate = (state: State) =>
@@ -131,6 +163,9 @@ export const selectDayTemplateFormModalErrorMessage = (state: State) =>
 
 export const selectNumberOfMeals = (state: State) =>
   state.dayTemplates.numberOfMeals;
+
+export const selectLoadingGetUserDayTemplates = (state: State) =>
+  state.dayTemplates.loadingGetUserDayTemplates;
 
 export const {
   updateTemplateDayTemplate,

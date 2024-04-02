@@ -3,16 +3,30 @@ import { Response, Request } from "express";
 // Status Codes
 import { StatusCodes } from "http-status-codes";
 // Prisma
-import { InstanceTemplateClient } from "../db/postgres";
+import { DayTemplateClient, InstanceTemplateClient } from "../db/postgres";
 import { DayTemplate, InstanceTemplate } from "@prisma/client";
 // Utils
 import { deleteCache, getOrSetCache, setCache } from "../utils/redis";
 
+type InstanceTemplateQueryObject = {
+  userId?: string;
+};
+
 const getAllInstanceTemplates = async (req: Request, res: Response) => {
+  const userId = req.query.userId;
+  const getAllUserInstanceTemplates = req.query.userDayTemplates;
+
+  const queryObject: InstanceTemplateQueryObject = {};
+
+  if (getAllUserInstanceTemplates) {
+    queryObject.userId = userId as string;
+  }
+
   const foundInstanceTemplates = await getOrSetCache(
     "instanceTemplates",
     async () => {
       const instanceTemplates = await InstanceTemplateClient.findMany({
+        where: queryObject,
         include: {
           macros: true,
           dayTemplates: true,
@@ -81,11 +95,23 @@ const getInstanceTemplateById = async (req: Request, res: Response) => {
 
 const createInstanceTemplate = async (req: Request, res: Response) => {
   const instanceTemplateBody = req.body;
+  const userId = req.query.userId;
+
+  if (userId) {
+    instanceTemplateBody.user = { connect: { id: userId } };
+  }
 
   if (!instanceTemplateBody) {
     return res
       .status(StatusCodes.BAD_REQUEST)
       .json({ message: "Please enter a request body!", instanceTemplate: {} });
+  }
+
+  if (!instanceTemplateBody.name) {
+    return res.status(StatusCodes.BAD_REQUEST).json({
+      message: "Please enter an instance template name!",
+      instanceTemplate: {},
+    });
   }
 
   if (!instanceTemplateBody.dayTemplates) {
@@ -95,15 +121,44 @@ const createInstanceTemplate = async (req: Request, res: Response) => {
     });
   }
 
-  const dayTemplates = instanceTemplateBody.dayTemplates as DayTemplate[];
+  const dayTemplatesIds = instanceTemplateBody.dayTemplates as string[];
+
+  const foundDayTemplates = await DayTemplateClient.findMany({
+    where: { id: { in: dayTemplatesIds } },
+    include: { macros: true },
+  });
+
+  if (foundDayTemplates.length < 1) {
+    return res.status(StatusCodes.BAD_REQUEST).json({
+      message: "Could not find the day templates with the given ids!",
+      dayTemplates: [],
+    });
+  }
+
+  let instanceTemplateMacros = {
+    calories: 0,
+    carbsAmount: 0,
+    fatsAmount: 0,
+    proteinAmount: 0,
+  };
+
+  foundDayTemplates.forEach((dayTemplate) => {
+    instanceTemplateMacros.calories += dayTemplate.macros.calories;
+    instanceTemplateMacros.proteinAmount += dayTemplate.macros.calories;
+    instanceTemplateMacros.carbsAmount += dayTemplate.macros.carbsAmount;
+    instanceTemplateMacros.fatsAmount += dayTemplate.macros.fatsAmount;
+  });
 
   const createdInstanceTemplate = await InstanceTemplateClient.create({
     data: {
       ...instanceTemplateBody,
       dayTemplates: {
-        connect: dayTemplates.map((dayTemplate) => ({
-          id: dayTemplate.id,
+        connect: dayTemplatesIds.map((dayTemplate) => ({
+          id: dayTemplate,
         })),
+      },
+      macros: {
+        create: instanceTemplateMacros,
       },
     },
     include: {

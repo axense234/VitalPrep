@@ -20,6 +20,7 @@ import UtensilTemplate from "./core/types/entity/mutation/UtensilTemplate";
 import RecipeTemplate from "./core/types/entity/mutation/RecipeTemplate";
 import { ImageOption } from "./core/types/ImageOption";
 import DayTemplateTemplate from "./core/types/entity/mutation/DayTemplateTemplate";
+import InstanceTemplateTemplate from "./core/types/entity/mutation/InstanceTemplateTemplate";
 
 export const homePageUrl = "/home";
 export const sitePhoneNumber = "0754189293(fake)";
@@ -84,6 +85,9 @@ export const defaultRecipeImageUrl =
 
 export const defaultDayTemplateImageUrl =
   "https://res.cloudinary.com/birthdayreminder/image/upload/v1708849436/VitalPrep/Default_Day_Instance_Image_xs53xh.jpg";
+
+export const defaultInstanceTemplateImageUrl =
+  "https://res.cloudinary.com/birthdayreminder/image/upload/v1708849818/VitalPrep/vector-set-foam-container_60352-1353_or48cz.jpg";
 
 export const createToolOptions: CreateToolOption[] = [
   {
@@ -199,6 +203,13 @@ export const defaultTemplateDayTemplate: DayTemplateTemplate = {
   name: "Chicken Tuesday",
   recipes: [],
   imageUrl: defaultDayTemplateImageUrl,
+};
+
+export const defaultTemplateInstanceTemplate: InstanceTemplateTemplate = {
+  name: "Protein Based Instance",
+  dayTemplates: [],
+  imageUrl: defaultInstanceTemplateImageUrl,
+  coverage: 0,
 };
 
 export const OAuthOptionsContent: OAuthOptionContent[] = [
