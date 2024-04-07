@@ -18,6 +18,7 @@ import { selectIngredientById } from "@/redux/slices/ingredientsSlice";
 import { selectUtensilById } from "@/redux/slices/utensilsSlice";
 import { selectRecipeById } from "@/redux/slices/recipesSlice";
 import { selectDayTemplateById } from "@/redux/slices/dayTemplatesSlice";
+import { selectInstanceTemplateById } from "@/redux/slices/instanceTemplatesSlice";
 
 const SelectFormControl: FC<SelectFormControlProps> = ({
   labelColor,
@@ -47,6 +48,10 @@ const SelectFormControl: FC<SelectFormControlProps> = ({
       case "dayTemplate":
         return useAppSelector((state: State) =>
           selectDayTemplateById(state, id)
+        );
+      case "instanceTemplate":
+        return useAppSelector((state: State) =>
+          selectInstanceTemplateById(state, id)
         );
       default:
         break;
@@ -78,6 +83,9 @@ const SelectFormControl: FC<SelectFormControlProps> = ({
       break;
     case "dayTemplate":
       selectFormControlBackgroundColor = "#013310";
+      break;
+    case "instanceTemplate":
+      selectFormControlBackgroundColor = "#012433";
       break;
     default:
       throw new Error("Invalid entity typed used on the select form control!");

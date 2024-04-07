@@ -6,11 +6,7 @@ import PrimaryButton from "@/components/shared/PrimaryButton";
 import ImageFormControl from "@/components/shared/form/ImageFormControl";
 import PopupModal from "@/components/shared/modals/PopupModal";
 // Data
-import {
-  defaultCreateDayTemplateImageUrls,
-  defaultDayTemplateImageUrl,
-  defaultInstanceTemplateImageUrl,
-} from "@/data";
+import { defaultInstanceTemplateImageUrl } from "@/data";
 // Redux
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import {
@@ -26,27 +22,13 @@ import {
 // React
 import { ChangeEvent, useEffect, useRef } from "react";
 import {
-  createDayTemplate,
   getAllUserDayTemplates,
   selectAllDayTemplatesIds,
-  selectDayTemplateFormModalErrorMessage,
-  selectLoadingCreateDayTemplate,
   selectLoadingGetUserDayTemplates,
-  selectNumberOfMeals,
-  selectTemplateDayTemplate,
-  updateLoadingCreateDayTemplate,
-  updateNumberOfMeals,
-  updateTemplateDayTemplate,
 } from "@/redux/slices/dayTemplatesSlice";
 import SelectFormControl from "@/components/shared/form/SelectFormControl";
 import {
-  getAllUserRecipes,
-  selectAllRecipesIds,
-  selectLoadingGetUserRecipes,
-} from "@/redux/slices/recipesSlice";
-import {
   createInstanceTemplate,
-  selectAllInstanceTemplatesIds,
   selectInstanceTemplateFormModalErrorMessage,
   selectLoadingCreateInstanceTemplate,
   selectTemplateInstanceTemplate,

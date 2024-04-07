@@ -10,9 +10,9 @@ export default interface TextFormControlProps {
   inputHeight?: number;
 
   direction: "row" | "column";
-  type: "email" | "text" | "password" | "number" | "url";
+  type: "email" | "text" | "password" | "number" | "url" | "datetime-local";
   required: boolean;
 
-  entityProperty: string | number | undefined;
+  entityProperty: string | number | undefined | Date;
   onEntityPropertyValueChange: ChangeEventHandler<HTMLInputElement>;
 }

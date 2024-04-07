@@ -14,7 +14,7 @@ type InstanceTemplateQueryObject = {
 
 const getAllInstanceTemplates = async (req: Request, res: Response) => {
   const userId = req.query.userId;
-  const getAllUserInstanceTemplates = req.query.userDayTemplates;
+  const getAllUserInstanceTemplates = req.query.userInstanceTemplates;
 
   const queryObject: InstanceTemplateQueryObject = {};
 

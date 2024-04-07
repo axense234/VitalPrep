@@ -29,6 +29,8 @@ type InitialStateType = {
   templateInstanceTemplate: InstanceTemplateTemplate;
   loadingCreateInstanceTemplate: LoadingStateType;
   instanceTemplateFormModalErrorMessage: string;
+
+  loadingGetUserInstanceTemplates: LoadingStateType;
 };
 
 export const instanceTemplatesAdapter = createEntityAdapter<InstanceTemplate>({
@@ -39,6 +41,7 @@ const initialState = instanceTemplatesAdapter.getInitialState({
   templateInstanceTemplate: defaultTemplateInstanceTemplate,
   loadingCreateInstanceTemplate: "IDLE",
   instanceTemplateFormModalErrorMessage: "Default Message",
+  loadingGetUserInstanceTemplates: "IDLE",
 }) as EntityState<InstanceTemplate, string> & InitialStateType;
 
 type CreateInstanceTemplateBody = {
@@ -66,6 +69,21 @@ export const createInstanceTemplate = createAsyncThunk<
   }
 );
 
+export const getAllUserInstanceTemplates = createAsyncThunk<
+  InstanceTemplate[] | AxiosError,
+  string
+>("instanceTemplates/getAllUserInstanceTemplates", async (userId) => {
+  try {
+    const { data } = await axiosInstance.get(
+      `/instanceTemplates?userId=${userId}&userInstanceTemplates=true`
+    );
+    return data.instanceTemplates as InstanceTemplate[];
+  } catch (error) {
+    console.log(error);
+    return error as AxiosError;
+  }
+});
+
 const instanceTemplatesSlice = createSlice({
   name: "instanceTemplates",
   initialState,
@@ -88,6 +106,19 @@ const instanceTemplatesSlice = createSlice({
   },
   extraReducers(builder) {
     builder
+      .addCase(getAllUserInstanceTemplates.pending, (state, action) => {
+        state.loadingGetUserInstanceTemplates = "PENDING";
+      })
+      .addCase(getAllUserInstanceTemplates.fulfilled, (state, action) => {
+        const instanceTemplates = action.payload as InstanceTemplate[];
+
+        if (instanceTemplates.length >= 1) {
+          state.loadingGetUserInstanceTemplates = "SUCCEDED";
+          instanceTemplatesAdapter.upsertMany(state, instanceTemplates);
+        } else {
+          state.loadingGetUserInstanceTemplates = "FAILED";
+        }
+      })
       .addCase(createInstanceTemplate.pending, (state, action) => {
         state.loadingCreateInstanceTemplate = "PENDING";
       })
@@ -113,7 +144,7 @@ const instanceTemplatesSlice = createSlice({
 });
 
 export const {
-  selectAll: selectAlInstanceTemplates,
+  selectAll: selectAllInstanceTemplates,
   selectById: selectInstanceTemplateById,
   selectIds: selectAllInstanceTemplatesIds,
 } = instanceTemplatesAdapter.getSelectors<State>(
@@ -128,6 +159,9 @@ export const selectLoadingCreateInstanceTemplate = (state: State) =>
 
 export const selectInstanceTemplateFormModalErrorMessage = (state: State) =>
   state.instanceTemplates.instanceTemplateFormModalErrorMessage;
+
+export const selectLoadingGetUserInstanceTemplates = (state: State) =>
+  state.instanceTemplates.loadingGetUserInstanceTemplates;
 
 export const {
   updateTemplateInstanceTemplate,

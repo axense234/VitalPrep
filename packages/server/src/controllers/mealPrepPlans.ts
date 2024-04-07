@@ -3,7 +3,7 @@ import { Response, Request } from "express";
 // Status Codes
 import { StatusCodes } from "http-status-codes";
 // Prisma
-import { MealPrepPlanClient } from "../db/postgres";
+import { InstanceTemplateClient, MealPrepPlanClient } from "../db/postgres";
 import { InstanceTemplate, MealPrepPlan } from "@prisma/client";
 // Utils
 import { deleteCache, getOrSetCache, setCache } from "../utils/redis";
@@ -73,11 +73,23 @@ const getMealPrepPlanById = async (req: Request, res: Response) => {
 
 const createMealPrepPlan = async (req: Request, res: Response) => {
   const mealPrepPlanBody = req.body;
+  const userId = req.query.userId;
+
+  if (userId) {
+    mealPrepPlanBody.user = { connect: { id: userId } };
+  }
 
   if (!mealPrepPlanBody) {
     return res
       .status(StatusCodes.BAD_REQUEST)
       .json({ message: "Please enter a request body!", mealPrepPlan: {} });
+  }
+
+  if (!mealPrepPlanBody.name) {
+    return res.status(StatusCodes.BAD_REQUEST).json({
+      message: "Please enter a meal prep plan name!",
+      mealPrepPlan: {},
+    });
   }
 
   if (!mealPrepPlanBody.instanceTemplates) {
@@ -87,16 +99,51 @@ const createMealPrepPlan = async (req: Request, res: Response) => {
     });
   }
 
-  const instanceTemplates =
-    mealPrepPlanBody.instanceTemplates as InstanceTemplate[];
+  if (!mealPrepPlanBody.instanceTemplatesTimings) {
+    return res.status(StatusCodes.BAD_REQUEST).json({
+      message: "Invalid instance templates timings!",
+      mealPrepPlan: {},
+    });
+  }
+
+  const instanceTemplatesIds = mealPrepPlanBody.instanceTemplates as string[];
+
+  const foundInstanceTemplates = await InstanceTemplateClient.findMany({
+    where: { id: { in: instanceTemplatesIds } },
+    include: { macros: true },
+  });
+
+  if (foundInstanceTemplates.length < 1) {
+    return res.status(StatusCodes.BAD_REQUEST).json({
+      message: "Could not find the instance templates with the given ids!",
+      instanceTemplates: [],
+    });
+  }
+
+  let mealPrepPlanMacros = {
+    calories: 0,
+    carbsAmount: 0,
+    fatsAmount: 0,
+    proteinAmount: 0,
+  };
+
+  foundInstanceTemplates.forEach((instanceTemplate) => {
+    mealPrepPlanMacros.calories += instanceTemplate.macros.calories;
+    mealPrepPlanMacros.proteinAmount += instanceTemplate.macros.proteinAmount;
+    mealPrepPlanMacros.carbsAmount += instanceTemplate.macros.carbsAmount;
+    mealPrepPlanMacros.fatsAmount += instanceTemplate.macros.fatsAmount;
+  });
 
   const createdMealPrepPlan = await MealPrepPlanClient.create({
     data: {
       ...mealPrepPlanBody,
       instanceTemplates: {
-        connect: instanceTemplates.map((instanceTemplate) => ({
-          id: instanceTemplate.id,
+        connect: instanceTemplatesIds.map((instanceTemplate) => ({
+          id: instanceTemplate,
         })),
+      },
+      macros: {
+        create: mealPrepPlanMacros,
       },
     },
     include: {

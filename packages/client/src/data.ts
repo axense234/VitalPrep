@@ -21,6 +21,7 @@ import RecipeTemplate from "./core/types/entity/mutation/RecipeTemplate";
 import { ImageOption } from "./core/types/ImageOption";
 import DayTemplateTemplate from "./core/types/entity/mutation/DayTemplateTemplate";
 import InstanceTemplateTemplate from "./core/types/entity/mutation/InstanceTemplateTemplate";
+import MealPrepPlanTemplate from "./core/types/entity/mutation/MealPrepPlanTemplate";
 
 export const homePageUrl = "/home";
 export const sitePhoneNumber = "0754189293(fake)";
@@ -88,6 +89,9 @@ export const defaultDayTemplateImageUrl =
 
 export const defaultInstanceTemplateImageUrl =
   "https://res.cloudinary.com/birthdayreminder/image/upload/v1708849818/VitalPrep/vector-set-foam-container_60352-1353_or48cz.jpg";
+
+export const defaultMealPrepPlanImageUrl =
+  "https://res.cloudinary.com/birthdayreminder/image/upload/v1708851067/VitalPrep/Default_Day_Instance_Image_Plan_obbwd9.jpg";
 
 export const createToolOptions: CreateToolOption[] = [
   {
@@ -210,6 +214,14 @@ export const defaultTemplateInstanceTemplate: InstanceTemplateTemplate = {
   dayTemplates: [],
   imageUrl: defaultInstanceTemplateImageUrl,
   coverage: 0,
+};
+
+export const defaultTemplateMealPrepPlan: MealPrepPlanTemplate = {
+  name: "Cool Meals Plan",
+  instanceTemplates: [],
+  imageUrl: defaultMealPrepPlanImageUrl,
+  activated: false,
+  instanceTemplatesTimings: [],
 };
 
 export const OAuthOptionsContent: OAuthOptionContent[] = [
