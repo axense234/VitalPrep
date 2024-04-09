@@ -7,6 +7,8 @@ export default interface TextAreaFormControlProps {
 
   maxInputLength?: number;
 
+  backgroundColor?: string;
+
   inputHeight?: number;
 
   direction: "row" | "column";

@@ -91,6 +91,9 @@ const CreateUtensilInterface = () => {
           type="text"
           inputHeight={36}
           labelFontSize={28}
+          backgroundColor="#FF6000"
+          border={"1.5px solid #120a06"}
+          padding={16}
         />
         <ImageFormControl
           labelColor="#120A06"
@@ -110,6 +113,9 @@ const CreateUtensilInterface = () => {
             }
           }}
           labelFontSize={28}
+          backgroundColor="#FF6000"
+          border={"1.5px solid #120a06"}
+          padding={16}
         />
         <CheckboxFormControl
           direction="row"
@@ -125,6 +131,9 @@ const CreateUtensilInterface = () => {
             )
           }
           labelFontSize={28}
+          backgroundColor="#FF6000"
+          border={"1.5px solid #120a06"}
+          padding={16}
         />
         <PrimaryButton
           backgroundColor="#FF6000"

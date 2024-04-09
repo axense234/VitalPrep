@@ -160,7 +160,7 @@ const CreateRecipeInterface = () => {
         <TextFormControl
           direction="row"
           entityProperty={templateRecipe.name}
-          labelColor="#120A06"
+          labelColor="#DDD9D5"
           labelContent="Recipe Name:"
           onEntityPropertyValueChange={(e) =>
             dispatch(
@@ -171,9 +171,12 @@ const CreateRecipeInterface = () => {
           type="text"
           inputHeight={36}
           labelFontSize={28}
+          backgroundColor="#8B0000"
+          border={"1.5px solid #120a06"}
+          padding={16}
         />
         <ImageFormControl
-          labelColor="#120A06"
+          labelColor="#DDD9D5"
           labelContent="Recipe Image:"
           direction="row"
           defaultImageUsedUrl={defaultUtensilImageUrl}
@@ -190,9 +193,12 @@ const CreateRecipeInterface = () => {
             }
           }}
           labelFontSize={28}
+          backgroundColor="#8B0000"
+          border={"1.5px solid #120a06"}
+          padding={16}
         />
         <SelectFormControl
-          labelColor="#120A06"
+          labelColor="#DDD9D5"
           labelContent="Ingredients:"
           required={true}
           entityPropertyOptions={ingredientsIds}
@@ -207,9 +213,10 @@ const CreateRecipeInterface = () => {
           }
           labelFontSize={28}
           areOptionsLoading={loadingGetUserIngredients === "PENDING"}
+          backgroundColor="#8B0000"
         />
         <SelectFormControl
-          labelColor="#120A06"
+          labelColor="#DDD9D5"
           labelContent="Utensils:"
           required={true}
           entityPropertyOptions={utensilsIds}
@@ -220,15 +227,19 @@ const CreateRecipeInterface = () => {
           }
           labelFontSize={28}
           areOptionsLoading={loadingGetUserUtensils === "PENDING"}
+          backgroundColor="#640000"
         />
-        <div className={createToolStyles.createInterfaceRecipeTutorial}>
-          <h3>Tutorial:</h3>
+        <div
+          className={createToolStyles.createInterfaceRecipeTutorial}
+          style={{ backgroundColor: "#8B0000" }}
+        >
+          <h3 style={{ color: "#DDD9D5" }}>Tutorial:</h3>
           <div
             className={createToolStyles.createInterfaceRecipeTutorialCheckboxes}
           >
             <CheckboxFormControl
               direction="row"
-              labelColor="#120A06"
+              labelColor="#DDD9D5"
               labelContent="Use Video Tutorial?:"
               entityProperty={String(showVideoTutorialContent)}
               onEntityPropertyValueChange={(e) =>
@@ -239,11 +250,14 @@ const CreateRecipeInterface = () => {
                 )
               }
               labelFontSize={26}
+              backgroundColor="#421d17"
+              border={"1.5px solid #120a06"}
+              padding={16}
             />
             {showVideoTutorialContent && (
               <VideoFormControl
                 direction="row"
-                labelColor="#120A06"
+                labelColor="#DDD9D5"
                 labelContent="Recipe Tutorial URL:"
                 inputHeight={36}
                 labelFontSize={26}
@@ -256,6 +270,7 @@ const CreateRecipeInterface = () => {
                     })
                   )
                 }
+                backgroundColor="#421d17"
                 onEntityPropertyValueUpdate={(urlInput) =>
                   dispatch(
                     updateTemplateRecipe({
@@ -268,7 +283,7 @@ const CreateRecipeInterface = () => {
             )}
             <CheckboxFormControl
               direction="row"
-              labelColor="#120A06"
+              labelColor="#DDD9D5"
               labelContent="Use Written Tutorial?:"
               entityProperty={String(showWrittenTutorialContent)}
               onEntityPropertyValueChange={() =>
@@ -279,12 +294,15 @@ const CreateRecipeInterface = () => {
                 )
               }
               labelFontSize={26}
+              backgroundColor="#421d17"
+              border={"1.5px solid #120a06"}
+              padding={16}
             />
             {showWrittenTutorialContent && (
               <TextAreaFormControl
                 direction="column"
                 entityProperty={templateRecipe.writtenTutorial}
-                labelColor="#120A06"
+                labelColor="#DDD9D5"
                 labelContent="Written Tutorial:"
                 onEntityPropertyValueChange={(e) =>
                   dispatch(
@@ -297,6 +315,7 @@ const CreateRecipeInterface = () => {
                 inputHeight={36}
                 labelFontSize={26}
                 maxInputLength={1000}
+                backgroundColor="#421d17"
               />
             )}
           </div>

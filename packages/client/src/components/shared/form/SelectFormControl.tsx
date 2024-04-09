@@ -30,6 +30,8 @@ const SelectFormControl: FC<SelectFormControlProps> = ({
   entityTypeUsed,
   areOptionsLoading,
   showEntityExtraCondition,
+  backgroundColor,
+  border,
 }) => {
   let componentUsedAsOption: FunctionComponent<EntityComponentProps> =
     EntityComponent;
@@ -92,10 +94,19 @@ const SelectFormControl: FC<SelectFormControlProps> = ({
   }
 
   return (
-    <div className={formControlsStyles.selectFormControlContainer}>
+    <div
+      className={formControlsStyles.selectFormControlContainer}
+      style={{
+        backgroundColor: backgroundColor ? backgroundColor : "none",
+        border: border ? border : "none",
+      }}
+    >
       <label
         htmlFor={labelContent}
-        style={{ color: labelColor, fontSize: labelFontSize || 22 }}
+        style={{
+          color: labelColor,
+          fontSize: labelFontSize || 22,
+        }}
       >
         {labelContent}
       </label>

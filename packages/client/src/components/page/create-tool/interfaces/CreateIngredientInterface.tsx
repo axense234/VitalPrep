@@ -74,7 +74,7 @@ const CreateIngredientInterface = () => {
 
   return (
     <section className={createToolStyles.createInterface}>
-      <PopupModal hasBorder={false} modalType="form" />
+      <PopupModal hasBorder={true} modalType="form" />
       <h2>Create Ingredient</h2>
       <form className={createToolStyles.createInterfaceForm}>
         <TextFormControl
@@ -91,6 +91,9 @@ const CreateIngredientInterface = () => {
           type="text"
           inputHeight={36}
           labelFontSize={28}
+          backgroundColor="#FFAE00"
+          border={"1.5px solid #120a06"}
+          padding={16}
         />
         <ImageFormControl
           labelColor="#120A06"
@@ -110,6 +113,9 @@ const CreateIngredientInterface = () => {
             }
           }}
           labelFontSize={28}
+          backgroundColor="#FFAE00"
+          border={"1.5px solid #120a06"}
+          padding={16}
         />
         <TextFormControl
           direction="row"
@@ -128,6 +134,9 @@ const CreateIngredientInterface = () => {
           type="number"
           inputHeight={36}
           labelFontSize={28}
+          backgroundColor="#FFAE00"
+          border={"1.5px solid #120a06"}
+          padding={16}
         />
         <TextFormControl
           direction="row"
@@ -146,6 +155,9 @@ const CreateIngredientInterface = () => {
           type="number"
           inputHeight={36}
           labelFontSize={28}
+          backgroundColor="#FFAE00"
+          border={"1.5px solid #120a06"}
+          padding={16}
         />
         <TextFormControl
           direction="row"
@@ -164,6 +176,9 @@ const CreateIngredientInterface = () => {
           type="number"
           inputHeight={36}
           labelFontSize={28}
+          backgroundColor="#FFAE00"
+          border={"1.5px solid #120a06"}
+          padding={16}
         />
         <TextFormControl
           direction="row"
@@ -182,6 +197,9 @@ const CreateIngredientInterface = () => {
           type="number"
           inputHeight={36}
           labelFontSize={28}
+          backgroundColor="#FFAE00"
+          border={"1.5px solid #120a06"}
+          padding={16}
         />
         <CheckboxFormControl
           direction="row"
@@ -197,6 +215,9 @@ const CreateIngredientInterface = () => {
             )
           }
           labelFontSize={28}
+          backgroundColor="#FFAE00"
+          border={"1.5px solid #120a06"}
+          padding={16}
         />
         <PrimaryButton
           backgroundColor="#FFAE00"

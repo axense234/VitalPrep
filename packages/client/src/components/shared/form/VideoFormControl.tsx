@@ -18,11 +18,15 @@ const VideoFormControl: FC<VideoFormControlProps> = ({
   onEntityPropertyValueUpdate,
   inputHeight,
   labelFontSize,
+  backgroundColor,
 }) => {
   useVideoUrlFormat(entityProperty || "", onEntityPropertyValueUpdate);
 
   return (
-    <div className={formControlsStyles.videoFormControlContainer}>
+    <div
+      className={formControlsStyles.videoFormControlContainer}
+      style={{ backgroundColor: backgroundColor ? backgroundColor : "none" }}
+    >
       <TextFormControl
         direction={direction}
         labelColor={labelColor}

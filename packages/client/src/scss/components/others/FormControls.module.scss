@@ -5,6 +5,8 @@
   align-items: flex-start;
   width: 100%;
   gap: 8px;
+  padding: 1rem;
+  border: 1.5px solid getColor("black-100-1");
 
   label {
     font-weight: bolder;
@@ -34,6 +36,9 @@
   align-items: flex-start;
   width: 100%;
   gap: 1rem;
+  padding-left: 1rem;
+
+  border: 1.5px solid getColor("black-100-1");
 
   label {
     @include flexCenter(row);
@@ -98,6 +103,9 @@
   justify-content: space-between;
   width: 100%;
 
+  padding: 1rem;
+  border: 1.5px solid getColor("black-100-1");
+
   label {
     font-weight: bolder;
     font-size: 22px;
@@ -135,6 +143,9 @@
   width: 100%;
   gap: 8px;
 
+  padding: 1rem;
+  border: 1.5px solid getColor("black-100-1");
+
   label {
     font-weight: bolder;
     font-size: 22px;
@@ -146,12 +157,13 @@
   list-style: none;
   width: 100%;
   gap: 1rem;
-  padding: 2rem;
   border: 1.5px solid getColor("black-100-1");
+  padding: 1rem;
 
   li {
     @include flexCenter(row);
     width: 100%;
+    border: 1.5px solid getColor("black-100-1");
   }
 }
 
@@ -160,6 +172,9 @@
   align-items: flex-start;
   width: 100%;
   gap: 8px;
+
+  padding: 1rem;
+  border: 1.5px solid getColor("black-100-1");
 
   iframe {
     width: 50%;
@@ -172,6 +187,9 @@
   align-items: flex-start;
   width: 100%;
   gap: 8px;
+
+  padding: 1rem;
+  border: 1.5px solid getColor("black-100-1");
 
   label {
     font-weight: bolder;

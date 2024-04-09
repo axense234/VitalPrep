@@ -158,7 +158,7 @@ const CreateMealPrepPlanInterface = () => {
         <TextFormControl
           direction="row"
           entityProperty={templateMealPrepPlan.name}
-          labelColor="#120A06"
+          labelColor="#DDD9D5"
           labelContent="Meal Prep Plan Name:"
           onEntityPropertyValueChange={(e) =>
             dispatch(
@@ -172,9 +172,12 @@ const CreateMealPrepPlanInterface = () => {
           type="text"
           inputHeight={36}
           labelFontSize={28}
+          backgroundColor="#42171C"
+          border={"1.5px solid #120a06"}
+          padding={16}
         />
         <ImageFormControl
-          labelColor="#120A06"
+          labelColor="#DDD9D5"
           labelContent="Meal Prep Plan Image:"
           direction="column"
           defaultImageUsedUrl={defaultMealPrepPlanImageUrl}
@@ -193,11 +196,14 @@ const CreateMealPrepPlanInterface = () => {
             }
           }}
           labelFontSize={28}
+          backgroundColor="#42171C"
+          border={"1.5px solid #120a06"}
+          padding={16}
         />
         <TextFormControl
           direction="row"
           entityProperty={numberOfInstanceTemplates}
-          labelColor="#120A06"
+          labelColor="#DDD9D5"
           labelContent="Number of Instances Used:"
           onEntityPropertyValueChange={(e) =>
             dispatch(updateNumberOfInstanceTemplates(e.target.valueAsNumber))
@@ -206,21 +212,25 @@ const CreateMealPrepPlanInterface = () => {
           type="number"
           inputHeight={36}
           labelFontSize={28}
+          backgroundColor="#42171C"
+          border={"1.5px solid #120a06"}
+          padding={16}
         />
         {numberOfInstanceTemplates && numberOfInstanceTemplates > 0 && (
           <div
             className={
               createToolStyles.createInterfaceDayTemplateRecipesContainer
             }
+            style={{ backgroundColor: "#42171C" }}
           >
-            <h3>Individual Instance Templates:</h3>
+            <h3 style={{ color: "#DDD9D5" }}>Individual Instance Templates:</h3>
             <ul className={createToolStyles.createInterfaceDayTemplateRecipes}>
               {numberOfInstanceTemplatesIterable.map(
                 (instanceTemplateOption) => {
                   return (
                     <li key={instanceTemplateOption.id}>
                       <SelectFormControl
-                        labelColor="#120A06"
+                        labelColor="#DDD9D5"
                         labelContent={`Number #${instanceTemplateOption.id} Instance:`}
                         required={true}
                         entityPropertyOptions={instanceTemplatesIds}
@@ -247,6 +257,7 @@ const CreateMealPrepPlanInterface = () => {
                             ] === id
                           );
                         }}
+                        backgroundColor="#42171C"
                       />
                     </li>
                   );
@@ -260,8 +271,9 @@ const CreateMealPrepPlanInterface = () => {
             className={
               createToolStyles.createInterfaceDayTemplateRecipesContainer
             }
+            style={{ backgroundColor: "#42171C" }}
           >
-            <h3>Meal Prep Timing:</h3>
+            <h3 style={{ color: "#DDD9D5" }}>Meal Prep Timing:</h3>
             <ul className={createToolStyles.createInterfaceDayTemplateRecipes}>
               {numberOfInstanceTemplatesIterable.map(
                 (instanceTemplateOption) => {
@@ -281,7 +293,7 @@ const CreateMealPrepPlanInterface = () => {
                                 .slice(0, 16)
                             : ""
                         }
-                        labelColor="#120A06"
+                        labelColor="#DDD9D5"
                         labelContent={`Number #${instanceTemplateOption.id} Instance Timing:`}
                         onEntityPropertyValueChange={(e) => {
                           const newInstanceTemplateTimings = [
@@ -307,6 +319,9 @@ const CreateMealPrepPlanInterface = () => {
                         type="datetime-local"
                         inputHeight={36}
                         labelFontSize={28}
+                        backgroundColor="#012433"
+                        border={"1.5px solid #120a06"}
+                        padding={16}
                       />
                     </li>
                   );

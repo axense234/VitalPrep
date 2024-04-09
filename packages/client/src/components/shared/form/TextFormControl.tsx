@@ -16,6 +16,9 @@ const TextFormControl: FC<TextFormControlProps> = ({
   inputHeight,
   labelFontSize,
   maxInputLength,
+  backgroundColor,
+  border,
+  padding,
 }) => {
   return (
     <div
@@ -23,6 +26,9 @@ const TextFormControl: FC<TextFormControlProps> = ({
       style={{
         flexDirection: direction,
         justifyContent: direction === "row" ? "space-between" : "center",
+        backgroundColor: backgroundColor ? backgroundColor : "none",
+        border: border ? border : "none",
+        padding: padding ? padding : "0",
       }}
     >
       <label
@@ -42,7 +48,7 @@ const TextFormControl: FC<TextFormControlProps> = ({
           width: type === "number" ? "50%" : "100%",
           height: inputHeight || 24,
         }}
-        value={entityProperty}
+        value={entityProperty as string | number}
         onChange={onEntityPropertyValueChange}
         required={required}
       />

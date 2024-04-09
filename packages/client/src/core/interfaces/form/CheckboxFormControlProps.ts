@@ -5,6 +5,10 @@ export default interface CheckboxFormControlProps {
   labelContent: string;
   labelFontSize?: number;
 
+  backgroundColor?: string;
+  border?: string;
+  padding?: number;
+
   direction: "row" | "column";
 
   entityProperty?: string | undefined;

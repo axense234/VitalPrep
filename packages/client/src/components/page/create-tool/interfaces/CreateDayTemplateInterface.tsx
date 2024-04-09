@@ -148,7 +148,7 @@ const CreateDayTemplateInterface = () => {
         <TextFormControl
           direction="row"
           entityProperty={templateDayTemplate.name}
-          labelColor="#120A06"
+          labelColor="#DDD9D5"
           labelContent="Day Template Name:"
           onEntityPropertyValueChange={(e) =>
             dispatch(
@@ -159,9 +159,12 @@ const CreateDayTemplateInterface = () => {
           type="text"
           inputHeight={36}
           labelFontSize={28}
+          backgroundColor="#013310"
+          border={"1.5px solid #120a06"}
+          padding={16}
         />
         <ImageFormControl
-          labelColor="#120A06"
+          labelColor="#DDD9D5"
           labelContent="Day Template Image:"
           direction="column"
           defaultImageUsedUrl={defaultDayTemplateImageUrl}
@@ -186,11 +189,14 @@ const CreateDayTemplateInterface = () => {
           }}
           labelFontSize={28}
           imageUrlOptions={defaultCreateDayTemplateImageUrls}
+          backgroundColor="#013310"
+          border={"1.5px solid #120a06"}
+          padding={16}
         />
         <TextFormControl
           direction="row"
           entityProperty={numberOfMeals}
-          labelColor="#120A06"
+          labelColor="#DDD9D5"
           labelContent="Number of Meals:"
           onEntityPropertyValueChange={(e) =>
             dispatch(updateNumberOfMeals(e.target.valueAsNumber))
@@ -199,20 +205,24 @@ const CreateDayTemplateInterface = () => {
           type="number"
           inputHeight={36}
           labelFontSize={28}
+          backgroundColor="#013310"
+          border={"1.5px solid #120a06"}
+          padding={16}
         />
         {numberOfMeals > 0 && (
           <div
             className={
               createToolStyles.createInterfaceDayTemplateRecipesContainer
             }
+            style={{ backgroundColor: "#013310" }}
           >
-            <h3>Recipes:</h3>
+            <h3 style={{ color: "#DDD9D5" }}>Recipes:</h3>
             <ul className={createToolStyles.createInterfaceDayTemplateRecipes}>
               {numberOfMealsIterable.map((mealOption) => {
                 return (
                   <li key={mealOption.id}>
                     <SelectFormControl
-                      labelColor="#120A06"
+                      labelColor="#DDD9D5"
                       labelContent={`Meal #${mealOption.id}:`}
                       required={true}
                       entityPropertyOptions={recipesIds}
@@ -229,6 +239,7 @@ const CreateDayTemplateInterface = () => {
                         )
                       }
                       labelFontSize={28}
+                      backgroundColor="#013310"
                       areOptionsLoading={loadingGetUserRecipes === "PENDING"}
                       showEntityExtraCondition={(id) => {
                         return (

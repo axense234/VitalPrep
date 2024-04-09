@@ -14,6 +14,7 @@ const TextAreaFormControl: FC<TextAreaFormControlProps> = ({
   inputHeight,
   labelFontSize,
   maxInputLength,
+  backgroundColor,
 }) => {
   return (
     <div
@@ -21,6 +22,7 @@ const TextAreaFormControl: FC<TextAreaFormControlProps> = ({
       style={{
         flexDirection: direction,
         justifyContent: direction === "row" ? "space-between" : "center",
+        backgroundColor: backgroundColor ? backgroundColor : "none",
       }}
     >
       <label

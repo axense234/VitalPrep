@@ -5,6 +5,9 @@ export default interface SelectFormControlProps {
 
   areOptionsLoading: boolean;
 
+  backgroundColor?: string;
+  border?: string;
+
   entityTypeUsed:
     | "ingredient"
     | "utensil"

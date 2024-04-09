@@ -22,6 +22,9 @@ const ImageFormControl: FC<ImageFormControlProps> = ({
   onEntityPropertyOptionSelected,
   labelFontSize,
   imageUrlOptions,
+  backgroundColor,
+  border,
+  padding,
 }) => {
   return (
     <div
@@ -29,6 +32,10 @@ const ImageFormControl: FC<ImageFormControlProps> = ({
       style={{
         flexDirection: direction,
         justifyContent: direction === "row" ? "space-between" : "center",
+        backgroundColor: backgroundColor ? backgroundColor : "none",
+        border: border ? border : "none",
+        padding: padding ? padding : "0",
+        alignItems: direction === "row" ? "center" : "flex-start",
       }}
     >
       <label htmlFor={labelContent} style={{ color: labelColor }}>

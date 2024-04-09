@@ -50,7 +50,7 @@
 .createInterface {
   @include flexCenter(column);
   width: 100%;
-  gap: 96px;
+  gap: 104px;
   padding: 128px 0px;
 
   h2 {
@@ -63,7 +63,7 @@
 .createInterfaceForm {
   @include flexCenter(column);
   width: 100%;
-  gap: 32px;
+  gap: 48px;
   padding: 0px 400px;
 
   button {
@@ -76,6 +76,9 @@
   width: 100%;
   align-items: flex-start;
   gap: 16px;
+
+  padding: 1rem;
+  border: 1.5px solid getColor("black-100-1");
 
   h3 {
     font-size: 28px;
@@ -94,6 +97,9 @@
   width: 100%;
   align-items: flex-start;
   gap: 16px;
+
+  padding: 1rem;
+  border: 1.5px solid getColor("black-100-1");
 
   h3 {
     font-size: 28px;

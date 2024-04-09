@@ -9,6 +9,10 @@ export default interface ImageFormControlProps {
   direction: "row" | "column";
   defaultImageUsedUrl: string;
 
+  backgroundColor?: string;
+  border?: string;
+  padding?: number;
+
   imageUrlOptions?: ImageOption[];
   onEntityPropertyOptionSelected?: (specifier: string) => undefined;
 

@@ -149,7 +149,7 @@ const CreateInstanceTemplateInterface = () => {
         <TextFormControl
           direction="row"
           entityProperty={templateInstanceTemplate.name}
-          labelColor="#120A06"
+          labelColor="#DDD9D5"
           labelContent="Instance Template Name:"
           onEntityPropertyValueChange={(e) =>
             dispatch(
@@ -163,9 +163,12 @@ const CreateInstanceTemplateInterface = () => {
           type="text"
           inputHeight={36}
           labelFontSize={28}
+          backgroundColor="#012433"
+          border={"1.5px solid #120a06"}
+          padding={16}
         />
         <ImageFormControl
-          labelColor="#120A06"
+          labelColor="#DDD9D5"
           labelContent="Instance Template Image:"
           direction="column"
           defaultImageUsedUrl={defaultInstanceTemplateImageUrl}
@@ -184,11 +187,14 @@ const CreateInstanceTemplateInterface = () => {
             }
           }}
           labelFontSize={28}
+          backgroundColor="#012433"
+          border={"1.5px solid #120a06"}
+          padding={16}
         />
         <TextFormControl
           direction="row"
           entityProperty={templateInstanceTemplate.coverage}
-          labelColor="#120A06"
+          labelColor="#DDD9D5"
           labelContent="Number of Days Covered:"
           onEntityPropertyValueChange={(e) =>
             dispatch(
@@ -202,6 +208,9 @@ const CreateInstanceTemplateInterface = () => {
           type="number"
           inputHeight={36}
           labelFontSize={28}
+          backgroundColor="#012433"
+          border={"1.5px solid #120a06"}
+          padding={16}
         />
         {templateInstanceTemplate.coverage &&
           templateInstanceTemplate.coverage > 0 && (
@@ -209,8 +218,11 @@ const CreateInstanceTemplateInterface = () => {
               className={
                 createToolStyles.createInterfaceDayTemplateRecipesContainer
               }
+              style={{
+                backgroundColor: "#012433",
+              }}
             >
-              <h3>Individual Day Templates:</h3>
+              <h3 style={{ color: "#DDD9D5" }}>Individual Day Templates:</h3>
               <ul
                 className={createToolStyles.createInterfaceDayTemplateRecipes}
               >
@@ -218,7 +230,7 @@ const CreateInstanceTemplateInterface = () => {
                   return (
                     <li key={dayOption.id}>
                       <SelectFormControl
-                        labelColor="#120A06"
+                        labelColor="#DDD9D5"
                         labelContent={`Day #${dayOption.id}:`}
                         required={true}
                         entityPropertyOptions={dayTemplatesIds}
@@ -235,6 +247,7 @@ const CreateInstanceTemplateInterface = () => {
                           )
                         }
                         labelFontSize={28}
+                        backgroundColor="#012433"
                         areOptionsLoading={
                           loadingGetUserDayTemplates === "PENDING"
                         }

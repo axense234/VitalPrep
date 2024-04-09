@@ -9,6 +9,10 @@ export default interface TextFormControlProps {
 
   inputHeight?: number;
 
+  backgroundColor?: string;
+  border?: string;
+  padding?: number;
+
   direction: "row" | "column";
   type: "email" | "text" | "password" | "number" | "url" | "datetime-local";
   required: boolean;

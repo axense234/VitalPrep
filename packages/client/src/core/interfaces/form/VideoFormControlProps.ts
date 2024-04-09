@@ -3,6 +3,8 @@ export default interface VideoFormControlProps {
   labelContent: string;
   labelFontSize?: number;
 
+  backgroundColor?: string;
+
   inputHeight?: number;
 
   direction: "row" | "column";
