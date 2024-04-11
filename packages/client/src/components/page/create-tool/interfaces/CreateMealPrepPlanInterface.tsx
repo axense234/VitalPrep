@@ -216,7 +216,7 @@ const CreateMealPrepPlanInterface = () => {
           border={"1.5px solid #120a06"}
           padding={16}
         />
-        {numberOfInstanceTemplates && numberOfInstanceTemplates > 0 && (
+        {numberOfInstanceTemplates && numberOfInstanceTemplates > 0 ? (
           <div
             className={
               createToolStyles.createInterfaceDayTemplateRecipesContainer
@@ -265,8 +265,8 @@ const CreateMealPrepPlanInterface = () => {
               )}
             </ul>
           </div>
-        )}
-        {numberOfInstanceTemplates && numberOfInstanceTemplates > 0 && (
+        ) : null}
+        {numberOfInstanceTemplates && numberOfInstanceTemplates > 0 ? (
           <div
             className={
               createToolStyles.createInterfaceDayTemplateRecipesContainer
@@ -329,7 +329,7 @@ const CreateMealPrepPlanInterface = () => {
               )}
             </ul>
           </div>
-        )}
+        ) : null}
         <PrimaryButton
           backgroundColor="#42171C"
           textColor="#DDD9D5"

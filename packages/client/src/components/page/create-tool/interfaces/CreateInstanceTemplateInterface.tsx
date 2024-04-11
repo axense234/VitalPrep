@@ -213,58 +213,56 @@ const CreateInstanceTemplateInterface = () => {
           padding={16}
         />
         {templateInstanceTemplate.coverage &&
-          templateInstanceTemplate.coverage > 0 && (
-            <div
-              className={
-                createToolStyles.createInterfaceDayTemplateRecipesContainer
-              }
-              style={{
-                backgroundColor: "#012433",
-              }}
-            >
-              <h3 style={{ color: "#DDD9D5" }}>Individual Day Templates:</h3>
-              <ul
-                className={createToolStyles.createInterfaceDayTemplateRecipes}
-              >
-                {numberOfDaysIterable.map((dayOption) => {
-                  return (
-                    <li key={dayOption.id}>
-                      <SelectFormControl
-                        labelColor="#DDD9D5"
-                        labelContent={`Day #${dayOption.id}:`}
-                        required={true}
-                        entityPropertyOptions={dayTemplatesIds}
-                        entityPropertyChosenOptions={
-                          templateInstanceTemplate.dayTemplates || []
-                        }
-                        entityTypeUsed="dayTemplate"
-                        onEntityPropertyValueChange={(id) =>
-                          handleUpdateArrayEntities(
-                            templateInstanceTemplate.dayTemplates,
-                            id,
-                            dayOption.id - 1,
-                            "dayTemplates"
-                          )
-                        }
-                        labelFontSize={28}
-                        backgroundColor="#012433"
-                        areOptionsLoading={
-                          loadingGetUserDayTemplates === "PENDING"
-                        }
-                        showEntityExtraCondition={(id) => {
-                          return (
-                            templateInstanceTemplate.dayTemplates[
-                              dayOption.id - 1
-                            ] === id
-                          );
-                        }}
-                      />
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
-          )}
+        templateInstanceTemplate.coverage > 0 ? (
+          <div
+            className={
+              createToolStyles.createInterfaceDayTemplateRecipesContainer
+            }
+            style={{
+              backgroundColor: "#012433",
+            }}
+          >
+            <h3 style={{ color: "#DDD9D5" }}>Individual Day Templates:</h3>
+            <ul className={createToolStyles.createInterfaceDayTemplateRecipes}>
+              {numberOfDaysIterable.map((dayOption) => {
+                return (
+                  <li key={dayOption.id}>
+                    <SelectFormControl
+                      labelColor="#DDD9D5"
+                      labelContent={`Day #${dayOption.id}:`}
+                      required={true}
+                      entityPropertyOptions={dayTemplatesIds}
+                      entityPropertyChosenOptions={
+                        templateInstanceTemplate.dayTemplates || []
+                      }
+                      entityTypeUsed="dayTemplate"
+                      onEntityPropertyValueChange={(id) =>
+                        handleUpdateArrayEntities(
+                          templateInstanceTemplate.dayTemplates,
+                          id,
+                          dayOption.id - 1,
+                          "dayTemplates"
+                        )
+                      }
+                      labelFontSize={28}
+                      backgroundColor="#012433"
+                      areOptionsLoading={
+                        loadingGetUserDayTemplates === "PENDING"
+                      }
+                      showEntityExtraCondition={(id) => {
+                        return (
+                          templateInstanceTemplate.dayTemplates[
+                            dayOption.id - 1
+                          ] === id
+                        );
+                      }}
+                    />
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        ) : null}
         <PrimaryButton
           backgroundColor="#012433"
           textColor="#DDD9D5"
