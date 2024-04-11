@@ -22,10 +22,99 @@ import { ImageOption } from "./core/types/ImageOption";
 import DayTemplateTemplate from "./core/types/entity/mutation/DayTemplateTemplate";
 import InstanceTemplateTemplate from "./core/types/entity/mutation/InstanceTemplateTemplate";
 import MealPrepPlanTemplate from "./core/types/entity/mutation/MealPrepPlanTemplate";
+import EntityQueryValues from "./core/types/entity/EntityQueryValues";
+import EntitySortingOptions from "./core/types/entity/EntitySortingOptions";
 
 export const homePageUrl = "/home";
 export const sitePhoneNumber = "0754189293(fake)";
 export const siteEmail = "thisemaildoesnotexit@nothing.com";
+
+export const defaultEntityQueryValues: EntityQueryValues = {
+  sortByKey: "name",
+  sortByOrder: "asc",
+  searchByKey: "name",
+  searchByValue: "",
+};
+
+export const entitySearchByOptions: EntitySortingOptions = {
+  ingredient: [{ label: "Name of Ingredient", value: "name" }],
+  utensil: [{ label: "Name of Utensil", value: "name" }],
+  recipe: [{ label: "Name of Recipe", value: "name" }],
+  dayTemplate: [{ label: "Name of Day Template", value: "name" }],
+  instanceTemplate: [{ label: "Name of Instance Template", value: "name" }],
+  mealPrepPlan: [{ label: "Name of Meal Prep Plan", value: "name" }],
+};
+
+export const entitySortingOptions: EntitySortingOptions = {
+  ingredient: [
+    {
+      label: "Availability of Ingredients",
+      value: "enabled",
+    },
+    {
+      label: "Ingredient Name",
+      value: "name",
+    },
+    {
+      label: "Commonly used Ingredients",
+      value: "numberOfRecipes",
+    },
+  ],
+  utensil: [
+    {
+      label: "Availability of Utensils",
+      value: "enabled",
+    },
+    {
+      label: "Name of Utensils",
+      value: "name",
+    },
+    {
+      label: "Commonly used Utensils",
+      value: "numberOfRecipes",
+    },
+  ],
+  recipe: [
+    {
+      label: "Name of Recipes",
+      value: "name",
+    },
+    {
+      label: "Commonly used Recipes",
+      value: "numberOfDayTemplates",
+    },
+  ],
+  dayTemplate: [
+    {
+      label: "Name of Day Templates",
+      value: "name",
+    },
+    {
+      label: "Commonly used Day Templates",
+      value: "numberOfInstanceTemplates",
+    },
+  ],
+  instanceTemplate: [
+    {
+      label: "Name of Instance Templates",
+      value: "name",
+    },
+    {
+      label: "Commonly used Instance Templates",
+      value: "numberOfMealPrepPlans",
+    },
+    {
+      label: "Coverage Of Instance Templates",
+      value: "coverage",
+    },
+  ],
+  mealPrepPlan: [
+    {
+      label: "Name of Meal Prep Plans",
+      value: "name",
+    },
+  ],
+};
 
 export const defaultCreateDayTemplateImageUrls: ImageOption[] = [
   {

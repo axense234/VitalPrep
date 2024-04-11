@@ -4,7 +4,7 @@
 import createToolStyles from "../../../scss/pages/CreateTool.module.scss";
 // Components
 import PageTitle from "@/components/shared/PageTitle";
-import CreateToolOptions from "@/components/page/create-tool/CreateToolOptions";
+import EntityOptions from "@/components/shared/entity/EntityOptions";
 import CreateToolInterface from "@/components/page/create-tool/CreateToolInterface";
 // Hooks
 import useAuthorization from "@/hooks/useAuthorization";
@@ -18,7 +18,7 @@ const CreateTool = () => {
         subtitleContent="use it to create stuff"
       />
       <div className={createToolStyles.createToolContent}>
-        <CreateToolOptions />
+        <EntityOptions />
         <CreateToolInterface />
       </div>
     </div>

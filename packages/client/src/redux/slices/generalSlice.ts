@@ -14,7 +14,12 @@ import { baseSiteUrl } from "@/config";
 // Next Auth
 import { getSession, signIn, signOut } from "next-auth/react";
 // Data
-import { defaultProfile, defaultTemplateProfile } from "@/data";
+import {
+  defaultEntityQueryValues,
+  defaultProfile,
+  defaultTemplateProfile,
+} from "@/data";
+import EntityQueryValues from "@/core/types/entity/EntityQueryValues";
 
 type ObjectKeyValueType = {
   key: string;
@@ -33,8 +38,11 @@ type InitialStateType = {
   showGeneralModal: boolean;
   isModalUsedWhenLoading: boolean;
 
-  selectedCreateToolOption: string;
+  selectedEntityOption: string;
+  selectedViewOption: "grid" | "list";
 
+  // Query
+  entityQueryValues: EntityQueryValues;
   // Auth
   profile: UserType;
   templateProfile: UserTemplate;
@@ -77,7 +85,11 @@ const initialState: InitialStateType = {
   showGeneralModal: false,
   isModalUsedWhenLoading: false,
 
-  selectedCreateToolOption: "ingredient",
+  selectedEntityOption: "ingredient",
+  selectedViewOption: "grid",
+
+  // Query
+  entityQueryValues: defaultEntityQueryValues,
 
   // Auth
   profile: defaultProfile,
@@ -220,14 +232,17 @@ const generalSlice = createSlice({
   name: "general",
   initialState,
   reducers: {
+    changeSelectedViewOption(state, action: PayloadAction<"grid" | "list">) {
+      state.selectedViewOption = action.payload;
+    },
     setTemplateModalMessage(state, action: PayloadAction<string>) {
       state.templateModalMessage = action.payload;
     },
     changeInvalidJWT(state, action: PayloadAction<boolean>) {
       state.invalidJWT = action.payload;
     },
-    setSelectedCreateToolOption(state, action: PayloadAction<string>) {
-      state.selectedCreateToolOption = action.payload;
+    setSelectedEntityOption(state, action: PayloadAction<string>) {
+      state.selectedEntityOption = action.payload;
     },
     changeIsUserABot(state, action: PayloadAction<boolean>) {
       state.isUserABot = action.payload;
@@ -238,6 +253,12 @@ const generalSlice = createSlice({
     updateTemplateProfile(state, action: PayloadAction<ObjectKeyValueType>) {
       state.templateProfile = {
         ...state.templateProfile,
+        [action.payload.key]: action.payload.value,
+      };
+    },
+    updateEntityQueryValues(state, action: PayloadAction<ObjectKeyValueType>) {
+      state.entityQueryValues = {
+        ...state.entityQueryValues,
         [action.payload.key]: action.payload.value,
       };
     },
@@ -481,10 +502,16 @@ export const selectIsModalUsedWhenLoading = (state: State) =>
 
 export const selectIsUserABot = (state: State) => state.general.isUserABot;
 
-export const selectSelectedCreateToolOption = (state: State) =>
-  state.general.selectedCreateToolOption;
+export const selectSelectedEntityOption = (state: State) =>
+  state.general.selectedEntityOption;
 
 export const selectInvalidJWT = (state: State) => state.general.invalidJWT;
+
+export const selectSelectedViewOption = (state: State) =>
+  state.general.selectedViewOption;
+
+export const selectEntityQueryValues = (state: State) =>
+  state.general.entityQueryValues;
 
 export const {
   changeIsSidebarOpened,
@@ -494,9 +521,11 @@ export const {
   manipulateLoadingCreateProfile,
   manipulateLoadingLoginProfile,
   changeIsUserABot,
-  setSelectedCreateToolOption,
+  setSelectedEntityOption,
   changeInvalidJWT,
   setTemplateModalMessage,
+  changeSelectedViewOption,
+  updateEntityQueryValues,
 } = generalSlice.actions;
 
 export default generalSlice.reducer;

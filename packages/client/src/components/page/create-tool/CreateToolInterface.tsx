@@ -4,7 +4,7 @@ import createToolStyles from "../../../scss/pages/CreateTool.module.scss";
 import { ReactElement } from "react";
 // Redux
 import { useAppSelector } from "@/hooks/redux";
-import { selectSelectedCreateToolOption } from "@/redux/slices/generalSlice";
+import { selectSelectedEntityOption } from "@/redux/slices/generalSlice";
 // Components
 import CreateIngredientInterface from "./interfaces/CreateIngredientInterface";
 import CreateUtensilInterface from "./interfaces/CreateUtensilInterface";
@@ -14,9 +14,7 @@ import CreateInstanceTemplateInterface from "./interfaces/CreateInstanceTemplate
 import CreateMealPrepPlanInterface from "./interfaces/CreateMealPrepPlanInterface";
 
 const CreateToolInterface = () => {
-  const selectedCreateToolOption = useAppSelector(
-    selectSelectedCreateToolOption
-  );
+  const selectedCreateToolOption = useAppSelector(selectSelectedEntityOption);
 
   let shownInterface: ReactElement = <CreateIngredientInterface />;
   switch (selectedCreateToolOption) {

@@ -1,0 +1,30 @@
+@use "../abstracts" as *;
+
+.multiViewToolContainer {
+  @include pageLayout();
+}
+
+.multiViewToolContent {
+  @include flexCenter(column);
+  width: 100%;
+  padding-top: 128px;
+  padding-bottom: 64px;
+  background-image: url($authFormPageTemplateFormBackgroundUrl);
+}
+
+.multiViewToolOptionsContainer {
+  @include flexCenter(column);
+  width: 100%;
+}
+
+.multiViewEntitiesContainer {
+  @include flexCenter(column);
+  list-style: none;
+  width: 100%;
+  gap: 0.5rem;
+  margin-top: 4rem;
+
+  li {
+    width: 100%;
+  }
+}

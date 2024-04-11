@@ -31,6 +31,8 @@ type InitialStateType = {
   mealPrepPlanFormModalErrorMessage: string;
 
   numberOfInstanceTemplates: number;
+
+  loadingGetUserMealPrepPlans: LoadingStateType;
 };
 
 export const mealPrepPlansAdapter = createEntityAdapter<MealPrepPlan>({
@@ -42,6 +44,7 @@ const initialState = mealPrepPlansAdapter.getInitialState({
   loadingCreateMealPrepPlan: "IDLE",
   mealPrepPlanFormModalErrorMessage: "Default Message",
   numberOfInstanceTemplates: 0,
+  loadingGetUserMealPrepPlans: "IDLE",
 }) as EntityState<MealPrepPlan, string> & InitialStateType;
 
 type CreateMealPrepPlanBody = {
@@ -69,6 +72,21 @@ export const createMealPrepPlan = createAsyncThunk<
   }
 );
 
+export const getAllUserMealPrepPlans = createAsyncThunk<
+  MealPrepPlanTemplate[] | AxiosError,
+  string
+>("mealPrepPlans/getAllUserMealPrepPlans", async (userId) => {
+  try {
+    const { data } = await axiosInstance.get(
+      `/mealPrepPlans?userId=${userId}&userMealPrepPlans=true`
+    );
+    return data.mealPrepPlans as MealPrepPlanTemplate[];
+  } catch (error) {
+    console.log(error);
+    return error as AxiosError;
+  }
+});
+
 const mealPrepPlansSlice = createSlice({
   name: "mealPrepPlans",
   initialState,
@@ -94,6 +112,19 @@ const mealPrepPlansSlice = createSlice({
   },
   extraReducers(builder) {
     builder
+      .addCase(getAllUserMealPrepPlans.pending, (state, action) => {
+        state.loadingGetUserMealPrepPlans = "PENDING";
+      })
+      .addCase(getAllUserMealPrepPlans.fulfilled, (state, action) => {
+        const mealPrepPlans = action.payload as MealPrepPlan[];
+
+        if (mealPrepPlans.length >= 1) {
+          state.loadingGetUserMealPrepPlans = "SUCCEDED";
+          mealPrepPlansAdapter.upsertMany(state, mealPrepPlans);
+        } else {
+          state.loadingGetUserMealPrepPlans = "FAILED";
+        }
+      })
       .addCase(createMealPrepPlan.pending, (state, action) => {
         state.loadingCreateMealPrepPlan = "PENDING";
       })
@@ -135,6 +166,9 @@ export const selectMealPrepPlanFormModalErrorMessage = (state: State) =>
 
 export const selectNumberOfInstanceTemplates = (state: State) =>
   state.mealPrepPlans.numberOfInstanceTemplates;
+
+export const selectLoadingGetUserMealPrepPlans = (state: State) =>
+  state.mealPrepPlans.loadingGetUserMealPrepPlans;
 
 export const {
   updateTemplateMealPrepPlan,

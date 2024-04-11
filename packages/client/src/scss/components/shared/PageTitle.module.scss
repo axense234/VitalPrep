@@ -15,6 +15,7 @@
   }
 
   #{&}__header {
+    @include flexCenter(column);
     margin-bottom: $pageTitleHeaderMarginBottom;
     h1 {
       @include h1Laptop();

@@ -8,9 +8,23 @@ import { InstanceTemplate, MealPrepPlan } from "@prisma/client";
 // Utils
 import { deleteCache, getOrSetCache, setCache } from "../utils/redis";
 
+type MealPrepPlanQueryObject = {
+  userId?: string;
+};
+
 const getAllMealPrepPlans = async (req: Request, res: Response) => {
+  const userId = req.query.userId;
+  const getAllUserMealPrepPlans = req.query.userMealPrepPlans;
+
+  const queryObject: MealPrepPlanQueryObject = {};
+
+  if (getAllUserMealPrepPlans) {
+    queryObject.userId = userId as string;
+  }
+
   const foundMealPrepPlans = await getOrSetCache("mealPrepPlans", async () => {
     const mealPrepPlans = await MealPrepPlanClient.findMany({
+      where: queryObject,
       include: {
         macros: true,
         instanceTemplates: true,

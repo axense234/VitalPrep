@@ -1,0 +1,69 @@
+@use "../../abstracts" as *;
+
+.sortingOptionsContainer {
+  @include flexCenter(row);
+  width: 100%;
+  height: 160px;
+  background-color: getColor("primary-1");
+
+  section {
+    @include flexCenter(row);
+    transition: background-color 0.135s linear;
+    padding: 2rem 0;
+    width: 50%;
+    height: 100%;
+    background-color: getColor("secondary-color-2.1");
+    gap: 2rem;
+
+    label {
+      font-weight: bolder;
+      font-size: 2rem;
+      color: getColor("tan-color-extra-light");
+      letter-spacing: 1.5px;
+    }
+
+    input {
+      background-color: getColor("tan-color");
+      border: 1.5px solid getColor("black-100-1");
+      width: 30%;
+      max-width: 400px;
+      font-size: 1rem;
+      padding: 0.5rem;
+      font-weight: 550;
+      word-wrap: break-word;
+      transition: background-color 0.135s linear;
+
+      &:hover {
+        background-color: getColor("tan-color-dark");
+      }
+    }
+
+    select {
+      background-color: getColor("tan-color");
+      border: 1.5px solid getColor("black-100-1");
+      width: auto;
+      max-width: 400px;
+      font-size: 0.8rem;
+      padding: 0.5rem;
+      font-weight: 550;
+      word-wrap: break-word;
+      transition: background-color 0.135s linear;
+
+      &:hover {
+        background-color: getColor("tan-color-dark");
+      }
+    }
+
+    button {
+      @include flexCenter(row);
+      font-size: 2rem;
+      background-color: inherit;
+      border: none;
+      transition: $crispyTransformTransition;
+    }
+
+    &:nth-of-type(2) {
+      background-color: getColor("secondary-color-3.4");
+    }
+  }
+}
