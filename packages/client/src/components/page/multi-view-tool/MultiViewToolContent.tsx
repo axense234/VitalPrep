@@ -1,11 +1,7 @@
 // SCSS
 import multiViewToolStyles from "../../../scss/pages/MultiViewTool.module.scss";
 // Components
-import EntityComponent, {
-  EntityType,
-} from "@/components/shared/entity/EntityComponent";
-// Helpers
-import selectEntityById from "@/helpers/selectEntityById";
+import EntityComponent from "@/components/shared/entity/EntityComponent";
 // React
 import { FC } from "react";
 
@@ -17,22 +13,23 @@ const MultiViewToolContent: FC<{
     | "dayTemplate"
     | "instanceTemplate"
     | "mealPrepPlan";
-  entityIds: string[];
+  entityIds: string[] | undefined;
 }> = ({ entityType, entityIds }) => {
   return (
     <ul className={multiViewToolStyles.multiViewEntitiesContainer}>
-      {entityIds?.map((entityId) => {
-        return (
-          <li key={entityId}>
-            <EntityComponent
-              clicked={true}
-              entity={selectEntityById(entityId, entityType) as EntityType}
-              entityType={entityType}
-              id={entityId}
-            />
-          </li>
-        );
-      })}
+      {entityIds &&
+        entityIds.length > 0 &&
+        entityIds.map((entityId) => {
+          return (
+            <li key={entityId}>
+              <EntityComponent
+                clicked={true}
+                entityType={entityType}
+                entityId={entityId}
+              />
+            </li>
+          );
+        })}
     </ul>
   );
 };

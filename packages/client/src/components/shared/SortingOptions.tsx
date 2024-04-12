@@ -9,7 +9,9 @@ import {
   updateEntityQueryValues,
 } from "@/redux/slices/generalSlice";
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
+// Data
 import { entitySearchByOptions, entitySortingOptions } from "@/data";
+// Types
 import EntitySortingOptions from "@/core/types/entity/EntitySortingOptions";
 
 const SortingOptions = () => {

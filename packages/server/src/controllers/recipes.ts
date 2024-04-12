@@ -13,29 +13,61 @@ type RecipeQueryObject = {
 };
 
 const getAllRecipes = async (req: Request, res: Response) => {
-  const userId = req.query.userId;
-  const getAllUserRecipes = req.query.userRecipes;
+  const {
+    userRecipes,
+    sortByKey,
+    sortByOrder,
+    searchByKey,
+    searchByValue,
+    userId,
+  } = req.query;
 
   const queryObject: RecipeQueryObject = {};
+  const orderByObject: any = {};
 
-  if (getAllUserRecipes) {
+  if (userRecipes) {
     queryObject.userId = userId as string;
   }
 
-  const foundRecipes = await getOrSetCache("recipes", async () => {
-    const recipes = await RecipeClient.findMany({
-      where: queryObject,
-      include: {
-        macros: true,
-        utensils: true,
-        ingredients: true,
-        dayTemplates: true,
-        recipeTutorial: true,
-        user: true,
-      },
-    });
-    return recipes as Recipe[];
+  if (sortByKey === "numberOfDayTemplates") {
+    orderByObject.dayTemplates = { _count: sortByOrder };
+  } else if (sortByKey) {
+    orderByObject[sortByKey as string] = (sortByOrder as string) || "asc";
+  }
+
+  if (searchByKey) {
+    queryObject[searchByKey as string] = {
+      contains: (searchByValue as string) || "",
+    };
+  }
+
+  const foundRecipes = await RecipeClient.findMany({
+    where: queryObject,
+    orderBy: orderByObject,
+    include: {
+      macros: true,
+      utensils: true,
+      ingredients: true,
+      dayTemplates: true,
+      recipeTutorial: true,
+      user: true,
+    },
   });
+
+  // const foundRecipes = await getOrSetCache("recipes", async () => {
+  //   const recipes = await RecipeClient.findMany({
+  //     where: queryObject,
+  //     include: {
+  //       macros: true,
+  //       utensils: true,
+  //       ingredients: true,
+  //       dayTemplates: true,
+  //       recipeTutorial: true,
+  //       user: true,
+  //     },
+  //   });
+  //   return recipes as Recipe[];
+  // });
 
   if (foundRecipes.length < 1) {
     return res

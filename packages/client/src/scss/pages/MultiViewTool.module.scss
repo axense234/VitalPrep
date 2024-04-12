@@ -21,8 +21,9 @@
   @include flexCenter(column);
   list-style: none;
   width: 100%;
-  gap: 0.5rem;
   margin-top: 4rem;
+  gap: 1rem;
+  padding: 1rem;
 
   li {
     width: 100%;

@@ -1,13 +1,13 @@
 @use "../../abstracts" as *;
 
-.ingredientComponent {
+.entityComponent {
   @include flexCenter(row);
   width: 100%;
   height: 80px;
   background-color: getColor("primary-1");
 }
 
-.ingredientComponentHeader {
+.entityComponentHeader {
   @include flexCenter(row);
   justify-content: flex-start;
   margin-right: auto;
@@ -24,7 +24,7 @@
   }
 }
 
-.ingredientComponentDetails {
+.entityComponentDetails {
   @include flexCenter(row);
   justify-content: flex-end;
   gap: 2rem;

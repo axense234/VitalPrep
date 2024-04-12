@@ -1,37 +1,16 @@
-// SCSS
-import entityComponentStyles from "../../../scss/components/shared/EntityComponents.module.scss";
 // React
-import { FC } from "react";
-// Next
-import Image from "next/image";
-// Data
-import { defaultIngredientImageUrl } from "@/data";
+import { FC, useEffect } from "react";
 // Types
-import {
-  DayTemplate,
-  Ingredient,
-  InstanceTemplate,
-  MealPrepPlan,
-  Recipe,
-  Utensil,
-} from "@prisma/client";
-import IngredientTemplate from "@/core/types/entity/mutation/IngredientTemplate";
-import DayTemplateTemplate from "@/core/types/entity/mutation/DayTemplateTemplate";
-import MealPrepPlanTemplate from "@/core/types/entity/mutation/MealPrepPlanTemplate";
-import InstanceTemplateTemplate from "@/core/types/entity/mutation/InstanceTemplateTemplate";
+import EntityComponentProps from "@/core/interfaces/entity/EntityComponentProps";
+// Components
+import IngredientComponent from "./IngredientComponent";
+import UtensilComponent from "./UtensilComponent";
+import RecipeComponent from "./RecipeComponent";
+import DayTemplateComponent from "./DayTemplateComponent";
+import InstanceTemplateComponent from "./InstanceTemplateComponent";
+import MealPrepPlanComponent from "./MealPrepPlanComponent";
 
-export type EntityType =
-  | IngredientTemplate
-  | Utensil
-  | Recipe
-  | DayTemplate
-  | InstanceTemplate
-  | MealPrepPlan;
-
-export interface EntityComponentProps {
-  id: string;
-  clicked: boolean;
-  entity: EntityType;
+type EntityComponentSchemeProps = EntityComponentProps & {
   entityType:
     | "ingredient"
     | "utensil"
@@ -39,104 +18,74 @@ export interface EntityComponentProps {
     | "dayTemplate"
     | "instanceTemplate"
     | "mealPrepPlan";
-}
+};
 
-const EntityComponent: FC<EntityComponentProps> = ({
+const EntityComponent: FC<EntityComponentSchemeProps> = ({
   clicked,
-  entity,
   entityType,
+  entityId,
 }) => {
-  const { name, imageUrl } = entity;
-  const { macros } = entity as IngredientTemplate;
-
-  let entityDisplayedInformation = (
-    <div className={entityComponentStyles.ingredientComponentDetails}>
-      <p>{macros?.calories} calories</p>
-      <p>{macros?.proteinAmount}g protein </p>
-      <p>{macros?.carbsAmount}g carbs</p>
-      <p>{macros?.fatsAmount}g fats</p>
-      <p>
-        {(entity as IngredientTemplate).enabled ? `ENABLED ✔️` : `DISABLED ❌`}
-      </p>
-    </div>
+  let entityComponentShown = useSelectEntityComponentShown(
+    entityType,
+    clicked,
+    entityId
   );
+
+  if (entityComponentShown) {
+    return entityComponentShown;
+  }
+  return null;
+};
+
+const useSelectEntityComponentShown = (
+  entityType:
+    | "ingredient"
+    | "utensil"
+    | "recipe"
+    | "dayTemplate"
+    | "instanceTemplate"
+    | "mealPrepPlan",
+  clicked: boolean,
+  entityId: string
+) => {
+  let entityComponentShown = null;
 
   switch (entityType) {
     case "ingredient":
-      entityDisplayedInformation = (
-        <div className={entityComponentStyles.ingredientComponentDetails}>
-          <p>{macros?.calories} calories</p>
-          <p>{macros?.proteinAmount}g protein </p>
-          <p>{macros?.carbsAmount}g carbs</p>
-          <p>{macros?.fatsAmount}g fats</p>
-          <p>
-            {(entity as IngredientTemplate).enabled
-              ? `ENABLED ✔️`
-              : `DISABLED ❌`}
-          </p>
-        </div>
+      entityComponentShown = (
+        <IngredientComponent clicked={clicked} entityId={entityId} />
       );
       break;
     case "utensil":
-      entityDisplayedInformation = (
-        <div className={entityComponentStyles.ingredientComponentDetails}>
-          <p>{(entity as Utensil).enabled ? `ENABLED ✔️` : `DISABLED ❌`}</p>
-        </div>
+      entityComponentShown = (
+        <UtensilComponent clicked={clicked} entityId={entityId} />
       );
       break;
     case "recipe":
-      entityDisplayedInformation = (
-        <div className={entityComponentStyles.ingredientComponentDetails}>
-          <p>{macros?.calories} calories</p>
-          <p>{macros?.proteinAmount}g protein </p>
-          <p>{macros?.carbsAmount}g carbs</p>
-          <p>{macros?.fatsAmount}g fats</p>
-        </div>
+      entityComponentShown = (
+        <RecipeComponent clicked={clicked} entityId={entityId} />
       );
       break;
     case "dayTemplate":
-      const dayTemplate = entity as DayTemplateTemplate;
-      entityDisplayedInformation = (
-        <div className={entityComponentStyles.ingredientComponentDetails}>
-          <p>{dayTemplate.recipes.length || "0"} meals</p>
-          <p>{macros?.calories} calories</p>
-        </div>
+      entityComponentShown = (
+        <DayTemplateComponent clicked={clicked} entityId={entityId} />
       );
       break;
     case "instanceTemplate":
-      const instanceTemplate = entity as InstanceTemplateTemplate;
-      entityDisplayedInformation = (
-        <div className={entityComponentStyles.ingredientComponentDetails}>
-          <p>{instanceTemplate.coverage || "0"} days covered</p>
-          <p>
-            {instanceTemplate.dayTemplates.length || "0"} day templates used
-          </p>
-        </div>
+      entityComponentShown = (
+        <InstanceTemplateComponent clicked={clicked} entityId={entityId} />
+      );
+      break;
+    case "mealPrepPlan":
+      entityComponentShown = (
+        <MealPrepPlanComponent clicked={clicked} entityId={entityId} />
       );
       break;
     default:
-      break;
+      throw new Error("Invalid entity type!");
   }
 
-  return (
-    <div
-      className={entityComponentStyles.ingredientComponent}
-      style={{ filter: clicked ? "brightness(1)" : "brightness(0.5)" }}
-    >
-      <header className={entityComponentStyles.ingredientComponentHeader}>
-        <Image
-          alt={`${name} Image`}
-          src={imageUrl || defaultIngredientImageUrl}
-          title={name}
-          aria-label={name}
-          width={80}
-          height={80}
-        />
-        <h4>{name}</h4>
-      </header>
-      {entityDisplayedInformation}
-    </div>
-  );
+  return entityComponentShown;
 };
 
 export default EntityComponent;

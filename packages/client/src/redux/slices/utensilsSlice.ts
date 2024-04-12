@@ -16,6 +16,7 @@ import { Utensil } from "@prisma/client";
 // Axios
 import { AxiosError } from "axios";
 import axiosInstance from "@/utils/axios";
+import EntityQueryValues from "@/core/types/entity/EntityQueryValues";
 
 type ObjectKeyValueType = {
   key: string;
@@ -68,11 +69,13 @@ export const createUtensil = createAsyncThunk<
 
 export const getAllUserUtensils = createAsyncThunk<
   Utensil[] | AxiosError,
-  string
->("utensils/getAllUserUtensils", async (userId) => {
+  { userId: string; entityQueryValues: EntityQueryValues }
+>("utensils/getAllUserUtensils", async ({ userId, entityQueryValues }) => {
   try {
+    const { searchByKey, searchByValue, sortByKey, sortByOrder } =
+      entityQueryValues;
     const { data } = await axiosInstance.get(
-      `/utensils?userId=${userId}&userUtensils=true`
+      `/utensils?userId=${userId}&userUtensils=true&searchByKey=${searchByKey}&searchByValue=${searchByValue}&sortByKey=${sortByKey}&sortByOrder=${sortByOrder}`
     );
     return data.utensils as Utensil[];
   } catch (error) {
@@ -87,6 +90,12 @@ const utensilsSlice = createSlice({
   reducers: {
     updateLoadingCreateUtensil(state, action: PayloadAction<LoadingStateType>) {
       state.loadingCreateUtensil = action.payload;
+    },
+    updateLoadingGetUserUtensils(
+      state,
+      action: PayloadAction<LoadingStateType>
+    ) {
+      state.loadingGetUserUtensils = action.payload;
     },
     updateTemplateUtensil(state, action: PayloadAction<ObjectKeyValueType>) {
       state.templateUtensil = {
@@ -105,7 +114,8 @@ const utensilsSlice = createSlice({
 
         if (utensils.length >= 1) {
           state.loadingGetUserUtensils = "SUCCEDED";
-          utensilsAdapter.upsertMany(state, utensils);
+          utensilsAdapter.removeAll(state);
+          utensilsAdapter.addMany(state, utensils);
         } else {
           state.loadingGetUserUtensils = "FAILED";
         }
@@ -152,7 +162,10 @@ export const selectUtensilFormModalErrorMessage = (state: State) =>
 export const selectLoadingGetUserUtensils = (state: State) =>
   state.utensils.loadingGetUserUtensils;
 
-export const { updateTemplateUtensil, updateLoadingCreateUtensil } =
-  utensilsSlice.actions;
+export const {
+  updateTemplateUtensil,
+  updateLoadingCreateUtensil,
+  updateLoadingGetUserUtensils,
+} = utensilsSlice.actions;
 
 export default utensilsSlice.reducer;

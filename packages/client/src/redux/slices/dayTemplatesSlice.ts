@@ -16,6 +16,7 @@ import { DayTemplate } from "@prisma/client";
 // Axios
 import { AxiosError } from "axios";
 import axiosInstance from "@/utils/axios";
+import EntityQueryValues from "@/core/types/entity/EntityQueryValues";
 
 type ObjectKeyValueType = {
   key: string;
@@ -71,23 +72,34 @@ export const createDayTemplate = createAsyncThunk<
 
 export const getAllUserDayTemplates = createAsyncThunk<
   DayTemplate[] | AxiosError,
-  string
->("dayTemplates/getAllUserDayTemplates", async (userId) => {
-  try {
-    const { data } = await axiosInstance.get(
-      `/dayTemplates?userId=${userId}&userDayTemplates=true`
-    );
-    return data.dayTemplates as DayTemplate[];
-  } catch (error) {
-    console.log(error);
-    return error as AxiosError;
+  { userId: string; entityQueryValues: EntityQueryValues }
+>(
+  "dayTemplates/getAllUserDayTemplates",
+  async ({ userId, entityQueryValues }) => {
+    try {
+      const { searchByKey, searchByValue, sortByKey, sortByOrder } =
+        entityQueryValues;
+      const { data } = await axiosInstance.get(
+        `/dayTemplates?userId=${userId}&userDayTemplates=true&searchByKey=${searchByKey}&searchByValue=${searchByValue}&sortByKey=${sortByKey}&sortByOrder=${sortByOrder}`
+      );
+      return data.dayTemplates as DayTemplate[];
+    } catch (error) {
+      console.log(error);
+      return error as AxiosError;
+    }
   }
-});
+);
 
 const dayTemplatesSlice = createSlice({
   name: "dayTemplates",
   initialState,
   reducers: {
+    updateLoadingGetUserDayTemplates(
+      state,
+      action: PayloadAction<LoadingStateType>
+    ) {
+      state.loadingGetUserDayTemplates = action.payload;
+    },
     updateNumberOfMeals(state, action: PayloadAction<number>) {
       state.numberOfMeals = action.payload as number;
     },
@@ -117,7 +129,8 @@ const dayTemplatesSlice = createSlice({
 
         if (dayTemplates.length >= 1) {
           state.loadingGetUserDayTemplates = "SUCCEDED";
-          dayTemplatesAdapter.upsertMany(state, dayTemplates);
+          dayTemplatesAdapter.removeAll(state);
+          dayTemplatesAdapter.addMany(state, dayTemplates);
         } else {
           state.loadingGetUserDayTemplates = "FAILED";
         }
@@ -171,6 +184,7 @@ export const {
   updateTemplateDayTemplate,
   updateLoadingCreateDayTemplate,
   updateNumberOfMeals,
+  updateLoadingGetUserDayTemplates,
 } = dayTemplatesSlice.actions;
 
 export default dayTemplatesSlice.reducer;

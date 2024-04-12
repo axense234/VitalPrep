@@ -13,31 +13,61 @@ type InstanceTemplateQueryObject = {
 };
 
 const getAllInstanceTemplates = async (req: Request, res: Response) => {
-  const userId = req.query.userId;
-  const getAllUserInstanceTemplates = req.query.userInstanceTemplates;
+  const {
+    userInstanceTemplates,
+    sortByKey,
+    sortByOrder,
+    searchByKey,
+    searchByValue,
+    userId,
+  } = req.query;
 
   const queryObject: InstanceTemplateQueryObject = {};
+  const orderByObject: any = {};
 
-  if (getAllUserInstanceTemplates) {
+  if (userInstanceTemplates) {
     queryObject.userId = userId as string;
   }
 
-  const foundInstanceTemplates = await getOrSetCache(
-    "instanceTemplates",
-    async () => {
-      const instanceTemplates = await InstanceTemplateClient.findMany({
-        where: queryObject,
-        include: {
-          macros: true,
-          dayTemplates: true,
-          mealPrepPlans: true,
-          mealPrepLogs: true,
-          user: true,
-        },
-      });
-      return instanceTemplates as InstanceTemplate[];
-    }
-  );
+  if (sortByKey === "numberOfMealPrepPlans") {
+    orderByObject.mealPrepPlans = { _count: sortByOrder };
+  } else if (sortByKey) {
+    orderByObject[sortByKey as string] = (sortByOrder as string) || "asc";
+  }
+
+  if (searchByKey) {
+    queryObject[searchByKey as string] = {
+      contains: (searchByValue as string) || "",
+    };
+  }
+
+  const foundInstanceTemplates = await InstanceTemplateClient.findMany({
+    where: queryObject,
+    include: {
+      macros: true,
+      dayTemplates: true,
+      mealPrepPlans: true,
+      mealPrepLogs: true,
+      user: true,
+    },
+  });
+
+  // const foundInstanceTemplates = await getOrSetCache(
+  //   "instanceTemplates",
+  //   async () => {
+  //     const instanceTemplates = await InstanceTemplateClient.findMany({
+  //       where: queryObject,
+  //       include: {
+  //         macros: true,
+  //         dayTemplates: true,
+  //         mealPrepPlans: true,
+  //         mealPrepLogs: true,
+  //         user: true,
+  //       },
+  //     });
+  //     return instanceTemplates as InstanceTemplate[];
+  //   }
+  // );
 
   if (foundInstanceTemplates.length < 1) {
     return res.status(StatusCodes.NOT_FOUND).json({

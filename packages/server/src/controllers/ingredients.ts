@@ -1,5 +1,5 @@
 // Express
-import { Response, Request } from "express";
+import { Response, Request, query } from "express";
 // Status Codes
 import { StatusCodes } from "http-status-codes";
 // Prisma
@@ -10,29 +10,60 @@ import { deleteCache, getOrSetCache, setCache } from "../utils/redis";
 
 type IngredientsQueryObject = {
   userId?: string;
+  searchByKey?: { contains: string };
 };
 
 const getAllIngredients = async (req: Request, res: Response) => {
-  const userId = req.query.userId;
-  const getAllUserIngredients = req.query.userIngredients;
+  const {
+    userIngredients,
+    sortByKey,
+    sortByOrder,
+    searchByKey,
+    searchByValue,
+    userId,
+  } = req.query;
 
   const queryObject: IngredientsQueryObject = {};
+  const orderByObject: any = {};
 
-  if (getAllUserIngredients) {
+  if (userIngredients) {
     queryObject.userId = userId as string;
   }
 
-  const foundIngredients = await getOrSetCache("ingredients", async () => {
-    const ingredients = await IngredientClient.findMany({
-      where: queryObject,
-      include: {
-        macros: true,
-        recipes: true,
-        user: true,
-      },
-    });
-    return ingredients as Ingredient[];
+  if (sortByKey === "numberOfRecipes") {
+    orderByObject.recipes = { _count: sortByOrder };
+  } else if (sortByKey) {
+    orderByObject[sortByKey as string] = (sortByOrder as string) || "asc";
+  }
+
+  if (searchByKey) {
+    queryObject[searchByKey as string] = {
+      contains: (searchByValue as string) || "",
+    };
+  }
+
+  const foundIngredients = await IngredientClient.findMany({
+    orderBy: orderByObject,
+    where: queryObject,
+    include: {
+      macros: true,
+      recipes: true,
+      user: true,
+    },
   });
+
+  // const foundIngredients = await getOrSetCache("ingredients", async () => {
+  //   const ingredients = await IngredientClient.findMany({
+  //     orderBy: orderByObject,
+  //     where: queryObject,
+  //     include: {
+  //       macros: true,
+  //       recipes: true,
+  //       user: true,
+  //     },
+  //   });
+  //   return ingredients as Ingredient[];
+  // });
 
   if (foundIngredients.length < 1) {
     return res

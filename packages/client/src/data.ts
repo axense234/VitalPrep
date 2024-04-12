@@ -290,12 +290,26 @@ export const defaultTemplateRecipe: RecipeTemplate = {
   utensils: [],
   writtenTutorial: "",
   videoTutorial: "",
+  macros: {
+    id: "blah",
+    calories: 200,
+    carbsAmount: 20,
+    proteinAmount: 20,
+    fatsAmount: 2,
+  },
 };
 
 export const defaultTemplateDayTemplate: DayTemplateTemplate = {
   name: "Chicken Tuesday",
   recipes: [],
   imageUrl: defaultDayTemplateImageUrl,
+  macros: {
+    id: "blah",
+    calories: 200,
+    carbsAmount: 20,
+    proteinAmount: 20,
+    fatsAmount: 2,
+  },
 };
 
 export const defaultTemplateInstanceTemplate: InstanceTemplateTemplate = {

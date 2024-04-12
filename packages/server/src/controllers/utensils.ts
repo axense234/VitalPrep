@@ -13,24 +13,51 @@ type UtensilsQueryObject = {
 };
 
 const getAllUtensils = async (req: Request, res: Response) => {
-  const userId = req.query.userId;
-  const getAllUserUtensils = req.query.userUtensils;
+  const {
+    userUtensils,
+    sortByKey,
+    sortByOrder,
+    searchByKey,
+    searchByValue,
+    userId,
+  } = req.query;
 
   const queryObject: UtensilsQueryObject = {};
+  const orderByObject: any = {};
 
-  if (getAllUserUtensils) {
+  if (userUtensils) {
     queryObject.userId = userId as string;
   }
 
-  const foundUtensils = await getOrSetCache("utensils", async () => {
-    const utensils = await UtensilClient.findMany({
-      include: {
-        recipes: true,
-        user: true,
-      },
-    });
-    return utensils as Utensil[];
+  if (sortByKey === "numberOfRecipes") {
+    orderByObject.recipes = { _count: sortByOrder };
+  } else if (sortByKey) {
+    orderByObject[sortByKey as string] = (sortByOrder as string) || "asc";
+  }
+
+  if (searchByKey) {
+    queryObject[searchByKey as string] = {
+      contains: (searchByValue as string) || "",
+    };
+  }
+  const foundUtensils = await UtensilClient.findMany({
+    orderBy: orderByObject,
+    where: queryObject,
+    include: {
+      recipes: true,
+      user: true,
+    },
   });
+
+  // const foundUtensils = await getOrSetCache("utensils", async () => {
+  //   const utensils = await UtensilClient.findMany({
+  //     include: {
+  //       recipes: true,
+  //       user: true,
+  //     },
+  //   });
+  //   return utensils as Utensil[];
+  // });
 
   if (foundUtensils.length < 1) {
     return res

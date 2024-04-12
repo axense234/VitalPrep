@@ -16,6 +16,7 @@ import { MealPrepPlan } from "@prisma/client";
 // Axios
 import { AxiosError } from "axios";
 import axiosInstance from "@/utils/axios";
+import EntityQueryValues from "@/core/types/entity/EntityQueryValues";
 
 type ObjectKeyValueType = {
   key: string;
@@ -74,23 +75,34 @@ export const createMealPrepPlan = createAsyncThunk<
 
 export const getAllUserMealPrepPlans = createAsyncThunk<
   MealPrepPlanTemplate[] | AxiosError,
-  string
->("mealPrepPlans/getAllUserMealPrepPlans", async (userId) => {
-  try {
-    const { data } = await axiosInstance.get(
-      `/mealPrepPlans?userId=${userId}&userMealPrepPlans=true`
-    );
-    return data.mealPrepPlans as MealPrepPlanTemplate[];
-  } catch (error) {
-    console.log(error);
-    return error as AxiosError;
+  { userId: string; entityQueryValues: EntityQueryValues }
+>(
+  "mealPrepPlans/getAllUserMealPrepPlans",
+  async ({ userId, entityQueryValues }) => {
+    try {
+      const { searchByKey, searchByValue, sortByKey, sortByOrder } =
+        entityQueryValues;
+      const { data } = await axiosInstance.get(
+        `/mealPrepPlans?userId=${userId}&userMealPrepPlans=true&searchByKey=${searchByKey}&searchByValue=${searchByValue}&sortByKey=${sortByKey}&sortByOrder=${sortByOrder}`
+      );
+      return data.mealPrepPlans as MealPrepPlanTemplate[];
+    } catch (error) {
+      console.log(error);
+      return error as AxiosError;
+    }
   }
-});
+);
 
 const mealPrepPlansSlice = createSlice({
   name: "mealPrepPlans",
   initialState,
   reducers: {
+    updateLoadingGetUserMealPrepPlans(
+      state,
+      action: PayloadAction<LoadingStateType>
+    ) {
+      state.loadingGetUserMealPrepPlans = action.payload;
+    },
     updateNumberOfInstanceTemplates(state, action: PayloadAction<number>) {
       state.numberOfInstanceTemplates = action.payload as number;
     },
@@ -120,7 +132,8 @@ const mealPrepPlansSlice = createSlice({
 
         if (mealPrepPlans.length >= 1) {
           state.loadingGetUserMealPrepPlans = "SUCCEDED";
-          mealPrepPlansAdapter.upsertMany(state, mealPrepPlans);
+          mealPrepPlansAdapter.removeAll(state);
+          mealPrepPlansAdapter.addMany(state, mealPrepPlans);
         } else {
           state.loadingGetUserMealPrepPlans = "FAILED";
         }
@@ -174,6 +187,7 @@ export const {
   updateTemplateMealPrepPlan,
   updateLoadingCreateMealPrepPlan,
   updateNumberOfInstanceTemplates,
+  updateLoadingGetUserMealPrepPlans,
 } = mealPrepPlansSlice.actions;
 
 export default mealPrepPlansSlice.reducer;

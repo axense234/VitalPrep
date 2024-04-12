@@ -10,7 +10,10 @@ import MultiViewToolOptions from "@/components/page/multi-view-tool/MultiViewToo
 import MultiViewToolContent from "@/components/page/multi-view-tool/MultiViewToolContent";
 // Redux
 import { useAppSelector } from "@/hooks/redux";
-import { selectSelectedEntityOption } from "@/redux/slices/generalSlice";
+import {
+  selectProfile,
+  selectSelectedEntityOption,
+} from "@/redux/slices/generalSlice";
 // Hooks
 import useGetMultiViewToolContentEntities from "@/hooks/useGetMultiViewToolContentEntities";
 // Helpers
@@ -18,9 +21,10 @@ import selectEntityIds from "@/helpers/selectEntityIds";
 
 const MultiViewTool = () => {
   useAuthorization();
+  const profile = useAppSelector(selectProfile);
 
   const entityType = useAppSelector(selectSelectedEntityOption);
-  useGetMultiViewToolContentEntities(entityType);
+  useGetMultiViewToolContentEntities(entityType, profile.id);
 
   const entityIds = selectEntityIds(entityType);
 
@@ -42,7 +46,7 @@ const MultiViewTool = () => {
               | "instanceTemplate"
               | "mealPrepPlan"
           }
-          entityIds={entityIds || []}
+          entityIds={entityIds}
         />
       </div>
     </div>

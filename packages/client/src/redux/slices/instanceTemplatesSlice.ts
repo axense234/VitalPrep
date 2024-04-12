@@ -16,6 +16,7 @@ import { InstanceTemplate } from "@prisma/client";
 // Axios
 import { AxiosError } from "axios";
 import axiosInstance from "@/utils/axios";
+import EntityQueryValues from "@/core/types/entity/EntityQueryValues";
 
 type ObjectKeyValueType = {
   key: string;
@@ -71,23 +72,34 @@ export const createInstanceTemplate = createAsyncThunk<
 
 export const getAllUserInstanceTemplates = createAsyncThunk<
   InstanceTemplate[] | AxiosError,
-  string
->("instanceTemplates/getAllUserInstanceTemplates", async (userId) => {
-  try {
-    const { data } = await axiosInstance.get(
-      `/instanceTemplates?userId=${userId}&userInstanceTemplates=true`
-    );
-    return data.instanceTemplates as InstanceTemplate[];
-  } catch (error) {
-    console.log(error);
-    return error as AxiosError;
+  { userId: string; entityQueryValues: EntityQueryValues }
+>(
+  "instanceTemplates/getAllUserInstanceTemplates",
+  async ({ userId, entityQueryValues }) => {
+    try {
+      const { searchByKey, searchByValue, sortByKey, sortByOrder } =
+        entityQueryValues;
+      const { data } = await axiosInstance.get(
+        `/instanceTemplates?userId=${userId}&userInstanceTemplates=true&searchByKey=${searchByKey}&searchByValue=${searchByValue}&sortByKey=${sortByKey}&sortByOrder=${sortByOrder}`
+      );
+      return data.instanceTemplates as InstanceTemplate[];
+    } catch (error) {
+      console.log(error);
+      return error as AxiosError;
+    }
   }
-});
+);
 
 const instanceTemplatesSlice = createSlice({
   name: "instanceTemplates",
   initialState,
   reducers: {
+    updateLoadingGetUserInstanceTemplates(
+      state,
+      action: PayloadAction<LoadingStateType>
+    ) {
+      state.loadingGetUserInstanceTemplates = action.payload;
+    },
     updateLoadingCreateInstanceTemplate(
       state,
       action: PayloadAction<LoadingStateType>
@@ -114,7 +126,8 @@ const instanceTemplatesSlice = createSlice({
 
         if (instanceTemplates.length >= 1) {
           state.loadingGetUserInstanceTemplates = "SUCCEDED";
-          instanceTemplatesAdapter.upsertMany(state, instanceTemplates);
+          instanceTemplatesAdapter.removeAll(state);
+          instanceTemplatesAdapter.addMany(state, instanceTemplates);
         } else {
           state.loadingGetUserInstanceTemplates = "FAILED";
         }
@@ -166,6 +179,7 @@ export const selectLoadingGetUserInstanceTemplates = (state: State) =>
 export const {
   updateTemplateInstanceTemplate,
   updateLoadingCreateInstanceTemplate,
+  updateLoadingGetUserInstanceTemplates,
 } = instanceTemplatesSlice.actions;
 
 export default instanceTemplatesSlice.reducer;

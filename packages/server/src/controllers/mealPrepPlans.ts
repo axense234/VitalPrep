@@ -13,26 +13,54 @@ type MealPrepPlanQueryObject = {
 };
 
 const getAllMealPrepPlans = async (req: Request, res: Response) => {
-  const userId = req.query.userId;
-  const getAllUserMealPrepPlans = req.query.userMealPrepPlans;
+  const {
+    userMealPrepPlans,
+    sortByKey,
+    sortByOrder,
+    searchByKey,
+    searchByValue,
+    userId,
+  } = req.query;
 
   const queryObject: MealPrepPlanQueryObject = {};
+  const orderByObject: any = {};
 
-  if (getAllUserMealPrepPlans) {
+  if (userMealPrepPlans) {
     queryObject.userId = userId as string;
   }
 
-  const foundMealPrepPlans = await getOrSetCache("mealPrepPlans", async () => {
-    const mealPrepPlans = await MealPrepPlanClient.findMany({
-      where: queryObject,
-      include: {
-        macros: true,
-        instanceTemplates: true,
-        user: true,
-      },
-    });
-    return mealPrepPlans as MealPrepPlan[];
+  if (sortByKey === "numberOfRecipes") {
+    orderByObject.recipes = { _count: sortByOrder };
+  } else if (sortByKey) {
+    orderByObject[sortByKey as string] = (sortByOrder as string) || "asc";
+  }
+
+  if (searchByKey) {
+    queryObject[searchByKey as string] = {
+      contains: (searchByValue as string) || "",
+    };
+  }
+
+  const foundMealPrepPlans = await MealPrepPlanClient.findMany({
+    where: queryObject,
+    include: {
+      macros: true,
+      instanceTemplates: true,
+      user: true,
+    },
   });
+
+  // const foundMealPrepPlans = await getOrSetCache("mealPrepPlans", async () => {
+  //   const mealPrepPlans = await MealPrepPlanClient.findMany({
+  //     where: queryObject,
+  //     include: {
+  //       macros: true,
+  //       instanceTemplates: true,
+  //       user: true,
+  //     },
+  //   });
+  //   return mealPrepPlans as MealPrepPlan[];
+  // });
 
   if (foundMealPrepPlans.length < 1) {
     return res.status(StatusCodes.NOT_FOUND).json({

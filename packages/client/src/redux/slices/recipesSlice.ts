@@ -16,6 +16,7 @@ import { Recipe } from "@prisma/client";
 // Axios
 import { AxiosError } from "axios";
 import axiosInstance from "@/utils/axios";
+import EntityQueryValues from "@/core/types/entity/EntityQueryValues";
 
 type ObjectKeyValueType = {
   key: string;
@@ -90,11 +91,13 @@ export const createRecipe = createAsyncThunk<
 
 export const getAllUserRecipes = createAsyncThunk<
   Recipe[] | AxiosError,
-  string
->("recipes/getAllUserRecipes", async (userId) => {
+  { userId: string; entityQueryValues: EntityQueryValues }
+>("recipes/getAllUserRecipes", async ({ userId, entityQueryValues }) => {
   try {
+    const { searchByKey, searchByValue, sortByKey, sortByOrder } =
+      entityQueryValues;
     const { data } = await axiosInstance.get(
-      `/recipes?userId=${userId}&userRecipes=true`
+      `/recipes?userId=${userId}&userRecipes=true&searchByKey=${searchByKey}&searchByValue=${searchByValue}&sortByKey=${sortByKey}&sortByOrder=${sortByOrder}`
     );
     return data.recipes as Recipe[];
   } catch (error) {
@@ -107,6 +110,12 @@ const recipesSlice = createSlice({
   name: "recipes",
   initialState,
   reducers: {
+    updateLoadingGetUserRecipes(
+      state,
+      action: PayloadAction<LoadingStateType>
+    ) {
+      state.loadingGetUserRecipes = action.payload;
+    },
     updateLoadingCreateRecipe(state, action: PayloadAction<LoadingStateType>) {
       state.loadingCreateRecipe = action.payload;
     },
@@ -133,7 +142,8 @@ const recipesSlice = createSlice({
 
         if (recipes.length >= 1) {
           state.loadingGetUserRecipes = "SUCCEDED";
-          recipesAdapter.upsertMany(state, recipes);
+          recipesAdapter.removeAll(state);
+          recipesAdapter.addMany(state, recipes);
         } else {
           state.loadingGetUserRecipes = "FAILED";
         }
@@ -191,6 +201,7 @@ export const {
   updateLoadingCreateRecipe,
   changeShowVideoTutorialContent,
   changeShowWrittenTutorialContent,
+  updateLoadingGetUserRecipes,
 } = recipesSlice.actions;
 
 export default recipesSlice.reducer;

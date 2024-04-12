@@ -4,7 +4,7 @@
 import homeStyles from "../../../scss/pages/Home.module.scss";
 // Components
 import PageTitle from "@/components/shared/PageTitle";
-import HomeCards from "@/components/page/home/HomeCards";
+import HomeCards from "@/components/page/create-tool/home/HomeCards";
 // Hooks
 import useAuthorization from "@/hooks/useAuthorization";
 

@@ -1,11 +1,11 @@
 // Types
 import HomeCardProps from "@/core/interfaces/HomeCardProps";
 // SCSS
-import homeCardsStyles from "../../scss/components/page/HomeCards.module.scss";
+import homeCardsStyles from "../../../../scss/components/page/HomeCards.module.scss";
 // React
 import { FC } from "react";
 // Components
-import PrimaryButton from "../../shared/PrimaryButton";
+import PrimaryButton from "../../../shared/PrimaryButton";
 // Next
 import Link from "next/link";
 // Data

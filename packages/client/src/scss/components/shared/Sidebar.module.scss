@@ -9,6 +9,7 @@
   position: fixed;
   top: 0;
   right: 0;
+  z-index: 10;
   background-color: getColor("secondary-color-3.2");
   gap: 2rem;
   transform: translateX(150%);

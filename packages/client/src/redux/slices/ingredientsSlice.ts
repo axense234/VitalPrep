@@ -16,6 +16,7 @@ import { Ingredient } from "@prisma/client";
 // Axios
 import { AxiosError } from "axios";
 import axiosInstance from "@/utils/axios";
+import EntityQueryValues from "@/core/types/entity/EntityQueryValues";
 
 type ObjectKeyValueType = {
   key: string;
@@ -33,9 +34,7 @@ type InitialStateType = {
   loadingGetUserIngredients: LoadingStateType;
 };
 
-export const ingredientsAdapter = createEntityAdapter<Ingredient>({
-  sortComparer: (a, b) => a.name.localeCompare(b.name),
-});
+export const ingredientsAdapter = createEntityAdapter<Ingredient>();
 
 const initialState = ingredientsAdapter.getInitialState({
   templateIngredient: defaultTemplateIngredient,
@@ -68,18 +67,23 @@ export const createIngredient = createAsyncThunk<
 
 export const getAllUserIngredients = createAsyncThunk<
   Ingredient[] | AxiosError,
-  string
->("ingredients/getAllUserIngredients", async (userId) => {
-  try {
-    const { data } = await axiosInstance.get(
-      `/ingredients?userId=${userId}&userIngredients=true`
-    );
-    return data.ingredients as Ingredient[];
-  } catch (error) {
-    console.log(error);
-    return error as AxiosError;
+  { userId: string; entityQueryValues: EntityQueryValues }
+>(
+  "ingredients/getAllUserIngredients",
+  async ({ userId, entityQueryValues }) => {
+    try {
+      const { searchByKey, searchByValue, sortByKey, sortByOrder } =
+        entityQueryValues;
+      const { data } = await axiosInstance.get(
+        `/ingredients?userId=${userId}&userIngredients=true&searchByKey=${searchByKey}&searchByValue=${searchByValue}&sortByKey=${sortByKey}&sortByOrder=${sortByOrder}`
+      );
+      return data.ingredients as Ingredient[];
+    } catch (error) {
+      console.log(error);
+      return error as AxiosError;
+    }
   }
-});
+);
 
 const ingredientsSlice = createSlice({
   name: "ingredients",
@@ -90,6 +94,12 @@ const ingredientsSlice = createSlice({
       action: PayloadAction<LoadingStateType>
     ) {
       state.loadingCreateIngredient = action.payload;
+    },
+    updateLoadingGetUserIngredients(
+      state,
+      action: PayloadAction<LoadingStateType>
+    ) {
+      state.loadingGetUserIngredients = action.payload;
     },
     updateTemplateIngredient(state, action: PayloadAction<ObjectKeyValueType>) {
       state.templateIngredient = {
@@ -108,7 +118,8 @@ const ingredientsSlice = createSlice({
 
         if (ingredients.length >= 1) {
           state.loadingGetUserIngredients = "SUCCEDED";
-          ingredientsAdapter.upsertMany(state, ingredients);
+          ingredientsAdapter.removeAll(state);
+          ingredientsAdapter.addMany(state, ingredients);
         } else {
           state.loadingGetUserIngredients = "FAILED";
         }
@@ -155,7 +166,10 @@ export const selectIngredientFormModalErrorMessage = (state: State) =>
 export const selectLoadingGetUserIngredients = (state: State) =>
   state.ingredients.loadingGetUserIngredients;
 
-export const { updateTemplateIngredient, updateLoadingCreateIngredient } =
-  ingredientsSlice.actions;
+export const {
+  updateTemplateIngredient,
+  updateLoadingCreateIngredient,
+  updateLoadingGetUserIngredients,
+} = ingredientsSlice.actions;
 
 export default ingredientsSlice.reducer;

@@ -13,27 +13,56 @@ type DayTemplateQueryObject = {
 };
 
 const getAllDayTemplates = async (req: Request, res: Response) => {
-  const userId = req.query.userId;
-  const getAllUserDayTemplates = req.query.userDayTemplates;
+  const {
+    userDayTemplates,
+    sortByKey,
+    sortByOrder,
+    searchByKey,
+    searchByValue,
+    userId,
+  } = req.query;
 
   const queryObject: DayTemplateQueryObject = {};
+  const orderByObject: any = {};
 
-  if (getAllUserDayTemplates) {
+  if (userDayTemplates) {
     queryObject.userId = userId as string;
   }
 
-  const foundDayTemplates = await getOrSetCache("dayTemplates", async () => {
-    const dayTemplates = await DayTemplateClient.findMany({
-      where: queryObject,
-      include: {
-        macros: true,
-        recipes: true,
-        instanceTemplates: true,
-        user: true,
-      },
-    });
-    return dayTemplates as DayTemplate[];
+  if (sortByKey === "numberOfInstanceTemplates") {
+    orderByObject.instanceTemplates = { _count: sortByOrder };
+  } else if (sortByKey) {
+    orderByObject[sortByKey as string] = (sortByOrder as string) || "asc";
+  }
+
+  if (searchByKey) {
+    queryObject[searchByKey as string] = {
+      contains: (searchByValue as string) || "",
+    };
+  }
+
+  const foundDayTemplates = await DayTemplateClient.findMany({
+    where: queryObject,
+    include: {
+      macros: true,
+      recipes: true,
+      instanceTemplates: true,
+      user: true,
+    },
   });
+
+  // const foundDayTemplates = await getOrSetCache("dayTemplates", async () => {
+  //   const dayTemplates = await DayTemplateClient.findMany({
+  //     where: queryObject,
+  //     include: {
+  //       macros: true,
+  //       recipes: true,
+  //       instanceTemplates: true,
+  //       user: true,
+  //     },
+  //   });
+  //   return dayTemplates as DayTemplate[];
+  // });
 
   if (foundDayTemplates.length < 1) {
     return res

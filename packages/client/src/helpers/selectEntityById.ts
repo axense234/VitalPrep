@@ -1,13 +1,15 @@
-import { useAppSelector } from "@/hooks/redux";
+// Redux
 import { State } from "@/redux/api/store";
 import { selectDayTemplateById } from "@/redux/slices/dayTemplatesSlice";
 import { selectIngredientById } from "@/redux/slices/ingredientsSlice";
 import { selectInstanceTemplateById } from "@/redux/slices/instanceTemplatesSlice";
+import { selectMealPrepPlanById } from "@/redux/slices/mealPrepPlansSlice";
 import { selectRecipeById } from "@/redux/slices/recipesSlice";
 import { selectUtensilById } from "@/redux/slices/utensilsSlice";
 
 const selectEntityById = (
-  id: string,
+  state: State,
+  entityId: string,
   selectedEntityOption:
     | "ingredient"
     | "utensil"
@@ -18,19 +20,19 @@ const selectEntityById = (
 ) => {
   switch (selectedEntityOption) {
     case "ingredient":
-      return useAppSelector((state: State) => selectIngredientById(state, id));
+      return selectIngredientById(state, entityId);
     case "utensil":
-      return useAppSelector((state: State) => selectUtensilById(state, id));
+      return selectUtensilById(state, entityId);
     case "recipe":
-      return useAppSelector((state: State) => selectRecipeById(state, id));
+      return selectRecipeById(state, entityId);
     case "dayTemplate":
-      return useAppSelector((state: State) => selectDayTemplateById(state, id));
+      return selectDayTemplateById(state, entityId);
     case "instanceTemplate":
-      return useAppSelector((state: State) =>
-        selectInstanceTemplateById(state, id)
-      );
+      return selectInstanceTemplateById(state, entityId);
+    case "mealPrepPlan":
+      return selectMealPrepPlanById(state, entityId);
     default:
-      break;
+      return null;
   }
 };
 
