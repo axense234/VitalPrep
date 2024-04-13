@@ -42,6 +42,7 @@ const getAllMealPrepPlans = async (req: Request, res: Response) => {
   }
 
   const foundMealPrepPlans = await MealPrepPlanClient.findMany({
+    orderBy: orderByObject,
     where: queryObject,
     include: {
       macros: true,

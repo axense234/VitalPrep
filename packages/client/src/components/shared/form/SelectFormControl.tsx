@@ -75,6 +75,7 @@ const SelectFormControl: FC<SelectFormControlProps> = ({
                   clicked={seeIfComponentHasBeenClicked(id)}
                   entityId={id}
                   entityType={entityTypeUsed}
+                  isALink={false}
                 />
               </li>
             );

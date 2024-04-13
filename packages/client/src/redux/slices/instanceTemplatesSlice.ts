@@ -34,9 +34,7 @@ type InitialStateType = {
   loadingGetUserInstanceTemplates: LoadingStateType;
 };
 
-export const instanceTemplatesAdapter = createEntityAdapter<InstanceTemplate>({
-  sortComparer: (a, b) => a.name.localeCompare(b.name),
-});
+export const instanceTemplatesAdapter = createEntityAdapter<InstanceTemplate>();
 
 const initialState = instanceTemplatesAdapter.getInitialState({
   templateInstanceTemplate: defaultTemplateInstanceTemplate,

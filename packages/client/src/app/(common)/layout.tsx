@@ -14,11 +14,24 @@ import {
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 // React
 import { useEffect, useRef } from "react";
+// ChartTS
+import { LineElement, PointElement, BarElement, ArcElement } from "chart.js";
+import ChartDataLabels from "chartjs-plugin-datalabels";
+
+import { Chart } from "chart.js/auto";
 
 const SpecialLayout = ({ children }: { children: React.ReactNode }) => {
   const dispatch = useAppDispatch();
   const isJWTInvalid = useAppSelector(selectInvalidJWT);
   const hasEffectRun = useRef(false);
+
+  Chart.register([
+    LineElement,
+    PointElement,
+    BarElement,
+    ArcElement,
+    ChartDataLabels,
+  ]);
 
   useEffect(() => {
     if (isJWTInvalid) {

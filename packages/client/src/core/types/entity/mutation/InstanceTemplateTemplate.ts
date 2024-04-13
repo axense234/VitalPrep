@@ -1,4 +1,4 @@
-import { InstanceTemplate } from "@prisma/client";
+import { InstanceTemplate, Macros } from "@prisma/client";
 
 type OptionalInstanceTemplate<T> = {
   [K in keyof T]?: T[K];
@@ -6,6 +6,7 @@ type OptionalInstanceTemplate<T> = {
 
 type InstanceTemplateTemplate = OptionalInstanceTemplate<InstanceTemplate> & {
   dayTemplates: string[];
+  macros?: Macros;
 };
 
 export default InstanceTemplateTemplate;

@@ -36,9 +36,7 @@ type InitialStateType = {
   loadingGetUserMealPrepPlans: LoadingStateType;
 };
 
-export const mealPrepPlansAdapter = createEntityAdapter<MealPrepPlan>({
-  sortComparer: (a, b) => a.name.localeCompare(b.name),
-});
+export const mealPrepPlansAdapter = createEntityAdapter<MealPrepPlan>();
 
 const initialState = mealPrepPlansAdapter.getInitialState({
   templateMealPrepPlan: defaultTemplateMealPrepPlan,

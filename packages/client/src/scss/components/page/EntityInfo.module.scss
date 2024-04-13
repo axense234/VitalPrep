@@ -1,0 +1,40 @@
+@use "../../abstracts" as *;
+
+.entityInfoContainer {
+  @include pageLayout();
+}
+
+.entityInfoContent {
+  @include flexCenter(column);
+  width: 100%;
+  padding-top: 128px;
+  padding-bottom: 64px;
+  gap: 64px;
+  background-image: url($authFormPageTemplateFormBackgroundUrl);
+}
+
+.entityInfoDetailsContainer {
+  @include flexCenter(column);
+  border: 2px solid black;
+  width: 100%;
+  height: auto;
+  gap: 3rem;
+}
+
+.entityInfoDetailsHeader {
+  @include flexCenter(column);
+  gap: 0.5rem;
+
+  h2 {
+    @include h2Laptop();
+    font-weight: 550;
+    letter-spacing: 3px;
+    margin-bottom: 1rem;
+  }
+
+  h3 {
+    font-size: 2rem;
+    font-weight: 550;
+    letter-spacing: 1px;
+  }
+}

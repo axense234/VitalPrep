@@ -32,6 +32,7 @@ type InitialStateType = {
   ingredientFormModalErrorMessage: string;
 
   loadingGetUserIngredients: LoadingStateType;
+  loadingGetUserIngredient: LoadingStateType;
 };
 
 export const ingredientsAdapter = createEntityAdapter<Ingredient>();
@@ -41,6 +42,7 @@ const initialState = ingredientsAdapter.getInitialState({
   loadingCreateIngredient: "IDLE",
   ingredientFormModalErrorMessage: "Default Message",
   loadingGetUserIngredients: "IDLE",
+  loadingGetUserIngredient: "IDLE",
 }) as EntityState<Ingredient, string> & InitialStateType;
 
 type CreateIngredientBody = {
@@ -85,6 +87,21 @@ export const getAllUserIngredients = createAsyncThunk<
   }
 );
 
+export const getUserIngredient = createAsyncThunk<
+  Ingredient | AxiosError,
+  { userId: string; ingredientId: string }
+>("ingredients/getUserIngredient", async ({ userId, ingredientId }) => {
+  try {
+    const { data } = await axiosInstance.get(
+      `/${userId}/ingredients/${ingredientId}`
+    );
+    return data.ingredient as Ingredient;
+  } catch (error) {
+    console.log(error);
+    return error as AxiosError;
+  }
+});
+
 const ingredientsSlice = createSlice({
   name: "ingredients",
   initialState,
@@ -110,6 +127,20 @@ const ingredientsSlice = createSlice({
   },
   extraReducers(builder) {
     builder
+      .addCase(getUserIngredient.pending, (state, action) => {
+        state.loadingGetUserIngredient = "PENDING";
+      })
+      .addCase(getUserIngredient.fulfilled, (state, action) => {
+        const ingredient = action.payload as Ingredient;
+        const axiosError = action.payload as AxiosError;
+
+        if (axiosError !== undefined && !axiosError.response) {
+          ingredientsAdapter.addOne(state, ingredient);
+          state.loadingGetUserIngredient = "SUCCEDED";
+        } else {
+          state.loadingGetUserIngredient = "FAILED";
+        }
+      })
       .addCase(getAllUserIngredients.pending, (state, action) => {
         state.loadingGetUserIngredients = "PENDING";
       })
@@ -165,6 +196,9 @@ export const selectIngredientFormModalErrorMessage = (state: State) =>
 
 export const selectLoadingGetUserIngredients = (state: State) =>
   state.ingredients.loadingGetUserIngredients;
+
+export const selectLoadingGetUserIngredient = (state: State) =>
+  state.ingredients.loadingGetUserIngredient;
 
 export const {
   updateTemplateIngredient,

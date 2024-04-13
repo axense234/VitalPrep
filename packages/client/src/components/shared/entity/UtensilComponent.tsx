@@ -4,6 +4,7 @@ import entityComponentStyles from "../../../scss/components/shared/EntityCompone
 import { FC } from "react";
 // Types
 import EntityComponentProps from "@/core/interfaces/entity/EntityComponentProps";
+import { Utensil } from "@prisma/client";
 // Data
 import { defaultUtensilImageUrl } from "@/data";
 // Helpers
@@ -13,7 +14,6 @@ import { useAppSelector } from "@/hooks/redux";
 import { State } from "@/redux/api/store";
 // Next
 import Image from "next/image";
-import { Utensil } from "@prisma/client";
 
 const UtensilComponent: FC<EntityComponentProps> = ({ clicked, entityId }) => {
   const utensilEntity = useAppSelector((state: State) =>

@@ -34,9 +34,7 @@ type InitialStateType = {
   loadingGetUserUtensils: LoadingStateType;
 };
 
-export const utensilsAdapter = createEntityAdapter<Utensil>({
-  sortComparer: (a, b) => a.name.localeCompare(b.name),
-});
+export const utensilsAdapter = createEntityAdapter<Utensil>();
 
 const initialState = utensilsAdapter.getInitialState({
   templateUtensil: defaultTemplateUtensil,

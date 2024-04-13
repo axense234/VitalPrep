@@ -15,7 +15,7 @@ import { State } from "@/redux/api/store";
 // Next
 import Image from "next/image";
 
-const ingredientComponent: FC<EntityComponentProps> = ({
+const IngredientComponent: FC<EntityComponentProps> = ({
   clicked,
   entityId,
 }) => {
@@ -52,4 +52,4 @@ const ingredientComponent: FC<EntityComponentProps> = ({
   );
 };
 
-export default ingredientComponent;
+export default IngredientComponent;

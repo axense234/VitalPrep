@@ -1,5 +1,7 @@
 // React
 import { FC, useEffect } from "react";
+// SCSS
+import entityComponentStyles from "../../../scss/components/shared/EntityComponents.module.scss";
 // Types
 import EntityComponentProps from "@/core/interfaces/entity/EntityComponentProps";
 // Components
@@ -9,6 +11,8 @@ import RecipeComponent from "./RecipeComponent";
 import DayTemplateComponent from "./DayTemplateComponent";
 import InstanceTemplateComponent from "./InstanceTemplateComponent";
 import MealPrepPlanComponent from "./MealPrepPlanComponent";
+// Next
+import Link from "next/link";
 
 type EntityComponentSchemeProps = EntityComponentProps & {
   entityType:
@@ -18,17 +22,20 @@ type EntityComponentSchemeProps = EntityComponentProps & {
     | "dayTemplate"
     | "instanceTemplate"
     | "mealPrepPlan";
+  isALink: boolean;
 };
 
 const EntityComponent: FC<EntityComponentSchemeProps> = ({
   clicked,
   entityType,
   entityId,
+  isALink,
 }) => {
-  let entityComponentShown = useSelectEntityComponentShown(
+  const entityComponentShown = useSelectEntityComponentShown(
     entityType,
     clicked,
-    entityId
+    entityId,
+    isALink
   );
 
   if (entityComponentShown) {
@@ -46,37 +53,45 @@ const useSelectEntityComponentShown = (
     | "instanceTemplate"
     | "mealPrepPlan",
   clicked: boolean,
-  entityId: string
+  entityId: string,
+  isALink: boolean
 ) => {
   let entityComponentShown = null;
+  let entityComponentDestination = "";
 
   switch (entityType) {
     case "ingredient":
+      entityComponentDestination = `/ingredient/${entityId}`;
       entityComponentShown = (
         <IngredientComponent clicked={clicked} entityId={entityId} />
       );
       break;
     case "utensil":
+      entityComponentDestination = `/utensil/${entityId}`;
       entityComponentShown = (
         <UtensilComponent clicked={clicked} entityId={entityId} />
       );
       break;
     case "recipe":
+      entityComponentDestination = `/recipe/${entityId}`;
       entityComponentShown = (
         <RecipeComponent clicked={clicked} entityId={entityId} />
       );
       break;
     case "dayTemplate":
+      entityComponentDestination = `/dayTemplate/${entityId}`;
       entityComponentShown = (
         <DayTemplateComponent clicked={clicked} entityId={entityId} />
       );
       break;
     case "instanceTemplate":
+      entityComponentDestination = `/instanceTemplate/${entityId}`;
       entityComponentShown = (
         <InstanceTemplateComponent clicked={clicked} entityId={entityId} />
       );
       break;
     case "mealPrepPlan":
+      entityComponentDestination = `/mealPrepPlan/${entityId}`;
       entityComponentShown = (
         <MealPrepPlanComponent clicked={clicked} entityId={entityId} />
       );
@@ -85,6 +100,16 @@ const useSelectEntityComponentShown = (
       throw new Error("Invalid entity type!");
   }
 
+  if (isALink) {
+    return (
+      <Link
+        href={entityComponentDestination}
+        className={entityComponentStyles.entityComponentLinkWrapper}
+      >
+        {entityComponentShown}
+      </Link>
+    );
+  }
   return entityComponentShown;
 };
 

@@ -36,9 +36,7 @@ type InitialStateType = {
   loadingGetUserRecipes: LoadingStateType;
 };
 
-export const recipesAdapter = createEntityAdapter<Recipe>({
-  sortComparer: (a, b) => a.name.localeCompare(b.name),
-});
+export const recipesAdapter = createEntityAdapter<Recipe>();
 
 const initialState = recipesAdapter.getInitialState({
   templateRecipe: defaultTemplateRecipe,

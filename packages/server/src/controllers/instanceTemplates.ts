@@ -42,6 +42,7 @@ const getAllInstanceTemplates = async (req: Request, res: Response) => {
   }
 
   const foundInstanceTemplates = await InstanceTemplateClient.findMany({
+    orderBy: orderByObject,
     where: queryObject,
     include: {
       macros: true,

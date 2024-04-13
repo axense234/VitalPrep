@@ -42,6 +42,7 @@ const getAllDayTemplates = async (req: Request, res: Response) => {
   }
 
   const foundDayTemplates = await DayTemplateClient.findMany({
+    orderBy: orderByObject,
     where: queryObject,
     include: {
       macros: true,

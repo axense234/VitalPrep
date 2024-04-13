@@ -26,6 +26,7 @@ const MultiViewToolContent: FC<{
                 clicked={true}
                 entityType={entityType}
                 entityId={entityId}
+                isALink={true}
               />
             </li>
           );

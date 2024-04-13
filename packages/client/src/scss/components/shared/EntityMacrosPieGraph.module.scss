@@ -1,0 +1,11 @@
+@use "../../abstracts" as *;
+
+.pieGraphContainer {
+  @include flexCenter(row);
+  width: 100%;
+  height: 640px;
+}
+
+.pieGraph {
+  font-size: 3rem;
+}

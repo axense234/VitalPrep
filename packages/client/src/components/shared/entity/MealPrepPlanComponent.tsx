@@ -4,7 +4,6 @@ import entityComponentStyles from "../../../scss/components/shared/EntityCompone
 import { FC } from "react";
 // Types
 import EntityComponentProps from "@/core/interfaces/entity/EntityComponentProps";
-import IngredientTemplate from "@/core/types/entity/mutation/IngredientTemplate";
 // Data
 import { defaultIngredientImageUrl, defaultMealPrepPlanImageUrl } from "@/data";
 // Helpers

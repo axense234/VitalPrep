@@ -35,9 +35,7 @@ type InitialStateType = {
   loadingGetUserDayTemplates: LoadingStateType;
 };
 
-export const dayTemplatesAdapter = createEntityAdapter<DayTemplate>({
-  sortComparer: (a, b) => a.name.localeCompare(b.name),
-});
+export const dayTemplatesAdapter = createEntityAdapter<DayTemplate>();
 
 const initialState = dayTemplatesAdapter.getInitialState({
   templateDayTemplate: defaultTemplateDayTemplate,

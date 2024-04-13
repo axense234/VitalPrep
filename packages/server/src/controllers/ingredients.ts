@@ -102,6 +102,8 @@ const getIngredientById = async (req: Request, res: Response) => {
     }
   );
 
+  console.log(foundIngredient);
+
   if (!foundIngredient) {
     return res.status(StatusCodes.NOT_FOUND).json({
       message: `Could not find any ingredients with id:${ingredientId}...`,
