@@ -6,7 +6,10 @@ import PrimaryButton from "@/components/shared/PrimaryButton";
 import ImageFormControl from "@/components/shared/form/ImageFormControl";
 import PopupModal from "@/components/shared/modals/PopupModal";
 // Data
-import { defaultInstanceTemplateImageUrl } from "@/data";
+import {
+  defaultEntityQueryValues,
+  defaultInstanceTemplateImageUrl,
+} from "@/data";
 // Redux
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import {
@@ -104,7 +107,12 @@ const CreateInstanceTemplateInterface = () => {
       loadingProfile &&
       !hasEffectRun.current
     ) {
-      dispatch(getAllUserDayTemplates(profile.id));
+      dispatch(
+        getAllUserDayTemplates({
+          userId: profile.id,
+          entityQueryValues: defaultEntityQueryValues,
+        })
+      );
     }
     hasEffectRun.current = true;
   }, [loadingGetUserDayTemplates, loadingProfile]);

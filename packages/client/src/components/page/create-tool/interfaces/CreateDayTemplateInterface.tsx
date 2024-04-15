@@ -9,6 +9,7 @@ import PopupModal from "@/components/shared/modals/PopupModal";
 import {
   defaultCreateDayTemplateImageUrls,
   defaultDayTemplateImageUrl,
+  defaultEntityQueryValues,
 } from "@/data";
 // Redux
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
@@ -106,7 +107,12 @@ const CreateDayTemplateInterface = () => {
       loadingProfile &&
       !hasEffectRun.current
     ) {
-      dispatch(getAllUserRecipes(profile.id));
+      dispatch(
+        getAllUserRecipes({
+          userId: profile.id,
+          entityQueryValues: defaultEntityQueryValues,
+        })
+      );
     }
     hasEffectRun.current = true;
   }, [loadingGetUserRecipes, loadingProfile]);

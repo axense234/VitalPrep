@@ -72,9 +72,16 @@ export const getAllUserUtensils = createAsyncThunk<
   try {
     const { searchByKey, searchByValue, sortByKey, sortByOrder } =
       entityQueryValues;
-    const { data } = await axiosInstance.get(
-      `/utensils?userId=${userId}&userUtensils=true&searchByKey=${searchByKey}&searchByValue=${searchByValue}&sortByKey=${sortByKey}&sortByOrder=${sortByOrder}`
-    );
+    const { data } = await axiosInstance.get(`/utensils`, {
+      params: {
+        userId,
+        userIngredients: true,
+        searchByKey,
+        searchByValue,
+        sortByKey,
+        sortByOrder,
+      },
+    });
     return data.utensils as Utensil[];
   } catch (error) {
     console.log(error);

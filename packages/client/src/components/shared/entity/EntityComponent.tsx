@@ -13,6 +13,12 @@ import InstanceTemplateComponent from "./InstanceTemplateComponent";
 import MealPrepPlanComponent from "./MealPrepPlanComponent";
 // Next
 import Link from "next/link";
+import IngredientTemplate from "@/core/types/entity/mutation/IngredientTemplate";
+import UtensilTemplate from "@/core/types/entity/mutation/UtensilTemplate";
+import RecipeTemplate from "@/core/types/entity/mutation/RecipeTemplate";
+import DayTemplateTemplate from "@/core/types/entity/mutation/DayTemplateTemplate";
+import InstanceTemplateTemplate from "@/core/types/entity/mutation/InstanceTemplateTemplate";
+import MealPrepPlanTemplate from "@/core/types/entity/mutation/MealPrepPlanTemplate";
 
 type EntityComponentSchemeProps = EntityComponentProps & {
   entityType:
@@ -30,12 +36,14 @@ const EntityComponent: FC<EntityComponentSchemeProps> = ({
   entityType,
   entityId,
   isALink,
+  entity,
 }) => {
   const entityComponentShown = useSelectEntityComponentShown(
     entityType,
     clicked,
     entityId,
-    isALink
+    isALink,
+    entity
   );
 
   if (entityComponentShown) {
@@ -54,46 +62,79 @@ const useSelectEntityComponentShown = (
     | "mealPrepPlan",
   clicked: boolean,
   entityId: string,
-  isALink: boolean
+  isALink: boolean,
+  entity?:
+    | IngredientTemplate
+    | UtensilTemplate
+    | RecipeTemplate
+    | DayTemplateTemplate
+    | InstanceTemplateTemplate
+    | MealPrepPlanTemplate
 ) => {
   let entityComponentShown = null;
   let entityComponentDestination = "";
 
+  console.log(entityId);
+
   switch (entityType) {
     case "ingredient":
-      entityComponentDestination = `/ingredient/${entityId}`;
+      entityComponentDestination = `/ingredient/${entityId || entity?.id}`;
       entityComponentShown = (
-        <IngredientComponent clicked={clicked} entityId={entityId} />
+        <IngredientComponent
+          clicked={clicked}
+          entityId={entityId}
+          entity={entity}
+        />
       );
       break;
     case "utensil":
-      entityComponentDestination = `/utensil/${entityId}`;
+      entityComponentDestination = `/utensil/${entityId || entity?.id}`;
       entityComponentShown = (
-        <UtensilComponent clicked={clicked} entityId={entityId} />
+        <UtensilComponent
+          clicked={clicked}
+          entityId={entityId}
+          entity={entity}
+        />
       );
       break;
     case "recipe":
-      entityComponentDestination = `/recipe/${entityId}`;
+      entityComponentDestination = `/recipe/${entityId || entity?.id}`;
       entityComponentShown = (
-        <RecipeComponent clicked={clicked} entityId={entityId} />
+        <RecipeComponent
+          clicked={clicked}
+          entityId={entityId}
+          entity={entity}
+        />
       );
       break;
     case "dayTemplate":
-      entityComponentDestination = `/dayTemplate/${entityId}`;
+      entityComponentDestination = `/dayTemplate/${entityId || entity?.id}`;
       entityComponentShown = (
-        <DayTemplateComponent clicked={clicked} entityId={entityId} />
+        <DayTemplateComponent
+          clicked={clicked}
+          entityId={entityId}
+          entity={entity}
+        />
       );
       break;
     case "instanceTemplate":
-      entityComponentDestination = `/instanceTemplate/${entityId}`;
+      entityComponentDestination = `/instanceTemplate/${entityId || entity?.id}`;
       entityComponentShown = (
-        <InstanceTemplateComponent clicked={clicked} entityId={entityId} />
+        <InstanceTemplateComponent
+          clicked={clicked}
+          entityId={entityId}
+          entity={entity}
+        />
       );
       break;
     case "mealPrepPlan":
-      entityComponentDestination = `/mealPrepPlan/${entityId}`;
+      entityComponentDestination = `/mealPrepPlan/${entityId || entity?.id}`;
       entityComponentShown = (
-        <MealPrepPlanComponent clicked={clicked} entityId={entityId} />
+        <MealPrepPlanComponent
+          clicked={clicked}
+          entityId={entityId}
+          entity={entity}
+        />
       );
       break;
     default:

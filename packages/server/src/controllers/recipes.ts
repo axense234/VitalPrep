@@ -4,35 +4,62 @@ import { Response, Request } from "express";
 import { StatusCodes } from "http-status-codes";
 // Prisma
 import { IngredientClient, RecipeClient, UtensilClient } from "../db/postgres";
-import { Ingredient, Macros, Recipe, Utensil } from "@prisma/client";
+import { Ingredient, Macros, Prisma, Recipe, Utensil } from "@prisma/client";
 // Utils
 import { deleteCache, getOrSetCache, setCache } from "../utils/redis";
 
-type RecipeQueryObject = {
+type GetAllRecipesQueryObject = {
   userId?: string;
+  searchByKey?: { contains: string };
+};
+
+type GetRecipeByIdQueryObject = {
+  id: string;
+  macrosId?: string;
+};
+
+type RecipesOrderByObject =
+  | ({
+      name?: "asc" | "desc";
+      dayTemplates?: { _count: string | undefined };
+    } & Prisma.RecipeOrderByWithRelationInput)
+  | Prisma.RecipeOrderByWithRelationInput[]
+  | undefined;
+
+type RecipesIncludeObject = {
+  macros?: boolean;
+  user?: boolean;
+  utensils?: boolean;
+  ingredients?: boolean;
+  dayTemplates?: boolean;
+  instanceTemplates?: boolean;
+  mealPrepPlans?: boolean;
 };
 
 const getAllRecipes = async (req: Request, res: Response) => {
   const {
     userRecipes,
-    sortByKey,
-    sortByOrder,
+    userId,
     searchByKey,
     searchByValue,
-    userId,
+    sortByKey,
+    sortByOrder,
+    includeMacros,
+    includeUser,
+    includeUtensils,
+    includeIngredients,
+    includeDayTemplates,
+    includeInstanceTemplates,
+    includeMealPrepPlans,
   } = req.query;
 
-  const queryObject: RecipeQueryObject = {};
-  const orderByObject: any = {};
+  const queryObject: GetAllRecipesQueryObject = {};
+  const orderByObject: RecipesOrderByObject = {};
+  const includeObject: RecipesIncludeObject = {};
 
+  // QUERY
   if (userRecipes) {
     queryObject.userId = userId as string;
-  }
-
-  if (sortByKey === "numberOfDayTemplates") {
-    orderByObject.dayTemplates = { _count: sortByOrder };
-  } else if (sortByKey) {
-    orderByObject[sortByKey as string] = (sortByOrder as string) || "asc";
   }
 
   if (searchByKey) {
@@ -41,33 +68,41 @@ const getAllRecipes = async (req: Request, res: Response) => {
     };
   }
 
+  // ORDER BY
+  if (sortByKey === "numberOfDayTemplates") {
+    orderByObject.dayTemplates = { _count: sortByOrder as "asc" | "desc" };
+  } else if (sortByKey) {
+    orderByObject[sortByKey as string] = (sortByOrder as string) || "asc";
+  }
+
+  // INCLUDE
+  if (includeMacros) {
+    includeObject.macros = true;
+  }
+  if (includeUser) {
+    includeObject.user = true;
+  }
+  if (includeIngredients) {
+    includeObject.ingredients = true;
+  }
+  if (includeUtensils) {
+    includeObject.utensils = true;
+  }
+  if (includeDayTemplates) {
+    includeObject.dayTemplates = true;
+  }
+  if (includeInstanceTemplates) {
+    includeObject.instanceTemplates = true;
+  }
+  if (includeMealPrepPlans) {
+    includeObject.mealPrepPlans = true;
+  }
+
   const foundRecipes = await RecipeClient.findMany({
     where: queryObject,
     orderBy: orderByObject,
-    include: {
-      macros: true,
-      utensils: true,
-      ingredients: true,
-      dayTemplates: true,
-      recipeTutorial: true,
-      user: true,
-    },
+    include: includeObject,
   });
-
-  // const foundRecipes = await getOrSetCache("recipes", async () => {
-  //   const recipes = await RecipeClient.findMany({
-  //     where: queryObject,
-  //     include: {
-  //       macros: true,
-  //       utensils: true,
-  //       ingredients: true,
-  //       dayTemplates: true,
-  //       recipeTutorial: true,
-  //       user: true,
-  //     },
-  //   });
-  //   return recipes as Recipe[];
-  // });
 
   if (foundRecipes.length < 1) {
     return res
@@ -84,30 +119,58 @@ const getAllRecipes = async (req: Request, res: Response) => {
 
 const getRecipeById = async (req: Request, res: Response) => {
   const { recipeId, userId } = req.params;
+  const {
+    includeMacros,
+    includeUser,
+    includeUtensils,
+    includeIngredients,
+    includeDayTemplates,
+    includeInstanceTemplates,
+    includeMealPrepPlans,
+  } = req.query;
+
+  const includeObject: RecipesIncludeObject = {};
+  const queryObject: GetRecipeByIdQueryObject = { id: "" };
 
   if (!recipeId) {
     return res
       .status(StatusCodes.BAD_REQUEST)
       .json({ message: "Please enter a recipe id!", recipe: {} });
   }
+  queryObject.id = recipeId;
 
-  const foundRecipe = await getOrSetCache(
-    `${userId}:recipes:${recipeId}`,
-    async () => {
-      const recipe = await RecipeClient.findUnique({
-        where: { id: recipeId },
-        include: {
-          macros: true,
-          utensils: true,
-          ingredients: true,
-          dayTemplates: true,
-          recipeTutorial: true,
-          user: true,
-        },
-      });
-      return recipe as Recipe;
-    }
-  );
+  // QUERY
+  if (userId) {
+    // queryObject.id = userId;
+  }
+
+  // INCLUDE
+  if (includeMacros) {
+    includeObject.macros = true;
+  }
+  if (includeUser) {
+    includeObject.user = true;
+  }
+  if (includeIngredients) {
+    includeObject.ingredients = true;
+  }
+  if (includeUtensils) {
+    includeObject.utensils = true;
+  }
+  if (includeDayTemplates) {
+    includeObject.dayTemplates = true;
+  }
+  if (includeInstanceTemplates) {
+    includeObject.instanceTemplates = true;
+  }
+  if (includeMealPrepPlans) {
+    includeObject.mealPrepPlans = true;
+  }
+
+  const foundRecipe = await RecipeClient.findUnique({
+    where: queryObject,
+    include: includeObject,
+  });
 
   if (!foundRecipe) {
     return res.status(StatusCodes.NOT_FOUND).json({

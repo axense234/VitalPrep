@@ -9,7 +9,7 @@ import SelectFormControl from "@/components/shared/form/SelectFormControl";
 // React
 import { ChangeEvent, useEffect, useRef } from "react";
 // Data
-import { defaultMealPrepPlanImageUrl } from "@/data";
+import { defaultEntityQueryValues, defaultMealPrepPlanImageUrl } from "@/data";
 // Redux
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import {
@@ -111,7 +111,12 @@ const CreateMealPrepPlanInterface = () => {
       loadingProfile &&
       !hasEffectRun.current
     ) {
-      dispatch(getAllUserInstanceTemplates(profile.id));
+      dispatch(
+        getAllUserInstanceTemplates({
+          userId: profile.id,
+          entityQueryValues: defaultEntityQueryValues,
+        })
+      );
     }
     hasEffectRun.current = true;
   }, [loadingGetUserInstanceTemplates, loadingProfile]);

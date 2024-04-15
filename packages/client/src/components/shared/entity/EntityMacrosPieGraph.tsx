@@ -8,7 +8,6 @@ import getEntityMacrosChartData from "@/helpers/getEntityMacrosChartData";
 import { FC } from "react";
 // ChartJS
 import { Pie } from "react-chartjs-2";
-import { plugins } from "chart.js";
 
 const EntityMacrosPieGraph: FC<{ macros: Macros }> = ({ macros }) => {
   return (
@@ -19,8 +18,7 @@ const EntityMacrosPieGraph: FC<{ macros: Macros }> = ({ macros }) => {
         options={{
           plugins: {
             legend: {
-              display: true,
-              title: { color: "#00000", font: { size: 32 } },
+              display: false,
             },
           },
         }}

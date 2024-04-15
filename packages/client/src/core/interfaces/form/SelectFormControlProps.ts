@@ -1,3 +1,5 @@
+import EntityType from "@/core/types/entity/EntityType";
+
 export default interface SelectFormControlProps {
   labelColor: "#DDD9D5" | "#120A06";
   labelContent: string;
@@ -8,13 +10,7 @@ export default interface SelectFormControlProps {
   backgroundColor?: string;
   border?: string;
 
-  entityTypeUsed:
-    | "ingredient"
-    | "utensil"
-    | "recipe"
-    | "dayTemplate"
-    | "instanceTemplate"
-    | "mealPrepPlan";
+  entityTypeUsed: EntityType;
   required: boolean;
 
   entityPropertyOptions: string[];

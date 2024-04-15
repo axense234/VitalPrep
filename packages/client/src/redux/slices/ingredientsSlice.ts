@@ -4,6 +4,7 @@ import { State } from "../api/store";
 // Data
 import { defaultTemplateIngredient } from "@/data";
 // Types
+import EntityQueryValues from "@/core/types/entity/EntityQueryValues";
 import {
   EntityState,
   PayloadAction,
@@ -16,7 +17,6 @@ import { Ingredient } from "@prisma/client";
 // Axios
 import { AxiosError } from "axios";
 import axiosInstance from "@/utils/axios";
-import EntityQueryValues from "@/core/types/entity/EntityQueryValues";
 
 type ObjectKeyValueType = {
   key: string;
@@ -76,9 +76,16 @@ export const getAllUserIngredients = createAsyncThunk<
     try {
       const { searchByKey, searchByValue, sortByKey, sortByOrder } =
         entityQueryValues;
-      const { data } = await axiosInstance.get(
-        `/ingredients?userId=${userId}&userIngredients=true&searchByKey=${searchByKey}&searchByValue=${searchByValue}&sortByKey=${sortByKey}&sortByOrder=${sortByOrder}`
-      );
+      const { data } = await axiosInstance.get(`/ingredients`, {
+        params: {
+          userId,
+          userIngredients: true,
+          searchByKey,
+          searchByValue,
+          sortByKey,
+          sortByOrder,
+        },
+      });
       return data.ingredients as Ingredient[];
     } catch (error) {
       console.log(error);
@@ -93,7 +100,17 @@ export const getUserIngredient = createAsyncThunk<
 >("ingredients/getUserIngredient", async ({ userId, ingredientId }) => {
   try {
     const { data } = await axiosInstance.get(
-      `/${userId}/ingredients/${ingredientId}`
+      `/${userId}/ingredients/${ingredientId}`,
+      {
+        params: {
+          includeMacros: true,
+          includeUser: true,
+          includeRecipes: true,
+          includeDayTemplates: true,
+          includeInstanceTemplates: true,
+          includeMealPrepPlans: true,
+        },
+      }
     );
     return data.ingredient as Ingredient;
   } catch (error) {
@@ -131,11 +148,11 @@ const ingredientsSlice = createSlice({
         state.loadingGetUserIngredient = "PENDING";
       })
       .addCase(getUserIngredient.fulfilled, (state, action) => {
-        const ingredient = action.payload as Ingredient;
+        const ingredient = action.payload as IngredientTemplate;
         const axiosError = action.payload as AxiosError;
 
         if (axiosError !== undefined && !axiosError.response) {
-          ingredientsAdapter.addOne(state, ingredient);
+          ingredientsAdapter.addOne(state, ingredient as Ingredient);
           state.loadingGetUserIngredient = "SUCCEDED";
         } else {
           state.loadingGetUserIngredient = "FAILED";

@@ -24,6 +24,7 @@ import dayTemplatesRouter from "./routers/dayTemplates";
 import instanceTemplatesRouter from "./routers/instanceTemplates";
 import mealPrepLogsRouter from "./routers/mealPrepLogs";
 import mealPrepPlansRouter from "./routers/mealPrepPlans";
+import dangerousRouter from "./routers/dangerous";
 
 dotenv.config();
 
@@ -36,7 +37,7 @@ app.use(
   cors({
     origin: [
       process.env.CORS_TESTING_CLIENT_ORIGIN as string,
-      process.env.CORST_PRODUCTION_CLIENT_ORIGIN as string,
+      process.env.CORS_PRODUCTION_CLIENT_ORIGIN as string,
     ],
     credentials: true,
   })
@@ -76,6 +77,7 @@ app.use("/", [
   instanceTemplatesRouter,
   mealPrepLogsRouter,
   mealPrepPlansRouter,
+  dangerousRouter,
 ]);
 
 app.use(errorHandlerMiddleware);

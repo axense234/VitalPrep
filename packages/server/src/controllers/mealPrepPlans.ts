@@ -4,35 +4,61 @@ import { Response, Request } from "express";
 import { StatusCodes } from "http-status-codes";
 // Prisma
 import { InstanceTemplateClient, MealPrepPlanClient } from "../db/postgres";
-import { InstanceTemplate, MealPrepPlan } from "@prisma/client";
+import { InstanceTemplate, MealPrepPlan, Prisma } from "@prisma/client";
 // Utils
 import { deleteCache, getOrSetCache, setCache } from "../utils/redis";
 
-type MealPrepPlanQueryObject = {
+type GetAllMealPrepPlansQueryObject = {
   userId?: string;
+  searchByKey?: { contains: string };
+};
+
+type GetMealPrepPlanByIdQueryObject = {
+  id: string;
+  macrosId?: string;
+};
+
+type MealPrepPlansOrderByObject =
+  | ({
+      name?: "asc" | "desc";
+    } & Prisma.MealPrepPlanOrderByWithRelationInput)
+  | Prisma.MealPrepPlanOrderByWithRelationInput[]
+  | undefined;
+
+type MealPrepPlansIncludeObject = {
+  macros?: boolean;
+  user?: boolean;
+  ingredients?: boolean;
+  utensils?: boolean;
+  recipes?: boolean;
+  dayTemplates?: boolean;
+  instanceTemplates?: boolean;
 };
 
 const getAllMealPrepPlans = async (req: Request, res: Response) => {
   const {
     userMealPrepPlans,
-    sortByKey,
-    sortByOrder,
+    userId,
     searchByKey,
     searchByValue,
-    userId,
+    sortByKey,
+    sortByOrder,
+    includeMacros,
+    includeUser,
+    includeIngredients,
+    includeUtensils,
+    includeRecipes,
+    includeDayTemplates,
+    includeInstanceTemplates,
   } = req.query;
 
-  const queryObject: MealPrepPlanQueryObject = {};
-  const orderByObject: any = {};
+  const queryObject: GetAllMealPrepPlansQueryObject = {};
+  const orderByObject: MealPrepPlansOrderByObject = {};
+  const includeObject: MealPrepPlansIncludeObject = {};
 
+  // QUERY
   if (userMealPrepPlans) {
     queryObject.userId = userId as string;
-  }
-
-  if (sortByKey === "numberOfRecipes") {
-    orderByObject.recipes = { _count: sortByOrder };
-  } else if (sortByKey) {
-    orderByObject[sortByKey as string] = (sortByOrder as string) || "asc";
   }
 
   if (searchByKey) {
@@ -41,27 +67,39 @@ const getAllMealPrepPlans = async (req: Request, res: Response) => {
     };
   }
 
+  // ORDER BY
+  if (sortByKey) {
+    orderByObject[sortByKey as string] = (sortByOrder as string) || "asc";
+  }
+
+  // INCLUDE
+  if (includeMacros) {
+    includeObject.macros = true;
+  }
+  if (includeUser) {
+    includeObject.user = true;
+  }
+  if (includeIngredients) {
+    includeObject.ingredients = true;
+  }
+  if (includeUtensils) {
+    includeObject.utensils = true;
+  }
+  if (includeRecipes) {
+    includeObject.recipes = true;
+  }
+  if (includeDayTemplates) {
+    includeObject.dayTemplates = true;
+  }
+  if (includeInstanceTemplates) {
+    includeObject.instanceTemplates = true;
+  }
+
   const foundMealPrepPlans = await MealPrepPlanClient.findMany({
     orderBy: orderByObject,
     where: queryObject,
-    include: {
-      macros: true,
-      instanceTemplates: true,
-      user: true,
-    },
+    include: includeObject,
   });
-
-  // const foundMealPrepPlans = await getOrSetCache("mealPrepPlans", async () => {
-  //   const mealPrepPlans = await MealPrepPlanClient.findMany({
-  //     where: queryObject,
-  //     include: {
-  //       macros: true,
-  //       instanceTemplates: true,
-  //       user: true,
-  //     },
-  //   });
-  //   return mealPrepPlans as MealPrepPlan[];
-  // });
 
   if (foundMealPrepPlans.length < 1) {
     return res.status(StatusCodes.NOT_FOUND).json({
@@ -79,27 +117,58 @@ const getAllMealPrepPlans = async (req: Request, res: Response) => {
 
 const getMealPrepPlanById = async (req: Request, res: Response) => {
   const { mealPrepPlanId, userId } = req.params;
+  const {
+    includeMacros,
+    includeUser,
+    includeIngredients,
+    includeUtensils,
+    includeRecipes,
+    includeDayTemplates,
+    includeInstanceTemplates,
+  } = req.query;
+
+  const includeObject: MealPrepPlansIncludeObject = {};
+  const queryObject: GetMealPrepPlanByIdQueryObject = { id: "" };
 
   if (!mealPrepPlanId) {
     return res
       .status(StatusCodes.BAD_REQUEST)
       .json({ message: "Please enter a meal prep plan id!", mealPrepPlan: {} });
   }
+  queryObject.id = mealPrepPlanId;
 
-  const foundMealPrepPlan = await getOrSetCache(
-    `${userId}:mealPrepPlans:${mealPrepPlanId}`,
-    async () => {
-      const mealPrepPlan = await MealPrepPlanClient.findUnique({
-        where: { id: mealPrepPlanId },
-        include: {
-          macros: true,
-          instanceTemplates: true,
-          user: true,
-        },
-      });
-      return mealPrepPlan as MealPrepPlan;
-    }
-  );
+  // QUERY
+  if (userId) {
+    // queryObject.id = userId;
+  }
+
+  // INCLUDE
+  if (includeMacros) {
+    includeObject.macros = true;
+  }
+  if (includeUser) {
+    includeObject.user = true;
+  }
+  if (includeIngredients) {
+    includeObject.ingredients = true;
+  }
+  if (includeUtensils) {
+    includeObject.utensils = true;
+  }
+  if (includeRecipes) {
+    includeObject.recipes = true;
+  }
+  if (includeDayTemplates) {
+    includeObject.dayTemplates = true;
+  }
+  if (includeInstanceTemplates) {
+    includeObject.instanceTemplates = true;
+  }
+
+  const foundMealPrepPlan = await MealPrepPlanClient.findUnique({
+    where: queryObject,
+    include: includeObject,
+  });
 
   if (!foundMealPrepPlan) {
     return res.status(StatusCodes.NOT_FOUND).json({
@@ -153,7 +222,13 @@ const createMealPrepPlan = async (req: Request, res: Response) => {
 
   const foundInstanceTemplates = await InstanceTemplateClient.findMany({
     where: { id: { in: instanceTemplatesIds } },
-    include: { macros: true },
+    include: {
+      macros: true,
+      ingredients: true,
+      utensils: true,
+      recipes: true,
+      dayTemplates: true,
+    },
   });
 
   if (foundInstanceTemplates.length < 1) {
@@ -162,6 +237,27 @@ const createMealPrepPlan = async (req: Request, res: Response) => {
       instanceTemplates: [],
     });
   }
+
+  const ingredientsIds = foundInstanceTemplates
+    .map((instanceTemplate) =>
+      instanceTemplate.ingredients.map((ingredient) => ingredient.id)
+    )
+    .flat();
+  const utensilsIds = foundInstanceTemplates
+    .map((instanceTemplate) =>
+      instanceTemplate.utensils.map((utensil) => utensil.id)
+    )
+    .flat();
+  const recipesIds = foundInstanceTemplates
+    .map((instanceTemplate) =>
+      instanceTemplate.recipes.map((recipe) => recipe.id)
+    )
+    .flat();
+  const dayTemplatesIds = foundInstanceTemplates
+    .map((instanceTemplate) =>
+      instanceTemplate.dayTemplates.map((dayTemplate) => dayTemplate.id)
+    )
+    .flat();
 
   let mealPrepPlanMacros = {
     calories: 0,
@@ -183,6 +279,26 @@ const createMealPrepPlan = async (req: Request, res: Response) => {
       instanceTemplates: {
         connect: instanceTemplatesIds.map((instanceTemplate) => ({
           id: instanceTemplate,
+        })),
+      },
+      dayTemplates: {
+        connect: dayTemplatesIds.map((dayTemplate) => ({
+          id: dayTemplate,
+        })),
+      },
+      recipes: {
+        connect: recipesIds.map((recipe) => ({
+          id: recipe,
+        })),
+      },
+      ingredients: {
+        connect: ingredientsIds.map((ingredient) => ({
+          id: ingredient,
+        })),
+      },
+      utensils: {
+        connect: utensilsIds.map((utensil) => ({
+          id: utensil,
         })),
       },
       macros: {

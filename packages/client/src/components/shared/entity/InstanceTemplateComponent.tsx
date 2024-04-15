@@ -42,7 +42,7 @@ const InstanceTemplateComponent: FC<EntityComponentProps> = ({
       </header>
       <div className={entityComponentStyles.entityComponentDetails}>
         <p>{coverage || "0"} days covered</p>
-        <p>{dayTemplates.length || "0"} day templates used</p>
+        <p>{dayTemplates?.length || "0"} day templates used</p>
       </div>
     </div>
   );

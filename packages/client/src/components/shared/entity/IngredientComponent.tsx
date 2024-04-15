@@ -18,12 +18,15 @@ import Image from "next/image";
 const IngredientComponent: FC<EntityComponentProps> = ({
   clicked,
   entityId,
+  entity,
 }) => {
   const ingredientEntity = useAppSelector((state: State) =>
     selectEntityById(state, entityId, "ingredient")
   ) as IngredientTemplate;
+  const ingredientEntityShown = ingredientEntity || entity;
+  console.log(ingredientEntityShown);
 
-  const { name, imageUrl, macros, enabled } = ingredientEntity;
+  const { name, imageUrl, macros, enabled } = ingredientEntityShown;
 
   return (
     <div

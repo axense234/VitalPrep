@@ -15,12 +15,17 @@ import { State } from "@/redux/api/store";
 // Next
 import Image from "next/image";
 
-const RecipeComponent: FC<EntityComponentProps> = ({ clicked, entityId }) => {
+const RecipeComponent: FC<EntityComponentProps> = ({
+  clicked,
+  entityId,
+  entity,
+}) => {
   const recipeEntity = useAppSelector((state: State) =>
     selectEntityById(state, entityId, "recipe")
   ) as RecipeTemplate;
+  const recipeEntityShown = recipeEntity || entity;
 
-  const { name, imageUrl, macros } = recipeEntity;
+  const { name, imageUrl, macros } = recipeEntityShown;
 
   return (
     <div

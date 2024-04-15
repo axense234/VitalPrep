@@ -15,10 +15,22 @@
 
 .entityInfoDetailsContainer {
   @include flexCenter(column);
-  border: 2px solid black;
   width: 100%;
   height: auto;
   gap: 3rem;
+
+  h2 {
+    @include h2Laptop();
+    font-weight: 550;
+    letter-spacing: 2px;
+    margin-bottom: 1rem;
+  }
+
+  h3 {
+    font-size: 2rem;
+    font-weight: 550;
+    letter-spacing: 1px;
+  }
 }
 
 .entityInfoDetailsHeader {

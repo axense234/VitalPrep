@@ -17,8 +17,17 @@ const getEntityMacrosChartData = (chartData: Macros): ChartData<"pie"> => {
               (acc, data) => ((acc as number) || 0) + ((data as number) || 0),
               0
             );
-            const percentage = ((value / (total as number)) * 100).toFixed(0);
-            return `${percentage}%`;
+            const percentage = ((value / (total as number)) * 100).toFixed(2);
+            const label = (ctx.chart.data.labels as string[])[ctx.dataIndex];
+
+            if (Number(percentage) <= 5) {
+              return `< ${percentage}% ${label.toLowerCase()}`;
+            } else {
+              return {
+                text: `${percentage}% ${label.toLowerCase()}`,
+                font: { size: 22 },
+              }.text;
+            }
           },
         },
         label: "Grams",
@@ -27,7 +36,7 @@ const getEntityMacrosChartData = (chartData: Macros): ChartData<"pie"> => {
           chartData?.carbsAmount || 0,
           chartData?.fatsAmount || 0,
         ],
-        backgroundColor: ["#432517", "#42171c", "#ff8c00"],
+        backgroundColor: ["#432517", "#42171c", "#ff6000"],
         borderColor: "black",
         borderWidth: 1,
       },

@@ -4,35 +4,60 @@ import { Response, Request } from "express";
 import { StatusCodes } from "http-status-codes";
 // Prisma
 import { UtensilClient } from "../db/postgres";
-import { Utensil } from "@prisma/client";
+import { Prisma, Utensil } from "@prisma/client";
 // Utils
 import { deleteCache, getOrSetCache, setCache } from "../utils/redis";
 
-type UtensilsQueryObject = {
+type GetAllUtensilsQueryObject = {
   userId?: string;
+};
+
+type UtensilsOrderByObject =
+  | ({
+      name?: "asc" | "desc";
+      enabled?: "asc" | "desc";
+      recipes?: { _count: string | undefined };
+    } & Prisma.UtensilOrderByWithRelationInput)
+  | Prisma.UtensilOrderByWithRelationInput[]
+  | undefined;
+
+type UtensilsIncludeObject = {
+  macros?: boolean;
+  user?: boolean;
+  recipes?: boolean;
+  dayTemplates?: boolean;
+  instanceTemplates?: boolean;
+  mealPrepPlans?: boolean;
+};
+
+type GetUtensilByIdQueryObject = {
+  id: string;
+  macrosId?: string;
 };
 
 const getAllUtensils = async (req: Request, res: Response) => {
   const {
     userUtensils,
-    sortByKey,
-    sortByOrder,
+    userId,
     searchByKey,
     searchByValue,
-    userId,
+    sortByKey,
+    sortByOrder,
+    includeMacros,
+    includeUser,
+    includeRecipes,
+    includeDayTemplates,
+    includeInstanceTemplates,
+    includeMealPrepPlans,
   } = req.query;
 
-  const queryObject: UtensilsQueryObject = {};
-  const orderByObject: any = {};
+  const queryObject: GetAllUtensilsQueryObject = {};
+  const orderByObject: UtensilsOrderByObject = {};
+  const includeObject: UtensilsIncludeObject = {};
 
+  // QUERY
   if (userUtensils) {
     queryObject.userId = userId as string;
-  }
-
-  if (sortByKey === "numberOfRecipes") {
-    orderByObject.recipes = { _count: sortByOrder };
-  } else if (sortByKey) {
-    orderByObject[sortByKey as string] = (sortByOrder as string) || "asc";
   }
 
   if (searchByKey) {
@@ -40,24 +65,41 @@ const getAllUtensils = async (req: Request, res: Response) => {
       contains: (searchByValue as string) || "",
     };
   }
+
+  // ORDER BY
+  if (sortByKey === "numberOfRecipes") {
+    orderByObject.recipes = { _count: sortByOrder as "asc" | "desc" };
+  } else if (sortByKey) {
+    orderByObject[sortByKey as string] = (sortByOrder as string) || "asc";
+  }
+
+  // INCLUDE
+
   const foundUtensils = await UtensilClient.findMany({
     orderBy: orderByObject,
     where: queryObject,
-    include: {
-      recipes: true,
-      user: true,
-    },
+    include: includeObject,
   });
 
-  // const foundUtensils = await getOrSetCache("utensils", async () => {
-  //   const utensils = await UtensilClient.findMany({
-  //     include: {
-  //       recipes: true,
-  //       user: true,
-  //     },
-  //   });
-  //   return utensils as Utensil[];
-  // });
+  // INCLUDE
+  if (includeMacros) {
+    includeObject.macros = true;
+  }
+  if (includeUser) {
+    includeObject.user = true;
+  }
+  if (includeRecipes) {
+    includeObject.recipes = true;
+  }
+  if (includeDayTemplates) {
+    includeObject.dayTemplates = true;
+  }
+  if (includeInstanceTemplates) {
+    includeObject.instanceTemplates = true;
+  }
+  if (includeMealPrepPlans) {
+    includeObject.mealPrepPlans = true;
+  }
 
   if (foundUtensils.length < 1) {
     return res
@@ -74,26 +116,53 @@ const getAllUtensils = async (req: Request, res: Response) => {
 
 const getUtensilById = async (req: Request, res: Response) => {
   const { utensilId, userId } = req.params;
+  const {
+    includeMacros,
+    includeUser,
+    includeRecipes,
+    includeDayTemplates,
+    includeInstanceTemplates,
+    includeMealPrepPlans,
+  } = req.query;
+  const includeObject: UtensilsIncludeObject = {};
+  const queryObject: GetUtensilByIdQueryObject = { id: "" };
 
   if (!utensilId) {
     return res
       .status(StatusCodes.BAD_REQUEST)
       .json({ message: "Please enter an utensil id!", utensil: {} });
   }
+  queryObject.id = utensilId;
 
-  const foundUtensil = await getOrSetCache(
-    `${userId}:utensils:${utensilId}`,
-    async () => {
-      const utensil = await UtensilClient.findUnique({
-        where: { id: utensilId },
-        include: {
-          recipes: true,
-          user: true,
-        },
-      });
-      return utensil as Utensil;
-    }
-  );
+  // QUERY
+  if (userId) {
+    // queryObject.id = userId;
+  }
+
+  // INCLUDE
+  if (includeMacros) {
+    includeObject.macros = true;
+  }
+  if (includeUser) {
+    includeObject.user = true;
+  }
+  if (includeRecipes) {
+    includeObject.recipes = true;
+  }
+  if (includeDayTemplates) {
+    includeObject.dayTemplates = true;
+  }
+  if (includeInstanceTemplates) {
+    includeObject.instanceTemplates = true;
+  }
+  if (includeMealPrepPlans) {
+    includeObject.mealPrepPlans = true;
+  }
+
+  const foundUtensil = await UtensilClient.findUnique({
+    where: queryObject,
+    include: includeObject,
+  });
 
   if (!foundUtensil) {
     return res.status(StatusCodes.NOT_FOUND).json({

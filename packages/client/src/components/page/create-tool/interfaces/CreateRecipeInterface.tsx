@@ -7,8 +7,10 @@ import ImageFormControl from "@/components/shared/form/ImageFormControl";
 import PopupModal from "@/components/shared/modals/PopupModal";
 import SelectFormControl from "@/components/shared/form/SelectFormControl";
 import CheckboxFormControl from "@/components/shared/form/CheckboxFormControl";
+import VideoFormControl from "@/components/shared/form/VideoFormControl";
+import TextAreaFormControl from "@/components/shared/form/TextAreaFormControl";
 // Data
-import { defaultUtensilImageUrl } from "@/data";
+import { defaultEntityQueryValues, defaultUtensilImageUrl } from "@/data";
 // React
 import { useEffect, useRef } from "react";
 // Redux
@@ -46,8 +48,6 @@ import {
   selectAllIngredientsIds,
   selectLoadingGetUserIngredients,
 } from "@/redux/slices/ingredientsSlice";
-import VideoFormControl from "@/components/shared/form/VideoFormControl";
-import TextAreaFormControl from "@/components/shared/form/TextAreaFormControl";
 
 const CreateRecipeInterface = () => {
   const dispatch = useAppDispatch();
@@ -111,14 +111,24 @@ const CreateRecipeInterface = () => {
       loadingProfile &&
       !hasEffectRun.current
     ) {
-      dispatch(getAllUserIngredients(profile.id));
+      dispatch(
+        getAllUserIngredients({
+          userId: profile.id,
+          entityQueryValues: defaultEntityQueryValues,
+        })
+      );
     }
     if (
       loadingGetUserUtensils === "IDLE" &&
       loadingProfile &&
       !hasEffectRun.current
     ) {
-      dispatch(getAllUserUtensils(profile.id));
+      dispatch(
+        getAllUserUtensils({
+          userId: profile.id,
+          entityQueryValues: defaultEntityQueryValues,
+        })
+      );
     }
     hasEffectRun.current = true;
   }, [loadingGetUserIngredients, loadingGetUserUtensils, loadingProfile]);
@@ -314,7 +324,7 @@ const CreateRecipeInterface = () => {
                 }
                 inputHeight={36}
                 labelFontSize={26}
-                maxInputLength={1000}
+                maxInputLength={10000}
                 backgroundColor="#421d17"
               />
             )}

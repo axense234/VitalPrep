@@ -11,12 +11,12 @@ import {
   createSlice,
 } from "@reduxjs/toolkit";
 import RecipeTemplate from "@/core/types/entity/mutation/RecipeTemplate";
+import EntityQueryValues from "@/core/types/entity/EntityQueryValues";
 // Prisma
 import { Recipe } from "@prisma/client";
 // Axios
 import { AxiosError } from "axios";
 import axiosInstance from "@/utils/axios";
-import EntityQueryValues from "@/core/types/entity/EntityQueryValues";
 
 type ObjectKeyValueType = {
   key: string;
@@ -94,9 +94,16 @@ export const getAllUserRecipes = createAsyncThunk<
   try {
     const { searchByKey, searchByValue, sortByKey, sortByOrder } =
       entityQueryValues;
-    const { data } = await axiosInstance.get(
-      `/recipes?userId=${userId}&userRecipes=true&searchByKey=${searchByKey}&searchByValue=${searchByValue}&sortByKey=${sortByKey}&sortByOrder=${sortByOrder}`
-    );
+    const { data } = await axiosInstance.get(`/recipes`, {
+      params: {
+        userId,
+        userIngredients: true,
+        searchByKey,
+        searchByValue,
+        sortByKey,
+        sortByOrder,
+      },
+    });
     return data.recipes as Recipe[];
   } catch (error) {
     console.log(error);

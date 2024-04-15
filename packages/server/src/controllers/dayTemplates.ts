@@ -4,35 +4,62 @@ import { Response, Request } from "express";
 import { StatusCodes } from "http-status-codes";
 // Prisma
 import { DayTemplateClient, RecipeClient } from "../db/postgres";
-import { DayTemplate, Recipe } from "@prisma/client";
+import { DayTemplate, Prisma, Recipe } from "@prisma/client";
 // Utils
 import { deleteCache, getOrSetCache, setCache } from "../utils/redis";
 
-type DayTemplateQueryObject = {
+type GetAllDayTemplatesQueryObject = {
   userId?: string;
+  searchByKey?: { contains: string };
+};
+
+type GetDayTemplateByIdQueryObject = {
+  id: string;
+  macrosId?: string;
+};
+
+type DayTemplatesOrderByObject =
+  | ({
+      name?: "asc" | "desc";
+      instanceTemplates?: { _count: string | undefined };
+    } & Prisma.DayTemplateOrderByWithRelationInput)
+  | Prisma.DayTemplateOrderByWithRelationInput[]
+  | undefined;
+
+type DayTemplatesIncludeObject = {
+  macros?: boolean;
+  user?: boolean;
+  ingredients?: boolean;
+  utensils?: boolean;
+  recipes?: boolean;
+  instanceTemplates?: boolean;
+  mealPrepPlans?: boolean;
 };
 
 const getAllDayTemplates = async (req: Request, res: Response) => {
   const {
     userDayTemplates,
-    sortByKey,
-    sortByOrder,
+    userId,
     searchByKey,
     searchByValue,
-    userId,
+    sortByKey,
+    sortByOrder,
+    includeMacros,
+    includeUser,
+    includeIngredients,
+    includeUtensils,
+    includeRecipes,
+    includeInstanceTemplates,
+    includeMealPrepPlans,
   } = req.query;
 
-  const queryObject: DayTemplateQueryObject = {};
-  const orderByObject: any = {};
+  const queryObject: GetAllDayTemplatesQueryObject = {};
+  const orderByObject: DayTemplatesOrderByObject = {};
+  const includeObject: DayTemplatesIncludeObject = {};
 
+  // QUERY
   if (userDayTemplates) {
     queryObject.userId = userId as string;
-  }
-
-  if (sortByKey === "numberOfInstanceTemplates") {
-    orderByObject.instanceTemplates = { _count: sortByOrder };
-  } else if (sortByKey) {
-    orderByObject[sortByKey as string] = (sortByOrder as string) || "asc";
   }
 
   if (searchByKey) {
@@ -41,29 +68,41 @@ const getAllDayTemplates = async (req: Request, res: Response) => {
     };
   }
 
+  // ORDER BY
+  if (sortByKey === "numberOfInstanceTemplates") {
+    orderByObject.instanceTemplates = { _count: sortByOrder as "asc" | "desc" };
+  } else if (sortByKey) {
+    orderByObject[sortByKey as string] = (sortByOrder as string) || "asc";
+  }
+
+  // INCLUDE
+  if (includeMacros) {
+    includeObject.macros = true;
+  }
+  if (includeUser) {
+    includeObject.user = true;
+  }
+  if (includeIngredients) {
+    includeObject.ingredients = true;
+  }
+  if (includeUtensils) {
+    includeObject.utensils = true;
+  }
+  if (includeRecipes) {
+    includeObject.recipes = true;
+  }
+  if (includeInstanceTemplates) {
+    includeObject.instanceTemplates = true;
+  }
+  if (includeMealPrepPlans) {
+    includeObject.mealPrepPlans = true;
+  }
+
   const foundDayTemplates = await DayTemplateClient.findMany({
     orderBy: orderByObject,
     where: queryObject,
-    include: {
-      macros: true,
-      recipes: true,
-      instanceTemplates: true,
-      user: true,
-    },
+    include: includeObject,
   });
-
-  // const foundDayTemplates = await getOrSetCache("dayTemplates", async () => {
-  //   const dayTemplates = await DayTemplateClient.findMany({
-  //     where: queryObject,
-  //     include: {
-  //       macros: true,
-  //       recipes: true,
-  //       instanceTemplates: true,
-  //       user: true,
-  //     },
-  //   });
-  //   return dayTemplates as DayTemplate[];
-  // });
 
   if (foundDayTemplates.length < 1) {
     return res
@@ -80,28 +119,58 @@ const getAllDayTemplates = async (req: Request, res: Response) => {
 
 const getDayTemplateById = async (req: Request, res: Response) => {
   const { dayTemplateId, userId } = req.params;
+  const {
+    includeMacros,
+    includeUser,
+    includeIngredients,
+    includeUtensils,
+    includeRecipes,
+    includeInstanceTemplates,
+    includeMealPrepPlans,
+  } = req.query;
+
+  const includeObject: DayTemplatesIncludeObject = {};
+  const queryObject: GetDayTemplateByIdQueryObject = { id: "" };
 
   if (!dayTemplateId) {
     return res
       .status(StatusCodes.BAD_REQUEST)
       .json({ message: "Please enter a day template id!", dayTemplate: {} });
   }
+  queryObject.id = dayTemplateId;
 
-  const foundDayTemplate = await getOrSetCache(
-    `${userId}:dayTemplates:${dayTemplateId}`,
-    async () => {
-      const dayTemplate = await DayTemplateClient.findUnique({
-        where: { id: dayTemplateId },
-        include: {
-          macros: true,
-          recipes: true,
-          instanceTemplates: true,
-          user: true,
-        },
-      });
-      return dayTemplate as DayTemplate;
-    }
-  );
+  // QUERY
+  if (userId) {
+    // queryObject.id = userId;
+  }
+
+  // INCLUDE
+  if (includeMacros) {
+    includeObject.macros = true;
+  }
+  if (includeUser) {
+    includeObject.user = true;
+  }
+  if (includeIngredients) {
+    includeObject.ingredients = true;
+  }
+  if (includeUtensils) {
+    includeObject.utensils = true;
+  }
+  if (includeRecipes) {
+    includeObject.recipes = true;
+  }
+  if (includeInstanceTemplates) {
+    includeObject.instanceTemplates = true;
+  }
+  if (includeMealPrepPlans) {
+    includeObject.mealPrepPlans = true;
+  }
+
+  const foundDayTemplate = await DayTemplateClient.findUnique({
+    where: queryObject,
+    include: includeObject,
+  });
 
   if (!foundDayTemplate) {
     return res.status(StatusCodes.NOT_FOUND).json({
@@ -147,7 +216,7 @@ const createDayTemplate = async (req: Request, res: Response) => {
 
   const foundRecipes = await RecipeClient.findMany({
     where: { id: { in: recipesIds } },
-    include: { macros: true },
+    include: { macros: true, ingredients: true, utensils: true },
   });
 
   if (foundRecipes.length < 1) {
@@ -156,6 +225,14 @@ const createDayTemplate = async (req: Request, res: Response) => {
       recipes: [],
     });
   }
+
+  const ingredientsIds = foundRecipes
+    .map((recipe) => recipe.ingredients.map((ingredient) => ingredient.id))
+    .flat();
+
+  const utensilsIds = foundRecipes
+    .map((recipe) => recipe.utensils.map((utensil) => utensil.id))
+    .flat();
 
   let dayTemplateMacros = {
     calories: 0,
@@ -177,6 +254,16 @@ const createDayTemplate = async (req: Request, res: Response) => {
       recipes: {
         connect: recipesIds.map((recipe) => ({
           id: recipe,
+        })),
+      },
+      ingredients: {
+        connect: ingredientsIds.map((ingredient) => ({
+          id: ingredient,
+        })),
+      },
+      utensils: {
+        connect: utensilsIds.map((utensil) => ({
+          id: utensil,
         })),
       },
       macros: {

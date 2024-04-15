@@ -18,12 +18,15 @@ import Image from "next/image";
 const DayTemplateComponent: FC<EntityComponentProps> = ({
   clicked,
   entityId,
+  entity,
 }) => {
   const dayTemplateEntity = useAppSelector((state: State) =>
     selectEntityById(state, entityId, "dayTemplate")
   ) as DayTemplateTemplate;
 
-  const { name, imageUrl, macros, recipes } = dayTemplateEntity;
+  const dayTemplateEntityUsed = dayTemplateEntity || entity;
+
+  const { name, imageUrl, macros, recipes } = dayTemplateEntityUsed;
 
   return (
     <div
@@ -42,7 +45,7 @@ const DayTemplateComponent: FC<EntityComponentProps> = ({
         <h4>{name}</h4>
       </header>
       <div className={entityComponentStyles.entityComponentDetails}>
-        <p>{recipes.length || "0"} meals</p>
+        <p>{recipes?.length || "0"} meals</p>
         <p>{macros?.calories} calories</p>
       </div>
     </div>

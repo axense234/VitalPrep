@@ -57,7 +57,12 @@ model MealPrepPlan {
   imageUrl  String  @default("https://res.cloudinary.com/birthdayreminder/image/upload/v1708851067/VitalPrep/Default_Day_Instance_Image_Plan_obbwd9.jpg")
   activated Boolean @default(true)
 
-  instanceTemplates        InstanceTemplate[]
+  ingredients       Ingredient[]
+  utensils          Utensil[]
+  recipes           Recipe[]
+  dayTemplates      DayTemplate[]
+  instanceTemplates InstanceTemplate[]
+
   instanceTemplatesTimings DateTime[]
 
   macros   Macros @relation(fields: [macrosId], references: [id], onDelete: Cascade)
@@ -73,6 +78,9 @@ model InstanceTemplate {
   imageUrl String @default("https://res.cloudinary.com/birthdayreminder/image/upload/v1708849818/VitalPrep/vector-set-foam-container_60352-1353_or48cz.jpg")
   coverage Int    @default(0)
 
+  ingredients   Ingredient[]
+  utensils      Utensil[]
+  recipes       Recipe[]
   dayTemplates  DayTemplate[]
   mealPrepPlans MealPrepPlan[]
   mealPrepLogs  MealPrepLog[]
@@ -89,8 +97,11 @@ model DayTemplate {
   name     String @default("Day Template")
   imageUrl String @default("https://res.cloudinary.com/birthdayreminder/image/upload/v1708849436/VitalPrep/Default_Day_Instance_Image_xs53xh.jpg")
 
+  ingredients       Ingredient[]
+  utensils          Utensil[]
   recipes           Recipe[]
   instanceTemplates InstanceTemplate[]
+  mealPrepPlans     MealPrepPlan[]
 
   macros   Macros @relation(fields: [macrosId], references: [id], onDelete: Cascade)
   macrosId String @unique
@@ -104,9 +115,11 @@ model Recipe {
   name     String @default("Recipe")
   imageUrl String @default("https://res.cloudinary.com/birthdayreminder/image/upload/v1708848563/VitalPrep/depositphotos_86878174-stock-illustration-simple-doodle-of-a-bowl_skeven.webp")
 
-  ingredients  Ingredient[]
-  utensils     Utensil[]
-  dayTemplates DayTemplate[]
+  ingredients       Ingredient[]
+  utensils          Utensil[]
+  dayTemplates      DayTemplate[]
+  instanceTemplates InstanceTemplate[]
+  mealPrepPlans     MealPrepPlan[]
 
   macros   Macros @relation(fields: [macrosId], references: [id], onDelete: Cascade)
   macrosId String @unique
@@ -132,7 +145,10 @@ model Ingredient {
   imageUrl String  @default("https://res.cloudinary.com/birthdayreminder/image/upload/v1708848204/VitalPrep/doodle-carrot-hand-drawn-black-white-outline-carrot-line-art-vegetable-stock-vector_502320-1096_oenebb.jpg")
   enabled  Boolean @default(true)
 
-  recipes Recipe[]
+  recipes           Recipe[]
+  dayTemplates      DayTemplate[]
+  instanceTemplates InstanceTemplate[]
+  mealPrepPlans     MealPrepPlan[]
 
   macros   Macros @relation(fields: [macrosId], references: [id], onDelete: Cascade)
   macrosId String @unique
@@ -161,7 +177,10 @@ model Utensil {
   imageUrl String  @default("https://res.cloudinary.com/birthdayreminder/image/upload/v1708848218/VitalPrep/frying-pan-with-food-hand-drawn-doodle-vector-41700255_ni2nh1.jpg")
   enabled  Boolean @default(true)
 
-  recipes Recipe[]
+  recipes           Recipe[]
+  dayTemplates      DayTemplate[]
+  instanceTemplates InstanceTemplate[]
+  mealPrepPlans     MealPrepPlan[]
 
   user   User?   @relation(fields: [userId], references: [id])
   userId String?
