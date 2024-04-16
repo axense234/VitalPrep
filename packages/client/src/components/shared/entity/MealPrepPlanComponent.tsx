@@ -18,12 +18,14 @@ import MealPrepPlanTemplate from "@/core/types/entity/mutation/MealPrepPlanTempl
 const MealPrepPlanComponent: FC<EntityComponentProps> = ({
   clicked,
   entityId,
+  entity,
 }) => {
   const mealPrepPlanEntity = useAppSelector((state: State) =>
     selectEntityById(state, entityId, "mealPrepPlan")
   ) as MealPrepPlanTemplate;
+  const mealPrepPlanEntityShown = mealPrepPlanEntity || entity;
 
-  const { name, imageUrl, instanceTemplates } = mealPrepPlanEntity;
+  const { name, imageUrl, instanceTemplates } = mealPrepPlanEntityShown;
 
   return (
     <div
@@ -42,7 +44,10 @@ const MealPrepPlanComponent: FC<EntityComponentProps> = ({
         <h4>{name}</h4>
       </header>
       <div className={entityComponentStyles.entityComponentDetails}>
-        <p>{instanceTemplates?.length} instance templates used</p>
+        <p>
+          {instanceTemplates?.length > 0 ? instanceTemplates.length : "???"}{" "}
+          instance templates used
+        </p>
       </div>
     </div>
   );

@@ -7,10 +7,18 @@
 .entityInfoContent {
   @include flexCenter(column);
   width: 100%;
+  padding: 256px;
   padding-top: 128px;
-  padding-bottom: 64px;
-  gap: 64px;
+  gap: 256px;
   background-image: url($authFormPageTemplateFormBackgroundUrl);
+}
+
+.entityInfoAppearancesContainer {
+  @include flexCenter(column);
+  align-items: flex-start;
+  width: 100%;
+  height: auto;
+  gap: 1.5rem;
 }
 
 .entityInfoDetailsContainer {
@@ -23,7 +31,7 @@
     @include h2Laptop();
     font-weight: 550;
     letter-spacing: 2px;
-    margin-bottom: 1rem;
+    margin-bottom: -1rem;
   }
 
   h3 {
@@ -48,5 +56,18 @@
     font-size: 2rem;
     font-weight: 550;
     letter-spacing: 1px;
+  }
+}
+
+.entityInfoAppearancesSectionEntities {
+  @include flexCenter(column);
+  width: 100%;
+  list-style: none;
+  gap: 8px;
+  padding: 1rem;
+
+  li {
+    @include flexCenter(row);
+    width: 100%;
   }
 }

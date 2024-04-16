@@ -14,7 +14,11 @@ const router = express.Router();
 
 router.get("/utensils", authenticationMiddleware, getAllUtensils);
 
-router.get("/utensils/:utensilId", authenticationMiddleware, getUtensilById);
+router.get(
+  "/:userId/utensils/:utensilId",
+  authenticationMiddleware,
+  getUtensilById
+);
 
 router.post("/utensils/create", authenticationMiddleware, createUtensil);
 

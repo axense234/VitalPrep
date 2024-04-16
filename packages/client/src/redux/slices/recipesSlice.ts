@@ -102,6 +102,7 @@ export const getAllUserRecipes = createAsyncThunk<
         searchByValue,
         sortByKey,
         sortByOrder,
+        includeMacros: true,
       },
     });
     return data.recipes as Recipe[];

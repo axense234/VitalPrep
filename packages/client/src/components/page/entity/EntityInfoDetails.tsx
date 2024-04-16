@@ -11,9 +11,10 @@ import { useAppSelector } from "@/hooks/redux";
 // Helpers
 import selectEntityById from "@/helpers/selectEntityById";
 // Data
-import { defaultIngredientImageUrl } from "@/data";
+import { defaultIngredientImageUrl, defaultUtensilImageUrl } from "@/data";
 // Types
 import IngredientTemplate from "@/core/types/entity/mutation/IngredientTemplate";
+import UtensilTemplate from "@/core/types/entity/mutation/UtensilTemplate";
 // Pie Chart
 import EntityMacrosPieGraph from "@/components/shared/entity/EntityMacrosPieGraph";
 
@@ -25,6 +26,8 @@ const EntityInfoDetails: FC<{ entityId: string; entityType: EntityType }> = ({
   const entity = useAppSelector((state) =>
     selectEntityById(state, entityId, entityType)
   );
+
+  console.log(entity, entityId);
 
   switch (entityType) {
     case "ingredient":
@@ -51,6 +54,25 @@ const EntityInfoDetails: FC<{ entityId: string; entityType: EntityType }> = ({
           <EntityMacrosPieGraph
             macros={(entity as IngredientTemplate)?.macros}
           />
+        </div>
+      );
+      break;
+    case "utensil":
+      entityInfoDetailsShown = (
+        <div className={entityInfoStyles.entityInfoDetailsContainer}>
+          <Image
+            width={640}
+            height={640}
+            src={entity?.imageUrl || defaultUtensilImageUrl}
+            alt={entity?.name || "Utensil Image"}
+            aria-label={entity?.name || "Utensil Image"}
+          />
+          <header className={entityInfoStyles.entityInfoDetailsHeader}>
+            <h2>{entity?.name || "Utensil Name"}</h2>
+            <h3>
+              {(entity as UtensilTemplate)?.enabled ? "ENABLED" : "DISABLED"}
+            </h3>
+          </header>
         </div>
       );
       break;

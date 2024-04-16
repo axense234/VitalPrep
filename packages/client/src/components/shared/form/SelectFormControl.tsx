@@ -8,14 +8,7 @@ import formControlsStyles from "../../../scss/components/others/FormControls.mod
 import EntityComponent from "../entity/EntityComponent";
 // React Spinners
 import { ClockLoader } from "react-spinners";
-// Redux
-import { useAppSelector } from "@/hooks/redux";
-import { State } from "@/redux/api/store";
-import { selectIngredientById } from "@/redux/slices/ingredientsSlice";
-import { selectUtensilById } from "@/redux/slices/utensilsSlice";
-import { selectRecipeById } from "@/redux/slices/recipesSlice";
-import { selectDayTemplateById } from "@/redux/slices/dayTemplatesSlice";
-import { selectInstanceTemplateById } from "@/redux/slices/instanceTemplatesSlice";
+// Helpers
 import selectFormBackgroundColor from "@/helpers/selectFormBackgroundColor";
 
 const SelectFormControl: FC<SelectFormControlProps> = ({

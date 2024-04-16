@@ -77,9 +77,17 @@ export const getAllUserInstanceTemplates = createAsyncThunk<
     try {
       const { searchByKey, searchByValue, sortByKey, sortByOrder } =
         entityQueryValues;
-      const { data } = await axiosInstance.get(
-        `/instanceTemplates?userId=${userId}&userInstanceTemplates=true&searchByKey=${searchByKey}&searchByValue=${searchByValue}&sortByKey=${sortByKey}&sortByOrder=${sortByOrder}`
-      );
+      const { data } = await axiosInstance.get(`/instanceTemplates`, {
+        params: {
+          userId,
+          userInstanceTemplates: true,
+          searchByKey,
+          searchByValue,
+          sortByKey,
+          sortByOrder,
+          includeDayTemplates: true,
+        },
+      });
       return data.instanceTemplates as InstanceTemplate[];
     } catch (error) {
       console.log(error);

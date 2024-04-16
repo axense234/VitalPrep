@@ -6,6 +6,7 @@ import EntityType from "@/core/types/entity/EntityType";
 import { useParams, usePathname } from "next/navigation";
 // Components
 import IngredientInfo from "./IngredientInfo";
+import UtensilInfo from "./UtensilInfo";
 // Redux
 import { useAppSelector } from "@/hooks/redux";
 import { selectProfile } from "@/redux/slices/generalSlice";
@@ -46,6 +47,9 @@ const useSelectEntityInfoPageShown = (
         );
         break;
       case "utensil":
+        entityComponentShown = (
+          <UtensilInfo entityId={entityId} userId={profileId} />
+        );
         break;
       case "recipe":
         break;

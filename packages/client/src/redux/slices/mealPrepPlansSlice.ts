@@ -80,9 +80,17 @@ export const getAllUserMealPrepPlans = createAsyncThunk<
     try {
       const { searchByKey, searchByValue, sortByKey, sortByOrder } =
         entityQueryValues;
-      const { data } = await axiosInstance.get(
-        `/mealPrepPlans?userId=${userId}&userMealPrepPlans=true&searchByKey=${searchByKey}&searchByValue=${searchByValue}&sortByKey=${sortByKey}&sortByOrder=${sortByOrder}`
-      );
+      const { data } = await axiosInstance.get(`/mealPrepPlans`, {
+        params: {
+          userId,
+          userMealPrepPlans: true,
+          searchByKey,
+          searchByValue,
+          sortByKey,
+          sortByOrder,
+          includeInstanceTemplates: true,
+        },
+      });
       return data.mealPrepPlans as MealPrepPlanTemplate[];
     } catch (error) {
       console.log(error);

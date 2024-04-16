@@ -32,6 +32,7 @@ type InitialStateType = {
   utensilFormModalErrorMessage: string;
 
   loadingGetUserUtensils: LoadingStateType;
+  loadingGetUserUtensil: LoadingStateType;
 };
 
 export const utensilsAdapter = createEntityAdapter<Utensil>();
@@ -41,6 +42,7 @@ const initialState = utensilsAdapter.getInitialState({
   loadingCreateUtensil: "IDLE",
   utensilFormModalErrorMessage: "Default Message",
   loadingGetUserUtensils: "IDLE",
+  loadingGetUserUtensil: "IDLE",
 }) as EntityState<Utensil, string> & InitialStateType;
 
 type CreateUtensilBody = {
@@ -89,6 +91,30 @@ export const getAllUserUtensils = createAsyncThunk<
   }
 });
 
+export const getUserUtensil = createAsyncThunk<
+  Utensil | AxiosError,
+  { userId: string; utensilId: string }
+>("utensils/getUserUtensil", async ({ userId, utensilId }) => {
+  try {
+    const { data } = await axiosInstance.get(
+      `/${userId}/utensils/${utensilId}`,
+      {
+        params: {
+          includeUser: true,
+          includeRecipes: true,
+          includeDayTemplates: true,
+          includeInstanceTemplates: true,
+          includeMealPrepPlans: true,
+        },
+      }
+    );
+    return data.utensil as Utensil;
+  } catch (error) {
+    console.log(error);
+    return error as AxiosError;
+  }
+});
+
 const utensilsSlice = createSlice({
   name: "utensils",
   initialState,
@@ -111,6 +137,20 @@ const utensilsSlice = createSlice({
   },
   extraReducers(builder) {
     builder
+      .addCase(getUserUtensil.pending, (state, action) => {
+        state.loadingGetUserUtensil = "PENDING";
+      })
+      .addCase(getUserUtensil.fulfilled, (state, action) => {
+        const utensil = action.payload as UtensilTemplate;
+        const axiosError = action.payload as AxiosError;
+
+        if (axiosError !== undefined && !axiosError.response) {
+          utensilsAdapter.upsertOne(state, utensil as Utensil);
+          state.loadingGetUserUtensil = "SUCCEDED";
+        } else {
+          state.loadingGetUserUtensil = "FAILED";
+        }
+      })
       .addCase(getAllUserUtensils.pending, (state, action) => {
         state.loadingGetUserUtensils = "PENDING";
       })
@@ -166,6 +206,9 @@ export const selectUtensilFormModalErrorMessage = (state: State) =>
 
 export const selectLoadingGetUserUtensils = (state: State) =>
   state.utensils.loadingGetUserUtensils;
+
+export const selectLoadingGetUserUtensil = (state: State) =>
+  state.utensils.loadingGetUserUtensil;
 
 export const {
   updateTemplateUtensil,

@@ -84,6 +84,7 @@ export const getAllUserIngredients = createAsyncThunk<
           searchByValue,
           sortByKey,
           sortByOrder,
+          includeMacros: true,
         },
       });
       return data.ingredients as Ingredient[];
@@ -152,7 +153,7 @@ const ingredientsSlice = createSlice({
         const axiosError = action.payload as AxiosError;
 
         if (axiosError !== undefined && !axiosError.response) {
-          ingredientsAdapter.addOne(state, ingredient as Ingredient);
+          ingredientsAdapter.upsertOne(state, ingredient as Ingredient);
           state.loadingGetUserIngredient = "SUCCEDED";
         } else {
           state.loadingGetUserIngredient = "FAILED";

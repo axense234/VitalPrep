@@ -18,11 +18,14 @@ import Image from "next/image";
 const InstanceTemplateComponent: FC<EntityComponentProps> = ({
   clicked,
   entityId,
+  entity,
 }) => {
   const instanceTemplate = useAppSelector((state: State) =>
     selectEntityById(state, entityId, "instanceTemplate")
   ) as InstanceTemplateTemplate;
-  const { name, imageUrl, coverage, dayTemplates } = instanceTemplate;
+  const instanceTemplateShown = instanceTemplate || entity;
+
+  const { name, imageUrl, coverage, dayTemplates } = instanceTemplateShown;
 
   return (
     <div

@@ -17,74 +17,60 @@ const EntityInfoAppearancesSection: FC<EntityInfoAppearancesSectionProps> = ({
   backgroundColor,
   labelFontSize,
 }) => {
-  let entityInfoAppearancesSectionShown = null;
+  let sectionTitleUsed = "Entities:";
+
   switch (entityTypeUsed) {
+    case "ingredient":
+      sectionTitleUsed = "Ingredients:";
+      break;
+    case "utensil":
+      sectionTitleUsed = "Utensils:";
+      break;
     case "recipe":
-      entityInfoAppearancesSectionShown = (
-        <div className={entityInfoStyles.entityInfoDetailsContainer}>
-          <h4 style={{ color: labelColor, fontSize: labelFontSize }}>
-            Recipes:
-          </h4>
-          {areOptionsLoading ? (
-            <ClockLoader />
-          ) : (
-            <ul
-              className={entityInfoStyles.entityInfoAppearancesSectionEntities}
-              style={{ backgroundColor: backgroundColor }}
-            >
-              {entities?.map((entity) => {
-                return (
-                  <li key={entity.id}>
-                    <EntityComponent
-                      clicked={true}
-                      entityId=""
-                      entityType="recipe"
-                      isALink={true}
-                      entity={entity}
-                    />
-                  </li>
-                );
-              })}
-            </ul>
-          )}
-        </div>
-      );
+      sectionTitleUsed = "Recipes:";
       break;
     case "dayTemplate":
-      entityInfoAppearancesSectionShown = (
-        <div className={entityInfoStyles.entityInfoDetailsContainer}>
-          <h4 style={{ color: labelColor, fontSize: labelFontSize }}>
-            Day Templates:
-          </h4>
-          {areOptionsLoading ? (
-            <ClockLoader />
-          ) : (
-            <ul
-              className={entityInfoStyles.entityInfoAppearancesSectionEntities}
-              style={{ backgroundColor: backgroundColor }}
-            >
-              {entities?.map((entity) => {
-                return (
-                  <li key={entity.id}>
-                    <EntityComponent
-                      clicked={true}
-                      entityId=""
-                      entityType="dayTemplate"
-                      isALink={true}
-                      entity={entity}
-                    />
-                  </li>
-                );
-              })}
-            </ul>
-          )}
-        </div>
-      );
+      sectionTitleUsed = "Day Templates:";
+      break;
+    case "instanceTemplate":
+      sectionTitleUsed = "Instance Templates:";
+      break;
+    case "mealPrepPlan":
+      sectionTitleUsed = "Meal Prep Plans:";
       break;
     default:
       break;
   }
-  return entityInfoAppearancesSectionShown;
+
+  return (
+    <div className={entityInfoStyles.entityInfoAppearancesContainer}>
+      <h4 style={{ color: labelColor, fontSize: labelFontSize }}>
+        {sectionTitleUsed}
+      </h4>
+      {areOptionsLoading ? (
+        <ClockLoader />
+      ) : (
+        <ul
+          className={entityInfoStyles.entityInfoAppearancesSectionEntities}
+          style={{ backgroundColor: backgroundColor }}
+        >
+          {entities?.map((entity) => {
+            return (
+              <li key={entity.id}>
+                <EntityComponent
+                  clicked={true}
+                  entityId=""
+                  entityType={entityTypeUsed}
+                  isALink={true}
+                  entity={entity}
+                />
+              </li>
+            );
+          })}
+        </ul>
+      )}
+    </div>
+  );
 };
 
 export default EntityInfoAppearancesSection;
