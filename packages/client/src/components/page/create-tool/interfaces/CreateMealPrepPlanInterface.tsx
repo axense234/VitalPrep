@@ -240,12 +240,13 @@ const CreateMealPrepPlanInterface = () => {
                         required={true}
                         entityPropertyOptions={instanceTemplatesIds}
                         entityPropertyChosenOptions={
-                          templateMealPrepPlan.instanceTemplates || []
+                          (templateMealPrepPlan.instanceTemplates as string[]) ||
+                          []
                         }
                         entityTypeUsed="instanceTemplate"
                         onEntityPropertyValueChange={(id) =>
                           handleUpdateArrayEntities(
-                            templateMealPrepPlan.instanceTemplates,
+                            templateMealPrepPlan.instanceTemplates as string[],
                             id,
                             instanceTemplateOption.id - 1,
                             "instanceTemplates"

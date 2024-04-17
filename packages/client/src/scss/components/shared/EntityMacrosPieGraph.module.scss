@@ -3,7 +3,7 @@
 .pieGraphContainer {
   @include flexCenter(row);
   width: 100%;
-  height: 640px;
+  max-height: 640px;
 }
 
 .pieGraph {

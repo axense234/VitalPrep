@@ -25,6 +25,13 @@
   @include flexCenter(column);
   width: 100%;
   height: auto;
+  gap: 12rem;
+}
+
+.entityInfoDetailsHero {
+  @include flexCenter(column);
+  height: auto;
+  width: 100%;
   gap: 3rem;
 
   h2 {
@@ -49,7 +56,6 @@
     @include h2Laptop();
     font-weight: 550;
     letter-spacing: 3px;
-    margin-bottom: 1rem;
   }
 
   h3 {
@@ -69,5 +75,111 @@
   li {
     @include flexCenter(row);
     width: 100%;
+  }
+}
+
+.entityInfoDetalsComposedSection {
+  @include flexCenter(column);
+  height: auto;
+  width: 100%;
+}
+
+.entityInfoDetailsComposedSectionContainer {
+  @include flexCenter(column);
+  width: 100%;
+  gap: 64px;
+
+  h3 {
+    @include h2Laptop();
+    font-weight: 550;
+    letter-spacing: 3px;
+  }
+}
+
+.entityInfoDetailsComposedSectionEntities {
+  @include flexCenter(row);
+  flex-wrap: wrap;
+  justify-content: space-around;
+
+  width: 100%;
+  list-style: none;
+  gap: 3rem;
+
+  li {
+    @include flexCenter(column);
+    max-width: 30%;
+
+    a {
+      @include flexCenter(column);
+      width: 100%;
+      text-decoration: none;
+    }
+  }
+}
+
+.entityInfoDetailsComposedSectionEntityCard {
+  @include flexCenter(column);
+  border: 2px solid black;
+  width: 100%;
+  gap: 1rem;
+  background-color: getColor("primary-1");
+  padding-bottom: 1rem;
+
+  img {
+    width: 100%;
+  }
+}
+
+.entityInfoDetailsComposedSectionEntityCardContent {
+  @include flexCenter(column);
+  padding: 2rem;
+  gap: 2rem;
+
+  h4 {
+    @include h4Laptop();
+    text-align: center;
+    font-weight: 550;
+    letter-spacing: 1.5px;
+    color: getColor(tan-color-extra-light);
+  }
+}
+
+.entityInfoRecipeTutorialContainer {
+  @include flexCenter(column);
+  width: 100%;
+  gap: 64px;
+
+  h3 {
+    @include h2Laptop();
+    font-weight: 550;
+    letter-spacing: 3px;
+  }
+}
+
+.entityInfoRecipeTutorialSection {
+  @include flexCenter(column);
+  width: 100%;
+  gap: 1.5rem;
+
+  h4 {
+    @include h4Laptop();
+    font-weight: 550;
+    letter-spacing: 1.5px;
+  }
+
+  iframe {
+    width: 50%;
+    min-height: 20rem;
+  }
+
+  p {
+    padding: 1rem;
+    width: 100%;
+    min-height: 20rem;
+    background-color: getColor("tan-color");
+    border: 1.5px solid getColor("black-100-1");
+    font-size: 1.25rem;
+    font-weight: 400;
+    letter-spacing: 0.35px;
   }
 }

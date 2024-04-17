@@ -3,14 +3,17 @@ import { ChartData } from "chart.js";
 // Types
 import { Macros } from "@prisma/client";
 
-const getEntityMacrosChartData = (chartData: Macros): ChartData<"pie"> => {
+const getEntityMacrosChartData = (
+  chartData: Macros,
+  labelSize: number
+): ChartData<"pie"> => {
   return {
     labels: ["Protein", "Carbs", "Fats"],
     datasets: [
       {
         datalabels: {
           color: "white",
-          font: { size: 28 },
+          font: { size: labelSize },
           formatter: (value, ctx) => {
             const dataset = ctx.chart.data.datasets[ctx.datasetIndex];
             const total = dataset.data.reduce(
@@ -20,14 +23,7 @@ const getEntityMacrosChartData = (chartData: Macros): ChartData<"pie"> => {
             const percentage = ((value / (total as number)) * 100).toFixed(2);
             const label = (ctx.chart.data.labels as string[])[ctx.dataIndex];
 
-            if (Number(percentage) <= 5) {
-              return `< ${percentage}% ${label.toLowerCase()}`;
-            } else {
-              return {
-                text: `${percentage}% ${label.toLowerCase()}`,
-                font: { size: 22 },
-              }.text;
-            }
+            return `${percentage}% ${label.toLowerCase()}`;
           },
         },
         label: "Grams",

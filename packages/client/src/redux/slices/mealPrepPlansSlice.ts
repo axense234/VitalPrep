@@ -34,6 +34,7 @@ type InitialStateType = {
   numberOfInstanceTemplates: number;
 
   loadingGetUserMealPrepPlans: LoadingStateType;
+  loadingGetUserMealPrepPlan: LoadingStateType;
 };
 
 export const mealPrepPlansAdapter = createEntityAdapter<MealPrepPlan>();
@@ -44,6 +45,7 @@ const initialState = mealPrepPlansAdapter.getInitialState({
   mealPrepPlanFormModalErrorMessage: "Default Message",
   numberOfInstanceTemplates: 0,
   loadingGetUserMealPrepPlans: "IDLE",
+  loadingGetUserMealPrepPlan: "IDLE",
 }) as EntityState<MealPrepPlan, string> & InitialStateType;
 
 type CreateMealPrepPlanBody = {
@@ -99,6 +101,35 @@ export const getAllUserMealPrepPlans = createAsyncThunk<
   }
 );
 
+export const getUserMealPrepPlan = createAsyncThunk<
+  MealPrepPlan | AxiosError,
+  { userId: string; mealPrepPlanId: string }
+>("mealPrepPlans/getUserMealPrepPlan", async ({ userId, mealPrepPlanId }) => {
+  try {
+    const { data } = await axiosInstance.get(
+      `/${userId}/mealPrepPlans/${mealPrepPlanId}`,
+      {
+        params: {
+          includeMacros: true,
+          includeIngredients: true,
+          includeIngredientsMacros: true,
+          includeUtensils: true,
+          includeRecipes: true,
+          includeRecipesMacros: true,
+          includeDayTemplates: true,
+          includeDayTemplatesMacros: true,
+          includeInstanceTemplates: true,
+          includeInstanceTemplatesMacros: true,
+        },
+      }
+    );
+    return data.mealPrepPlan as MealPrepPlan;
+  } catch (error) {
+    console.log(error);
+    return error as AxiosError;
+  }
+});
+
 const mealPrepPlansSlice = createSlice({
   name: "mealPrepPlans",
   initialState,
@@ -130,6 +161,20 @@ const mealPrepPlansSlice = createSlice({
   },
   extraReducers(builder) {
     builder
+      .addCase(getUserMealPrepPlan.pending, (state, action) => {
+        state.loadingGetUserMealPrepPlan = "PENDING";
+      })
+      .addCase(getUserMealPrepPlan.fulfilled, (state, action) => {
+        const mealPrepPlan = action.payload as MealPrepPlanTemplate;
+        const axiosError = action.payload as AxiosError;
+
+        if (axiosError !== undefined && !axiosError.response) {
+          mealPrepPlansAdapter.upsertOne(state, mealPrepPlan as MealPrepPlan);
+          state.loadingGetUserMealPrepPlan = "SUCCEDED";
+        } else {
+          state.loadingGetUserMealPrepPlan = "FAILED";
+        }
+      })
       .addCase(getAllUserMealPrepPlans.pending, (state, action) => {
         state.loadingGetUserMealPrepPlans = "PENDING";
       })
@@ -188,6 +233,9 @@ export const selectNumberOfInstanceTemplates = (state: State) =>
 
 export const selectLoadingGetUserMealPrepPlans = (state: State) =>
   state.mealPrepPlans.loadingGetUserMealPrepPlans;
+
+export const selectLoadingGetUserMealPrepPlan = (state: State) =>
+  state.mealPrepPlans.loadingGetUserMealPrepPlan;
 
 export const {
   updateTemplateMealPrepPlan,

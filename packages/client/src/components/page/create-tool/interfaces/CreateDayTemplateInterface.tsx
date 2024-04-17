@@ -233,12 +233,12 @@ const CreateDayTemplateInterface = () => {
                       required={true}
                       entityPropertyOptions={recipesIds}
                       entityPropertyChosenOptions={
-                        templateDayTemplate.recipes || []
+                        (templateDayTemplate.recipes as string[]) || []
                       }
                       entityTypeUsed="recipe"
                       onEntityPropertyValueChange={(id) =>
                         handleUpdateArrayEntities(
-                          templateDayTemplate.recipes,
+                          templateDayTemplate.recipes as string[],
                           id,
                           mealOption.id - 1,
                           "recipes"

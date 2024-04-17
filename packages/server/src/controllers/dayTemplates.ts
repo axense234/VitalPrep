@@ -4,9 +4,9 @@ import { Response, Request } from "express";
 import { StatusCodes } from "http-status-codes";
 // Prisma
 import { DayTemplateClient, RecipeClient } from "../db/postgres";
-import { DayTemplate, Prisma, Recipe } from "@prisma/client";
+import { Prisma, Recipe } from "@prisma/client";
 // Utils
-import { deleteCache, getOrSetCache, setCache } from "../utils/redis";
+import { deleteCache, setCache } from "../utils/redis";
 
 type GetAllDayTemplatesQueryObject = {
   userId?: string;
@@ -29,9 +29,9 @@ type DayTemplatesOrderByObject =
 type DayTemplatesIncludeObject = {
   macros?: boolean;
   user?: boolean;
-  ingredients?: boolean;
+  ingredients?: boolean | { include: { macros: boolean } };
   utensils?: boolean;
-  recipes?: boolean;
+  recipes?: boolean | { include: { macros: boolean } };
   instanceTemplates?: boolean;
   mealPrepPlans?: boolean;
 };
@@ -123,8 +123,10 @@ const getDayTemplateById = async (req: Request, res: Response) => {
     includeMacros,
     includeUser,
     includeIngredients,
+    includeIngredientsMacros,
     includeUtensils,
     includeRecipes,
+    includeRecipesMacros,
     includeInstanceTemplates,
     includeMealPrepPlans,
   } = req.query;
@@ -154,11 +156,17 @@ const getDayTemplateById = async (req: Request, res: Response) => {
   if (includeIngredients) {
     includeObject.ingredients = true;
   }
+  if (includeIngredientsMacros && includeIngredients) {
+    includeObject.ingredients = { include: { macros: true } };
+  }
   if (includeUtensils) {
     includeObject.utensils = true;
   }
   if (includeRecipes) {
     includeObject.recipes = true;
+  }
+  if (includeRecipesMacros && includeRecipes) {
+    includeObject.recipes = { include: { macros: true } };
   }
   if (includeInstanceTemplates) {
     includeObject.instanceTemplates = true;

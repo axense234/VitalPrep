@@ -241,12 +241,13 @@ const CreateInstanceTemplateInterface = () => {
                       required={true}
                       entityPropertyOptions={dayTemplatesIds}
                       entityPropertyChosenOptions={
-                        templateInstanceTemplate.dayTemplates || []
+                        (templateInstanceTemplate.dayTemplates as string[]) ||
+                        []
                       }
                       entityTypeUsed="dayTemplate"
                       onEntityPropertyValueChange={(id) =>
                         handleUpdateArrayEntities(
-                          templateInstanceTemplate.dayTemplates,
+                          templateInstanceTemplate.dayTemplates as string[],
                           id,
                           dayOption.id - 1,
                           "dayTemplates"

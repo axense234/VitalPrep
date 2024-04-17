@@ -1,7 +1,7 @@
 // Redux Toolkit
 import { State } from "../api/store";
 // Data
-import { defaultTemplateRecipe, defaultTemplateUtensil } from "@/data";
+import { defaultTemplateRecipe } from "@/data";
 // Types
 import {
   EntityState,
@@ -34,6 +34,7 @@ type InitialStateType = {
   showWrittenTutorialContent: boolean;
 
   loadingGetUserRecipes: LoadingStateType;
+  loadingGetUserRecipe: LoadingStateType;
 };
 
 export const recipesAdapter = createEntityAdapter<Recipe>();
@@ -45,6 +46,7 @@ const initialState = recipesAdapter.getInitialState({
   showVideoTutorialContent: false,
   showWrittenTutorialContent: false,
   loadingGetUserRecipes: "IDLE",
+  loadingGetUserRecipe: "IDLE",
 }) as EntityState<Recipe, string> & InitialStateType;
 
 type CreateRecipeBody = {
@@ -112,6 +114,30 @@ export const getAllUserRecipes = createAsyncThunk<
   }
 });
 
+export const getUserRecipe = createAsyncThunk<
+  Recipe | AxiosError,
+  { userId: string; recipeId: string }
+>("recipes/getUserRecipe", async ({ userId, recipeId }) => {
+  try {
+    const { data } = await axiosInstance.get(`/${userId}/recipes/${recipeId}`, {
+      params: {
+        includeRecipeTutorial: true,
+        includeMacros: true,
+        includeIngredients: true,
+        includeIngredientsMacros: true,
+        includeUtensils: true,
+        includeDayTemplates: true,
+        includeInstanceTemplates: true,
+        includeMealPrepPlans: true,
+      },
+    });
+    return data.recipe as Recipe;
+  } catch (error) {
+    console.log(error);
+    return error as AxiosError;
+  }
+});
+
 const recipesSlice = createSlice({
   name: "recipes",
   initialState,
@@ -140,6 +166,20 @@ const recipesSlice = createSlice({
   },
   extraReducers(builder) {
     builder
+      .addCase(getUserRecipe.pending, (state, action) => {
+        state.loadingGetUserRecipe = "PENDING";
+      })
+      .addCase(getUserRecipe.fulfilled, (state, action) => {
+        const recipe = action.payload as RecipeTemplate;
+        const axiosError = action.payload as AxiosError;
+
+        if (axiosError !== undefined && !axiosError.response) {
+          recipesAdapter.upsertOne(state, recipe as Recipe);
+          state.loadingGetUserRecipe = "SUCCEDED";
+        } else {
+          state.loadingGetUserRecipe = "FAILED";
+        }
+      })
       .addCase(getAllUserRecipes.pending, (state, action) => {
         state.loadingGetUserRecipes = "PENDING";
       })
@@ -201,6 +241,9 @@ export const selectShowWrittenTutorialContent = (state: State) =>
 
 export const selectLoadingGetUserRecipes = (state: State) =>
   state.recipes.loadingGetUserRecipes;
+
+export const selectLoadingGetUserRecipe = (state: State) =>
+  state.recipes.loadingGetUserRecipe;
 
 export const {
   updateTemplateRecipe,

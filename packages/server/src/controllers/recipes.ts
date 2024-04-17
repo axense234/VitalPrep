@@ -27,10 +27,11 @@ type RecipesOrderByObject =
   | undefined;
 
 type RecipesIncludeObject = {
+  recipeTutorial?: boolean;
   macros?: boolean;
   user?: boolean;
   utensils?: boolean;
-  ingredients?: boolean;
+  ingredients?: boolean | { include: { macros: boolean } };
   dayTemplates?: boolean;
   instanceTemplates?: boolean;
   mealPrepPlans?: boolean;
@@ -120,10 +121,12 @@ const getAllRecipes = async (req: Request, res: Response) => {
 const getRecipeById = async (req: Request, res: Response) => {
   const { recipeId, userId } = req.params;
   const {
+    includeRecipeTutorial,
     includeMacros,
     includeUser,
     includeUtensils,
     includeIngredients,
+    includeIngredientsMacros,
     includeDayTemplates,
     includeInstanceTemplates,
     includeMealPrepPlans,
@@ -145,6 +148,9 @@ const getRecipeById = async (req: Request, res: Response) => {
   }
 
   // INCLUDE
+  if (includeRecipeTutorial) {
+    includeObject.recipeTutorial = true;
+  }
   if (includeMacros) {
     includeObject.macros = true;
   }
@@ -153,6 +159,9 @@ const getRecipeById = async (req: Request, res: Response) => {
   }
   if (includeIngredients) {
     includeObject.ingredients = true;
+  }
+  if (includeIngredientsMacros && includeIngredients) {
+    includeObject.ingredients = { include: { macros: true } };
   }
   if (includeUtensils) {
     includeObject.utensils = true;

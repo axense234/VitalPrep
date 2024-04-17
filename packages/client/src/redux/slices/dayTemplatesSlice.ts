@@ -33,6 +33,7 @@ type InitialStateType = {
   numberOfMeals: number;
 
   loadingGetUserDayTemplates: LoadingStateType;
+  loadingGetUserDayTemplate: LoadingStateType;
 };
 
 export const dayTemplatesAdapter = createEntityAdapter<DayTemplate>();
@@ -44,6 +45,7 @@ const initialState = dayTemplatesAdapter.getInitialState({
   numberOfMeals: 0,
   mealsInOrder: [],
   loadingGetUserDayTemplates: "IDLE",
+  loadingGetUserDayTemplate: "IDLE",
 }) as EntityState<DayTemplate, string> & InitialStateType;
 
 type CreateDayTemplateBody = {
@@ -97,6 +99,33 @@ export const getAllUserDayTemplates = createAsyncThunk<
   }
 );
 
+export const getUserDayTemplate = createAsyncThunk<
+  DayTemplate | AxiosError,
+  { userId: string; dayTemplateId: string }
+>("dayTemplates/getUserDayTemplate", async ({ userId, dayTemplateId }) => {
+  try {
+    const { data } = await axiosInstance.get(
+      `/${userId}/dayTemplates/${dayTemplateId}`,
+      {
+        params: {
+          includeMacros: true,
+          includeIngredients: true,
+          includeIngredientsMacros: true,
+          includeUtensils: true,
+          includeRecipes: true,
+          includeRecipesMacros: true,
+          includeInstanceTemplates: true,
+          includeMealPrepPlans: true,
+        },
+      }
+    );
+    return data.dayTemplate as DayTemplate;
+  } catch (error) {
+    console.log(error);
+    return error as AxiosError;
+  }
+});
+
 const dayTemplatesSlice = createSlice({
   name: "dayTemplates",
   initialState,
@@ -128,6 +157,20 @@ const dayTemplatesSlice = createSlice({
   },
   extraReducers(builder) {
     builder
+      .addCase(getUserDayTemplate.pending, (state, action) => {
+        state.loadingGetUserDayTemplate = "PENDING";
+      })
+      .addCase(getUserDayTemplate.fulfilled, (state, action) => {
+        const dayTemplate = action.payload as DayTemplateTemplate;
+        const axiosError = action.payload as AxiosError;
+
+        if (axiosError !== undefined && !axiosError.response) {
+          dayTemplatesAdapter.upsertOne(state, dayTemplate as DayTemplate);
+          state.loadingGetUserDayTemplate = "SUCCEDED";
+        } else {
+          state.loadingGetUserDayTemplate = "FAILED";
+        }
+      })
       .addCase(getAllUserDayTemplates.pending, (state, action) => {
         state.loadingGetUserDayTemplates = "PENDING";
       })
@@ -186,6 +229,9 @@ export const selectNumberOfMeals = (state: State) =>
 
 export const selectLoadingGetUserDayTemplates = (state: State) =>
   state.dayTemplates.loadingGetUserDayTemplates;
+
+export const selectLoadingGetUserDayTemplate = (state: State) =>
+  state.dayTemplates.loadingGetUserDayTemplate;
 
 export const {
   updateTemplateDayTemplate,

@@ -212,11 +212,13 @@ const CreateRecipeInterface = () => {
           labelContent="Ingredients:"
           required={true}
           entityPropertyOptions={ingredientsIds}
-          entityPropertyChosenOptions={templateRecipe.ingredients || []}
+          entityPropertyChosenOptions={
+            (templateRecipe.ingredients as string[]) || []
+          }
           entityTypeUsed="ingredient"
           onEntityPropertyValueChange={(id) =>
             handleUpdateArrayEntities(
-              templateRecipe.ingredients,
+              templateRecipe.ingredients as string[],
               id,
               "ingredients"
             )
@@ -230,10 +232,16 @@ const CreateRecipeInterface = () => {
           labelContent="Utensils:"
           required={true}
           entityPropertyOptions={utensilsIds}
-          entityPropertyChosenOptions={templateRecipe.utensils || []}
+          entityPropertyChosenOptions={
+            (templateRecipe.utensils as string[]) || []
+          }
           entityTypeUsed="utensil"
           onEntityPropertyValueChange={(id) =>
-            handleUpdateArrayEntities(templateRecipe.utensils, id, "utensils")
+            handleUpdateArrayEntities(
+              templateRecipe.utensils as string[],
+              id,
+              "utensils"
+            )
           }
           labelFontSize={28}
           areOptionsLoading={loadingGetUserUtensils === "PENDING"}

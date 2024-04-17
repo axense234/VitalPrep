@@ -11,6 +11,9 @@ import selectEntityById from "@/helpers/selectEntityById";
 import { useAppSelector } from "@/hooks/redux";
 // Components
 import EntityInfoAppearancesSection from "./EntityInfoAppearancesSection";
+import RecipeTemplate from "@/core/types/entity/mutation/RecipeTemplate";
+import DayTemplateTemplate from "@/core/types/entity/mutation/DayTemplateTemplate";
+import InstanceTemplateTemplate from "@/core/types/entity/mutation/InstanceTemplateTemplate";
 
 const EntityInfoAppearances: FC<{
   entityId: string;
@@ -36,7 +39,7 @@ const EntityInfoAppearances: FC<{
         const ingredientMealPrepPlans = entityAsIngredient.mealPrepPlans;
 
         entityInfoAppearancesShown = (
-          <div className={entityInfoStyles.entityInfoDetailsContainer}>
+          <div className={entityInfoStyles.entityInfoDetailsHero}>
             <h2>Appearances</h2>
             <EntityInfoAppearancesSection
               areOptionsLoading={false}
@@ -82,7 +85,7 @@ const EntityInfoAppearances: FC<{
         const utensilMealPrepPlans = entityAsUtensil.mealPrepPlans;
 
         entityInfoAppearancesShown = (
-          <div className={entityInfoStyles.entityInfoDetailsContainer}>
+          <div className={entityInfoStyles.entityInfoDetailsHero}>
             <h2>Appearances</h2>
             <EntityInfoAppearancesSection
               areOptionsLoading={false}
@@ -115,6 +118,92 @@ const EntityInfoAppearances: FC<{
               labelColor="#120A06"
               labelFontSize={28}
               backgroundColor="#42171C"
+            />
+          </div>
+        );
+        break;
+      case "recipe":
+        const entityAsRecipe = entity as RecipeTemplate;
+
+        const recipeDayTemplates = entityAsRecipe.dayTemplates;
+        const recipeInstanceTemplates = entityAsRecipe.instanceTemplates;
+        const recipeMealPrepPlans = entityAsRecipe.mealPrepPlans;
+
+        entityInfoAppearancesShown = (
+          <div className={entityInfoStyles.entityInfoDetailsHero}>
+            <h2>Appearances</h2>
+            <EntityInfoAppearancesSection
+              areOptionsLoading={false}
+              entities={recipeDayTemplates || []}
+              entityTypeUsed="dayTemplate"
+              labelColor="#120A06"
+              labelFontSize={28}
+              backgroundColor="#8B0000"
+            />
+            <EntityInfoAppearancesSection
+              areOptionsLoading={false}
+              entities={recipeInstanceTemplates || []}
+              entityTypeUsed="instanceTemplate"
+              labelColor="#120A06"
+              labelFontSize={28}
+              backgroundColor="#013310"
+            />
+            <EntityInfoAppearancesSection
+              areOptionsLoading={false}
+              entities={recipeMealPrepPlans || []}
+              entityTypeUsed="mealPrepPlan"
+              labelColor="#120A06"
+              labelFontSize={28}
+              backgroundColor="#012433"
+            />
+          </div>
+        );
+        break;
+      case "dayTemplate":
+        const entityAsDayTemplate = entity as DayTemplateTemplate;
+
+        const dayTemplateInstanceTemplates =
+          entityAsDayTemplate.instanceTemplates;
+        const dayTemplateMealPrepPlans = entityAsDayTemplate.mealPrepPlans;
+
+        entityInfoAppearancesShown = (
+          <div className={entityInfoStyles.entityInfoDetailsHero}>
+            <h2>Appearances</h2>
+            <EntityInfoAppearancesSection
+              areOptionsLoading={false}
+              entities={dayTemplateInstanceTemplates || []}
+              entityTypeUsed="instanceTemplate"
+              labelColor="#120A06"
+              labelFontSize={28}
+              backgroundColor="#013310"
+            />
+            <EntityInfoAppearancesSection
+              areOptionsLoading={false}
+              entities={dayTemplateMealPrepPlans || []}
+              entityTypeUsed="mealPrepPlan"
+              labelColor="#120A06"
+              labelFontSize={28}
+              backgroundColor="#012433"
+            />
+          </div>
+        );
+        break;
+      case "instanceTemplate":
+        const entityAsInstanceTemplate = entity as InstanceTemplateTemplate;
+
+        const instanceTemplateMealPrepPlans =
+          entityAsInstanceTemplate.mealPrepPlans;
+
+        entityInfoAppearancesShown = (
+          <div className={entityInfoStyles.entityInfoDetailsHero}>
+            <h2>Appearances</h2>
+            <EntityInfoAppearancesSection
+              areOptionsLoading={false}
+              entities={instanceTemplateMealPrepPlans || []}
+              entityTypeUsed="mealPrepPlan"
+              labelColor="#120A06"
+              labelFontSize={28}
+              backgroundColor="#012433"
             />
           </div>
         );

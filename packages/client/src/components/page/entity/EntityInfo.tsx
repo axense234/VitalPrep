@@ -10,6 +10,10 @@ import UtensilInfo from "./UtensilInfo";
 // Redux
 import { useAppSelector } from "@/hooks/redux";
 import { selectProfile } from "@/redux/slices/generalSlice";
+import RecipeInfo from "./RecipeInfo";
+import DayTemplateInfo from "./DayTemplateInfo";
+import InstanceTemplateInfo from "./InstanceTemplateInfo";
+import MealPrepPlanInfo from "./MealPrepPlanInfo";
 
 const EntityInfo = () => {
   const pathname = usePathname();
@@ -52,12 +56,24 @@ const useSelectEntityInfoPageShown = (
         );
         break;
       case "recipe":
+        entityComponentShown = (
+          <RecipeInfo entityId={entityId} userId={profileId} />
+        );
         break;
       case "dayTemplate":
+        entityComponentShown = (
+          <DayTemplateInfo entityId={entityId} userId={profileId} />
+        );
         break;
       case "instanceTemplate":
+        entityComponentShown = (
+          <InstanceTemplateInfo entityId={entityId} userId={profileId} />
+        );
         break;
       case "mealPrepPlan":
+        entityComponentShown = (
+          <MealPrepPlanInfo entityId={entityId} userId={profileId} />
+        );
         break;
       default:
         throw new Error("Invalid entity type!");

@@ -9,11 +9,14 @@ import { FC } from "react";
 // ChartJS
 import { Pie } from "react-chartjs-2";
 
-const EntityMacrosPieGraph: FC<{ macros: Macros }> = ({ macros }) => {
+const EntityMacrosPieGraph: FC<{ macros: Macros; labelSize: number }> = ({
+  macros,
+  labelSize,
+}) => {
   return (
     <div className={pieGraphStyles.pieGraphContainer}>
       <Pie
-        data={getEntityMacrosChartData(macros || {})}
+        data={getEntityMacrosChartData(macros || {}, labelSize)}
         className={pieGraphStyles.pieGraph}
         options={{
           plugins: {

@@ -28,11 +28,11 @@ type MealPrepPlansOrderByObject =
 type MealPrepPlansIncludeObject = {
   macros?: boolean;
   user?: boolean;
-  ingredients?: boolean;
+  ingredients?: boolean | { include: { macros: boolean } };
   utensils?: boolean;
-  recipes?: boolean;
-  dayTemplates?: boolean;
-  instanceTemplates?: boolean;
+  recipes?: boolean | { include: { macros: boolean } };
+  dayTemplates?: boolean | { include: { macros: boolean } };
+  instanceTemplates?: boolean | { include: { macros: boolean } };
 };
 
 const getAllMealPrepPlans = async (req: Request, res: Response) => {
@@ -121,10 +121,14 @@ const getMealPrepPlanById = async (req: Request, res: Response) => {
     includeMacros,
     includeUser,
     includeIngredients,
+    includeIngredientsMacros,
     includeUtensils,
     includeRecipes,
+    includeRecipesMacros,
     includeDayTemplates,
+    includeDayTemplatesMacros,
     includeInstanceTemplates,
+    includeInstanceTemplatesMacros,
   } = req.query;
 
   const includeObject: MealPrepPlansIncludeObject = {};
@@ -152,17 +156,29 @@ const getMealPrepPlanById = async (req: Request, res: Response) => {
   if (includeIngredients) {
     includeObject.ingredients = true;
   }
+  if (includeIngredientsMacros && includeIngredients) {
+    includeObject.ingredients = { include: { macros: true } };
+  }
   if (includeUtensils) {
     includeObject.utensils = true;
   }
   if (includeRecipes) {
     includeObject.recipes = true;
   }
+  if (includeRecipesMacros && includeRecipes) {
+    includeObject.recipes = { include: { macros: true } };
+  }
   if (includeDayTemplates) {
     includeObject.dayTemplates = true;
   }
+  if (includeDayTemplatesMacros && includeDayTemplates) {
+    includeObject.dayTemplates = { include: { macros: true } };
+  }
   if (includeInstanceTemplates) {
     includeObject.instanceTemplates = true;
+  }
+  if (includeInstanceTemplatesMacros && includeInstanceTemplates) {
+    includeObject.instanceTemplates = { include: { macros: true } };
   }
 
   const foundMealPrepPlan = await MealPrepPlanClient.findUnique({

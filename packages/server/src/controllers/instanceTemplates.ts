@@ -30,10 +30,10 @@ type InstanceTemplatesOrderByObject =
 type InstanceTemplatesIncludeObject = {
   macros?: boolean;
   user?: boolean;
-  ingredients?: boolean;
+  ingredients?: boolean | { include: { macros: boolean } };
   utensils?: boolean;
-  recipes?: boolean;
-  dayTemplates?: boolean;
+  recipes?: boolean | { include: { macros: boolean } };
+  dayTemplates?: boolean | { include: { macros: boolean } };
   mealPrepPlans?: boolean;
 };
 
@@ -125,9 +125,12 @@ const getInstanceTemplateById = async (req: Request, res: Response) => {
     includeMacros,
     includeUser,
     includeIngredients,
+    includeIngredientsMacros,
     includeUtensils,
     includeRecipes,
+    includeRecipesMacros,
     includeDayTemplates,
+    includeDayTemplatesMacros,
     includeMealPrepPlans,
   } = req.query;
 
@@ -157,14 +160,23 @@ const getInstanceTemplateById = async (req: Request, res: Response) => {
   if (includeIngredients) {
     includeObject.ingredients = true;
   }
+  if (includeIngredientsMacros && includeIngredients) {
+    includeObject.ingredients = { include: { macros: true } };
+  }
   if (includeUtensils) {
     includeObject.utensils = true;
   }
   if (includeRecipes) {
     includeObject.recipes = true;
   }
+  if (includeRecipesMacros && includeRecipes) {
+    includeObject.recipes = { include: { macros: true } };
+  }
   if (includeDayTemplates) {
     includeObject.dayTemplates = true;
+  }
+  if (includeDayTemplatesMacros && includeDayTemplates) {
+    includeObject.dayTemplates = { include: { macros: true } };
   }
   if (includeMealPrepPlans) {
     includeObject.mealPrepPlans = true;

@@ -32,6 +32,7 @@ type InitialStateType = {
   instanceTemplateFormModalErrorMessage: string;
 
   loadingGetUserInstanceTemplates: LoadingStateType;
+  loadingGetUserInstanceTemplate: LoadingStateType;
 };
 
 export const instanceTemplatesAdapter = createEntityAdapter<InstanceTemplate>();
@@ -41,6 +42,7 @@ const initialState = instanceTemplatesAdapter.getInitialState({
   loadingCreateInstanceTemplate: "IDLE",
   instanceTemplateFormModalErrorMessage: "Default Message",
   loadingGetUserInstanceTemplates: "IDLE",
+  loadingGetUserInstanceTemplate: "IDLE",
 }) as EntityState<InstanceTemplate, string> & InitialStateType;
 
 type CreateInstanceTemplateBody = {
@@ -96,6 +98,37 @@ export const getAllUserInstanceTemplates = createAsyncThunk<
   }
 );
 
+export const getUserInstanceTemplate = createAsyncThunk<
+  InstanceTemplate | AxiosError,
+  { userId: string; instanceTemplateId: string }
+>(
+  "instanceTemplates/getUserInstanceTemplate",
+  async ({ userId, instanceTemplateId }) => {
+    try {
+      const { data } = await axiosInstance.get(
+        `/${userId}/instanceTemplates/${instanceTemplateId}`,
+        {
+          params: {
+            includeMacros: true,
+            includeIngredients: true,
+            includeIngredientsMacros: true,
+            includeUtensils: true,
+            includeRecipes: true,
+            includeRecipesMacros: true,
+            includeDayTemplates: true,
+            includeDayTemplatesMacros: true,
+            includeMealPrepPlans: true,
+          },
+        }
+      );
+      return data.instanceTemplate as InstanceTemplate;
+    } catch (error) {
+      console.log(error);
+      return error as AxiosError;
+    }
+  }
+);
+
 const instanceTemplatesSlice = createSlice({
   name: "instanceTemplates",
   initialState,
@@ -124,6 +157,23 @@ const instanceTemplatesSlice = createSlice({
   },
   extraReducers(builder) {
     builder
+      .addCase(getUserInstanceTemplate.pending, (state, action) => {
+        state.loadingGetUserInstanceTemplate = "PENDING";
+      })
+      .addCase(getUserInstanceTemplate.fulfilled, (state, action) => {
+        const instanceTemplate = action.payload as InstanceTemplateTemplate;
+        const axiosError = action.payload as AxiosError;
+
+        if (axiosError !== undefined && !axiosError.response) {
+          instanceTemplatesAdapter.upsertOne(
+            state,
+            instanceTemplate as InstanceTemplate
+          );
+          state.loadingGetUserInstanceTemplate = "SUCCEDED";
+        } else {
+          state.loadingGetUserInstanceTemplate = "FAILED";
+        }
+      })
       .addCase(getAllUserInstanceTemplates.pending, (state, action) => {
         state.loadingGetUserInstanceTemplates = "PENDING";
       })
@@ -181,6 +231,9 @@ export const selectInstanceTemplateFormModalErrorMessage = (state: State) =>
 
 export const selectLoadingGetUserInstanceTemplates = (state: State) =>
   state.instanceTemplates.loadingGetUserInstanceTemplates;
+
+export const selectLoadingGetUserInstanceTemplate = (state: State) =>
+  state.instanceTemplates.loadingGetUserInstanceTemplate;
 
 export const {
   updateTemplateInstanceTemplate,
