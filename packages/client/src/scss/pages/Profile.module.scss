@@ -1,0 +1,75 @@
+@use "../abstracts" as *;
+
+.profileContainer {
+  @include pageLayout();
+}
+
+.profileContent {
+  @include flexCenter(column);
+  width: 100%;
+  padding: 128px;
+  gap: 256px;
+  background-image: url($authFormPageTemplateFormBackgroundUrl);
+}
+
+.profileInfoContainer {
+  @include flexCenter(column);
+  width: 100%;
+  gap: 1rem;
+
+  img {
+    margin-bottom: 2rem;
+  }
+
+  h2 {
+    @include h2Laptop();
+    font-weight: 550;
+    letter-spacing: 2px;
+  }
+
+  h3 {
+    font-size: 2rem;
+    font-weight: 550;
+    letter-spacing: 1px;
+  }
+}
+
+.profileInfoEmail {
+  @include flexCenter(row);
+  width: 100%;
+  gap: 2rem;
+
+  svg {
+    font-size: 3rem;
+    cursor: pointer;
+  }
+}
+
+.profileDetailsContainer {
+  @include flexCenter(column);
+  width: 100%;
+  gap: 3rem;
+
+  h2 {
+    @include h2Laptop();
+    font-weight: 550;
+    letter-spacing: 2px;
+    align-self: center;
+  }
+
+  h3 {
+    font-size: 2rem;
+    font-weight: 550;
+    letter-spacing: 1px;
+
+    span {
+      color: getColor("secondary-color-light-2.4");
+    }
+  }
+}
+
+.profileDetailsContent {
+  @include flexCenter(column);
+  align-items: flex-start;
+  gap: 2rem;
+}

@@ -41,6 +41,8 @@ type InitialStateType = {
   selectedEntityOption: string;
   selectedViewOption: "grid" | "list";
 
+  showProfileEmail: boolean;
+
   // Query
   entityQueryValues: EntityQueryValues;
   // Auth
@@ -87,6 +89,8 @@ const initialState: InitialStateType = {
 
   selectedEntityOption: "ingredient",
   selectedViewOption: "grid",
+
+  showProfileEmail: false,
 
   // Query
   entityQueryValues: defaultEntityQueryValues,
@@ -232,6 +236,9 @@ const generalSlice = createSlice({
   name: "general",
   initialState,
   reducers: {
+    changeShowProfileEmail(state, action: PayloadAction<boolean>) {
+      state.showProfileEmail = action.payload;
+    },
     changeSelectedViewOption(state, action: PayloadAction<"grid" | "list">) {
       state.selectedViewOption = action.payload;
     },
@@ -513,6 +520,9 @@ export const selectSelectedViewOption = (state: State) =>
 export const selectEntityQueryValues = (state: State) =>
   state.general.entityQueryValues;
 
+export const selectShowProfileEmail = (state: State) =>
+  state.general.showProfileEmail;
+
 export const {
   changeIsSidebarOpened,
   updateTemplateProfile,
@@ -526,6 +536,7 @@ export const {
   setTemplateModalMessage,
   changeSelectedViewOption,
   updateEntityQueryValues,
+  changeShowProfileEmail,
 } = generalSlice.actions;
 
 export default generalSlice.reducer;
