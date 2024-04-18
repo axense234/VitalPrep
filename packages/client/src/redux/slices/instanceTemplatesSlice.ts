@@ -83,6 +83,7 @@ export const getAllUserInstanceTemplates = createAsyncThunk<
         params: {
           userId,
           userInstanceTemplates: true,
+          includeMacros: true,
           searchByKey,
           searchByValue,
           sortByKey,

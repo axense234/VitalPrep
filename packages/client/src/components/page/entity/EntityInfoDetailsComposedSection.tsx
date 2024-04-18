@@ -11,7 +11,7 @@ import MealPrepPlanTemplate from "@/core/types/entity/mutation/MealPrepPlanTempl
 import RecipeTemplate from "@/core/types/entity/mutation/RecipeTemplate";
 import UtensilTemplate from "@/core/types/entity/mutation/UtensilTemplate";
 // Components
-import EntityInfoDetailsComposedSectionEntityCard from "./EntityInfoDetailsComposedSectionEntityCard";
+import EntityCard from "../../shared/entity/EntityCard";
 // Next
 import Link from "next/link";
 
@@ -26,8 +26,6 @@ const EntityInfoDetailsComposedSection: FC<{
     | MealPrepPlanTemplate[];
 }> = ({ entities, entityType }) => {
   let entityInfoDetailsComposedSectionTitle = null;
-  let entityInfoDetailsComposedSectionBackgroundColor = undefined;
-  let entityInfoDetailsComposedSectionLabelColor = undefined;
 
   const buildEntityLinkDestination = (entityId: string) => {
     return `/${entityType}/${entityId}`;
@@ -36,33 +34,21 @@ const EntityInfoDetailsComposedSection: FC<{
   switch (entityType) {
     case "ingredient":
       entityInfoDetailsComposedSectionTitle = "Ingredients Used";
-      entityInfoDetailsComposedSectionBackgroundColor = "#FFAE00";
-      entityInfoDetailsComposedSectionLabelColor = "#120A06";
       break;
     case "utensil":
       entityInfoDetailsComposedSectionTitle = "Utensils Used";
-      entityInfoDetailsComposedSectionBackgroundColor = "#FF6000";
-      entityInfoDetailsComposedSectionLabelColor = "#120A06";
       break;
     case "recipe":
       entityInfoDetailsComposedSectionTitle = "Recipes Used";
-      entityInfoDetailsComposedSectionBackgroundColor = "#8B0000";
-      entityInfoDetailsComposedSectionLabelColor = "#DDD9D5";
       break;
     case "dayTemplate":
       entityInfoDetailsComposedSectionTitle = "Day Templates Used";
-      entityInfoDetailsComposedSectionBackgroundColor = "#013310";
-      entityInfoDetailsComposedSectionLabelColor = "#DDD9D5";
       break;
     case "instanceTemplate":
       entityInfoDetailsComposedSectionTitle = "Instance Templates Used";
-      entityInfoDetailsComposedSectionBackgroundColor = "#012433";
-      entityInfoDetailsComposedSectionLabelColor = "#DDD9D5";
       break;
     case "mealPrepPlan":
       entityInfoDetailsComposedSectionTitle = "Meal Prep Plans Used";
-      entityInfoDetailsComposedSectionBackgroundColor = "#42171C";
-      entityInfoDetailsComposedSectionLabelColor = "#DDD9D5";
       break;
     default:
       break;
@@ -80,14 +66,7 @@ const EntityInfoDetailsComposedSection: FC<{
                 title="View More"
                 aria-label="View More"
               >
-                <EntityInfoDetailsComposedSectionEntityCard
-                  entity={entity}
-                  entityType={entityType}
-                  backgroundColor={
-                    entityInfoDetailsComposedSectionBackgroundColor
-                  }
-                  labelColor={entityInfoDetailsComposedSectionLabelColor}
-                />
+                <EntityCard entity={entity} entityType={entityType} />
               </Link>
             </li>
           );

@@ -25,9 +25,10 @@ import {
 import EntityMacrosPieGraph from "@/components/shared/entity/EntityMacrosPieGraph";
 // Components
 import EntityInfoDetailsComposedSection from "./EntityInfoDetailsComposedSection";
+// Types
 import DayTemplateTemplate from "@/core/types/entity/mutation/DayTemplateTemplate";
 import InstanceTemplateTemplate from "@/core/types/entity/mutation/InstanceTemplateTemplate";
-import { DayTemplate, Macros } from "@prisma/client";
+import { Macros } from "@prisma/client";
 import MealPrepPlanTemplate from "@/core/types/entity/mutation/MealPrepPlanTemplate";
 
 const EntityInfoDetails: FC<{ entityId: string; entityType: EntityType }> = ({
@@ -221,7 +222,7 @@ const EntityInfoDetails: FC<{ entityId: string; entityType: EntityType }> = ({
               aria-label={entity?.name || "Instance Template Image"}
             />
             <header className={entityInfoStyles.entityInfoDetailsHeader}>
-              <h2>{entity?.name || "Day Template Name"}</h2>
+              <h2>{entity?.name || "Instance Template Name"}</h2>
               <h3>
                 {(entity as InstanceTemplateTemplate)?.dayTemplates?.length > 0
                   ? `${(entity as InstanceTemplateTemplate)?.dayTemplates?.length} day templates used`
@@ -307,7 +308,7 @@ const EntityInfoDetails: FC<{ entityId: string; entityType: EntityType }> = ({
                 (entity as MealPrepPlanTemplate)
                   ?.instanceTemplates as InstanceTemplateTemplate[]
               }
-              entityType={"mealPrepPlan"}
+              entityType={"instanceTemplate"}
             />
           </div>
           <div className={entityInfoStyles.entityInfoDetalsComposedSection}>

@@ -7,8 +7,7 @@
 .entityInfoContent {
   @include flexCenter(column);
   width: 100%;
-  padding: 256px;
-  padding-top: 128px;
+  padding: 128px;
   gap: 256px;
   background-image: url($authFormPageTemplateFormBackgroundUrl);
 }
@@ -24,7 +23,6 @@
 .entityInfoDetailsContainer {
   @include flexCenter(column);
   width: 100%;
-  height: auto;
   gap: 12rem;
 }
 
@@ -100,14 +98,16 @@
   @include flexCenter(row);
   flex-wrap: wrap;
   justify-content: space-around;
+  align-items: flex-start;
 
   width: 100%;
   list-style: none;
-  gap: 3rem;
+  gap: 4rem;
 
   li {
     @include flexCenter(column);
-    max-width: 30%;
+    max-width: 15%;
+    width: 15%;
 
     a {
       @include flexCenter(column);
@@ -127,19 +127,26 @@
 
   img {
     width: 100%;
+    height: auto;
   }
 }
 
 .entityInfoDetailsComposedSectionEntityCardContent {
   @include flexCenter(column);
-  padding: 2rem;
-  gap: 2rem;
+  width: 100%;
+  gap: 1rem;
+  padding: 0.5rem;
+
+  div {
+    padding: 1rem;
+    width: 100%;
+  }
 
   h4 {
-    @include h4Laptop();
+    font-size: 24px;
     text-align: center;
     font-weight: 550;
-    letter-spacing: 1.5px;
+    letter-spacing: 1px;
     color: getColor(tan-color-extra-light);
   }
 }

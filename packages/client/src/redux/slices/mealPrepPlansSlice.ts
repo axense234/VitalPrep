@@ -91,6 +91,7 @@ export const getAllUserMealPrepPlans = createAsyncThunk<
           sortByKey,
           sortByOrder,
           includeInstanceTemplates: true,
+          includeMacros: true,
         },
       });
       return data.mealPrepPlans as MealPrepPlanTemplate[];

@@ -23,8 +23,10 @@ import {
 } from "@/data";
 // React
 import { FC } from "react";
+import { useAppSelector } from "@/hooks/redux";
+import selectEntityById from "@/helpers/selectEntityById";
 
-const EntityInfoDetailsComposedSectionEntityCard: FC<{
+const EntityCard: FC<{
   entityType: EntityType;
   entity:
     | IngredientTemplate
@@ -33,36 +35,54 @@ const EntityInfoDetailsComposedSectionEntityCard: FC<{
     | DayTemplateTemplate
     | InstanceTemplateTemplate
     | MealPrepPlanTemplate;
-  backgroundColor?: string;
-  labelColor?: string;
-}> = ({ entityType, entity, backgroundColor, labelColor }) => {
+  entityId?: string;
+}> = ({ entityType, entity, entityId }) => {
   let defaultImageUrlShownBasedOnEntityType = defaultIngredientImageUrl;
   let entityIdentifier = "Ingredient";
+  let entityCardBackgroundColor = "#FFAE00";
+  let entityCardLabelColor = "#120A06";
+
+  const entityFromState = useAppSelector((state) =>
+    selectEntityById(state, entityId || "", entityType)
+  );
+  const entityUsed = entity || entityFromState;
 
   switch (entityType) {
     case "ingredient":
       defaultImageUrlShownBasedOnEntityType = defaultIngredientImageUrl;
       entityIdentifier = "Ingredient";
+      entityCardBackgroundColor = "#FFAE00";
+      entityCardLabelColor = "#120A06";
       break;
     case "utensil":
       defaultImageUrlShownBasedOnEntityType = defaultUtensilImageUrl;
       entityIdentifier = "Utensil";
+      entityCardBackgroundColor = "#FF6000";
+      entityCardLabelColor = "#120A06";
       break;
     case "recipe":
       defaultImageUrlShownBasedOnEntityType = defaultRecipeImageUrl;
       entityIdentifier = "Recipe";
+      entityCardBackgroundColor = "#8B0000";
+      entityCardLabelColor = "#DDD9D5";
       break;
     case "dayTemplate":
       defaultImageUrlShownBasedOnEntityType = defaultDayTemplateImageUrl;
       entityIdentifier = "Day Template";
+      entityCardBackgroundColor = "#013310";
+      entityCardLabelColor = "#DDD9D5";
       break;
     case "instanceTemplate":
       defaultImageUrlShownBasedOnEntityType = defaultInstanceTemplateImageUrl;
       entityIdentifier = "Instance Template";
+      entityCardBackgroundColor = "#012433";
+      entityCardLabelColor = "#DDD9D5";
       break;
     case "mealPrepPlan":
       defaultImageUrlShownBasedOnEntityType = defaultMealPrepPlanImageUrl;
       entityIdentifier = "Meal Prep Plan";
+      entityCardBackgroundColor = "#42171C";
+      entityCardLabelColor = "#DDD9D5";
       break;
     default:
       break;
@@ -71,28 +91,28 @@ const EntityInfoDetailsComposedSectionEntityCard: FC<{
   return (
     <div
       className={entityInfoStyles.entityInfoDetailsComposedSectionEntityCard}
-      style={{ backgroundColor: backgroundColor ? backgroundColor : "#432517" }}
+      style={{ backgroundColor: entityCardBackgroundColor }}
     >
       <Image
-        width={240}
-        height={360}
-        alt={entity.name || `${entityIdentifier} Image`}
-        title={entity.name || `${entityIdentifier} Image`}
-        aria-label={entity.name || `${entityIdentifier} Image`}
-        src={entity.imageUrl || defaultImageUrlShownBasedOnEntityType}
+        width={120}
+        height={160}
+        alt={entityUsed.name || `${entityIdentifier} Image`}
+        title={entityUsed.name || `${entityIdentifier} Image`}
+        aria-label={entityUsed.name || `${entityIdentifier} Image`}
+        src={entityUsed.imageUrl || defaultImageUrlShownBasedOnEntityType}
       />
       <div
         className={
           entityInfoStyles.entityInfoDetailsComposedSectionEntityCardContent
         }
       >
-        <h4 style={{ color: labelColor ? labelColor : "#ddd9d5" }}>
-          {entity.name || `${entityIdentifier} Name`}
+        <h4 style={{ color: entityCardLabelColor }}>
+          {entityUsed.name || `${entityIdentifier} Name`}
         </h4>
         {entityType !== "utensil" ? (
           <EntityMacrosPieGraph
-            macros={(entity as IngredientTemplate)?.macros}
-            labelSize={16}
+            macros={(entityUsed as IngredientTemplate)?.macros}
+            labelSize={12}
           />
         ) : null}
       </div>
@@ -100,4 +120,4 @@ const EntityInfoDetailsComposedSectionEntityCard: FC<{
   );
 };
 
-export default EntityInfoDetailsComposedSectionEntityCard;
+export default EntityCard;

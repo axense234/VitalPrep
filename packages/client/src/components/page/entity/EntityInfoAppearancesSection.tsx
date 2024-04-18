@@ -63,6 +63,7 @@ const EntityInfoAppearancesSection: FC<EntityInfoAppearancesSectionProps> = ({
                   entityType={entityTypeUsed}
                   isALink={true}
                   entity={entity}
+                  selectedViewOption="list"
                 />
               </li>
             );

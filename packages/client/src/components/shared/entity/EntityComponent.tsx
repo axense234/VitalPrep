@@ -1,9 +1,7 @@
 // React
-import { FC, useEffect } from "react";
+import { FC } from "react";
 // SCSS
 import entityComponentStyles from "../../../scss/components/shared/EntityComponents.module.scss";
-// Types
-import EntityComponentProps from "@/core/interfaces/entity/EntityComponentProps";
 // Components
 import IngredientComponent from "./IngredientComponent";
 import UtensilComponent from "./UtensilComponent";
@@ -11,16 +9,26 @@ import RecipeComponent from "./RecipeComponent";
 import DayTemplateComponent from "./DayTemplateComponent";
 import InstanceTemplateComponent from "./InstanceTemplateComponent";
 import MealPrepPlanComponent from "./MealPrepPlanComponent";
+import EntityCard from "./EntityCard";
+
 // Next
 import Link from "next/link";
+// Types
 import IngredientTemplate from "@/core/types/entity/mutation/IngredientTemplate";
 import UtensilTemplate from "@/core/types/entity/mutation/UtensilTemplate";
 import RecipeTemplate from "@/core/types/entity/mutation/RecipeTemplate";
 import DayTemplateTemplate from "@/core/types/entity/mutation/DayTemplateTemplate";
 import InstanceTemplateTemplate from "@/core/types/entity/mutation/InstanceTemplateTemplate";
 import MealPrepPlanTemplate from "@/core/types/entity/mutation/MealPrepPlanTemplate";
+// Redux
+import { useAppSelector } from "@/hooks/redux";
+import { selectSelectedViewOption } from "@/redux/slices/generalSlice";
 
-type EntityComponentSchemeProps = EntityComponentProps & {
+type EntityComponentSchemeProps = {
+  isALink: boolean;
+  clicked: boolean;
+  entityId: string;
+  selectedViewOption?: "grid" | "list";
   entityType:
     | "ingredient"
     | "utensil"
@@ -28,21 +36,33 @@ type EntityComponentSchemeProps = EntityComponentProps & {
     | "dayTemplate"
     | "instanceTemplate"
     | "mealPrepPlan";
-  isALink: boolean;
+  entity?:
+    | IngredientTemplate
+    | UtensilTemplate
+    | RecipeTemplate
+    | DayTemplateTemplate
+    | InstanceTemplateTemplate
+    | MealPrepPlanTemplate;
 };
 
 const EntityComponent: FC<EntityComponentSchemeProps> = ({
   clicked,
   entityType,
   entityId,
-  isALink,
   entity,
+  isALink,
+  selectedViewOption,
 }) => {
+  const selectedViewOptionFromState = useAppSelector(selectSelectedViewOption);
+  const usedSelectedViewOption =
+    selectedViewOption || selectedViewOptionFromState;
+
   const entityComponentShown = useSelectEntityComponentShown(
     entityType,
     clicked,
     entityId,
     isALink,
+    usedSelectedViewOption,
     entity
   );
 
@@ -63,6 +83,7 @@ const useSelectEntityComponentShown = (
   clicked: boolean,
   entityId: string,
   isALink: boolean,
+  selectedViewOption: "grid" | "list",
   entity?:
     | IngredientTemplate
     | UtensilTemplate
@@ -79,63 +100,123 @@ const useSelectEntityComponentShown = (
   switch (entityType) {
     case "ingredient":
       entityComponentDestination = `/ingredient/${entityId || entity?.id}`;
-      entityComponentShown = (
-        <IngredientComponent
-          clicked={clicked}
-          entityId={entityId}
-          entity={entity}
-        />
-      );
+      if (selectedViewOption === "grid") {
+        entityComponentShown = (
+          <EntityCard
+            entity={entity as IngredientTemplate}
+            entityType={entityType}
+            entityId={entityId}
+          />
+        );
+      } else if (selectedViewOption === "list") {
+        entityComponentShown = (
+          <IngredientComponent
+            clicked={clicked}
+            entityId={entityId}
+            entity={entity}
+          />
+        );
+      }
       break;
     case "utensil":
       entityComponentDestination = `/utensil/${entityId || entity?.id}`;
-      entityComponentShown = (
-        <UtensilComponent
-          clicked={clicked}
-          entityId={entityId}
-          entity={entity}
-        />
-      );
+      if (selectedViewOption === "grid") {
+        entityComponentShown = (
+          <EntityCard
+            entity={entity as UtensilTemplate}
+            entityType={entityType}
+            entityId={entityId}
+          />
+        );
+      } else if (selectedViewOption === "list") {
+        entityComponentShown = (
+          <UtensilComponent
+            clicked={clicked}
+            entityId={entityId}
+            entity={entity}
+          />
+        );
+      }
       break;
     case "recipe":
       entityComponentDestination = `/recipe/${entityId || entity?.id}`;
-      entityComponentShown = (
-        <RecipeComponent
-          clicked={clicked}
-          entityId={entityId}
-          entity={entity}
-        />
-      );
+      if (selectedViewOption === "grid") {
+        entityComponentShown = (
+          <EntityCard
+            entity={entity as RecipeTemplate}
+            entityType={entityType}
+            entityId={entityId}
+          />
+        );
+      } else if (selectedViewOption === "list") {
+        entityComponentShown = (
+          <RecipeComponent
+            clicked={clicked}
+            entityId={entityId}
+            entity={entity}
+          />
+        );
+      }
       break;
     case "dayTemplate":
       entityComponentDestination = `/dayTemplate/${entityId || entity?.id}`;
-      entityComponentShown = (
-        <DayTemplateComponent
-          clicked={clicked}
-          entityId={entityId}
-          entity={entity}
-        />
-      );
+      if (selectedViewOption === "grid") {
+        entityComponentShown = (
+          <EntityCard
+            entity={entity as DayTemplateTemplate}
+            entityType={entityType}
+            entityId={entityId}
+          />
+        );
+      } else if (selectedViewOption === "list") {
+        entityComponentShown = (
+          <DayTemplateComponent
+            clicked={clicked}
+            entityId={entityId}
+            entity={entity}
+          />
+        );
+      }
       break;
     case "instanceTemplate":
       entityComponentDestination = `/instanceTemplate/${entityId || entity?.id}`;
-      entityComponentShown = (
-        <InstanceTemplateComponent
-          clicked={clicked}
-          entityId={entityId}
-          entity={entity}
-        />
-      );
+      if (selectedViewOption === "grid") {
+        entityComponentShown = (
+          <EntityCard
+            entity={entity as InstanceTemplateTemplate}
+            entityType={entityType}
+            entityId={entityId}
+          />
+        );
+      } else if (selectedViewOption === "list") {
+        entityComponentShown = (
+          <InstanceTemplateComponent
+            clicked={clicked}
+            entityId={entityId}
+            entity={entity}
+          />
+        );
+      }
       break;
     case "mealPrepPlan":
       entityComponentDestination = `/mealPrepPlan/${entityId || entity?.id}`;
-      entityComponentShown = (
-        <MealPrepPlanComponent
-          clicked={clicked}
-          entityId={entityId}
-          entity={entity}
-        />
-      );
+      if (selectedViewOption === "grid") {
+        entityComponentShown = (
+          <EntityCard
+            entity={entity as MealPrepPlanTemplate}
+            entityType={entityType}
+            entityId={entityId}
+          />
+        );
+      } else if (selectedViewOption === "list") {
+        entityComponentShown = (
+          <MealPrepPlanComponent
+            clicked={clicked}
+            entityId={entityId}
+            entity={entity}
+          />
+        );
+      }
       break;
     default:
       throw new Error("Invalid entity type!");

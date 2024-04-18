@@ -7,7 +7,6 @@
 .multiViewToolContent {
   @include flexCenter(column);
   width: 100%;
-  padding-top: 128px;
   padding-bottom: 64px;
   background-image: url($authFormPageTemplateFormBackgroundUrl);
 }
@@ -18,14 +17,51 @@
 }
 
 .multiViewEntitiesContainer {
-  @include flexCenter(column);
+  @include flexCenter(row);
+  align-items: flex-start;
+  flex-wrap: wrap;
   list-style: none;
   width: 100%;
-  margin-top: 4rem;
-  gap: 1rem;
+  gap: 4rem;
   padding: 1rem;
 
   li {
-    width: 100%;
+    @include flexCenter(column);
+    max-width: 15%;
+    width: 15%;
+  }
+}
+
+.multiViewEntitiesNoEntitiesMessage {
+  font-size: 1.5rem;
+  color: getColor("black-100-1");
+  padding: 1.5rem;
+  background-color: getColor("tan-color");
+  letter-spacing: 0.75px;
+  font-weight: 550;
+  border: 1.5px solid getColor("black-100-1");
+  border-radius: 1rem;
+
+  a {
+    text-decoration: none;
+    color: getColor("secondary-color-light-2.4");
+
+    &:hover {
+      font-style: italic;
+      text-decoration: underline;
+    }
+  }
+}
+
+.multiViewEntitiesWrapper {
+  @include flexCenter(column);
+  width: 100%;
+  padding: 128px;
+  gap: 4rem;
+
+  h2 {
+    @include h2Laptop();
+    font-weight: 550;
+    letter-spacing: 3px;
   }
 }

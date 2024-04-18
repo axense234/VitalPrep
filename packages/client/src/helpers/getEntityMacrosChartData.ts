@@ -20,7 +20,7 @@ const getEntityMacrosChartData = (
               (acc, data) => ((acc as number) || 0) + ((data as number) || 0),
               0
             );
-            const percentage = ((value / (total as number)) * 100).toFixed(2);
+            const percentage = ((value / (total as number)) * 100).toFixed(1);
             const label = (ctx.chart.data.labels as string[])[ctx.dataIndex];
 
             return `${percentage}% ${label.toLowerCase()}`;

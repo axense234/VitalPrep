@@ -69,6 +69,7 @@ const SelectFormControl: FC<SelectFormControlProps> = ({
                   entityId={id}
                   entityType={entityTypeUsed}
                   isALink={false}
+                  selectedViewOption="list"
                 />
               </li>
             );
