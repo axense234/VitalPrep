@@ -58,6 +58,9 @@ type InitialStateType = {
   loadingLoginOAuthProfile: LoadingStateType;
   loadingGetProfile: LoadingStateType;
   loadingGetOAuthProfile: LoadingStateType;
+  loadingUpdateProfile: LoadingStateType;
+
+  verifiedPassword: string;
 };
 
 type CreateCloudinaryImageTemplate = {
@@ -107,6 +110,9 @@ const initialState: InitialStateType = {
   loadingCreateOAuthProfile: "IDLE",
   loadingLoginOAuthProfile: "IDLE",
   loadingGetOAuthProfile: "IDLE",
+  loadingUpdateProfile: "IDLE",
+
+  verifiedPassword: "",
 };
 
 export const logoutUser = createAsyncThunk("general/logoutUser", async () => {
@@ -202,6 +208,23 @@ export const signupUser = createAsyncThunk<User | AxiosError, UserTemplate>(
   }
 );
 
+export const updateUser = createAsyncThunk<User | AxiosError, UserTemplate>(
+  "general/updateUser",
+  async (userTemplate) => {
+    try {
+      const { data } = await axiosInstance.patch(
+        `/users/update/${userTemplate.id}`,
+        userTemplate,
+        { params: { accountProfileModifications: true } }
+      );
+      return data.user as User;
+    } catch (error) {
+      console.log(error);
+      return error as AxiosError;
+    }
+  }
+);
+
 export const loginUser = createAsyncThunk<User | AxiosError, UserTemplate>(
   "general/loginUser",
   async (userTemplate) => {
@@ -236,6 +259,9 @@ const generalSlice = createSlice({
   name: "general",
   initialState,
   reducers: {
+    changeVerifiedPassword(state, action: PayloadAction<string>) {
+      state.verifiedPassword = action.payload;
+    },
     changeShowProfileEmail(state, action: PayloadAction<boolean>) {
       state.showProfileEmail = action.payload;
     },
@@ -262,6 +288,9 @@ const generalSlice = createSlice({
         ...state.templateProfile,
         [action.payload.key]: action.payload.value,
       };
+    },
+    setTemplateProfile(state, action: PayloadAction<UserType>) {
+      state.templateProfile = action.payload;
     },
     updateEntityQueryValues(state, action: PayloadAction<ObjectKeyValueType>) {
       state.entityQueryValues = {
@@ -389,6 +418,33 @@ const generalSlice = createSlice({
         } else {
           const errorData = axiosError?.response?.data as { message: string };
           state.loadingCreateProfile = "FAILED";
+          state.showGeneralModal = false;
+          state.showFormModal = true;
+          state.templateModalMessage = errorData.message;
+        }
+      })
+      .addCase(updateUser.pending, (state, action) => {
+        state.loadingUpdateProfile = "PENDING";
+        state.showGeneralModal = true;
+        state.templateModalMessage = `Trying to update your account`;
+        state.isModalUsedWhenLoading = true;
+      })
+      .addCase(updateUser.fulfilled, (state, action) => {
+        state.isModalUsedWhenLoading = false;
+        state.invalidJWT = false;
+
+        const user = action.payload as UserType;
+        const axiosError = action.payload as AxiosError;
+        console.log(user);
+
+        if (axiosError !== undefined && !axiosError.response) {
+          state.profile = user;
+          state.showGeneralModal = true;
+          state.loadingUpdateProfile = "SUCCEDED";
+          state.templateModalMessage = `Successfully updated user ${user.username} account details`;
+        } else {
+          const errorData = axiosError?.response?.data as { message: string };
+          state.loadingUpdateProfile = "FAILED";
           state.showGeneralModal = false;
           state.showFormModal = true;
           state.templateModalMessage = errorData.message;
@@ -523,6 +579,12 @@ export const selectEntityQueryValues = (state: State) =>
 export const selectShowProfileEmail = (state: State) =>
   state.general.showProfileEmail;
 
+export const selectVerifiedPassword = (state: State) =>
+  state.general.verifiedPassword;
+
+export const selectLoadingUpdateProfile = (state: State) =>
+  state.general.loadingUpdateProfile;
+
 export const {
   changeIsSidebarOpened,
   updateTemplateProfile,
@@ -537,6 +599,8 @@ export const {
   changeSelectedViewOption,
   updateEntityQueryValues,
   changeShowProfileEmail,
+  setTemplateProfile,
+  changeVerifiedPassword,
 } = generalSlice.actions;
 
 export default generalSlice.reducer;

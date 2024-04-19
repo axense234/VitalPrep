@@ -1,0 +1,44 @@
+@use "../abstracts" as *;
+
+.settingsContainer {
+  @include pageLayout();
+  background-image: url("https://res.cloudinary.com/birthdayreminder/image/upload/v1709221737/VitalPrep/wood_wall_best_aqiakh.jpg");
+}
+
+.settingsContent {
+  @include flexCenter(column);
+  width: 100%;
+  background-color: getColor("secondary-color-1.2");
+  padding: 4rem;
+  margin: 8rem 0;
+}
+
+.accountSettingsContainer {
+  @include flexCenter(column);
+  position: relative;
+  width: 100%;
+  padding: 8rem 0;
+
+  h2 {
+    @include h2Laptop();
+    text-align: center;
+    letter-spacing: 3.5px;
+    color: getColor("tan-color-extra-light");
+    text-shadow:
+      $titleOutlineNegativeCoeficient $titleOutlineNegativeCoeficient 0 black,
+      $titleOutlinePozitiveCoeficient $titleOutlineNegativeCoeficient 0 black,
+      $titleOutlineNegativeCoeficient $titleOutlinePozitiveCoeficient 0 black,
+      $titleOutlinePozitiveCoeficient $titleOutlinePozitiveCoeficient 0 black;
+  }
+}
+
+.accountSettingsForm {
+  @include flexCenter(column);
+  width: 100%;
+  padding: 4rem 12rem;
+  gap: 2rem;
+
+  button {
+    margin-top: 1rem;
+  }
+}

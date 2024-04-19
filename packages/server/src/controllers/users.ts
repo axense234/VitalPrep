@@ -16,6 +16,7 @@ import {
 } from "../db/postgres";
 // Utils
 import { deleteCache, getOrSetCache, setCache } from "../utils/redis";
+import { encryptPassword } from "../utils/bcrypt";
 
 const getAllUsers = async (req: Request, res: Response) => {
   const foundUsers = await getOrSetCache("users", async () => {
@@ -92,6 +93,7 @@ const getUserById = async (req: Request, res: Response) => {
 const updateUserById = async (req: Request, res: Response) => {
   const { userId } = req.params;
   const userBody = req.body;
+  const { accountProfileModifications } = req.query;
 
   if (!userId) {
     return res
@@ -103,6 +105,26 @@ const updateUserById = async (req: Request, res: Response) => {
     return res
       .status(StatusCodes.BAD_REQUEST)
       .json({ message: "Please enter a request body!", user: {} });
+  }
+
+  if (accountProfileModifications) {
+    delete userBody?.ingredients;
+    delete userBody?.utensils;
+    delete userBody?.recipes;
+    delete userBody?.dayTemplates;
+    delete userBody?.instanceTemplates;
+    delete userBody?.mealPrepPlans;
+    delete userBody?.mealPrepLogs;
+    delete userBody?.notificationSettings;
+    delete userBody?.notificationSettingsId;
+  }
+
+  if (userBody.password && userBody.password === "") {
+    delete userBody.password;
+  }
+
+  if (userBody.password) {
+    userBody.password = await encryptPassword(userBody.password);
   }
 
   const updatedUser = await UserClient.update({

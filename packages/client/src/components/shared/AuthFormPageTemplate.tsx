@@ -15,27 +15,8 @@ import Image from "next/image";
 import Link from "next/link";
 // Data
 import { authFormPageTemplateImageUrls } from "@/data";
-// Redux
-import { useAppDispatch, useAppSelector } from "@/hooks/redux";
-import {
-  changeShowFormModal,
-  changeShowGeneralModal,
-  selectIsModalUsedWhenLoading,
-  selectShowFormModal,
-  selectShowGeneralModal,
-  selectTemplateModalMessage,
-} from "@/redux/slices/generalSlice";
 
 const AuthFormPageTemplate: FC<AuthFormPageTemplateProps> = ({ type }) => {
-  const dispatch = useAppDispatch();
-
-  const showFormModal = useAppSelector(selectShowFormModal);
-  const showGeneralModal = useAppSelector(selectShowGeneralModal);
-
-  const modalMessage = useAppSelector(selectTemplateModalMessage);
-
-  const isModalUsedWhenLoading = useAppSelector(selectIsModalUsedWhenLoading);
-
   let pageTitleUsed = "Title";
   let pageImageUrlUsed = authFormPageTemplateImageUrls[0].imageUrl;
   let pageSubtitleUsed = "Subtitle";

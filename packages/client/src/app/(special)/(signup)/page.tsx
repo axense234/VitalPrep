@@ -7,7 +7,6 @@ import useAuthorization from "@/hooks/useAuthorization";
 
 const Signup = () => {
   useAuthorization();
-
   return <AuthFormPageTemplate type="signup" />;
 };
 
