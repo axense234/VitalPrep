@@ -9,6 +9,7 @@ const errorHandlerMiddleware: ErrorRequestHandler = (err, req, res, next) => {
   const customError = {
     message: err.message || "Unexpected error.",
     code: (typeof err.code === "string" ? 500 : err.code || err.status) || 500,
+    type: "normal",
   };
 
   console.log(err);
@@ -16,6 +17,7 @@ const errorHandlerMiddleware: ErrorRequestHandler = (err, req, res, next) => {
   if (err.code === "P2002") {
     customError.message = "Please provide an unique email!";
     customError.code = StatusCodes.BAD_REQUEST;
+    customError.type = "email";
   }
 
   if (err.code === "P2025") {
@@ -28,7 +30,9 @@ const errorHandlerMiddleware: ErrorRequestHandler = (err, req, res, next) => {
     customError.code = StatusCodes.BAD_REQUEST;
   }
 
-  return res.status(customError.code).json({ message: customError.message });
+  return res
+    .status(customError.code)
+    .json({ message: customError.message, type: customError.type });
 };
 
 export default errorHandlerMiddleware;

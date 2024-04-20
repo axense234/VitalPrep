@@ -12,6 +12,7 @@ import {
   MealPrepPlanClient,
   RecipeClient,
   UserClient,
+  UserNotificationSettingsClient,
   UtensilClient,
 } from "../db/postgres";
 // Utils
@@ -93,7 +94,8 @@ const getUserById = async (req: Request, res: Response) => {
 const updateUserById = async (req: Request, res: Response) => {
   const { userId } = req.params;
   const userBody = req.body;
-  const { accountProfileModifications } = req.query;
+  const { accountProfileModifications, accountNotificationModifications } =
+    req.query;
 
   if (!userId) {
     return res
@@ -107,7 +109,16 @@ const updateUserById = async (req: Request, res: Response) => {
       .json({ message: "Please enter a request body!", user: {} });
   }
 
-  if (accountProfileModifications) {
+  if (accountNotificationModifications) {
+    const notificationUpdateBody = userBody.notificationSettings;
+    const response = await UserNotificationSettingsClient.update({
+      where: { id: userBody?.notificationSettingsId },
+      data: { ...notificationUpdateBody },
+    });
+    console.log(response);
+  }
+
+  if (accountProfileModifications || accountNotificationModifications) {
     delete userBody?.ingredients;
     delete userBody?.utensils;
     delete userBody?.recipes;

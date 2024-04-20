@@ -3,6 +3,7 @@ import { PrismaClient } from "@prisma/client";
 export const prismaClient = new PrismaClient();
 
 const UserClient = prismaClient.user;
+const UserNotificationSettingsClient = prismaClient.notificationSettings;
 const MealPrepLogClient = prismaClient.mealPrepLog;
 const MealPrepPlanClient = prismaClient.mealPrepPlan;
 const InstanceTemplateClient = prismaClient.instanceTemplate;
@@ -24,5 +25,6 @@ export {
   RecipeClient,
   IngredientClient,
   UtensilClient,
+  UserNotificationSettingsClient,
   connectToPostgres,
 };

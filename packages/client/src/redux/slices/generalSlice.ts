@@ -203,27 +203,38 @@ export const signupUser = createAsyncThunk<User | AxiosError, UserTemplate>(
       const { data } = await axiosInstance.post("/users/signup", userTemplate);
       return data.user as User;
     } catch (error) {
-      return error as AxiosError;
-    }
-  }
-);
-
-export const updateUser = createAsyncThunk<User | AxiosError, UserTemplate>(
-  "general/updateUser",
-  async (userTemplate) => {
-    try {
-      const { data } = await axiosInstance.patch(
-        `/users/update/${userTemplate.id}`,
-        userTemplate,
-        { params: { accountProfileModifications: true } }
-      );
-      return data.user as User;
-    } catch (error) {
       console.log(error);
       return error as AxiosError;
     }
   }
 );
+
+export const updateUser = createAsyncThunk<
+  User | AxiosError,
+  { userTemplate: UserTemplate; typeOfUpdate: "account" | "notification" }
+>("general/updateUser", async ({ userTemplate, typeOfUpdate }) => {
+  try {
+    let requestParams: {
+      accountProfileModifications?: boolean;
+      accountNotificationModifications?: boolean;
+    } = {};
+    if (typeOfUpdate === "account") {
+      requestParams.accountProfileModifications = true;
+    } else if (typeOfUpdate === "notification") {
+      requestParams.accountNotificationModifications = true;
+    }
+
+    const { data } = await axiosInstance.patch(
+      `/users/update/${userTemplate.id}`,
+      userTemplate,
+      { params: requestParams }
+    );
+    return data.user as User;
+  } catch (error) {
+    console.log(error);
+    return error as AxiosError;
+  }
+});
 
 export const loginUser = createAsyncThunk<User | AxiosError, UserTemplate>(
   "general/loginUser",
@@ -286,6 +297,15 @@ const generalSlice = createSlice({
     updateTemplateProfile(state, action: PayloadAction<ObjectKeyValueType>) {
       state.templateProfile = {
         ...state.templateProfile,
+        [action.payload.key]: action.payload.value,
+      };
+    },
+    updateTemplateProfileNotificationSettings(
+      state,
+      action: PayloadAction<ObjectKeyValueType>
+    ) {
+      (state.templateProfile as UserType).notificationSettings = {
+        ...(state.templateProfile as UserType).notificationSettings,
         [action.payload.key]: action.payload.value,
       };
     },
@@ -392,8 +412,17 @@ const generalSlice = createSlice({
           state.loadingCreateOAuthProfile = "SUCCEDED";
           state.templateModalMessage = `Successfully signed up user: ${user.username}`;
         } else {
-          state.loadingCreateOAuthProfile = "FAILED";
-          state.templateModalMessage = `Failed to sign up user`;
+          const errorData = axiosError?.response?.data as {
+            message: string;
+            type: "email" | "normal";
+          };
+          if (errorData.type === "email") {
+            state.loadingCreateOAuthProfile = "FAILED";
+            state.templateModalMessage = `Successfully signed in your account!`;
+          } else {
+            state.loadingCreateOAuthProfile = "FAILED";
+            state.templateModalMessage = errorData.message;
+          }
         }
       })
       .addCase(signupUser.pending, (state, action) => {
@@ -441,7 +470,7 @@ const generalSlice = createSlice({
           state.profile = user;
           state.showGeneralModal = true;
           state.loadingUpdateProfile = "SUCCEDED";
-          state.templateModalMessage = `Successfully updated user ${user.username} account details`;
+          state.templateModalMessage = `Successfully updated user ${user.username}'s settings`;
         } else {
           const errorData = axiosError?.response?.data as { message: string };
           state.loadingUpdateProfile = "FAILED";
@@ -597,6 +626,7 @@ export const {
   changeInvalidJWT,
   setTemplateModalMessage,
   changeSelectedViewOption,
+  updateTemplateProfileNotificationSettings,
   updateEntityQueryValues,
   changeShowProfileEmail,
   setTemplateProfile,
