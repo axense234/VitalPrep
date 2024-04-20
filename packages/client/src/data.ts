@@ -29,6 +29,13 @@ export const homePageUrl = "/home";
 export const sitePhoneNumber = "0754189293(fake)";
 export const siteEmail = "thisemaildoesnotexit@nothing.com";
 
+export const notificationMessageStyles = [
+  "Default",
+  "Serious",
+  "Motivating",
+  "Menacing",
+];
+
 export const defaultEntityQueryValues: EntityQueryValues = {
   sortByKey: "name",
   sortByOrder: "asc",
@@ -310,6 +317,7 @@ export const defaultTemplateDayTemplate: DayTemplateTemplate = {
     proteinAmount: 20,
     fatsAmount: 2,
   },
+  mealPrepPlans: [],
 };
 
 export const defaultTemplateInstanceTemplate: InstanceTemplateTemplate = {
@@ -317,6 +325,7 @@ export const defaultTemplateInstanceTemplate: InstanceTemplateTemplate = {
   dayTemplates: [],
   imageUrl: defaultInstanceTemplateImageUrl,
   coverage: 0,
+  mealPrepPlans: [],
 };
 
 export const defaultTemplateMealPrepPlan: MealPrepPlanTemplate = {

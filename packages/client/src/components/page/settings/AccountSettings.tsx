@@ -153,7 +153,7 @@ const AccountSettings = () => {
         <PrimaryButton
           backgroundColor="#432517"
           textColor="#ddd9d5"
-          content="Update Account Details"
+          content="Update Account Settings"
           type="functional"
           fontFamily="Cabin"
           fontSize={24}
