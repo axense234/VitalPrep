@@ -72,7 +72,8 @@ type CreateCloudinaryImageTemplate = {
     | "recipes"
     | "dayTemplates"
     | "instanceTemplates"
-    | "mealPrepPlans";
+    | "mealPrepPlans"
+    | "mealPrepLogs";
 };
 
 type SigninUserThroughOAuth = {

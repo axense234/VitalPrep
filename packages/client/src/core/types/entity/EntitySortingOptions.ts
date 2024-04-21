@@ -10,6 +10,7 @@ type EntitySortingOptions = {
   dayTemplate: EntitySortingOption[];
   instanceTemplate: EntitySortingOption[];
   mealPrepPlan: EntitySortingOption[];
+  mealPrepLog: EntitySortingOption[];
 };
 
 export default EntitySortingOptions;

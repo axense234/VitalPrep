@@ -4,6 +4,7 @@ type EntityType =
   | "recipe"
   | "dayTemplate"
   | "instanceTemplate"
-  | "mealPrepPlan";
+  | "mealPrepPlan"
+  | "mealPrepLog";
 
 export default EntityType;

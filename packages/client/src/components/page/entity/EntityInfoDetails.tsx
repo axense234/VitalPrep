@@ -30,6 +30,7 @@ import DayTemplateTemplate from "@/core/types/entity/mutation/DayTemplateTemplat
 import InstanceTemplateTemplate from "@/core/types/entity/mutation/InstanceTemplateTemplate";
 import { Macros } from "@prisma/client";
 import MealPrepPlanTemplate from "@/core/types/entity/mutation/MealPrepPlanTemplate";
+import MealPrepLogTemplate from "@/core/types/entity/mutation/MealPrepLogTemplate";
 
 const EntityInfoDetails: FC<{ entityId: string; entityType: EntityType }> = ({
   entityId,
@@ -341,6 +342,82 @@ const EntityInfoDetails: FC<{ entityId: string; entityType: EntityType }> = ({
             <EntityInfoDetailsComposedSection
               entities={
                 (entity as MealPrepPlanTemplate)?.utensils as UtensilTemplate[]
+              }
+              entityType={"utensil"}
+            />
+          </div>
+        </div>
+      );
+      break;
+    case "mealPrepLog":
+      entityInfoDetailsShown = (
+        <div className={entityInfoStyles.entityInfoDetailsContainer}>
+          <div className={entityInfoStyles.entityInfoDetailsHero}>
+            <Image
+              width={640}
+              height={640}
+              src={entity?.imageUrl || defaultInstanceTemplateImageUrl}
+              alt={entity?.name || "Meal Prep Log Image"}
+              aria-label={entity?.name || "Meal Prep Log Image"}
+            />
+            <header className={entityInfoStyles.entityInfoDetailsHeader}>
+              <h2>{entity?.name || "Meal Prep Log Name"}</h2>
+              <h3>
+                {(entity as MealPrepLogTemplate)?.completed
+                  ? `COMPLETED ✔️`
+                  : "NOT COMPLETED ❌"}
+              </h3>
+              <h3>
+                {new Date((entity as MealPrepLogTemplate)?.date as Date)
+                  ? new Date(
+                      (entity as MealPrepLogTemplate)?.date as Date
+                    ).toLocaleDateString()
+                  : "unknown date"}
+              </h3>
+              <h3>
+                {(entity as MealPrepLogTemplate)?.cookingDuration
+                  ? `${(entity as MealPrepLogTemplate)?.cookingDuration} hours`
+                  : "??? hours"}
+              </h3>
+            </header>
+            <EntityMacrosPieGraph
+              macros={
+                (entity as MealPrepLogTemplate)?.instanceTemplate
+                  ?.macros as Macros
+              }
+              labelSize={28}
+            />
+          </div>
+          <div className={entityInfoStyles.entityInfoDetalsComposedSection}>
+            <EntityInfoDetailsComposedSection
+              entities={
+                (entity as MealPrepLogTemplate)
+                  ?.dayTemplates as DayTemplateTemplate[]
+              }
+              entityType={"dayTemplate"}
+            />
+          </div>
+          <div className={entityInfoStyles.entityInfoDetalsComposedSection}>
+            <EntityInfoDetailsComposedSection
+              entities={
+                (entity as MealPrepLogTemplate)?.recipes as RecipeTemplate[]
+              }
+              entityType={"recipe"}
+            />
+          </div>
+          <div className={entityInfoStyles.entityInfoDetalsComposedSection}>
+            <EntityInfoDetailsComposedSection
+              entities={
+                (entity as MealPrepLogTemplate)
+                  ?.ingredients as IngredientTemplate[]
+              }
+              entityType={"ingredient"}
+            />
+          </div>
+          <div className={entityInfoStyles.entityInfoDetalsComposedSection}>
+            <EntityInfoDetailsComposedSection
+              entities={
+                (entity as MealPrepLogTemplate)?.utensils as UtensilTemplate[]
               }
               entityType={"utensil"}
             />

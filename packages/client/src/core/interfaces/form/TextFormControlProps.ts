@@ -14,7 +14,14 @@ export default interface TextFormControlProps {
   padding?: number;
 
   direction: "row" | "column";
-  type: "email" | "text" | "password" | "number" | "url" | "datetime-local";
+  type:
+    | "email"
+    | "text"
+    | "password"
+    | "number"
+    | "url"
+    | "datetime-local"
+    | "date";
   required: boolean;
 
   entityProperty: string | number | undefined | Date;

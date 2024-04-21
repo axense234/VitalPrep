@@ -10,7 +10,6 @@ import DayTemplateComponent from "./DayTemplateComponent";
 import InstanceTemplateComponent from "./InstanceTemplateComponent";
 import MealPrepPlanComponent from "./MealPrepPlanComponent";
 import EntityCard from "./EntityCard";
-
 // Next
 import Link from "next/link";
 // Types
@@ -20,22 +19,18 @@ import RecipeTemplate from "@/core/types/entity/mutation/RecipeTemplate";
 import DayTemplateTemplate from "@/core/types/entity/mutation/DayTemplateTemplate";
 import InstanceTemplateTemplate from "@/core/types/entity/mutation/InstanceTemplateTemplate";
 import MealPrepPlanTemplate from "@/core/types/entity/mutation/MealPrepPlanTemplate";
+import EntityType from "@/core/types/entity/EntityType";
 // Redux
 import { useAppSelector } from "@/hooks/redux";
 import { selectSelectedViewOption } from "@/redux/slices/generalSlice";
+import MealPrepLogTemplate from "@/core/types/entity/mutation/MealPrepLogTemplate";
 
 type EntityComponentSchemeProps = {
   isALink: boolean;
   clicked: boolean;
   entityId: string;
   selectedViewOption?: "grid" | "list";
-  entityType:
-    | "ingredient"
-    | "utensil"
-    | "recipe"
-    | "dayTemplate"
-    | "instanceTemplate"
-    | "mealPrepPlan";
+  entityType: EntityType;
   entity?:
     | IngredientTemplate
     | UtensilTemplate
@@ -73,13 +68,7 @@ const EntityComponent: FC<EntityComponentSchemeProps> = ({
 };
 
 const useSelectEntityComponentShown = (
-  entityType:
-    | "ingredient"
-    | "utensil"
-    | "recipe"
-    | "dayTemplate"
-    | "instanceTemplate"
-    | "mealPrepPlan",
+  entityType: EntityType,
   clicked: boolean,
   entityId: string,
   isALink: boolean,
@@ -204,6 +193,26 @@ const useSelectEntityComponentShown = (
         entityComponentShown = (
           <EntityCard
             entity={entity as MealPrepPlanTemplate}
+            entityType={entityType}
+            entityId={entityId}
+          />
+        );
+      } else if (selectedViewOption === "list") {
+        entityComponentShown = (
+          <MealPrepPlanComponent
+            clicked={clicked}
+            entityId={entityId}
+            entity={entity}
+          />
+        );
+      }
+      break;
+    case "mealPrepLog":
+      entityComponentDestination = `/mealPrepLog/${entityId || entity?.id}`;
+      if (selectedViewOption === "grid") {
+        entityComponentShown = (
+          <EntityCard
+            entity={entity as MealPrepLogTemplate}
             entityType={entityType}
             entityId={entityId}
           />

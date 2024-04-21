@@ -24,6 +24,7 @@ import InstanceTemplateTemplate from "./core/types/entity/mutation/InstanceTempl
 import MealPrepPlanTemplate from "./core/types/entity/mutation/MealPrepPlanTemplate";
 import EntityQueryValues from "./core/types/entity/EntityQueryValues";
 import EntitySortingOptions from "./core/types/entity/EntitySortingOptions";
+import MealPrepLogTemplate from "./core/types/entity/mutation/MealPrepLogTemplate";
 
 export const homePageUrl = "/home";
 export const sitePhoneNumber = "0754189293(fake)";
@@ -50,6 +51,7 @@ export const entitySearchByOptions: EntitySortingOptions = {
   dayTemplate: [{ label: "Name of Day Template", value: "name" }],
   instanceTemplate: [{ label: "Name of Instance Template", value: "name" }],
   mealPrepPlan: [{ label: "Name of Meal Prep Plan", value: "name" }],
+  mealPrepLog: [{ label: "Name of Meal Prep Log", value: "name" }],
 };
 
 export const entitySortingOptions: EntitySortingOptions = {
@@ -119,6 +121,13 @@ export const entitySortingOptions: EntitySortingOptions = {
     {
       label: "Name of Meal Prep Plans",
       value: "name",
+    },
+  ],
+  mealPrepLog: [
+    { label: "Name of Meal Prep Logs", value: "name" },
+    {
+      label: "Completion of Meal Prep Logs",
+      value: "completed",
     },
   ],
 };
@@ -326,6 +335,19 @@ export const defaultTemplateInstanceTemplate: InstanceTemplateTemplate = {
   imageUrl: defaultInstanceTemplateImageUrl,
   coverage: 0,
   mealPrepPlans: [],
+};
+
+export const defaultTemplateMealPrepLog: MealPrepLogTemplate = {
+  name: "Log",
+  imageUrl: defaultInstanceTemplateImageUrl,
+  completed: true,
+  cookingDuration: 1,
+  date: new Date(),
+  dayTemplates: [],
+  ingredients: [],
+  recipes: [],
+  utensils: [],
+  instanceTemplate: defaultTemplateInstanceTemplate,
 };
 
 export const defaultTemplateMealPrepPlan: MealPrepPlanTemplate = {

@@ -6,6 +6,7 @@ import notificationSettingsStyles from "../../../scss/pages/Settings.module.scss
 import PrimaryButton from "@/components/shared/PrimaryButton";
 import CheckboxFormControl from "@/components/shared/form/CheckboxFormControl";
 import ImageFormControl from "@/components/shared/form/ImageFormControl";
+import RadioFormControl from "@/components/shared/form/RadioFormControl";
 // Data
 import { defaultProfileImageUrl, notificationMessageStyles } from "@/data";
 // Redux
@@ -21,7 +22,6 @@ import {
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 // Types
 import UserType from "@/core/types/entity/UserType";
-import RadioFormControl from "@/components/shared/form/RadioFormControl";
 
 const NotificationSettings = () => {
   const dispatch = useAppDispatch();

@@ -47,6 +47,11 @@ model MealPrepLog {
   instanceTemplate   InstanceTemplate @relation(fields: [instanceTemplateId], references: [id])
   instanceTemplateId String
 
+  utensils     Utensil[]
+  ingredients  Ingredient[]
+  recipes      Recipe[]
+  dayTemplates DayTemplate[]
+
   user   User?   @relation(fields: [userId], references: [id])
   userId String?
 }
@@ -102,6 +107,7 @@ model DayTemplate {
   recipes           Recipe[]
   instanceTemplates InstanceTemplate[]
   mealPrepPlans     MealPrepPlan[]
+  mealPrepLogs      MealPrepLog[]
 
   macros   Macros @relation(fields: [macrosId], references: [id], onDelete: Cascade)
   macrosId String @unique
@@ -120,6 +126,7 @@ model Recipe {
   dayTemplates      DayTemplate[]
   instanceTemplates InstanceTemplate[]
   mealPrepPlans     MealPrepPlan[]
+  mealPrepLogs      MealPrepLog[]
 
   macros   Macros @relation(fields: [macrosId], references: [id], onDelete: Cascade)
   macrosId String @unique
@@ -149,6 +156,7 @@ model Ingredient {
   dayTemplates      DayTemplate[]
   instanceTemplates InstanceTemplate[]
   mealPrepPlans     MealPrepPlan[]
+  mealPrepLogs      MealPrepLog[]
 
   macros   Macros @relation(fields: [macrosId], references: [id], onDelete: Cascade)
   macrosId String @unique
@@ -181,6 +189,7 @@ model Utensil {
   dayTemplates      DayTemplate[]
   instanceTemplates InstanceTemplate[]
   mealPrepPlans     MealPrepPlan[]
+  mealPrepLogs      MealPrepLog[]
 
   user   User?   @relation(fields: [userId], references: [id])
   userId String?

@@ -1,7 +1,7 @@
 // Redux Toolkit
 import { State } from "../api/store";
 // Data
-import { defaultTemplateInstanceTemplate } from "@/data";
+import { defaultTemplateMealPrepLog } from "@/data";
 // Types
 import {
   EntityState,
@@ -38,7 +38,7 @@ type InitialStateType = {
 export const instanceTemplatesAdapter = createEntityAdapter<InstanceTemplate>();
 
 const initialState = instanceTemplatesAdapter.getInitialState({
-  templateInstanceTemplate: defaultTemplateInstanceTemplate,
+  templateInstanceTemplate: defaultTemplateMealPrepLog,
   loadingCreateInstanceTemplate: "IDLE",
   instanceTemplateFormModalErrorMessage: "Default Message",
   loadingGetUserInstanceTemplates: "IDLE",

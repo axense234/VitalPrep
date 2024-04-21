@@ -1,12 +1,6 @@
-const selectFormBackgroundColor = (
-  entityTypeUsed:
-    | "ingredient"
-    | "utensil"
-    | "recipe"
-    | "dayTemplate"
-    | "instanceTemplate"
-    | "mealPrepPlan"
-) => {
+import EntityType from "@/core/types/entity/EntityType";
+
+const selectFormBackgroundColor = (entityTypeUsed: EntityType) => {
   switch (entityTypeUsed) {
     case "ingredient":
       return "#FFAE00";
@@ -18,6 +12,8 @@ const selectFormBackgroundColor = (
       return "#013310";
     case "instanceTemplate":
       return "#012433";
+    case "mealPrepLog":
+      return "#d2b48c";
     default:
       return "#00000";
   }

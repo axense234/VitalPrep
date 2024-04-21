@@ -3,16 +3,10 @@ import entityInfoStyles from "../../../scss/components/page/EntityInfo.module.sc
 // Components
 import PageTitle from "@/components/shared/PageTitle";
 import EntityInfoDetails from "./EntityInfoDetails";
-import EntityInfoAppearances from "./EntityInfoAppearances";
 // React
 import { FC, useEffect } from "react";
 // Redux
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
-import {} from "@/redux/slices/recipesSlice";
-import {
-  getUserInstanceTemplate,
-  selectLoadingGetUserInstanceTemplate,
-} from "@/redux/slices/instanceTemplatesSlice";
 import {
   getUserMealPrepPlan,
   selectLoadingGetUserMealPrepPlan,

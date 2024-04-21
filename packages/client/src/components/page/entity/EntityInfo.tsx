@@ -7,13 +7,14 @@ import { useParams, usePathname } from "next/navigation";
 // Components
 import IngredientInfo from "./IngredientInfo";
 import UtensilInfo from "./UtensilInfo";
-// Redux
-import { useAppSelector } from "@/hooks/redux";
-import { selectProfile } from "@/redux/slices/generalSlice";
 import RecipeInfo from "./RecipeInfo";
 import DayTemplateInfo from "./DayTemplateInfo";
 import InstanceTemplateInfo from "./InstanceTemplateInfo";
 import MealPrepPlanInfo from "./MealPrepPlanInfo";
+import MealPrepLogInfo from "./MealPrepLogInfo";
+// Redux
+import { useAppSelector } from "@/hooks/redux";
+import { selectProfile } from "@/redux/slices/generalSlice";
 
 const EntityInfo = () => {
   const pathname = usePathname();
@@ -73,6 +74,11 @@ const useSelectEntityInfoPageShown = (
       case "mealPrepPlan":
         entityComponentShown = (
           <MealPrepPlanInfo entityId={entityId} userId={profileId} />
+        );
+        break;
+      case "mealPrepLog":
+        entityComponentShown = (
+          <MealPrepLogInfo entityId={entityId} userId={profileId} />
         );
         break;
       default:

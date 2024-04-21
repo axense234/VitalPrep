@@ -1,7 +1,7 @@
 // Types
 import SelectFormControlProps from "@/core/interfaces/form/SelectFormControlProps";
 // React
-import { FC, useEffect } from "react";
+import { FC } from "react";
 // SCSS
 import formControlsStyles from "../../../scss/components/others/FormControls.module.scss";
 // Components
@@ -23,18 +23,29 @@ const SelectFormControl: FC<SelectFormControlProps> = ({
   showEntityExtraCondition,
   backgroundColor,
   border,
+  canSelectMultipleEntities = true,
 }) => {
-  const seeIfComponentHasBeenClicked = (id: string) => {
-    if (showEntityExtraCondition) {
-      return (
-        Boolean(
-          entityPropertyChosenOptions.find((idToSearch) => idToSearch === id)
-        ) && showEntityExtraCondition(id)
-      );
-    }
+  const searchInChosenOptionsForPropertyId = (id: string) => {
     return Boolean(
-      entityPropertyChosenOptions.find((idToSearch) => idToSearch === id)
+      (entityPropertyChosenOptions as string[]).find(
+        (idToSearch) => idToSearch === id
+      )
     );
+  };
+
+  const searchInOptionsForPropertyId = (id: string) => {
+    return Boolean(entityPropertyChosenOptions === id);
+  };
+
+  const seeIfComponentHasBeenClicked = (id: string) => {
+    const finderFunctionUsed = canSelectMultipleEntities
+      ? searchInChosenOptionsForPropertyId
+      : searchInOptionsForPropertyId;
+
+    if (showEntityExtraCondition) {
+      return finderFunctionUsed(id) && showEntityExtraCondition(id);
+    }
+    return finderFunctionUsed(id);
   };
 
   return (

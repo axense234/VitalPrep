@@ -4,19 +4,16 @@ import multiViewToolStyles from "../../../scss/pages/MultiViewTool.module.scss";
 import EntityComponent from "@/components/shared/entity/EntityComponent";
 // React
 import { FC } from "react";
+// Types
+import EntityType from "@/core/types/entity/EntityType";
 // Next
 import Link from "next/link";
+// Redux
 import { useAppSelector } from "@/hooks/redux";
 import { selectSelectedViewOption } from "@/redux/slices/generalSlice";
 
 const MultiViewToolContent: FC<{
-  entityType:
-    | "ingredient"
-    | "utensil"
-    | "recipe"
-    | "dayTemplate"
-    | "instanceTemplate"
-    | "mealPrepPlan";
+  entityType: EntityType;
   entityIds: string[] | undefined;
 }> = ({ entityType, entityIds }) => {
   let multiViewToolContentTitle = "Ingredients";
@@ -41,6 +38,9 @@ const MultiViewToolContent: FC<{
       break;
     case "mealPrepPlan":
       multiViewToolContentTitle = "Meal Prep Plans";
+      break;
+    case "mealPrepLog":
+      multiViewToolContentTitle = "Your Logs";
       break;
     default:
       break;

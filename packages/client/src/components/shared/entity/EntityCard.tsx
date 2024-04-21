@@ -10,6 +10,7 @@ import InstanceTemplateTemplate from "@/core/types/entity/mutation/InstanceTempl
 import MealPrepPlanTemplate from "@/core/types/entity/mutation/MealPrepPlanTemplate";
 import RecipeTemplate from "@/core/types/entity/mutation/RecipeTemplate";
 import UtensilTemplate from "@/core/types/entity/mutation/UtensilTemplate";
+import MealPrepLogTemplate from "@/core/types/entity/mutation/MealPrepLogTemplate";
 // Next
 import Image from "next/image";
 // Data
@@ -23,7 +24,9 @@ import {
 } from "@/data";
 // React
 import { FC } from "react";
+// Redux
 import { useAppSelector } from "@/hooks/redux";
+// Helpers
 import selectEntityById from "@/helpers/selectEntityById";
 
 const EntityCard: FC<{
@@ -34,7 +37,8 @@ const EntityCard: FC<{
     | RecipeTemplate
     | DayTemplateTemplate
     | InstanceTemplateTemplate
-    | MealPrepPlanTemplate;
+    | MealPrepPlanTemplate
+    | MealPrepLogTemplate;
   entityId?: string;
 }> = ({ entityType, entity, entityId }) => {
   let defaultImageUrlShownBasedOnEntityType = defaultIngredientImageUrl;
@@ -84,6 +88,12 @@ const EntityCard: FC<{
       entityCardBackgroundColor = "#42171C";
       entityCardLabelColor = "#DDD9D5";
       break;
+    case "mealPrepLog":
+      defaultImageUrlShownBasedOnEntityType = defaultInstanceTemplateImageUrl;
+      entityIdentifier = "Meal Prep Log";
+      entityCardBackgroundColor = "#42171C";
+      entityCardLabelColor = "#DDD9D5";
+      break;
     default:
       break;
   }
@@ -109,7 +119,7 @@ const EntityCard: FC<{
         <h4 style={{ color: entityCardLabelColor }}>
           {entityUsed.name || `${entityIdentifier} Name`}
         </h4>
-        {entityType !== "utensil" ? (
+        {entityType !== "utensil" && entityType !== "mealPrepLog" ? (
           <EntityMacrosPieGraph
             macros={(entityUsed as IngredientTemplate)?.macros}
             labelSize={12}
