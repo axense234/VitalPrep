@@ -25,10 +25,200 @@ import MealPrepPlanTemplate from "./core/types/entity/mutation/MealPrepPlanTempl
 import EntityQueryValues from "./core/types/entity/EntityQueryValues";
 import EntitySortingOptions from "./core/types/entity/EntitySortingOptions";
 import MealPrepLogTemplate from "./core/types/entity/mutation/MealPrepLogTemplate";
+import FAQPageSection from "./core/types/FAQPageSection";
 
 export const homePageUrl = "/home";
 export const sitePhoneNumber = "0754189293(fake)";
 export const siteEmail = "thisemaildoesnotexit@nothing.com";
+
+export const faqPageContent: FAQPageSection[] = [
+  {
+    id: 1,
+    sectionTitle: "Introduction to Meal Prep",
+    sectionDescription:
+      "The following are some frequently asked questions by people who are new to meal prep and do not know where/how to start.",
+    sectionAccordions: [
+      {
+        id: 1,
+        accordionTitle: "What is Meal Prepping?",
+        accordionContent:
+          "Meal prepping involves preparing and portioning out meals in advance, typically for several days at a time. It's a strategy for saving time during busy weeks and ensuring you have healthy, homemade meals readily available.",
+      },
+      {
+        id: 2,
+        accordionTitle: "How does Meal Prepping save time?",
+        accordionContent:
+          "Meal prepping saves time by allowing you to prepare multiple meals at once, usually on a designated day like a weekend. This means you can cook in bulk, reducing the overall time spent in the kitchen during the week. Additionally, having pre-made meals ready to go eliminates the need to cook from scratch every day, streamlining meal preparation and reducing decision-making time.",
+      },
+      {
+        id: 3,
+        accordionTitle: "What are the benefits of Meal Prepping?",
+        accordionContent:
+          "Meal prepping offers several benefits, including time-saving, healthier eating, portion control, cost-effectiveness, reduced food waste, and consistency.        ",
+      },
+      {
+        id: 4,
+        accordionTitle: "How do I start Meal Prepping if I'm a beginner?",
+        accordionContent:
+          "To start meal prepping as a beginner, begin by planning your meals, making a grocery list, setting aside dedicated time, investing in storage containers, cooking in batches, portioning out meals, storing them properly, and reheating when ready to eat.        ",
+      },
+    ],
+  },
+  {
+    id: 2,
+    sectionTitle: "Meal Prep Essentials",
+    sectionDescription:
+      "The following are some frequently asked questions by people who have started to meal prep and want to get more in touch with the whole process.",
+    sectionAccordions: [
+      {
+        id: 1,
+        accordionTitle: "What equipment do I need for Meal Prepping?",
+        accordionContent:
+          "For meal prepping, you'll need basic kitchen equipment such as knives, cutting boards, pots and pans, meal prep containers, a food scale, mixing bowls, and measuring cups and spoons.",
+      },
+      {
+        id: 2,
+        accordionTitle:
+          "How long do meal-prepped meals typically last in the fridge or freezer?",
+        accordionContent:
+          "Meal-prepped meals typically last in the refrigerator for about 3-4 days and in the freezer for 1-2 months, depending on the type of food and how well it's packaged. Proper storage in airtight containers helps maintain freshness and extends shelf life.",
+      },
+      {
+        id: 3,
+        accordionTitle:
+          "How do I ensure my meal-prepped food stays fresh throughout the week?",
+        accordionContent:
+          "To ensure your meal-prepped food stays fresh throughout the week, use airtight containers, refrigerate promptly, label containers with the date of preparation, portion out meals properly, and avoid opening containers unnecessarily.",
+      },
+      {
+        id: 4,
+        accordionTitle:
+          "Can I customize my Meal Prep based on my nutritional goals?",
+        accordionContent:
+          "Yes, you can customize your meal prep based on your nutritional goals. You have the flexibility to choose recipes and ingredients that align with your dietary needs, whether you're focusing on weight loss, muscle gain, or specific nutritional requirements.        ",
+      },
+      {
+        id: 5,
+        accordionTitle: "How do I calculate portion sizes for Meal Prepping?",
+        accordionContent:
+          "To calculate portion sizes for meal prepping, start by determining your nutritional needs based on factors like age, gender, weight, and activity level. Then, use tools like food scales or measuring cups to accurately portion out ingredients according to your dietary goals. It may also be helpful to consult with a nutritionist or use online resources to guide portion size calculations based on your specific needs.",
+      },
+      {
+        id: 6,
+        accordionTitle: "How often should I Meal Prep?",
+        accordionContent:
+          "How often you should meal prep depends on your personal schedule and preferences. Many people find it helpful to meal prep once or twice a week, typically on weekends or whenever they have free time. This allows them to prepare meals for several days ahead, reducing the need to cook every day. However, you can adjust the frequency based on your needs and lifestyle, whether it's meal prepping for the entire week or just a few days at a time.",
+      },
+      {
+        id: 7,
+        accordionTitle: "Is Meal Prepping cost-effective?",
+        accordionContent:
+          "Yes, meal prepping is often cost-effective. By buying ingredients in bulk and cooking meals at home, you can save money compared to regularly eating out or purchasing pre-made meals.",
+      },
+    ],
+  },
+  {
+    id: 3,
+    sectionTitle: "Meal Prep Recipes and Ideas",
+    sectionDescription:
+      "The following are some frequently asked questions by people who have more specific questions and/or want to spice up their meal preps.",
+    sectionAccordions: [
+      {
+        id: 1,
+        accordionTitle: "What are some common Meal Prepping mistakes to avoid?",
+        accordionContent:
+          "Some common meal prepping mistakes to avoid include not planning ahead, using improper storage containers, neglecting variety in meals, not accounting for portion sizes, and not labeling containers with the date of preparation.",
+      },
+      {
+        id: 2,
+        accordionTitle: "What are some easy Meal Prep recipes for beginners?",
+        accordionContent:
+          "Some easy meal prep recipes for beginners include overnight oats, sheet pan chicken and vegetables, quinoa salad bowls, veggie stir-fry with rice, and turkey and black bean wraps. These recipes are simple to prepare in bulk and can be customized with your favorite ingredients.",
+      },
+      {
+        id: 3,
+        accordionTitle: "How do I prevent meal boredom when Meal Prepping?",
+        accordionContent:
+          "To prevent meal boredom when meal prepping, incorporate variety by experimenting with different recipes, flavors, and cuisines. Rotate your meal options weekly to keep things interesting, and consider trying new ingredients or cooking methods to add excitement to your meals. Additionally, you can create theme days, such as Meatless Mondays or Taco Tuesdays, to add structure and diversity to your meal prep routine.",
+      },
+      {
+        id: 4,
+        accordionTitle:
+          "Can I still Meal Prep if I have dietary restrictions or food allergies?",
+        accordionContent:
+          "Absolutely! You can still meal prep with dietary restrictions or food allergies. Just choose recipes and ingredients that align with your dietary needs, and there are plenty of resources available to help you find suitable options.",
+      },
+      {
+        id: 5,
+        accordionTitle:
+          "Can I Meal Prep for specific diets, like keto, vegan, or gluten-free?",
+        accordionContent:
+          "Yes, you can meal prep for specific diets like keto, vegan, or gluten-free. There are plenty of recipes and resources available tailored to these dietary preferences. Simply choose recipes and ingredients that align with your chosen diet, and you can effectively meal prep while adhering to your dietary requirements.",
+      },
+      {
+        id: 6,
+        accordionTitle: "Can I Meal Prep snacks and desserts too?",
+        accordionContent:
+          "Yes, you can definitely meal prep snacks and desserts. Prepare healthy snacks like fruit and nut packs, yogurt parfaits, or vegetable sticks with hummus for easy grab-and-go options. For desserts, consider making batches of healthier treats like energy balls, granola bars, or baked goods using wholesome ingredients. Meal prepping snacks and desserts can help satisfy cravings while supporting your overall dietary goals.",
+      },
+      {
+        id: 7,
+        accordionTitle:
+          "How do I keep my meal-prepped meals interesting and flavorful?",
+        accordionContent:
+          "To keep your meal-prepped meals interesting and flavorful, experiment with a variety of herbs, spices, sauces, and marinades to add depth of flavor. Incorporate different cooking techniques such as grilling, roasting, or sautéing to enhance the taste and texture of your meals. Additionally, try incorporating a mix of colorful fruits and vegetables, whole grains, and lean proteins to create visually appealing and tasty dishes. Don't be afraid to get creative and try new recipes to keep your meals exciting and enjoyable.",
+      },
+    ],
+  },
+  {
+    id: 4,
+    sectionTitle: "Storage and Practical Tips",
+    sectionDescription:
+      "The following are some frequently asked questions by people who have questions about efficient containment, cooking time, size, reheating of meals in a meal prep.",
+    sectionAccordions: [
+      {
+        id: 1,
+        accordionTitle: "How do I store meal-prepped meals properly?",
+        accordionContent:
+          "After meal prepping, transfer your meals into airtight containers to maintain freshness and prevent contamination. Store them in the refrigerator at temperatures below 40°F (4°C) to slow bacterial growth and extend their shelf life. Make sure to label containers with the date of preparation to track freshness. When reheating, ensure food reaches an internal temperature of 165°F (74°C) to kill any harmful bacteria.",
+      },
+      {
+        id: 2,
+        accordionTitle:
+          "What are the best containers for storing meal-prepped meals?",
+        accordionContent:
+          "The best containers for storing meal-prepped meals are airtight containers made of glass or BPA-free plastic. These containers help to maintain freshness, prevent leaks, and are microwave and dishwasher safe for easy reheating and cleaning. Look for containers with compartments to keep different components of your meal separate, and consider investing in a variety of sizes to accommodate different portion sizes and meal types.",
+      },
+      {
+        id: 3,
+        accordionTitle: "Can I meal prep for the whole family?",
+        accordionContent:
+          "Yes, you can definitely meal prep for the whole family. Simply adjust your recipes and portion sizes to accommodate the number of people you're feeding. Consider preparing larger batches of meals and using family-sized containers or multiple individual containers to store portions for everyone. Involving family members in the meal prep process can also make it a fun and collaborative activity.",
+      },
+      {
+        id: 4,
+        accordionTitle:
+          "What is the ideal number of meals to include in my meal prep?",
+        accordionContent:
+          "The ideal number of meals to include in your meal prep depends on your personal schedule and dietary needs. Some people prefer to prep all meals for the week, including breakfast, lunch, and dinner, while others may only prep lunches or dinners. Start by considering how many meals you typically eat at home versus dining out, and then plan accordingly. You can always adjust the number of meals as needed based on your preferences and lifestyle.",
+      },
+      {
+        id: 5,
+        accordionTitle:
+          "How do I reheat meal-prepped food to maintain its quality?",
+        accordionContent:
+          "To maintain the quality of meal-prepped food when reheating, it's best to use gentle heating methods such as microwaving, steaming, or oven reheating. Avoid overheating, which can cause the food to dry out or become rubbery. Cover the food with a microwave-safe lid or damp paper towel to retain moisture during microwaving. For oven reheating, use a lower temperature and cover the dish with aluminum foil to prevent excessive drying. Stirring or flipping halfway through can also help ensure even reheating.",
+      },
+      {
+        id: 6,
+        accordionTitle:
+          "What is the recommended duration for my meal prep cooking sessions?",
+        accordionContent:
+          "The recommended duration for meal prep cooking sessions depends on factors such as the number of meals you're preparing, your cooking skills, and the complexity of the recipes. Generally, aim for a few hours, such as 2-3 hours, to prepare meals for the week. However, you can adjust the duration based on your schedule and preferences. Some people prefer shorter, more frequent meal prep sessions, while others may dedicate a longer block of time to prep for the entire week. Experiment to find what works best for you.",
+      },
+    ],
+  },
+];
 
 export const notificationMessageStyles = [
   "Default",

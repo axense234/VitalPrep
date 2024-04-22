@@ -1,0 +1,89 @@
+@use "../abstracts" as *;
+
+.gettingStartedContainer {
+  @include pageLayout();
+}
+
+.gettingStartedContent {
+  @include flexCenter(column);
+  row-gap: $homeCardsContainerRowGap;
+  background-image: url($homeCardsContainerBackgroundImageUrl);
+  padding: $homeCardsContainerPadding;
+}
+
+.gettingStartedSection {
+  @include flexCenter(column);
+  padding: $homeCardContainerPadding;
+  background-color: $homeCardContainerDefaultBackgroundColor;
+  width: 100%;
+  gap: $homeCardContainerDistanceBetweenTitleAndInformation;
+  border-top: 1.5px solid getColor("black-100-1");
+  border-bottom: 1.5px solid getColor("black-100-1");
+
+  &:nth-of-type(2) {
+    background-color: getColor("primary-1");
+  }
+
+  &:nth-of-type(3) {
+    background-color: getColor("secondary-color-1.4");
+  }
+
+  &:nth-of-type(4) {
+    background-color: getColor("secondary-color-1.1");
+  }
+
+  &:nth-of-type(5) {
+    background-color: getColor("secondary-color-1.2");
+  }
+
+  h1 {
+    @include h2Laptop();
+    text-align: center;
+    letter-spacing: 3.5px;
+    color: getColor("tan-color-extra-light");
+    text-shadow:
+      $titleOutlineNegativeCoeficient $titleOutlineNegativeCoeficient 0 black,
+      $titleOutlinePozitiveCoeficient $titleOutlineNegativeCoeficient 0 black,
+      $titleOutlineNegativeCoeficient $titleOutlinePozitiveCoeficient 0 black,
+      $titleOutlinePozitiveCoeficient $titleOutlinePozitiveCoeficient 0 black;
+  }
+
+  h2 {
+    @include h3Laptop();
+    align-self: flex-start;
+    text-align: left;
+    letter-spacing: 2.5px;
+    color: getColor("tan-color-extra-light");
+    text-shadow:
+      $titleOutlineNegativeCoeficient $titleOutlineNegativeCoeficient 0 black,
+      $titleOutlinePozitiveCoeficient $titleOutlineNegativeCoeficient 0 black,
+      $titleOutlineNegativeCoeficient $titleOutlinePozitiveCoeficient 0 black,
+      $titleOutlinePozitiveCoeficient $titleOutlinePozitiveCoeficient 0 black;
+  }
+
+  p {
+    width: 100%;
+    font-size: 2rem;
+    text-align: left;
+    font-family: "EB Garamond", serif;
+    color: getColor("tan-color-extra-light");
+  }
+
+  span {
+    color: red;
+  }
+
+  a {
+    text-decoration: none;
+    color: getColor("secondary-color-light-2.4");
+
+    &:hover {
+      font-style: italic;
+      text-decoration: underline;
+    }
+  }
+
+  button {
+    margin-top: $homeCardContainerButtonMarginTop;
+  }
+}
