@@ -31,6 +31,140 @@ export const homePageUrl = "/home";
 export const sitePhoneNumber = "0754189293(fake)";
 export const siteEmail = "thisemaildoesnotexit@nothing.com";
 
+export const aboutFrontendTechnologies = [
+  {
+    id: 1,
+    logoUrl:
+      "https://res.cloudinary.com/birthdayreminder/image/upload/v1668764486/Icons%20and%20Stuff/HTML5_badge_ag98vs.webp",
+    logoDest: "https://www.w3schools.com/html/",
+    logoLabel: "HTML",
+  },
+  {
+    id: 2,
+    logoUrl:
+      "https://res.cloudinary.com/birthdayreminder/image/upload/v1668764497/Icons%20and%20Stuff/css-118-569410_pqbfyw.webp",
+    logoDest: "https://www.w3schools.com/css/",
+    logoLabel: "CSS",
+  },
+  {
+    id: 3,
+    logoUrl:
+      "https://res.cloudinary.com/birthdayreminder/image/upload/v1674063331/Icons%20and%20Stuff/typescript_logo_png_kl85ny.webp",
+    logoDest: "https://www.typescriptlang.org/",
+    logoLabel: "Typescript(TS)",
+  },
+  {
+    id: 4,
+    logoUrl:
+      "https://res.cloudinary.com/birthdayreminder/image/upload/v1668764549/Icons%20and%20Stuff/react_js_logo_icon512_b7nzgm.webp",
+    logoDest: "https://react.dev/",
+    logoLabel: "React - JS/TS Framework",
+  },
+  {
+    id: 5,
+    logoUrl:
+      "https://res.cloudinary.com/birthdayreminder/image/upload/v1674063415/Icons%20and%20Stuff/sass-logo-2_xkltmh.webp",
+    logoDest: "https://sass-lang.com/",
+    logoLabel: "SCSS",
+  },
+  {
+    id: 6,
+    logoUrl:
+      "https://res.cloudinary.com/birthdayreminder/image/upload/v1668764511/Icons%20and%20Stuff/redux-logo_ejnmb7.webp",
+    logoDest: "https://redux.js.org/",
+    logoLabel: "Redux & Redux Toolkit - React State Management Library",
+  },
+  {
+    id: 7,
+    logoUrl:
+      "https://res.cloudinary.com/birthdayreminder/image/upload/v1674571532/Icons%20and%20Stuff/nextjs_logo_hdppif.png",
+    logoDest: "https://nextjs.org/",
+    logoLabel: "NextJS - React Framework",
+  },
+];
+
+export const aboutBackendTechnologies = [
+  {
+    id: 1,
+    logoUrl:
+      "https://res.cloudinary.com/birthdayreminder/image/upload/v1668764542/Icons%20and%20Stuff/nodejs-logo-png--435_xz77cw.webp",
+    logoDest: "https://nodejs.org/en",
+    logoLabel: "NodeJS",
+  },
+  {
+    id: 2,
+    logoUrl:
+      "https://res.cloudinary.com/birthdayreminder/image/upload/v1668764524/Icons%20and%20Stuff/express-js-icon-20_onazqf.webp",
+    logoDest: "https://expressjs.com/",
+    logoLabel: "ExpressJS - NodeJS Web Framework",
+  },
+  {
+    id: 3,
+    logoUrl:
+      "https://res.cloudinary.com/birthdayreminder/image/upload/v1674063331/Icons%20and%20Stuff/typescript_logo_png_kl85ny.webp",
+    logoDest: "https://www.typescriptlang.org/",
+    logoLabel: "Typescript(TS)",
+  },
+  {
+    id: 4,
+    logoUrl:
+      "https://res.cloudinary.com/birthdayreminder/image/upload/v1674063477/Icons%20and%20Stuff/postgresql-logo-png-transparent_zxfyrt.webp",
+    logoDest: "https://www.postgresql.org/",
+    logoLabel: "PostgreSQL - SQL Database",
+  },
+  {
+    id: 5,
+    logoUrl:
+      "https://res.cloudinary.com/birthdayreminder/image/upload/v1674063521/Icons%20and%20Stuff/redis-logo_i8mudb.webp",
+    logoDest: "https://redis.io/",
+    logoLabel: "Redis - Cache Database",
+  },
+  {
+    id: 6,
+    logoUrl:
+      "https://res.cloudinary.com/birthdayreminder/image/upload/v1674063501/Icons%20and%20Stuff/prisma-logo-3805665B69-seeklogo.com_cj8pk8.webp",
+    logoDest: "https://www.prisma.io/",
+    logoLabel: "Prisma - DB ORM",
+  },
+];
+
+export const aboutCloudServices = [
+  {
+    id: 1,
+    logoUrl:
+      "https://res.cloudinary.com/birthdayreminder/image/upload/v1668764538/Icons%20and%20Stuff/netlify-logo-png-transparent_f4eya5.webp",
+    logoDest: "https://www.netlify.com/",
+    logoLabel: "Netlify",
+  },
+  {
+    id: 2,
+    logoUrl:
+      "https://res.cloudinary.com/birthdayreminder/image/upload/v1674063547/Icons%20and%20Stuff/render_logo_fu2pxk.webp",
+    logoDest: "https://render.com/",
+    logoLabel: "Render",
+  },
+];
+
+export const aboutMediaManagement = [
+  {
+    id: 1,
+    logoUrl:
+      "https://res.cloudinary.com/birthdayreminder/image/upload/v1713861293/Icons%20and%20Stuff/cloudinary_cloud_glyph_512x512_qgwst5.png",
+    logoDest: "https://cloudinary.com/",
+    logoLabel: "Cloudinary",
+  },
+];
+
+export const aboutVCS = [
+  {
+    id: 1,
+    logoUrl:
+      "https://res.cloudinary.com/birthdayreminder/image/upload/v1713861987/Icons%20and%20Stuff/25231_xybfm1.png",
+    logoDest: "https://github.com/",
+    logoLabel: "Github",
+  },
+];
+
 export const faqPageContent: FAQPageSection[] = [
   {
     id: 1,

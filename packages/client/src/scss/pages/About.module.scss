@@ -1,0 +1,109 @@
+@use "../abstracts" as *;
+
+.aboutContainer {
+  @include pageLayout();
+}
+
+.aboutContent {
+  @include flexCenter(column);
+  row-gap: $homeCardsContainerRowGap;
+  background-image: url($homeCardsContainerBackgroundImageUrl);
+  padding: $homeCardsContainerPadding;
+}
+
+.aboutContentSection {
+  @include flexCenter(column);
+  padding: $homeCardContainerPadding;
+  background-color: $homeCardContainerDefaultBackgroundColor;
+  width: 100%;
+  gap: 2.5rem;
+
+  &:nth-of-type(2) {
+    background-color: getColor("primary-1");
+  }
+
+  &:nth-of-type(3) {
+    background-color: getColor("secondary-color-1.4");
+  }
+
+  &:nth-of-type(4) {
+    background-color: getColor("secondary-color-1.1");
+  }
+
+  &:nth-of-type(5) {
+    background-color: getColor("secondary-color-1.2");
+  }
+
+  h1 {
+    @include h2Laptop();
+    text-align: center;
+    letter-spacing: 3.5px;
+    color: getColor("tan-color-extra-light");
+    text-shadow:
+      $titleOutlineNegativeCoeficient $titleOutlineNegativeCoeficient 0 black,
+      $titleOutlinePozitiveCoeficient $titleOutlineNegativeCoeficient 0 black,
+      $titleOutlineNegativeCoeficient $titleOutlinePozitiveCoeficient 0 black,
+      $titleOutlinePozitiveCoeficient $titleOutlinePozitiveCoeficient 0 black;
+  }
+
+  h2 {
+    @include h4Laptop();
+    align-self: flex-start;
+    text-align: left;
+    letter-spacing: 2.5px;
+    margin-top: 3rem;
+    color: getColor("tan-color-extra-light");
+    text-shadow:
+      $titleOutlineNegativeCoeficient $titleOutlineNegativeCoeficient 0 black,
+      $titleOutlinePozitiveCoeficient $titleOutlineNegativeCoeficient 0 black,
+      $titleOutlineNegativeCoeficient $titleOutlinePozitiveCoeficient 0 black,
+      $titleOutlinePozitiveCoeficient $titleOutlinePozitiveCoeficient 0 black;
+  }
+
+  p {
+    width: 100%;
+    text-align: center;
+    padding: 0 8rem;
+    font-size: 2.5rem;
+    font-family: "EB Garamond", serif;
+    color: getColor("tan-color-extra-light");
+  }
+
+  span {
+    color: red;
+  }
+
+  a {
+    text-decoration: none;
+    color: getColor("secondary-color-light-2.4");
+
+    &:hover {
+      font-style: italic;
+      text-decoration: underline;
+    }
+  }
+
+  button {
+    margin-top: $homeCardContainerButtonMarginTop;
+  }
+}
+
+.aboutContentSectionLogos {
+  @include flexCenter(row);
+  margin-top: 3rem;
+  padding: 0 8rem;
+  width: 80%;
+  flex-wrap: wrap;
+  list-style: none;
+  column-gap: 6rem;
+  row-gap: 4rem;
+
+  li {
+    @include flexCenter(row);
+    transition: $crispyTransformTransition;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+}
