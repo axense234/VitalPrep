@@ -84,9 +84,14 @@ export const getAllUserMealPrepLogs = createAsyncThunk<
           sortByKey,
           sortByOrder,
           includeIngredients: true,
+          includeIngredientsMacros: true,
           includeUtensils: true,
           includeRecipes: true,
+          includeRecipesMacros: true,
           includeDayTemplates: true,
+          includeDayTemplatesMacros: true,
+          includeInstanceTemplate: true,
+          includeInstanceTemplateMacros: true,
         },
       });
       return data.mealPrepLogs as MealPrepLog[];

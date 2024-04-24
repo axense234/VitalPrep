@@ -25,6 +25,16 @@ const authenticationMiddleware = async (
   if (userEmail && userEmail !== "undefined" && userEmail !== "null") {
     const foundUser = await UserClient.findUnique({
       where: { email: userEmail as string },
+      include: {
+        ingredients: true,
+        utensils: true,
+        recipes: true,
+        dayTemplates: true,
+        instanceTemplates: true,
+        mealPrepPlans: true,
+        mealPrepLogs: true,
+        notificationSettings: true,
+      },
     });
     if (foundUser) {
       req.user = { userId: foundUser.id, username: foundUser.username };

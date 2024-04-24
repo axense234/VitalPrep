@@ -45,9 +45,14 @@ const getAllMealPrepLogs = async (req: Request, res: Response) => {
     sortByOrder,
     includeUser,
     includeIngredients,
+    includeIngredientsMacros,
     includeUtensils,
     includeRecipes,
+    includeRecipesMacros,
     includeDayTemplates,
+    includeDayTemplatesMacros,
+    includeInstanceTemplate,
+    includeInstanceTemplateMacros,
   } = req.query;
 
   const queryObject: GetAllMealPrepLogsQueryObject = {};
@@ -77,14 +82,29 @@ const getAllMealPrepLogs = async (req: Request, res: Response) => {
   if (includeIngredients) {
     includeObject.ingredients = true;
   }
+  if (includeIngredients && includeIngredientsMacros) {
+    includeObject.ingredients = { include: { macros: true } };
+  }
   if (includeUtensils) {
     includeObject.utensils = true;
   }
   if (includeRecipes) {
     includeObject.recipes = true;
   }
+  if (includeRecipes && includeRecipesMacros) {
+    includeObject.recipes = { include: { macros: true } };
+  }
   if (includeDayTemplates) {
     includeObject.dayTemplates = true;
+  }
+  if (includeDayTemplates && includeDayTemplatesMacros) {
+    includeObject.dayTemplates = { include: { macros: true } };
+  }
+  if (includeInstanceTemplate) {
+    includeObject.instanceTemplate = true;
+  }
+  if (includeInstanceTemplate && includeInstanceTemplateMacros) {
+    includeObject.instanceTemplate = { include: { macros: true } };
   }
 
   const foundMealPrepLogs = await MealPrepLogClient.findMany({

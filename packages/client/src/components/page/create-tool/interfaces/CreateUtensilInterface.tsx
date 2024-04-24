@@ -126,7 +126,7 @@ const CreateUtensilInterface = () => {
             dispatch(
               updateTemplateUtensil({
                 key: "enabled",
-                value: Boolean(e.target.value),
+                value: !Boolean(e.target.value),
               })
             )
           }

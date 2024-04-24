@@ -4,12 +4,9 @@ import entityComponentStyles from "../../../scss/components/shared/EntityCompone
 import { FC } from "react";
 // Types
 import EntityComponentProps from "@/core/interfaces/entity/EntityComponentProps";
-import IngredientTemplate from "@/core/types/entity/mutation/IngredientTemplate";
+import MealPrepLogTemplate from "@/core/types/entity/mutation/MealPrepLogTemplate";
 // Data
-import {
-  defaultIngredientImageUrl,
-  defaultInstanceTemplateImageUrl,
-} from "@/data";
+import { defaultInstanceTemplateImageUrl } from "@/data";
 // Helpers
 import selectEntityById from "@/helpers/selectEntityById";
 // Redux
@@ -17,7 +14,6 @@ import { useAppSelector } from "@/hooks/redux";
 import { State } from "@/redux/api/store";
 // Next
 import Image from "next/image";
-import MealPrepLogTemplate from "@/core/types/entity/mutation/MealPrepLogTemplate";
 
 const MealPrepLogComponent: FC<EntityComponentProps> = ({
   clicked,
@@ -32,6 +28,7 @@ const MealPrepLogComponent: FC<EntityComponentProps> = ({
   const { name, imageUrl, cookingDuration, date, completed } =
     mealPrepLogEntityShown;
 
+  console.log(mealPrepLogEntityShown, date);
   return (
     <div
       className={entityComponentStyles.entityComponent}
@@ -49,7 +46,7 @@ const MealPrepLogComponent: FC<EntityComponentProps> = ({
         <h4>{name}</h4>
       </header>
       <div className={entityComponentStyles.entityComponentDetails}>
-        <p>{date?.toLocaleDateString() || "???"}</p>
+        <p>{new Date(date || "")?.toLocaleDateString() || "???"}</p>
         <p>{cookingDuration || "???"} hours spent</p>
         <p>{completed ? "COMPLETED" : "NOT COMPLETED"}</p>
       </div>

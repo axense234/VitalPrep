@@ -24,6 +24,7 @@ import EntityType from "@/core/types/entity/EntityType";
 import { useAppSelector } from "@/hooks/redux";
 import { selectSelectedViewOption } from "@/redux/slices/generalSlice";
 import MealPrepLogTemplate from "@/core/types/entity/mutation/MealPrepLogTemplate";
+import MealPrepLogComponent from "./MealPrepLogComponent";
 
 type EntityComponentSchemeProps = {
   isALink: boolean;
@@ -219,7 +220,7 @@ const useSelectEntityComponentShown = (
         );
       } else if (selectedViewOption === "list") {
         entityComponentShown = (
-          <MealPrepPlanComponent
+          <MealPrepLogComponent
             clicked={clicked}
             entityId={entityId}
             entity={entity}

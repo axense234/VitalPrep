@@ -4,6 +4,7 @@ import { State } from "../api/store";
 // Types
 import UserType from "@/core/types/entity/UserType";
 import UserTemplate from "@/core/types/entity/mutation/UserTemplate";
+import EntityQueryValues from "@/core/types/entity/EntityQueryValues";
 import { User } from "@prisma/client";
 // Axios
 import axiosInstance from "@/utils/axios";
@@ -19,7 +20,6 @@ import {
   defaultProfile,
   defaultTemplateProfile,
 } from "@/data";
-import EntityQueryValues from "@/core/types/entity/EntityQueryValues";
 
 type ObjectKeyValueType = {
   key: string;

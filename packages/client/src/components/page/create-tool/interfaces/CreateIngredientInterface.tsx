@@ -210,7 +210,7 @@ const CreateIngredientInterface = () => {
             dispatch(
               updateTemplateIngredient({
                 key: "enabled",
-                value: Boolean(e.target.value),
+                value: !Boolean(e.target.value),
               })
             )
           }

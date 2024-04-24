@@ -178,7 +178,7 @@ const CreateLogContent = () => {
               dispatch(
                 updateTemplateMealPrepLog({
                   key: "completed",
-                  value: Boolean(e.target.value),
+                  value: !Boolean(e.target.value),
                 })
               )
             }

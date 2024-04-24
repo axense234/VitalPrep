@@ -101,6 +101,8 @@ const getAllUtensils = async (req: Request, res: Response) => {
     includeObject.mealPrepPlans = true;
   }
 
+  console.log(foundUtensils);
+
   if (foundUtensils.length < 1) {
     return res
       .status(StatusCodes.NOT_FOUND)
@@ -179,6 +181,11 @@ const getUtensilById = async (req: Request, res: Response) => {
 
 const createUtensil = async (req: Request, res: Response) => {
   const utensilBody = req.body;
+  const userId = req.query.userId;
+
+  if (userId) {
+    utensilBody.user = { connect: { id: userId } };
+  }
 
   if (!utensilBody) {
     return res
