@@ -8,14 +8,13 @@ import { UserClient } from "../db/postgres";
 import { encryptPassword, comparePasswords } from "../utils/bcrypt";
 import { createJWT } from "../utils/jwt";
 import { deleteCache, setCache } from "../utils/redis";
+import { randomUUID } from "crypto";
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const signupUser = async (req: Request, res: Response) => {
   const userBody = req.body;
   const throughOAuth = Boolean(req.query.throughOAuth);
-
-  console.log("lwpaodapwd");
 
   if (!userBody) {
     return res
@@ -34,8 +33,6 @@ const signupUser = async (req: Request, res: Response) => {
       .status(StatusCodes.BAD_REQUEST)
       .json({ message: "Please enter an email!" });
   }
-
-  console.log(userBody.email);
 
   if (!emailRegex.test(userBody.email)) {
     return res
@@ -61,11 +58,7 @@ const signupUser = async (req: Request, res: Response) => {
   }
 
   if (throughOAuth) {
-    // WARNING
-    // MAJOR SECURITY WORKAROUND
-    // DID THIS ONLY BECAUSE I SUCK
-    // LET'S HOPE NOONE READS THIS LINE AND STARTS USING IT FOR MISCHEVIOUS PURPOSES
-    userBody.password = userBody.email + userBody.age + userBody.username;
+    userBody.password = randomUUID();
   }
 
   const encryptedPass = await encryptPassword(userBody.password);
@@ -87,7 +80,6 @@ const signupUser = async (req: Request, res: Response) => {
   }
 
   const token = createJWT(createdUser.id, createdUser.username);
-  console.log(createdUser.id);
 
   await deleteCache(`users`);
   await setCache(`${createdUser.id}:jwt-vitalprep`, token);

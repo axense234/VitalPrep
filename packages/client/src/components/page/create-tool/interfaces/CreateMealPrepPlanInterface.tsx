@@ -341,7 +341,6 @@ const CreateMealPrepPlanInterface = () => {
           textColor="#DDD9D5"
           content="Create Meal Prep Plan"
           type="functional"
-          fontFamily="Cabin"
           fontSize={24}
           height={64}
           width={560}

@@ -55,7 +55,6 @@ const HomeCard: FC<HomeCardProps> = ({
           fontSize={21}
           width={216}
           content="Get Started"
-          fontFamily="Cabin"
           height={48}
           type="link"
           linkDest="/create-tool"

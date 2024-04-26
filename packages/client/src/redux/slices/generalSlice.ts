@@ -137,6 +137,7 @@ export const getProfileOAuth = createAsyncThunk(
       const { data } = await axiosInstance.get(
         `/users/null?userEmail=${session?.user?.email}`
       );
+      localStorage.setItem("userId", data.user.id);
       return data.user as User;
     } catch (error) {
       console.log(error);
@@ -151,6 +152,7 @@ export const getProfileJWT = createAsyncThunk(
     try {
       const userId = localStorage.getItem("userId");
       const { data } = await axiosInstance.get(`/users/${userId}`);
+      localStorage.setItem("userId", data.user.id);
       return data.user as User;
     } catch (error) {
       console.log(error);
@@ -174,6 +176,7 @@ export const signupUserOAuth = createAsyncThunk<User | AxiosError>(
       const { data } = await axiosInstance.post("/users/signup", userTemplate, {
         params: { throughOAuth: true },
       });
+      localStorage.setItem("userId", data.user.id);
       return data.user as User;
     } catch (error) {
       console.log(error);
@@ -202,6 +205,7 @@ export const signupUser = createAsyncThunk<User | AxiosError, UserTemplate>(
   async (userTemplate) => {
     try {
       const { data } = await axiosInstance.post("/users/signup", userTemplate);
+      localStorage.setItem("userId", data.user.id);
       return data.user as User;
     } catch (error) {
       console.log(error);
@@ -242,6 +246,7 @@ export const loginUser = createAsyncThunk<User | AxiosError, UserTemplate>(
   async (userTemplate) => {
     try {
       const { data } = await axiosInstance.post("/users/login", userTemplate);
+      localStorage.setItem("userId", data.user.id);
       return data.user as User;
     } catch (error) {
       return error as AxiosError;

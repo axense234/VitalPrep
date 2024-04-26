@@ -13,7 +13,6 @@ const PrimaryButton: FC<PrimaryButtonProps> = ({
   width,
   height,
   content,
-  fontFamily,
   linkDest,
   type,
   disabled,
@@ -33,7 +32,6 @@ const PrimaryButton: FC<PrimaryButtonProps> = ({
           className={primaryButtonStyles.primaryButton}
           style={{
             backgroundColor,
-            fontFamily,
             height,
             fontSize,
             width,
@@ -56,7 +54,6 @@ const PrimaryButton: FC<PrimaryButtonProps> = ({
         type="submit"
         style={{
           backgroundColor,
-          fontFamily,
           height,
           fontSize,
           width,

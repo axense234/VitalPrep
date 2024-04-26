@@ -226,7 +226,6 @@ const CreateLogContent = () => {
             textColor="#120A06"
             content="Add Meal Prep Log"
             type="functional"
-            fontFamily="Cabin"
             fontSize={24}
             height={64}
             width={560}

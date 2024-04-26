@@ -264,7 +264,6 @@ const CreateDayTemplateInterface = () => {
           textColor="#DDD9D5"
           content="Create Day Template"
           type="functional"
-          fontFamily="Cabin"
           fontSize={24}
           height={64}
           width={560}

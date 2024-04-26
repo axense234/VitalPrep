@@ -1,0 +1,34 @@
+@use "../abstracts" as *;
+
+.errorPageContainer {
+  @include pageLayout();
+  min-height: 100vh;
+  background-image: url("https://res.cloudinary.com/birthdayreminder/image/upload/v1714121279/VitalPrep/image1_le8tkv.png");
+  background-attachment: fixed;
+  padding-bottom: 10%;
+
+  h1 {
+    @include h1Laptop();
+    width: 100%;
+    text-align: center;
+    color: getColor("black-100-1");
+    letter-spacing: 1rem;
+    text-shadow:
+      $titleOutlineNegativeCoeficient $titleOutlineNegativeCoeficient 0 black,
+      $titleOutlinePozitiveCoeficient $titleOutlineNegativeCoeficient 0 black,
+      $titleOutlineNegativeCoeficient $titleOutlinePozitiveCoeficient 0 black,
+      $titleOutlinePozitiveCoeficient $titleOutlinePozitiveCoeficient 0 black;
+  }
+
+  p {
+    width: 100%;
+    font-size: 2rem;
+    text-align: center;
+    font-family: "EB Garamond", serif;
+    color: getColor("black-100-1");
+  }
+
+  button {
+    margin-top: 2.25rem;
+  }
+}

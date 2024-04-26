@@ -343,7 +343,6 @@ const CreateRecipeInterface = () => {
           textColor="#DDD9D5"
           content="Create Recipe"
           type="functional"
-          fontFamily="Cabin"
           fontSize={24}
           height={64}
           width={560}

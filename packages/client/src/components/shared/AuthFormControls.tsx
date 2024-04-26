@@ -139,7 +139,6 @@ export const AuthFormControls: FC<AuthFormControlsProps> = ({ type }) => {
           onHoverContent={isUserABot ? "Confirm you are not a robot!" : ""}
           backgroundColor="#043301"
           content="Sign Up"
-          fontFamily="Cabin"
           fontSize={21}
           height={40}
           width={128}
@@ -188,7 +187,6 @@ export const AuthFormControls: FC<AuthFormControlsProps> = ({ type }) => {
           type="functional"
           backgroundColor="#120A06"
           content="Log In"
-          fontFamily="Cabin"
           fontSize={21}
           height={40}
           width={128}

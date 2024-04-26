@@ -104,7 +104,6 @@ const NotificationSettings = () => {
           textColor="#ddd9d5"
           content="Update Notification Settings"
           type="functional"
-          fontFamily="Cabin"
           fontSize={24}
           height={64}
           width={560}

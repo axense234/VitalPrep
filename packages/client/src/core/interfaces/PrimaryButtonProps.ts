@@ -6,7 +6,6 @@ export default interface PrimaryButtonProps {
   type: "functional" | "link";
   onClickFunction?: MouseEventHandler<HTMLButtonElement> | undefined;
   linkDest?: string;
-  fontFamily: "Cabin" | "EB Garamond";
   fontSize: number;
   backgroundColor: string;
   textColor?: string;

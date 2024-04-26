@@ -140,7 +140,6 @@ const CreateUtensilInterface = () => {
           textColor="#120A06"
           content="Create Utensil"
           type="functional"
-          fontFamily="Cabin"
           fontSize={24}
           height={64}
           width={560}

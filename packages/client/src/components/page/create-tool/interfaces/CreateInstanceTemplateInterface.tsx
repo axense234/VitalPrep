@@ -277,7 +277,6 @@ const CreateInstanceTemplateInterface = () => {
           textColor="#DDD9D5"
           content="Create Instance Template"
           type="functional"
-          fontFamily="Cabin"
           fontSize={24}
           height={64}
           width={560}
