@@ -27,6 +27,15 @@
     font-family: "EB Garamond", serif;
     color: getColor("black-100-1");
   }
+  a {
+    text-decoration: none;
+    color: getColor("secondary-color-light-2.4");
+
+    &:hover {
+      font-style: italic;
+      text-decoration: underline;
+    }
+  }
 
   button {
     margin-top: 2.25rem;

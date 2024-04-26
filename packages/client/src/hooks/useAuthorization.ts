@@ -68,7 +68,6 @@ export const useRedirect = (
   const profile = useAppSelector(selectProfile);
 
   useEffect(() => {
-    console.log("oopsie redirected");
     if (pathname && router && loading) {
       if (
         profile.email &&
@@ -77,7 +76,7 @@ export const useRedirect = (
       ) {
         router.push("/home");
       } else if (!profile.email && pathname !== "/" && pathname !== "/login") {
-        router.push("/");
+        router.push("/auth-error");
       }
     }
   }, [pathname, router, loading, profile]);
