@@ -1,0 +1,33 @@
+@use "../abstracts" as *;
+
+.contactContainer {
+  @include pageLayout();
+  min-height: 100vh;
+  gap: 3rem;
+  background-image: url("https://res.cloudinary.com/birthdayreminder/image/upload/v1714124438/wallpaperflare.com_wallpaper_3_lfswhp.jpg");
+
+  h1 {
+    @include h1Laptop();
+    width: 100%;
+    text-align: center;
+    color: getColor("black-100-1");
+    letter-spacing: 0.5rem;
+    text-shadow:
+      $titleOutlineNegativeCoeficient $titleOutlineNegativeCoeficient 0 black,
+      $titleOutlinePozitiveCoeficient $titleOutlineNegativeCoeficient 0 black,
+      $titleOutlineNegativeCoeficient $titleOutlinePozitiveCoeficient 0 black,
+      $titleOutlinePozitiveCoeficient $titleOutlinePozitiveCoeficient 0 black;
+  }
+}
+
+.contactDetails {
+  @include flexCenter(column);
+  gap: 1rem;
+
+  p {
+    width: 100%;
+    font-size: 2rem;
+    font-family: "EB Garamond", serif;
+    color: getColor("black-100-1");
+  }
+}

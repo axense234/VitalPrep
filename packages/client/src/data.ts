@@ -28,7 +28,7 @@ import MealPrepLogTemplate from "./core/types/entity/mutation/MealPrepLogTemplat
 import FAQPageSection from "./core/types/FAQPageSection";
 
 export const homePageUrl = "/home";
-export const sitePhoneNumber = "0754189293(fake)";
+export const sitePhoneNumber = "0754 189 293(fake)";
 export const siteEmail = "thisemaildoesnotexit@nothing.com";
 
 export const aboutFrontendTechnologies = [
