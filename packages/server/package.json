@@ -6,7 +6,7 @@
     "dev": "nodemon src/index.ts",
     "build": "npm install",
     "transpile": "npm uninstall typescript && npm install typescript@5.3.3 && tsc",
-    "migrate": "npm uninstall prisma && npm install prisma@5.10.2 && npx prisma migrate deploy && npm uninstall @prisma/client && npm i @prisma/client@5.10.2 && npx prisma generate",
+    "migrate": "npm uninstall prisma && npm uninstall @prisma/client && npm install prisma@5.10.2 && npm install @prisma/client@latest && npx prisma migrate deploy && npx prisma generate",
     "start": "node dist/index.js"
   },
   "devDependencies": {
