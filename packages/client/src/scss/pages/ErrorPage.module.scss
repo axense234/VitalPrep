@@ -13,11 +13,6 @@
     text-align: center;
     color: getColor("black-100-1");
     letter-spacing: 1rem;
-    text-shadow:
-      $titleOutlineNegativeCoeficient $titleOutlineNegativeCoeficient 0 black,
-      $titleOutlinePozitiveCoeficient $titleOutlineNegativeCoeficient 0 black,
-      $titleOutlineNegativeCoeficient $titleOutlinePozitiveCoeficient 0 black,
-      $titleOutlinePozitiveCoeficient $titleOutlinePozitiveCoeficient 0 black;
   }
 
   p {

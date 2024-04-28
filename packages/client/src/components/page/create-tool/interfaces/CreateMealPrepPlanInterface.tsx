@@ -7,7 +7,7 @@ import ImageFormControl from "@/components/shared/form/ImageFormControl";
 import PopupModal from "@/components/shared/modals/PopupModal";
 import SelectFormControl from "@/components/shared/form/SelectFormControl";
 // React
-import { ChangeEvent, useEffect, useRef } from "react";
+import React, { ChangeEvent, useEffect, useRef } from "react";
 // Data
 import { defaultEntityQueryValues, defaultMealPrepPlanImageUrl } from "@/data";
 // Redux
@@ -33,10 +33,12 @@ import {
   selectMealPrepPlanFormModalErrorMessage,
   selectMealPrepPlanTemplate,
   selectNumberOfInstanceTemplates,
+  updateInstanceTemplatesTiming,
   updateLoadingCreateMealPrepPlan,
   updateNumberOfInstanceTemplates,
   updateTemplateMealPrepPlan,
 } from "@/redux/slices/mealPrepPlansSlice";
+import WeekdayFormControl from "@/components/shared/form/WeekdayFormControl";
 
 const CreateMealPrepPlanInterface = () => {
   const dispatch = useAppDispatch();
@@ -69,6 +71,30 @@ const CreateMealPrepPlanInterface = () => {
       id: index + 1,
     })
   );
+
+  const onCreateMealPrepPlanSubmit = (e: React.SyntheticEvent) => {
+    e.preventDefault();
+    if (
+      numberOfInstanceTemplates !==
+      templateMealPrepPlan.instanceTemplatesTimings.length
+    ) {
+      dispatch(changeShowGeneralModal(false));
+      dispatch(changeShowFormModal(true));
+      dispatch(
+        setTemplateModalMessage("Please verify the Meal Prep Plan Timings!")
+      );
+    } else if (
+      numberOfInstanceTemplates ===
+      templateMealPrepPlan.instanceTemplatesTimings.length
+    ) {
+      dispatch(
+        createMealPrepPlan({
+          templateMealPrepPlan: templateMealPrepPlan,
+          userId: profile.id,
+        })
+      );
+    }
+  };
 
   const handleUpdateArrayEntities = (
     entityIds: string[] = [],
@@ -279,55 +305,58 @@ const CreateMealPrepPlanInterface = () => {
             }
             style={{ backgroundColor: "#42171C" }}
           >
-            <h3 style={{ color: "#DDD9D5" }}>Meal Prep Timing:</h3>
-            <ul className={createToolStyles.createInterfaceDayTemplateRecipes}>
+            <h3 style={{ color: "#DDD9D5" }}>Meal Prep Timings:</h3>
+            <ul className={createToolStyles.createInterfaceMealPrepPlanTimings}>
               {numberOfInstanceTemplatesIterable.map(
                 (instanceTemplateOption) => {
                   return (
-                    <li key={instanceTemplateOption.id}>
+                    <li
+                      key={instanceTemplateOption.id}
+                      className={
+                        createToolStyles.createInterfaceMealPrepPlanTimingContainer
+                      }
+                    >
+                      <WeekdayFormControl
+                        labelContent="Weekday:"
+                        onEntityPropertyValueChange={(weekday: string) =>
+                          dispatch(
+                            updateInstanceTemplatesTiming({
+                              index: instanceTemplateOption.id - 1,
+                              load: { key: "weekday", value: weekday },
+                            })
+                          )
+                        }
+                        currentEntityValue={
+                          templateMealPrepPlan.instanceTemplatesTimings[
+                            instanceTemplateOption.id - 1
+                          ]?.weekday
+                        }
+                        fontSize={28}
+                      />
                       <TextFormControl
                         direction="row"
                         entityProperty={
-                          templateMealPrepPlan.instanceTemplatesTimings &&
                           templateMealPrepPlan.instanceTemplatesTimings[
                             instanceTemplateOption.id - 1
-                          ] instanceof Date
-                            ? templateMealPrepPlan.instanceTemplatesTimings[
-                                instanceTemplateOption.id - 1
-                              ]
-                                .toISOString()
-                                .slice(0, 16)
-                            : ""
+                          ]?.sessionStartingTime
                         }
                         labelColor="#DDD9D5"
-                        labelContent={`Number #${instanceTemplateOption.id} Instance Timing:`}
-                        onEntityPropertyValueChange={(e) => {
-                          const newInstanceTemplateTimings = [
-                            ...(templateMealPrepPlan.instanceTemplatesTimings as Date[]),
-                          ];
-
-                          const newValue = e.target.value
-                            ? new Date(e.target.value)
-                            : new Date();
-
-                          newInstanceTemplateTimings[
-                            instanceTemplateOption.id - 1
-                          ] = newValue;
-
+                        labelContent="Session Starting Time:"
+                        onEntityPropertyValueChange={(e) =>
                           dispatch(
-                            updateTemplateMealPrepPlan({
-                              key: "instanceTemplatesTimings",
-                              value: newInstanceTemplateTimings,
+                            updateInstanceTemplatesTiming({
+                              index: instanceTemplateOption.id - 1,
+                              load: {
+                                key: "sessionStartingTime",
+                                value: e.target.value,
+                              },
                             })
-                          );
-                        }}
+                          )
+                        }
                         required={true}
-                        type="datetime-local"
+                        type="time"
                         inputHeight={36}
                         labelFontSize={28}
-                        backgroundColor="#012433"
-                        border={"1.5px solid #120a06"}
-                        padding={16}
                       />
                     </li>
                   );
@@ -348,15 +377,7 @@ const CreateMealPrepPlanInterface = () => {
             loadingCreateMealPrepPlan === "PENDING" ||
             loadingCloudinaryImage === "PENDING"
           }
-          onClickFunction={(e) => {
-            e.preventDefault();
-            dispatch(
-              createMealPrepPlan({
-                templateMealPrepPlan: templateMealPrepPlan,
-                userId: profile.id,
-              })
-            );
-          }}
+          onClickFunction={(e) => onCreateMealPrepPlanSubmit(e)}
         />
       </form>
     </section>

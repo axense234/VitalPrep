@@ -1,4 +1,4 @@
-import { DayTemplate, Macros, MealPrepPlan } from "@prisma/client";
+import { Macros, MealPrepPlan, MealPrepPlanTiming } from "@prisma/client";
 import IngredientTemplate from "./IngredientTemplate";
 import RecipeTemplate from "./RecipeTemplate";
 import UtensilTemplate from "./UtensilTemplate";
@@ -9,6 +9,12 @@ type OptionalMealPrepPlan<T> = {
   [K in keyof T]?: T[K];
 };
 
+type OptionalMealPrepTiming<T> = {
+  [K in keyof T]?: T[K];
+};
+
+type MealPrepTimingTemplate = OptionalMealPrepTiming<MealPrepPlanTiming>;
+
 type MealPrepPlanTemplate = OptionalMealPrepPlan<MealPrepPlan> & {
   instanceTemplates: string[] | InstanceTemplateTemplate[];
   macros?: Macros;
@@ -16,6 +22,7 @@ type MealPrepPlanTemplate = OptionalMealPrepPlan<MealPrepPlan> & {
   utensils?: UtensilTemplate[];
   recipes?: RecipeTemplate[];
   dayTemplates?: DayTemplateTemplate[];
+  instanceTemplatesTimings: MealPrepTimingTemplate[];
 };
 
 export default MealPrepPlanTemplate;

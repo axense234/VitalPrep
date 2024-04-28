@@ -26,6 +26,7 @@ import EntityQueryValues from "./core/types/entity/EntityQueryValues";
 import EntitySortingOptions from "./core/types/entity/EntitySortingOptions";
 import MealPrepLogTemplate from "./core/types/entity/mutation/MealPrepLogTemplate";
 import FAQPageSection from "./core/types/FAQPageSection";
+import UserType from "./core/types/entity/UserType";
 
 export const homePageUrl = "/home";
 export const sitePhoneNumber = "0754 189 293(fake)";
@@ -567,7 +568,7 @@ export const createToolOptions: CreateToolOption[] = [
   },
 ];
 
-export const defaultProfile = {
+export const defaultProfile: UserType = {
   id: "",
   username: "",
   email: "",
@@ -589,6 +590,7 @@ export const defaultProfile = {
     notificationStyle: "default",
   },
   notificationSettingsId: "",
+  mealPrepPlanInUseId: "",
 };
 
 export const defaultTemplateProfile = {
@@ -678,7 +680,6 @@ export const defaultTemplateMealPrepPlan: MealPrepPlanTemplate = {
   name: "Cool Meals Plan",
   instanceTemplates: [],
   imageUrl: defaultMealPrepPlanImageUrl,
-  activated: false,
   instanceTemplatesTimings: [],
 };
 
@@ -747,6 +748,8 @@ export const homeCardsContent: HomeCardContent[] = [
     backgroundColor: "#421d17",
   },
 ];
+
+export const weekdayFormControlContent = defaultCreateDayTemplateImageUrls;
 
 export const pageLinks: PageLink[] = [
   {

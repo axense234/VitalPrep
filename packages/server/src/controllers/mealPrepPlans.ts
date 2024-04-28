@@ -4,9 +4,9 @@ import { Response, Request } from "express";
 import { StatusCodes } from "http-status-codes";
 // Prisma
 import { InstanceTemplateClient, MealPrepPlanClient } from "../db/postgres";
-import { InstanceTemplate, MealPrepPlan, Prisma } from "@prisma/client";
+import { InstanceTemplate, MealPrepPlanTiming, Prisma } from "@prisma/client";
 // Utils
-import { deleteCache, getOrSetCache, setCache } from "../utils/redis";
+import { deleteCache, setCache } from "../utils/redis";
 
 type GetAllMealPrepPlansQueryObject = {
   userId?: string;
@@ -227,12 +227,25 @@ const createMealPrepPlan = async (req: Request, res: Response) => {
     });
   }
 
-  if (!mealPrepPlanBody.instanceTemplatesTimings) {
+  if (mealPrepPlanBody.instanceTemplatesTimings.length < 1) {
     return res.status(StatusCodes.BAD_REQUEST).json({
       message: "Invalid instance templates timings!",
       mealPrepPlan: {},
     });
   }
+
+  const instanceTemplatesTimingsFromRequestBody =
+    mealPrepPlanBody.instanceTemplatesTimings as MealPrepPlanTiming[];
+  delete mealPrepPlanBody.instanceTemplatesTimings;
+
+  instanceTemplatesTimingsFromRequestBody.forEach((instanceTemplateTiming) => {
+    if (!instanceTemplateTiming?.sessionStartingTime) {
+      return res.status(StatusCodes.BAD_REQUEST).json({
+        message: "Please choose appropiate times for the instance timings!",
+        mealPrepPlan: {},
+      });
+    }
+  });
 
   const instanceTemplatesIds = mealPrepPlanBody.instanceTemplates as string[];
 
@@ -292,6 +305,9 @@ const createMealPrepPlan = async (req: Request, res: Response) => {
   const createdMealPrepPlan = await MealPrepPlanClient.create({
     data: {
       ...mealPrepPlanBody,
+      instanceTemplatesTimings: {
+        createMany: { data: instanceTemplatesTimingsFromRequestBody },
+      },
       instanceTemplates: {
         connect: instanceTemplatesIds.map((instanceTemplate) => ({
           id: instanceTemplate,
@@ -324,6 +340,7 @@ const createMealPrepPlan = async (req: Request, res: Response) => {
     include: {
       macros: true,
       instanceTemplates: true,
+      instanceTemplatesTimings: true,
       user: true,
     },
   });
@@ -334,6 +351,8 @@ const createMealPrepPlan = async (req: Request, res: Response) => {
       mealPrepPlan: {},
     });
   }
+
+  console.log(createdMealPrepPlan);
 
   await deleteCache(`mealPrepPlans`);
   await deleteCache(`${createdMealPrepPlan.userId}:mealPrepPlans`);

@@ -26,6 +26,7 @@ import {
   updateUser,
   changeVerifiedPassword,
   createCloudinaryImage,
+  setTypeOfUpdateAccountQuery,
 } from "@/redux/slices/generalSlice";
 
 const AccountSettings = () => {
@@ -62,6 +63,7 @@ const AccountSettings = () => {
       dispatch(changeShowFormModal(true));
       dispatch(setTemplateModalMessage("Passwords must match!"));
     } else if (templateProfile.password === verifiedPassword) {
+      dispatch(setTypeOfUpdateAccountQuery("account"));
       dispatch(
         updateUser({ userTemplate: templateProfile, typeOfUpdate: "account" })
       );

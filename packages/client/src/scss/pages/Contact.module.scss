@@ -11,12 +11,7 @@
     width: 100%;
     text-align: center;
     color: getColor("black-100-1");
-    letter-spacing: 0.5rem;
-    text-shadow:
-      $titleOutlineNegativeCoeficient $titleOutlineNegativeCoeficient 0 black,
-      $titleOutlinePozitiveCoeficient $titleOutlineNegativeCoeficient 0 black,
-      $titleOutlineNegativeCoeficient $titleOutlinePozitiveCoeficient 0 black,
-      $titleOutlinePozitiveCoeficient $titleOutlinePozitiveCoeficient 0 black;
+    letter-spacing: 0.25rem;
   }
 }
 

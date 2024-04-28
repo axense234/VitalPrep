@@ -16,6 +16,7 @@ import {
   selectLoadingUpdateProfile,
   selectTemplateImageUrl,
   selectTemplateProfile,
+  setTypeOfUpdateAccountQuery,
   updateTemplateProfileNotificationSettings,
   updateUser,
 } from "@/redux/slices/generalSlice";
@@ -111,14 +112,17 @@ const NotificationSettings = () => {
             loadingCloudinaryImage === "PENDING" ||
             loadingUpdateProfile === "PENDING"
           }
-          onClickFunction={() =>
-            dispatch(
-              updateUser({
-                userTemplate: templateProfile,
-                typeOfUpdate: "notification",
-              })
-            )
-          }
+          onClickFunction={() => {
+            {
+              dispatch(setTypeOfUpdateAccountQuery("notification"));
+              dispatch(
+                updateUser({
+                  typeOfUpdate: "notification",
+                  userTemplate: templateProfile,
+                })
+              );
+            }
+          }}
         />
       </form>
     </section>

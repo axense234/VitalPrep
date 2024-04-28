@@ -21,7 +21,8 @@ export default interface TextFormControlProps {
     | "number"
     | "url"
     | "datetime-local"
-    | "date";
+    | "date"
+    | "time";
   required: boolean;
 
   entityProperty: string | number | undefined | Date;

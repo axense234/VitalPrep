@@ -4,6 +4,9 @@ import createLogContentStyles from "../../../scss/pages/CreateLog.module.scss";
 // Components
 import SelectFormControl from "@/components/shared/form/SelectFormControl";
 import TextFormControl from "@/components/shared/form/TextFormControl";
+import ImageFormControl from "@/components/shared/form/ImageFormControl";
+import PrimaryButton from "@/components/shared/PrimaryButton";
+import PopupModal from "@/components/shared/modals/PopupModal";
 // Data
 import {
   defaultEntityQueryValues,
@@ -32,12 +35,9 @@ import {
   selectTemplateMealPrepLog,
   updateTemplateMealPrepLog,
 } from "@/redux/slices/mealPrepLogsSlice";
+import { updateLoadingCreateIngredient } from "@/redux/slices/ingredientsSlice";
 // React
 import { useEffect } from "react";
-import ImageFormControl from "@/components/shared/form/ImageFormControl";
-import PrimaryButton from "@/components/shared/PrimaryButton";
-import PopupModal from "@/components/shared/modals/PopupModal";
-import { updateLoadingCreateIngredient } from "@/redux/slices/ingredientsSlice";
 
 const CreateLogContent = () => {
   const dispatch = useAppDispatch();

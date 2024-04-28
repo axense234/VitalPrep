@@ -1,5 +1,5 @@
 // React
-import { ChangeEventHandler, FC } from "react";
+import { FC } from "react";
 // SCSS
 import formControlsStyles from "../../../scss/components/others/FormControls.module.scss";
 // Types

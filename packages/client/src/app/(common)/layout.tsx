@@ -19,6 +19,7 @@ import { LineElement, PointElement, BarElement, ArcElement } from "chart.js";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 
 import { Chart } from "chart.js/auto";
+import ActiveMealPrepPlan from "@/components/shared/ActiveMealPrepPlan";
 
 const SpecialLayout = ({ children }: { children: React.ReactNode }) => {
   const dispatch = useAppDispatch();
@@ -52,6 +53,7 @@ const SpecialLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       <Navbar />
+      <ActiveMealPrepPlan />
       <Sidebar />
       <PopupModal
         modalColor="#cfbea7"

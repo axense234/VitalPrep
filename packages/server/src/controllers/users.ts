@@ -94,8 +94,11 @@ const getUserById = async (req: Request, res: Response) => {
 const updateUserById = async (req: Request, res: Response) => {
   const { userId } = req.params;
   const userBody = req.body;
-  const { accountProfileModifications, accountNotificationModifications } =
-    req.query;
+  const {
+    accountProfileModifications,
+    accountNotificationModifications,
+    accountMealPrepPlanInUseIdModifications,
+  } = req.query;
 
   if (!userId) {
     return res
@@ -118,7 +121,11 @@ const updateUserById = async (req: Request, res: Response) => {
     console.log(response);
   }
 
-  if (accountProfileModifications || accountNotificationModifications) {
+  if (
+    accountProfileModifications ||
+    accountNotificationModifications ||
+    accountMealPrepPlanInUseIdModifications
+  ) {
     delete userBody?.ingredients;
     delete userBody?.utensils;
     delete userBody?.recipes;

@@ -18,6 +18,8 @@ model User {
   notificationSettings   NotificationSettings @relation(fields: [notificationSettingsId], references: [id], onDelete: Cascade)
   notificationSettingsId String               @unique
 
+  mealPrepPlanInUseId String @default("")
+
   utensils          Utensil[]
   ingredients       Ingredient[]
   recipes           Recipe[]
@@ -57,10 +59,9 @@ model MealPrepLog {
 }
 
 model MealPrepPlan {
-  id        String  @id @default(uuid())
-  name      String  @default("Meal Prep Plan")
-  imageUrl  String  @default("https://res.cloudinary.com/birthdayreminder/image/upload/v1708851067/VitalPrep/Default_Day_Instance_Image_Plan_obbwd9.jpg")
-  activated Boolean @default(true)
+  id       String @id @default(uuid())
+  name     String @default("Meal Prep Plan")
+  imageUrl String @default("https://res.cloudinary.com/birthdayreminder/image/upload/v1708851067/VitalPrep/Default_Day_Instance_Image_Plan_obbwd9.jpg")
 
   ingredients       Ingredient[]
   utensils          Utensil[]
@@ -68,13 +69,21 @@ model MealPrepPlan {
   dayTemplates      DayTemplate[]
   instanceTemplates InstanceTemplate[]
 
-  instanceTemplatesTimings DateTime[]
+  instanceTemplatesTimings MealPrepPlanTiming[]
 
   macros   Macros @relation(fields: [macrosId], references: [id], onDelete: Cascade)
   macrosId String @unique
 
   user   User?   @relation(fields: [userId], references: [id])
   userId String?
+}
+
+model MealPrepPlanTiming {
+  id                  String        @id @default(uuid())
+  weekday             String
+  sessionStartingTime String        @default("12:00")
+  mealPrepPlan        MealPrepPlan? @relation(fields: [mealPrepPlanId], references: [id])
+  mealPrepPlanId      String?
 }
 
 model InstanceTemplate {

@@ -71,7 +71,7 @@
   @include flexCenter(column);
   width: 100%;
   align-items: flex-start;
-  gap: 16px;
+  gap: 1rem;
 
   padding: 1rem;
   border: 1.5px solid getColor("black-100-1");
@@ -79,16 +79,37 @@
   h3 {
     font-size: 28px;
   }
+
+  li {
+    @include flexCenter(column);
+    width: 100%;
+  }
 }
 
 .createInterfaceDayTemplateRecipes {
   @include flexCenter(column);
   list-style: none;
   width: 100%;
-  gap: 16px;
+  gap: 1rem;
 
   li {
-    @include flexCenter(row);
+    @include flexCenter(column);
     width: 100%;
   }
+}
+
+.createInterfaceMealPrepPlanTimings {
+  @include flexCenter(column);
+  list-style: none;
+  width: 100%;
+  gap: 3rem;
+}
+
+.createInterfaceMealPrepPlanTimingContainer {
+  @include flexCenter(column);
+  width: 100%;
+  padding: 1rem;
+  gap: 2rem;
+  background-color: getColor("primary-1");
+  border: 1px solid getColor("black-100-1");
 }

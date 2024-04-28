@@ -27,6 +27,7 @@ type ObjectKeyValueType = {
 };
 
 type LoadingStateType = "IDLE" | "PENDING" | "SUCCEDED" | "FAILED";
+type TypeOfUpdateAccountQuery = "account" | "notification" | "mealPrepPlanUsed";
 
 type InitialStateType = {
   // General
@@ -45,6 +46,8 @@ type InitialStateType = {
 
   // Query
   entityQueryValues: EntityQueryValues;
+  typeOfUpdateAccountQuery: TypeOfUpdateAccountQuery;
+
   // Auth
   profile: UserType;
   templateProfile: UserTemplate;
@@ -98,6 +101,7 @@ const initialState: InitialStateType = {
 
   // Query
   entityQueryValues: defaultEntityQueryValues,
+  typeOfUpdateAccountQuery: "account",
 
   // Auth
   profile: defaultProfile,
@@ -216,17 +220,20 @@ export const signupUser = createAsyncThunk<User | AxiosError, UserTemplate>(
 
 export const updateUser = createAsyncThunk<
   User | AxiosError,
-  { userTemplate: UserTemplate; typeOfUpdate: "account" | "notification" }
+  { userTemplate: UserTemplate; typeOfUpdate: TypeOfUpdateAccountQuery }
 >("general/updateUser", async ({ userTemplate, typeOfUpdate }) => {
   try {
     let requestParams: {
       accountProfileModifications?: boolean;
       accountNotificationModifications?: boolean;
+      accountMealPrepPlanInUseIdModifications?: boolean;
     } = {};
     if (typeOfUpdate === "account") {
       requestParams.accountProfileModifications = true;
     } else if (typeOfUpdate === "notification") {
       requestParams.accountNotificationModifications = true;
+    } else if (typeOfUpdate === "mealPrepPlanUsed") {
+      requestParams.accountMealPrepPlanInUseIdModifications = true;
     }
 
     const { data } = await axiosInstance.patch(
@@ -276,6 +283,12 @@ const generalSlice = createSlice({
   name: "general",
   initialState,
   reducers: {
+    setTypeOfUpdateAccountQuery(
+      state,
+      action: PayloadAction<TypeOfUpdateAccountQuery>
+    ) {
+      state.typeOfUpdateAccountQuery = action.payload;
+    },
     changeVerifiedPassword(state, action: PayloadAction<string>) {
       state.verifiedPassword = action.payload;
     },
@@ -461,7 +474,13 @@ const generalSlice = createSlice({
       .addCase(updateUser.pending, (state, action) => {
         state.loadingUpdateProfile = "PENDING";
         state.showGeneralModal = true;
-        state.templateModalMessage = `Trying to update your account`;
+        if (state.typeOfUpdateAccountQuery === "account") {
+          state.templateModalMessage = `Trying to update your account details settings`;
+        } else if (state.typeOfUpdateAccountQuery === "mealPrepPlanUsed") {
+          state.templateModalMessage = `Trying to update your used Meal Prep Plan`;
+        } else if (state.typeOfUpdateAccountQuery === "notification") {
+          state.templateModalMessage = `Trying to update your account notification settings`;
+        }
         state.isModalUsedWhenLoading = true;
       })
       .addCase(updateUser.fulfilled, (state, action) => {
@@ -476,7 +495,13 @@ const generalSlice = createSlice({
           state.profile = user;
           state.showGeneralModal = true;
           state.loadingUpdateProfile = "SUCCEDED";
-          state.templateModalMessage = `Successfully updated user ${user.username}'s settings`;
+          if (state.typeOfUpdateAccountQuery === "account") {
+            state.templateModalMessage = `Successfully updated user ${user.username}'s account settings.`;
+          } else if (state.typeOfUpdateAccountQuery === "mealPrepPlanUsed") {
+            state.templateModalMessage = `Updated user ${user.username}'s used Meal Prep Plan successfully.`;
+          } else if (state.typeOfUpdateAccountQuery === "notification") {
+            state.templateModalMessage = `Successfully updated user ${user.username}'s account notification settings.`;
+          }
         } else {
           const errorData = axiosError?.response?.data as { message: string };
           state.loadingUpdateProfile = "FAILED";
@@ -620,6 +645,9 @@ export const selectVerifiedPassword = (state: State) =>
 export const selectLoadingUpdateProfile = (state: State) =>
   state.general.loadingUpdateProfile;
 
+export const selectTypeOfUpdateAccountQuery = (state: State) =>
+  state.general.typeOfUpdateAccountQuery;
+
 export const {
   changeIsSidebarOpened,
   updateTemplateProfile,
@@ -637,6 +665,7 @@ export const {
   changeShowProfileEmail,
   setTemplateProfile,
   changeVerifiedPassword,
+  setTypeOfUpdateAccountQuery,
 } = generalSlice.actions;
 
 export default generalSlice.reducer;

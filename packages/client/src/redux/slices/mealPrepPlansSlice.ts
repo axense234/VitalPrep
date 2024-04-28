@@ -11,12 +11,12 @@ import {
   createSlice,
 } from "@reduxjs/toolkit";
 import MealPrepPlanTemplate from "@/core/types/entity/mutation/MealPrepPlanTemplate";
+import EntityQueryValues from "@/core/types/entity/EntityQueryValues";
 // Prisma
-import { MealPrepPlan } from "@prisma/client";
+import { MealPrepPlan, MealPrepPlanTiming } from "@prisma/client";
 // Axios
 import { AxiosError } from "axios";
 import axiosInstance from "@/utils/axios";
-import EntityQueryValues from "@/core/types/entity/EntityQueryValues";
 
 type ObjectKeyValueType = {
   key: string;
@@ -135,6 +135,19 @@ const mealPrepPlansSlice = createSlice({
   name: "mealPrepPlans",
   initialState,
   reducers: {
+    updateInstanceTemplatesTiming(
+      state,
+      action: PayloadAction<{ load: ObjectKeyValueType; index: number }>
+    ) {
+      state.templateMealPrepPlan.instanceTemplatesTimings[
+        action.payload.index
+      ] = {
+        ...state.templateMealPrepPlan.instanceTemplatesTimings[
+          action.payload.index
+        ],
+        [action.payload.load.key]: action.payload.load.value,
+      };
+    },
     updateLoadingGetUserMealPrepPlans(
       state,
       action: PayloadAction<LoadingStateType>
@@ -243,6 +256,7 @@ export const {
   updateLoadingCreateMealPrepPlan,
   updateNumberOfInstanceTemplates,
   updateLoadingGetUserMealPrepPlans,
+  updateInstanceTemplatesTiming,
 } = mealPrepPlansSlice.actions;
 
 export default mealPrepPlansSlice.reducer;
