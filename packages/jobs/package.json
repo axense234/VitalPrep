@@ -1,0 +1,21 @@
+{
+  "name": "jobs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "node handleMealPrepSessionReminders.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.6.8",
+    "dotenv": "^16.4.5",
+    "onesignal-node": "^3.4.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.5"
+  }
+}
