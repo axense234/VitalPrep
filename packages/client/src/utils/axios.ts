@@ -5,7 +5,7 @@ import { baseServerUrl } from "@/config";
 
 const axiosInstance = axios.create({
   baseURL: baseServerUrl,
-  withCredentials: true,
+  withCredentials: false,
 });
 
 export default axiosInstance;

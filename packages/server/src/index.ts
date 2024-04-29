@@ -39,7 +39,7 @@ app.use(
       process.env.CORS_TESTING_CLIENT_ORIGIN as string,
       process.env.CORS_PRODUCTION_CLIENT_ORIGIN as string,
     ],
-    credentials: true,
+    credentials: false,
   })
 );
 
