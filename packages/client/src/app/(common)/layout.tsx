@@ -5,6 +5,7 @@ import Navbar from "@/components/shared/Navbar";
 import Footer from "@/components/shared/Footer";
 import Sidebar from "@/components/shared/Sidebar";
 import PopupModal from "@/components/shared/modals/PopupModal";
+import ActiveMealPrepPlan from "@/components/shared/ActiveMealPrepPlan";
 // Redux
 import {
   logoutUser,
@@ -17,9 +18,11 @@ import { useEffect, useRef } from "react";
 // ChartTS
 import { LineElement, PointElement, BarElement, ArcElement } from "chart.js";
 import ChartDataLabels from "chartjs-plugin-datalabels";
-
 import { Chart } from "chart.js/auto";
-import ActiveMealPrepPlan from "@/components/shared/ActiveMealPrepPlan";
+// Helpers
+import initializeOneSignal from "@/helpers/initializeOneSignal";
+// Next
+import Script from "next/script";
 
 const SpecialLayout = ({ children }: { children: React.ReactNode }) => {
   const dispatch = useAppDispatch();
@@ -33,6 +36,10 @@ const SpecialLayout = ({ children }: { children: React.ReactNode }) => {
     ArcElement,
     ChartDataLabels,
   ]);
+
+  useEffect(() => {
+    initializeOneSignal();
+  }, []);
 
   useEffect(() => {
     if (isJWTInvalid) {
@@ -52,6 +59,7 @@ const SpecialLayout = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <>
+      <Script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" defer />
       <Navbar />
       <ActiveMealPrepPlan />
       <Sidebar />

@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
+  reactStrictMode: false,
   distDir: "build",
   compiler: {
     removeConsole: process.env.NODE_ENV !== "development",

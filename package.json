@@ -22,5 +22,8 @@
     "eslint-plugin-prettier": "^5.1.3",
     "lerna": "^8.1.2",
     "prettier": "^3.2.5"
+  },
+  "dependencies": {
+    "react-onesignal": "^3.0.1"
   }
 }
