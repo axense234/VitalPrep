@@ -43,6 +43,9 @@ app.use(
   })
 );
 
+console.log(process.env.CORS_TESTING_CLIENT_ORIGIN as string);
+console.log(process.env.CORS_PRODUCTION_CLIENT_ORIGIN as string);
+
 app.use(helmet());
 
 app.use(morgan("dev"));
