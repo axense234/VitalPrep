@@ -39,7 +39,7 @@ const SpecialLayout = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     initializeOneSignal();
-  });
+  }, []);
 
   useEffect(() => {
     if (isJWTInvalid) {
