@@ -10,4 +10,13 @@ const initializeOneSignal = async () => {
   });
 };
 
-export default initializeOneSignal;
+const loginOneSignal = async (userId: string) => {
+  console.log(`logged in one signal: ${userId}`);
+  await OneSignal.login(userId);
+};
+
+const logoutOneSignal = async () => {
+  await OneSignal.logout();
+};
+
+export { loginOneSignal, logoutOneSignal, initializeOneSignal };

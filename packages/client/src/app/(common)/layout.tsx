@@ -10,6 +10,9 @@ import ActiveMealPrepPlan from "@/components/shared/ActiveMealPrepPlan";
 import {
   logoutUser,
   selectInvalidJWT,
+  selectLoadingGetOAuthProfile,
+  selectLoadingGetProfile,
+  selectProfile,
   signupUserOAuth,
 } from "@/redux/slices/generalSlice";
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
@@ -20,7 +23,10 @@ import { LineElement, PointElement, BarElement, ArcElement } from "chart.js";
 import ChartDataLabels from "chartjs-plugin-datalabels";
 import { Chart } from "chart.js/auto";
 // Helpers
-import initializeOneSignal from "@/helpers/initializeOneSignal";
+import {
+  initializeOneSignal,
+  loginOneSignal,
+} from "@/helpers/initializeOneSignal";
 // Next
 import Script from "next/script";
 
@@ -28,6 +34,10 @@ const SpecialLayout = ({ children }: { children: React.ReactNode }) => {
   const dispatch = useAppDispatch();
   const isJWTInvalid = useAppSelector(selectInvalidJWT);
   const hasEffectRun = useRef(false);
+
+  const profile = useAppSelector(selectProfile);
+  const loadingGetProfile = useAppSelector(selectLoadingGetProfile);
+  const loadingGetOAuthProfile = useAppSelector(selectLoadingGetOAuthProfile);
 
   Chart.register([
     LineElement,
@@ -38,8 +48,22 @@ const SpecialLayout = ({ children }: { children: React.ReactNode }) => {
   ]);
 
   useEffect(() => {
-    initializeOneSignal();
+    const initialize = async () => {
+      try {
+        await initializeOneSignal();
+      } catch (error) {
+        console.error("Error initializing OneSignal:", error);
+      }
+    };
+
+    initialize();
   }, []);
+
+  useEffect(() => {
+    if (profile.id) {
+      loginOneSignal(profile.id);
+    }
+  }, [profile.id, loadingGetProfile, loadingGetOAuthProfile]);
 
   useEffect(() => {
     if (isJWTInvalid) {
@@ -59,7 +83,6 @@ const SpecialLayout = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <>
-      <Script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" defer />
       <Navbar />
       <ActiveMealPrepPlan />
       <Sidebar />
@@ -71,6 +94,7 @@ const SpecialLayout = ({ children }: { children: React.ReactNode }) => {
       />
       {children}
       <Footer />
+      <Script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async />
     </>
   );
 };

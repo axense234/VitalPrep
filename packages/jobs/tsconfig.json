@@ -10,5 +10,6 @@
       "skipLibCheck": true,
       "noImplicitAny": false
     },
-    "exclude": ["node_modules",".env"]
+    "include": ["src/*.ts"],
+    "exclude": ["node_modules",".env","dist"]
   }
