@@ -58,7 +58,7 @@ const NotificationSettings = () => {
             dispatch(
               updateTemplateProfileNotificationSettings({
                 key: "allowedNotifications",
-                value: !Boolean(e.target.value),
+                value: Boolean(e.target.value),
               })
             );
           }}

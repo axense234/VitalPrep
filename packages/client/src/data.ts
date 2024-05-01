@@ -600,6 +600,11 @@ export const defaultTemplateProfile = {
   imageUrl:
     "https://res.cloudinary.com/birthdayreminder/image/upload/v1708852560/VitalPrep/defaultprofileimage_tzrh3w.jpg",
   age: 8,
+  notificationSettings: {
+    allowedNotifications: true,
+    notificationImageUrl: defaultInstanceTemplateImageUrl,
+    notificationStyle: "default",
+  },
 };
 
 export const defaultTemplateIngredient: IngredientTemplate = {

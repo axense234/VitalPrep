@@ -238,6 +238,8 @@ export const updateUser = createAsyncThunk<
     } else if (typeOfUpdate === "mealPrepPlanUsed") {
       requestParams.accountMealPrepPlanInUseIdModifications = true;
     }
+    // @ts-ignore
+    console.log(userTemplate.notificationSettings);
 
     const { data } = await axiosInstance.patch(
       `/users/update/${userTemplate.id}`,

@@ -24,9 +24,13 @@ const handleEveryHourReminders = async () => {
     const mealPrepPlanInstanceTemplatesTimings =
       userMealPrepPlan.instanceTemplatesTimings;
 
+    const mealPrepPlanInstanceTemplates = userMealPrepPlan.instanceTemplates;
+
+    console.log(mealPrepPlanInstanceTemplates);
+
     console.log(mealPrepPlanInstanceTemplatesTimings);
 
-    mealPrepPlanInstanceTemplatesTimings.forEach(async (timing) => {
+    mealPrepPlanInstanceTemplatesTimings.forEach(async (timing, index) => {
       const currentDayOfTheWeekIndex = new Date().getDay();
       const currentDayOfTheWeekString = days[currentDayOfTheWeekIndex];
 
@@ -37,9 +41,19 @@ const handleEveryHourReminders = async () => {
         console.log(currentHour, timingHour);
 
         if (currentHour === timingHour - everyHourReminderInterval) {
-          await sendNotification(user.id, user.username, "preSessionReminder");
+          await sendNotification(
+            user.id,
+            user.username,
+            "preSessionReminder",
+            mealPrepPlanInstanceTemplates[0]?.id
+          );
         } else if (currentHour === timingHour + everyHourReminderInterval) {
-          await sendNotification(user.id, user.username, "postSessionReminder");
+          await sendNotification(
+            user.id,
+            user.username,
+            "postSessionReminder",
+            mealPrepPlanInstanceTemplates[0]?.id
+          );
         }
       }
     });
