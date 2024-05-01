@@ -14,7 +14,7 @@ type InstanceTemplateTemplate = OptionalInstanceTemplate<InstanceTemplate> & {
   ingredients?: IngredientTemplate[];
   utensils?: UtensilTemplate[];
   recipes?: RecipeTemplate[];
-  mealPrepPlans: MealPrepPlan[];
+  mealPrepPlans?: MealPrepPlan[];
 };
 
 export default InstanceTemplateTemplate;

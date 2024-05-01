@@ -652,7 +652,6 @@ export const defaultTemplateDayTemplate: DayTemplateTemplate = {
     proteinAmount: 20,
     fatsAmount: 2,
   },
-  mealPrepPlans: [],
 };
 
 export const defaultTemplateInstanceTemplate: InstanceTemplateTemplate = {
@@ -660,7 +659,6 @@ export const defaultTemplateInstanceTemplate: InstanceTemplateTemplate = {
   dayTemplates: [],
   imageUrl: defaultInstanceTemplateImageUrl,
   coverage: 0,
-  mealPrepPlans: [],
 };
 
 export const defaultTemplateMealPrepLog: MealPrepLogTemplate = {

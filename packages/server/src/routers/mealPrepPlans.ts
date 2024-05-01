@@ -9,6 +9,7 @@ import {
   updateMealPrepPlan,
 } from "../controllers/mealPrepPlans";
 import authenticationMiddleware from "../middleware/authentication";
+import allowRouteUse from "../middleware/adminUse";
 
 const router = express.Router();
 
@@ -16,7 +17,7 @@ router.get("/mealPrepPlans", authenticationMiddleware, getAllMealPrepPlans);
 
 router.get(
   "/:userId/mealPrepPlans/:mealPrepPlanId",
-  authenticationMiddleware,
+  allowRouteUse,
   getMealPrepPlanById
 );
 

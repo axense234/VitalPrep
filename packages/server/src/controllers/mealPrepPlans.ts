@@ -33,6 +33,7 @@ type MealPrepPlansIncludeObject = {
   recipes?: boolean | { include: { macros: boolean } };
   dayTemplates?: boolean | { include: { macros: boolean } };
   instanceTemplates?: boolean | { include: { macros: boolean } };
+  instanceTemplatesTimings?: boolean;
 };
 
 const getAllMealPrepPlans = async (req: Request, res: Response) => {
@@ -129,6 +130,7 @@ const getMealPrepPlanById = async (req: Request, res: Response) => {
     includeDayTemplatesMacros,
     includeInstanceTemplates,
     includeInstanceTemplatesMacros,
+    includeInstanceTemplatesTimings,
   } = req.query;
 
   const includeObject: MealPrepPlansIncludeObject = {};
@@ -179,6 +181,9 @@ const getMealPrepPlanById = async (req: Request, res: Response) => {
   }
   if (includeInstanceTemplatesMacros && includeInstanceTemplates) {
     includeObject.instanceTemplates = { include: { macros: true } };
+  }
+  if (includeInstanceTemplatesTimings) {
+    includeObject.instanceTemplatesTimings = true;
   }
 
   const foundMealPrepPlan = await MealPrepPlanClient.findUnique({

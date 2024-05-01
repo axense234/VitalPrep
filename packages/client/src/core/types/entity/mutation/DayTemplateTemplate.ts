@@ -18,7 +18,7 @@ type DayTemplateTemplate = OptionalDayTemplate<DayTemplate> & {
   ingredients?: IngredientTemplate[];
   utensils?: UtensilTemplate[];
   instanceTemplates?: InstanceTemplate[];
-  mealPrepPlans: MealPrepPlan[];
+  mealPrepPlans?: MealPrepPlan[];
 };
 
 export default DayTemplateTemplate;

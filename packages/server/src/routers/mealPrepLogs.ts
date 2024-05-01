@@ -9,6 +9,7 @@ import {
   updateMealPrepLog,
 } from "../controllers/mealPrepLogs";
 import authenticationMiddleware from "../middleware/authentication";
+import allowRouteUse from "../middleware/adminUse";
 
 const router = express.Router();
 
