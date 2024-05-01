@@ -47,6 +47,27 @@ const ActiveMealPrepPlan = () => {
 
   useEffect(() => {
     if (
+      loadingProfile === "SUCCEDED" &&
+      profile.mealPrepPlanInUseId === "" &&
+      mealPrepPlans.length === 1
+    ) {
+      {
+        dispatch(setTypeOfUpdateAccountQuery("mealPrepPlanUsed"));
+        dispatch(
+          updateUser({
+            typeOfUpdate: "mealPrepPlanUsed",
+            userTemplate: {
+              ...profile,
+              mealPrepPlanInUseId: mealPrepPlans[0].id,
+            },
+          })
+        );
+      }
+    }
+  }, [loadingProfile, profile.mealPrepPlanInUseId, mealPrepPlans, dispatch]);
+
+  useEffect(() => {
+    if (
       loadingGetUserMealPrepPlans === "IDLE" &&
       loadingProfile === "SUCCEDED" &&
       profile.id
@@ -61,16 +82,18 @@ const ActiveMealPrepPlan = () => {
   }, [loadingGetUserMealPrepPlans, loadingProfile, profile.id]);
 
   useEffect(() => {
-    const activeMealPrepPlanContainer =
-      activeMealPrepPlanRef.current as HTMLDivElement;
-    if (showActiveMealPrepPlan) {
-      activeMealPrepPlanContainer.style.transform = "translateX(0%)";
-    } else if (!showActiveMealPrepPlan) {
-      activeMealPrepPlanContainer.style.transform = "translateX(-80%)";
+    if (mealPrepPlans.length >= 1) {
+      const activeMealPrepPlanContainer =
+        activeMealPrepPlanRef.current as HTMLDivElement;
+      if (showActiveMealPrepPlan) {
+        activeMealPrepPlanContainer.style.transform = "translateX(0%)";
+      } else if (!showActiveMealPrepPlan) {
+        activeMealPrepPlanContainer.style.transform = "translateX(-80%)";
+      }
     }
   }, [showActiveMealPrepPlan, setShowActiveMealPrepPlan]);
 
-  if (loadingProfile !== "SUCCEDED" && mealPrepPlans.length > 0) {
+  if (mealPrepPlans.length < 1) {
     return null;
   }
 
