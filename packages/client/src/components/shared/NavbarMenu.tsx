@@ -4,6 +4,7 @@
 import { LuMenuSquare } from "react-icons/lu";
 // React Icons
 import navbarMenuStyles from "../../scss/components/shared/NavbarMenu.module.scss";
+// Redux
 import { useAppDispatch } from "@/hooks/redux";
 import { changeIsSidebarOpened } from "@/redux/slices/generalSlice";
 

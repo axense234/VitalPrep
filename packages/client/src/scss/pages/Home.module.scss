@@ -3,3 +3,111 @@
 .homeContainer {
   @include pageLayout();
 }
+
+.homeSectionsContainer {
+  @include flexCenter(column);
+  width: 100%;
+}
+
+.homeSectionContainer {
+  @include flexCenter(row);
+  width: 100%;
+  height: 55rem;
+  background-position: right;
+  background-color: getColor("primary-3");
+}
+
+.homeSectionContent {
+  @include flexCenter(column);
+  align-items: flex-start;
+  position: relative;
+  width: 60%;
+  height: 100%;
+
+  img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.homeSectionContentWrapper {
+  @include flexCenter(column);
+  align-items: flex-start;
+  height: 100%;
+  width: 65%;
+  gap: 7rem;
+  z-index: 2;
+}
+
+.homeSectionContentDetails {
+  @include flexCenter(column);
+  width: 100%;
+  align-items: flex-start;
+  gap: 5rem;
+
+  p {
+    @include heading("h6", "laptop", "black");
+  }
+}
+
+.homeSectionMiddleContentDetails {
+  @extend .homeSectionContentDetails;
+  padding: 8rem;
+  gap: 7rem;
+}
+
+.homeSectionContentHeader {
+  @include flexCenter(column);
+  width: 100%;
+  align-items: flex-start;
+
+  h1 {
+    @include heading("h1", "laptop", "black");
+    width: 100%;
+  }
+
+  h4 {
+    @include heading("h4", "laptop", "black");
+    width: 100%;
+  }
+}
+
+.homeSectionContentItems {
+  @include flexCenter(row);
+  align-items: flex-start;
+  width: 100%;
+}
+
+.homeSectionContentItem {
+  @include flexCenter(column);
+  justify-content: flex-start;
+  width: 100%;
+  gap: 2rem;
+
+  img {
+    width: 8rem;
+    height: 8rem;
+    position: relative;
+  }
+}
+
+.homeSectionContentItemHeader {
+  @include flexCenter(column);
+  width: 100%;
+  gap: 1rem;
+
+  h4 {
+    @include heading("h4", "laptop", "black");
+    text-align: center;
+  }
+
+  p {
+    @include paragraph("laptop", "black");
+    max-width: 90%;
+    text-align: center;
+  }
+}
+
+.homeSectionContentDescriptions {
+}

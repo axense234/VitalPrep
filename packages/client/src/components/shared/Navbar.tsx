@@ -1,13 +1,13 @@
 // SCSS
 import navbarStyles from "../../scss/components/shared/Navbar.module.scss";
 // Components
-import Logo from "./Logo";
 import NavbarMenu from "./NavbarMenu";
+import NavbarProfile from "./NavbarProfile";
 
 const Navbar = () => {
   return (
     <nav className={navbarStyles.navbarContainer}>
-      <Logo dimensions={100} logoImageUrlIndex={1} />
+      <NavbarProfile />
       <NavbarMenu />
     </nav>
   );

@@ -27,10 +27,87 @@ import EntitySortingOptions from "./core/types/entity/EntitySortingOptions";
 import MealPrepLogTemplate from "./core/types/entity/mutation/MealPrepLogTemplate";
 import FAQPageSection from "./core/types/FAQPageSection";
 import UserType from "./core/types/entity/UserType";
+import HomeSectionContentProps from "./core/interfaces/HomeSectionContentProps";
 
 export const homePageUrl = "/home";
 export const sitePhoneNumber = "0754 189 293(fake)";
 export const siteEmail = "thisemaildoesnotexit@nothing.com";
+
+export const homeSectionsContent: (HomeSectionContentProps & { id: number })[] =
+  [
+    {
+      id: 1,
+      sectionTitle: "Vital Prep",
+      sectionSubTitle: "meal prep helper",
+      contentBackgroundImageSrc:
+        "https://res.cloudinary.com/birthdayreminder/image/upload/v1714932026/VitalPrep/Frame_15hmwkp5_i6n4jw.png",
+      backgroundImageSrc:
+        "https://res.cloudinary.com/birthdayreminder/image/upload/v1714922259/VitalPrep/pre_prepared_meals_pqenm1.png",
+      ctaButtonContent: "Get Started",
+      position: "left",
+      type: "positional",
+      sectionDescription:
+        "VitalPrep is a complex meal prep helper app that helps people create meal prep plans and to follow those respective plans.",
+    },
+    {
+      id: 2,
+      sectionTitle: "Meal Prep",
+      sectionSubTitle: "what is it?",
+      contentBackgroundImageSrc:
+        "https://res.cloudinary.com/birthdayreminder/image/upload/v1714932222/VitalPrep/Group_6LOL_kdbrjk.png",
+      backgroundImageSrc:
+        "https://res.cloudinary.com/birthdayreminder/image/upload/v1714922258/VitalPrep/iamge2_fwhqee.png",
+      ctaButtonContent: "Learn More",
+      position: "right",
+      type: "positional",
+      sectionDescription:
+        "Meal Prep, short for meal preparation, is the practice of planning and preparing meals in advance, typically for a period of several days to a week.",
+    },
+    {
+      id: 3,
+      sectionTitle: "Meal Prep Benefits",
+      sectionSubTitle: "what you want",
+      position: "left",
+      type: "middle",
+      sectionItems: [
+        {
+          id: 1,
+          imageSrc:
+            "https://res.cloudinary.com/birthdayreminder/image/upload/v1714930835/VitalPrep/128x128_fztzec.png",
+          itemDescription:
+            "Meal Prepping saves you time by not having to cook everyday and money since ingredients tend to cost way less compared to other options.",
+          itemTitle: "Money and Time",
+        },
+        {
+          id: 2,
+          imageSrc:
+            "https://res.cloudinary.com/birthdayreminder/image/upload/v1714930846/VitalPrep/128x128_xw9f3j.png",
+          itemDescription:
+            "Meal Prepping tends to use ingredients that are often extremely nutritious with a high satiety index and low calorie density.",
+          itemTitle: "Health",
+        },
+        {
+          id: 3,
+          imageSrc:
+            "https://res.cloudinary.com/birthdayreminder/image/upload/v1714930857/VitalPrep/128x128_qr2440.png",
+          itemDescription:
+            "Meal Prepping leaves you with no worries about food since you have prepared meals available. Cooking in general is a very relaxing activity, reducing stress and helping manage it in the future.",
+          itemTitle: "Stress Reduction",
+        },
+      ],
+    },
+    {
+      id: 4,
+      sectionTitle: "Difficulties?",
+      sectionSubTitle: "we can help",
+      contentBackgroundImageSrc:
+        "https://res.cloudinary.com/birthdayreminder/image/upload/v1714932026/VitalPrep/Frame_15hmwkp5_i6n4jw.png",
+      backgroundImageSrc:
+        "https://res.cloudinary.com/birthdayreminder/image/upload/v1714923610/VitalPrep/iamge5_p2bca4.png",
+      position: "left",
+      type: "descriptionBased",
+    },
+  ];
 
 export const aboutFrontendTechnologies = [
   {
