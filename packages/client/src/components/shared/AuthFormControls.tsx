@@ -56,11 +56,8 @@ export const AuthFormControls: FC<AuthFormControlsProps> = ({ type }) => {
     return (
       <form className={authFormControlsStyles.formContainer}>
         <TextFormControl
-          direction="column"
-          labelColor="#120A06"
           type="text"
           labelContent="Username:"
-          required
           entityProperty={templateProfile.username as string}
           onEntityPropertyValueChange={(e) =>
             dispatch(
@@ -69,11 +66,8 @@ export const AuthFormControls: FC<AuthFormControlsProps> = ({ type }) => {
           }
         />
         <TextFormControl
-          direction="column"
-          labelColor="#120A06"
           type="email"
           labelContent="Email:"
-          required
           entityProperty={templateProfile.email as string}
           onEntityPropertyValueChange={(e) =>
             dispatch(
@@ -82,11 +76,8 @@ export const AuthFormControls: FC<AuthFormControlsProps> = ({ type }) => {
           }
         />
         <TextFormControl
-          direction="column"
-          labelColor="#120A06"
           type="password"
           labelContent="Password:"
-          required
           entityProperty={templateProfile.password as string}
           onEntityPropertyValueChange={(e) =>
             dispatch(
@@ -95,9 +86,7 @@ export const AuthFormControls: FC<AuthFormControlsProps> = ({ type }) => {
           }
         />
         <ImageFormControl
-          labelColor="#120A06"
           labelContent="Profile Image:"
-          direction="column"
           defaultImageUsedUrl={defaultProfileImageUrl}
           entityPropertyLoadingStatus={loadingCloudinaryImage}
           entityProperty={templateProfile.imageUrl as string}
@@ -113,11 +102,8 @@ export const AuthFormControls: FC<AuthFormControlsProps> = ({ type }) => {
           }}
         />
         <TextFormControl
-          direction="column"
-          labelColor="#120A06"
           type="number"
           labelContent="Age:"
-          required={false}
           entityProperty={templateProfile.age as number}
           onEntityPropertyValueChange={(e) =>
             dispatch(
@@ -129,19 +115,15 @@ export const AuthFormControls: FC<AuthFormControlsProps> = ({ type }) => {
           }
         />
         <CheckboxFormControl
-          direction="row"
-          labelColor="#120A06"
           labelContent="Default Plan?:"
+          entityProperty={undefined}
+          onEntityPropertyValueChange={(e) => undefined}
         />
         <ReCAPTCHAControl />
         <PrimaryButton
           type="functional"
           onHoverContent={isUserABot ? "Confirm you are not a robot!" : ""}
-          backgroundColor="#043301"
           content="Sign Up"
-          fontSize={21}
-          height={40}
-          width={128}
           disabled={
             loadingCloudinaryImage === "PENDING" ||
             isRequestPending ||
@@ -158,11 +140,8 @@ export const AuthFormControls: FC<AuthFormControlsProps> = ({ type }) => {
     return (
       <form className={authFormControlsStyles.formContainer}>
         <TextFormControl
-          direction="column"
-          labelColor="#120A06"
           type="email"
           labelContent="Email:"
-          required
           entityProperty={templateProfile.email as string}
           onEntityPropertyValueChange={(e) =>
             dispatch(
@@ -171,11 +150,8 @@ export const AuthFormControls: FC<AuthFormControlsProps> = ({ type }) => {
           }
         />
         <TextFormControl
-          direction="column"
-          labelColor="#120A06"
           type="password"
           labelContent="Password:"
-          required
           entityProperty={templateProfile.password as string}
           onEntityPropertyValueChange={(e) =>
             dispatch(
@@ -185,11 +161,7 @@ export const AuthFormControls: FC<AuthFormControlsProps> = ({ type }) => {
         />
         <PrimaryButton
           type="functional"
-          backgroundColor="#120A06"
           content="Log In"
-          fontSize={21}
-          height={40}
-          width={128}
           disabled={isRequestPending}
           onClickFunction={(e) => {
             e.preventDefault();

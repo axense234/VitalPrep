@@ -712,7 +712,7 @@ export const authFormPageTemplateImageUrls: ImageUrl[] = [
   {
     id: 2,
     imageUrl:
-      "https://res.cloudinary.com/birthdayreminder/image/upload/v1710063057/VitalPrep/bamboo-bamboo-whisk-board-bowls_dehtz1.jpg",
+      "https://res.cloudinary.com/birthdayreminder/image/upload/v1709133342/VitalPrep/wallpaperflare_1_qmx5uv.png",
   },
 ];
 

@@ -1,19 +1,12 @@
 import { ChangeEventHandler } from "react";
 
 export default interface TextFormControlProps {
-  labelColor: "#DDD9D5" | "#120A06";
-  labelContent: string;
+  labelColor?: "#DDD9D5" | "#120A06";
   labelFontSize?: number;
-
   maxInputLength?: number;
-
   inputHeight?: number;
 
-  backgroundColor?: string;
-  border?: string;
-  padding?: number;
-
-  direction: "row" | "column";
+  labelContent: string;
   type:
     | "email"
     | "text"
@@ -23,7 +16,6 @@ export default interface TextFormControlProps {
     | "datetime-local"
     | "date"
     | "time";
-  required: boolean;
 
   entityProperty: string | number | undefined | Date;
   onEntityPropertyValueChange: ChangeEventHandler<HTMLInputElement>;

@@ -2,14 +2,14 @@
 
 .primaryButton {
   @include flexCenter(row);
-  height: $primaryButtonInitialHeight;
-  width: $primaryButtonInitialWidth;
-  font-size: $primaryButtonInitialFontSize;
-  font-family: $primaryButtonInitialFontFamily;
-  color: $primaryButtonInitialColor;
-  font-weight: 400;
-  letter-spacing: 1.5px;
-  border: 1.5px solid getColor("black-100-1");
+  @include heading("h6", "phone", "black");
+  color: getColor("tan-color-extra-light");
+  font-weight: 550;
+  border: 1.5px solid getColor("black-75-1");
+  background-color: getColor("primary-1");
+  border-radius: 10px;
+  padding: 0.5rem 2.5rem;
+
   transition: $crispyTransformTransition;
 
   &:hover {

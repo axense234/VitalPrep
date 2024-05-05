@@ -13,33 +13,18 @@ import { ClockLoader } from "react-spinners";
 
 const ImageFormControl: FC<ImageFormControlProps> = ({
   defaultImageUsedUrl,
-  direction,
   labelColor,
   labelContent,
   entityPropertyLoadingStatus,
   entityProperty,
   onEntityPropertyValueChange,
   onEntityPropertyOptionSelected,
-  labelFontSize,
   imageUrlOptions,
-  backgroundColor,
-  border,
-  padding,
 }) => {
   return (
-    <div
-      className={formControlsStyles.imageFormControlContainer}
-      style={{
-        flexDirection: direction,
-        justifyContent: direction === "row" ? "space-between" : "center",
-        backgroundColor: backgroundColor ? backgroundColor : "none",
-        border: border ? border : "none",
-        padding: padding ? padding : "0",
-        alignItems: direction === "row" ? "center" : "flex-start",
-      }}
-    >
+    <div className={formControlsStyles.imageFormControlContainer}>
       <label htmlFor={labelContent} style={{ color: labelColor }}>
-        <span style={{ fontSize: labelFontSize || 22 }}>{labelContent}</span>
+        {labelContent}
       </label>
       {imageUrlOptions && imageUrlOptions.length > 0 && (
         <ul className={formControlsStyles.imageUrlOptionsContainer}>
@@ -84,8 +69,8 @@ const ImageFormControl: FC<ImageFormControlProps> = ({
           <Image
             src={(entityProperty as string) || defaultImageUsedUrl}
             alt={labelContent}
-            width={100}
-            height={100}
+            width={80}
+            height={80}
           />
         ) : (
           <ClockLoader

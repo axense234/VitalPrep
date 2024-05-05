@@ -6,32 +6,13 @@ import { FC } from "react";
 import formControlsStyles from "../../../scss/components/others/FormControls.module.scss";
 
 const CheckboxFormControl: FC<CheckboxFormControlProps> = ({
-  direction,
-  labelColor,
   labelContent,
   entityProperty,
   onEntityPropertyValueChange,
-  labelFontSize,
-  backgroundColor,
-  border,
-  padding,
 }) => {
   return (
-    <div
-      className={formControlsStyles.checkboxFormControlContainer}
-      style={{
-        flexDirection: direction,
-        backgroundColor: backgroundColor ? backgroundColor : "none",
-        border: border ? border : "none",
-        padding: padding ? padding : "0",
-      }}
-    >
-      <label
-        htmlFor={labelContent}
-        style={{ color: labelColor, fontSize: labelFontSize || 22 }}
-      >
-        {labelContent}
-      </label>
+    <div className={formControlsStyles.checkboxFormControlContainer}>
+      <label htmlFor={labelContent}>{labelContent}</label>
       <input
         type="checkbox"
         name={labelContent}

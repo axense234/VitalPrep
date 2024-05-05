@@ -26,7 +26,7 @@
   padding: 128px 0px;
 
   h2 {
-    @include h2Laptop();
+    @include heading("h2", "laptop", "black");
     letter-spacing: 4.5px;
     color: getColor("black-100-1");
   }

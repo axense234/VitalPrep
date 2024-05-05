@@ -7,7 +7,7 @@
   background-image: url("https://res.cloudinary.com/birthdayreminder/image/upload/v1714124438/wallpaperflare.com_wallpaper_3_lfswhp.jpg");
 
   h1 {
-    @include h1Laptop();
+    @include heading("h1", "laptop", "black");
     width: 100%;
     text-align: center;
     color: getColor("black-100-1");

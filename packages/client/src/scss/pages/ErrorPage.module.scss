@@ -8,7 +8,7 @@
   padding-bottom: 10%;
 
   h1 {
-    @include h1Laptop();
+    @include heading("h1", "laptop", "black");
     width: 100%;
     text-align: center;
     color: getColor("black-100-1");

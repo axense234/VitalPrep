@@ -45,7 +45,7 @@
     height: 100%;
     color: getColor("tan-color");
     text-align: start;
-    @include paragraphLaptop();
+    @include paragraph("laptop", "black");
 
     &:hover {
       transform: translateX(10px);
@@ -61,7 +61,7 @@
 
   p {
     color: getColor("tan-color");
-    @include paragraphLaptop();
+    @include paragraph("laptop", "black");
 
     transition:
       $crispyTransformTransition,
@@ -74,7 +74,7 @@
 
   span {
     color: getColor("tan-color");
-    @include paragraphLaptop();
+    @include paragraph("laptop", "black");
 
     margin-left: $footerDistanceBetweenContactInfoSections;
     color: getColor("secondary-color-light-2.4");
@@ -93,6 +93,6 @@
 
   p {
     color: getColor("tan-color");
-    @include paragraphLaptop();
+    @include paragraph("laptop", "black");
   }
 }

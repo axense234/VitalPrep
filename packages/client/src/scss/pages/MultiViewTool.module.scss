@@ -60,7 +60,7 @@
   gap: 4rem;
 
   h2 {
-    @include h2Laptop();
+    @include heading("h2", "laptop", "black");
     font-weight: 550;
     letter-spacing: 3px;
   }

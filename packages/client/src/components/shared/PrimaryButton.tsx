@@ -8,17 +8,12 @@ import { FC } from "react";
 import Link from "next/link";
 
 const PrimaryButton: FC<PrimaryButtonProps> = ({
-  backgroundColor,
-  fontSize,
-  width,
-  height,
   content,
   linkDest,
   type,
   disabled,
   onHoverContent,
   onClickFunction,
-  textColor,
 }) => {
   if (type === "link")
     return (
@@ -30,14 +25,6 @@ const PrimaryButton: FC<PrimaryButtonProps> = ({
       >
         <button
           className={primaryButtonStyles.primaryButton}
-          style={{
-            backgroundColor,
-            height,
-            fontSize,
-            width,
-            color: textColor,
-            fontWeight: 800,
-          }}
           disabled={disabled}
         >
           {content}
@@ -52,16 +39,6 @@ const PrimaryButton: FC<PrimaryButtonProps> = ({
         title={onHoverContent || content}
         aria-label={onHoverContent || content}
         type="submit"
-        style={{
-          backgroundColor,
-          height,
-          fontSize,
-          width,
-          filter: disabled ? "brightness(0.5)" : "brightness(1)",
-          cursor: disabled ? "initial" : "pointer",
-          color: textColor,
-          fontWeight: 800,
-        }}
         disabled={disabled}
         onClick={onClickFunction}
       >

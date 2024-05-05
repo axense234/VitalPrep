@@ -4,24 +4,25 @@
   @include flexCenter(column);
   align-items: flex-start;
   width: 100%;
-  gap: 8px;
-  padding: 1rem;
-  border: 1.5px solid getColor("black-100-1");
+  gap: 0.5rem;
 
   label {
-    font-weight: bolder;
-    font-size: 22px;
+    @include heading("h6", "laptop", "black");
+    font-weight: 550;
   }
 
   input {
     background-color: getColor("tan-color");
-    border: 1.5px solid getColor("black-100-1");
+    border: 1.5px solid getColor("black-75-1");
+    border-radius: 10px;
+
     width: 100%;
-    max-width: 400px;
-    height: 24px;
+    height: 2.5rem;
+
     font-size: 1rem;
     padding: 0.5rem;
     font-weight: 550;
+
     word-wrap: break-word;
     transition: background-color 0.135s linear;
 
@@ -35,19 +36,11 @@
   @include flexCenter(column);
   align-items: flex-start;
   width: 100%;
-  gap: 1rem;
-  padding-left: 1rem;
-
-  border: 1.5px solid getColor("black-100-1");
+  gap: 0.5rem;
 
   label {
-    @include flexCenter(row);
-    gap: 8px;
-
-    span {
-      font-weight: bolder;
-      font-size: 22px;
-    }
+    @include heading("h6", "laptop", "black");
+    font-weight: 550;
 
     svg {
       width: 16px;
@@ -59,12 +52,14 @@
 .imageInputContainer {
   @include flexCenter(row);
   position: relative;
-  width: 100px;
-  height: 100px;
+  width: 5rem;
+  height: 5rem;
+  border-radius: 5px;
 
   img {
     width: 100%;
     height: 100%;
+    border-radius: 5px;
   }
 }
 
@@ -102,25 +97,25 @@
   @include flexCenter(row);
   justify-content: space-between;
   width: 100%;
-  max-width: 400px;
-
-  padding: 1rem;
-  border: 1.5px solid getColor("black-100-1");
+  gap: 1rem;
 
   label {
-    font-weight: bolder;
-    font-size: 22px;
+    @include heading("h6", "laptop", "black");
+    font-weight: 550;
   }
 
   input[type="checkbox"] {
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
-    width: 24px;
-    height: 24px;
-    border: 1.5px solid getColor("black-100-1");
+
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 1.5px solid getColor("black-75-1");
     background-color: getColor("tan-color");
     cursor: pointer;
+
+    border-radius: 10px;
 
     transition: background-color 0.135s linear;
 
@@ -135,6 +130,8 @@
 }
 
 .reCAPTCHA {
+  @include flexCenter(row);
+  justify-content: flex-start;
   width: 100%;
 }
 

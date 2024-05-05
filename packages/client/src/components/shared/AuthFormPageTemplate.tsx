@@ -1,9 +1,9 @@
 "use client";
-
 // Components
 import OAuthOptions from "@/components/shared/OAuthOptions";
 import AuthFormControls from "./AuthFormControls";
 import PopupModal from "./modals/PopupModal";
+import SignupLogo from "./SignupLogo";
 // SCSS
 import authFormPageTemplateStyles from "../../scss/components/shared/AuthFormPageTemplate.module.scss";
 // Types
@@ -55,10 +55,11 @@ const AuthFormPageTemplate: FC<AuthFormPageTemplateProps> = ({ type }) => {
       <section className={authFormPageTemplateStyles.formContainer}>
         <PopupModal hasBorder={false} modalType="form" />
         <div className={authFormPageTemplateStyles.formContainerContentWrapper}>
+          <SignupLogo />
           <div className={authFormPageTemplateStyles.formContainerContent}>
             <header>
-              <h4>{pageTitleUsed}</h4>
-              <h5>{pageSubtitleUsed}</h5>
+              <h3>{pageTitleUsed}</h3>
+              <h6>{pageSubtitleUsed}</h6>
               <Link href={pageSubtitleLinkUsed.linkDest}>
                 {pageSubtitleLinkUsed.textContent}
               </Link>

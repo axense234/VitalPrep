@@ -37,7 +37,7 @@
   }
 
   h1 {
-    @include h2Laptop();
+    @include heading("h2", "laptop", "black");
     text-align: center;
     letter-spacing: 3.5px;
     color: getColor("tan-color-extra-light");
@@ -49,7 +49,7 @@
   }
 
   h2 {
-    @include h3Laptop();
+    @include heading("h3", "laptop", "black");
     align-self: flex-start;
     text-align: left;
     letter-spacing: 2.5px;

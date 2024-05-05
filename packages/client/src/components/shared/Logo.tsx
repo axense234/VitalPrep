@@ -10,11 +10,11 @@ import logoStyles from "../../scss/components/shared/Logo.module.scss";
 // Types
 import LogoProps from "@/core/interfaces/LogoProps";
 
-const Logo: FC<LogoProps> = ({ logoImageUrlIndex, dimensions }) => {
+const Logo: FC<LogoProps> = ({ logoImageUrlIndex, dimensions, clickable }) => {
   return (
     <Link
-      href={homePageUrl}
-      title="Home"
+      href={clickable ? homePageUrl : "/"}
+      title={clickable ? "Home" : "Vital Prep"}
       className={logoStyles.logoContainer}
       style={{ width: dimensions, height: dimensions }}
     >
@@ -24,8 +24,8 @@ const Logo: FC<LogoProps> = ({ logoImageUrlIndex, dimensions }) => {
             ?.imageUrl || logoImageUrls[0].imageUrl
         }
         alt="Logo"
-        width={dimensions | 100}
-        height={dimensions | 100}
+        width={dimensions | 80}
+        height={dimensions | 80}
       />
     </Link>
   );

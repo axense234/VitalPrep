@@ -18,7 +18,7 @@
     @include flexCenter(column);
     margin-bottom: $pageTitleHeaderMarginBottom;
     h1 {
-      @include h1Laptop();
+      @include heading("h1", "laptop", "black");
       color: getColor("tan-color-extra-light");
       text-shadow:
         $titleOutlineNegativeCoeficient $titleOutlineNegativeCoeficient 0 black,
@@ -28,7 +28,7 @@
     }
 
     h3 {
-      @include h3Laptop();
+      @include heading("h3", "laptop", "black");
       color: getColor("tan-color-extra-light");
       text-shadow:
         $titleOutlineNegativeCoeficient $titleOutlineNegativeCoeficient 0 black,

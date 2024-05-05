@@ -27,16 +27,31 @@ $colors: (
   "black-25-1": #120a06,
   "black-10-1": #120a06,
   "black-5-1": #120a06,
+  "signup-background-color": #ee8f00,
 );
 
 $fontSizes: (
   "p-laptop": 21px,
+  "p-tablet": 18px,
+  "p-phone": 18px,
   "h1-laptop": 119px,
   "h2-laptop": 88.4px,
   "h3-laptop": 66.3px,
   "h4-laptop": 49.7px,
   "h5-laptop": 37.3px,
   "h6-laptop": 28px,
+  "h1-tablet": 101px,
+  "h2-tablet": 75.8px,
+  "h3-tablet": 56.8px,
+  "h4-tablet": 42.6px,
+  "h5-tablet": 32px,
+  "h6-tablet": 24px,
+  "h1-phone": 68.9px,
+  "h2-phone": 54.9px,
+  "h3-phone": 44px,
+  "h4-phone": 35.2px,
+  "h5-phone": 28.1px,
+  "h6-phone": 22.5px,
 );
 
 $screenSizes: (

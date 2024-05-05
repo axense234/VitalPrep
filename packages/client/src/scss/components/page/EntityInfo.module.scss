@@ -33,7 +33,7 @@
   gap: 3rem;
 
   h2 {
-    @include h2Laptop();
+    @include heading("h2", "laptop", "black");
     font-weight: 550;
     letter-spacing: 2px;
     margin-bottom: -1rem;
@@ -51,7 +51,7 @@
   gap: 0.5rem;
 
   h2 {
-    @include h2Laptop();
+    @include heading("h2", "laptop", "black");
     font-weight: 550;
     letter-spacing: 3px;
   }
@@ -88,7 +88,7 @@
   gap: 64px;
 
   h3 {
-    @include h2Laptop();
+    @include heading("h2", "laptop", "black");
     font-weight: 550;
     letter-spacing: 3px;
   }
@@ -157,7 +157,7 @@
   gap: 64px;
 
   h3 {
-    @include h2Laptop();
+    @include heading("h2", "laptop", "black");
     font-weight: 550;
     letter-spacing: 3px;
   }
@@ -169,7 +169,7 @@
   gap: 1.5rem;
 
   h4 {
-    @include h4Laptop();
+    @include heading("h4", "laptop", "black");
     font-weight: 550;
     letter-spacing: 1.5px;
   }

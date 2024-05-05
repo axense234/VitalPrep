@@ -46,7 +46,7 @@
   }
 
   h3 {
-    @include h3Laptop();
+    @include heading("h3", "laptop", "black");
     letter-spacing: 3.5px;
     color: getColor("black-100-1");
     text-align: center;

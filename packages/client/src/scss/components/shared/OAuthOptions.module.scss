@@ -4,21 +4,13 @@
   @include flexCenter(column);
   width: 100%;
   padding: 0;
-  gap: $authContainerDistanceBetweenItems;
+  gap: 2rem;
 
-  p,
-  span {
-    font-size: $authContainerParagraphFontSize;
-    font-weight: 550;
-    font-family: "Cabin", sans-serif;
-    color: getColor("black-100-1");
+  p {
+    @include paragraph("laptop", "black");
     text-align: center;
+    font-weight: 550;
     width: 100%;
-    margin: 0;
-  }
-
-  span {
-    letter-spacing: 2px;
   }
 }
 
@@ -26,32 +18,38 @@
   @include flexCenter(column);
   list-style: none;
   width: 100%;
-  padding: 0;
-  gap: 1rem;
+  gap: 1.5rem;
+  padding: 0rem 1rem;
 
   li {
     @include flexCenter(column);
     width: 100%;
+    transition: $crispyTransformTransition;
+    border-radius: 10px;
+    border: 1.5px solid getColor("black-75-1");
+
+    &:hover {
+      transform: scale(1.05);
+    }
   }
 }
 
 .authButton {
   @include flexCenter(row);
-  border: 2px solid green;
   background-color: getColor("tan-color");
+  border-radius: 10px;
   gap: 0.5rem;
   width: 100%;
-  max-width: $authButtonMaxWidth;
-  padding: $authButtonPadding;
-  border: 2px solid getColor("black-100-1");
-  transition: $crispyTransformTransition;
+  padding: 0.25rem 1rem;
+  border: none;
 
-  &:hover {
-    transform: scale(1.05);
+  span {
+    @include paragraph("laptop", "black");
+    font-weight: 550;
   }
 
   svg {
-    width: 35px;
-    height: 35px;
+    width: 2.5rem;
+    height: 2.5rem;
   }
 }

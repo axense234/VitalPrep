@@ -20,7 +20,7 @@
   padding: 8rem 0;
 
   h2 {
-    @include h2Laptop();
+    @include heading("h2", "laptop", "black");
     text-align: center;
     letter-spacing: 3.5px;
     color: getColor("tan-color-extra-light");

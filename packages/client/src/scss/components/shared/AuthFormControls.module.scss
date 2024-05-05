@@ -4,12 +4,10 @@
   @include flexCenter(column);
   justify-content: flex-start;
   width: 100%;
-  max-width: 320px;
-  gap: 24px;
+  gap: 1.5rem;
 
   button {
+    margin-top: 4.5rem;
     align-self: flex-start;
-    margin-top: 96px;
-    margin-bottom: 16px;
   }
 }

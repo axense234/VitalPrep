@@ -20,11 +20,12 @@ const ReCAPTCHAControl = () => {
   };
 
   return (
-    <ReCAPTCHA
-      sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY as string}
-      onChange={(token) => onSuccess(token)}
-      className={formControlStyles.reCAPTCHA}
-    />
+    <div className={formControlStyles.reCAPTCHA}>
+      <ReCAPTCHA
+        sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY as string}
+        onChange={(token) => onSuccess(token)}
+      />
+    </div>
   );
 };
 
