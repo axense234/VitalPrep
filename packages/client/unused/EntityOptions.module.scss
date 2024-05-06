@@ -1,0 +1,29 @@
+// @use "../../abstracts" as *;
+
+// .entityOptions {
+//   display: grid;
+//   grid-template-columns: repeat(2, 1fr);
+//   grid-template-rows: repeat(3, 1fr);
+//   gap: 24px;
+//   list-style: none;
+//   width: 100%;
+//   height: $createToolOptionsContainerHeight;
+//   background-color: $createToolOptionsBackgroundColor;
+//   padding: $createToolOptionsPadding;
+
+//   li {
+//     @include flexCenter(row);
+//     border: 1.5px solid getColor("black-100-1");
+//   }
+// }
+
+// .entityOption {
+//   @include flexCenter(row);
+//   transition: background-color 0.135s linear;
+//   width: 100%;
+//   height: 100%;
+//   border: none;
+
+//   font-size: $createToolOptionFontSize;
+//   font-weight: 800;
+// }

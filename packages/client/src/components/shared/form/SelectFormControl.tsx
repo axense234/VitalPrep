@@ -8,21 +8,15 @@ import formControlsStyles from "../../../scss/components/others/FormControls.mod
 import EntityComponent from "../entity/EntityComponent";
 // React Spinners
 import { ClockLoader } from "react-spinners";
-// Helpers
-import selectFormBackgroundColor from "@/helpers/selectFormBackgroundColor";
 
 const SelectFormControl: FC<SelectFormControlProps> = ({
-  labelColor,
   labelContent,
   entityPropertyOptions,
   entityPropertyChosenOptions,
   onEntityPropertyValueChange,
-  labelFontSize,
   entityTypeUsed,
   areOptionsLoading,
   showEntityExtraCondition,
-  backgroundColor,
-  border,
   canSelectMultipleEntities = true,
 }) => {
   const searchInChosenOptionsForPropertyId = (id: string) => {
@@ -32,6 +26,7 @@ const SelectFormControl: FC<SelectFormControlProps> = ({
       )
     );
   };
+  console.log(entityPropertyOptions);
 
   const searchInOptionsForPropertyId = (id: string) => {
     return Boolean(entityPropertyChosenOptions === id);
@@ -49,29 +44,12 @@ const SelectFormControl: FC<SelectFormControlProps> = ({
   };
 
   return (
-    <div
-      className={formControlsStyles.selectFormControlContainer}
-      style={{
-        backgroundColor: backgroundColor ? backgroundColor : "none",
-        border: border ? border : "none",
-      }}
-    >
-      <label
-        htmlFor={labelContent}
-        style={{
-          color: labelColor,
-          fontSize: labelFontSize || 22,
-        }}
-      >
-        {labelContent}
-      </label>
+    <div className={formControlsStyles.selectFormControlContainer}>
+      <label htmlFor={labelContent}>{labelContent}</label>
       {areOptionsLoading || entityPropertyOptions.length < 1 ? (
         <ClockLoader />
       ) : (
-        <ul
-          className={formControlsStyles.selectFormControlList}
-          style={{ backgroundColor: selectFormBackgroundColor(entityTypeUsed) }}
-        >
+        <ul className={formControlsStyles.selectFormControlList}>
           {entityPropertyOptions.map((id) => {
             return (
               <li key={id} onClick={() => onEntityPropertyValueChange(id)}>

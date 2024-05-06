@@ -1,7 +1,5 @@
-// Components
-import EntityMacrosPieGraph from "@/components/shared/entity/EntityMacrosPieGraph";
 // SCSS
-import entityInfoStyles from "../../../scss/components/page/EntityInfo.module.scss";
+import entityCardStyles from "../../../scss/components/shared/EntityCard.module.scss";
 // Types
 import EntityType from "@/core/types/entity/EntityType";
 import DayTemplateTemplate from "@/core/types/entity/mutation/DayTemplateTemplate";
@@ -43,8 +41,8 @@ const EntityCard: FC<{
 }> = ({ entityType, entity, entityId }) => {
   let defaultImageUrlShownBasedOnEntityType = defaultIngredientImageUrl;
   let entityIdentifier = "Ingredient";
-  let entityCardBackgroundColor = "#FFAE00";
-  let entityCardLabelColor = "#120A06";
+  let entityDetails = `${(entity as IngredientTemplate)?.macros?.calories || 0} calories / 100g`;
+  let entitySubDetails = `${(entity as DayTemplateTemplate)?.macros?.calories || 0} calories`;
 
   const entityFromState = useAppSelector((state) =>
     selectEntityById(state, entityId || "", entityType)
@@ -55,76 +53,63 @@ const EntityCard: FC<{
     case "ingredient":
       defaultImageUrlShownBasedOnEntityType = defaultIngredientImageUrl;
       entityIdentifier = "Ingredient";
-      entityCardBackgroundColor = "#FFAE00";
-      entityCardLabelColor = "#120A06";
+      entityDetails = `${(entity as IngredientTemplate)?.macros?.calories || 0} calories / 100g`;
       break;
     case "utensil":
       defaultImageUrlShownBasedOnEntityType = defaultUtensilImageUrl;
       entityIdentifier = "Utensil";
-      entityCardBackgroundColor = "#FF6000";
-      entityCardLabelColor = "#120A06";
+      entityDetails =
+        (entity as UtensilTemplate)?.enabled === true
+          ? `ENABLED ✔️`
+          : "DISABLED ❌";
       break;
     case "recipe":
       defaultImageUrlShownBasedOnEntityType = defaultRecipeImageUrl;
       entityIdentifier = "Recipe";
-      entityCardBackgroundColor = "#8B0000";
-      entityCardLabelColor = "#DDD9D5";
+      entityDetails = `${(entity as RecipeTemplate)?.macros?.calories || 0} calories`;
       break;
     case "dayTemplate":
       defaultImageUrlShownBasedOnEntityType = defaultDayTemplateImageUrl;
       entityIdentifier = "Day Template";
-      entityCardBackgroundColor = "#013310";
-      entityCardLabelColor = "#DDD9D5";
+      entityDetails = `${(entity as DayTemplateTemplate)?.recipes?.filter((recipe) => recipe !== "")?.length} meals`;
+      entitySubDetails = `${(entity as DayTemplateTemplate)?.macros?.calories || 0} calories`;
       break;
     case "instanceTemplate":
       defaultImageUrlShownBasedOnEntityType = defaultInstanceTemplateImageUrl;
       entityIdentifier = "Instance Template";
-      entityCardBackgroundColor = "#012433";
-      entityCardLabelColor = "#DDD9D5";
+      entityDetails = `${(entity as InstanceTemplateTemplate)?.coverage || 0} days covered`;
+      entitySubDetails = `${(entity as InstanceTemplateTemplate)?.macros?.calories || 0} calories`;
       break;
     case "mealPrepPlan":
       defaultImageUrlShownBasedOnEntityType = defaultMealPrepPlanImageUrl;
       entityIdentifier = "Meal Prep Plan";
-      entityCardBackgroundColor = "#42171C";
-      entityCardLabelColor = "#DDD9D5";
+      entityDetails = `${(entity as MealPrepPlanTemplate)?.instanceTemplates?.filter((instanceTemplate) => instanceTemplate !== "").length || 0} instances used`;
+      entitySubDetails = `${(entity as MealPrepPlanTemplate)?.macros?.calories || 0} calories`;
       break;
     case "mealPrepLog":
       defaultImageUrlShownBasedOnEntityType = defaultInstanceTemplateImageUrl;
       entityIdentifier = "Meal Prep Log";
-      entityCardBackgroundColor = "#42171C";
-      entityCardLabelColor = "#DDD9D5";
       break;
     default:
       break;
   }
 
   return (
-    <div
-      className={entityInfoStyles.entityInfoDetailsComposedSectionEntityCard}
-      style={{ backgroundColor: entityCardBackgroundColor }}
-    >
+    <div className={entityCardStyles.entityCardContainer}>
       <Image
-        width={120}
-        height={160}
+        width={384}
+        height={384}
         alt={entityUsed.name || `${entityIdentifier} Image`}
         title={entityUsed.name || `${entityIdentifier} Image`}
         aria-label={entityUsed.name || `${entityIdentifier} Image`}
         src={entityUsed.imageUrl || defaultImageUrlShownBasedOnEntityType}
       />
-      <div
-        className={
-          entityInfoStyles.entityInfoDetailsComposedSectionEntityCardContent
-        }
-      >
-        <h4 style={{ color: entityCardLabelColor }}>
-          {entityUsed.name || `${entityIdentifier} Name`}
-        </h4>
-        {entityType !== "utensil" && entityType !== "mealPrepLog" ? (
-          <EntityMacrosPieGraph
-            macros={(entityUsed as IngredientTemplate)?.macros}
-            labelSize={12}
-          />
-        ) : null}
+      <div className={entityCardStyles.entityCardContentDetails}>
+        <h5>{entityUsed.name || `${entityIdentifier} Name`}</h5>
+        <h6>{entityDetails}</h6>
+        {(entityType === "dayTemplate" ||
+          entityType === "instanceTemplate" ||
+          entityType === "mealPrepPlan") && <h6>{entitySubDetails}</h6>}
       </div>
     </div>
   );

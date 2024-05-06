@@ -10,7 +10,7 @@ type OptionalInstanceTemplate<T> = {
 
 type InstanceTemplateTemplate = OptionalInstanceTemplate<InstanceTemplate> & {
   dayTemplates: string[] | DayTemplateTemplate[];
-  macros?: Macros;
+  macros: Macros;
   ingredients?: IngredientTemplate[];
   utensils?: UtensilTemplate[];
   recipes?: RecipeTemplate[];

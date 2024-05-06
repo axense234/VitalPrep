@@ -5,12 +5,18 @@ import TextFormControl from "@/components/shared/form/TextFormControl";
 import PrimaryButton from "@/components/shared/PrimaryButton";
 import ImageFormControl from "@/components/shared/form/ImageFormControl";
 import PopupModal from "@/components/shared/modals/PopupModal";
+import SelectFormControl from "@/components/shared/form/SelectFormControl";
+import EntityPreview from "@/components/shared/entity/EntityPreview";
 // Data
 import {
   defaultCreateDayTemplateImageUrls,
   defaultDayTemplateImageUrl,
   defaultEntityQueryValues,
 } from "@/data";
+// Types
+import RecipeTemplate from "@/core/types/entity/mutation/RecipeTemplate";
+// React
+import { ChangeEvent, useEffect, useRef } from "react";
 // Redux
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import {
@@ -23,8 +29,6 @@ import {
   selectTemplateImageUrl,
   setTemplateModalMessage,
 } from "@/redux/slices/generalSlice";
-// React
-import { ChangeEvent, useEffect, useRef } from "react";
 import {
   createDayTemplate,
   selectDayTemplateFormModalErrorMessage,
@@ -35,12 +39,14 @@ import {
   updateNumberOfMeals,
   updateTemplateDayTemplate,
 } from "@/redux/slices/dayTemplatesSlice";
-import SelectFormControl from "@/components/shared/form/SelectFormControl";
 import {
   getAllUserRecipes,
+  selectAllRecipes,
   selectAllRecipesIds,
   selectLoadingGetUserRecipes,
 } from "@/redux/slices/recipesSlice";
+// Helpers
+import calculateEntityMacrosBasedOnComponents from "@/helpers/calculateEntityMacrosBasedOnComponents";
 
 const CreateDayTemplateInterface = () => {
   const dispatch = useAppDispatch();
@@ -99,7 +105,26 @@ const CreateDayTemplateInterface = () => {
     }
   };
 
-  console.log(templateDayTemplate.recipes);
+  const recipesBasedOnRecipeIds = useAppSelector(selectAllRecipes).filter(
+    (recipe) => {
+      return templateDayTemplate.recipes.find(
+        (tdtRecipeId) => tdtRecipeId === recipe.id
+      );
+    }
+  ) as RecipeTemplate[];
+
+  useEffect(() => {
+    dispatch(
+      updateTemplateDayTemplate({
+        key: "macros",
+        value: calculateEntityMacrosBasedOnComponents(
+          recipesBasedOnRecipeIds.map(
+            (recipe: RecipeTemplate) => recipe?.macros
+          )
+        ),
+      })
+    );
+  }, [templateDayTemplate.recipes]);
 
   useEffect(() => {
     if (
@@ -146,142 +171,143 @@ const CreateDayTemplateInterface = () => {
     }
   }, [loadingCloudinaryImage]);
 
+  useEffect(() => {
+    if (numberOfMeals >= 1) {
+      dispatch(
+        updateTemplateDayTemplate({
+          key: "recipes",
+          value: templateDayTemplate.recipes.slice(0, numberOfMeals),
+        })
+      );
+    }
+  }, [numberOfMeals]);
+
+  console.log(templateDayTemplate.recipes);
+
   return (
     <section className={createToolStyles.createInterface}>
-      <PopupModal hasBorder={false} modalType="form" />
-      <h2>Create Day Template</h2>
-      <form className={createToolStyles.createInterfaceForm}>
-        <TextFormControl
-          direction="row"
-          entityProperty={templateDayTemplate.name}
-          labelColor="#DDD9D5"
-          labelContent="Day Template Name:"
-          onEntityPropertyValueChange={(e) =>
-            dispatch(
-              updateTemplateDayTemplate({ key: "name", value: e.target.value })
-            )
-          }
-          required={true}
-          type="text"
-          inputHeight={36}
-          labelFontSize={28}
-          backgroundColor="#013310"
-          border={"1.5px solid #120a06"}
-          padding={16}
-        />
-        <ImageFormControl
-          labelColor="#DDD9D5"
-          labelContent="Day Template Image:"
-          direction="column"
-          defaultImageUsedUrl={defaultDayTemplateImageUrl}
-          entityPropertyLoadingStatus={loadingCloudinaryImage}
-          entityProperty={templateDayTemplate.imageUrl as string}
-          onEntityPropertyValueChange={(
-            sourceOfImages: ChangeEvent<HTMLInputElement>
-          ) => {
-            if (sourceOfImages?.target.files) {
-              dispatch(
-                createCloudinaryImage({
-                  entity: "dayTemplates",
-                  imageFile: sourceOfImages?.target?.files[0] || sourceOfImages,
-                })
-              );
-            }
-          }}
-          onEntityPropertyOptionSelected={(imageUrl) => {
-            dispatch(
-              updateTemplateDayTemplate({ key: "imageUrl", value: imageUrl })
-            );
-          }}
-          labelFontSize={28}
-          imageUrlOptions={defaultCreateDayTemplateImageUrls}
-          backgroundColor="#013310"
-          border={"1.5px solid #120a06"}
-          padding={16}
-        />
-        <TextFormControl
-          direction="row"
-          entityProperty={numberOfMeals}
-          labelColor="#DDD9D5"
-          labelContent="Number of Meals:"
-          onEntityPropertyValueChange={(e) =>
-            dispatch(updateNumberOfMeals(e.target.valueAsNumber))
-          }
-          required={true}
-          type="number"
-          inputHeight={36}
-          labelFontSize={28}
-          backgroundColor="#013310"
-          border={"1.5px solid #120a06"}
-          padding={16}
-        />
-        {numberOfMeals > 0 && (
-          <div
-            className={
-              createToolStyles.createInterfaceDayTemplateRecipesContainer
-            }
-            style={{ backgroundColor: "#013310" }}
-          >
-            <h3 style={{ color: "#DDD9D5" }}>Recipes:</h3>
-            <ul className={createToolStyles.createInterfaceDayTemplateRecipes}>
-              {numberOfMealsIterable.map((mealOption) => {
-                return (
-                  <li key={mealOption.id}>
-                    <SelectFormControl
-                      labelColor="#DDD9D5"
-                      labelContent={`Meal #${mealOption.id}:`}
-                      required={true}
-                      entityPropertyOptions={recipesIds}
-                      entityPropertyChosenOptions={
-                        (templateDayTemplate.recipes as string[]) || []
-                      }
-                      entityTypeUsed="recipe"
-                      onEntityPropertyValueChange={(id) =>
-                        handleUpdateArrayEntities(
-                          templateDayTemplate.recipes as string[],
-                          id,
-                          mealOption.id - 1,
-                          "recipes"
-                        )
-                      }
-                      labelFontSize={28}
-                      backgroundColor="#013310"
-                      areOptionsLoading={loadingGetUserRecipes === "PENDING"}
-                      showEntityExtraCondition={(id) => {
-                        return (
-                          templateDayTemplate.recipes[mealOption.id - 1] === id
-                        );
-                      }}
-                    />
-                  </li>
+      <div className={createToolStyles.createInterfaceWrapper}>
+        <div className={createToolStyles.createInterfaceFormContainer}>
+          <PopupModal hasBorder={false} modalType="form" />
+          <h4>Create Day Template</h4>
+          <form className={createToolStyles.createInterfaceForm}>
+            <TextFormControl
+              entityProperty={templateDayTemplate.name}
+              labelContent="Day Template Name:"
+              onEntityPropertyValueChange={(e) =>
+                dispatch(
+                  updateTemplateDayTemplate({
+                    key: "name",
+                    value: e.target.value,
+                  })
+                )
+              }
+              type="text"
+            />
+            <ImageFormControl
+              labelContent="Day Template Image:"
+              defaultImageUsedUrl={defaultDayTemplateImageUrl}
+              entityPropertyLoadingStatus={loadingCloudinaryImage}
+              entityProperty={templateDayTemplate.imageUrl as string}
+              onEntityPropertyValueChange={(
+                sourceOfImages: ChangeEvent<HTMLInputElement>
+              ) => {
+                if (sourceOfImages?.target.files) {
+                  dispatch(
+                    createCloudinaryImage({
+                      entity: "dayTemplates",
+                      imageFile:
+                        sourceOfImages?.target?.files[0] || sourceOfImages,
+                    })
+                  );
+                }
+              }}
+              onEntityPropertyOptionSelected={(imageUrl) => {
+                dispatch(
+                  updateTemplateDayTemplate({
+                    key: "imageUrl",
+                    value: imageUrl,
+                  })
                 );
-              })}
-            </ul>
-          </div>
-        )}
-        <PrimaryButton
-          backgroundColor="#013310"
-          textColor="#DDD9D5"
-          content="Create Day Template"
-          type="functional"
-          fontSize={24}
-          height={64}
-          width={560}
-          disabled={
-            loadingCreateDayTemplate === "PENDING" ||
-            loadingCloudinaryImage === "PENDING"
-          }
-          onClickFunction={(e) => {
-            e.preventDefault();
-            dispatch(
-              createDayTemplate({
-                templateDayTemplate: templateDayTemplate,
-                userId: profile.id,
-              })
-            );
-          }}
+              }}
+              imageUrlOptions={defaultCreateDayTemplateImageUrls}
+            />
+            <TextFormControl
+              entityProperty={numberOfMeals}
+              labelContent="Number of Meals:"
+              onEntityPropertyValueChange={(e) =>
+                dispatch(updateNumberOfMeals(e.target.valueAsNumber))
+              }
+              type="number"
+            />
+            <PrimaryButton
+              content="Create Day Template"
+              type="functional"
+              disabled={
+                loadingCreateDayTemplate === "PENDING" ||
+                loadingCloudinaryImage === "PENDING"
+              }
+              onClickFunction={(e) => {
+                e.preventDefault();
+                dispatch(
+                  createDayTemplate({
+                    templateDayTemplate: templateDayTemplate,
+                    userId: profile.id,
+                  })
+                );
+              }}
+            />
+          </form>
+        </div>
+        <EntityPreview
+          entity={templateDayTemplate}
+          entityType="dayTemplate"
+          type="preview"
         />
-      </form>
+      </div>
+      {numberOfMeals > 0 && (
+        <div
+          className={
+            createToolStyles.createInterfaceMultipleComponentsContainer
+          }
+        >
+          <h4>Recipes:</h4>
+          <ul
+            className={
+              createToolStyles.createInterfaceMultipleComponentsSelectControls
+            }
+          >
+            {numberOfMealsIterable.map((mealOption) => {
+              return (
+                <li key={mealOption.id}>
+                  <SelectFormControl
+                    labelContent={`Meal #${mealOption.id}:`}
+                    entityPropertyOptions={recipesIds}
+                    entityPropertyChosenOptions={
+                      (templateDayTemplate.recipes as string[]) || []
+                    }
+                    entityTypeUsed="recipe"
+                    onEntityPropertyValueChange={(id) =>
+                      handleUpdateArrayEntities(
+                        templateDayTemplate.recipes as string[],
+                        id,
+                        mealOption.id - 1,
+                        "recipes"
+                      )
+                    }
+                    areOptionsLoading={loadingGetUserRecipes === "PENDING"}
+                    showEntityExtraCondition={(id) => {
+                      return (
+                        templateDayTemplate.recipes[mealOption.id - 1] === id
+                      );
+                    }}
+                  />
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      )}
     </section>
   );
 };

@@ -23,7 +23,7 @@ const TextFormControl: FC<TextFormControlProps> = ({
         minLength={3}
         maxLength={maxInputLength || 40}
         style={{
-          width: type === "number" ? "50%" : "100%",
+          width: type === "number" ? "65%" : "100%",
         }}
         value={entityProperty as string | number}
         onChange={onEntityPropertyValueChange}

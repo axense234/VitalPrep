@@ -6,6 +6,9 @@ import PrimaryButton from "@/components/shared/PrimaryButton";
 import ImageFormControl from "@/components/shared/form/ImageFormControl";
 import PopupModal from "@/components/shared/modals/PopupModal";
 import SelectFormControl from "@/components/shared/form/SelectFormControl";
+import WeekdayFormControl from "@/components/shared/form/WeekdayFormControl";
+import EntityPreview from "@/components/shared/entity/EntityPreview";
+import InstanceTemplateTemplate from "@/core/types/entity/mutation/InstanceTemplateTemplate";
 // React
 import React, { ChangeEvent, useEffect, useRef } from "react";
 // Data
@@ -17,13 +20,13 @@ import {
   changeShowGeneralModal,
   createCloudinaryImage,
   selectLoadingCloudinaryImage,
-  selectLoadingGetProfile,
   selectProfile,
   selectTemplateImageUrl,
   setTemplateModalMessage,
 } from "@/redux/slices/generalSlice";
 import {
   getAllUserInstanceTemplates,
+  selectAllInstanceTemplates,
   selectAllInstanceTemplatesIds,
   selectLoadingGetUserInstanceTemplates,
 } from "@/redux/slices/instanceTemplatesSlice";
@@ -38,7 +41,9 @@ import {
   updateNumberOfInstanceTemplates,
   updateTemplateMealPrepPlan,
 } from "@/redux/slices/mealPrepPlansSlice";
-import WeekdayFormControl from "@/components/shared/form/WeekdayFormControl";
+
+// Helpers
+import calculateEntityMacrosBasedOnComponents from "@/helpers/calculateEntityMacrosBasedOnComponents";
 
 const CreateMealPrepPlanInterface = () => {
   const dispatch = useAppDispatch();
@@ -60,7 +65,6 @@ const CreateMealPrepPlanInterface = () => {
     selectLoadingCreateMealPrepPlan
   );
   const loadingCloudinaryImage = useAppSelector(selectLoadingCloudinaryImage);
-  const loadingProfile = useAppSelector(selectLoadingGetProfile);
   const loadingGetUserInstanceTemplates = useAppSelector(
     selectLoadingGetUserInstanceTemplates
   );
@@ -131,10 +135,32 @@ const CreateMealPrepPlanInterface = () => {
     }
   };
 
+  const instanceTemplatesBasedOnInstanceTemplateIds = useAppSelector(
+    selectAllInstanceTemplates
+  ).filter((instanceTemplate) => {
+    return templateMealPrepPlan.instanceTemplates.find(
+      (tmppInstanceTemplateId) => tmppInstanceTemplateId === instanceTemplate.id
+    );
+  }) as InstanceTemplateTemplate[];
+
+  useEffect(() => {
+    dispatch(
+      updateTemplateMealPrepPlan({
+        key: "macros",
+        value: calculateEntityMacrosBasedOnComponents(
+          instanceTemplatesBasedOnInstanceTemplateIds.map(
+            (instanceTemplate: InstanceTemplateTemplate) =>
+              instanceTemplate?.macros
+          )
+        ),
+      })
+    );
+  }, [templateMealPrepPlan.instanceTemplates]);
+
   useEffect(() => {
     if (
       loadingGetUserInstanceTemplates === "IDLE" &&
-      loadingProfile &&
+      profile.id &&
       !hasEffectRun.current
     ) {
       dispatch(
@@ -145,7 +171,7 @@ const CreateMealPrepPlanInterface = () => {
       );
     }
     hasEffectRun.current = true;
-  }, [loadingGetUserInstanceTemplates, loadingProfile]);
+  }, [loadingGetUserInstanceTemplates, profile.id]);
 
   useEffect(() => {
     if (loadingCreateMealPrepPlan === "SUCCEDED") {
@@ -179,207 +205,183 @@ const CreateMealPrepPlanInterface = () => {
     }
   }, [loadingCloudinaryImage]);
 
+  useEffect(() => {
+    if (numberOfInstanceTemplates > 0) {
+      dispatch(
+        updateTemplateMealPrepPlan({
+          key: "instanceTemplates",
+          value: templateMealPrepPlan.instanceTemplates.slice(
+            0,
+            numberOfInstanceTemplates
+          ),
+        })
+      );
+    }
+  }, [numberOfInstanceTemplates]);
+
   console.log(templateMealPrepPlan.instanceTemplatesTimings);
 
   return (
     <section className={createToolStyles.createInterface}>
-      <PopupModal hasBorder={false} modalType="form" />
-      <h2>Create Meal Prep Plan</h2>
-      <form className={createToolStyles.createInterfaceForm}>
-        <TextFormControl
-          direction="row"
-          entityProperty={templateMealPrepPlan.name}
-          labelColor="#DDD9D5"
-          labelContent="Meal Prep Plan Name:"
-          onEntityPropertyValueChange={(e) =>
-            dispatch(
-              updateTemplateMealPrepPlan({
-                key: "name",
-                value: e.target.value,
-              })
-            )
-          }
-          required={true}
-          type="text"
-          inputHeight={36}
-          labelFontSize={28}
-          backgroundColor="#42171C"
-          border={"1.5px solid #120a06"}
-          padding={16}
-        />
-        <ImageFormControl
-          labelColor="#DDD9D5"
-          labelContent="Meal Prep Plan Image:"
-          direction="column"
-          defaultImageUsedUrl={defaultMealPrepPlanImageUrl}
-          entityPropertyLoadingStatus={loadingCloudinaryImage}
-          entityProperty={templateMealPrepPlan.imageUrl as string}
-          onEntityPropertyValueChange={(
-            sourceOfImages: ChangeEvent<HTMLInputElement>
-          ) => {
-            if (sourceOfImages?.target.files) {
-              dispatch(
-                createCloudinaryImage({
-                  entity: "mealPrepPlans",
-                  imageFile: sourceOfImages?.target?.files[0] || sourceOfImages,
-                })
-              );
-            }
-          }}
-          labelFontSize={28}
-          backgroundColor="#42171C"
-          border={"1.5px solid #120a06"}
-          padding={16}
-        />
-        <TextFormControl
-          direction="row"
-          entityProperty={numberOfInstanceTemplates}
-          labelColor="#DDD9D5"
-          labelContent="Number of Instances Used:"
-          onEntityPropertyValueChange={(e) =>
-            dispatch(updateNumberOfInstanceTemplates(e.target.valueAsNumber))
-          }
-          required={true}
-          type="number"
-          inputHeight={36}
-          labelFontSize={28}
-          backgroundColor="#42171C"
-          border={"1.5px solid #120a06"}
-          padding={16}
-        />
-        {numberOfInstanceTemplates && numberOfInstanceTemplates > 0 ? (
-          <div
-            className={
-              createToolStyles.createInterfaceDayTemplateRecipesContainer
-            }
-            style={{ backgroundColor: "#42171C" }}
-          >
-            <h3 style={{ color: "#DDD9D5" }}>Individual Instance Templates:</h3>
-            <ul className={createToolStyles.createInterfaceDayTemplateRecipes}>
-              {numberOfInstanceTemplatesIterable.map(
-                (instanceTemplateOption) => {
-                  return (
-                    <li key={instanceTemplateOption.id}>
-                      <SelectFormControl
-                        labelColor="#DDD9D5"
-                        labelContent={`Number #${instanceTemplateOption.id} Instance:`}
-                        required={true}
-                        entityPropertyOptions={instanceTemplatesIds}
-                        entityPropertyChosenOptions={
-                          (templateMealPrepPlan.instanceTemplates as string[]) ||
-                          []
-                        }
-                        entityTypeUsed="instanceTemplate"
-                        onEntityPropertyValueChange={(id) =>
-                          handleUpdateArrayEntities(
-                            templateMealPrepPlan.instanceTemplates as string[],
-                            id,
-                            instanceTemplateOption.id - 1,
-                            "instanceTemplates"
-                          )
-                        }
-                        labelFontSize={28}
-                        areOptionsLoading={
-                          loadingGetUserInstanceTemplates === "PENDING"
-                        }
-                        showEntityExtraCondition={(id) => {
-                          return (
-                            templateMealPrepPlan.instanceTemplates[
-                              instanceTemplateOption.id - 1
-                            ] === id
-                          );
-                        }}
-                        backgroundColor="#42171C"
-                      />
-                    </li>
+      <div className={createToolStyles.createInterfaceWrapper}>
+        <div className={createToolStyles.createInterfaceFormContainer}>
+          <PopupModal hasBorder={false} modalType="form" />
+          <h4>Create Meal Prep Plan</h4>
+          <form className={createToolStyles.createInterfaceForm}>
+            <TextFormControl
+              entityProperty={templateMealPrepPlan.name}
+              labelContent="Meal Prep Plan Name:"
+              onEntityPropertyValueChange={(e) =>
+                dispatch(
+                  updateTemplateMealPrepPlan({
+                    key: "name",
+                    value: e.target.value,
+                  })
+                )
+              }
+              type="text"
+            />
+            <ImageFormControl
+              labelContent="Meal Prep Plan Image:"
+              defaultImageUsedUrl={defaultMealPrepPlanImageUrl}
+              entityPropertyLoadingStatus={loadingCloudinaryImage}
+              entityProperty={templateMealPrepPlan.imageUrl as string}
+              onEntityPropertyValueChange={(
+                sourceOfImages: ChangeEvent<HTMLInputElement>
+              ) => {
+                if (sourceOfImages?.target.files) {
+                  dispatch(
+                    createCloudinaryImage({
+                      entity: "mealPrepPlans",
+                      imageFile:
+                        sourceOfImages?.target?.files[0] || sourceOfImages,
+                    })
                   );
                 }
-              )}
-            </ul>
-          </div>
-        ) : null}
-        {numberOfInstanceTemplates && numberOfInstanceTemplates > 0 ? (
-          <div
+              }}
+            />
+            <TextFormControl
+              entityProperty={numberOfInstanceTemplates}
+              labelContent="Number of Instances Used:"
+              onEntityPropertyValueChange={(e) =>
+                dispatch(
+                  updateNumberOfInstanceTemplates(e.target.valueAsNumber)
+                )
+              }
+              type="number"
+            />
+            <PrimaryButton
+              content="Create Meal Prep Plan"
+              type="functional"
+              disabled={
+                loadingCreateMealPrepPlan === "PENDING" ||
+                loadingCloudinaryImage === "PENDING"
+              }
+              onClickFunction={(e) => onCreateMealPrepPlanSubmit(e)}
+            />
+          </form>
+        </div>
+        <EntityPreview
+          entity={templateMealPrepPlan}
+          entityType="mealPrepPlan"
+          type="preview"
+        />
+      </div>
+      {numberOfInstanceTemplates > 0 ? (
+        <div
+          className={
+            createToolStyles.createInterfaceMultipleComponentsContainer
+          }
+        >
+          <h4>Individual Instance Templates:</h4>
+          <ul
             className={
-              createToolStyles.createInterfaceDayTemplateRecipesContainer
+              createToolStyles.createInterfaceMultipleComponentsSelectControls
             }
-            style={{ backgroundColor: "#42171C" }}
           >
-            <h3 style={{ color: "#DDD9D5" }}>Meal Prep Timings:</h3>
-            <ul className={createToolStyles.createInterfaceMealPrepPlanTimings}>
-              {numberOfInstanceTemplatesIterable.map(
-                (instanceTemplateOption) => {
-                  return (
-                    <li
-                      key={instanceTemplateOption.id}
-                      className={
-                        createToolStyles.createInterfaceMealPrepPlanTimingContainer
+            {numberOfInstanceTemplatesIterable.map((instanceTemplateOption) => {
+              return (
+                <li
+                  key={instanceTemplateOption.id}
+                  className={
+                    createToolStyles.createInterfaceMultipleComponentsSelectControlsListItem
+                  }
+                >
+                  <SelectFormControl
+                    labelContent={`Number #${instanceTemplateOption.id} Instance:`}
+                    entityPropertyOptions={instanceTemplatesIds}
+                    entityPropertyChosenOptions={
+                      (templateMealPrepPlan.instanceTemplates as string[]) || []
+                    }
+                    entityTypeUsed="instanceTemplate"
+                    onEntityPropertyValueChange={(id) =>
+                      handleUpdateArrayEntities(
+                        templateMealPrepPlan.instanceTemplates as string[],
+                        id,
+                        instanceTemplateOption.id - 1,
+                        "instanceTemplates"
+                      )
+                    }
+                    areOptionsLoading={
+                      loadingGetUserInstanceTemplates === "PENDING"
+                    }
+                    showEntityExtraCondition={(id) => {
+                      return (
+                        templateMealPrepPlan.instanceTemplates[
+                          instanceTemplateOption.id - 1
+                        ] === id
+                      );
+                    }}
+                  />
+                  <div
+                    key={instanceTemplateOption.id}
+                    className={
+                      createToolStyles.createInterfaceMealPrepPlanTimingContainer
+                    }
+                  >
+                    <WeekdayFormControl
+                      labelContent="Weekday:"
+                      onEntityPropertyValueChange={(weekday: string) =>
+                        dispatch(
+                          updateInstanceTemplatesTiming({
+                            index: instanceTemplateOption.id - 1,
+                            load: { key: "weekday", value: weekday },
+                          })
+                        )
                       }
-                    >
-                      <WeekdayFormControl
-                        labelContent="Weekday:"
-                        onEntityPropertyValueChange={(weekday: string) =>
-                          dispatch(
-                            updateInstanceTemplatesTiming({
-                              index: instanceTemplateOption.id - 1,
-                              load: { key: "weekday", value: weekday },
-                            })
-                          )
-                        }
-                        currentEntityValue={
-                          templateMealPrepPlan.instanceTemplatesTimings[
-                            instanceTemplateOption.id - 1
-                          ]?.weekday
-                        }
-                        fontSize={28}
-                      />
-                      <TextFormControl
-                        direction="row"
-                        entityProperty={
-                          templateMealPrepPlan.instanceTemplatesTimings[
-                            instanceTemplateOption.id - 1
-                          ]?.sessionStartingTime
-                        }
-                        labelColor="#DDD9D5"
-                        labelContent="Session Starting Time:"
-                        onEntityPropertyValueChange={(e) =>
-                          dispatch(
-                            updateInstanceTemplatesTiming({
-                              index: instanceTemplateOption.id - 1,
-                              load: {
-                                key: "sessionStartingTime",
-                                value: e.target.value,
-                              },
-                            })
-                          )
-                        }
-                        required={true}
-                        type="time"
-                        inputHeight={36}
-                        labelFontSize={28}
-                      />
-                    </li>
-                  );
-                }
-              )}
-            </ul>
-          </div>
-        ) : null}
-        <PrimaryButton
-          backgroundColor="#42171C"
-          textColor="#DDD9D5"
-          content="Create Meal Prep Plan"
-          type="functional"
-          fontSize={24}
-          height={64}
-          width={560}
-          disabled={
-            loadingCreateMealPrepPlan === "PENDING" ||
-            loadingCloudinaryImage === "PENDING"
-          }
-          onClickFunction={(e) => onCreateMealPrepPlanSubmit(e)}
-        />
-      </form>
+                      currentEntityValue={
+                        templateMealPrepPlan.instanceTemplatesTimings[
+                          instanceTemplateOption.id - 1
+                        ]?.weekday
+                      }
+                    />
+                    <TextFormControl
+                      entityProperty={
+                        templateMealPrepPlan.instanceTemplatesTimings[
+                          instanceTemplateOption.id - 1
+                        ]?.sessionStartingTime
+                      }
+                      labelContent="Session Starting Time:"
+                      onEntityPropertyValueChange={(e) =>
+                        dispatch(
+                          updateInstanceTemplatesTiming({
+                            index: instanceTemplateOption.id - 1,
+                            load: {
+                              key: "sessionStartingTime",
+                              value: e.target.value,
+                            },
+                          })
+                        )
+                      }
+                      type="time"
+                    />
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      ) : null}
     </section>
   );
 };

@@ -10,6 +10,7 @@ import {
   PayloadAction,
   createAsyncThunk,
   createEntityAdapter,
+  createSelector,
   createSlice,
 } from "@reduxjs/toolkit";
 // Prisma
@@ -142,6 +143,15 @@ const ingredientsSlice = createSlice({
         [action.payload.key]: action.payload.value,
       };
     },
+    updateTemplateIngredientMacros(
+      state,
+      action: PayloadAction<ObjectKeyValueType>
+    ) {
+      state.templateIngredient.macros = {
+        ...state.templateIngredient.macros,
+        [action.payload.key]: action.payload.value,
+      };
+    },
   },
   extraReducers(builder) {
     builder
@@ -222,6 +232,7 @@ export const {
   updateTemplateIngredient,
   updateLoadingCreateIngredient,
   updateLoadingGetUserIngredients,
+  updateTemplateIngredientMacros,
 } = ingredientsSlice.actions;
 
 export default ingredientsSlice.reducer;

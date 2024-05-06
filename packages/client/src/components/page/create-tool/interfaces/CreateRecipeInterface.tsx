@@ -6,9 +6,7 @@ import PrimaryButton from "@/components/shared/PrimaryButton";
 import ImageFormControl from "@/components/shared/form/ImageFormControl";
 import PopupModal from "@/components/shared/modals/PopupModal";
 import SelectFormControl from "@/components/shared/form/SelectFormControl";
-import CheckboxFormControl from "@/components/shared/form/CheckboxFormControl";
-import VideoFormControl from "@/components/shared/form/VideoFormControl";
-import TextAreaFormControl from "@/components/shared/form/TextAreaFormControl";
+import EntityPreview from "@/components/shared/entity/EntityPreview";
 // Data
 import { defaultEntityQueryValues, defaultUtensilImageUrl } from "@/data";
 // React
@@ -32,8 +30,6 @@ import {
   setTemplateModalMessage,
 } from "@/redux/slices/generalSlice";
 import {
-  changeShowVideoTutorialContent,
-  changeShowWrittenTutorialContent,
   createRecipe,
   selectLoadingCreateRecipe,
   selectRecipeFormModalErrorMessage,
@@ -45,9 +41,13 @@ import {
 } from "@/redux/slices/recipesSlice";
 import {
   getAllUserIngredients,
+  selectAllIngredients,
   selectAllIngredientsIds,
   selectLoadingGetUserIngredients,
 } from "@/redux/slices/ingredientsSlice";
+import CreateRecipeTutorial from "../CreateRecipeTutorial";
+import calculateEntityMacrosBasedOnComponents from "@/helpers/calculateEntityMacrosBasedOnComponents";
+import IngredientTemplate from "@/core/types/entity/mutation/IngredientTemplate";
 
 const CreateRecipeInterface = () => {
   const dispatch = useAppDispatch();
@@ -82,6 +82,27 @@ const CreateRecipeInterface = () => {
     loadingGetProfile === "SUCCEDED"
       ? loadingGetProfile
       : loadingGetOAuthProfile;
+
+  const ingredientsBasedOnIngredientIds = useAppSelector(
+    selectAllIngredients
+  ).filter((ingredient) => {
+    return templateRecipe.ingredients.find(
+      (trIngredientId) => trIngredientId === ingredient.id
+    );
+  }) as IngredientTemplate[];
+
+  useEffect(() => {
+    dispatch(
+      updateTemplateRecipe({
+        key: "macros",
+        value: calculateEntityMacrosBasedOnComponents(
+          ingredientsBasedOnIngredientIds.map(
+            (ingredient: IngredientTemplate) => ingredient?.macros
+          )
+        ),
+      })
+    );
+  }, [templateRecipe.ingredients]);
 
   const handleUpdateArrayEntities = (
     entityIds: string[] = [],
@@ -164,53 +185,69 @@ const CreateRecipeInterface = () => {
 
   return (
     <section className={createToolStyles.createInterface}>
-      <PopupModal hasBorder={false} modalType="form" />
-      <h2>Create Recipe</h2>
-      <form className={createToolStyles.createInterfaceForm}>
-        <TextFormControl
-          direction="row"
-          entityProperty={templateRecipe.name}
-          labelColor="#DDD9D5"
-          labelContent="Recipe Name:"
-          onEntityPropertyValueChange={(e) =>
-            dispatch(
-              updateTemplateRecipe({ key: "name", value: e.target.value })
-            )
-          }
-          required={true}
-          type="text"
-          inputHeight={36}
-          labelFontSize={28}
-          backgroundColor="#8B0000"
-          border={"1.5px solid #120a06"}
-          padding={16}
+      <div className={createToolStyles.createInterfaceWrapper}>
+        <div className={createToolStyles.createInterfaceFormContainer}>
+          <PopupModal hasBorder={false} modalType="form" />
+          <h4>Create Recipe</h4>
+          <form className={createToolStyles.createInterfaceForm}>
+            <TextFormControl
+              entityProperty={templateRecipe.name}
+              labelContent="Recipe Name:"
+              onEntityPropertyValueChange={(e) =>
+                dispatch(
+                  updateTemplateRecipe({ key: "name", value: e.target.value })
+                )
+              }
+              type="text"
+            />
+            <ImageFormControl
+              labelContent="Recipe Image:"
+              defaultImageUsedUrl={defaultUtensilImageUrl}
+              entityPropertyLoadingStatus={loadingCloudinaryImage}
+              entityProperty={templateRecipe.imageUrl as string}
+              onEntityPropertyValueChange={(e) => {
+                if (e.target.files) {
+                  dispatch(
+                    createCloudinaryImage({
+                      entity: "recipes",
+                      imageFile: e.target.files[0],
+                    })
+                  );
+                }
+              }}
+              labelFontSize={28}
+            />
+            <CreateRecipeTutorial />
+            <PrimaryButton
+              content="Create Recipe"
+              type="functional"
+              disabled={
+                loadingCreateRecipe === "PENDING" ||
+                loadingCloudinaryImage === "PENDING"
+              }
+              onClickFunction={(e) => {
+                e.preventDefault();
+                dispatch(
+                  createRecipe({
+                    templateRecipe: templateRecipe,
+                    userId: profile.id,
+                    showVideoTutorialContent: showVideoTutorialContent,
+                    showWrittenTutorialContent: showWrittenTutorialContent,
+                  })
+                );
+              }}
+            />
+          </form>
+        </div>
+        <EntityPreview
+          entity={templateRecipe}
+          entityType="recipe"
+          type="preview"
         />
-        <ImageFormControl
-          labelColor="#DDD9D5"
-          labelContent="Recipe Image:"
-          direction="row"
-          defaultImageUsedUrl={defaultUtensilImageUrl}
-          entityPropertyLoadingStatus={loadingCloudinaryImage}
-          entityProperty={templateRecipe.imageUrl as string}
-          onEntityPropertyValueChange={(e) => {
-            if (e.target.files) {
-              dispatch(
-                createCloudinaryImage({
-                  entity: "recipes",
-                  imageFile: e.target.files[0],
-                })
-              );
-            }
-          }}
-          labelFontSize={28}
-          backgroundColor="#8B0000"
-          border={"1.5px solid #120a06"}
-          padding={16}
-        />
+      </div>
+      <div className={createToolStyles.createInterfaceComponentsContainer}>
         <SelectFormControl
-          labelColor="#DDD9D5"
-          labelContent="Ingredients:"
-          required={true}
+          labelContent="Ingredients Used:"
           entityPropertyOptions={ingredientsIds}
           entityPropertyChosenOptions={
             (templateRecipe.ingredients as string[]) || []
@@ -223,14 +260,10 @@ const CreateRecipeInterface = () => {
               "ingredients"
             )
           }
-          labelFontSize={28}
           areOptionsLoading={loadingGetUserIngredients === "PENDING"}
-          backgroundColor="#8B0000"
         />
         <SelectFormControl
-          labelColor="#DDD9D5"
-          labelContent="Utensils:"
-          required={true}
+          labelContent="Utensils Used:"
           entityPropertyOptions={utensilsIds}
           entityPropertyChosenOptions={
             (templateRecipe.utensils as string[]) || []
@@ -243,126 +276,9 @@ const CreateRecipeInterface = () => {
               "utensils"
             )
           }
-          labelFontSize={28}
           areOptionsLoading={loadingGetUserUtensils === "PENDING"}
-          backgroundColor="#640000"
         />
-        <div
-          className={createToolStyles.createInterfaceRecipeTutorial}
-          style={{ backgroundColor: "#8B0000" }}
-        >
-          <h3 style={{ color: "#DDD9D5" }}>Tutorial:</h3>
-          <div
-            className={createToolStyles.createInterfaceRecipeTutorialCheckboxes}
-          >
-            <CheckboxFormControl
-              direction="row"
-              labelColor="#DDD9D5"
-              labelContent="Use Video Tutorial?:"
-              entityProperty={String(showVideoTutorialContent)}
-              onEntityPropertyValueChange={(e) =>
-                dispatch(
-                  changeShowVideoTutorialContent(
-                    !Boolean(showVideoTutorialContent)
-                  )
-                )
-              }
-              labelFontSize={26}
-              backgroundColor="#421d17"
-              border={"1.5px solid #120a06"}
-              padding={16}
-            />
-            {showVideoTutorialContent && (
-              <VideoFormControl
-                direction="row"
-                labelColor="#DDD9D5"
-                labelContent="Recipe Tutorial URL:"
-                inputHeight={36}
-                labelFontSize={26}
-                entityProperty={templateRecipe.videoTutorial}
-                onEntityPropertyValueChange={(e) =>
-                  dispatch(
-                    updateTemplateRecipe({
-                      key: "videoTutorial",
-                      value: e.target.value,
-                    })
-                  )
-                }
-                backgroundColor="#421d17"
-                onEntityPropertyValueUpdate={(urlInput) =>
-                  dispatch(
-                    updateTemplateRecipe({
-                      key: "videoTutorial",
-                      value: urlInput,
-                    })
-                  )
-                }
-              />
-            )}
-            <CheckboxFormControl
-              direction="row"
-              labelColor="#DDD9D5"
-              labelContent="Use Written Tutorial?:"
-              entityProperty={String(showWrittenTutorialContent)}
-              onEntityPropertyValueChange={() =>
-                dispatch(
-                  changeShowWrittenTutorialContent(
-                    !Boolean(showWrittenTutorialContent)
-                  )
-                )
-              }
-              labelFontSize={26}
-              backgroundColor="#421d17"
-              border={"1.5px solid #120a06"}
-              padding={16}
-            />
-            {showWrittenTutorialContent && (
-              <TextAreaFormControl
-                direction="column"
-                entityProperty={templateRecipe.writtenTutorial}
-                labelColor="#DDD9D5"
-                labelContent="Written Tutorial:"
-                onEntityPropertyValueChange={(e) =>
-                  dispatch(
-                    updateTemplateRecipe({
-                      key: "writtenTutorial",
-                      value: e.target.value,
-                    })
-                  )
-                }
-                inputHeight={36}
-                labelFontSize={26}
-                maxInputLength={10000}
-                backgroundColor="#421d17"
-              />
-            )}
-          </div>
-        </div>
-        <PrimaryButton
-          backgroundColor="#8B0000"
-          textColor="#DDD9D5"
-          content="Create Recipe"
-          type="functional"
-          fontSize={24}
-          height={64}
-          width={560}
-          disabled={
-            loadingCreateRecipe === "PENDING" ||
-            loadingCloudinaryImage === "PENDING"
-          }
-          onClickFunction={(e) => {
-            e.preventDefault();
-            dispatch(
-              createRecipe({
-                templateRecipe: templateRecipe,
-                userId: profile.id,
-                showVideoTutorialContent: showVideoTutorialContent,
-                showWrittenTutorialContent: showVideoTutorialContent,
-              })
-            );
-          }}
-        />
-      </form>
+      </div>
     </section>
   );
 };

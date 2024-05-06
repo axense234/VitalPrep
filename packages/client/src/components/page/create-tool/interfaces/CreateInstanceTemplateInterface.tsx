@@ -26,8 +26,10 @@ import {
 import { ChangeEvent, useEffect, useRef } from "react";
 import {
   getAllUserDayTemplates,
+  selectAllDayTemplates,
   selectAllDayTemplatesIds,
   selectLoadingGetUserDayTemplates,
+  updateTemplateDayTemplate,
 } from "@/redux/slices/dayTemplatesSlice";
 import SelectFormControl from "@/components/shared/form/SelectFormControl";
 import {
@@ -38,6 +40,9 @@ import {
   updateLoadingCreateInstanceTemplate,
   updateTemplateInstanceTemplate,
 } from "@/redux/slices/instanceTemplatesSlice";
+import EntityPreview from "@/components/shared/entity/EntityPreview";
+import calculateEntityMacrosBasedOnComponents from "@/helpers/calculateEntityMacrosBasedOnComponents";
+import DayTemplateTemplate from "@/core/types/entity/mutation/DayTemplateTemplate";
 
 const CreateInstanceTemplateInterface = () => {
   const dispatch = useAppDispatch();
@@ -101,6 +106,27 @@ const CreateInstanceTemplateInterface = () => {
 
   console.log(templateInstanceTemplate.dayTemplates);
 
+  const dayTemplatesBasedOnDayTemplateIds = useAppSelector(
+    selectAllDayTemplates
+  ).filter((dayTemplate) => {
+    return templateInstanceTemplate.dayTemplates.find(
+      (titDayTemplateId) => titDayTemplateId === dayTemplate.id
+    );
+  }) as DayTemplateTemplate[];
+
+  useEffect(() => {
+    dispatch(
+      updateTemplateInstanceTemplate({
+        key: "macros",
+        value: calculateEntityMacrosBasedOnComponents(
+          dayTemplatesBasedOnDayTemplateIds.map(
+            (dayTemplate: DayTemplateTemplate) => dayTemplate?.macros
+          )
+        ),
+      })
+    );
+  }, [templateInstanceTemplate.dayTemplates]);
+
   useEffect(() => {
     if (
       loadingGetUserDayTemplates === "IDLE" &&
@@ -149,152 +175,153 @@ const CreateInstanceTemplateInterface = () => {
     }
   }, [loadingCloudinaryImage]);
 
+  useEffect(() => {
+    if (
+      templateInstanceTemplate.coverage &&
+      templateInstanceTemplate?.coverage >= 1
+    ) {
+      dispatch(
+        updateTemplateInstanceTemplate({
+          key: "dayTemplates",
+          value: templateInstanceTemplate.dayTemplates.slice(
+            0,
+            templateInstanceTemplate.coverage
+          ),
+        })
+      );
+    }
+  }, [templateInstanceTemplate.coverage]);
+
+  console.log(templateInstanceTemplate.dayTemplates);
+
   return (
     <section className={createToolStyles.createInterface}>
-      <PopupModal hasBorder={false} modalType="form" />
-      <h2>Create Instance Template</h2>
-      <form className={createToolStyles.createInterfaceForm}>
-        <TextFormControl
-          direction="row"
-          entityProperty={templateInstanceTemplate.name}
-          labelColor="#DDD9D5"
-          labelContent="Instance Template Name:"
-          onEntityPropertyValueChange={(e) =>
-            dispatch(
-              updateTemplateInstanceTemplate({
-                key: "name",
-                value: e.target.value,
-              })
-            )
-          }
-          required={true}
-          type="text"
-          inputHeight={36}
-          labelFontSize={28}
-          backgroundColor="#012433"
-          border={"1.5px solid #120a06"}
-          padding={16}
-        />
-        <ImageFormControl
-          labelColor="#DDD9D5"
-          labelContent="Instance Template Image:"
-          direction="column"
-          defaultImageUsedUrl={defaultInstanceTemplateImageUrl}
-          entityPropertyLoadingStatus={loadingCloudinaryImage}
-          entityProperty={templateInstanceTemplate.imageUrl as string}
-          onEntityPropertyValueChange={(
-            sourceOfImages: ChangeEvent<HTMLInputElement>
-          ) => {
-            if (sourceOfImages?.target.files) {
-              dispatch(
-                createCloudinaryImage({
-                  entity: "instanceTemplates",
-                  imageFile: sourceOfImages?.target?.files[0] || sourceOfImages,
-                })
-              );
-            }
-          }}
-          labelFontSize={28}
-          backgroundColor="#012433"
-          border={"1.5px solid #120a06"}
-          padding={16}
-        />
-        <TextFormControl
-          direction="row"
-          entityProperty={templateInstanceTemplate.coverage}
-          labelColor="#DDD9D5"
-          labelContent="Number of Days Covered:"
-          onEntityPropertyValueChange={(e) =>
-            dispatch(
-              updateTemplateInstanceTemplate({
-                key: "coverage",
-                value: e.target.valueAsNumber,
-              })
-            )
-          }
-          required={true}
-          type="number"
-          inputHeight={36}
-          labelFontSize={28}
-          backgroundColor="#012433"
-          border={"1.5px solid #120a06"}
-          padding={16}
-        />
-        {templateInstanceTemplate.coverage &&
-        templateInstanceTemplate.coverage > 0 ? (
-          <div
-            className={
-              createToolStyles.createInterfaceDayTemplateRecipesContainer
-            }
-            style={{
-              backgroundColor: "#012433",
-            }}
-          >
-            <h3 style={{ color: "#DDD9D5" }}>Individual Day Templates:</h3>
-            <ul className={createToolStyles.createInterfaceDayTemplateRecipes}>
-              {numberOfDaysIterable.map((dayOption) => {
-                return (
-                  <li key={dayOption.id}>
-                    <SelectFormControl
-                      labelColor="#DDD9D5"
-                      labelContent={`Day #${dayOption.id}:`}
-                      required={true}
-                      entityPropertyOptions={dayTemplatesIds}
-                      entityPropertyChosenOptions={
-                        (templateInstanceTemplate.dayTemplates as string[]) ||
-                        []
-                      }
-                      entityTypeUsed="dayTemplate"
-                      onEntityPropertyValueChange={(id) =>
-                        handleUpdateArrayEntities(
-                          templateInstanceTemplate.dayTemplates as string[],
-                          id,
-                          dayOption.id - 1,
-                          "dayTemplates"
-                        )
-                      }
-                      labelFontSize={28}
-                      backgroundColor="#012433"
-                      areOptionsLoading={
-                        loadingGetUserDayTemplates === "PENDING"
-                      }
-                      showEntityExtraCondition={(id) => {
-                        return (
-                          templateInstanceTemplate.dayTemplates[
-                            dayOption.id - 1
-                          ] === id
-                        );
-                      }}
-                    />
-                  </li>
+      <div className={createToolStyles.createInterfaceWrapper}>
+        <div className={createToolStyles.createInterfaceFormContainer}>
+          <PopupModal hasBorder={false} modalType="form" />
+          <h4>Create Instance Template</h4>
+          <form className={createToolStyles.createInterfaceForm}>
+            <TextFormControl
+              entityProperty={templateInstanceTemplate.name}
+              labelContent="Instance Template Name:"
+              onEntityPropertyValueChange={(e) =>
+                dispatch(
+                  updateTemplateInstanceTemplate({
+                    key: "name",
+                    value: e.target.value,
+                  })
+                )
+              }
+              type="text"
+            />
+            <ImageFormControl
+              labelContent="Instance Template Image:"
+              defaultImageUsedUrl={defaultInstanceTemplateImageUrl}
+              entityPropertyLoadingStatus={loadingCloudinaryImage}
+              entityProperty={templateInstanceTemplate.imageUrl as string}
+              onEntityPropertyValueChange={(
+                sourceOfImages: ChangeEvent<HTMLInputElement>
+              ) => {
+                if (sourceOfImages?.target.files) {
+                  dispatch(
+                    createCloudinaryImage({
+                      entity: "instanceTemplates",
+                      imageFile:
+                        sourceOfImages?.target?.files[0] || sourceOfImages,
+                    })
+                  );
+                }
+              }}
+            />
+            <TextFormControl
+              entityProperty={templateInstanceTemplate.coverage}
+              labelContent="Number of Days Covered:"
+              onEntityPropertyValueChange={(e) =>
+                dispatch(
+                  updateTemplateInstanceTemplate({
+                    key: "coverage",
+                    value: e.target.valueAsNumber,
+                  })
+                )
+              }
+              type="number"
+            />
+            <PrimaryButton
+              content="Create Instance Template"
+              type="functional"
+              disabled={
+                loadingCreateInstanceTemplate === "PENDING" ||
+                loadingCloudinaryImage === "PENDING"
+              }
+              onClickFunction={(e) => {
+                e.preventDefault();
+                dispatch(
+                  createInstanceTemplate({
+                    templateInstanceTemplate: templateInstanceTemplate,
+                    userId: profile.id,
+                  })
                 );
-              })}
-            </ul>
-          </div>
-        ) : null}
-        <PrimaryButton
-          backgroundColor="#012433"
-          textColor="#DDD9D5"
-          content="Create Instance Template"
-          type="functional"
-          fontSize={24}
-          height={64}
-          width={560}
-          disabled={
-            loadingCreateInstanceTemplate === "PENDING" ||
-            loadingCloudinaryImage === "PENDING"
-          }
-          onClickFunction={(e) => {
-            e.preventDefault();
-            dispatch(
-              createInstanceTemplate({
-                templateInstanceTemplate: templateInstanceTemplate,
-                userId: profile.id,
-              })
-            );
-          }}
+              }}
+            />
+          </form>
+        </div>
+        <EntityPreview
+          entity={templateInstanceTemplate}
+          entityType="instanceTemplate"
+          type="preview"
         />
-      </form>
+      </div>
+      {templateInstanceTemplate.coverage &&
+      templateInstanceTemplate?.coverage > 0 ? (
+        <div
+          className={
+            createToolStyles.createInterfaceMultipleComponentsContainer
+          }
+        >
+          <h4>Individual Day Templates:</h4>
+          <ul
+            className={
+              createToolStyles.createInterfaceMultipleComponentsSelectControls
+            }
+          >
+            {numberOfDaysIterable.map((dayOption) => {
+              return (
+                <li
+                  key={dayOption.id}
+                  className={
+                    createToolStyles.createInterfaceMultipleComponentsSelectControlsListItem
+                  }
+                >
+                  <SelectFormControl
+                    labelContent={`Day #${dayOption.id}:`}
+                    entityPropertyOptions={dayTemplatesIds}
+                    entityPropertyChosenOptions={
+                      (templateInstanceTemplate.dayTemplates as string[]) || []
+                    }
+                    entityTypeUsed="dayTemplate"
+                    onEntityPropertyValueChange={(id) =>
+                      handleUpdateArrayEntities(
+                        templateInstanceTemplate.dayTemplates as string[],
+                        id,
+                        dayOption.id - 1,
+                        "dayTemplates"
+                      )
+                    }
+                    areOptionsLoading={loadingGetUserDayTemplates === "PENDING"}
+                    showEntityExtraCondition={(id) => {
+                      return (
+                        templateInstanceTemplate.dayTemplates[
+                          dayOption.id - 1
+                        ] === id
+                      );
+                    }}
+                  />
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      ) : null}
     </section>
   );
 };

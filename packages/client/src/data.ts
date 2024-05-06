@@ -28,10 +28,30 @@ import MealPrepLogTemplate from "./core/types/entity/mutation/MealPrepLogTemplat
 import FAQPageSection from "./core/types/FAQPageSection";
 import UserType from "./core/types/entity/UserType";
 import HomeSectionContentProps from "./core/interfaces/HomeSectionContentProps";
+import PageTitleContentType from "./core/types/PageTitleContentType";
 
 export const homePageUrl = "/home";
 export const sitePhoneNumber = "0754 189 293(fake)";
 export const siteEmail = "thisemaildoesnotexit@nothing.com";
+
+export const pageTitleContent: PageTitleContentType[] = [
+  {
+    id: 1,
+    specificPagePath: "/create-tool",
+    backgroundImageSrc:
+      "https://res.cloudinary.com/birthdayreminder/image/upload/v1714922257/VitalPrep/E5CLZDMYERHVRFH2IPKEXKQSEA_a3belu.jpg",
+    pageTitleTextContent: "Create Tool",
+    pageSubTitleContent: "create what you need",
+  },
+  {
+    id: 1,
+    specificPagePath: "/create-log",
+    backgroundImageSrc:
+      "https://res.cloudinary.com/birthdayreminder/image/upload/v1714922259/VitalPrep/pre_prepared_meals_pqenm1.png",
+    pageTitleTextContent: "Add Log",
+    pageSubTitleContent: "save your session log",
+  },
+];
 
 export const homeSectionsContent: (HomeSectionContentProps & { id: number })[] =
   [
@@ -600,6 +620,9 @@ export const defaultInstanceTemplateImageUrl =
 export const defaultMealPrepPlanImageUrl =
   "https://res.cloudinary.com/birthdayreminder/image/upload/v1708851067/VitalPrep/Default_Day_Instance_Image_Plan_obbwd9.jpg";
 
+export const defaultMealPrepLogImageUrl =
+  "https://res.cloudinary.com/birthdayreminder/image/upload/v1715014493/log-image_lrmtb5.jpg";
+
 export const createToolOptions: CreateToolOption[] = [
   {
     id: 1,
@@ -741,11 +764,18 @@ export const defaultTemplateInstanceTemplate: InstanceTemplateTemplate = {
   dayTemplates: [],
   imageUrl: defaultInstanceTemplateImageUrl,
   coverage: 0,
+  macros: {
+    id: "blah",
+    calories: 200,
+    carbsAmount: 20,
+    proteinAmount: 20,
+    fatsAmount: 2,
+  },
 };
 
 export const defaultTemplateMealPrepLog: MealPrepLogTemplate = {
   name: "Log",
-  imageUrl: defaultInstanceTemplateImageUrl,
+  imageUrl: defaultMealPrepLogImageUrl,
   completed: true,
   cookingDuration: 1,
   date: new Date(),
@@ -754,6 +784,13 @@ export const defaultTemplateMealPrepLog: MealPrepLogTemplate = {
   recipes: [],
   utensils: [],
   instanceTemplate: defaultTemplateInstanceTemplate,
+  macros: {
+    id: "blah",
+    calories: 200,
+    carbsAmount: 20,
+    proteinAmount: 20,
+    fatsAmount: 2,
+  },
 };
 
 export const defaultTemplateMealPrepPlan: MealPrepPlanTemplate = {
@@ -848,16 +885,16 @@ export const pageLinks: PageLink[] = [
   },
   {
     id: 3,
-    linkDest: "/create-tool",
+    linkDest: "/create-log",
     reactIcon: MdCreate({}),
-    linkTitle: "Create Tool",
+    linkTitle: "Add Log",
     linkType: "normal",
   },
   {
     id: 4,
-    linkDest: "/create-log",
+    linkDest: "/create-tool",
     reactIcon: MdCreate({}),
-    linkTitle: "Create Log",
+    linkTitle: "Create Tool",
     linkType: "normal",
   },
   {

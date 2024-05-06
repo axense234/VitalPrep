@@ -6,38 +6,18 @@ import formControlsStyles from "../../../scss/components/others/FormControls.mod
 import TextAreaFormControlProps from "@/core/interfaces/form/TextAreaFormControlProps";
 
 const TextAreaFormControl: FC<TextAreaFormControlProps> = ({
-  direction,
   entityProperty,
-  labelColor,
   labelContent,
   onEntityPropertyValueChange,
-  inputHeight,
-  labelFontSize,
   maxInputLength,
-  backgroundColor,
 }) => {
   return (
-    <div
-      className={formControlsStyles.textAreaFormControlContainer}
-      style={{
-        flexDirection: direction,
-        justifyContent: direction === "row" ? "space-between" : "center",
-        backgroundColor: backgroundColor ? backgroundColor : "none",
-      }}
-    >
-      <label
-        htmlFor={labelContent}
-        style={{ color: labelColor, fontSize: labelFontSize || 22 }}
-      >
-        {labelContent}
-      </label>
+    <div className={formControlsStyles.textAreaFormControlContainer}>
+      <label htmlFor={labelContent}>{labelContent}</label>
       <textarea
         name={labelContent}
         minLength={3}
         maxLength={maxInputLength || 40}
-        style={{
-          height: inputHeight || 24,
-        }}
         value={entityProperty}
         onChange={onEntityPropertyValueChange}
       />

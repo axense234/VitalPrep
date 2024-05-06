@@ -237,6 +237,10 @@ const createMealPrepLog = async (req: Request, res: Response) => {
     });
   }
 
+  if (mealPrepLogBody.macros) {
+    delete mealPrepLogBody.macros;
+  }
+
   const instanceTemplateId = mealPrepLogBody.instanceTemplateId;
   delete mealPrepLogBody.instanceTemplateId;
 

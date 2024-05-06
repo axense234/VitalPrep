@@ -1,4 +1,4 @@
-import { InstanceTemplate, MealPrepLog } from "@prisma/client";
+import { InstanceTemplate, Macros, MealPrepLog } from "@prisma/client";
 import RecipeTemplate from "./RecipeTemplate";
 import IngredientTemplate from "./IngredientTemplate";
 import UtensilTemplate from "./UtensilTemplate";
@@ -15,6 +15,7 @@ type MealPrepLogTemplate = OptionalMealPrepLog<MealPrepLog> & {
   recipes?: RecipeTemplate[];
   ingredients?: IngredientTemplate[];
   utensils?: UtensilTemplate[];
+  macros: Macros;
 };
 
 export default MealPrepLogTemplate;

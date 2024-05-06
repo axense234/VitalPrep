@@ -20,7 +20,6 @@ import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import { useEffect, useRef } from "react";
 // ChartTS
 import { LineElement, PointElement, BarElement, ArcElement } from "chart.js";
-import ChartDataLabels from "chartjs-plugin-datalabels";
 import { Chart } from "chart.js/auto";
 // Helpers
 import {
@@ -39,13 +38,7 @@ const SpecialLayout = ({ children }: { children: React.ReactNode }) => {
   const loadingGetProfile = useAppSelector(selectLoadingGetProfile);
   const loadingGetOAuthProfile = useAppSelector(selectLoadingGetOAuthProfile);
 
-  Chart.register([
-    LineElement,
-    PointElement,
-    BarElement,
-    ArcElement,
-    ChartDataLabels,
-  ]);
+  Chart.register([LineElement, PointElement, BarElement, ArcElement]);
 
   useEffect(() => {
     const initialize = async () => {

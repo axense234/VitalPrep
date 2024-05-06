@@ -85,8 +85,6 @@ const useSelectEntityComponentShown = (
   let entityComponentShown = null;
   let entityComponentDestination = "";
 
-  console.log(entityId);
-
   switch (entityType) {
     case "ingredient":
       entityComponentDestination = `/ingredient/${entityId || entity?.id}`;

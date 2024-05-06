@@ -21,8 +21,8 @@ import {
   defaultRecipeImageUrl,
   defaultUtensilImageUrl,
 } from "@/data";
-// Pie Chart
-import EntityMacrosPieGraph from "@/components/shared/entity/EntityMacrosPieGraph";
+// Line Chart
+import EntityMacros from "@/components/shared/entity/EntityMacros";
 // Components
 import EntityInfoDetailsComposedSection from "./EntityInfoDetailsComposedSection";
 // Types
@@ -69,7 +69,7 @@ const EntityInfoDetails: FC<{ entityId: string; entityType: EntityType }> = ({
               </h3>
             </header>
           </div>
-          <EntityMacrosPieGraph
+          <EntityMacros
             macros={(entity as IngredientTemplate)?.macros}
             labelSize={28}
           />
@@ -116,7 +116,7 @@ const EntityInfoDetails: FC<{ entityId: string; entityType: EntityType }> = ({
                   : "??? calories"}
               </h3>
             </header>
-            <EntityMacrosPieGraph
+            <EntityMacros
               macros={(entity as RecipeTemplate)?.macros}
               labelSize={28}
             />
@@ -178,7 +178,7 @@ const EntityInfoDetails: FC<{ entityId: string; entityType: EntityType }> = ({
                   : "??? total calories"}
               </h3>
             </header>
-            <EntityMacrosPieGraph
+            <EntityMacros
               macros={(entity as DayTemplateTemplate)?.macros}
               labelSize={28}
             />
@@ -235,7 +235,7 @@ const EntityInfoDetails: FC<{ entityId: string; entityType: EntityType }> = ({
                   : `??? days covered`}
               </h3>
             </header>
-            <EntityMacrosPieGraph
+            <EntityMacros
               macros={(entity as InstanceTemplateTemplate)?.macros as Macros}
               labelSize={28}
             />
@@ -298,7 +298,7 @@ const EntityInfoDetails: FC<{ entityId: string; entityType: EntityType }> = ({
                   : "??? day templates used"}
               </h3>
             </header>
-            <EntityMacrosPieGraph
+            <EntityMacros
               macros={(entity as MealPrepPlanTemplate)?.macros as Macros}
               labelSize={28}
             />
@@ -380,7 +380,7 @@ const EntityInfoDetails: FC<{ entityId: string; entityType: EntityType }> = ({
                   : "??? hours"}
               </h3>
             </header>
-            <EntityMacrosPieGraph
+            <EntityMacros
               macros={
                 (entity as MealPrepLogTemplate)?.instanceTemplate
                   ?.macros as Macros

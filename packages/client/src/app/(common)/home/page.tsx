@@ -4,7 +4,7 @@ import homeStyles from "../../../scss/pages/Home.module.scss";
 // Hooks
 import useAuthorization from "@/hooks/useAuthorization";
 // Components
-import HomeSections from "@/components/page/create-tool/home/HomeSections";
+import HomeSections from "@/components/page/home/HomeSections";
 
 const Home = () => {
   useAuthorization();

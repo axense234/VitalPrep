@@ -12,6 +12,8 @@
   background-color: getColor("secondary-color-1.1");
   transition: transform 0.135s ease-in;
   transform: translateX(-80%);
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
 }
 
 .activeMealPrepPlanSettings {
@@ -32,11 +34,10 @@
   select {
     @include flexCenter(column);
     appearance: none;
-    border: 2px solid black;
     border: none;
     width: 100%;
     background-color: getColor("primary-3");
-    color: getColor("black-100-1");
+    color: getColor("black-75-1");
     padding: 0.75rem;
     font-size: 0.75rem;
 
@@ -54,6 +55,8 @@
 .activeMealPrepPlanContent {
   @include flexCenter(row);
   width: 70%;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
 
   h3 {
     text-align: center;
@@ -66,5 +69,7 @@
   img {
     width: 25%;
     margin-left: auto;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
   }
 }

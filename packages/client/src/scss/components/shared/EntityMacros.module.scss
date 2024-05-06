@@ -1,0 +1,16 @@
+@use "../../abstracts" as *;
+
+.lineGraphContainer {
+  @include flexCenter(column);
+  width: 100%;
+  max-height: 40rem;
+  gap: 2rem;
+
+  h4 {
+    @include heading("h4", "laptop", "black");
+  }
+
+  h6 {
+    @include heading("h6", "laptop", "black");
+  }
+}

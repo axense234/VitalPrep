@@ -29,6 +29,7 @@ import {
 } from "@/redux/slices/generalSlice";
 // React
 import { useEffect } from "react";
+import EntityPreview from "@/components/shared/entity/EntityPreview";
 
 const CreateUtensilInterface = () => {
   const dispatch = useAppDispatch();
@@ -72,92 +73,79 @@ const CreateUtensilInterface = () => {
     }
   }, [loadingCloudinaryImage]);
 
+  console.log(templateUtensil.enabled);
+
   return (
     <section className={createToolStyles.createInterface}>
-      <PopupModal hasBorder={false} modalType="form" />
-      <h2>Create Utensil</h2>
-      <form className={createToolStyles.createInterfaceForm}>
-        <TextFormControl
-          direction="row"
-          entityProperty={templateUtensil.name}
-          labelColor="#120A06"
-          labelContent="Utensil Name:"
-          onEntityPropertyValueChange={(e) =>
-            dispatch(
-              updateTemplateUtensil({ key: "name", value: e.target.value })
-            )
-          }
-          required={true}
-          type="text"
-          inputHeight={36}
-          labelFontSize={28}
-          backgroundColor="#FF6000"
-          border={"1.5px solid #120a06"}
-          padding={16}
+      <div className={createToolStyles.createInterfaceWrapper}>
+        <div className={createToolStyles.createInterfaceFormContainer}>
+          <PopupModal hasBorder={false} modalType="form" />
+          <h4>Create Utensil</h4>
+          <form className={createToolStyles.createInterfaceForm}>
+            <TextFormControl
+              entityProperty={templateUtensil.name}
+              labelContent="Utensil Name:"
+              onEntityPropertyValueChange={(e) =>
+                dispatch(
+                  updateTemplateUtensil({ key: "name", value: e.target.value })
+                )
+              }
+              type="text"
+            />
+            <ImageFormControl
+              labelContent="Utensil Image:"
+              defaultImageUsedUrl={defaultUtensilImageUrl}
+              entityPropertyLoadingStatus={loadingCloudinaryImage}
+              entityProperty={templateUtensil.imageUrl as string}
+              onEntityPropertyValueChange={(e) => {
+                if (e.target.files) {
+                  dispatch(
+                    createCloudinaryImage({
+                      entity: "utensils",
+                      imageFile: e.target.files[0],
+                    })
+                  );
+                }
+              }}
+            />
+            <CheckboxFormControl
+              labelContent="Enabled?:"
+              entityProperty={String(templateUtensil.enabled)}
+              onEntityPropertyValueChange={(e) => {
+                console.log(e.target.value);
+                dispatch(
+                  updateTemplateUtensil({
+                    key: "enabled",
+                    value: e.target.value === "true" ? false : true,
+                  })
+                );
+              }}
+            />
+            <PrimaryButton
+              content="Create Utensil"
+              type="functional"
+              disabled={
+                loadingCreateUtensil === "PENDING" ||
+                loadingCloudinaryImage === "PENDING"
+              }
+              onClickFunction={(e) => {
+                e.preventDefault();
+                dispatch(
+                  createUtensil({
+                    templateUtensil: templateUtensil,
+                    userId: profile.id,
+                  })
+                );
+              }}
+            />
+          </form>
+        </div>
+        <EntityPreview
+          entity={templateUtensil}
+          entityType="utensil"
+          type="preview"
         />
-        <ImageFormControl
-          labelColor="#120A06"
-          labelContent="Utensil Image:"
-          direction="row"
-          defaultImageUsedUrl={defaultUtensilImageUrl}
-          entityPropertyLoadingStatus={loadingCloudinaryImage}
-          entityProperty={templateUtensil.imageUrl as string}
-          onEntityPropertyValueChange={(e) => {
-            if (e.target.files) {
-              dispatch(
-                createCloudinaryImage({
-                  entity: "utensils",
-                  imageFile: e.target.files[0],
-                })
-              );
-            }
-          }}
-          labelFontSize={28}
-          backgroundColor="#FF6000"
-          border={"1.5px solid #120a06"}
-          padding={16}
-        />
-        <CheckboxFormControl
-          direction="row"
-          labelColor="#120A06"
-          labelContent="Enabled?:"
-          entityProperty={String(templateUtensil.enabled)}
-          onEntityPropertyValueChange={(e) =>
-            dispatch(
-              updateTemplateUtensil({
-                key: "enabled",
-                value: !Boolean(e.target.value),
-              })
-            )
-          }
-          labelFontSize={28}
-          backgroundColor="#FF6000"
-          border={"1.5px solid #120a06"}
-          padding={16}
-        />
-        <PrimaryButton
-          backgroundColor="#FF6000"
-          textColor="#120A06"
-          content="Create Utensil"
-          type="functional"
-          fontSize={24}
-          height={64}
-          width={560}
-          disabled={
-            loadingCreateUtensil === "PENDING" ||
-            loadingCloudinaryImage === "PENDING"
-          }
-          onClickFunction={(e) => {
-            e.preventDefault();
-            dispatch(
-              createUtensil({
-                templateUtensil: templateUtensil,
-                userId: profile.id,
-              })
-            );
-          }}
-        />
-      </form>
+      </div>
     </section>
   );
 };

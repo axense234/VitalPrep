@@ -10,31 +10,18 @@ import VideoFormControlProps from "@/core/interfaces/form/VideoFormControlProps"
 import useVideoUrlFormat from "@/hooks/useVideoUrlFormat";
 
 const VideoFormControl: FC<VideoFormControlProps> = ({
-  direction,
   entityProperty,
-  labelColor,
   labelContent,
   onEntityPropertyValueChange,
   onEntityPropertyValueUpdate,
-  inputHeight,
-  labelFontSize,
-  backgroundColor,
 }) => {
   useVideoUrlFormat(entityProperty || "", onEntityPropertyValueUpdate);
 
   return (
-    <div
-      className={formControlsStyles.videoFormControlContainer}
-      style={{ backgroundColor: backgroundColor ? backgroundColor : "none" }}
-    >
+    <div className={formControlsStyles.videoFormControlContainer}>
       <TextFormControl
-        direction={direction}
-        labelColor={labelColor}
         labelContent={labelContent}
         type="url"
-        required={false}
-        inputHeight={inputHeight}
-        labelFontSize={labelFontSize}
         entityProperty={entityProperty}
         onEntityPropertyValueChange={onEntityPropertyValueChange}
         maxInputLength={1000}

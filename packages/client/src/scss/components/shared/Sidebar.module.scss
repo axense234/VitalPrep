@@ -4,13 +4,14 @@
   @include flexCenter(column);
   justify-content: flex-start;
   height: 100%;
-  width: $sidebarContainerWidth;
-  border-left: 1.5px solid getColor("black-100-1");
+  width: 30%;
+  min-width: 30rem;
+  border-left: 1.5px solid getColor("black-75-1");
+  background-color: getColor("secondary-color-3.2");
   position: fixed;
   top: 0;
   right: 0;
   z-index: 10;
-  background-color: getColor("secondary-color-3.2");
   gap: 2rem;
   transform: translateX(150%);
   transition: $crispyTransformTransition;
@@ -47,8 +48,6 @@
 
   h3 {
     @include heading("h3", "laptop", "black");
-    letter-spacing: 3.5px;
-    color: getColor("black-100-1");
     text-align: center;
     width: 100%;
   }
@@ -83,7 +82,7 @@
   }
 
   p {
-    font-size: $sidebarPageLinkTitleFontSize;
+    @include paragraph("laptop", "black");
     font-weight: 550;
     width: 100%;
     text-align: start;

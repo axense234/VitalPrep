@@ -6,6 +6,7 @@ import PrimaryButton from "@/components/shared/PrimaryButton";
 import ImageFormControl from "@/components/shared/form/ImageFormControl";
 import CheckboxFormControl from "@/components/shared/form/CheckboxFormControl";
 import PopupModal from "@/components/shared/modals/PopupModal";
+import EntityPreview from "@/components/shared/entity/EntityPreview";
 // Data
 import { defaultIngredientImageUrl } from "@/data";
 // Redux
@@ -17,6 +18,7 @@ import {
   selectTemplateIngredient,
   updateLoadingCreateIngredient,
   updateTemplateIngredient,
+  updateTemplateIngredientMacros,
 } from "@/redux/slices/ingredientsSlice";
 import {
   changeShowFormModal,
@@ -74,174 +76,130 @@ const CreateIngredientInterface = () => {
 
   return (
     <section className={createToolStyles.createInterface}>
-      <PopupModal hasBorder={true} modalType="form" />
-      <h2>Create Ingredient</h2>
-      <form className={createToolStyles.createInterfaceForm}>
-        <TextFormControl
-          direction="row"
-          entityProperty={templateIngredient.name}
-          labelColor="#120A06"
-          labelContent="Ingredient Name:"
-          onEntityPropertyValueChange={(e) =>
-            dispatch(
-              updateTemplateIngredient({ key: "name", value: e.target.value })
-            )
-          }
-          required={true}
-          type="text"
-          inputHeight={36}
-          labelFontSize={28}
-          backgroundColor="#FFAE00"
-          border={"1.5px solid #120a06"}
-          padding={16}
+      <div className={createToolStyles.createInterfaceWrapper}>
+        <div className={createToolStyles.createInterfaceFormContainer}>
+          <PopupModal hasBorder={true} modalType="form" />
+          <h4>Create Ingredient</h4>
+          <form className={createToolStyles.createInterfaceForm}>
+            <TextFormControl
+              entityProperty={templateIngredient.name}
+              labelContent="Ingredient Name:"
+              onEntityPropertyValueChange={(e) =>
+                dispatch(
+                  updateTemplateIngredient({
+                    key: "name",
+                    value: e.target.value,
+                  })
+                )
+              }
+              type="text"
+            />
+            <ImageFormControl
+              labelContent="Ingredient Image:"
+              defaultImageUsedUrl={defaultIngredientImageUrl}
+              entityPropertyLoadingStatus={loadingCloudinaryImage}
+              entityProperty={templateIngredient.imageUrl as string}
+              onEntityPropertyValueChange={(e) => {
+                if (e.target.files) {
+                  dispatch(
+                    createCloudinaryImage({
+                      entity: "ingredients",
+                      imageFile: e.target.files[0],
+                    })
+                  );
+                }
+              }}
+            />
+            <TextFormControl
+              entityProperty={templateIngredient.macros.calories}
+              labelContent="Calories(per 100g):"
+              onEntityPropertyValueChange={(e) =>
+                dispatch(
+                  updateTemplateIngredientMacros({
+                    key: "calories",
+                    value: e.target.valueAsNumber,
+                  })
+                )
+              }
+              type="number"
+            />
+            <TextFormControl
+              entityProperty={templateIngredient.macros.proteinAmount}
+              labelContent="Protein(in grams):"
+              onEntityPropertyValueChange={(e) =>
+                dispatch(
+                  updateTemplateIngredientMacros({
+                    key: "proteinAmount",
+                    value: e.target.valueAsNumber,
+                  })
+                )
+              }
+              type="number"
+            />
+            <TextFormControl
+              entityProperty={templateIngredient.macros.carbsAmount}
+              labelColor="#120A06"
+              labelContent="Carbs(in grams):"
+              onEntityPropertyValueChange={(e) =>
+                dispatch(
+                  updateTemplateIngredientMacros({
+                    key: "carbsAmount",
+                    value: e.target.valueAsNumber,
+                  })
+                )
+              }
+              type="number"
+            />
+            <TextFormControl
+              entityProperty={templateIngredient.macros.fatsAmount}
+              labelContent="Fats(in grams):"
+              onEntityPropertyValueChange={(e) =>
+                dispatch(
+                  updateTemplateIngredientMacros({
+                    key: "fatsAmount",
+                    value: e.target.valueAsNumber,
+                  })
+                )
+              }
+              type="number"
+            />
+            <CheckboxFormControl
+              labelContent="Enabled?:"
+              entityProperty={String(templateIngredient.enabled)}
+              onEntityPropertyValueChange={(e) =>
+                dispatch(
+                  updateTemplateIngredient({
+                    key: "enabled",
+                    value: e.target.value === "true" ? false : true,
+                  })
+                )
+              }
+            />
+            <PrimaryButton
+              content="Create Ingredient"
+              type="functional"
+              disabled={
+                loadingCreateIngredient === "PENDING" ||
+                loadingCloudinaryImage === "PENDING"
+              }
+              onClickFunction={(e) => {
+                e.preventDefault();
+                dispatch(
+                  createIngredient({
+                    templateIngredient: templateIngredient,
+                    userId: profile.id,
+                  })
+                );
+              }}
+            />
+          </form>
+        </div>
+        <EntityPreview
+          entity={templateIngredient}
+          entityType="ingredient"
+          type="preview"
         />
-        <ImageFormControl
-          labelColor="#120A06"
-          labelContent="Ingredient Image:"
-          direction="row"
-          defaultImageUsedUrl={defaultIngredientImageUrl}
-          entityPropertyLoadingStatus={loadingCloudinaryImage}
-          entityProperty={templateIngredient.imageUrl as string}
-          onEntityPropertyValueChange={(e) => {
-            if (e.target.files) {
-              dispatch(
-                createCloudinaryImage({
-                  entity: "ingredients",
-                  imageFile: e.target.files[0],
-                })
-              );
-            }
-          }}
-          labelFontSize={28}
-          backgroundColor="#FFAE00"
-          border={"1.5px solid #120a06"}
-          padding={16}
-        />
-        <TextFormControl
-          direction="row"
-          entityProperty={templateIngredient.calories}
-          labelColor="#120A06"
-          labelContent="Calories(per 100g):"
-          onEntityPropertyValueChange={(e) =>
-            dispatch(
-              updateTemplateIngredient({
-                key: "calories",
-                value: e.target.valueAsNumber,
-              })
-            )
-          }
-          required={true}
-          type="number"
-          inputHeight={36}
-          labelFontSize={28}
-          backgroundColor="#FFAE00"
-          border={"1.5px solid #120a06"}
-          padding={16}
-        />
-        <TextFormControl
-          direction="row"
-          entityProperty={templateIngredient.proteins}
-          labelColor="#120A06"
-          labelContent="Protein(per 100g, in grams):"
-          onEntityPropertyValueChange={(e) =>
-            dispatch(
-              updateTemplateIngredient({
-                key: "proteins",
-                value: e.target.valueAsNumber,
-              })
-            )
-          }
-          required={true}
-          type="number"
-          inputHeight={36}
-          labelFontSize={28}
-          backgroundColor="#FFAE00"
-          border={"1.5px solid #120a06"}
-          padding={16}
-        />
-        <TextFormControl
-          direction="row"
-          entityProperty={templateIngredient.carbs}
-          labelColor="#120A06"
-          labelContent="Carbs(per 100g, in grams):"
-          onEntityPropertyValueChange={(e) =>
-            dispatch(
-              updateTemplateIngredient({
-                key: "carbs",
-                value: e.target.valueAsNumber,
-              })
-            )
-          }
-          required={true}
-          type="number"
-          inputHeight={36}
-          labelFontSize={28}
-          backgroundColor="#FFAE00"
-          border={"1.5px solid #120a06"}
-          padding={16}
-        />
-        <TextFormControl
-          direction="row"
-          entityProperty={templateIngredient.fats}
-          labelColor="#120A06"
-          labelContent="Fats(per 100g, in grams):"
-          onEntityPropertyValueChange={(e) =>
-            dispatch(
-              updateTemplateIngredient({
-                key: "fats",
-                value: e.target.valueAsNumber,
-              })
-            )
-          }
-          required={true}
-          type="number"
-          inputHeight={36}
-          labelFontSize={28}
-          backgroundColor="#FFAE00"
-          border={"1.5px solid #120a06"}
-          padding={16}
-        />
-        <CheckboxFormControl
-          direction="row"
-          labelColor="#120A06"
-          labelContent="Enabled?:"
-          entityProperty={String(templateIngredient.enabled)}
-          onEntityPropertyValueChange={(e) =>
-            dispatch(
-              updateTemplateIngredient({
-                key: "enabled",
-                value: !Boolean(e.target.value),
-              })
-            )
-          }
-          labelFontSize={28}
-          backgroundColor="#FFAE00"
-          border={"1.5px solid #120a06"}
-          padding={16}
-        />
-        <PrimaryButton
-          backgroundColor="#FFAE00"
-          textColor="#120A06"
-          content="Create Ingredient"
-          type="functional"
-          fontSize={24}
-          height={64}
-          width={560}
-          disabled={
-            loadingCreateIngredient === "PENDING" ||
-            loadingCloudinaryImage === "PENDING"
-          }
-          onClickFunction={(e) => {
-            e.preventDefault();
-            dispatch(
-              createIngredient({
-                templateIngredient: templateIngredient,
-                userId: profile.id,
-              })
-            );
-          }}
-        />
-      </form>
+      </div>
     </section>
   );
 };

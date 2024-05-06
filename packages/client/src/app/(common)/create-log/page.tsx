@@ -2,20 +2,31 @@
 // Hooks
 import useAuthorization from "@/hooks/useAuthorization";
 // SCSS
-import createLogStyles from "../../../scss/pages/CreateLog.module.scss";
+import createToolStyles from "../../../scss/pages/CreateTool.module.scss";
 // Components
 import PageTitle from "@/components/shared/PageTitle";
-import CreateLogContent from "@/components/page/create-log/CreateLogContent";
+import CreateToolInterface from "@/components/page/create-tool/CreateToolInterface";
+// Data
+import { pageTitleContent } from "@/data";
 
 const CreateLog = () => {
   useAuthorization();
+
+  const { backgroundImageSrc, pageSubTitleContent, pageTitleTextContent } =
+    pageTitleContent.find(
+      (pageTitle) => pageTitle.specificPagePath === "/create-log"
+    ) || pageTitleContent[0];
+
   return (
-    <div className={createLogStyles.createLogContainer}>
+    <div className={createToolStyles.createToolContainer}>
       <PageTitle
-        titleContent="Add Log"
-        subtitleContent="log your meal prep session"
+        titleContent={pageTitleTextContent}
+        subtitleContent={pageSubTitleContent}
+        backgroundImageSrc={backgroundImageSrc}
       />
-      <CreateLogContent />
+      <div className={createToolStyles.createToolContent}>
+        <CreateToolInterface forcedSelectedEntityOption="mealPrepLog" />
+      </div>
     </div>
   );
 };

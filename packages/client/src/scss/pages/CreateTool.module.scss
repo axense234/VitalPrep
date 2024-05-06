@@ -2,15 +2,79 @@
 
 .createToolContainer {
   @include pageLayout();
+  position: relative;
+  background-color: getColor("secondary-color-3.3");
 }
 
 .createToolContent {
   @include flexCenter(column);
   width: 100%;
-  padding-top: 128px;
-  padding-bottom: 64px;
-  gap: 64px;
-  background-image: url($authFormPageTemplateFormBackgroundUrl);
+  padding: 8rem;
+}
+
+.createInterfaceWrapper {
+  @include flexCenter(row);
+  align-items: flex-start;
+  width: 100%;
+  gap: 8rem;
+}
+
+.createInterfaceComponentsContainer {
+  @include flexCenter(column);
+  width: 100%;
+  gap: 8rem;
+}
+
+.createInterfaceMultipleComponentsContainer {
+  @include flexCenter(column);
+  width: 100%;
+  gap: 2rem;
+  background-color: getColorWithOpacity("secondary-color-3.1", 0.5);
+  padding: 2rem;
+  border-radius: 25px;
+
+  h4 {
+    @include heading("h4", "laptop", "black");
+  }
+}
+
+.createInterfaceMultipleComponentsSelectControlsListItem {
+  @include flexCenter(column);
+  width: 100%;
+  gap: 3rem;
+
+  div {
+    align-items: flex-start;
+  }
+}
+
+.createInterfaceMultipleComponentsSelectControls {
+  @include flexCenter(column);
+  width: 100%;
+  gap: 3rem;
+  list-style: none;
+
+  li {
+    @include flexCenter(column);
+    gap: 3rem;
+
+    div {
+      align-items: flex-start;
+    }
+  }
+}
+
+.createInterfaceFormContainer {
+  @include flexCenter(column);
+  align-items: flex-start;
+  gap: 2rem;
+  padding: 4rem;
+  border-radius: 25px;
+  background-color: getColorWithOpacity("secondary-color-3.1", 0.5);
+
+  h4 {
+    @include heading("h4", "laptop", "black");
+  }
 }
 
 .createToolInterface {
@@ -22,67 +86,17 @@
 .createInterface {
   @include flexCenter(column);
   width: 100%;
-  gap: 104px;
-  padding: 128px 0px;
-
-  h2 {
-    @include heading("h2", "laptop", "black");
-    letter-spacing: 4.5px;
-    color: getColor("black-100-1");
-  }
+  gap: 8rem;
 }
 
 .createInterfaceForm {
   @include flexCenter(column);
   align-items: flex-start;
   width: 100%;
-  gap: 48px;
-  padding: 0px 400px;
+  gap: 2rem;
 
   button {
-    margin-top: 64px;
-    align-self: center;
-  }
-}
-
-.createInterfaceRecipeTutorial {
-  @include flexCenter(column);
-  width: 100%;
-  align-items: flex-start;
-  gap: 16px;
-
-  padding: 1rem;
-  border: 1.5px solid getColor("black-100-1");
-
-  h3 {
-    font-size: 28px;
-  }
-}
-
-.createInterfaceRecipeTutorialCheckboxes {
-  @include flexCenter(column);
-  align-items: flex-start;
-  width: 100%;
-  padding-left: 64px;
-  gap: 32px;
-}
-
-.createInterfaceDayTemplateRecipesContainer {
-  @include flexCenter(column);
-  width: 100%;
-  align-items: flex-start;
-  gap: 1rem;
-
-  padding: 1rem;
-  border: 1.5px solid getColor("black-100-1");
-
-  h3 {
-    font-size: 28px;
-  }
-
-  li {
-    @include flexCenter(column);
-    width: 100%;
+    margin-top: 2rem;
   }
 }
 
@@ -107,9 +121,8 @@
 
 .createInterfaceMealPrepPlanTimingContainer {
   @include flexCenter(column);
+  align-items: flex-start;
+  padding: 2rem;
   width: 100%;
-  padding: 1rem;
-  gap: 2rem;
-  background-color: getColor("primary-1");
-  border: 1px solid getColor("black-100-1");
+  gap: 1rem;
 }

@@ -117,40 +117,6 @@
   }
 }
 
-.entityInfoDetailsComposedSectionEntityCard {
-  @include flexCenter(column);
-  border: 2px solid black;
-  width: 100%;
-  gap: 1rem;
-  background-color: getColor("primary-1");
-  padding-bottom: 1rem;
-
-  img {
-    width: 100%;
-    height: auto;
-  }
-}
-
-.entityInfoDetailsComposedSectionEntityCardContent {
-  @include flexCenter(column);
-  width: 100%;
-  gap: 1rem;
-  padding: 0.5rem;
-
-  div {
-    padding: 1rem;
-    width: 100%;
-  }
-
-  h4 {
-    font-size: 24px;
-    text-align: center;
-    font-weight: 550;
-    letter-spacing: 1px;
-    color: getColor(tan-color-extra-light);
-  }
-}
-
 .entityInfoRecipeTutorialContainer {
   @include flexCenter(column);
   width: 100%;

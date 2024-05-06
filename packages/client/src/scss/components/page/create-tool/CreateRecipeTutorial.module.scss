@@ -1,0 +1,19 @@
+@use "../../../abstracts" as *;
+
+.createRecipeTutorialContainer {
+  @include flexCenter(column);
+  align-items: flex-start;
+  width: 100%;
+  gap: 2rem;
+  margin-top: 4rem;
+
+  h5 {
+    @include heading("h5", "laptop", "black");
+  }
+}
+
+.createRecipeTutorialCheckboxes {
+  @include flexCenter(column);
+  width: 100%;
+  gap: 2rem;
+}

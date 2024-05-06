@@ -1,0 +1,75 @@
+@use "../../abstracts" as *;
+
+.hiddenEntityTypeMenuContainer {
+  @include flexCenter(column);
+  position: fixed;
+  top: 27.5%;
+  left: 0%;
+  z-index: 2;
+  background-color: getColor("secondary-color-1.2");
+  padding: 1.5rem;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+
+  svg {
+    height: 3rem;
+    width: 3rem;
+    color: green;
+    transition: $crispyTransformTransition;
+
+    &:hover {
+      transform: rotate(-90deg) scale(1.2);
+    }
+  }
+}
+
+.entityTypeMenuContainer {
+  @include flexCenter(column);
+  position: fixed;
+  top: 27.5%;
+  left: 0;
+  width: 20%;
+  padding: 1.5rem;
+  padding-top: 2.5rem;
+  background-color: getColor("secondary-color-1.2");
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  z-index: 3;
+  transition: $crispyTransformTransition;
+
+  svg {
+    align-self: flex-end;
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    color: red;
+    width: 1.5rem;
+    height: 1.5rem;
+    transition: $crispyTransformTransition;
+    cursor: crosshair;
+
+    &:hover {
+      transform: rotate(45deg);
+    }
+  }
+}
+
+.entityTypeMenuOptions {
+  @include flexCenter(column);
+  align-items: flex-start;
+  width: 100%;
+  list-style: none;
+  cursor: pointer;
+  gap: 1rem;
+
+  li {
+    @include flexCenter(row);
+    @include heading("h6", "phone", "black");
+    width: 100%;
+    background-color: getColor("tan-color-extra-light");
+    border-radius: 10px;
+    padding: 0.5rem 0;
+    font-weight: 550;
+    transition: background-color 0.135s ease-in;
+  }
+}

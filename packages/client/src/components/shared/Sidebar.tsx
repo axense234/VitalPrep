@@ -8,6 +8,7 @@ import PageLink from "@/core/types/PageLink";
 import { FC, useEffect, useRef } from "react";
 // Next
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 // Data
 import { pageLinks } from "@/data";
 // React Icons
@@ -22,7 +23,6 @@ import {
 } from "@/redux/slices/generalSlice";
 // Hooks
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
-import { usePathname } from "next/navigation";
 
 const Sidebar = () => {
   const dispatch = useAppDispatch();
@@ -116,7 +116,7 @@ const SidebarPageLink: FC<PageLink> = ({
 const SidebarFooter = () => {
   return (
     <footer className={sidebarStyles.sidebarFooter}>
-      <Logo dimensions={72} logoImageUrlIndex={2} />
+      <Logo dimensions={72} logoImageUrlIndex={2} clickable />
       <SocialMediaIcons />
     </footer>
   );

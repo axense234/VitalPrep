@@ -18,18 +18,10 @@ const WeekdayFormControl: FC<{
     payload: { load: ObjectKeyValueType; index: number };
   };
   currentEntityValue: string | undefined;
-  fontSize: number;
-}> = ({
-  labelContent,
-  onEntityPropertyValueChange,
-  fontSize,
-  currentEntityValue,
-}) => {
+}> = ({ labelContent, onEntityPropertyValueChange, currentEntityValue }) => {
   return (
     <div className={weekdayFormControlStyles.weekdayFormControlContainer}>
-      <label htmlFor="weekdays" style={{ fontSize }}>
-        {labelContent}
-      </label>
+      <label htmlFor="weekdays">{labelContent}</label>
       <ul className={weekdayFormControlStyles.weekdayFormControlList}>
         {weekdayFormControlContent.map((weekdayContent) => {
           return (
@@ -46,12 +38,12 @@ const WeekdayFormControl: FC<{
                 alt={weekdayContent.titleContent}
                 title={weekdayContent.titleContent}
                 aria-label={weekdayContent.titleContent}
-                width={100}
-                height={100}
+                width={80}
+                height={80}
                 style={{
                   border:
                     weekdayContent.titleContent === currentEntityValue
-                      ? "0.5rem solid green"
+                      ? "0.25rem solid green"
                       : "none",
                 }}
               />

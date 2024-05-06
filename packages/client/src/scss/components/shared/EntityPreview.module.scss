@@ -1,0 +1,26 @@
+@use "../../abstracts" as *;
+
+.entityPreviewContainer {
+  @include flexCenter(column);
+  gap: 6rem;
+  border-radius: 25px;
+  padding: 4rem;
+  background-color: getColorWithOpacity("secondary-color-3.1", 0.5);
+
+  h4 {
+    @include heading("h4", "laptop", "black");
+    width: 100%;
+    text-align: center;
+  }
+}
+
+.entityPreviewDetailsContainer {
+  @include flexCenter(column);
+  gap: 2rem;
+
+  h4 {
+    @include heading("h4", "laptop", "black");
+    width: 100%;
+    text-align: center;
+  }
+}

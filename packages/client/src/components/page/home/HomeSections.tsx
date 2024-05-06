@@ -1,6 +1,6 @@
 // SCSS
 import PrimaryButton from "@/components/shared/PrimaryButton";
-import homeSectionsStyles from "../../../../scss/pages/Home.module.scss";
+import homeSectionsStyles from "../../../scss/pages/Home.module.scss";
 // React
 import { FC } from "react";
 // Next
