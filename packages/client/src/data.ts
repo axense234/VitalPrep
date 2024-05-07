@@ -44,12 +44,36 @@ export const pageTitleContent: PageTitleContentType[] = [
     pageSubTitleContent: "create what you need",
   },
   {
-    id: 1,
+    id: 2,
     specificPagePath: "/create-log",
     backgroundImageSrc:
       "https://res.cloudinary.com/birthdayreminder/image/upload/v1714922259/VitalPrep/pre_prepared_meals_pqenm1.png",
     pageTitleTextContent: "Add Log",
     pageSubTitleContent: "save your session log",
+  },
+  {
+    id: 3,
+    specificPagePath: "/multi-view-tool",
+    backgroundImageSrc:
+      "https://res.cloudinary.com/birthdayreminder/image/upload/v1714923609/VitalPrep/iamge4_vgdmkb.png",
+    pageTitleTextContent: "Multi-View Tool",
+    pageSubTitleContent: "see all the stuff you need",
+  },
+  {
+    id: 4,
+    specificPagePath: "/logs",
+    backgroundImageSrc:
+      "https://res.cloudinary.com/birthdayreminder/image/upload/v1714923610/VitalPrep/iamge6_mosykq.png",
+    pageTitleTextContent: "Meal Prep Logs",
+    pageSubTitleContent: "see all your logs",
+  },
+  {
+    id: 5,
+    specificPagePath: "/ingredient",
+    backgroundImageSrc:
+      "https://res.cloudinary.com/birthdayreminder/image/upload/v1714923609/VitalPrep/iamge4_vgdmkb.png",
+    pageTitleTextContent: "View Ingredient",
+    pageSubTitleContent: "the base of every recipe",
   },
 ];
 

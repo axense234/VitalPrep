@@ -43,9 +43,12 @@ const MealPrepLogComponent: FC<EntityComponentProps> = ({
           width={80}
           height={80}
         />
-        <h4>{name}</h4>
+        <h5>{name}</h5>
       </header>
-      <div className={entityComponentStyles.entityComponentDetails}>
+      <div
+        className={entityComponentStyles.entityComponentDetails}
+        style={{ alignItems: "center" }}
+      >
         <p>{new Date(date || "")?.toLocaleDateString() || "???"}</p>
         <p>{cookingDuration || "???"} hours spent</p>
         <p>{completed ? "COMPLETED" : "NOT COMPLETED"}</p>

@@ -4,8 +4,9 @@ import entityComponentStyles from "../../../scss/components/shared/EntityCompone
 import { FC } from "react";
 // Types
 import EntityComponentProps from "@/core/interfaces/entity/EntityComponentProps";
+import MealPrepPlanTemplate from "@/core/types/entity/mutation/MealPrepPlanTemplate";
 // Data
-import { defaultIngredientImageUrl, defaultMealPrepPlanImageUrl } from "@/data";
+import { defaultMealPrepPlanImageUrl } from "@/data";
 // Helpers
 import selectEntityById from "@/helpers/selectEntityById";
 // Redux
@@ -13,7 +14,6 @@ import { useAppSelector } from "@/hooks/redux";
 import { State } from "@/redux/api/store";
 // Next
 import Image from "next/image";
-import MealPrepPlanTemplate from "@/core/types/entity/mutation/MealPrepPlanTemplate";
 
 const MealPrepPlanComponent: FC<EntityComponentProps> = ({
   clicked,
@@ -41,9 +41,12 @@ const MealPrepPlanComponent: FC<EntityComponentProps> = ({
           width={80}
           height={80}
         />
-        <h4>{name}</h4>
+        <h5>{name}</h5>
       </header>
-      <div className={entityComponentStyles.entityComponentDetails}>
+      <div
+        className={entityComponentStyles.entityComponentDetails}
+        style={{ alignItems: "center" }}
+      >
         <p>
           {instanceTemplates?.length > 0 ? instanceTemplates.length : "???"}{" "}
           instance templates used

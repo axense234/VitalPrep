@@ -23,8 +23,6 @@ const EntityInfo = () => {
 
   const profile = useAppSelector(selectProfile);
 
-  console.log(entityType, entityId);
-
   const entityInfoPageShown = useSelectEntityInfoPageShown(
     entityType,
     entityId as string,

@@ -163,7 +163,6 @@
   li {
     @include flexCenter(row);
     width: 100%;
-    border: 1.5px solid getColor("black-100-1");
   }
 }
 

@@ -42,9 +42,12 @@ const DayTemplateComponent: FC<EntityComponentProps> = ({
           width={80}
           height={80}
         />
-        <h4>{name}</h4>
+        <h5>{name}</h5>
       </header>
-      <div className={entityComponentStyles.entityComponentDetails}>
+      <div
+        className={entityComponentStyles.entityComponentDetails}
+        style={{ alignItems: "center" }}
+      >
         <p>{recipes?.length || "0"} meals</p>
         <p>{macros?.calories} calories</p>
       </div>

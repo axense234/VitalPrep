@@ -8,7 +8,7 @@ import useAuthorization from "@/hooks/useAuthorization";
 // Components
 import PageTitle from "@/components/shared/PageTitle";
 import MultiViewToolContent from "@/components/page/multi-view-tool/MultiViewToolContent";
-import MealPrepLogsOptions from "@/components/page/logs/MealPrepLogsOptions";
+import ViewEntityOptions from "@/components/page/entity/ViewEntityOptions";
 // Redux
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import {
@@ -16,7 +16,6 @@ import {
   selectLoadingGetOAuthProfile,
   selectLoadingGetProfile,
   selectProfile,
-  setSelectedEntityOption,
 } from "@/redux/slices/generalSlice";
 import {
   getAllUserMealPrepLogs,
@@ -24,6 +23,8 @@ import {
   selectLoadingGetUserMealPrepLogs,
   updateLoadingGetUserMealPrepLogs,
 } from "@/redux/slices/mealPrepLogsSlice";
+// Data
+import { pageTitleContent } from "@/data";
 
 const MealPrepLogs = () => {
   useAuthorization();
@@ -66,10 +67,6 @@ const MealPrepLogs = () => {
   }, [loadingProfile, profile.id, loadingGetUserMealPrepLogs]);
 
   useEffect(() => {
-    dispatch(setSelectedEntityOption("mealPrepLog"));
-  }, []);
-
-  useEffect(() => {
     if (loadingGetUserMealPrepLogs === "IDLE" && profile.id) {
       dispatch(
         getAllUserMealPrepLogs({
@@ -80,16 +77,22 @@ const MealPrepLogs = () => {
     }
   }, [loadingGetUserMealPrepLogs, profile.id]);
 
+  const { backgroundImageSrc, pageSubTitleContent, pageTitleTextContent } =
+    pageTitleContent.find(
+      (pageTitle) => pageTitle.specificPagePath === "/logs"
+    ) || pageTitleContent[0];
+
   return (
     <div className={multiViewToolStyles.multiViewToolContainer}>
       <PageTitle
-        titleContent="Meal Prep Logs"
-        subtitleContent="view all your logs"
+        titleContent={pageTitleTextContent}
+        subtitleContent={pageSubTitleContent}
+        backgroundImageSrc={backgroundImageSrc}
       />
       <div className={multiViewToolStyles.multiViewToolContent}>
-        <MealPrepLogsOptions />
+        <ViewEntityOptions viewMealPrepLog={true} />
         <MultiViewToolContent
-          entityType={"mealPrepLog"}
+          entityType="mealPrepLog"
           entityIds={mealPrepLogsIds}
         />
       </div>

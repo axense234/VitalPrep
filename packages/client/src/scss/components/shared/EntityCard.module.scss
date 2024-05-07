@@ -8,6 +8,12 @@
   width: 24rem;
   height: auto;
 
+  transition: $crispyTransformTransition;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+
   img {
     width: 100%;
     height: 100%;

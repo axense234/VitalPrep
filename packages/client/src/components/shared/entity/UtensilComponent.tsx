@@ -36,9 +36,12 @@ const UtensilComponent: FC<EntityComponentProps> = ({ clicked, entityId }) => {
           width={80}
           height={80}
         />
-        <h4>{name}</h4>
+        <h5>{name}</h5>
       </header>
-      <div className={entityComponentStyles.entityComponentDetails}>
+      <div
+        className={entityComponentStyles.entityComponentDetails}
+        style={{ alignItems: "center" }}
+      >
         <p>{enabled ? `ENABLED ✔️` : `DISABLED ❌`}</p>
       </div>
     </div>

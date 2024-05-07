@@ -1,0 +1,106 @@
+@use "../../abstracts" as *;
+
+.viewEntityOptionsContainer {
+  @include flexCenter(row);
+  width: 100%;
+  padding: 2.5rem 5rem;
+  justify-content: space-evenly;
+  gap: auto;
+  background-color: getColorWithOpacity("secondary-color-3.1", 0.8);
+  border-bottom: 1.5px solid getColor("black-75-1");
+
+  label {
+    @include heading("h6", "laptop", "black");
+    font-weight: 550;
+  }
+
+  select {
+    @include flexCenter(row);
+    @include heading("h6", "tablet", "black");
+    font-weight: 550;
+    border: 1.5px solid getColor("black-75-1");
+    background-color: getColor("tan-color");
+    padding: 0.5rem 2.5rem;
+    border-radius: 15px;
+    appearance: none;
+  }
+}
+
+.chooseEntityOptionContainer {
+  @include flexCenter(row);
+  justify-content: flex-start;
+  gap: 0.5rem;
+}
+
+.sortByEntityPropertyContainer {
+  @include flexCenter(row);
+  justify-content: flex-start;
+  gap: 1rem;
+
+  button {
+    @include flexCenter(row);
+    font-size: 2rem;
+    background-color: inherit;
+    border: none;
+    transition: $crispyTransformTransition;
+  }
+}
+
+.searchEntityContainer {
+  @include flexCenter(row);
+  justify-content: flex-start;
+  gap: 0.5rem;
+
+  input {
+    background-color: getColor("tan-color");
+    border: 1.5px solid getColor("black-75-1");
+    border-radius: 10px;
+
+    width: 100%;
+    max-width: 40rem;
+    height: 2.5rem;
+
+    font-size: 1rem;
+    padding: 0.5rem;
+    font-weight: 550;
+
+    word-wrap: break-word;
+    transition: background-color 0.135s linear;
+
+    &:hover {
+      background-color: getColor("tan-color-dark");
+    }
+  }
+}
+
+.searchEntityInputContainer {
+  @include flexCenter(row);
+
+  svg {
+    font-size: 2rem;
+    margin-left: -2.5rem;
+    transition: $crispyTransformTransition;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+}
+
+.entityViewTypeContainer {
+  @include flexCenter(row);
+  justify-content: center;
+  gap: 0.25rem;
+
+  svg {
+    font-size: 2.5rem;
+    transition: $crispyTransformTransition;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+    &:nth-of-type(2) {
+      font-size: 2rem;
+    }
+  }
+}

@@ -6,8 +6,8 @@ import multiViewToolStyles from "../../../scss/pages/MultiViewTool.module.scss";
 import useAuthorization from "@/hooks/useAuthorization";
 // Components
 import PageTitle from "@/components/shared/PageTitle";
-import MultiViewToolOptions from "@/components/page/multi-view-tool/MultiViewToolOptions";
 import MultiViewToolContent from "@/components/page/multi-view-tool/MultiViewToolContent";
+import ViewEntityOptions from "@/components/page/entity/ViewEntityOptions";
 // Redux
 import { useAppSelector } from "@/hooks/redux";
 import {
@@ -18,6 +18,8 @@ import {
 import useGetMultiViewToolContentEntities from "@/hooks/useGetMultiViewToolContentEntities";
 // Helpers
 import selectEntityIds from "@/helpers/selectEntityIds";
+// Data
+import { pageTitleContent } from "@/data";
 
 const MultiViewTool = () => {
   useAuthorization();
@@ -28,14 +30,20 @@ const MultiViewTool = () => {
 
   const entityIds = selectEntityIds(entityType);
 
+  const { backgroundImageSrc, pageSubTitleContent, pageTitleTextContent } =
+    pageTitleContent.find(
+      (pageTitle) => pageTitle.specificPagePath === "/multi-view-tool"
+    ) || pageTitleContent[0];
+
   return (
     <div className={multiViewToolStyles.multiViewToolContainer}>
       <PageTitle
-        titleContent="Multi-View Tool"
-        subtitleContent="view all the entities you have created"
+        titleContent={pageTitleTextContent}
+        subtitleContent={pageSubTitleContent}
+        backgroundImageSrc={backgroundImageSrc}
       />
       <div className={multiViewToolStyles.multiViewToolContent}>
-        <MultiViewToolOptions />
+        <ViewEntityOptions />
         <MultiViewToolContent
           entityType={
             entityType as

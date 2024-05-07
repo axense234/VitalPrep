@@ -9,6 +9,7 @@ import RecipeComponent from "./RecipeComponent";
 import DayTemplateComponent from "./DayTemplateComponent";
 import InstanceTemplateComponent from "./InstanceTemplateComponent";
 import MealPrepPlanComponent from "./MealPrepPlanComponent";
+import MealPrepLogComponent from "./MealPrepLogComponent";
 import EntityCard from "./EntityCard";
 // Next
 import Link from "next/link";
@@ -20,11 +21,10 @@ import DayTemplateTemplate from "@/core/types/entity/mutation/DayTemplateTemplat
 import InstanceTemplateTemplate from "@/core/types/entity/mutation/InstanceTemplateTemplate";
 import MealPrepPlanTemplate from "@/core/types/entity/mutation/MealPrepPlanTemplate";
 import EntityType from "@/core/types/entity/EntityType";
+import MealPrepLogTemplate from "@/core/types/entity/mutation/MealPrepLogTemplate";
 // Redux
 import { useAppSelector } from "@/hooks/redux";
 import { selectSelectedViewOption } from "@/redux/slices/generalSlice";
-import MealPrepLogTemplate from "@/core/types/entity/mutation/MealPrepLogTemplate";
-import MealPrepLogComponent from "./MealPrepLogComponent";
 
 type EntityComponentSchemeProps = {
   isALink: boolean;
@@ -94,6 +94,7 @@ const useSelectEntityComponentShown = (
             entity={entity as IngredientTemplate}
             entityType={entityType}
             entityId={entityId}
+            size="medium"
           />
         );
       } else if (selectedViewOption === "list") {
@@ -114,6 +115,7 @@ const useSelectEntityComponentShown = (
             entity={entity as UtensilTemplate}
             entityType={entityType}
             entityId={entityId}
+            size="medium"
           />
         );
       } else if (selectedViewOption === "list") {
@@ -134,6 +136,7 @@ const useSelectEntityComponentShown = (
             entity={entity as RecipeTemplate}
             entityType={entityType}
             entityId={entityId}
+            size="medium"
           />
         );
       } else if (selectedViewOption === "list") {
@@ -154,6 +157,7 @@ const useSelectEntityComponentShown = (
             entity={entity as DayTemplateTemplate}
             entityType={entityType}
             entityId={entityId}
+            size="medium"
           />
         );
       } else if (selectedViewOption === "list") {
@@ -174,6 +178,7 @@ const useSelectEntityComponentShown = (
             entity={entity as InstanceTemplateTemplate}
             entityType={entityType}
             entityId={entityId}
+            size="medium"
           />
         );
       } else if (selectedViewOption === "list") {
@@ -194,6 +199,7 @@ const useSelectEntityComponentShown = (
             entity={entity as MealPrepPlanTemplate}
             entityType={entityType}
             entityId={entityId}
+            size="medium"
           />
         );
       } else if (selectedViewOption === "list") {
@@ -214,6 +220,7 @@ const useSelectEntityComponentShown = (
             entity={entity as MealPrepLogTemplate}
             entityType={entityType}
             entityId={entityId}
+            size="medium"
           />
         );
       } else if (selectedViewOption === "list") {

@@ -59,7 +59,12 @@ const EntityDetails: FC<{
   return (
     <div className={entityPreviewStyles.entityPreviewDetailsContainer}>
       <h4>{type === "preview" ? "Preview" : entityType[0].toUpperCase()}</h4>
-      <EntityCard entity={entity} entityType={entityType} entityId={entityId} />
+      <EntityCard
+        entity={entity}
+        entityType={entityType}
+        entityId={entityId}
+        size="large"
+      />
     </div>
   );
 };

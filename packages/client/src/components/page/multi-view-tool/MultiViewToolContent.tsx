@@ -61,8 +61,8 @@ const MultiViewToolContent: FC<{
               <li
                 key={entityId}
                 style={{
-                  maxWidth: selectedViewOption === "grid" ? "15%" : "100%",
-                  width: selectedViewOption === "grid" ? "15%" : "100%",
+                  maxWidth: selectedViewOption === "grid" ? "20%" : "100%",
+                  width: selectedViewOption === "grid" ? "20%" : "100%",
                 }}
               >
                 <EntityComponent

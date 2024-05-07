@@ -2,10 +2,10 @@
 // import multiViewToolStyles from "../../../scss/pages/MultiViewTool.module.scss";
 
 // // Components
-// import SortingOptions from "../../../../unused/SortingOptions";
+// import SortingOptions from "@/components/shared/SortingOptions";
 // import ViewTypeOptions from "@/components/shared/ViewTypeOptions";
 
-// const MealPrepLogsOptions = () => {
+// const MultiViewToolOptions = () => {
 //   return (
 //     <div className={multiViewToolStyles.multiViewToolOptionsContainer}>
 //       <ViewTypeOptions />
@@ -14,4 +14,4 @@
 //   );
 // };
 
-// export default MealPrepLogsOptions;
+// export default MultiViewToolOptions;

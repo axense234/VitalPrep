@@ -12,6 +12,7 @@ import {
   getUserIngredient,
   selectLoadingGetUserIngredient,
 } from "@/redux/slices/ingredientsSlice";
+import { pageTitleContent } from "@/data";
 
 const IngredientInfo: FC<{ entityId: string; userId: string }> = ({
   entityId,
@@ -23,17 +24,22 @@ const IngredientInfo: FC<{ entityId: string; userId: string }> = ({
   );
 
   useEffect(() => {
-    console.log(loadingGetUserIngredient, userId, entityId);
     if (loadingGetUserIngredient === "IDLE" && userId && entityId) {
       dispatch(getUserIngredient({ userId, ingredientId: entityId }));
     }
   }, [entityId, userId, loadingGetUserIngredient]);
 
+  const { backgroundImageSrc, pageSubTitleContent, pageTitleTextContent } =
+    pageTitleContent.find((pageTitle) =>
+      pageTitle.specificPagePath.startsWith("/ingredient")
+    ) || pageTitleContent[0];
+
   return (
     <div className={entityInfoStyles.entityInfoContainer}>
       <PageTitle
-        titleContent="View Ingredient"
-        subtitleContent="the base of every recipe"
+        titleContent={pageTitleTextContent}
+        subtitleContent={pageSubTitleContent}
+        backgroundImageSrc={backgroundImageSrc}
       />
       <div className={entityInfoStyles.entityInfoContent}>
         <EntityInfoDetails entityId={entityId} entityType="ingredient" />

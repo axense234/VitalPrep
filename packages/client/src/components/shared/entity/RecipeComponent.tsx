@@ -41,9 +41,12 @@ const RecipeComponent: FC<EntityComponentProps> = ({
           width={80}
           height={80}
         />
-        <h4>{name}</h4>
+        <h5>{name}</h5>
       </header>
-      <div className={entityComponentStyles.entityComponentDetails}>
+      <div
+        className={entityComponentStyles.entityComponentDetails}
+        style={{ alignItems: "center" }}
+      >
         <p>{macros?.calories} calories</p>
         <p>{macros?.proteinAmount}g protein </p>
         <p>{macros?.carbsAmount}g carbs</p>

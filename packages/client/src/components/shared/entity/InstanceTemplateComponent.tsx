@@ -41,9 +41,12 @@ const InstanceTemplateComponent: FC<EntityComponentProps> = ({
           width={80}
           height={80}
         />
-        <h4>{name}</h4>
+        <h5>{name}</h5>
       </header>
-      <div className={entityComponentStyles.entityComponentDetails}>
+      <div
+        className={entityComponentStyles.entityComponentDetails}
+        style={{ alignItems: "center" }}
+      >
         <p>{coverage || "0"} days covered</p>
         <p>{dayTemplates?.length || "0"} day templates used</p>
       </div>

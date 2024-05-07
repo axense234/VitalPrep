@@ -2,13 +2,12 @@
 
 .multiViewToolContainer {
   @include pageLayout();
+  background-color: getColor("secondary-color-3.3");
 }
 
 .multiViewToolContent {
   @include flexCenter(column);
   width: 100%;
-  padding-bottom: 64px;
-  background-image: url($authFormPageTemplateFormBackgroundUrl);
 }
 
 .multiViewToolOptionsContainer {
@@ -22,13 +21,13 @@
   flex-wrap: wrap;
   list-style: none;
   width: 100%;
-  gap: 4rem;
+  gap: 2rem;
   padding: 1rem;
 
   li {
     @include flexCenter(column);
-    max-width: 15%;
-    width: 15%;
+    max-width: 20%;
+    width: 20%;
   }
 }
 

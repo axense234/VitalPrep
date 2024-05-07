@@ -28,6 +28,7 @@ import { useAppSelector } from "@/hooks/redux";
 import selectEntityById from "@/helpers/selectEntityById";
 
 const EntityCard: FC<{
+  size: "large" | "medium";
   entityType: EntityType;
   entity:
     | IngredientTemplate
@@ -38,53 +39,53 @@ const EntityCard: FC<{
     | MealPrepPlanTemplate
     | MealPrepLogTemplate;
   entityId?: string;
-}> = ({ entityType, entity, entityId }) => {
-  let defaultImageUrlShownBasedOnEntityType = defaultIngredientImageUrl;
-  let entityIdentifier = "Ingredient";
-  let entityDetails = `${(entity as IngredientTemplate)?.macros?.calories || 0} calories / 100g`;
-  let entitySubDetails = `${(entity as DayTemplateTemplate)?.macros?.calories || 0} calories`;
-
+}> = ({ entityType, entity, entityId, size = "large" }) => {
   const entityFromState = useAppSelector((state) =>
     selectEntityById(state, entityId || "", entityType)
   );
   const entityUsed = entity || entityFromState;
 
+  let defaultImageUrlShownBasedOnEntityType = defaultIngredientImageUrl;
+  let entityIdentifier = "Ingredient";
+  let entityDetails = `${(entityUsed as IngredientTemplate)?.macros?.calories || 0} calories / 100g`;
+  let entitySubDetails = `${(entityUsed as DayTemplateTemplate)?.macros?.calories || 0} calories`;
+
   switch (entityType) {
     case "ingredient":
       defaultImageUrlShownBasedOnEntityType = defaultIngredientImageUrl;
       entityIdentifier = "Ingredient";
-      entityDetails = `${(entity as IngredientTemplate)?.macros?.calories || 0} calories / 100g`;
+      entityDetails = `${(entityUsed as IngredientTemplate)?.macros?.calories || 0} calories / 100g`;
       break;
     case "utensil":
       defaultImageUrlShownBasedOnEntityType = defaultUtensilImageUrl;
       entityIdentifier = "Utensil";
       entityDetails =
-        (entity as UtensilTemplate)?.enabled === true
+        (entityUsed as UtensilTemplate)?.enabled === true
           ? `ENABLED ✔️`
           : "DISABLED ❌";
       break;
     case "recipe":
       defaultImageUrlShownBasedOnEntityType = defaultRecipeImageUrl;
       entityIdentifier = "Recipe";
-      entityDetails = `${(entity as RecipeTemplate)?.macros?.calories || 0} calories`;
+      entityDetails = `${(entityUsed as RecipeTemplate)?.macros?.calories || 0} calories`;
       break;
     case "dayTemplate":
       defaultImageUrlShownBasedOnEntityType = defaultDayTemplateImageUrl;
       entityIdentifier = "Day Template";
-      entityDetails = `${(entity as DayTemplateTemplate)?.recipes?.filter((recipe) => recipe !== "")?.length} meals`;
-      entitySubDetails = `${(entity as DayTemplateTemplate)?.macros?.calories || 0} calories`;
+      entityDetails = `${(entityUsed as DayTemplateTemplate)?.recipes?.filter((recipe) => recipe !== "")?.length} meals`;
+      entitySubDetails = `${(entityUsed as DayTemplateTemplate)?.macros?.calories || 0} calories`;
       break;
     case "instanceTemplate":
       defaultImageUrlShownBasedOnEntityType = defaultInstanceTemplateImageUrl;
       entityIdentifier = "Instance Template";
-      entityDetails = `${(entity as InstanceTemplateTemplate)?.coverage || 0} days covered`;
-      entitySubDetails = `${(entity as InstanceTemplateTemplate)?.macros?.calories || 0} calories`;
+      entityDetails = `${(entityUsed as InstanceTemplateTemplate)?.coverage || 0} days covered`;
+      entitySubDetails = `${(entityUsed as InstanceTemplateTemplate)?.macros?.calories || 0} calories`;
       break;
     case "mealPrepPlan":
       defaultImageUrlShownBasedOnEntityType = defaultMealPrepPlanImageUrl;
       entityIdentifier = "Meal Prep Plan";
-      entityDetails = `${(entity as MealPrepPlanTemplate)?.instanceTemplates?.filter((instanceTemplate) => instanceTemplate !== "").length || 0} instances used`;
-      entitySubDetails = `${(entity as MealPrepPlanTemplate)?.macros?.calories || 0} calories`;
+      entityDetails = `${(entityUsed as MealPrepPlanTemplate)?.instanceTemplates?.filter((instanceTemplate) => instanceTemplate !== "").length || 0} instances used`;
+      entitySubDetails = `${(entityUsed as MealPrepPlanTemplate)?.macros?.calories || 0} calories`;
       break;
     case "mealPrepLog":
       defaultImageUrlShownBasedOnEntityType = defaultInstanceTemplateImageUrl;
@@ -95,7 +96,12 @@ const EntityCard: FC<{
   }
 
   return (
-    <div className={entityCardStyles.entityCardContainer}>
+    <div
+      className={entityCardStyles.entityCardContainer}
+      style={{
+        maxWidth: size === "large" ? "24rem" : "16rem",
+      }}
+    >
       <Image
         width={384}
         height={384}
@@ -106,10 +112,16 @@ const EntityCard: FC<{
       />
       <div className={entityCardStyles.entityCardContentDetails}>
         <h5>{entityUsed.name || `${entityIdentifier} Name`}</h5>
-        <h6>{entityDetails}</h6>
+        <h6 style={{ fontSize: "large" ? "1.5rem" : "1rem" }}>
+          {entityDetails}
+        </h6>
         {(entityType === "dayTemplate" ||
           entityType === "instanceTemplate" ||
-          entityType === "mealPrepPlan") && <h6>{entitySubDetails}</h6>}
+          entityType === "mealPrepPlan") && (
+          <h6 style={{ fontSize: "large" ? "1.5rem" : "1rem" }}>
+            {entitySubDetails}
+          </h6>
+        )}
       </div>
     </div>
   );
