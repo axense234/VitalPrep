@@ -13,7 +13,7 @@ import {
 import MealPrepPlanTemplate from "@/core/types/entity/mutation/MealPrepPlanTemplate";
 import EntityQueryValues from "@/core/types/entity/EntityQueryValues";
 // Prisma
-import { MealPrepPlan, MealPrepPlanTiming } from "@prisma/client";
+import { MealPrepPlan } from "@prisma/client";
 // Axios
 import { AxiosError } from "axios";
 import axiosInstance from "@/utils/axios";
@@ -90,8 +90,12 @@ export const getAllUserMealPrepPlans = createAsyncThunk<
           searchByValue,
           sortByKey,
           sortByOrder,
-          includeInstanceTemplates: true,
           includeMacros: true,
+          includeUtensils: true,
+          includeIngredients: true,
+          includeRecipes: true,
+          includeDayTemplates: true,
+          includeInstanceTemplates: true,
         },
       });
       return data.mealPrepPlans as MealPrepPlanTemplate[];

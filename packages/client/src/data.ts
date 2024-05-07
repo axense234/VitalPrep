@@ -75,6 +75,46 @@ export const pageTitleContent: PageTitleContentType[] = [
     pageTitleTextContent: "View Ingredient",
     pageSubTitleContent: "the base of every recipe",
   },
+  {
+    id: 6,
+    specificPagePath: "/utensil",
+    backgroundImageSrc:
+      "https://res.cloudinary.com/birthdayreminder/image/upload/v1714923609/VitalPrep/iamge4_vgdmkb.png",
+    pageTitleTextContent: "View Utensil",
+    pageSubTitleContent: "your cooking tool",
+  },
+  {
+    id: 7,
+    specificPagePath: "/recipe",
+    backgroundImageSrc:
+      "https://res.cloudinary.com/birthdayreminder/image/upload/v1714923609/VitalPrep/iamge4_vgdmkb.png",
+    pageTitleTextContent: "View Recipe",
+    pageSubTitleContent: "savor and enjoy",
+  },
+  {
+    id: 8,
+    specificPagePath: "/dayTemplate",
+    backgroundImageSrc:
+      "https://res.cloudinary.com/birthdayreminder/image/upload/v1714923609/VitalPrep/iamge4_vgdmkb.png",
+    pageTitleTextContent: "View Day Template",
+    pageSubTitleContent: "your day plan",
+  },
+  {
+    id: 9,
+    specificPagePath: "/instanceTemplate",
+    backgroundImageSrc:
+      "https://res.cloudinary.com/birthdayreminder/image/upload/v1714923609/VitalPrep/iamge4_vgdmkb.png",
+    pageTitleTextContent: "View Instance Template",
+    pageSubTitleContent: "your weekly session scheme",
+  },
+  {
+    id: 10,
+    specificPagePath: "/mealPrepPlan",
+    backgroundImageSrc:
+      "https://res.cloudinary.com/birthdayreminder/image/upload/v1714923609/VitalPrep/iamge4_vgdmkb.png",
+    pageTitleTextContent: "View Meal Prep Plan",
+    pageSubTitleContent: "your plan to follow",
+  },
 ];
 
 export const homeSectionsContent: (HomeSectionContentProps & { id: number })[] =

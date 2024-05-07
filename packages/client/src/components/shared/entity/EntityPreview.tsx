@@ -56,14 +56,39 @@ const EntityDetails: FC<{
     | MealPrepLogTemplate;
   entityId?: string;
 }> = ({ type, entityType, entity, entityId }) => {
+  let viewLabel = "Ingredient";
+  switch (entityType) {
+    case "ingredient":
+      viewLabel = "Ingredient";
+      break;
+    case "utensil":
+      viewLabel = "Utensil";
+      break;
+    case "recipe":
+      viewLabel = "Recipe";
+      break;
+    case "dayTemplate":
+      viewLabel = "Day Template";
+      break;
+    case "instanceTemplate":
+      viewLabel = "Instance Template";
+      break;
+    case "mealPrepPlan":
+      viewLabel = "Meal Prep Plan";
+      break;
+    default:
+      break;
+  }
+
   return (
     <div className={entityPreviewStyles.entityPreviewDetailsContainer}>
-      <h4>{type === "preview" ? "Preview" : entityType[0].toUpperCase()}</h4>
+      <h4>{type === "preview" ? "Preview" : viewLabel}</h4>
       <EntityCard
         entity={entity}
         entityType={entityType}
         entityId={entityId}
         size="large"
+        isALink={false}
       />
     </div>
   );

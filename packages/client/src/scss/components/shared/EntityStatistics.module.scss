@@ -1,0 +1,32 @@
+@use "../../abstracts" as *;
+
+.entityStatisticsContainer {
+  @include flexCenter(column);
+  gap: 3rem;
+  padding: 4rem;
+  border-radius: 25px;
+  background-color: getColorWithOpacity("secondary-color-3.1", 0.5);
+
+  h4 {
+    @include heading("h4", "laptop", "black");
+  }
+}
+
+.entityStatisticsList {
+  @include flexCenter(column);
+  align-items: flex-start;
+  list-style: none;
+  width: 100%;
+  gap: 2rem;
+
+  li {
+    @include heading("h6", "laptop", "black");
+    justify-content: flex-start;
+    font-weight: 550;
+    width: 100%;
+
+    span {
+      color: getColor("secondary-color-light-2.4");
+    }
+  }
+}

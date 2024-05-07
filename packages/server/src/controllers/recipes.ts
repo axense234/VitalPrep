@@ -52,6 +52,7 @@ const getAllRecipes = async (req: Request, res: Response) => {
     includeDayTemplates,
     includeInstanceTemplates,
     includeMealPrepPlans,
+    includeRecipeTutorial,
   } = req.query;
 
   const queryObject: GetAllRecipesQueryObject = {};
@@ -97,6 +98,9 @@ const getAllRecipes = async (req: Request, res: Response) => {
   }
   if (includeMealPrepPlans) {
     includeObject.mealPrepPlans = true;
+  }
+  if (includeRecipeTutorial) {
+    includeObject.recipeTutorial = true;
   }
 
   const foundRecipes = await RecipeClient.findMany({

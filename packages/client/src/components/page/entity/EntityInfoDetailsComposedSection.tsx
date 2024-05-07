@@ -66,7 +66,12 @@ const EntityInfoDetailsComposedSection: FC<{
                 title="View More"
                 aria-label="View More"
               >
-                <EntityCard entity={entity} entityType={entityType} />
+                <EntityCard
+                  entity={entity}
+                  entityType={entityType}
+                  isALink={false}
+                  size="medium"
+                />
               </Link>
             </li>
           );

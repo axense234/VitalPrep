@@ -91,7 +91,11 @@ export const getAllUserInstanceTemplates = createAsyncThunk<
           searchByValue,
           sortByKey,
           sortByOrder,
+          includeIngredients: true,
+          includeUtensils: true,
+          includeRecipes: true,
           includeDayTemplates: true,
+          includeMealPrepPlans: true,
         },
       });
       return data.instanceTemplates as InstanceTemplate[];

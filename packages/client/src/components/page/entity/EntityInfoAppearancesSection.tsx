@@ -13,9 +13,6 @@ const EntityInfoAppearancesSection: FC<EntityInfoAppearancesSectionProps> = ({
   areOptionsLoading,
   entities,
   entityTypeUsed,
-  labelColor,
-  backgroundColor,
-  labelFontSize,
 }) => {
   let sectionTitleUsed = "Entities:";
 
@@ -42,18 +39,17 @@ const EntityInfoAppearancesSection: FC<EntityInfoAppearancesSectionProps> = ({
       break;
   }
 
+  if (!entities || entities?.length < 1) {
+    return null;
+  }
+
   return (
     <div className={entityInfoStyles.entityInfoAppearancesContainer}>
-      <h4 style={{ color: labelColor, fontSize: labelFontSize }}>
-        {sectionTitleUsed}
-      </h4>
+      <h5>{sectionTitleUsed}</h5>
       {areOptionsLoading ? (
         <ClockLoader />
       ) : (
-        <ul
-          className={entityInfoStyles.entityInfoAppearancesSectionEntities}
-          style={{ backgroundColor: backgroundColor }}
-        >
+        <ul className={entityInfoStyles.entityInfoAppearancesSectionEntities}>
           {entities?.map((entity) => {
             return (
               <li key={entity.id}>

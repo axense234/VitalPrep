@@ -41,3 +41,8 @@
     padding: 0 0.5rem;
   }
 }
+
+.entityCardLinkWrapper {
+  @include flexCenter(column);
+  text-decoration: none;
+}

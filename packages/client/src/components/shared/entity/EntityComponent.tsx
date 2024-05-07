@@ -95,6 +95,7 @@ const useSelectEntityComponentShown = (
             entityType={entityType}
             entityId={entityId}
             size="medium"
+            isALink={false}
           />
         );
       } else if (selectedViewOption === "list") {
@@ -115,6 +116,7 @@ const useSelectEntityComponentShown = (
             entity={entity as UtensilTemplate}
             entityType={entityType}
             entityId={entityId}
+            isALink={false}
             size="medium"
           />
         );
@@ -136,6 +138,7 @@ const useSelectEntityComponentShown = (
             entity={entity as RecipeTemplate}
             entityType={entityType}
             entityId={entityId}
+            isALink={false}
             size="medium"
           />
         );
@@ -157,6 +160,7 @@ const useSelectEntityComponentShown = (
             entity={entity as DayTemplateTemplate}
             entityType={entityType}
             entityId={entityId}
+            isALink={false}
             size="medium"
           />
         );
@@ -178,6 +182,7 @@ const useSelectEntityComponentShown = (
             entity={entity as InstanceTemplateTemplate}
             entityType={entityType}
             entityId={entityId}
+            isALink={false}
             size="medium"
           />
         );
@@ -199,6 +204,7 @@ const useSelectEntityComponentShown = (
             entity={entity as MealPrepPlanTemplate}
             entityType={entityType}
             entityId={entityId}
+            isALink={false}
             size="medium"
           />
         );
@@ -220,6 +226,7 @@ const useSelectEntityComponentShown = (
             entity={entity as MealPrepLogTemplate}
             entityType={entityType}
             entityId={entityId}
+            isALink={false}
             size="medium"
           />
         );

@@ -7,6 +7,8 @@ import ImageFormControl from "@/components/shared/form/ImageFormControl";
 import PopupModal from "@/components/shared/modals/PopupModal";
 import SelectFormControl from "@/components/shared/form/SelectFormControl";
 import EntityPreview from "@/components/shared/entity/EntityPreview";
+import CreateRecipeTutorial from "../CreateRecipeTutorial";
+import IngredientTemplate from "@/core/types/entity/mutation/IngredientTemplate";
 // Data
 import { defaultEntityQueryValues, defaultUtensilImageUrl } from "@/data";
 // React
@@ -45,9 +47,8 @@ import {
   selectAllIngredientsIds,
   selectLoadingGetUserIngredients,
 } from "@/redux/slices/ingredientsSlice";
-import CreateRecipeTutorial from "../CreateRecipeTutorial";
+// Helpers
 import calculateEntityMacrosBasedOnComponents from "@/helpers/calculateEntityMacrosBasedOnComponents";
-import IngredientTemplate from "@/core/types/entity/mutation/IngredientTemplate";
 
 const CreateRecipeInterface = () => {
   const dispatch = useAppDispatch();

@@ -88,7 +88,11 @@ export const getAllUserDayTemplates = createAsyncThunk<
           sortByKey,
           sortByOrder,
           includeMacros: true,
+          includeIngredients: true,
+          includeUtensils: true,
           includeRecipes: true,
+          includeInstanceTemplates: true,
+          includeMealPrepPlans: true,
         },
       });
       return data.dayTemplates as DayTemplate[];

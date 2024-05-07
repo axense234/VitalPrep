@@ -12,6 +12,7 @@ import {
   getUserIngredient,
   selectLoadingGetUserIngredient,
 } from "@/redux/slices/ingredientsSlice";
+// Datas
 import { pageTitleContent } from "@/data";
 
 const IngredientInfo: FC<{ entityId: string; userId: string }> = ({

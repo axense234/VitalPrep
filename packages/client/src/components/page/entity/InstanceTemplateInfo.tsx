@@ -10,13 +10,11 @@ import { FC, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import {} from "@/redux/slices/recipesSlice";
 import {
-  getUserDayTemplate,
-  selectLoadingGetUserDayTemplate,
-} from "@/redux/slices/dayTemplatesSlice";
-import {
   getUserInstanceTemplate,
   selectLoadingGetUserInstanceTemplate,
 } from "@/redux/slices/instanceTemplatesSlice";
+import { pageTitleContent } from "@/data";
+import EntityInfoComponents from "./EntityInfoComponents";
 
 const InstanceTemplateInfo: FC<{ entityId: string; userId: string }> = ({
   entityId,
@@ -36,14 +34,24 @@ const InstanceTemplateInfo: FC<{ entityId: string; userId: string }> = ({
     }
   }, [entityId, userId, loadingGetUserInstanceTemplate]);
 
+  const { backgroundImageSrc, pageSubTitleContent, pageTitleTextContent } =
+    pageTitleContent.find((pageTitle) =>
+      pageTitle.specificPagePath.startsWith("/instanceTemplate")
+    ) || pageTitleContent[0];
+
   return (
     <div className={entityInfoStyles.entityInfoContainer}>
       <PageTitle
-        titleContent="View Instance Template"
-        subtitleContent="your meal prep template"
+        titleContent={pageTitleTextContent}
+        subtitleContent={pageSubTitleContent}
+        backgroundImageSrc={backgroundImageSrc}
       />
       <div className={entityInfoStyles.entityInfoContent}>
         <EntityInfoDetails entityId={entityId} entityType="instanceTemplate" />
+        <EntityInfoComponents
+          entityId={entityId}
+          entityType="instanceTemplate"
+        />
         <EntityInfoAppearances
           entityId={entityId}
           entityType="instanceTemplate"

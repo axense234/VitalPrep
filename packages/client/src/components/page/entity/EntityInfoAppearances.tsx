@@ -5,15 +5,15 @@ import entityInfoStyles from "../../../scss/components/page/EntityInfo.module.sc
 // Types
 import EntityType from "@/core/types/entity/EntityType";
 import IngredientTemplate from "@/core/types/entity/mutation/IngredientTemplate";
+import RecipeTemplate from "@/core/types/entity/mutation/RecipeTemplate";
+import DayTemplateTemplate from "@/core/types/entity/mutation/DayTemplateTemplate";
+import InstanceTemplateTemplate from "@/core/types/entity/mutation/InstanceTemplateTemplate";
 // Helpers
 import selectEntityById from "@/helpers/selectEntityById";
 // Redux
 import { useAppSelector } from "@/hooks/redux";
 // Components
 import EntityInfoAppearancesSection from "./EntityInfoAppearancesSection";
-import RecipeTemplate from "@/core/types/entity/mutation/RecipeTemplate";
-import DayTemplateTemplate from "@/core/types/entity/mutation/DayTemplateTemplate";
-import InstanceTemplateTemplate from "@/core/types/entity/mutation/InstanceTemplateTemplate";
 
 const EntityInfoAppearances: FC<{
   entityId: string;
@@ -40,38 +40,26 @@ const EntityInfoAppearances: FC<{
 
         entityInfoAppearancesShown = (
           <div className={entityInfoStyles.entityInfoDetailsHero}>
-            <h2>Appearances</h2>
+            <h4>Appearances</h4>
             <EntityInfoAppearancesSection
               areOptionsLoading={false}
               entities={ingredientRecipes || []}
               entityTypeUsed="recipe"
-              labelColor="#120A06"
-              labelFontSize={28}
-              backgroundColor="#8B0000"
             />
             <EntityInfoAppearancesSection
               areOptionsLoading={false}
               entities={ingredientDayTemplates || []}
               entityTypeUsed="dayTemplate"
-              labelColor="#120A06"
-              labelFontSize={28}
-              backgroundColor="#013310"
             />
             <EntityInfoAppearancesSection
               areOptionsLoading={false}
               entities={ingredientInstanceTemplates || []}
               entityTypeUsed="instanceTemplate"
-              labelColor="#120A06"
-              labelFontSize={28}
-              backgroundColor="#012433"
             />
             <EntityInfoAppearancesSection
               areOptionsLoading={false}
               entities={ingredientMealPrepPlans || []}
               entityTypeUsed="mealPrepPlan"
-              labelColor="#120A06"
-              labelFontSize={28}
-              backgroundColor="#42171C"
             />
           </div>
         );
@@ -86,38 +74,26 @@ const EntityInfoAppearances: FC<{
 
         entityInfoAppearancesShown = (
           <div className={entityInfoStyles.entityInfoDetailsHero}>
-            <h2>Appearances</h2>
+            <h4>Appearances</h4>
             <EntityInfoAppearancesSection
               areOptionsLoading={false}
               entities={utensilRecipes || []}
               entityTypeUsed="recipe"
-              labelColor="#120A06"
-              labelFontSize={28}
-              backgroundColor="#8B0000"
             />
             <EntityInfoAppearancesSection
               areOptionsLoading={false}
               entities={utensilDayTemplates || []}
               entityTypeUsed="dayTemplate"
-              labelColor="#120A06"
-              labelFontSize={28}
-              backgroundColor="#013310"
             />
             <EntityInfoAppearancesSection
               areOptionsLoading={false}
               entities={utensilInstanceTemplates || []}
               entityTypeUsed="instanceTemplate"
-              labelColor="#120A06"
-              labelFontSize={28}
-              backgroundColor="#012433"
             />
             <EntityInfoAppearancesSection
               areOptionsLoading={false}
               entities={utensilMealPrepPlans || []}
               entityTypeUsed="mealPrepPlan"
-              labelColor="#120A06"
-              labelFontSize={28}
-              backgroundColor="#42171C"
             />
           </div>
         );
@@ -131,30 +107,21 @@ const EntityInfoAppearances: FC<{
 
         entityInfoAppearancesShown = (
           <div className={entityInfoStyles.entityInfoDetailsHero}>
-            <h2>Appearances</h2>
+            <h4>Appearances</h4>
             <EntityInfoAppearancesSection
               areOptionsLoading={false}
               entities={recipeDayTemplates || []}
               entityTypeUsed="dayTemplate"
-              labelColor="#120A06"
-              labelFontSize={28}
-              backgroundColor="#8B0000"
             />
             <EntityInfoAppearancesSection
               areOptionsLoading={false}
               entities={recipeInstanceTemplates || []}
               entityTypeUsed="instanceTemplate"
-              labelColor="#120A06"
-              labelFontSize={28}
-              backgroundColor="#013310"
             />
             <EntityInfoAppearancesSection
               areOptionsLoading={false}
               entities={recipeMealPrepPlans || []}
               entityTypeUsed="mealPrepPlan"
-              labelColor="#120A06"
-              labelFontSize={28}
-              backgroundColor="#012433"
             />
           </div>
         );
@@ -168,22 +135,16 @@ const EntityInfoAppearances: FC<{
 
         entityInfoAppearancesShown = (
           <div className={entityInfoStyles.entityInfoDetailsHero}>
-            <h2>Appearances</h2>
+            <h4>Appearances</h4>
             <EntityInfoAppearancesSection
               areOptionsLoading={false}
               entities={dayTemplateInstanceTemplates || []}
               entityTypeUsed="instanceTemplate"
-              labelColor="#120A06"
-              labelFontSize={28}
-              backgroundColor="#013310"
             />
             <EntityInfoAppearancesSection
               areOptionsLoading={false}
               entities={dayTemplateMealPrepPlans || []}
               entityTypeUsed="mealPrepPlan"
-              labelColor="#120A06"
-              labelFontSize={28}
-              backgroundColor="#012433"
             />
           </div>
         );
@@ -196,14 +157,11 @@ const EntityInfoAppearances: FC<{
 
         entityInfoAppearancesShown = (
           <div className={entityInfoStyles.entityInfoDetailsHero}>
-            <h2>Appearances</h2>
+            <h4>Appearances</h4>
             <EntityInfoAppearancesSection
               areOptionsLoading={false}
               entities={instanceTemplateMealPrepPlans || []}
               entityTypeUsed="mealPrepPlan"
-              labelColor="#120A06"
-              labelFontSize={28}
-              backgroundColor="#012433"
             />
           </div>
         );

@@ -99,12 +99,14 @@ export const getAllUserRecipes = createAsyncThunk<
     const { data } = await axiosInstance.get(`/recipes`, {
       params: {
         userId,
-        userIngredients: true,
+        includeIngredients: true,
+        includeUtensils: true,
         searchByKey,
         searchByValue,
         sortByKey,
         sortByOrder,
         includeMacros: true,
+        includeRecipeTutorial: true,
       },
     });
     return data.recipes as Recipe[];

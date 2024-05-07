@@ -7,6 +7,8 @@ import EntityType from "@/core/types/entity/EntityType";
 import RecipeTemplate from "@/core/types/entity/mutation/RecipeTemplate";
 import IngredientTemplate from "@/core/types/entity/mutation/IngredientTemplate";
 import UtensilTemplate from "@/core/types/entity/mutation/UtensilTemplate";
+import EntityPreview from "@/components/shared/entity/EntityPreview";
+import EntityStatistics from "./EntityStatistics";
 // Next
 import Image from "next/image";
 // Redux
@@ -16,10 +18,8 @@ import selectEntityById from "@/helpers/selectEntityById";
 // Data
 import {
   defaultDayTemplateImageUrl,
-  defaultIngredientImageUrl,
   defaultInstanceTemplateImageUrl,
   defaultRecipeImageUrl,
-  defaultUtensilImageUrl,
 } from "@/data";
 // Line Chart
 import EntityMacros from "@/components/shared/entity/EntityMacros";
@@ -45,307 +45,272 @@ const EntityInfoDetails: FC<{ entityId: string; entityType: EntityType }> = ({
 
   switch (entityType) {
     case "ingredient":
+      const entityAsIngredient = entity as IngredientTemplate;
       entityInfoDetailsShown = (
         <div className={entityInfoStyles.entityInfoDetailsContainer}>
-          <div className={entityInfoStyles.entityInfoDetailsHero}>
-            <Image
-              width={640}
-              height={640}
-              src={entity?.imageUrl || defaultIngredientImageUrl}
-              alt={entity?.name || "Ingredient Image"}
-              aria-label={entity?.name || "Ingredient Image"}
-            />
-            <header className={entityInfoStyles.entityInfoDetailsHeader}>
-              <h2>{entity?.name || "Ingredient Name"}</h2>
-              <h3>
-                {(entity as IngredientTemplate)?.macros?.calories
-                  ? `${(entity as IngredientTemplate)?.macros?.calories} calories`
-                  : "??? calories"}
-              </h3>
-              <h3>
-                {(entity as IngredientTemplate)?.enabled
-                  ? "ENABLED"
-                  : "DISABLED"}
-              </h3>
-            </header>
-          </div>
-          <EntityMacros
-            macros={(entity as IngredientTemplate)?.macros}
-            labelSize={28}
+          <EntityPreview
+            entity={entityAsIngredient}
+            entityId={entityId}
+            entityType="ingredient"
+            type="view"
+          />
+          <EntityStatistics
+            statistics={[
+              {
+                id: 1,
+                count: entityAsIngredient?.mealPrepPlans?.length || 0,
+                entityType: "Meal Prep Plans",
+                essence: "usable",
+              },
+              {
+                id: 2,
+                count: entityAsIngredient?.instanceTemplates?.length || 0,
+                entityType: "Instance Templates",
+                essence: "usable",
+              },
+              {
+                id: 3,
+                count: entityAsIngredient?.dayTemplates?.length || 0,
+                entityType: "Day Templates",
+                essence: "usable",
+              },
+              {
+                id: 4,
+                count: entityAsIngredient?.recipes?.length || 0,
+                entityType: "Recipes",
+                essence: "usable",
+              },
+            ]}
           />
         </div>
       );
       break;
     case "utensil":
+      const entityAsUtensil = entity as UtensilTemplate;
       entityInfoDetailsShown = (
         <div className={entityInfoStyles.entityInfoDetailsContainer}>
-          <div className={entityInfoStyles.entityInfoDetailsHero}>
-            <Image
-              width={640}
-              height={640}
-              src={entity?.imageUrl || defaultUtensilImageUrl}
-              alt={entity?.name || "Utensil Image"}
-              aria-label={entity?.name || "Utensil Image"}
-            />
-            <header className={entityInfoStyles.entityInfoDetailsHeader}>
-              <h2>{entity?.name || "Utensil Name"}</h2>
-              <h3>
-                {(entity as UtensilTemplate)?.enabled ? "ENABLED" : "DISABLED"}
-              </h3>
-            </header>
-          </div>
+          <EntityPreview
+            entity={entityAsUtensil}
+            entityId={entityId}
+            entityType="utensil"
+            type="view"
+          />
+          <EntityStatistics
+            statistics={[
+              {
+                id: 1,
+                count: entityAsUtensil?.mealPrepPlans?.length || 0,
+                entityType: "Meal Prep Plans",
+                essence: "usable",
+              },
+              {
+                id: 2,
+                count: entityAsUtensil?.instanceTemplates?.length || 0,
+                entityType: "Instance Templates",
+                essence: "usable",
+              },
+              {
+                id: 3,
+                count: entityAsUtensil?.dayTemplates?.length || 0,
+                entityType: "Day Templates",
+                essence: "usable",
+              },
+              {
+                id: 4,
+                count: entityAsUtensil?.recipes?.length || 0,
+                entityType: "Recipes",
+                essence: "usable",
+              },
+            ]}
+          />
         </div>
       );
       break;
     case "recipe":
+      const entityAsRecipe = entity as RecipeTemplate;
       entityInfoDetailsShown = (
         <div className={entityInfoStyles.entityInfoDetailsContainer}>
-          <div className={entityInfoStyles.entityInfoDetailsHero}>
-            <Image
-              width={640}
-              height={640}
-              src={entity?.imageUrl || defaultRecipeImageUrl}
-              alt={entity?.name || "Recipe Image"}
-              aria-label={entity?.name || "Recipe Image"}
-            />
-            <header className={entityInfoStyles.entityInfoDetailsHeader}>
-              <h2>{entity?.name || "Recipe Name"}</h2>
-              <h3>
-                {(entity as RecipeTemplate)?.macros?.calories
-                  ? `${(entity as RecipeTemplate)?.macros?.calories} calories`
-                  : "??? calories"}
-              </h3>
-            </header>
-            <EntityMacros
-              macros={(entity as RecipeTemplate)?.macros}
-              labelSize={28}
-            />
-          </div>
-          <div className={entityInfoStyles.entityInfoRecipeTutorialContainer}>
-            <h3>Tutorial</h3>
-            <div className={entityInfoStyles.entityInfoRecipeTutorialSection}>
-              <h4>Video Tutorial</h4>
-              <iframe
-                src={(entity as RecipeTemplate)?.recipeTutorial?.videoTutorial}
-                title={entity?.name}
-                aria-label={entity?.name}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowFullScreen
-              />
-            </div>
-            <div className={entityInfoStyles.entityInfoRecipeTutorialSection}>
-              <h4>Written Tutorial</h4>
-              <p>
-                {(entity as RecipeTemplate)?.recipeTutorial?.writtenTutorial}
-              </p>
-            </div>
-          </div>
-          <div className={entityInfoStyles.entityInfoDetalsComposedSection}>
-            <EntityInfoDetailsComposedSection
-              entities={
-                (entity as RecipeTemplate)?.ingredients as IngredientTemplate[]
-              }
-              entityType={"ingredient"}
-            />
-          </div>
-          <div className={entityInfoStyles.entityInfoDetalsComposedSection}>
-            <EntityInfoDetailsComposedSection
-              entities={
-                (entity as RecipeTemplate)?.utensils as UtensilTemplate[]
-              }
-              entityType={"utensil"}
-            />
-          </div>
+          <EntityPreview
+            entity={entityAsRecipe}
+            entityId={entityId}
+            entityType="recipe"
+            type="view"
+          />
+          <EntityStatistics
+            statistics={[
+              {
+                id: 1,
+                count: entityAsRecipe?.mealPrepPlans?.length || 0,
+                entityType: "Meal Prep Plans",
+                essence: "usable",
+              },
+              {
+                id: 2,
+                count: entityAsRecipe?.instanceTemplates?.length || 0,
+                entityType: "Instance Templates",
+                essence: "usable",
+              },
+              {
+                id: 3,
+                count: entityAsRecipe?.dayTemplates?.length || 0,
+                entityType: "Day Templates",
+                essence: "usable",
+              },
+              {
+                id: 4,
+                count: entityAsRecipe?.ingredients?.length || 0,
+                entityType: "Ingredients",
+                essence: "component",
+              },
+              {
+                id: 5,
+                count: entityAsRecipe?.utensils?.length || 0,
+                entityType: "Utensils",
+                essence: "component",
+              },
+            ]}
+          />
         </div>
       );
       break;
     case "dayTemplate":
+      const entityAsDayTemplate = entity as DayTemplateTemplate;
       entityInfoDetailsShown = (
         <div className={entityInfoStyles.entityInfoDetailsContainer}>
-          <div className={entityInfoStyles.entityInfoDetailsHero}>
-            <Image
-              width={640}
-              height={640}
-              src={entity?.imageUrl || defaultDayTemplateImageUrl}
-              alt={entity?.name || "Day Template Image"}
-              aria-label={entity?.name || "Day Template Image"}
-            />
-            <header className={entityInfoStyles.entityInfoDetailsHeader}>
-              <h2>{entity?.name || "Day Template Name"}</h2>
-              <h3>
-                {(entity as DayTemplateTemplate)?.macros?.calories
-                  ? `${(entity as DayTemplateTemplate)?.macros?.calories} total calories`
-                  : "??? total calories"}
-              </h3>
-            </header>
-            <EntityMacros
-              macros={(entity as DayTemplateTemplate)?.macros}
-              labelSize={28}
-            />
-          </div>
-          <div className={entityInfoStyles.entityInfoDetalsComposedSection}>
-            <EntityInfoDetailsComposedSection
-              entities={
-                (entity as DayTemplateTemplate)?.recipes as RecipeTemplate[]
-              }
-              entityType={"recipe"}
-            />
-          </div>
-          <div className={entityInfoStyles.entityInfoDetalsComposedSection}>
-            <EntityInfoDetailsComposedSection
-              entities={
-                (entity as DayTemplateTemplate)
-                  ?.ingredients as IngredientTemplate[]
-              }
-              entityType={"ingredient"}
-            />
-          </div>
-          <div className={entityInfoStyles.entityInfoDetalsComposedSection}>
-            <EntityInfoDetailsComposedSection
-              entities={
-                (entity as DayTemplateTemplate)?.utensils as UtensilTemplate[]
-              }
-              entityType={"utensil"}
-            />
-          </div>
+          <EntityPreview
+            entity={entityAsDayTemplate}
+            entityId={entityId}
+            entityType="dayTemplate"
+            type="view"
+          />
+          <EntityStatistics
+            statistics={[
+              {
+                id: 1,
+                count: entityAsDayTemplate?.mealPrepPlans?.length || 0,
+                entityType: "Meal Prep Plans",
+                essence: "usable",
+              },
+              {
+                id: 2,
+                count: entityAsDayTemplate?.instanceTemplates?.length || 0,
+                entityType: "Instance Templates",
+                essence: "usable",
+              },
+              {
+                id: 3,
+                count: entityAsDayTemplate?.recipes?.length || 0,
+                entityType: "Recipes",
+                essence: "component",
+              },
+              {
+                id: 4,
+                count: entityAsDayTemplate?.ingredients?.length || 0,
+                entityType: "Ingredients",
+                essence: "component",
+              },
+              {
+                id: 5,
+                count: entityAsDayTemplate?.utensils?.length || 0,
+                entityType: "Utensils",
+                essence: "component",
+              },
+            ]}
+          />
         </div>
       );
       break;
     case "instanceTemplate":
+      const entityAsInstanceTemplate = entity as InstanceTemplateTemplate;
       entityInfoDetailsShown = (
         <div className={entityInfoStyles.entityInfoDetailsContainer}>
-          <div className={entityInfoStyles.entityInfoDetailsHero}>
-            <Image
-              width={640}
-              height={640}
-              src={entity?.imageUrl || defaultInstanceTemplateImageUrl}
-              alt={entity?.name || "Instance Template Image"}
-              aria-label={entity?.name || "Instance Template Image"}
-            />
-            <header className={entityInfoStyles.entityInfoDetailsHeader}>
-              <h2>{entity?.name || "Instance Template Name"}</h2>
-              <h3>
-                {(entity as InstanceTemplateTemplate)?.dayTemplates?.length > 0
-                  ? `${(entity as InstanceTemplateTemplate)?.dayTemplates?.length} day templates used`
-                  : "??? day templates used"}
-              </h3>
-              <h3>
-                {(entity as InstanceTemplateTemplate)?.coverage
-                  ? `${(entity as InstanceTemplateTemplate).coverage} days covered`
-                  : `??? days covered`}
-              </h3>
-            </header>
-            <EntityMacros
-              macros={(entity as InstanceTemplateTemplate)?.macros as Macros}
-              labelSize={28}
-            />
-          </div>
-          <div className={entityInfoStyles.entityInfoDetalsComposedSection}>
-            <EntityInfoDetailsComposedSection
-              entities={
-                (entity as InstanceTemplateTemplate)
-                  ?.dayTemplates as DayTemplateTemplate[]
-              }
-              entityType={"dayTemplate"}
-            />
-          </div>
-          <div className={entityInfoStyles.entityInfoDetalsComposedSection}>
-            <EntityInfoDetailsComposedSection
-              entities={
-                (entity as InstanceTemplateTemplate)
-                  ?.recipes as RecipeTemplate[]
-              }
-              entityType={"recipe"}
-            />
-          </div>
-          <div className={entityInfoStyles.entityInfoDetalsComposedSection}>
-            <EntityInfoDetailsComposedSection
-              entities={
-                (entity as InstanceTemplateTemplate)
-                  ?.ingredients as IngredientTemplate[]
-              }
-              entityType={"ingredient"}
-            />
-          </div>
-          <div className={entityInfoStyles.entityInfoDetalsComposedSection}>
-            <EntityInfoDetailsComposedSection
-              entities={
-                (entity as InstanceTemplateTemplate)
-                  ?.utensils as UtensilTemplate[]
-              }
-              entityType={"utensil"}
-            />
-          </div>
+          <EntityPreview
+            entity={entityAsInstanceTemplate}
+            entityId={entityId}
+            entityType="instanceTemplate"
+            type="view"
+          />
+          <EntityStatistics
+            statistics={[
+              {
+                id: 1,
+                count: entityAsInstanceTemplate?.mealPrepPlans?.length || 0,
+                entityType: "Meal Prep Plans",
+                essence: "usable",
+              },
+              {
+                id: 2,
+                count: entityAsInstanceTemplate?.dayTemplates?.length || 0,
+                entityType: "Day Templates",
+                essence: "component",
+              },
+              {
+                id: 3,
+                count: entityAsInstanceTemplate?.recipes?.length || 0,
+                entityType: "Recipes",
+                essence: "component",
+              },
+              {
+                id: 4,
+                count: entityAsInstanceTemplate?.ingredients?.length || 0,
+                entityType: "Ingredients",
+                essence: "component",
+              },
+              {
+                id: 5,
+                count: entityAsInstanceTemplate?.utensils?.length || 0,
+                entityType: "Utensils",
+                essence: "component",
+              },
+            ]}
+          />
         </div>
       );
       break;
     case "mealPrepPlan":
+      const entityAsMealPrepPlan = entity as MealPrepPlanTemplate;
       entityInfoDetailsShown = (
         <div className={entityInfoStyles.entityInfoDetailsContainer}>
-          <div className={entityInfoStyles.entityInfoDetailsHero}>
-            <Image
-              width={640}
-              height={640}
-              src={entity?.imageUrl || defaultInstanceTemplateImageUrl}
-              alt={entity?.name || "Meal Prep Plan Image"}
-              aria-label={entity?.name || "Meal Prep Plan Image"}
-            />
-            <header className={entityInfoStyles.entityInfoDetailsHeader}>
-              <h2>{entity?.name || "Meal Prep Plan Name"}</h2>
-              <h3>
-                {(entity as MealPrepPlanTemplate)?.instanceTemplates?.length > 0
-                  ? `${(entity as MealPrepPlanTemplate)?.instanceTemplates?.length} instance templates used`
-                  : "??? day templates used"}
-              </h3>
-            </header>
-            <EntityMacros
-              macros={(entity as MealPrepPlanTemplate)?.macros as Macros}
-              labelSize={28}
-            />
-          </div>
-          <div className={entityInfoStyles.entityInfoDetalsComposedSection}>
-            <EntityInfoDetailsComposedSection
-              entities={
-                (entity as MealPrepPlanTemplate)
-                  ?.instanceTemplates as InstanceTemplateTemplate[]
-              }
-              entityType={"instanceTemplate"}
-            />
-          </div>
-          <div className={entityInfoStyles.entityInfoDetalsComposedSection}>
-            <EntityInfoDetailsComposedSection
-              entities={
-                (entity as MealPrepPlanTemplate)
-                  ?.dayTemplates as DayTemplateTemplate[]
-              }
-              entityType={"dayTemplate"}
-            />
-          </div>
-          <div className={entityInfoStyles.entityInfoDetalsComposedSection}>
-            <EntityInfoDetailsComposedSection
-              entities={
-                (entity as MealPrepPlanTemplate)?.recipes as RecipeTemplate[]
-              }
-              entityType={"recipe"}
-            />
-          </div>
-          <div className={entityInfoStyles.entityInfoDetalsComposedSection}>
-            <EntityInfoDetailsComposedSection
-              entities={
-                (entity as MealPrepPlanTemplate)
-                  ?.ingredients as IngredientTemplate[]
-              }
-              entityType={"ingredient"}
-            />
-          </div>
-          <div className={entityInfoStyles.entityInfoDetalsComposedSection}>
-            <EntityInfoDetailsComposedSection
-              entities={
-                (entity as MealPrepPlanTemplate)?.utensils as UtensilTemplate[]
-              }
-              entityType={"utensil"}
-            />
-          </div>
+          <EntityPreview
+            entity={entityAsMealPrepPlan}
+            entityId={entityId}
+            entityType="mealPrepPlan"
+            type="view"
+          />
+          <EntityStatistics
+            statistics={[
+              {
+                id: 1,
+                count: entityAsMealPrepPlan?.instanceTemplates?.length || 0,
+                entityType: "Instance Templates",
+                essence: "component",
+              },
+              {
+                id: 2,
+                count: entityAsMealPrepPlan?.dayTemplates?.length || 0,
+                entityType: "Day Templates",
+                essence: "component",
+              },
+              {
+                id: 3,
+                count: entityAsMealPrepPlan?.recipes?.length || 0,
+                entityType: "Recipes",
+                essence: "component",
+              },
+              {
+                id: 4,
+                count: entityAsMealPrepPlan?.ingredients?.length || 0,
+                entityType: "Ingredients",
+                essence: "component",
+              },
+              {
+                id: 5,
+                count: entityAsMealPrepPlan?.utensils?.length || 0,
+                entityType: "Utensils",
+                essence: "component",
+              },
+            ]}
+          />
         </div>
       );
       break;
@@ -385,7 +350,6 @@ const EntityInfoDetails: FC<{ entityId: string; entityType: EntityType }> = ({
                 (entity as MealPrepLogTemplate)?.instanceTemplate
                   ?.macros as Macros
               }
-              labelSize={28}
             />
           </div>
           <div className={entityInfoStyles.entityInfoDetalsComposedSection}>

@@ -7,14 +7,8 @@ import UtensilTemplate from "@/core/types/entity/mutation/UtensilTemplate";
 import { InstanceTemplate } from "@prisma/client";
 
 type EntityInfoAppearancesSectionProps = {
-  labelColor: "#DDD9D5" | "#120A06";
-  labelFontSize?: number;
-
   areOptionsLoading: boolean;
-
-  backgroundColor?: string;
-
-  entities:
+  entities?:
     | InstanceTemplate[]
     | UtensilTemplate[]
     | RecipeTemplate[]
