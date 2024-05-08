@@ -42,10 +42,6 @@
   @include flexCenter(column);
   width: 100%;
   gap: 3rem;
-
-  div {
-    align-items: flex-start;
-  }
 }
 
 .createInterfaceMultipleComponentsSelectControls {
@@ -56,6 +52,8 @@
 
   li {
     @include flexCenter(column);
+    width: 100%;
+    align-items: flex-start;
     gap: 3rem;
 
     div {

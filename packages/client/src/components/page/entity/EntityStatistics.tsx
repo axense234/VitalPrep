@@ -13,13 +13,13 @@ const EntityStatistics: FC<{ statistics: EntityStatisticsType }> = ({
   ) => {
     switch (essence) {
       case "usable":
-        return "Used in";
+        return "Used in ";
       case "component":
-        return "Uses";
+        return "Uses ";
       case "count":
         return "Number of ";
       default:
-        return "Used in";
+        return "Used in ";
     }
   };
 

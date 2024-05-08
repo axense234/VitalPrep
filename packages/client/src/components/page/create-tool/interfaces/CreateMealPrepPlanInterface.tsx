@@ -41,7 +41,6 @@ import {
   updateNumberOfInstanceTemplates,
   updateTemplateMealPrepPlan,
 } from "@/redux/slices/mealPrepPlansSlice";
-
 // Helpers
 import calculateEntityMacrosBasedOnComponents from "@/helpers/calculateEntityMacrosBasedOnComponents";
 

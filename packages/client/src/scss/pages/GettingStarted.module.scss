@@ -2,75 +2,114 @@
 
 .gettingStartedContainer {
   @include pageLayout();
+  background-color: getColor("primary-3");
 }
 
 .gettingStartedContent {
-  @include flexCenter(column);
-  row-gap: $homeCardsContainerRowGap;
-  background-image: url($homeCardsContainerBackgroundImageUrl);
-  padding: $homeCardsContainerPadding;
+  @include flexCenter(row);
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  gap: 3rem;
+  padding: 8rem 6rem;
 }
 
-.gettingStartedSection {
+.gettingStartedContentMapContainer {
   @include flexCenter(column);
-  padding: $homeCardContainerPadding;
-  background-color: $homeCardContainerDefaultBackgroundColor;
-  width: 100%;
-  gap: $homeCardContainerDistanceBetweenTitleAndInformation;
-  border-top: 1.5px solid getColor("black-100-1");
-  border-bottom: 1.5px solid getColor("black-100-1");
+  align-items: flex-start;
+  gap: 1rem;
+  min-width: 20%;
 
-  &:nth-of-type(2) {
-    background-color: getColor("primary-1");
-  }
-
-  &:nth-of-type(3) {
-    background-color: getColor("secondary-color-1.4");
-  }
-
-  &:nth-of-type(4) {
-    background-color: getColor("secondary-color-1.1");
-  }
-
-  &:nth-of-type(5) {
-    background-color: getColor("secondary-color-1.2");
-  }
-
-  h1 {
-    @include heading("h2", "laptop", "black");
-    text-align: center;
-    letter-spacing: 3.5px;
-    color: getColor("tan-color-extra-light");
-    text-shadow:
-      $titleOutlineNegativeCoeficient $titleOutlineNegativeCoeficient 0 black,
-      $titleOutlinePozitiveCoeficient $titleOutlineNegativeCoeficient 0 black,
-      $titleOutlineNegativeCoeficient $titleOutlinePozitiveCoeficient 0 black,
-      $titleOutlinePozitiveCoeficient $titleOutlinePozitiveCoeficient 0 black;
-  }
-
-  h2 {
-    @include heading("h3", "laptop", "black");
-    align-self: flex-start;
-    text-align: left;
-    letter-spacing: 2.5px;
-    color: getColor("tan-color-extra-light");
-    text-shadow:
-      $titleOutlineNegativeCoeficient $titleOutlineNegativeCoeficient 0 black,
-      $titleOutlinePozitiveCoeficient $titleOutlineNegativeCoeficient 0 black,
-      $titleOutlineNegativeCoeficient $titleOutlinePozitiveCoeficient 0 black,
-      $titleOutlinePozitiveCoeficient $titleOutlinePozitiveCoeficient 0 black;
-  }
-
-  p {
+  h5 {
+    @include heading("h6", "laptop", "black");
     width: 100%;
-    font-size: 2rem;
-    text-align: left;
-    font-family: "EB Garamond", serif;
-    color: getColor("tan-color-extra-light");
   }
+}
+
+.gettingStartedContentMapSections {
+  @include flexCenter(column);
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+
+.gettingStartedContentMapSection {
+  @include flexCenter(column);
+  align-items: flex-start;
+  gap: 0.5rem;
+
+  h6 {
+    @include heading("h6", "phone", "black");
+    width: 100%;
+    transition: $crispyTransformTransition;
+
+    &:hover {
+      transform: translateX(10%);
+      font-style: italic;
+    }
+  }
+}
+
+.gettingStartedContentMapSectionContent {
+  @include flexCenter(column);
+  align-items: flex-start;
+  gap: 0.25rem;
+  margin-left: 1.5rem;
+
+  li {
+    @include flexCenter(row);
+    align-items: flex-start;
+
+    a {
+      @include flexCenter(row);
+      align-items: flex-start;
+      text-decoration: none;
+      transition: $crispyTransformTransition;
+
+      &:hover {
+        transform: scale(1.05);
+      }
+
+      p {
+        @include paragraph("laptop", "black");
+      }
+    }
+  }
+}
+
+.gettingStartedContentContainer {
+  @include flexCenter(column);
+  border-radius: 25px;
+}
+
+.gettingStartedContentSection {
+  @include flexCenter(column);
+  border-radius: 25px;
+  padding: 4rem;
+  padding-bottom: 13.5rem;
+  gap: 2rem;
+  background-color: getColor("secondary-color-3.3");
+
+  h4 {
+    @include heading("h4", "laptop", "black");
+    text-align: center;
+    width: 100%;
+  }
+}
+
+.gettingStartedContentArticles {
+  @include flexCenter(column);
+  align-items: flex-start;
+  gap: 6rem;
+}
+
+.gettingStartedContentArticle {
+  @include flexCenter(column);
+  align-items: flex-start;
+  gap: 1.5rem;
 
   span {
-    color: red;
+    color: getColor("error-color");
+    font-weight: 550;
   }
 
   a {
@@ -78,12 +117,20 @@
     color: getColor("secondary-color-light-2.4");
 
     &:hover {
-      font-style: italic;
       text-decoration: underline;
     }
   }
 
-  button {
-    margin-top: $homeCardContainerButtonMarginTop;
+  img {
+    height: 30rem;
+    width: auto;
+  }
+
+  h5 {
+    @include heading("h5", "laptop", "black");
+  }
+
+  p {
+    @include paragraph("laptop", "black");
   }
 }

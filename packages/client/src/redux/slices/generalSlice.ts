@@ -20,6 +20,8 @@ import {
   defaultProfile,
   defaultTemplateProfile,
 } from "@/data";
+import { SectionValueType } from "@/core/types/GettingStartedContentMapContentType";
+import { Payload } from "@prisma/client/runtime/library";
 
 type ObjectKeyValueType = {
   key: string;
@@ -43,6 +45,8 @@ type InitialStateType = {
   selectedViewOption: "grid" | "list";
 
   showProfileEmail: boolean;
+
+  currentGuideSection: SectionValueType;
 
   // Query
   entityQueryValues: EntityQueryValues;
@@ -93,6 +97,8 @@ const initialState: InitialStateType = {
   showFormModal: false,
   showGeneralModal: false,
   isModalUsedWhenLoading: false,
+
+  currentGuideSection: "basics",
 
   selectedEntityOption: "ingredient",
   selectedViewOption: "grid",
@@ -318,6 +324,12 @@ const generalSlice = createSlice({
   name: "general",
   initialState,
   reducers: {
+    resetTemplateImageUrl(state) {
+      state.templateImageUrl = "";
+    },
+    changeCurrentGuideSection(state, action: PayloadAction<SectionValueType>) {
+      state.currentGuideSection = action.payload;
+    },
     setTypeOfUpdateAccountQuery(
       state,
       action: PayloadAction<TypeOfUpdateAccountQuery>
@@ -683,6 +695,9 @@ export const selectLoadingUpdateProfile = (state: State) =>
 export const selectTypeOfUpdateAccountQuery = (state: State) =>
   state.general.typeOfUpdateAccountQuery;
 
+export const selectCurrentGuideSection = (state: State) =>
+  state.general.currentGuideSection;
+
 export const {
   changeIsSidebarOpened,
   updateTemplateProfile,
@@ -701,6 +716,8 @@ export const {
   setTemplateProfile,
   changeVerifiedPassword,
   setTypeOfUpdateAccountQuery,
+  changeCurrentGuideSection,
+  resetTemplateImageUrl,
 } = generalSlice.actions;
 
 export default generalSlice.reducer;

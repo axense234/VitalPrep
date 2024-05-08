@@ -9,10 +9,12 @@ import ActiveMealPrepPlan from "@/components/shared/ActiveMealPrepPlan";
 // Redux
 import {
   logoutUser,
+  resetTemplateImageUrl,
   selectInvalidJWT,
   selectLoadingGetOAuthProfile,
   selectLoadingGetProfile,
   selectProfile,
+  selectTemplateImageUrl,
   signupUserOAuth,
 } from "@/redux/slices/generalSlice";
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
@@ -28,6 +30,7 @@ import {
 } from "@/helpers/initializeOneSignal";
 // Next
 import Script from "next/script";
+import { usePathname } from "next/navigation";
 
 const SpecialLayout = ({ children }: { children: React.ReactNode }) => {
   const dispatch = useAppDispatch();
@@ -38,7 +41,12 @@ const SpecialLayout = ({ children }: { children: React.ReactNode }) => {
   const loadingGetProfile = useAppSelector(selectLoadingGetProfile);
   const loadingGetOAuthProfile = useAppSelector(selectLoadingGetOAuthProfile);
 
+  const pathname = usePathname();
   Chart.register([LineElement, PointElement, BarElement, ArcElement]);
+
+  useEffect(() => {
+    dispatch(resetTemplateImageUrl());
+  }, [pathname]);
 
   useEffect(() => {
     const initialize = async () => {
@@ -87,7 +95,7 @@ const SpecialLayout = ({ children }: { children: React.ReactNode }) => {
       />
       {children}
       <Footer />
-      <Script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async />
+      <Script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" defer />
     </>
   );
 };

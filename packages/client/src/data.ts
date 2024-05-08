@@ -29,10 +29,133 @@ import FAQPageSection from "./core/types/FAQPageSection";
 import UserType from "./core/types/entity/UserType";
 import HomeSectionContentProps from "./core/interfaces/HomeSectionContentProps";
 import PageTitleContentType from "./core/types/PageTitleContentType";
+import { GettingStartedContentMapContentType } from "./core/types/GettingStartedContentMapContentType";
 
 export const homePageUrl = "/home";
 export const sitePhoneNumber = "0754 189 293(fake)";
 export const siteEmail = "thisemaildoesnotexit@nothing.com";
+
+export const gettingStartedGuideContentMapContent: GettingStartedContentMapContentType =
+  [
+    {
+      id: 1,
+      sectionLabel: "The Basics",
+      sectionValue: "basics",
+      sectionContent: [
+        {
+          orderLetter: "a",
+          subsectionLabel: "Guide Goal",
+          subsectionLinkDest: "#guideGoal",
+        },
+        {
+          orderLetter: "b",
+          subsectionLabel: "Create Tool Page",
+          subsectionLinkDest: "#createToolPage",
+        },
+        {
+          orderLetter: "c",
+          subsectionLabel: "Multi-View Tool Page",
+          subsectionLinkDest: "#multiViewToolPage",
+        },
+        {
+          orderLetter: "d",
+          subsectionLabel: "View Tool Page",
+          subsectionLinkDest: "#viewToolPage",
+        },
+      ],
+    },
+    {
+      id: 2,
+      sectionLabel: "Entities",
+      sectionValue: "entities",
+      sectionContent: [
+        {
+          orderLetter: "a",
+          subsectionLabel: "Ingredients",
+          subsectionLinkDest: "#ingredients",
+        },
+        {
+          orderLetter: "b",
+          subsectionLabel: "Utensils",
+          subsectionLinkDest: "#utensils",
+        },
+        {
+          orderLetter: "c",
+          subsectionLabel: "Recipes",
+          subsectionLinkDest: "#recipes",
+        },
+        {
+          orderLetter: "d",
+          subsectionLabel: "Day Plans",
+          subsectionLinkDest: "#dayPlans",
+        },
+        {
+          orderLetter: "e",
+          subsectionLabel: "Session Templates",
+          subsectionLinkDest: "#sessionTemplates",
+        },
+        {
+          orderLetter: "f",
+          subsectionLabel: "Meal Prep Plans",
+          subsectionLinkDest: "#mealPrepPlans",
+        },
+      ],
+    },
+    {
+      id: 3,
+      sectionLabel: "Session Logs",
+      sectionValue: "logs",
+      sectionContent: [
+        {
+          orderLetter: "a",
+          subsectionLabel: "What are Session Logs?",
+          subsectionLinkDest: "#whatAreSessionLogs",
+        },
+        {
+          orderLetter: "b",
+          subsectionLabel: "How to Create a Session Log?",
+          subsectionLinkDest: "#createSessionLogs",
+        },
+        {
+          orderLetter: "c",
+          subsectionLabel: "How to View a Session Log?",
+          subsectionLinkDest: "#viewSessionLogs",
+        },
+      ],
+    },
+    {
+      id: 4,
+      sectionLabel: "Profile, Settings and Extras",
+      sectionValue: "extras",
+      sectionContent: [
+        {
+          orderLetter: "a",
+          subsectionLabel: "Profile Page?",
+          subsectionLinkDest: "#profilePage",
+        },
+        {
+          orderLetter: "b",
+          subsectionLabel: "Settings Page?",
+          subsectionLinkDest: "#settingsPage",
+        },
+        {
+          orderLetter: "c",
+          subsectionLabel: "Feedback",
+          subsectionLinkDest: "#feedback",
+        },
+        {
+          orderLetter: "d",
+          subsectionLabel: "Notifications",
+          subsectionLinkDest: "#notifications",
+        },
+        {
+          orderLetter: "e",
+          subsectionLabel: "Conclusion",
+          subsectionLinkDest: "#conclusion",
+        },
+      ],
+    },
+  ];
 
 export const pageTitleContent: PageTitleContentType[] = [
   {
@@ -146,6 +269,14 @@ export const pageTitleContent: PageTitleContentType[] = [
       "https://res.cloudinary.com/birthdayreminder/image/upload/v1715166007/VitalPrep/wallpaperflare.com_wallpaper_koxz6s.jpg",
     pageTitleTextContent: "Contact",
     pageSubTitleContent: "get in touch with us",
+  },
+  {
+    id: 15,
+    specificPagePath: "/guide",
+    backgroundImageSrc:
+      "https://res.cloudinary.com/birthdayreminder/image/upload/v1715168276/VitalPrep/vecteezy_ai-generated-five-different-meal-boxes-with-different-types_36807454_t02dn1.jpg",
+    pageTitleTextContent: "Getting Started",
+    pageSubTitleContent: "the basic guide to VitalPrep",
   },
 ];
 
