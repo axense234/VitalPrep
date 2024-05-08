@@ -6,25 +6,20 @@ import PrimaryButton from "@/components/shared/PrimaryButton";
 import { homePageUrl } from "@/data";
 
 const NotFound = () => {
-  const notFoundContent = (
-    <div className={errorPageStyles.errorPageContainer}>
-      <h1>404 Error</h1>
-      <p>Could not find the page that you were looking for.</p>
-      <PrimaryButton
-        type="link"
-        backgroundColor="#42613F"
-        textColor="#120a06"
-        content="Home"
-        disabled={false}
-        fontSize={21}
-        height={40}
-        width={160}
-        linkDest={homePageUrl}
-      />
+  return (
+    <div className={errorPageStyles.notFoundContainer}>
+      <div className={errorPageStyles.notFoundContent}>
+        <h1>404 Not Found</h1>
+        <h4>could not find the page you were looking for</h4>
+        <PrimaryButton
+          content="Go Home"
+          disabled={false}
+          type="link"
+          linkDest={homePageUrl}
+        />
+      </div>
     </div>
   );
-
-  return notFoundContent;
 };
 
 export default NotFound;

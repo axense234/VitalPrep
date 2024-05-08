@@ -1,38 +1,26 @@
 @use "../abstracts" as *;
 
-.errorPageContainer {
+.notFoundContainer {
   @include pageLayout();
   min-height: 100vh;
-  background-image: url("https://res.cloudinary.com/birthdayreminder/image/upload/v1714121279/VitalPrep/image1_le8tkv.png");
-  background-attachment: fixed;
-  padding-bottom: 10%;
+  background-image: url("https://res.cloudinary.com/birthdayreminder/image/upload/v1715164587/VitalPrep/desktop-wallpaper-everything-you-need-for-your-first-kitchen-1920x1077-for-your-mobile-tablet-utensils_tzli9m.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.notFoundContent {
+  @include flexCenter(column);
+  background-color: getColorWithOpacity("secondary-color-3.3", 0.8);
+  border-radius: 25px;
+  padding: 4rem;
 
   h1 {
     @include heading("h1", "laptop", "black");
-    width: 100%;
-    text-align: center;
-    color: getColor("black-100-1");
-    letter-spacing: 1rem;
   }
-
-  p {
-    width: 100%;
-    font-size: 2rem;
-    text-align: center;
-    font-family: "EB Garamond", serif;
-    color: getColor("black-100-1");
+  h4 {
+    @include heading("h4", "laptop", "black");
   }
-  a {
-    text-decoration: none;
-    color: getColor("secondary-color-light-2.4");
-
-    &:hover {
-      font-style: italic;
-      text-decoration: underline;
-    }
-  }
-
   button {
-    margin-top: 2.25rem;
+    margin-top: 4rem;
   }
 }
