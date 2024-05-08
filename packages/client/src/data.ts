@@ -139,6 +139,14 @@ export const pageTitleContent: PageTitleContentType[] = [
     pageTitleTextContent: "Settings",
     pageSubTitleContent: "update your settings",
   },
+  {
+    id: 14,
+    specificPagePath: "/contact",
+    backgroundImageSrc:
+      "https://res.cloudinary.com/birthdayreminder/image/upload/v1715166007/VitalPrep/wallpaperflare.com_wallpaper_koxz6s.jpg",
+    pageTitleTextContent: "Contact",
+    pageSubTitleContent: "get in touch with us",
+  },
 ];
 
 export const homeSectionsContent: (HomeSectionContentProps & { id: number })[] =
