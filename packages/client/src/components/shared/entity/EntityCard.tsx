@@ -100,6 +100,8 @@ const EntityCard: FC<{
       entityComponentDestination = `/mealPrepLog/${entityId || entity?.id}`;
       defaultImageUrlShownBasedOnEntityType = defaultInstanceTemplateImageUrl;
       entityIdentifier = "Meal Prep Log";
+      entityDetails = `${(entityUsed as MealPrepLogTemplate)?.completed ? `COMPLETED ✔️` : "ABANDONED ❌"}`;
+      entitySubDetails = `${(entityUsed as MealPrepLogTemplate)?.cookingDuration || 0} hours`;
       break;
     default:
       break;
@@ -165,7 +167,8 @@ const EntityCard: FC<{
         </h6>
         {(entityType === "dayTemplate" ||
           entityType === "instanceTemplate" ||
-          entityType === "mealPrepPlan") && (
+          entityType === "mealPrepPlan" ||
+          entityType === "mealPrepLog") && (
           <h6 style={{ fontSize: "large" ? "1.5rem" : "1rem" }}>
             {entitySubDetails}
           </h6>

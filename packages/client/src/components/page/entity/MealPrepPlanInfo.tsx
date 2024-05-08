@@ -12,8 +12,8 @@ import {
   getUserMealPrepPlan,
   selectLoadingGetUserMealPrepPlan,
 } from "@/redux/slices/mealPrepPlansSlice";
-// Data
-import { pageTitleContent } from "@/data";
+// Helpers
+import getPageTitlePropsBasedOnPathname from "@/helpers/getPageTitlePropsBasedOnPathname";
 
 const MealPrepPlanInfo: FC<{ entityId: string; userId: string }> = ({
   entityId,
@@ -32,9 +32,7 @@ const MealPrepPlanInfo: FC<{ entityId: string; userId: string }> = ({
   }, [entityId, userId, loadingGetUserMealPrepPlan]);
 
   const { backgroundImageSrc, pageSubTitleContent, pageTitleTextContent } =
-    pageTitleContent.find((pageTitle) =>
-      pageTitle.specificPagePath.startsWith("/mealPrepPlan")
-    ) || pageTitleContent[0];
+    getPageTitlePropsBasedOnPathname("/mealPrepPlan");
 
   return (
     <div className={entityInfoStyles.entityInfoContainer}>

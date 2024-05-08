@@ -172,6 +172,44 @@ const EntityInfoComponents: FC<{
       );
       break;
     case "mealPrepLog":
+      entityComponents = (
+        <div className={entityInfoTutorialStyles.entityInfoComponentsSections}>
+          <EntityInfoComponentsSection
+            entityType="ingredient"
+            entityComponents={
+              (entity as MealPrepPlanTemplate)
+                ?.ingredients as IngredientTemplate[]
+            }
+            entityName={entity?.name || "Entity Name"}
+            entitiesLabel="Ingredients"
+          />
+          <EntityInfoComponentsSection
+            entityType="utensil"
+            entityComponents={
+              (entity as MealPrepPlanTemplate)?.utensils as UtensilTemplate[]
+            }
+            entityName={entity?.name || "Entity Name"}
+            entitiesLabel="Utensils"
+          />
+          <EntityInfoComponentsSection
+            entityType="utensil"
+            entityComponents={
+              (entity as MealPrepPlanTemplate)?.recipes as RecipeTemplate[]
+            }
+            entityName={entity?.name || "Entity Name"}
+            entitiesLabel="Recipes"
+          />
+          <EntityInfoComponentsSection
+            entityType="utensil"
+            entityComponents={
+              (entity as MealPrepPlanTemplate)
+                ?.dayTemplates as DayTemplateTemplate[]
+            }
+            entityName={entity?.name || "Entity Name"}
+            entitiesLabel="Day Templates"
+          />
+        </div>
+      );
       break;
     default:
       break;

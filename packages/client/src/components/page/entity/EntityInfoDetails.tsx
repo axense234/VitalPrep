@@ -26,9 +26,9 @@ import EntityMacros from "@/components/shared/entity/EntityMacros";
 // Components
 import EntityInfoDetailsComposedSection from "./EntityInfoDetailsComposedSection";
 // Types
+import { Macros } from "@prisma/client";
 import DayTemplateTemplate from "@/core/types/entity/mutation/DayTemplateTemplate";
 import InstanceTemplateTemplate from "@/core/types/entity/mutation/InstanceTemplateTemplate";
-import { Macros } from "@prisma/client";
 import MealPrepPlanTemplate from "@/core/types/entity/mutation/MealPrepPlanTemplate";
 import MealPrepLogTemplate from "@/core/types/entity/mutation/MealPrepLogTemplate";
 
@@ -315,77 +315,43 @@ const EntityInfoDetails: FC<{ entityId: string; entityType: EntityType }> = ({
       );
       break;
     case "mealPrepLog":
+      const entityAsMealPrepLog = entity as MealPrepLogTemplate;
       entityInfoDetailsShown = (
         <div className={entityInfoStyles.entityInfoDetailsContainer}>
-          <div className={entityInfoStyles.entityInfoDetailsHero}>
-            <Image
-              width={640}
-              height={640}
-              src={entity?.imageUrl || defaultInstanceTemplateImageUrl}
-              alt={entity?.name || "Meal Prep Log Image"}
-              aria-label={entity?.name || "Meal Prep Log Image"}
-            />
-            <header className={entityInfoStyles.entityInfoDetailsHeader}>
-              <h2>{entity?.name || "Meal Prep Log Name"}</h2>
-              <h3>
-                {(entity as MealPrepLogTemplate)?.completed
-                  ? `COMPLETED ✔️`
-                  : "NOT COMPLETED ❌"}
-              </h3>
-              <h3>
-                {new Date((entity as MealPrepLogTemplate)?.date as Date)
-                  ? new Date(
-                      (entity as MealPrepLogTemplate)?.date as Date
-                    ).toLocaleDateString()
-                  : "unknown date"}
-              </h3>
-              <h3>
-                {(entity as MealPrepLogTemplate)?.cookingDuration
-                  ? `${(entity as MealPrepLogTemplate)?.cookingDuration} hours`
-                  : "??? hours"}
-              </h3>
-            </header>
-            <EntityMacros
-              macros={
-                (entity as MealPrepLogTemplate)?.instanceTemplate
-                  ?.macros as Macros
-              }
-            />
-          </div>
-          <div className={entityInfoStyles.entityInfoDetalsComposedSection}>
-            <EntityInfoDetailsComposedSection
-              entities={
-                (entity as MealPrepLogTemplate)
-                  ?.dayTemplates as DayTemplateTemplate[]
-              }
-              entityType={"dayTemplate"}
-            />
-          </div>
-          <div className={entityInfoStyles.entityInfoDetalsComposedSection}>
-            <EntityInfoDetailsComposedSection
-              entities={
-                (entity as MealPrepLogTemplate)?.recipes as RecipeTemplate[]
-              }
-              entityType={"recipe"}
-            />
-          </div>
-          <div className={entityInfoStyles.entityInfoDetalsComposedSection}>
-            <EntityInfoDetailsComposedSection
-              entities={
-                (entity as MealPrepLogTemplate)
-                  ?.ingredients as IngredientTemplate[]
-              }
-              entityType={"ingredient"}
-            />
-          </div>
-          <div className={entityInfoStyles.entityInfoDetalsComposedSection}>
-            <EntityInfoDetailsComposedSection
-              entities={
-                (entity as MealPrepLogTemplate)?.utensils as UtensilTemplate[]
-              }
-              entityType={"utensil"}
-            />
-          </div>
+          <EntityPreview
+            entity={entityAsMealPrepLog}
+            entityId={entityId}
+            entityType="mealPrepLog"
+            type="view"
+          />
+          <EntityStatistics
+            statistics={[
+              {
+                id: 1,
+                count: entityAsMealPrepLog?.dayTemplates?.length || 0,
+                entityType: "Day Templates",
+                essence: "component",
+              },
+              {
+                id: 2,
+                count: entityAsMealPrepLog?.recipes?.length || 0,
+                entityType: "Recipes",
+                essence: "component",
+              },
+              {
+                id: 3,
+                count: entityAsMealPrepLog?.ingredients?.length || 0,
+                entityType: "Ingredients",
+                essence: "component",
+              },
+              {
+                id: 4,
+                count: entityAsMealPrepLog?.utensils?.length || 0,
+                entityType: "Utensils",
+                essence: "component",
+              },
+            ]}
+          />
         </div>
       );
       break;

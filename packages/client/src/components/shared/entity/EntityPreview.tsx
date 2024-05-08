@@ -36,7 +36,12 @@ const EntityPreview: FC<{
         entity={entity}
         entityId={entityId}
       />
-      {entityType !== "utensil" && (
+      {entityType === "mealPrepLog" && (
+        <EntityMacros
+          macros={(entity as MealPrepLogTemplate)?.instanceTemplate?.macros}
+        />
+      )}
+      {entityType !== "utensil" && entityType !== "mealPrepLog" && (
         <EntityMacros macros={(entity as IngredientTemplate)?.macros} />
       )}
     </section>

@@ -3,6 +3,8 @@ import entityInfoStyles from "../../../scss/components/page/EntityInfo.module.sc
 // Components
 import PageTitle from "@/components/shared/PageTitle";
 import EntityInfoDetails from "./EntityInfoDetails";
+import EntityInfoComponents from "./EntityInfoComponents";
+import EntityInfoInstanceTemplate from "./EntityInfoInstanceTemplate";
 // React
 import { FC, useEffect } from "react";
 // Redux
@@ -11,6 +13,8 @@ import {
   getUserMealPrepLog,
   selectLoadingGetUserMealPrepLog,
 } from "@/redux/slices/mealPrepLogsSlice";
+// Helpers
+import getPageTitlePropsBasedOnPathname from "@/helpers/getPageTitlePropsBasedOnPathname";
 
 const MealPrepLogInfo: FC<{ entityId: string; userId: string }> = ({
   entityId,
@@ -28,14 +32,20 @@ const MealPrepLogInfo: FC<{ entityId: string; userId: string }> = ({
     }
   }, [entityId, userId, loadingGetUserMealPrepLog]);
 
+  const { backgroundImageSrc, pageSubTitleContent, pageTitleTextContent } =
+    getPageTitlePropsBasedOnPathname("/mealPrepLog");
+
   return (
     <div className={entityInfoStyles.entityInfoContainer}>
       <PageTitle
-        titleContent="View Meal Prep Log"
-        subtitleContent="the details of your log"
+        titleContent={pageTitleTextContent}
+        subtitleContent={pageSubTitleContent}
+        backgroundImageSrc={backgroundImageSrc}
       />
       <div className={entityInfoStyles.entityInfoContent}>
         <EntityInfoDetails entityId={entityId} entityType="mealPrepLog" />
+        <EntityInfoInstanceTemplate entityId={entityId} />
+        <EntityInfoComponents entityId={entityId} entityType="mealPrepLog" />
       </div>
     </div>
   );

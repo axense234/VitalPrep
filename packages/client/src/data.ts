@@ -115,6 +115,14 @@ export const pageTitleContent: PageTitleContentType[] = [
     pageTitleTextContent: "View Meal Prep Plan",
     pageSubTitleContent: "your plan to follow",
   },
+  {
+    id: 11,
+    specificPagePath: "/mealPrepLog",
+    backgroundImageSrc:
+      "https://res.cloudinary.com/birthdayreminder/image/upload/v1714923609/VitalPrep/iamge4_vgdmkb.png",
+    pageTitleTextContent: "View Meal Prep Log",
+    pageSubTitleContent: "your saved meal prep log",
+  },
 ];
 
 export const homeSectionsContent: (HomeSectionContentProps & { id: number })[] =

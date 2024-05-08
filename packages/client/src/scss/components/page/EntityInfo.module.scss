@@ -261,3 +261,23 @@
     max-width: 25%;
   }
 }
+
+.entityInfoInstanceTemplateContainer {
+  @include flexCenter(column);
+  width: 100%;
+  padding: 4rem;
+  gap: 6rem;
+  background-color: getColorWithOpacity("secondary-color-3.1", 0.5);
+  border-radius: 25px;
+
+  h4 {
+    @include heading("h4", "laptop", "black");
+  }
+}
+
+.entityInfoInstanceTemplateContainerContent {
+  @include flexCenter(row);
+  align-items: flex-start;
+  width: 100%;
+  gap: 8rem;
+}
