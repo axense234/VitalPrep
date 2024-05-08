@@ -8,29 +8,16 @@ import RecipeTemplate from "@/core/types/entity/mutation/RecipeTemplate";
 import IngredientTemplate from "@/core/types/entity/mutation/IngredientTemplate";
 import UtensilTemplate from "@/core/types/entity/mutation/UtensilTemplate";
 import EntityPreview from "@/components/shared/entity/EntityPreview";
-import EntityStatistics from "./EntityStatistics";
-// Next
-import Image from "next/image";
-// Redux
-import { useAppSelector } from "@/hooks/redux";
-// Helpers
-import selectEntityById from "@/helpers/selectEntityById";
-// Data
-import {
-  defaultDayTemplateImageUrl,
-  defaultInstanceTemplateImageUrl,
-  defaultRecipeImageUrl,
-} from "@/data";
-// Line Chart
-import EntityMacros from "@/components/shared/entity/EntityMacros";
-// Components
-import EntityInfoDetailsComposedSection from "./EntityInfoDetailsComposedSection";
-// Types
-import { Macros } from "@prisma/client";
 import DayTemplateTemplate from "@/core/types/entity/mutation/DayTemplateTemplate";
 import InstanceTemplateTemplate from "@/core/types/entity/mutation/InstanceTemplateTemplate";
 import MealPrepPlanTemplate from "@/core/types/entity/mutation/MealPrepPlanTemplate";
 import MealPrepLogTemplate from "@/core/types/entity/mutation/MealPrepLogTemplate";
+// Components
+import EntityStatistics from "./EntityStatistics";
+// Redux
+import { useAppSelector } from "@/hooks/redux";
+// Helpers
+import selectEntityById from "@/helpers/selectEntityById";
 
 const EntityInfoDetails: FC<{ entityId: string; entityType: EntityType }> = ({
   entityId,

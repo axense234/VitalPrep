@@ -15,12 +15,17 @@ import { State } from "@/redux/api/store";
 // Next
 import Image from "next/image";
 
-const UtensilComponent: FC<EntityComponentProps> = ({ clicked, entityId }) => {
+const UtensilComponent: FC<EntityComponentProps> = ({
+  clicked,
+  entityId,
+  entity,
+}) => {
   const utensilEntity = useAppSelector((state: State) =>
     selectEntityById(state, entityId, "utensil")
   ) as Utensil;
+  const utensilEntityShown = utensilEntity || entity;
 
-  const { name, imageUrl, enabled } = utensilEntity;
+  const { name, imageUrl, enabled } = utensilEntityShown;
 
   return (
     <div
@@ -36,7 +41,7 @@ const UtensilComponent: FC<EntityComponentProps> = ({ clicked, entityId }) => {
           width={80}
           height={80}
         />
-        <h5>{name}</h5>
+        <h6>{name}</h6>
       </header>
       <div
         className={entityComponentStyles.entityComponentDetails}

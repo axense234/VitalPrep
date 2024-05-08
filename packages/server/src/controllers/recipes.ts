@@ -3,10 +3,10 @@ import { Response, Request } from "express";
 // Status Codes
 import { StatusCodes } from "http-status-codes";
 // Prisma
-import { IngredientClient, RecipeClient, UtensilClient } from "../db/postgres";
-import { Ingredient, Macros, Prisma, Recipe, Utensil } from "@prisma/client";
+import { IngredientClient, RecipeClient } from "../db/postgres";
+import { Ingredient, Macros, Prisma, Utensil } from "@prisma/client";
 // Utils
-import { deleteCache, getOrSetCache, setCache } from "../utils/redis";
+import { deleteCache, setCache } from "../utils/redis";
 
 type GetAllRecipesQueryObject = {
   userId?: string;

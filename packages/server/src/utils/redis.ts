@@ -14,6 +14,14 @@ const getOrSetCache = async (key, cb) => {
   return freshData;
 };
 
+const getCache = async (key) => {
+  const data = await redisClient.get(key);
+
+  if (data !== null) {
+    return JSON.parse(data);
+  }
+};
+
 const setCache = async (key, data) => {
   await redisClient.setEx(key, DEF_EXP_TIME, JSON.stringify(data));
 };
@@ -26,4 +34,4 @@ const deleteAllCache = async () => {
   await redisClient.flushAll();
 };
 
-export { getOrSetCache, deleteAllCache, setCache, deleteCache };
+export { getOrSetCache, deleteAllCache, setCache, deleteCache, getCache };

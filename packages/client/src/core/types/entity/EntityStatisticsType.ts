@@ -1,6 +1,6 @@
 type EntityStatisticsType = {
   id: number;
-  essence: "component" | "usable";
+  essence: "component" | "usable" | "count";
   entityType: string;
   count: number;
 }[];

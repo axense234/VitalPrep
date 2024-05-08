@@ -3,7 +3,6 @@ import { Request, Response } from "express";
 // Status Codes
 import { StatusCodes } from "http-status-codes/build/cjs/status-codes";
 // Prisma
-import { User } from "@prisma/client";
 import {
   DayTemplateClient,
   IngredientClient,
@@ -18,6 +17,17 @@ import {
 // Utils
 import { deleteCache, getOrSetCache, setCache } from "../utils/redis";
 import { encryptPassword } from "../utils/bcrypt";
+
+type UsersIncludeObject = {
+  ingredients?: boolean | { include: { macros: boolean } };
+  utensils?: boolean;
+  recipes?: boolean | { include: { macros: boolean } };
+  dayTemplates?: boolean | { include: { macros: boolean } };
+  instanceTemplates?: boolean | { include: { macros: boolean } };
+  mealPrepPlans?: boolean | { include: { macros: boolean } };
+  mealPrepLogs?: boolean;
+  notificationSettings?: boolean;
+};
 
 const getAllUsers = async (req: Request, res: Response) => {
   const foundUsers = await getOrSetCache("users", async () => {
@@ -52,8 +62,24 @@ const getAllUsers = async (req: Request, res: Response) => {
 const getUserById = async (req: Request, res: Response) => {
   const userIdParams = req.params.userId;
   const userIdCache = req.user.userId;
+  const {
+    includeIngredients,
+    includeIngredientsMacros,
+    includeUtensils,
+    includeRecipes,
+    includeRecipesMacros,
+    includeDayTemplates,
+    includeDayTemplatesMacros,
+    includeInstanceTemplates,
+    includeInstanceTemplatesMacros,
+    includeMealPrepPlans,
+    includeMealPrepPlansMacros,
+    includeMealPrepLogs,
+    includeNotificationSettings,
+  } = req.query;
 
   const userId = userIdParams ? userIdCache : userIdParams;
+  const includeObject: UsersIncludeObject = {};
 
   if (!userId || userId === "null" || userId === "undefined") {
     return res
@@ -61,21 +87,51 @@ const getUserById = async (req: Request, res: Response) => {
       .json({ message: "Please enter an user id!", user: {} });
   }
 
-  const foundUser = await getOrSetCache(`users:${userId}`, async () => {
-    const user = await UserClient.findUnique({
-      where: { id: userId },
-      include: {
-        ingredients: true,
-        utensils: true,
-        recipes: true,
-        dayTemplates: true,
-        instanceTemplates: true,
-        mealPrepPlans: true,
-        mealPrepLogs: true,
-        notificationSettings: true,
-      },
-    });
-    return user as User;
+  // INCLUDE
+  if (includeIngredients) {
+    includeObject.ingredients = true;
+  }
+  if (includeIngredients && includeIngredientsMacros) {
+    includeObject.ingredients = { include: { macros: true } };
+  }
+  if (includeUtensils) {
+    includeObject.utensils = true;
+  }
+  if (includeRecipes) {
+    includeObject.recipes = true;
+  }
+  if (includeRecipes && includeRecipesMacros) {
+    includeObject.recipes = { include: { macros: true } };
+  }
+  if (includeDayTemplates) {
+    includeObject.dayTemplates = true;
+  }
+  if (includeDayTemplates && includeDayTemplatesMacros) {
+    includeObject.dayTemplates = { include: { macros: true } };
+  }
+  if (includeInstanceTemplates) {
+    includeObject.instanceTemplates = true;
+  }
+  if (includeInstanceTemplates && includeInstanceTemplatesMacros) {
+    includeObject.instanceTemplates = { include: { macros: true } };
+  }
+  if (includeMealPrepPlans) {
+    includeObject.mealPrepPlans = true;
+  }
+  if (includeMealPrepPlans && includeMealPrepPlansMacros) {
+    includeObject.mealPrepPlans = { include: { macros: true } };
+  }
+  if (includeMealPrepLogs) {
+    includeObject.mealPrepLogs = true;
+  }
+  if (includeNotificationSettings) {
+    includeObject.notificationSettings = true;
+  }
+
+  console.log(includeObject);
+  const foundUser = await UserClient.findUnique({
+    where: { id: userId },
+    include: includeObject,
   });
 
   if (!foundUser) {

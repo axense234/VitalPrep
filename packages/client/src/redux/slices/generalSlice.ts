@@ -20,7 +20,6 @@ import {
   defaultProfile,
   defaultTemplateProfile,
 } from "@/data";
-import { selectIngredientById } from "./ingredientsSlice";
 
 type ObjectKeyValueType = {
   key: string;
@@ -127,7 +126,7 @@ export const logoutUser = createAsyncThunk("general/logoutUser", async () => {
     await axiosInstance.post(`/users/signout/${userId}`).then(() => {
       localStorage.removeItem("userId");
     });
-    await signOut({ redirect: true, callbackUrl: "http://localhost:3000/" });
+    await signOut({ redirect: true, callbackUrl: `${process.env.SITE_URL}/` });
   } catch (error) {
     console.log(error);
     return error as AxiosError;
@@ -140,7 +139,24 @@ export const getProfileOAuth = createAsyncThunk(
     try {
       const session = await getSession();
       const { data } = await axiosInstance.get(
-        `/users/null?userEmail=${session?.user?.email}`
+        `/users/null?userEmail=${session?.user?.email}`,
+        {
+          params: {
+            includeIngredients: true,
+            includeIngredientsMacros: true,
+            includeUtensils: true,
+            includeRecipes: true,
+            includeRecipesMacros: true,
+            includeDayTemplates: true,
+            includeDayTemplatesMacros: true,
+            includeInstanceTemplates: true,
+            includeInstanceTemplatesMacros: true,
+            includeMealPrepPlans: true,
+            includeMealPrepPlansMacros: true,
+            includeMealPrepLogs: true,
+            includeNotificationSettings: true,
+          },
+        }
       );
       localStorage.setItem("userId", data.user.id);
       return data.user as User;
@@ -156,7 +172,23 @@ export const getProfileJWT = createAsyncThunk(
   async () => {
     try {
       const userId = localStorage.getItem("userId");
-      const { data } = await axiosInstance.get(`/users/${userId}`);
+      const { data } = await axiosInstance.get(`/users/${userId}`, {
+        params: {
+          includeIngredients: true,
+          includeIngredientsMacros: true,
+          includeUtensils: true,
+          includeRecipes: true,
+          includeRecipesMacros: true,
+          includeDayTemplates: true,
+          includeDayTemplatesMacros: true,
+          includeInstanceTemplates: true,
+          includeInstanceTemplatesMacros: true,
+          includeMealPrepPlans: true,
+          includeMealPrepPlansMacros: true,
+          includeMealPrepLogs: true,
+          includeNotificationSettings: true,
+        },
+      });
       localStorage.setItem("userId", data.user.id);
       return data.user as User;
     } catch (error) {

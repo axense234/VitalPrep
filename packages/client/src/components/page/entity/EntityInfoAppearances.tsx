@@ -8,6 +8,7 @@ import IngredientTemplate from "@/core/types/entity/mutation/IngredientTemplate"
 import RecipeTemplate from "@/core/types/entity/mutation/RecipeTemplate";
 import DayTemplateTemplate from "@/core/types/entity/mutation/DayTemplateTemplate";
 import InstanceTemplateTemplate from "@/core/types/entity/mutation/InstanceTemplateTemplate";
+import UserType from "@/core/types/entity/UserType";
 // Helpers
 import selectEntityById from "@/helpers/selectEntityById";
 // Redux
@@ -17,17 +18,18 @@ import EntityInfoAppearancesSection from "./EntityInfoAppearancesSection";
 
 const EntityInfoAppearances: FC<{
   entityId: string;
-  entityType: EntityType;
-}> = ({ entityId, entityType }) => {
+  entityType: EntityType | "profile";
+  profileEntity?: UserType;
+}> = ({ entityId, entityType, profileEntity }) => {
   let entityInfoAppearancesShown = null;
   const entity = useAppSelector((state) =>
-    selectEntityById(state, entityId, entityType)
+    selectEntityById(state, entityId, entityType as EntityType)
   );
 
   console.log(entity);
   console.log(entity, entityType);
 
-  if (entity) {
+  if (entity || profileEntity) {
     switch (entityType) {
       case "ingredient":
         const entityAsIngredient = entity as IngredientTemplate;
@@ -162,6 +164,58 @@ const EntityInfoAppearances: FC<{
               areOptionsLoading={false}
               entities={instanceTemplateMealPrepPlans || []}
               entityTypeUsed="mealPrepPlan"
+            />
+          </div>
+        );
+        break;
+      case "profile":
+        const profileIngredients = profileEntity?.ingredients;
+        const profileUtensils = profileEntity?.utensils;
+        const profileRecipes = profileEntity?.recipes;
+        const profileDayTemplates = profileEntity?.dayTemplates;
+        const profileInstanceTemplates = profileEntity?.instanceTemplates;
+        const profileMealPrepPlans = profileEntity?.mealPrepPlans;
+        const profileMealPrepLogs = profileEntity?.mealPrepLogs;
+
+        console.log(profileEntity);
+
+        entityInfoAppearancesShown = (
+          <div className={entityInfoStyles.entityInfoDetailsHero}>
+            <h4>Created Entities</h4>
+            <EntityInfoAppearancesSection
+              areOptionsLoading={false}
+              entities={profileIngredients || []}
+              entityTypeUsed="ingredient"
+            />
+            <EntityInfoAppearancesSection
+              areOptionsLoading={false}
+              entities={profileUtensils || []}
+              entityTypeUsed="utensil"
+            />
+            <EntityInfoAppearancesSection
+              areOptionsLoading={false}
+              entities={profileRecipes || []}
+              entityTypeUsed="recipe"
+            />
+            <EntityInfoAppearancesSection
+              areOptionsLoading={false}
+              entities={profileDayTemplates || []}
+              entityTypeUsed="dayTemplate"
+            />
+            <EntityInfoAppearancesSection
+              areOptionsLoading={false}
+              entities={profileInstanceTemplates || []}
+              entityTypeUsed="instanceTemplate"
+            />
+            <EntityInfoAppearancesSection
+              areOptionsLoading={false}
+              entities={profileMealPrepPlans || []}
+              entityTypeUsed="mealPrepPlan"
+            />
+            <EntityInfoAppearancesSection
+              areOptionsLoading={false}
+              entities={profileMealPrepLogs || []}
+              entityTypeUsed="mealPrepLog"
             />
           </div>
         );

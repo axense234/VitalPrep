@@ -35,6 +35,9 @@ const EntityInfoAppearancesSection: FC<EntityInfoAppearancesSectionProps> = ({
     case "mealPrepPlan":
       sectionTitleUsed = "Meal Prep Plans:";
       break;
+    case "mealPrepLog":
+      sectionTitleUsed = "Meal Prep Logs:";
+      break;
     default:
       break;
   }

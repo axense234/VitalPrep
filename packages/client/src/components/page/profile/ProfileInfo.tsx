@@ -26,15 +26,15 @@ const ProfileInfo = () => {
       <Image
         alt="Profile Image"
         src={profile.imageUrl || defaultProfileImageUrl}
-        width={640}
-        height={640}
+        width={240}
+        height={240}
       />
-      <h2>{profile.username || "Username"}</h2>
+      <h4>{profile.username || "Username"}</h4>
       <div className={profileStyles.profileInfoEmail}>
         {profile.email ? (
-          <h3>{showProfileEmail ? profile.email : hiddenProfileEmail}</h3>
+          <h6>{showProfileEmail ? profile.email : hiddenProfileEmail}</h6>
         ) : (
-          <h3>"profileemail@gmail.com"</h3>
+          <h6>"profileemail@gmail.com"</h6>
         )}
 
         {showProfileEmail ? (

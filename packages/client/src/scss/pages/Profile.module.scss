@@ -2,74 +2,52 @@
 
 .profileContainer {
   @include pageLayout();
+  background-color: getColor("secondary-color-3.3");
 }
 
 .profileContent {
   @include flexCenter(column);
   width: 100%;
-  padding: 128px;
-  gap: 256px;
-  background-image: url($authFormPageTemplateFormBackgroundUrl);
+  gap: 8rem;
+  padding: 8rem;
 }
 
 .profileInfoContainer {
   @include flexCenter(column);
-  width: 100%;
   gap: 1rem;
+  padding: 4rem;
+  border-radius: 25px;
+  background-color: getColorWithOpacity("secondary-color-3.1", 0.5);
 
   img {
     margin-bottom: 2rem;
   }
 
-  h2 {
-    @include heading("h2", "laptop", "black");
+  h4 {
+    @include heading("h4", "laptop", "black");
     font-weight: 550;
-    letter-spacing: 2px;
   }
 
-  h3 {
-    font-size: 2rem;
-    font-weight: 550;
-    letter-spacing: 1px;
+  h6 {
+    @include heading("h6", "laptop", "black");
   }
 }
 
 .profileInfoEmail {
   @include flexCenter(row);
+  justify-content: center;
   width: 100%;
-  gap: 2rem;
+  gap: 0.5rem;
 
   svg {
-    font-size: 3rem;
+    font-size: 2rem;
     cursor: pointer;
   }
 }
 
-.profileDetailsContainer {
-  @include flexCenter(column);
-  width: 100%;
-  gap: 3rem;
-
-  h2 {
-    @include heading("h2", "laptop", "black");
-    font-weight: 550;
-    letter-spacing: 2px;
-    align-self: center;
-  }
-
-  h3 {
-    font-size: 2rem;
-    font-weight: 550;
-    letter-spacing: 1px;
-
-    span {
-      color: getColor("secondary-color-light-2.4");
-    }
-  }
-}
-
-.profileDetailsContent {
-  @include flexCenter(column);
+.profileDetails {
+  @include flexCenter(row);
   align-items: flex-start;
-  gap: 2rem;
+  justify-content: space-between;
+  width: 100%;
 }

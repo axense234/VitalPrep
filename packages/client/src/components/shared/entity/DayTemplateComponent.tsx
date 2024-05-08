@@ -42,7 +42,7 @@ const DayTemplateComponent: FC<EntityComponentProps> = ({
           width={80}
           height={80}
         />
-        <h5>{name}</h5>
+        <h6>{name}</h6>
       </header>
       <div
         className={entityComponentStyles.entityComponentDetails}

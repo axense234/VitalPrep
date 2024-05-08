@@ -17,6 +17,7 @@ import { MealPrepPlan } from "@prisma/client";
 // Axios
 import { AxiosError } from "axios";
 import axiosInstance from "@/utils/axios";
+import { logoutUser } from "./generalSlice";
 
 type ObjectKeyValueType = {
   key: string;
