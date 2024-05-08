@@ -132,7 +132,10 @@ export const logoutUser = createAsyncThunk("general/logoutUser", async () => {
     await axiosInstance.post(`/users/signout/${userId}`).then(() => {
       localStorage.removeItem("userId");
     });
-    await signOut({ redirect: true, callbackUrl: `${process.env.SITE_URL}/` });
+    await signOut({
+      redirect: true,
+      callbackUrl: `${process.env.NEXT_PUBLIC_SITE_URL}/`,
+    });
   } catch (error) {
     console.log(error);
     return error as AxiosError;
