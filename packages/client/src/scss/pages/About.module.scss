@@ -6,15 +6,14 @@
 
 .aboutContent {
   @include flexCenter(column);
-  row-gap: $homeCardsContainerRowGap;
-  background-image: url($homeCardsContainerBackgroundImageUrl);
-  padding: $homeCardsContainerPadding;
+  row-gap: 2rem;
+  padding: 4rem;
 }
 
 .aboutContentSection {
   @include flexCenter(column);
-  padding: $homeCardContainerPadding;
-  background-color: $homeCardContainerDefaultBackgroundColor;
+  padding: 3rem;
+  background-color: blue;
   width: 100%;
   gap: 2.5rem;
 
@@ -39,11 +38,6 @@
     text-align: center;
     letter-spacing: 3.5px;
     color: getColor("tan-color-extra-light");
-    text-shadow:
-      $titleOutlineNegativeCoeficient $titleOutlineNegativeCoeficient 0 black,
-      $titleOutlinePozitiveCoeficient $titleOutlineNegativeCoeficient 0 black,
-      $titleOutlineNegativeCoeficient $titleOutlinePozitiveCoeficient 0 black,
-      $titleOutlinePozitiveCoeficient $titleOutlinePozitiveCoeficient 0 black;
   }
 
   h2 {
@@ -53,11 +47,6 @@
     letter-spacing: 2.5px;
     margin-top: 3rem;
     color: getColor("tan-color-extra-light");
-    text-shadow:
-      $titleOutlineNegativeCoeficient $titleOutlineNegativeCoeficient 0 black,
-      $titleOutlinePozitiveCoeficient $titleOutlineNegativeCoeficient 0 black,
-      $titleOutlineNegativeCoeficient $titleOutlinePozitiveCoeficient 0 black,
-      $titleOutlinePozitiveCoeficient $titleOutlinePozitiveCoeficient 0 black;
   }
 
   p {
@@ -84,7 +73,7 @@
   }
 
   button {
-    margin-top: $homeCardContainerButtonMarginTop;
+    margin-top: 3rem;
   }
 }
 
