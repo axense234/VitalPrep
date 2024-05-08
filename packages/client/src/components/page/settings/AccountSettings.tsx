@@ -73,14 +73,11 @@ const AccountSettings = () => {
   return (
     <section className={accountSettingsStyles.accountSettingsContainer}>
       <PopupModal hasBorder={false} modalType="form" />
-      <h2>Account Settings</h2>
+      <h4>Account Settings</h4>
       <form className={accountSettingsStyles.accountSettingsForm}>
         <TextFormControl
-          direction="column"
-          labelColor="#DDD9D5"
           type="text"
           labelContent="New Username:"
-          required
           entityProperty={templateProfile.username as string}
           onEntityPropertyValueChange={(e) =>
             dispatch(
@@ -91,11 +88,8 @@ const AccountSettings = () => {
           labelFontSize={28}
         />
         <TextFormControl
-          direction="column"
-          labelColor="#DDD9D5"
           type="email"
           labelContent="New Email:"
-          required
           entityProperty={templateProfile.email as string}
           onEntityPropertyValueChange={(e) =>
             dispatch(
@@ -106,11 +100,8 @@ const AccountSettings = () => {
           labelFontSize={28}
         />
         <TextFormControl
-          direction="column"
-          labelColor="#DDD9D5"
           type="password"
           labelContent="New Password:"
-          required
           entityProperty={templateProfile.password as string}
           onEntityPropertyValueChange={(e) =>
             dispatch(
@@ -121,11 +112,8 @@ const AccountSettings = () => {
           labelFontSize={28}
         />
         <TextFormControl
-          direction="column"
-          labelColor="#DDD9D5"
           type="password"
           labelContent="Verify Password:"
-          required
           entityProperty={verifiedPassword as string}
           onEntityPropertyValueChange={(e) =>
             dispatch(changeVerifiedPassword(e.target.value))
@@ -134,9 +122,7 @@ const AccountSettings = () => {
           labelFontSize={28}
         />
         <ImageFormControl
-          labelColor="#DDD9D5"
           labelContent="New Account Image:"
-          direction="column"
           defaultImageUsedUrl={defaultProfileImageUrl}
           entityPropertyLoadingStatus={loadingCloudinaryImage}
           entityProperty={templateProfile.imageUrl as string}
@@ -153,13 +139,8 @@ const AccountSettings = () => {
           labelFontSize={28}
         />
         <PrimaryButton
-          backgroundColor="#432517"
-          textColor="#ddd9d5"
           content="Update Account Settings"
           type="functional"
-          fontSize={24}
-          height={64}
-          width={560}
           disabled={
             loadingCloudinaryImage === "PENDING" ||
             loadingUpdateProfile === "PENDING"

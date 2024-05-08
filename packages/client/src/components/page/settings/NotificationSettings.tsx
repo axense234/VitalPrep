@@ -42,13 +42,13 @@ const NotificationSettings = () => {
     }
   }, [loadingCloudinaryImage]);
 
+  console.log(templateProfile?.notificationSettings);
+
   return (
     <section className={notificationSettingsStyles.accountSettingsContainer}>
-      <h2>Notification Settings</h2>
+      <h4>Notification Settings</h4>
       <form className={notificationSettingsStyles.accountSettingsForm}>
         <CheckboxFormControl
-          direction="row"
-          labelColor="#DDD9D5"
           labelContent="Allow Notifications?:"
           entityProperty={String(
             templateProfile?.notificationSettings?.allowedNotifications
@@ -58,16 +58,13 @@ const NotificationSettings = () => {
             dispatch(
               updateTemplateProfileNotificationSettings({
                 key: "allowedNotifications",
-                value: Boolean(e.target.value),
+                value: e.target.value === "true" ? false : true,
               })
             );
           }}
-          labelFontSize={28}
         />
         <ImageFormControl
-          labelColor="#DDD9D5"
           labelContent="Notification Image:"
-          direction="column"
           defaultImageUsedUrl={defaultProfileImageUrl}
           entityPropertyLoadingStatus={loadingCloudinaryImage}
           entityProperty={
@@ -87,8 +84,10 @@ const NotificationSettings = () => {
           labelFontSize={28}
         />
         <RadioFormControl
+          chosenEntityProperty={
+            templateProfile?.notificationSettings?.notificationStyle
+          }
           entityPropertyOptions={notificationMessageStyles}
-          labelColor="#DDD9D5"
           labelContent="Notification Style:"
           onEntityPropertyValueChange={(value: string) =>
             dispatch(
@@ -98,16 +97,10 @@ const NotificationSettings = () => {
               })
             )
           }
-          labelFontSize={28}
         />
         <PrimaryButton
-          backgroundColor="#432517"
-          textColor="#ddd9d5"
           content="Update Notification Settings"
           type="functional"
-          fontSize={24}
-          height={64}
-          width={560}
           disabled={
             loadingCloudinaryImage === "PENDING" ||
             loadingUpdateProfile === "PENDING"

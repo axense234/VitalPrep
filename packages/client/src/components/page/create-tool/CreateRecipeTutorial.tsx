@@ -37,7 +37,9 @@ const CreateRecipeTutorial = () => {
           entityProperty={String(showVideoTutorialContent)}
           onEntityPropertyValueChange={(e) =>
             dispatch(
-              changeShowVideoTutorialContent(!Boolean(showVideoTutorialContent))
+              changeShowVideoTutorialContent(
+                e.target.value === "true" ? false : true
+              )
             )
           }
         />
@@ -66,10 +68,10 @@ const CreateRecipeTutorial = () => {
         <CheckboxFormControl
           labelContent="Use Written Tutorial?:"
           entityProperty={String(showWrittenTutorialContent)}
-          onEntityPropertyValueChange={() =>
+          onEntityPropertyValueChange={(e) =>
             dispatch(
               changeShowWrittenTutorialContent(
-                !Boolean(showWrittenTutorialContent)
+                e.target.value === "true" ? false : true
               )
             )
           }

@@ -6,33 +6,16 @@ import { FC } from "react";
 import formControlsStyles from "../../../scss/components/others/FormControls.module.scss";
 
 const RadioFormControl: FC<RadioFormControlProps> = ({
-  labelColor,
   labelContent,
   entityPropertyOptions,
   onEntityPropertyValueChange,
-  labelFontSize,
-  backgroundColor,
-  border,
+  chosenEntityProperty,
 }) => {
   return (
-    <div
-      className={formControlsStyles.radioFormControlContainer}
-      style={{
-        backgroundColor: backgroundColor ? backgroundColor : "none",
-        border: border ? border : "none",
-      }}
-    >
-      <label
-        htmlFor={labelContent}
-        style={{
-          color: labelColor,
-          fontSize: labelFontSize || 22,
-        }}
-      >
-        {labelContent}
-      </label>
+    <div className={formControlsStyles.radioFormControlContainer}>
+      <label htmlFor={labelContent}>{labelContent}</label>
       <ul className={formControlsStyles.radioFormControlContent}>
-        {entityPropertyOptions.map((name, index) => {
+        {entityPropertyOptions.map((name) => {
           return (
             <li key={name}>
               <input
@@ -41,6 +24,7 @@ const RadioFormControl: FC<RadioFormControlProps> = ({
                 id={name}
                 value={name}
                 onChange={() => onEntityPropertyValueChange(name)}
+                checked={chosenEntityProperty === name.toLowerCase()}
               />
               <label htmlFor={name}>{name}</label>
             </li>

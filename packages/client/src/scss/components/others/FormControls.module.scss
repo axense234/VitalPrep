@@ -239,7 +239,6 @@
 
 .radioFormControlContainer {
   @include flexCenter(column);
-  border: 2px solid black;
   align-items: flex-start;
   width: 100%;
   gap: 1rem;
@@ -248,50 +247,32 @@
     font-weight: bolder;
     font-size: 22px;
   }
-
-  input {
-    background-color: getColor("tan-color");
-    border: 1.5px solid getColor("black-100-1");
-    width: 100%;
-    max-width: 400px;
-    height: 24px;
-    font-size: 1rem;
-    padding: 0.5rem;
-    font-weight: 550;
-    word-wrap: break-word;
-    transition: background-color 0.135s linear;
-
-    &:hover {
-      background-color: getColor("tan-color-dark");
-    }
-  }
 }
 
 .radioFormControlContent {
   @include flexCenter(row);
   list-style: none;
-  gap: 2rem;
+  gap: 1.5rem;
 
   li {
     @include flexCenter(row);
-    gap: 1rem;
+    gap: 0.5rem;
 
     input[type="radio"] {
       appearance: none;
       width: 2rem;
       height: 2rem;
       border: 1.5px solid getColor("black-100-1");
+      background-color: getColor("secondary-color-3.4");
       border-radius: 100%;
 
       &:checked {
-        background-color: #646aff;
+        background-color: getColor("secondary-color-2.3");
       }
     }
 
     label {
-      font-size: 22px;
-      color: getColor("tan-color-extra-light");
-      letter-spacing: 1px;
+      @include heading("h6", "tablet", "black");
     }
   }
 }

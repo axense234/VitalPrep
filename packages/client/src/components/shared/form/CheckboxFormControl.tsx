@@ -19,6 +19,7 @@ const CheckboxFormControl: FC<CheckboxFormControlProps> = ({
         id={labelContent}
         value={entityProperty}
         onChange={onEntityPropertyValueChange}
+        checked={entityProperty === "true" ? true : false}
       />
     </div>
   );

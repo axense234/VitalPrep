@@ -128,8 +128,16 @@ export const pageTitleContent: PageTitleContentType[] = [
     specificPagePath: "/profile",
     backgroundImageSrc:
       "https://res.cloudinary.com/birthdayreminder/image/upload/v1715149532/VitalPrep/wallpaperflare_1_mealprep_nrihvi.png",
-    pageTitleTextContent: "Profile Page",
+    pageTitleTextContent: "Profile",
     pageSubTitleContent: "view your profile",
+  },
+  {
+    id: 13,
+    specificPagePath: "/settings",
+    backgroundImageSrc:
+      "https://res.cloudinary.com/birthdayreminder/image/upload/v1715149532/VitalPrep/wallpaperflare_1_mealprep_nrihvi.png",
+    pageTitleTextContent: "Settings",
+    pageSubTitleContent: "update your settings",
   },
 ];
 
