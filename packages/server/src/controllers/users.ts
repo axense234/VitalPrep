@@ -128,7 +128,6 @@ const getUserById = async (req: Request, res: Response) => {
     includeObject.notificationSettings = true;
   }
 
-  console.log(includeObject);
   const foundUser = await UserClient.findUnique({
     where: { id: userId },
     include: includeObject,
@@ -174,7 +173,6 @@ const updateUserById = async (req: Request, res: Response) => {
       where: { id: userBody?.notificationSettingsId },
       data: { ...notificationUpdateBody },
     });
-    console.log(response);
   }
 
   if (

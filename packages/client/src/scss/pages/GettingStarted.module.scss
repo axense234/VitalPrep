@@ -59,7 +59,8 @@
     @include flexCenter(row);
     align-items: flex-start;
 
-    a {
+    p {
+      @include paragraph("laptop", "black");
       @include flexCenter(row);
       align-items: flex-start;
       text-decoration: none;
@@ -68,22 +69,23 @@
       &:hover {
         transform: scale(1.05);
       }
-
-      p {
-        @include paragraph("laptop", "black");
-      }
     }
   }
 }
 
 .gettingStartedContentContainer {
   @include flexCenter(column);
-  border-radius: 25px;
+  justify-content: flex-start;
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
+  max-height: 50rem;
+  overflow-y: scroll;
 }
 
 .gettingStartedContentSection {
   @include flexCenter(column);
-  border-radius: 25px;
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
   padding: 4rem;
   padding-bottom: 13.5rem;
   gap: 2rem;
@@ -124,6 +126,8 @@
   img {
     height: 30rem;
     width: auto;
+    border-radius: 10px;
+    border: 1px solid getColor("black-75-1");
   }
 
   h5 {

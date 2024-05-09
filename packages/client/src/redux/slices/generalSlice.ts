@@ -134,7 +134,7 @@ export const logoutUser = createAsyncThunk("general/logoutUser", async () => {
     });
     await signOut({
       redirect: true,
-      callbackUrl: `${process.env.NEXT_PUBLIC_SITE_URL}/`,
+      callbackUrl: `${process.env.NEXT_PUBLIC_PRODUCTION_CLIENT_SITE_URL}/`,
     });
   } catch (error) {
     console.log(error);

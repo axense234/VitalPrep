@@ -2,8 +2,6 @@
 import gettingStartedContentMapStyles from "../../../scss/pages/GettingStarted.module.scss";
 // Data
 import { gettingStartedGuideContentMapContent } from "@/data";
-// Next
-import Link from "next/link";
 // Redux
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import {
@@ -45,6 +43,8 @@ const GettingStartedContentMap = () => {
                       ? "blue"
                       : "black",
                 }}
+                title={`Change Section to ${guideSection.sectionLabel}`}
+                aria-label={`Change Section to ${guideSection.sectionLabel}`}
               >
                 {guideSection.id}. {guideSection.sectionLabel}
               </h6>
@@ -56,11 +56,9 @@ const GettingStartedContentMap = () => {
                 {guideSection.sectionContent.map((section) => {
                   return (
                     <li key={section.orderLetter + section.subsectionLabel}>
-                      <Link href={section.subsectionLinkDest}>
-                        <p>
-                          {section.orderLetter}. {section.subsectionLabel}
-                        </p>
-                      </Link>
+                      <p>
+                        {section.orderLetter}. {section.subsectionLabel}
+                      </p>
                     </li>
                   );
                 })}
