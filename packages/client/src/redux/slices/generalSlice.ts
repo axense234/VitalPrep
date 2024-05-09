@@ -21,7 +21,6 @@ import {
   defaultTemplateProfile,
 } from "@/data";
 import { SectionValueType } from "@/core/types/GettingStartedContentMapContentType";
-import { Payload } from "@prisma/client/runtime/library";
 
 type ObjectKeyValueType = {
   key: string;

@@ -11,6 +11,7 @@ import Link from "next/link";
 // Redux
 import { useAppSelector } from "@/hooks/redux";
 import { selectSelectedViewOption } from "@/redux/slices/generalSlice";
+import useGetWindowWidth from "@/hooks/useGetWindowWidth";
 
 const MultiViewToolContent: FC<{
   entityType: EntityType;
@@ -19,6 +20,18 @@ const MultiViewToolContent: FC<{
   let multiViewToolContentTitle = "Ingredients";
 
   const selectedViewOption = useAppSelector(selectSelectedViewOption);
+
+  let windowWidth = useGetWindowWidth();
+  let listItemMaxWidthBasedOnWindowWidth = "20%";
+  if (windowWidth <= 1600) {
+    listItemMaxWidthBasedOnWindowWidth = "30%";
+  }
+  if (windowWidth <= 1150) {
+    listItemMaxWidthBasedOnWindowWidth = "45%";
+  }
+  if (windowWidth <= 875) {
+    listItemMaxWidthBasedOnWindowWidth = "100%";
+  }
 
   switch (entityType) {
     case "ingredient":
@@ -61,8 +74,14 @@ const MultiViewToolContent: FC<{
               <li
                 key={entityId}
                 style={{
-                  maxWidth: selectedViewOption === "grid" ? "20%" : "100%",
-                  width: selectedViewOption === "grid" ? "20%" : "100%",
+                  maxWidth:
+                    selectedViewOption === "grid"
+                      ? listItemMaxWidthBasedOnWindowWidth
+                      : "100%",
+                  width:
+                    selectedViewOption === "grid"
+                      ? listItemMaxWidthBasedOnWindowWidth
+                      : "100%",
                 }}
               >
                 <EntityComponent

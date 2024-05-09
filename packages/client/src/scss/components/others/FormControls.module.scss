@@ -6,9 +6,23 @@
   width: 100%;
   gap: 0.5rem;
 
+  @media screen and (max-width: 650px) {
+    width: 80%;
+  }
+  @media screen and (max-width: 375px) {
+    width: 97.5%;
+  }
+
   label {
     @include heading("h6", "laptop", "black");
     font-weight: 550;
+
+    @media screen and (max-width: 1200px) {
+      @include heading("h6", "tablet", "black");
+    }
+    @media screen and (max-width: 650px) {
+      @include heading("h6", "phone", "black");
+    }
   }
 
   input {
@@ -30,6 +44,10 @@
     &:hover {
       background-color: getColor("tan-color-dark");
     }
+
+    @media screen and (max-width: 650px) {
+      height: 2rem;
+    }
   }
 }
 
@@ -39,9 +57,23 @@
   width: 100%;
   gap: 0.5rem;
 
+  @media screen and (max-width: 650px) {
+    width: 80%;
+  }
+  @media screen and (max-width: 375px) {
+    width: 97.5%;
+  }
+
   label {
     @include heading("h6", "laptop", "black");
     font-weight: 550;
+
+    @media screen and (max-width: 1200px) {
+      @include heading("h6", "tablet", "black");
+    }
+    @media screen and (max-width: 650px) {
+      @include heading("h6", "phone", "black");
+    }
 
     svg {
       width: 16px;
@@ -101,9 +133,24 @@
   width: 100%;
   gap: 1rem;
 
+  @media screen and (max-width: 650px) {
+    width: 80%;
+  }
+
+  @media screen and (max-width: 375px) {
+    width: 97.5%;
+  }
+
   label {
     @include heading("h6", "laptop", "black");
     font-weight: 550;
+
+    @media screen and (max-width: 1200px) {
+      @include heading("h6", "tablet", "black");
+    }
+    @media screen and (max-width: 650px) {
+      @include heading("h6", "phone", "black");
+    }
   }
 
   input[type="checkbox"] {
@@ -124,6 +171,11 @@
     &:hover {
       background-color: getColor("tan-color-dark");
     }
+
+    @media screen and (max-width: 650px) {
+      width: 2rem;
+      height: 2rem;
+    }
   }
 
   input[type="checkbox"]:checked {
@@ -135,6 +187,11 @@
   @include flexCenter(row);
   justify-content: flex-start;
   width: 100%;
+
+  @media screen and (max-width: 650px) {
+    width: 80%;
+    justify-content: center;
+  }
 }
 
 .selectFormControlContainer {

@@ -14,6 +14,8 @@ import { useAppSelector } from "@/hooks/redux";
 import { State } from "@/redux/api/store";
 // Next
 import Image from "next/image";
+// Hooks
+import useGetWindowWidth from "@/hooks/useGetWindowWidth";
 
 const DayTemplateComponent: FC<EntityComponentProps> = ({
   clicked,
@@ -27,6 +29,8 @@ const DayTemplateComponent: FC<EntityComponentProps> = ({
   const dayTemplateEntityUsed = dayTemplateEntity || entity;
 
   const { name, imageUrl, macros, recipes } = dayTemplateEntityUsed;
+  let windowWidth = useGetWindowWidth();
+  let phoneRedesign = windowWidth <= 800;
 
   return (
     <div
@@ -48,8 +52,12 @@ const DayTemplateComponent: FC<EntityComponentProps> = ({
         className={entityComponentStyles.entityComponentDetails}
         style={{ alignItems: "center" }}
       >
-        <p>{recipes?.length || "0"} meals</p>
-        <p>{macros?.calories} calories</p>
+        {phoneRedesign ? null : (
+          <>
+            <p>{recipes?.length || "0"} meals</p>
+            <p>{macros?.calories} calories</p>
+          </>
+        )}
       </div>
     </div>
   );

@@ -24,10 +24,14 @@
   gap: 2rem;
   padding: 1rem;
 
+  @media screen and (max-width: 600px) {
+    padding: 1rem 0;
+  }
+
   li {
-    @include flexCenter(column);
-    max-width: 20%;
-    width: 20%;
+    @include flexCenter(row);
+    max-width: 25%;
+    width: 25%;
   }
 }
 
@@ -55,12 +59,32 @@
 .multiViewEntitiesWrapper {
   @include flexCenter(column);
   width: 100%;
-  padding: 128px;
+  padding: 8rem;
   gap: 4rem;
+
+  @media screen and (max-width: 1200px) {
+    padding: 8rem 2rem;
+  }
+  @media screen and (max-width: 600px) {
+    padding: 4rem 0.5rem;
+    gap: 2rem;
+  }
 
   h2 {
     @include heading("h2", "laptop", "black");
     font-weight: 550;
     letter-spacing: 3px;
+    text-align: center;
+
+    @media screen and (max-width: 1200px) {
+      @include heading("h2", "tablet", "black");
+    }
+
+    @media screen and (max-width: 600px) {
+      @include heading("h2", "phone", "black");
+    }
+    @media screen and (max-width: 375px) {
+      @include heading("h3", "phone", "black");
+    }
   }
 }

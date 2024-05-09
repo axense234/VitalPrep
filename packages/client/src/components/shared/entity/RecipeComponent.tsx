@@ -14,6 +14,8 @@ import { useAppSelector } from "@/hooks/redux";
 import { State } from "@/redux/api/store";
 // Next
 import Image from "next/image";
+// Hooks
+import useGetWindowWidth from "@/hooks/useGetWindowWidth";
 
 const RecipeComponent: FC<EntityComponentProps> = ({
   clicked,
@@ -26,6 +28,9 @@ const RecipeComponent: FC<EntityComponentProps> = ({
   const recipeEntityShown = recipeEntity || entity;
 
   const { name, imageUrl, macros } = recipeEntityShown;
+  let windowWidth = useGetWindowWidth();
+  let tabletOrPhoneRedesign = windowWidth <= 1000;
+  let phoneRedesign = windowWidth <= 600;
 
   return (
     <div
@@ -47,10 +52,14 @@ const RecipeComponent: FC<EntityComponentProps> = ({
         className={entityComponentStyles.entityComponentDetails}
         style={{ alignItems: "center" }}
       >
-        <p>{macros?.calories} calories</p>
-        <p>{macros?.proteinAmount}g protein </p>
-        <p>{macros?.carbsAmount}g carbs</p>
-        <p>{macros?.fatsAmount}g fats</p>
+        {phoneRedesign ? null : <p>{macros?.calories} calories</p>}
+        {tabletOrPhoneRedesign ? null : (
+          <>
+            <p>{macros?.proteinAmount}g protein </p>
+            <p>{macros?.carbsAmount}g carbs</p>
+            <p>{macros?.fatsAmount}g fats</p>
+          </>
+        )}
       </div>
     </div>
   );

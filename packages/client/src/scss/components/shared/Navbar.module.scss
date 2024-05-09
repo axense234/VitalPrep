@@ -3,19 +3,30 @@
 .navbarContainer {
   @include flexCenter(row);
   justify-content: space-between;
-  align-items: flex-end;
   width: 100%;
   max-height: $maxNavbarHeight;
   padding: $navbarPadding;
   background-color: $navbarBackgroundColor;
+
+  @media screen and (max-width: 650px) {
+    padding: 1rem 2rem;
+  }
 }
 
 .navbarProfileContainer {
   @include flexCenter(row);
   gap: 1rem;
 
+  @media screen and (max-width: 650px) {
+    gap: 0.5rem;
+  }
+
   h6 {
     @include heading("h6", "tablet", "white");
+
+    @media screen and (max-width: 650px) {
+      @include paragraph("phone", "white");
+    }
   }
 }
 

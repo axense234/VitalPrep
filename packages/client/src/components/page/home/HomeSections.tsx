@@ -10,8 +10,26 @@ import Link from "next/link";
 import HomeSectionContentProps from "@/core/interfaces/HomeSectionContentProps";
 // Data
 import { homeSectionsContent } from "@/data";
+// Hooks
+import useGetWindowWidth from "@/hooks/useGetWindowWidth";
 
 const HomeSections = () => {
+  const windowWidth = useGetWindowWidth();
+  let sectionPaddingBasedOnWindowWidth = "6rem";
+  let tabletAndPhoneRedesign = windowWidth <= 1200;
+
+  if (windowWidth <= 1500) {
+    sectionPaddingBasedOnWindowWidth = "4rem";
+  }
+  if (windowWidth <= 1300) {
+    sectionPaddingBasedOnWindowWidth = "1.8rem";
+  }
+  if (windowWidth <= 1200) {
+    sectionPaddingBasedOnWindowWidth = "0";
+  }
+
+  console.log(sectionPaddingBasedOnWindowWidth);
+
   return (
     <div className={homeSectionsStyles.homeSectionsContainer}>
       {homeSectionsContent.map((homeSectionContent) => {
@@ -20,6 +38,10 @@ const HomeSections = () => {
             <HomeSectionPositional
               {...homeSectionContent}
               key={homeSectionContent.id}
+              sectionPaddingBasedOnWindowWidth={
+                sectionPaddingBasedOnWindowWidth
+              }
+              tabletAndPhoneRedesign={tabletAndPhoneRedesign}
             />
           );
         } else if (homeSectionContent.type === "descriptionBased") {
@@ -27,6 +49,10 @@ const HomeSections = () => {
             <HomeSectionDescriptionBased
               {...homeSectionContent}
               key={homeSectionContent.id}
+              sectionPaddingBasedOnWindowWidth={
+                sectionPaddingBasedOnWindowWidth
+              }
+              tabletAndPhoneRedesign={tabletAndPhoneRedesign}
             />
           );
         } else if (homeSectionContent.type === "middle") {
@@ -50,6 +76,8 @@ const HomeSectionPositional: FC<HomeSectionContentProps> = ({
   sectionTitle,
   sectionSubTitle,
   contentBackgroundImageSrc,
+  sectionPaddingBasedOnWindowWidth,
+  tabletAndPhoneRedesign,
 }) => {
   return (
     <section
@@ -65,17 +93,21 @@ const HomeSectionPositional: FC<HomeSectionContentProps> = ({
           alignItems: position === "left" ? "flex-start" : "flex-end",
         }}
       >
-        <Image
-          alt="Background Home Section Image"
-          height={830}
-          width={1125}
-          src={contentBackgroundImageSrc as string}
-        />
+        {!tabletAndPhoneRedesign ? (
+          <Image
+            alt="Background Home Section Image"
+            height={830}
+            width={1125}
+            src={contentBackgroundImageSrc as string}
+          />
+        ) : null}
         <div
           className={homeSectionsStyles.homeSectionContentWrapper}
           style={{
-            paddingLeft: position === "left" ? "8rem" : "0rem",
-            paddingRight: position === "right" ? "8rem" : "0rem",
+            paddingLeft:
+              position === "left" ? sectionPaddingBasedOnWindowWidth : "0rem",
+            paddingRight:
+              position === "right" ? sectionPaddingBasedOnWindowWidth : "0rem",
           }}
         >
           <div className={homeSectionsStyles.homeSectionContentDetails}>
@@ -101,9 +133,13 @@ const HomeSectionMiddle: FC<HomeSectionContentProps> = ({
   sectionSubTitle,
   sectionTitle,
   sectionItems,
+  tabletAndPhoneRedesign,
 }) => {
   return (
-    <section className={homeSectionsStyles.homeSectionContainer}>
+    <section
+      className={homeSectionsStyles.homeSectionContainer}
+      style={{ minHeight: "55rem", height: "auto" }}
+    >
       <div
         className={homeSectionsStyles.homeSectionContent}
         style={{ width: "100%" }}
@@ -128,8 +164,8 @@ const HomeSectionMiddle: FC<HomeSectionContentProps> = ({
                   <Image
                     alt={sectionItem.itemTitle}
                     src={sectionItem.imageSrc}
-                    width={128}
-                    height={128}
+                    width={tabletAndPhoneRedesign ? 100 : 128}
+                    height={tabletAndPhoneRedesign ? 100 : 128}
                   />
                   <div
                     className={homeSectionsStyles.homeSectionContentItemHeader}
@@ -153,6 +189,8 @@ const HomeSectionDescriptionBased: FC<HomeSectionContentProps> = ({
   sectionSubTitle,
   sectionTitle,
   contentBackgroundImageSrc,
+  sectionPaddingBasedOnWindowWidth,
+  tabletAndPhoneRedesign,
 }) => {
   return (
     <section
@@ -168,17 +206,21 @@ const HomeSectionDescriptionBased: FC<HomeSectionContentProps> = ({
           alignItems: position === "left" ? "flex-start" : "flex-end",
         }}
       >
-        <Image
-          alt="Background Home Section Image"
-          height={830}
-          width={1125}
-          src={contentBackgroundImageSrc as string}
-        />
+        {!tabletAndPhoneRedesign ? (
+          <Image
+            alt="Background Home Section Image"
+            height={830}
+            width={1125}
+            src={contentBackgroundImageSrc as string}
+          />
+        ) : null}
         <div
           className={homeSectionsStyles.homeSectionContentWrapper}
           style={{
-            paddingLeft: position === "left" ? "8rem" : "0rem",
-            paddingRight: position === "right" ? "8rem" : "0rem",
+            paddingLeft:
+              position === "left" ? sectionPaddingBasedOnWindowWidth : "0rem",
+            paddingRight:
+              position === "right" ? sectionPaddingBasedOnWindowWidth : "0rem",
           }}
         >
           <div className={homeSectionsStyles.homeSectionContentDetails}>

@@ -2,6 +2,8 @@
 import activeMealPrepPlanStyles from "../../scss/components/shared/ActiveMealPrepPlan.module.scss";
 // Next
 import Image from "next/image";
+// React
+import { useEffect, useRef, useState } from "react";
 // Data
 import { defaultEntityQueryValues, defaultMealPrepPlanImageUrl } from "@/data";
 // Redux
@@ -13,12 +15,12 @@ import {
   setTypeOfUpdateAccountQuery,
   updateUser,
 } from "@/redux/slices/generalSlice";
-import { useEffect, useRef, useState } from "react";
 import {
   getAllUserMealPrepPlans,
   selectAllMealPrepPlans,
   selectLoadingGetUserMealPrepPlans,
 } from "@/redux/slices/mealPrepPlansSlice";
+import useGetWindowWidth from "@/hooks/useGetWindowWidth";
 
 const ActiveMealPrepPlan = () => {
   const dispatch = useAppDispatch();
@@ -40,6 +42,9 @@ const ActiveMealPrepPlan = () => {
   );
 
   const mealPrepPlans = useAppSelector(selectAllMealPrepPlans);
+
+  let windowWidth = useGetWindowWidth();
+  let tabletOrPhoneRedesign = windowWidth <= 500;
 
   const activeMealPrepPlan = mealPrepPlans.find(
     (mpp) => mpp.id === profile.mealPrepPlanInUseId
@@ -88,7 +93,11 @@ const ActiveMealPrepPlan = () => {
       if (showActiveMealPrepPlan) {
         activeMealPrepPlanContainer.style.transform = "translateX(0%)";
       } else if (!showActiveMealPrepPlan) {
-        activeMealPrepPlanContainer.style.transform = "translateX(-80%)";
+        if (tabletOrPhoneRedesign) {
+          activeMealPrepPlanContainer.style.transform = "translateX(-70%)";
+        } else {
+          activeMealPrepPlanContainer.style.transform = "translateX(-80%)";
+        }
       }
     }
   }, [showActiveMealPrepPlan, setShowActiveMealPrepPlan]);
@@ -131,7 +140,7 @@ const ActiveMealPrepPlan = () => {
         </select>
       </div>
       <div className={activeMealPrepPlanStyles.activeMealPrepPlanContent}>
-        <h3>{activeMealPrepPlan?.name}</h3>
+        {tabletOrPhoneRedesign ? null : <h3>{activeMealPrepPlan?.name}</h3>}
         <Image
           width={80}
           height={80}

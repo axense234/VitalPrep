@@ -59,53 +59,58 @@ const ViewEntityOptions: FC<{ viewMealPrepLog?: boolean }> = ({
       )}
       <div className={viewEntityOptionsStyles.sortByEntityPropertyContainer}>
         <label htmlFor="sortByOptions">Sort By:</label>
-        <select
-          name="sortByOptions"
-          id="sortByOptions"
-          value={entityQueryValues.sortByKey}
-          onChange={(e) =>
-            dispatch(
-              updateEntityQueryValues({
-                key: "sortByKey",
-                value: e.target.value,
-              })
-            )
-          }
+        <div
+          className={viewEntityOptionsStyles.sortByEntityPropertyContainerOrder}
         >
-          {entitySortingOptionUsed.map((entitySortingOption) => {
-            return (
-              <option
-                key={entitySortingOption.label}
-                value={entitySortingOption.value}
-                title={`Sort By: ${entitySortingOption.label}`}
-                aria-label={`Sort By: ${entitySortingOption.label}`}
-              >
-                {entitySortingOption.label}
-              </option>
-            );
-          })}
-        </select>
-        <button
-          type="button"
-          title={`Current Order: ${entityQueryValues.sortByOrder === "asc" ? "Ascending" : "Descending"}`}
-          aria-label={`Current Order: ${entityQueryValues.sortByOrder === "asc" ? "Ascending" : "Descending"}`}
-          style={{
-            transform:
-              entityQueryValues.sortByOrder === "asc"
-                ? "rotate(0deg)"
-                : "rotate(180deg)",
-          }}
-          onClick={() =>
-            dispatch(
-              updateEntityQueryValues({
-                key: "sortByOrder",
-                value: entityQueryValues.sortByOrder === "asc" ? "desc" : "asc",
-              })
-            )
-          }
-        >
-          <FaArrowUp />
-        </button>
+          <select
+            name="sortByOptions"
+            id="sortByOptions"
+            value={entityQueryValues.sortByKey}
+            onChange={(e) =>
+              dispatch(
+                updateEntityQueryValues({
+                  key: "sortByKey",
+                  value: e.target.value,
+                })
+              )
+            }
+          >
+            {entitySortingOptionUsed.map((entitySortingOption) => {
+              return (
+                <option
+                  key={entitySortingOption.label}
+                  value={entitySortingOption.value}
+                  title={`Sort By: ${entitySortingOption.label}`}
+                  aria-label={`Sort By: ${entitySortingOption.label}`}
+                >
+                  {entitySortingOption.label}
+                </option>
+              );
+            })}
+          </select>
+          <button
+            type="button"
+            title={`Current Order: ${entityQueryValues.sortByOrder === "asc" ? "Ascending" : "Descending"}`}
+            aria-label={`Current Order: ${entityQueryValues.sortByOrder === "asc" ? "Ascending" : "Descending"}`}
+            style={{
+              transform:
+                entityQueryValues.sortByOrder === "asc"
+                  ? "rotate(0deg)"
+                  : "rotate(180deg)",
+            }}
+            onClick={() =>
+              dispatch(
+                updateEntityQueryValues({
+                  key: "sortByOrder",
+                  value:
+                    entityQueryValues.sortByOrder === "asc" ? "desc" : "asc",
+                })
+              )
+            }
+          >
+            <FaArrowUp />
+          </button>
+        </div>
       </div>
       <div className={viewEntityOptionsStyles.searchEntityContainer}>
         <label htmlFor="searchEntity">Search:</label>

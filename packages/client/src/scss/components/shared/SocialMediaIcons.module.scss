@@ -5,6 +5,10 @@
   max-width: $socialMediaIconsMaxWidth;
   gap: $socialMediaIconsGap;
   list-style: none;
+
+  @media screen and (max-width: 600px) {
+    gap: 1rem;
+  }
 }
 
 .socialMediaIcon {

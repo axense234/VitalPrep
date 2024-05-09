@@ -14,6 +14,8 @@ import { useAppSelector } from "@/hooks/redux";
 import { State } from "@/redux/api/store";
 // Next
 import Image from "next/image";
+// Hooks
+import useGetWindowWidth from "@/hooks/useGetWindowWidth";
 
 const UtensilComponent: FC<EntityComponentProps> = ({
   clicked,
@@ -26,6 +28,8 @@ const UtensilComponent: FC<EntityComponentProps> = ({
   const utensilEntityShown = utensilEntity || entity;
 
   const { name, imageUrl, enabled } = utensilEntityShown;
+  let windowWidth = useGetWindowWidth();
+  let phoneRedesign = windowWidth <= 500;
 
   return (
     <div
@@ -47,7 +51,7 @@ const UtensilComponent: FC<EntityComponentProps> = ({
         className={entityComponentStyles.entityComponentDetails}
         style={{ alignItems: "center" }}
       >
-        <p>{enabled ? `ENABLED ✔️` : `DISABLED ❌`}</p>
+        {phoneRedesign ? null : <p>{enabled ? `ENABLED ✔️` : `DISABLED ❌`}</p>}
       </div>
     </div>
   );

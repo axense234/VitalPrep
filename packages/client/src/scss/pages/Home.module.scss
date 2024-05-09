@@ -15,14 +15,27 @@
   height: 55rem;
   background-position: right;
   background-color: getColor("primary-3");
+
+  @media screen and (max-width: 1200px) {
+    height: 65rem;
+  }
+
+  @media screen and (max-width: 650px) {
+    height: 55rem;
+  }
 }
 
 .homeSectionContent {
   @include flexCenter(column);
   align-items: flex-start;
   position: relative;
-  width: 60%;
+  width: 62.5%;
   height: 100%;
+
+  @media screen and (max-width: 1200px) {
+    width: 100%;
+    align-items: center;
+  }
 
   img {
     position: absolute;
@@ -35,9 +48,26 @@
   @include flexCenter(column);
   align-items: flex-start;
   height: 100%;
-  width: 65%;
+  width: 67.5%;
   gap: 7rem;
   z-index: 2;
+
+  @media screen and (max-width: 1200px) {
+    width: 100%;
+    height: auto;
+    align-items: center;
+    background-color: getColorWithOpacity("secondary-color-3.3", 0.8);
+    padding: 4rem;
+  }
+
+  @media screen and (max-width: 650px) {
+    gap: 3rem;
+    padding: 4rem 2rem;
+  }
+
+  @media screen and (max-width: 350px) {
+    padding: 4rem 1rem;
+  }
 }
 
 .homeSectionContentDetails {
@@ -46,15 +76,39 @@
   align-items: flex-start;
   gap: 5rem;
 
+  @media screen and (max-width: 1200px) {
+    align-items: center;
+  }
+
+  @media screen and (max-width: 650px) {
+    gap: 2rem;
+  }
+
   p {
     @include heading("h6", "laptop", "black");
+
+    @media screen and (max-width: 1200px) {
+      @include heading("h6", "tablet", "black");
+      text-align: center;
+      max-width: 65%;
+    }
+
+    @media screen and (max-width: 650px) {
+      @include heading("h6", "phone", "black");
+      max-width: 80%;
+    }
   }
 }
 
 .homeSectionMiddleContentDetails {
   @extend .homeSectionContentDetails;
-  padding: 8rem;
+  padding: 4rem;
   gap: 7rem;
+
+  @media screen and (max-width: 650px) {
+    gap: 3rem;
+    padding: 4rem 1rem;
+  }
 }
 
 .homeSectionContentHeader {
@@ -62,21 +116,76 @@
   width: 100%;
   align-items: flex-start;
 
+  @media screen and (max-width: 1200px) {
+    align-items: center;
+  }
+
   h1 {
     @include heading("h1", "laptop", "black");
     width: 100%;
+
+    @media screen and (max-width: 1650px) {
+      @include heading("h1", "tablet", "black");
+    }
+
+    @media screen and (max-width: 1200px) {
+      text-align: center;
+    }
+    @media screen and (max-width: 650px) {
+      @include heading("h1", "phone", "black");
+    }
+    @media screen and (max-width: 450px) {
+      @include heading("h2", "phone", "black");
+    }
   }
 
   h4 {
     @include heading("h4", "laptop", "black");
     width: 100%;
+
+    @media screen and (max-width: 1200px) {
+      @include heading("h4", "tablet", "black");
+      text-align: center;
+    }
+    @media screen and (max-width: 650px) {
+      @include heading("h4", "phone", "black");
+    }
+    @media screen and (max-width: 450px) {
+      @include heading("h5", "phone", "black");
+    }
   }
 }
 
 .homeSectionContentItems {
   @include flexCenter(row);
   align-items: flex-start;
+  flex-wrap: wrap;
   width: 100%;
+
+  @media screen and (max-width: 1000px) {
+    gap: 4rem;
+  }
+
+  li {
+    @include flexCenter(column);
+    max-width: 30%;
+    width: 30%;
+    gap: 2rem;
+
+    @media screen and (max-width: 1200px) {
+      max-width: 45%;
+      width: 45%;
+    }
+
+    @media screen and (max-width: 1000px) {
+      width: 100%;
+      max-width: 100%;
+    }
+
+    @media screen and (max-width: 650px) {
+      gap: 1rem;
+    }
+  }
 }
 
 .homeSectionContentItem {
@@ -100,14 +209,52 @@
   h4 {
     @include heading("h4", "laptop", "black");
     text-align: center;
+
+    @media screen and (max-width: 1200px) {
+      @include heading("h4", "tablet", "black");
+    }
+    @media screen and (max-width: 650px) {
+      @include heading("h4", "phone", "black");
+    }
+    @media screen and (max-width: 450px) {
+      @include heading("h5", "phone", "black");
+    }
   }
 
   p {
     @include paragraph("laptop", "black");
     max-width: 90%;
     text-align: center;
+
+    @media screen and (max-width: 1200px) {
+      @include paragraph("tablet", "black");
+      max-width: 60%;
+    }
+    @media screen and (max-width: 650px) {
+      @include paragraph("phone", "black");
+      max-width: 80%;
+    }
   }
 }
 
 .homeSectionContentDescriptions {
+  @include flexCenter(column);
+  gap: 2.5rem;
+
+  p {
+    @include heading("h6", "laptop", "black");
+
+    @media screen and (max-width: 1200px) {
+      text-align: center;
+      max-width: 65%;
+    }
+    @media screen and (max-width: 650px) {
+      @include heading("h6", "phone", "black");
+      max-width: 80%;
+    }
+    @media screen and (max-width: 450px) {
+      @include paragraph("phone", "black");
+      max-width: 80%;
+    }
+  }
 }

@@ -13,15 +13,19 @@ import PageLink from "@/core/types/PageLink";
 import { FC } from "react";
 // Next
 import Link from "next/link";
-import { signOut } from "next-auth/react";
+// Redux
 import { useAppDispatch } from "@/hooks/redux";
 import { logoutUser } from "@/redux/slices/generalSlice";
+import useGetWindowWidth from "@/hooks/useGetWindowWidth";
 
 const Footer = () => {
+  let windowWidth = useGetWindowWidth();
+  let tabletAndPhoneRedesign = windowWidth <= 600;
+
   return (
     <footer className={footerStyles.footerContainer}>
       <FooterPageLinks />
-      <FooterContact />
+      {tabletAndPhoneRedesign ? null : <FooterContact />}
       <FooterBar />
     </footer>
   );
@@ -90,7 +94,7 @@ const FooterBar = () => {
   return (
     <div className={footerStyles.footerBar}>
       <div className={footerStyles.footerCopyright}>
-        <Logo dimensions={100} logoImageUrlIndex={1} />
+        <Logo dimensions={100} logoImageUrlIndex={1} clickable />
         <p>axense's Team Copyright &copy; 2024</p>
       </div>
       <SocialMediaIcons />

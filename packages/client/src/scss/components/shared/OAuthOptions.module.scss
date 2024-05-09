@@ -11,6 +11,10 @@
     text-align: center;
     font-weight: 550;
     width: 100%;
+
+    @media screen and (max-width: 650px) {
+      @include paragraph("tablet", "black");
+    }
   }
 }
 
@@ -21,6 +25,10 @@
   gap: 1.5rem;
   padding: 0rem 1rem;
 
+  @media screen and (max-width: 650px) {
+    padding: 0rem;
+  }
+
   li {
     @include flexCenter(column);
     width: 100%;
@@ -30,6 +38,13 @@
 
     &:hover {
       transform: scale(1.05);
+    }
+
+    @media screen and (max-width: 650px) {
+      width: 80%;
+    }
+    @media screen and (max-width: 375px) {
+      width: 97.5%;
     }
   }
 }
@@ -46,10 +61,19 @@
   span {
     @include paragraph("laptop", "black");
     font-weight: 550;
+
+    @media screen and (max-width: 650px) {
+      @include paragraph("phone", "black");
+    }
   }
 
   svg {
     width: 2.5rem;
     height: 2.5rem;
+
+    @media screen and (max-width: 650px) {
+      width: 2rem;
+      height: 2rem;
+    }
   }
 }

@@ -11,6 +11,8 @@ interface HomeSectionContentProps {
   ctaButtonContent?: string;
   position: "left" | "right";
   type: "positional" | "middle" | "descriptionBased";
+  sectionPaddingBasedOnWindowWidth: string;
+  tabletAndPhoneRedesign: boolean;
 
   backgroundImageSrc?: string;
   contentBackgroundImageSrc?: string;

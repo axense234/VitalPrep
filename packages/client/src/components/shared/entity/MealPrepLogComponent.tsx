@@ -14,6 +14,8 @@ import { useAppSelector } from "@/hooks/redux";
 import { State } from "@/redux/api/store";
 // Next
 import Image from "next/image";
+// Hooks
+import useGetWindowWidth from "@/hooks/useGetWindowWidth";
 
 const MealPrepLogComponent: FC<EntityComponentProps> = ({
   clicked,
@@ -27,8 +29,10 @@ const MealPrepLogComponent: FC<EntityComponentProps> = ({
 
   const { name, imageUrl, cookingDuration, date, completed } =
     mealPrepLogEntityShown;
+  let windowWidth = useGetWindowWidth();
+  let tabletOrPhoneRedesign = windowWidth <= 1100;
+  let phoneRedesign = windowWidth <= 500;
 
-  console.log(mealPrepLogEntityShown, date);
   return (
     <div
       className={entityComponentStyles.entityComponent}
@@ -49,9 +53,15 @@ const MealPrepLogComponent: FC<EntityComponentProps> = ({
         className={entityComponentStyles.entityComponentDetails}
         style={{ alignItems: "center" }}
       >
-        <p>{new Date(date || "")?.toLocaleDateString() || "???"}</p>
-        <p>{cookingDuration || "???"} hours spent</p>
-        <p>{completed ? "COMPLETED" : "NOT COMPLETED"}</p>
+        {phoneRedesign ? null : (
+          <p>{new Date(date || "")?.toLocaleDateString() || "???"}</p>
+        )}
+        {tabletOrPhoneRedesign ? null : (
+          <>
+            <p>{cookingDuration || "???"} hours spent</p>
+            <p>{completed ? "COMPLETED" : "NOT COMPLETED"}</p>
+          </>
+        )}
       </div>
     </div>
   );

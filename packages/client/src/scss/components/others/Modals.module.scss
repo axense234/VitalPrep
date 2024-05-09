@@ -16,6 +16,8 @@
     opacity 0.135s linear,
     transform 0.135s linear;
   gap: 8px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 
   svg {
     align-self: flex-end;
@@ -31,8 +33,7 @@
   p {
     font-weight: 550;
     letter-spacing: 1.25px;
-    font-size: 20px;
-    color: getColor("tan-color-extra-light");
     text-align: center;
+    @include paragraph("laptop", "black");
   }
 }

@@ -8,12 +8,18 @@
   top: 8.25rem;
   left: 0;
   width: 25%;
+  min-width: 30rem;
   height: 5rem;
   background-color: getColor("secondary-color-1.1");
   transition: transform 0.135s ease-in;
   transform: translateX(-80%);
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
+
+  @media screen and (max-width: 500px) {
+    min-width: 15rem;
+    transform: translateX(-70%);
+  }
 }
 
 .activeMealPrepPlanSettings {
@@ -21,6 +27,10 @@
   width: 30%;
   height: 100%;
   justify-content: space-between;
+
+  @media screen and (max-width: 500px) {
+    width: auto;
+  }
 
   label {
     @include flexCenter(row);
@@ -58,12 +68,28 @@
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
 
+  @media screen and (max-width: 500px) {
+    width: auto;
+  }
+
   h3 {
+    @include heading("h6", "tablet", "black");
     text-align: center;
     width: 75%;
-    font-size: 24px;
     color: getColor("tan-color-extra-light");
     padding: 0 1rem;
+
+    @media screen and (max-width: 600px) {
+      @include heading("h6", "phone", "black");
+      color: getColor("tan-color-extra-light");
+      padding: 0 0.5rem;
+    }
+
+    @media screen and (max-width: 500px) {
+      display: hidden;
+      width: 0%;
+      padding: 0;
+    }
   }
 
   img {
@@ -71,5 +97,10 @@
     margin-left: auto;
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
+
+    @media screen and (max-width: 500px) {
+      width: auto;
+      margin-left: 0;
+    }
   }
 }

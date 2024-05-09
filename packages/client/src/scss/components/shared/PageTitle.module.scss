@@ -8,19 +8,68 @@
   background-size: cover;
   border-bottom: 1.5px solid getColor("black-75-1");
 
+  @media screen and (max-width: 1200px) {
+    height: 57rem;
+  }
+  @media screen and (max-width: 800px) {
+    height: 50rem;
+  }
+
   #{&}__header {
     @include flexCenter(column);
+    margin: 0rem 3rem;
     margin-bottom: 10rem;
     padding: 4rem 8rem;
     border-radius: 25px;
     background-color: getColorWithOpacity("secondary-color-3.3", 0.8);
 
+    @media screen and (max-width: 1350px) {
+      padding: 4rem 4rem;
+    }
+
+    @media screen and (max-width: 800px) {
+      padding: 2rem 1rem;
+      margin-left: 1rem;
+      margin-right: 1rem;
+    }
+
+    @media screen and (max-width: 400px) {
+      padding: 2rem 0.5rem;
+      margin-left: 0.75rem;
+      margin-right: 0.75rem;
+    }
+
     h1 {
       @include heading("h1", "laptop", "black");
+      text-align: center;
+
+      @media screen and (max-width: 1200px) {
+        @include heading("h1", "tablet", "black");
+      }
+
+      @media screen and (max-width: 800px) {
+        @include heading("h1", "phone", "black");
+      }
+
+      @media screen and (max-width: 600px) {
+        @include heading("h2", "phone", "black");
+      }
     }
 
     h3 {
       @include heading("h3", "laptop", "black");
+      text-align: center;
+
+      @media screen and (max-width: 1200px) {
+        @include heading("h3", "tablet", "black");
+      }
+
+      @media screen and (max-width: 800px) {
+        @include heading("h3", "phone", "black");
+      }
+      @media screen and (max-width: 600px) {
+        @include heading("h4", "phone", "black");
+      }
     }
   }
 }

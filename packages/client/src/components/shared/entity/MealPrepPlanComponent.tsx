@@ -14,6 +14,8 @@ import { useAppSelector } from "@/hooks/redux";
 import { State } from "@/redux/api/store";
 // Next
 import Image from "next/image";
+// Hooks
+import useGetWindowWidth from "@/hooks/useGetWindowWidth";
 
 const MealPrepPlanComponent: FC<EntityComponentProps> = ({
   clicked,
@@ -26,6 +28,8 @@ const MealPrepPlanComponent: FC<EntityComponentProps> = ({
   const mealPrepPlanEntityShown = mealPrepPlanEntity || entity;
 
   const { name, imageUrl, instanceTemplates } = mealPrepPlanEntityShown;
+  let windowWidth = useGetWindowWidth();
+  let phoneRedesign = windowWidth <= 700;
 
   return (
     <div
@@ -47,10 +51,12 @@ const MealPrepPlanComponent: FC<EntityComponentProps> = ({
         className={entityComponentStyles.entityComponentDetails}
         style={{ alignItems: "center" }}
       >
-        <p>
-          {instanceTemplates?.length > 0 ? instanceTemplates.length : "???"}{" "}
-          instance templates used
-        </p>
+        {phoneRedesign ? null : (
+          <p>
+            {instanceTemplates?.length > 0 ? instanceTemplates.length : "???"}{" "}
+            instance templates used
+          </p>
+        )}
       </div>
     </div>
   );

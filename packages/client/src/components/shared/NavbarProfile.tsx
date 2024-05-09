@@ -11,6 +11,7 @@ import { defaultProfileImageUrl } from "@/data";
 
 const NavbarProfile = () => {
   const profile = useAppSelector(selectProfile);
+  console.log(profile);
 
   if (!profile.email) {
     return null;

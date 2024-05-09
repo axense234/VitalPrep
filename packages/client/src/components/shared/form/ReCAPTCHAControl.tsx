@@ -24,6 +24,7 @@ const ReCAPTCHAControl = () => {
       <ReCAPTCHA
         sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY as string}
         onChange={(token) => onSuccess(token)}
+        size="normal"
       />
     </div>
   );

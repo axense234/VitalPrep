@@ -14,6 +14,8 @@ import { useAppSelector } from "@/hooks/redux";
 import { State } from "@/redux/api/store";
 // Next
 import Image from "next/image";
+// Hooks
+import useGetWindowWidth from "@/hooks/useGetWindowWidth";
 
 const IngredientComponent: FC<EntityComponentProps> = ({
   clicked,
@@ -27,6 +29,10 @@ const IngredientComponent: FC<EntityComponentProps> = ({
   console.log(ingredientEntityShown);
 
   const { name, imageUrl, macros, enabled } = ingredientEntityShown;
+
+  let windowWidth = useGetWindowWidth();
+  let tabletOrPhoneRedesign = windowWidth <= 1100;
+  let phoneRedesign = windowWidth <= 500;
 
   return (
     <div
@@ -48,11 +54,15 @@ const IngredientComponent: FC<EntityComponentProps> = ({
         className={entityComponentStyles.entityComponentDetails}
         style={{ alignItems: "center" }}
       >
-        <p>{macros?.calories} calories</p>
-        <p>{macros?.proteinAmount}g protein </p>
-        <p>{macros?.carbsAmount}g carbs</p>
-        <p>{macros?.fatsAmount}g fats</p>
-        <p>{enabled ? `ENABLED ✔️` : `DISABLED ❌`}</p>
+        {phoneRedesign ? null : <p>{macros?.calories} calories</p>}
+        {tabletOrPhoneRedesign ? null : (
+          <>
+            <p>{macros?.proteinAmount}g protein </p>
+            <p>{macros?.carbsAmount}g carbs</p>
+            <p>{macros?.fatsAmount}g fats</p>
+            <p>{enabled ? `ENABLED ✔️` : `DISABLED ❌`}</p>
+          </>
+        )}
       </div>
     </div>
   );

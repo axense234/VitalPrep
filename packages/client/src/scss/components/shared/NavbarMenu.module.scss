@@ -10,6 +10,11 @@
   border: none;
   margin-left: auto;
 
+  @media screen and (max-width: 650px) {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
   svg {
     width: 100%;
     height: 100%;
