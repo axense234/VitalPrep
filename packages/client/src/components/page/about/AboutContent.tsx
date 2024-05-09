@@ -70,8 +70,8 @@ const AboutContent = () => {
                   aria-label={backendTech.logoLabel}
                 >
                   <Image
-                    width={160}
-                    height={160}
+                    width={120}
+                    height={120}
                     alt={backendTech.logoLabel}
                     src={backendTech.logoUrl}
                   />
@@ -114,7 +114,7 @@ const AboutContent = () => {
           The following are other technologies i have used but not included in
           the above:
         </p>
-        <h2>Media Management</h2>
+        <h4>Media Management</h4>
         <ul
           className={aboutStyles.aboutContentSectionLogos}
           style={{
@@ -143,7 +143,7 @@ const AboutContent = () => {
             );
           })}
         </ul>
-        <h2>Version Control System(VCS)</h2>
+        <h4>Version Control System(VCS)</h4>
         <ul
           className={aboutStyles.aboutContentSectionLogos}
           style={{

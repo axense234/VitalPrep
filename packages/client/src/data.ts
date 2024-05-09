@@ -278,6 +278,14 @@ export const pageTitleContent: PageTitleContentType[] = [
     pageTitleTextContent: "Getting Started",
     pageSubTitleContent: "the basic guide to VitalPrep",
   },
+  {
+    id: 15,
+    specificPagePath: "/about",
+    backgroundImageSrc:
+      "https://res.cloudinary.com/birthdayreminder/image/upload/v1715248516/vecteezy_meatless-meal-prep-convenient-healthy-and-budget-friendly_29882198_eyphoa.jpg",
+    pageTitleTextContent: "About",
+    pageSubTitleContent: "find more about us and the app",
+  },
 ];
 
 export const homeSectionsContent: (HomeSectionContentProps & { id: number })[] =
