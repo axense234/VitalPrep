@@ -15,7 +15,17 @@ const FAQContentSection: FC<FAQPageSection> = ({
   return (
     <section className={faqStyles.faqContentSection}>
       <h1>{sectionTitle}</h1>
-      <p>{sectionDescription}</p>
+      <p
+        className={faqStyles.faqContentSectionParagraph}
+        style={{
+          color:
+            sectionTitle === "Meal Prep Recipes and Ideas"
+              ? "#ddd9d5"
+              : "#120a06",
+        }}
+      >
+        {sectionDescription}
+      </p>
       <ul className={faqStyles.faqContentSectionAccordions}>
         {sectionAccordions.map((sectionAccordion) => {
           return (

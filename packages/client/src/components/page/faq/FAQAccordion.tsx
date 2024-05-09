@@ -30,13 +30,13 @@ const FAQAccordion: FC<FAQAccordionType> = ({
             onClick={() => setShowAccordionContent(false)}
           />
         )}
-        <h3>{accordionTitle}</h3>
+        <h5>{accordionTitle}</h5>
       </header>
       <div
         className={faqStyles.faqAccordionContent}
         style={{
           height: showAccordionContent
-            ? `${accordionContent.length / 3 + 40}px `
+            ? `${accordionContent.length / 6 + 40}px `
             : "0rem",
         }}
       >

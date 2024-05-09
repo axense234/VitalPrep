@@ -286,6 +286,14 @@ export const pageTitleContent: PageTitleContentType[] = [
     pageTitleTextContent: "About",
     pageSubTitleContent: "find more about us and the app",
   },
+  {
+    id: 16,
+    specificPagePath: "/faq",
+    backgroundImageSrc:
+      "https://res.cloudinary.com/birthdayreminder/image/upload/v1715248516/vecteezy_meatless-meal-prep-convenient-healthy-and-budget-friendly_29882198_eyphoa.jpg",
+    pageTitleTextContent: "FAQ",
+    pageSubTitleContent: "frequently asked questions",
+  },
 ];
 
 export const homeSectionsContent: (HomeSectionContentProps & { id: number })[] =
