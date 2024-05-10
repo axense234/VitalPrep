@@ -178,6 +178,7 @@ export const getProfileOAuth = createAsyncThunk(
 export const getProfileJWT = createAsyncThunk(
   "general/getProfileJWT",
   async () => {
+    console.log(`${baseSiteUrl}/home`);
     try {
       const userId = localStorage.getItem("userId");
       const { data } = await axiosInstance.get(`/users/${userId}`, {

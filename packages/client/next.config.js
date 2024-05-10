@@ -2,9 +2,9 @@
 const nextConfig = {
   reactStrictMode: false,
   distDir: "build",
-  compiler: {
-    removeConsole: process.env.NODE_ENV !== "development",
-  },
+  // compiler: {
+  //   removeConsole: process.env.NODE_ENV !== "development",
+  // },
   images: {
     remotePatterns: [
       {
