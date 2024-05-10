@@ -12,6 +12,21 @@
   width: 100%;
   gap: 3rem;
   padding: 8rem 6rem;
+
+  @media screen and (max-width: 1500px) {
+    padding: 8rem 2rem;
+  }
+
+  @media screen and (max-width: 1200px) {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4rem;
+  }
+
+  @media screen and (max-width: 800px) {
+    padding: 8rem 1rem;
+  }
 }
 
 .gettingStartedContentMapContainer {
@@ -20,9 +35,30 @@
   gap: 1rem;
   min-width: 20%;
 
+  @media screen and (max-width: 1200px) {
+    align-items: center;
+    width: 100%;
+    padding: 4rem 8rem;
+    border-radius: 15px;
+    background-color: getColor("secondary-color-3.2");
+    gap: 2rem;
+  }
+
+  @media screen and (max-width: 800px) {
+    padding: 4rem 4rem;
+  }
+  @media screen and (max-width: 600px) {
+    padding: 4rem 2rem;
+  }
+
   h5 {
     @include heading("h6", "laptop", "black");
     width: 100%;
+
+    @media screen and (max-width: 1200px) {
+      @include heading("h5", "laptop", "black");
+      text-align: center;
+    }
   }
 }
 
@@ -30,6 +66,25 @@
   @include flexCenter(column);
   align-items: flex-start;
   gap: 1.5rem;
+
+  @media screen and (max-width: 1200px) {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    row-gap: 3rem;
+
+    > li {
+      @include flexCenter(column);
+      align-items: flex-start;
+      width: 45%;
+      max-width: 45%;
+
+      @media screen and (max-width: 600px) {
+        width: 95%;
+        max-width: 95%;
+      }
+    }
+  }
 }
 
 .gettingStartedContentMapSection {
@@ -91,10 +146,24 @@
   gap: 2rem;
   background-color: getColor("secondary-color-3.3");
 
+  @media screen and (max-width: 600px) {
+    padding: 4rem 2rem;
+  }
+  @media screen and (max-width: 400px) {
+    padding: 4rem 1rem;
+  }
+
   h4 {
     @include heading("h4", "laptop", "black");
     text-align: center;
     width: 100%;
+
+    @media screen and (max-width: 1200px) {
+      @include heading("h4", "tablet", "black");
+    }
+    @media screen and (max-width: 600px) {
+      @include heading("h4", "phone", "black");
+    }
   }
 }
 
@@ -128,10 +197,30 @@
     width: auto;
     border-radius: 10px;
     border: 1px solid getColor("black-75-1");
+
+    @media screen and (max-width: 1350px) {
+      height: 20rem;
+    }
+
+    @media screen and (max-width: 800px) {
+      height: 15rem;
+    }
+    @media screen and (max-width: 600px) {
+      height: 10rem;
+    }
+    @media screen and (max-width: 400px) {
+      height: 8rem;
+    }
   }
 
   h5 {
     @include heading("h5", "laptop", "black");
+    @media screen and (max-width: 1200px) {
+      @include heading("h5", "tablet", "black");
+    }
+    @media screen and (max-width: 600px) {
+      @include heading("h5", "phone", "black");
+    }
   }
 
   p {

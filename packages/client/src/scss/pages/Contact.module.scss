@@ -13,6 +13,25 @@
   gap: 8rem;
   padding: 8rem;
   padding-bottom: 16rem;
+
+  @media screen and (max-width: 1700px) {
+    gap: 4rem;
+    padding: 8rem 4rem;
+    padding-bottom: 16rem;
+  }
+
+  @media screen and (max-width: 1500px) {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  @media screen and (max-width: 600px) {
+    padding: 8rem 2rem;
+  }
+
+  @media screen and (max-width: 450px) {
+    padding: 8rem 0.5rem;
+  }
 }
 
 .contactEmailContainer,
@@ -24,6 +43,16 @@
   border-radius: 25px;
   background-color: getColorWithOpacity("secondary-color-3.1", 0.5);
 
+  @media screen and (max-width: 900px) {
+    padding: 4rem 2rem;
+  }
+  @media screen and (max-width: 600px) {
+    gap: 1.5rem;
+  }
+  @media screen and (max-width: 400px) {
+    padding: 4rem 1rem;
+  }
+
   ul {
     margin-top: 1rem;
     max-width: 100%;
@@ -34,6 +63,13 @@
 
   h4 {
     @include heading("h4", "laptop", "black");
+
+    @media screen and (max-width: 1200px) {
+      @include heading("h4", "tablet", "black");
+    }
+    @media screen and (max-width: 600px) {
+      @include heading("h4", "phone", "black");
+    }
   }
 
   button {
@@ -42,7 +78,14 @@
 
   input,
   textarea {
-    min-width: 30rem;
+    min-width: 40rem;
+
+    @media screen and (max-width: 900px) {
+      min-width: 25rem;
+    }
+    @media screen and (max-width: 550px) {
+      min-width: 10rem;
+    }
   }
 
   textarea {
@@ -59,5 +102,14 @@
 
   p {
     @include heading("h6", "laptop", "black");
+    @media screen and (max-width: 1200px) {
+      @include heading("h6", "tablet", "black");
+    }
+    @media screen and (max-width: 600px) {
+      @include heading("h6", "phone", "black");
+    }
+    @media screen and (max-width: 400px) {
+      @include paragraph("phone", "black");
+    }
   }
 }

@@ -2,6 +2,7 @@
 import faqStyles from "../../../scss/pages/FAQ.module.scss";
 // Types
 import FAQAccordionType from "@/core/types/FAQAccordion";
+import useGetWindowWidth from "@/hooks/useGetWindowWidth";
 // React
 import { FC, useState } from "react";
 // React Icons
@@ -13,6 +14,18 @@ const FAQAccordion: FC<FAQAccordionType> = ({
 }) => {
   const [showAccordionContent, setShowAccordionContent] =
     useState<boolean>(false);
+
+  let windowWidth = useGetWindowWidth();
+  let accordionContentHeightDividerValue = 4;
+  if (windowWidth <= 1200) {
+    accordionContentHeightDividerValue = 3;
+  }
+  if (windowWidth <= 1000) {
+    accordionContentHeightDividerValue = 2;
+  }
+  if (windowWidth <= 775) {
+    accordionContentHeightDividerValue = 1.5;
+  }
 
   return (
     <div className={faqStyles.faqAccordionContainer}>
@@ -36,7 +49,7 @@ const FAQAccordion: FC<FAQAccordionType> = ({
         className={faqStyles.faqAccordionContent}
         style={{
           height: showAccordionContent
-            ? `${accordionContent.length / 6 + 40}px `
+            ? `${accordionContent.length / accordionContentHeightDividerValue + 40}px `
             : "0rem",
         }}
       >

@@ -10,6 +10,18 @@
   width: 100%;
   gap: 8rem;
   padding: 8rem;
+
+  @media screen and (max-width: 1400px) {
+    padding: 8rem 4rem;
+  }
+
+  @media screen and (max-width: 600px) {
+    padding: 8rem 2rem;
+  }
+
+  @media screen and (max-width: 400px) {
+    padding: 8rem 0.5rem;
+  }
 }
 
 .profileInfoContainer {
@@ -19,6 +31,14 @@
   border-radius: 25px;
   background-color: getColorWithOpacity("secondary-color-3.1", 0.5);
 
+  @media screen and (max-width: 1400px) {
+    padding: 4rem 3rem;
+  }
+
+  @media screen and (max-width: 1200px) {
+    width: 100%;
+  }
+
   img {
     margin-bottom: 2rem;
   }
@@ -26,22 +46,42 @@
   h4 {
     @include heading("h4", "laptop", "black");
     font-weight: 550;
+
+    @media screen and (max-width: 1200px) {
+      @include heading("h4", "tablet", "black");
+    }
+
+    @media screen and (max-width: 600px) {
+      @include heading("h4", "phone", "black");
+    }
   }
 
   h6 {
     @include heading("h6", "laptop", "black");
+
+    @media screen and (max-width: 1200px) {
+      @include heading("h6", "tablet", "black");
+    }
+
+    @media screen and (max-width: 600px) {
+      font-size: 0.8rem;
+      font-weight: 550;
+    }
   }
 }
 
 .profileInfoEmail {
   @include flexCenter(row);
   justify-content: center;
-  width: 100%;
   gap: 0.5rem;
 
   svg {
     font-size: 2rem;
     cursor: pointer;
+
+    @media screen and (max-width: 600px) {
+      font-size: 1.5rem;
+    }
   }
 }
 
@@ -50,4 +90,11 @@
   align-items: flex-start;
   justify-content: space-between;
   width: 100%;
+
+  @media screen and (max-width: 1200px) {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4rem;
+  }
 }

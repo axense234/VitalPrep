@@ -32,7 +32,7 @@ const IngredientComponent: FC<EntityComponentProps> = ({
 
   let windowWidth = useGetWindowWidth();
   let tabletOrPhoneRedesign = windowWidth <= 1100;
-  let phoneRedesign = windowWidth <= 500;
+  let phoneRedesign = windowWidth <= 600;
 
   return (
     <div

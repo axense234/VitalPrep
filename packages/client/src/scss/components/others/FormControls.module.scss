@@ -339,19 +339,38 @@
   gap: 1rem;
 
   label {
-    font-weight: bolder;
-    font-size: 22px;
+    @include heading("h6", "laptop", "black");
+    font-weight: 550;
+
+    @media screen and (max-width: 1200px) {
+      @include heading("h6", "tablet", "black");
+    }
+    @media screen and (max-width: 650px) {
+      @include heading("h6", "phone", "black");
+    }
   }
 }
 
 .radioFormControlContent {
   @include flexCenter(row);
+  flex-wrap: wrap;
   list-style: none;
   gap: 1.5rem;
 
   li {
     @include flexCenter(row);
     gap: 0.5rem;
+
+    @media screen and (max-width: 900px) {
+      align-items: flex-start;
+      justify-content: flex-start;
+      width: 45%;
+      max-width: 45%;
+    }
+    @media screen and (max-width: 600px) {
+      width: 95%;
+      max-width: 95%;
+    }
 
     input[type="radio"] {
       appearance: none;

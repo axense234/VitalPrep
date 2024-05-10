@@ -14,11 +14,54 @@
   border-radius: 25px;
   padding: 4rem;
 
+  @media screen and (max-width: 1050px) {
+    padding: 4rem 2rem;
+  }
+
+  @media screen and (max-width: 800px) {
+    padding: 4rem 1rem;
+  }
+
+  @media screen and (max-width: 400px) {
+    padding: 4rem 0.5rem;
+  }
+
   h1 {
     @include heading("h1", "laptop", "black");
+    text-align: center;
+
+    @media screen and (max-width: 1200px) {
+      @include heading("h1", "tablet", "black");
+    }
+
+    @media screen and (max-width: 800px) {
+      @include heading("h1", "phone", "black");
+    }
+
+    @media screen and (max-width: 600px) {
+      @include heading("h2", "phone", "black");
+    }
+    @media screen and (max-width: 425px) {
+      @include heading("h3", "phone", "black");
+    }
   }
   h4 {
     @include heading("h4", "laptop", "black");
+    text-align: center;
+
+    @media screen and (max-width: 1200px) {
+      @include heading("h4", "tablet", "black");
+    }
+
+    @media screen and (max-width: 800px) {
+      @include heading("h4", "phone", "black");
+    }
+    @media screen and (max-width: 600px) {
+      @include heading("h5", "phone", "black");
+    }
+    @media screen and (max-width: 425px) {
+      @include heading("h6", "phone", "black");
+    }
   }
   button {
     margin-top: 4rem;

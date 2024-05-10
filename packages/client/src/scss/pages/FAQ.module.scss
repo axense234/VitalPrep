@@ -17,6 +17,22 @@
   padding: 8rem;
   padding-bottom: 13.5rem;
 
+  @media screen and (max-width: 1350px) {
+    padding: 8rem 4rem;
+  }
+
+  @media screen and (max-width: 1200px) {
+    padding: 8rem 2rem;
+  }
+
+  @media screen and (max-width: 600px) {
+    gap: 2rem;
+  }
+
+  @media screen and (max-width: 400px) {
+    padding: 8rem 0.75rem;
+  }
+
   &:nth-of-type(1) {
     background-color: getColor("secondary-color-3.1");
   }
@@ -40,6 +56,19 @@
   h1 {
     @include heading("h1", "laptop", "black");
     text-align: center;
+
+    @media screen and (max-width: 1200px) {
+      @include heading("h1", "tablet", "black");
+    }
+    @media screen and (max-width: 800px) {
+      @include heading("h1", "phone", "black");
+    }
+    @media screen and (max-width: 500px) {
+      @include heading("h2", "phone", "black");
+    }
+    @media screen and (max-width: 400px) {
+      @include heading("h3", "phone", "black");
+    }
   }
 
   span {
@@ -63,6 +92,13 @@
 
 .faqContentSectionParagraph {
   @include heading("h5", "laptop", "black");
+
+  @media screen and (max-width: 1200px) {
+    @include heading("h6", "tabket", "black");
+  }
+  @media screen and (max-width: 600px) {
+    @include heading("h6", "phone", "black");
+  }
 }
 
 .faqContentSectionAccordions {
@@ -72,6 +108,10 @@
   width: 100%;
   gap: 4rem;
   margin-top: 2rem;
+
+  @media screen and (max-width: 600px) {
+    gap: 2rem;
+  }
 
   li {
     @include flexCenter(row);
@@ -97,12 +137,40 @@
   padding: 1rem 4rem;
   gap: 3.5rem;
 
+  @media screen and (max-width: 1200px) {
+    padding: 1rem 2rem;
+  }
+
+  @media screen and (max-width: 600px) {
+    gap: 1.75rem;
+  }
+
+  @media screen and (max-width: 400px) {
+    padding: 1rem;
+  }
+
   svg {
     font-size: 2.5rem;
+
+    @media screen and (max-width: 1200px) {
+      font-size: 2rem;
+    }
+
+    @media screen and (max-width: 600px) {
+      font-size: 1.25rem;
+    }
   }
 
   h5 {
-    @include heading("h5", "tablet", "black");
+    @include heading("h5", "laptop", "black");
+    width: 80%;
+
+    @media screen and (max-width: 1200px) {
+      @include heading("h6", "tablet", "black");
+    }
+    @media screen and (max-width: 800px) {
+      @include heading("h6", "phone", "black");
+    }
   }
 }
 
@@ -113,7 +181,22 @@
   overflow: hidden;
   padding: 0rem 10rem;
 
+  @media screen and (max-width: 1200px) {
+    padding: 0 8rem;
+  }
+
+  @media screen and (max-width: 800px) {
+    padding: 0 2rem;
+  }
+
   p {
     @include paragraph("laptop", "black");
+
+    @media screen and (max-width: 700px) {
+      @include paragraph("tablet", "black");
+    }
+    @media screen and (max-width: 375px) {
+      font-size: 0.95rem;
+    }
   }
 }

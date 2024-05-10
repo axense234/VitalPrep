@@ -17,6 +17,14 @@
   padding: 8rem;
   padding-bottom: 13.5rem;
 
+  @media screen and (max-width: 1200px) {
+    padding: 8rem 4rem;
+  }
+
+  @media screen and (max-width: 600px) {
+    padding: 6rem 1rem;
+  }
+
   &:nth-of-type(1) {
     background-color: getColor("secondary-color-3.1");
   }
@@ -45,6 +53,19 @@
   h1 {
     @include heading("h1", "laptop", "black");
     text-align: center;
+
+    @media screen and (max-width: 1200px) {
+      @include heading("h1", "tablet", "black");
+    }
+    @media screen and (max-width: 800px) {
+      @include heading("h1", "phone", "black");
+    }
+    @media screen and (max-width: 500px) {
+      @include heading("h2", "phone", "black");
+    }
+    @media screen and (max-width: 400px) {
+      @include heading("h3", "phone", "black");
+    }
   }
 
   h4 {
@@ -52,11 +73,29 @@
     align-self: flex-start;
     text-align: left;
     margin-top: 3rem;
+
+    @media screen and (max-width: 1200px) {
+      @include heading("h4", "tablet", "black");
+    }
+    @media screen and (max-width: 800px) {
+      @include heading("h4", "phone", "black");
+      align-self: center;
+      text-align: center;
+    }
   }
 
   p {
     @include heading("h5", "laptop", "black");
     width: 80%;
+
+    @media screen and (max-width: 1200px) {
+      @include heading("h5", "tablet", "black");
+    }
+    @media screen and (max-width: 800px) {
+      @include heading("h5", "phone", "black");
+      text-align: center;
+      width: 90%;
+    }
   }
 
   a {
@@ -84,6 +123,13 @@
   column-gap: 6rem;
   row-gap: 4rem;
 
+  @media screen and (max-width: 800px) {
+    justify-content: center !important;
+    width: 100%;
+    column-gap: 3rem;
+    row-gap: 2rem;
+  }
+
   li {
     @include flexCenter(row);
     transition: $crispyTransformTransition;
@@ -91,6 +137,11 @@
     img {
       width: 7.5rem;
       height: 7.5rem;
+
+      @media screen and (max-width: 800px) {
+        width: 5rem;
+        height: 5rem;
+      }
     }
 
     &:hover {

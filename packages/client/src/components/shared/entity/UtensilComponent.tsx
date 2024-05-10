@@ -29,7 +29,7 @@ const UtensilComponent: FC<EntityComponentProps> = ({
 
   const { name, imageUrl, enabled } = utensilEntityShown;
   let windowWidth = useGetWindowWidth();
-  let phoneRedesign = windowWidth <= 500;
+  let phoneRedesign = windowWidth <= 600;
 
   return (
     <div
