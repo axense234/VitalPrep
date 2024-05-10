@@ -29,8 +29,8 @@ const RecipeComponent: FC<EntityComponentProps> = ({
 
   const { name, imageUrl, macros } = recipeEntityShown;
   let windowWidth = useGetWindowWidth();
-  let tabletOrPhoneRedesign = windowWidth <= 1000;
-  let phoneRedesign = windowWidth <= 600;
+  let tabletOrPhoneRedesign = windowWidth && windowWidth <= 1000;
+  let phoneRedesign = windowWidth && windowWidth <= 600;
 
   return (
     <div

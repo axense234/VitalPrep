@@ -29,7 +29,7 @@ const InstanceTemplateComponent: FC<EntityComponentProps> = ({
 
   const { name, imageUrl, coverage, dayTemplates } = instanceTemplateShown;
   let windowWidth = useGetWindowWidth();
-  let tabletOrPhoneRedesign = windowWidth <= 1000;
+  let tabletOrPhoneRedesign = windowWidth && windowWidth <= 1000;
 
   return (
     <div

@@ -29,7 +29,7 @@ const MealPrepPlanComponent: FC<EntityComponentProps> = ({
 
   const { name, imageUrl, instanceTemplates } = mealPrepPlanEntityShown;
   let windowWidth = useGetWindowWidth();
-  let phoneRedesign = windowWidth <= 700;
+  let phoneRedesign = windowWidth && windowWidth <= 700;
 
   return (
     <div

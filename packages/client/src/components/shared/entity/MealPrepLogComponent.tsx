@@ -30,8 +30,8 @@ const MealPrepLogComponent: FC<EntityComponentProps> = ({
   const { name, imageUrl, cookingDuration, date, completed } =
     mealPrepLogEntityShown;
   let windowWidth = useGetWindowWidth();
-  let tabletOrPhoneRedesign = windowWidth <= 1100;
-  let phoneRedesign = windowWidth <= 500;
+  let tabletOrPhoneRedesign = windowWidth && windowWidth <= 1100;
+  let phoneRedesign = windowWidth && windowWidth <= 500;
 
   return (
     <div

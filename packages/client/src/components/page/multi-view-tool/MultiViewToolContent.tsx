@@ -24,13 +24,13 @@ const MultiViewToolContent: FC<{
 
   let windowWidth = useGetWindowWidth();
   let listItemMaxWidthBasedOnWindowWidth = "20%";
-  if (windowWidth <= 1600) {
+  if (windowWidth && windowWidth <= 1600) {
     listItemMaxWidthBasedOnWindowWidth = "30%";
   }
-  if (windowWidth <= 1150) {
+  if (windowWidth && windowWidth <= 1150) {
     listItemMaxWidthBasedOnWindowWidth = "45%";
   }
-  if (windowWidth <= 875) {
+  if (windowWidth && windowWidth <= 875) {
     listItemMaxWidthBasedOnWindowWidth = "100%";
   }
 

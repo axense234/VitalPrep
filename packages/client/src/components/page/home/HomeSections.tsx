@@ -16,15 +16,15 @@ import useGetWindowWidth from "@/hooks/useGetWindowWidth";
 const HomeSections = () => {
   const windowWidth = useGetWindowWidth();
   let sectionPaddingBasedOnWindowWidth = "6rem";
-  let tabletAndPhoneRedesign = windowWidth <= 1200;
+  let tabletAndPhoneRedesign = windowWidth && windowWidth <= 1200;
 
-  if (windowWidth <= 1500) {
+  if (windowWidth && windowWidth <= 1500) {
     sectionPaddingBasedOnWindowWidth = "4rem";
   }
-  if (windowWidth <= 1300) {
+  if (windowWidth && windowWidth <= 1300) {
     sectionPaddingBasedOnWindowWidth = "1.8rem";
   }
-  if (windowWidth <= 1200) {
+  if (windowWidth && windowWidth <= 1200) {
     sectionPaddingBasedOnWindowWidth = "0";
   }
 
@@ -41,7 +41,7 @@ const HomeSections = () => {
               sectionPaddingBasedOnWindowWidth={
                 sectionPaddingBasedOnWindowWidth
               }
-              tabletAndPhoneRedesign={tabletAndPhoneRedesign}
+              tabletAndPhoneRedesign={tabletAndPhoneRedesign || false}
             />
           );
         } else if (homeSectionContent.type === "descriptionBased") {
@@ -52,7 +52,7 @@ const HomeSections = () => {
               sectionPaddingBasedOnWindowWidth={
                 sectionPaddingBasedOnWindowWidth
               }
-              tabletAndPhoneRedesign={tabletAndPhoneRedesign}
+              tabletAndPhoneRedesign={tabletAndPhoneRedesign || false}
             />
           );
         } else if (homeSectionContent.type === "middle") {

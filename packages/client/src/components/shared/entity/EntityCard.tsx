@@ -56,7 +56,7 @@ const EntityCard: FC<{
   let entitySubDetails = `${(entityUsed as DayTemplateTemplate)?.macros?.calories || 0} calories`;
 
   let windowWidth = useGetWindowWidth();
-  let tabletAndPhoneRedesign = windowWidth <= 600;
+  let tabletAndPhoneRedesign = windowWidth && windowWidth <= 600;
 
   switch (entityType) {
     case "ingredient":

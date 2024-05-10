@@ -31,8 +31,8 @@ const IngredientComponent: FC<EntityComponentProps> = ({
   const { name, imageUrl, macros, enabled } = ingredientEntityShown;
 
   let windowWidth = useGetWindowWidth();
-  let tabletOrPhoneRedesign = windowWidth <= 1100;
-  let phoneRedesign = windowWidth <= 600;
+  let tabletOrPhoneRedesign = windowWidth && windowWidth <= 1100;
+  let phoneRedesign = windowWidth && windowWidth <= 600;
 
   return (
     <div

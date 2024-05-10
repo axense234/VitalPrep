@@ -20,7 +20,7 @@ import useGetWindowWidth from "@/hooks/useGetWindowWidth";
 
 const Footer = () => {
   let windowWidth = useGetWindowWidth();
-  let tabletAndPhoneRedesign = windowWidth <= 600;
+  let tabletAndPhoneRedesign = windowWidth && windowWidth <= 600;
 
   return (
     <footer className={footerStyles.footerContainer}>

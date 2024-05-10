@@ -30,7 +30,7 @@ const DayTemplateComponent: FC<EntityComponentProps> = ({
 
   const { name, imageUrl, macros, recipes } = dayTemplateEntityUsed;
   let windowWidth = useGetWindowWidth();
-  let phoneRedesign = windowWidth <= 800;
+  let phoneRedesign = windowWidth && windowWidth <= 800;
 
   return (
     <div

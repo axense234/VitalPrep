@@ -44,7 +44,7 @@ const ActiveMealPrepPlan = () => {
   const mealPrepPlans = useAppSelector(selectAllMealPrepPlans);
 
   let windowWidth = useGetWindowWidth();
-  let tabletOrPhoneRedesign = windowWidth <= 500;
+  let tabletOrPhoneRedesign = windowWidth && windowWidth <= 500;
 
   const activeMealPrepPlan = mealPrepPlans.find(
     (mpp) => mpp.id === profile.mealPrepPlanInUseId

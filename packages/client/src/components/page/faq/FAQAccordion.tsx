@@ -17,13 +17,13 @@ const FAQAccordion: FC<FAQAccordionType> = ({
 
   let windowWidth = useGetWindowWidth();
   let accordionContentHeightDividerValue = 4;
-  if (windowWidth <= 1200) {
+  if (windowWidth && windowWidth <= 1200) {
     accordionContentHeightDividerValue = 3;
   }
-  if (windowWidth <= 1000) {
+  if (windowWidth && windowWidth <= 1000) {
     accordionContentHeightDividerValue = 2;
   }
-  if (windowWidth <= 775) {
+  if (windowWidth && windowWidth <= 775) {
     accordionContentHeightDividerValue = 1.5;
   }
 
