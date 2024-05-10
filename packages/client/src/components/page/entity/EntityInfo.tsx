@@ -12,6 +12,7 @@ import DayTemplateInfo from "./DayTemplateInfo";
 import InstanceTemplateInfo from "./InstanceTemplateInfo";
 import MealPrepPlanInfo from "./MealPrepPlanInfo";
 import MealPrepLogInfo from "./MealPrepLogInfo";
+import PageTitle from "@/components/shared/PageTitle";
 // Redux
 import { useAppSelector } from "@/hooks/redux";
 import { selectProfile } from "@/redux/slices/generalSlice";
@@ -32,7 +33,13 @@ const EntityInfo = () => {
   if (entityInfoPageShown) {
     return entityInfoPageShown;
   }
-  return null;
+  return (
+    <PageTitle
+      titleContent="View Entity Info"
+      subtitleContent="loading entity..."
+      backgroundImageSrc="https://res.cloudinary.com/birthdayreminder/image/upload/v1714922259/VitalPrep/pre_prepared_meals_pqenm1.png"
+    />
+  );
 };
 
 const useSelectEntityInfoPageShown = (

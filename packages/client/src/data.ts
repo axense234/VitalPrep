@@ -311,6 +311,8 @@ export const homeSectionsContent: (HomeSectionContentProps & { id: number })[] =
       type: "positional",
       sectionDescription:
         "VitalPrep is a complex meal prep helper app that helps people create meal prep plans and to follow those respective plans.",
+      sectionPaddingBasedOnWindowWidth: "",
+      tabletAndPhoneRedesign: false,
     },
     {
       id: 2,
@@ -325,6 +327,8 @@ export const homeSectionsContent: (HomeSectionContentProps & { id: number })[] =
       type: "positional",
       sectionDescription:
         "Meal Prep, short for meal preparation, is the practice of planning and preparing meals in advance, typically for a period of several days to a week.",
+      sectionPaddingBasedOnWindowWidth: "",
+      tabletAndPhoneRedesign: false,
     },
     {
       id: 3,
@@ -358,17 +362,21 @@ export const homeSectionsContent: (HomeSectionContentProps & { id: number })[] =
           itemTitle: "Stress Reduction",
         },
       ],
+      sectionPaddingBasedOnWindowWidth: "",
+      tabletAndPhoneRedesign: false,
     },
     {
       id: 4,
       sectionTitle: "Difficulties?",
       sectionSubTitle: "we can help",
       contentBackgroundImageSrc:
-        "https://res.cloudinary.com/birthdayreminder/image/upload/v1714932026/VitalPrep/Frame_15hmwkp5_i6n4jw.png",
+        "https://res.cloudinary.com/birthdayreminder/image/upload/v1715355285/difficulties_shtsqm.png",
       backgroundImageSrc:
         "https://res.cloudinary.com/birthdayreminder/image/upload/v1714923610/VitalPrep/iamge5_p2bca4.png",
       position: "left",
       type: "descriptionBased",
+      sectionPaddingBasedOnWindowWidth: "",
+      tabletAndPhoneRedesign: false,
     },
   ];
 

@@ -76,7 +76,7 @@ export const useRedirect = (
       ) {
         router.push("/home");
       } else if (!profile.email && pathname !== "/" && pathname !== "/login") {
-        router.push("/auth-error");
+        router.push("/");
       }
     }
   }, [pathname, router, loading, profile]);
