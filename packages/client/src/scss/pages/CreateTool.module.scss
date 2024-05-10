@@ -10,6 +10,13 @@
   @include flexCenter(column);
   width: 100%;
   padding: 8rem;
+
+  @media screen and (max-width: 1300px) {
+    padding: 4rem 2rem;
+  }
+  @media screen and (max-width: 600px) {
+    padding: 4rem 1rem;
+  }
 }
 
 .createInterfaceWrapper {
@@ -17,6 +24,18 @@
   align-items: flex-start;
   width: 100%;
   gap: 8rem;
+
+  @media screen and (max-width: 1500px) {
+    gap: 4rem;
+  }
+  @media screen and (max-width: 1300px) {
+    gap: 2.5rem;
+  }
+
+  @media screen and (max-width: 1200px) {
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 .createInterfaceComponentsContainer {
@@ -33,8 +52,23 @@
   padding: 2rem;
   border-radius: 25px;
 
+  @media screen and (max-width: 800px) {
+    padding: 2rem 1rem;
+  }
+  @media screen and (max-width: 600px) {
+    padding: 2rem 0.5rem;
+  }
+
   h4 {
     @include heading("h4", "laptop", "black");
+    text-align: center;
+
+    @media screen and (max-width: 1200px) {
+      @include heading("h4", "tablet", "black");
+    }
+    @media screen and (max-width: 600px) {
+      @include heading("h4", "phone", "black");
+    }
   }
 }
 
@@ -70,8 +104,33 @@
   border-radius: 25px;
   background-color: getColorWithOpacity("secondary-color-3.1", 0.5);
 
+  @media screen and (max-width: 1300px) {
+    padding: 4rem 2rem;
+  }
+
+  @media screen and (max-width: 1200px) {
+    width: 100%;
+    align-items: center;
+    padding: 8rem;
+  }
+
+  @media screen and (max-width: 800px) {
+    padding: 4rem 3rem;
+  }
+  @media screen and (max-width: 600px) {
+    padding: 4rem 1.5rem;
+  }
+
   h4 {
     @include heading("h4", "laptop", "black");
+    text-align: center;
+
+    @media screen and (max-width: 1200px) {
+      @include heading("h4", "tablet", "black");
+    }
+    @media screen and (max-width: 600px) {
+      @include heading("h4", "phone", "black");
+    }
   }
 }
 
@@ -92,6 +151,10 @@
   align-items: flex-start;
   width: 100%;
   gap: 2rem;
+
+  @media screen and (max-width: 600px) {
+    align-items: center;
+  }
 
   button {
     margin-top: 2rem;

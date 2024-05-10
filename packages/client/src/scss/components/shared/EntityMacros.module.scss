@@ -7,11 +7,31 @@
   max-width: 40rem;
   gap: 2rem;
 
+  @media screen and (max-width: 1200px) {
+    gap: 1.5rem;
+  }
+  @media screen and (max-width: 600px) {
+    gap: 1rem;
+  }
+
   h4 {
     @include heading("h4", "laptop", "black");
+
+    @media screen and (max-width: 1200px) {
+      @include heading("h4", "tablet", "black");
+    }
+    @media screen and (max-width: 600px) {
+      @include heading("h4", "phone", "black");
+    }
   }
 
   h6 {
     @include heading("h6", "laptop", "black");
+    @media screen and (max-width: 1200px) {
+      @include heading("h6", "tablet", "black");
+    }
+    @media screen and (max-width: 600px) {
+      @include heading("h6", "phone", "black");
+    }
   }
 }

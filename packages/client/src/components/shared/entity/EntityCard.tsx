@@ -11,6 +11,7 @@ import UtensilTemplate from "@/core/types/entity/mutation/UtensilTemplate";
 import MealPrepLogTemplate from "@/core/types/entity/mutation/MealPrepLogTemplate";
 // Next
 import Image from "next/image";
+import Link from "next/link";
 // Data
 import {
   defaultIngredientImageUrl,
@@ -26,7 +27,8 @@ import { FC } from "react";
 import { useAppSelector } from "@/hooks/redux";
 // Helpers
 import selectEntityById from "@/helpers/selectEntityById";
-import Link from "next/link";
+// Hooks
+import useGetWindowWidth from "@/hooks/useGetWindowWidth";
 
 const EntityCard: FC<{
   isALink: boolean;
@@ -52,6 +54,9 @@ const EntityCard: FC<{
   let entityIdentifier = "Ingredient";
   let entityDetails = `${(entityUsed as IngredientTemplate)?.macros?.calories || 0} calories / 100g`;
   let entitySubDetails = `${(entityUsed as DayTemplateTemplate)?.macros?.calories || 0} calories`;
+
+  let windowWidth = useGetWindowWidth();
+  let tabletAndPhoneRedesign = windowWidth <= 600;
 
   switch (entityType) {
     case "ingredient":
@@ -116,7 +121,8 @@ const EntityCard: FC<{
         <div
           className={entityCardStyles.entityCardContainer}
           style={{
-            maxWidth: size === "large" ? "24rem" : "16rem",
+            maxWidth:
+              size === "large" && !tabletAndPhoneRedesign ? "24rem" : "16rem",
           }}
         >
           <Image
@@ -129,13 +135,27 @@ const EntityCard: FC<{
           />
           <div className={entityCardStyles.entityCardContentDetails}>
             <h5>{entityUsed?.name || `${entityIdentifier} Name`}</h5>
-            <h6 style={{ fontSize: "large" ? "1.5rem" : "1rem" }}>
+            <h6
+              style={{
+                fontSize:
+                  size === "large" && !tabletAndPhoneRedesign
+                    ? "1.5rem"
+                    : "1rem",
+              }}
+            >
               {entityDetails}
             </h6>
             {(entityType === "dayTemplate" ||
               entityType === "instanceTemplate" ||
               entityType === "mealPrepPlan") && (
-              <h6 style={{ fontSize: "large" ? "1.5rem" : "1rem" }}>
+              <h6
+                style={{
+                  fontSize:
+                    size === "large" && !tabletAndPhoneRedesign
+                      ? "1.5rem"
+                      : "1rem",
+                }}
+              >
                 {entitySubDetails}
               </h6>
             )}
@@ -149,7 +169,8 @@ const EntityCard: FC<{
     <div
       className={entityCardStyles.entityCardContainer}
       style={{
-        maxWidth: size === "large" ? "24rem" : "16rem",
+        maxWidth:
+          size === "large" && !tabletAndPhoneRedesign ? "24rem" : "16rem",
       }}
     >
       <Image
@@ -162,14 +183,24 @@ const EntityCard: FC<{
       />
       <div className={entityCardStyles.entityCardContentDetails}>
         <h5>{entityUsed?.name || `${entityIdentifier} Name`}</h5>
-        <h6 style={{ fontSize: "large" ? "1.5rem" : "1rem" }}>
+        <h6
+          style={{
+            fontSize:
+              size === "large" && !tabletAndPhoneRedesign ? "1.5rem" : "1rem",
+          }}
+        >
           {entityDetails}
         </h6>
         {(entityType === "dayTemplate" ||
           entityType === "instanceTemplate" ||
           entityType === "mealPrepPlan" ||
           entityType === "mealPrepLog") && (
-          <h6 style={{ fontSize: "large" ? "1.5rem" : "1rem" }}>
+          <h6
+            style={{
+              fontSize:
+                size === "large" && !tabletAndPhoneRedesign ? "1.5rem" : "1rem",
+            }}
+          >
             {entitySubDetails}
           </h6>
         )}

@@ -7,8 +7,23 @@
   border-radius: 25px;
   background-color: getColorWithOpacity("secondary-color-3.1", 0.5);
 
+  @media screen and (max-width: 1200px) {
+    width: 100%;
+  }
+
+  @media screen and (max-width: 600px) {
+    padding: 4rem 1rem;
+  }
+
   h4 {
     @include heading("h4", "laptop", "black");
+
+    @media screen and (max-width: 1200px) {
+      @include heading("h4", "tablet", "black");
+    }
+    @media screen and (max-width: 600px) {
+      @include heading("h4", "phone", "black");
+    }
   }
 }
 
@@ -24,6 +39,13 @@
     justify-content: flex-start;
     font-weight: 550;
     width: 100%;
+
+    @media screen and (max-width: 1200px) {
+      @include heading("h6", "tablet", "black");
+    }
+    @media screen and (max-width: 600px) {
+      @include heading("h6", "phone", "black");
+    }
 
     span {
       color: getColor("secondary-color-light-2.4");

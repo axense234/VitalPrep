@@ -7,10 +7,33 @@
   padding: 4rem;
   background-color: getColorWithOpacity("secondary-color-3.1", 0.5);
 
+  @media screen and (max-width: 1300px) {
+    padding: 4rem 2rem;
+  }
+
+  @media screen and (max-width: 1200px) {
+    width: 100%;
+  }
+
+  @media screen and (max-width: 800px) {
+    padding: 4rem 3rem;
+  }
+
+  @media screen and (max-width: 600px) {
+    padding: 4rem 1.5rem;
+  }
+
   h4 {
     @include heading("h4", "laptop", "black");
     width: 100%;
     text-align: center;
+
+    @media screen and (max-width: 1200px) {
+      @include heading("h4", "tablet", "black");
+    }
+    @media screen and (max-width: 600px) {
+      @include heading("h4", "phone", "black");
+    }
   }
 }
 
@@ -18,9 +41,23 @@
   @include flexCenter(column);
   gap: 2rem;
 
+  @media screen and (max-width: 1200px) {
+    gap: 1.5rem;
+  }
+  @media screen and (max-width: 600px) {
+    gap: 1rem;
+  }
+
   h4 {
     @include heading("h4", "laptop", "black");
     width: 100%;
     text-align: center;
+
+    @media screen and (max-width: 1200px) {
+      @include heading("h4", "tablet", "black");
+    }
+    @media screen and (max-width: 600px) {
+      @include heading("h4", "phone", "black");
+    }
   }
 }

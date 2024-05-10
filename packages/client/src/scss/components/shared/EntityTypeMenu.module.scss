@@ -11,6 +11,10 @@
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
 
+  @media screen and (max-width: 500px) {
+    padding: 0.75rem;
+  }
+
   svg {
     height: 3rem;
     width: 3rem;
@@ -29,6 +33,7 @@
   top: 27.5%;
   left: 0;
   width: 20%;
+  min-width: 20rem;
   padding: 1.5rem;
   padding-top: 2.5rem;
   background-color: getColor("secondary-color-1.2");
@@ -36,6 +41,12 @@
   border-bottom-right-radius: 20px;
   z-index: 3;
   transition: $crispyTransformTransition;
+
+  @media screen and (max-width: 500px) {
+    min-width: 15rem;
+    padding: 1rem;
+    padding-top: 2rem;
+  }
 
   svg {
     align-self: flex-end;
@@ -71,5 +82,9 @@
     padding: 0.5rem 0;
     font-weight: 550;
     transition: background-color 0.135s ease-in;
+
+    @media screen and (max-width: 500px) {
+      @include paragraph("tablet", "black");
+    }
   }
 }

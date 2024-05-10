@@ -11,6 +11,7 @@ import Link from "next/link";
 // Redux
 import { useAppSelector } from "@/hooks/redux";
 import { selectSelectedViewOption } from "@/redux/slices/generalSlice";
+// Hooks
 import useGetWindowWidth from "@/hooks/useGetWindowWidth";
 
 const MultiViewToolContent: FC<{

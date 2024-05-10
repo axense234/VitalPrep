@@ -89,6 +89,11 @@
   height: 5rem;
   border-radius: 5px;
 
+  @media screen and (max-width: 950px) {
+    width: 3rem;
+    height: 3rem;
+  }
+
   img {
     width: 100%;
     height: 100%;
@@ -157,6 +162,7 @@
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
+    max-width: 40rem;
 
     width: 2.5rem;
     height: 2.5rem;
@@ -202,9 +208,21 @@
   background-color: getColorWithOpacity("secondary-color-3.1", 0.5);
   border-radius: 25px;
 
+  @media screen and (max-width: 650px) {
+    padding: 2rem 0.5rem;
+    gap: 1rem;
+  }
+
   label {
     @include heading("h5", "laptop", "black");
     font-weight: 550;
+
+    @media screen and (max-width: 1200px) {
+      @include heading("h5", "tablet", "black");
+    }
+    @media screen and (max-width: 650px) {
+      @include heading("h5", "phone", "black");
+    }
   }
 }
 
@@ -216,6 +234,10 @@
   padding: 2rem;
   background-color: getColorWithOpacity("secondary-color-3.1", 0.5);
   border-radius: 25px;
+
+  @media screen and (max-width: 650px) {
+    padding: 2rem 0.5rem;
+  }
 
   li {
     @include flexCenter(row);
@@ -246,6 +268,13 @@
   label {
     @include heading("h6", "laptop", "black");
     font-weight: 550;
+
+    @media screen and (max-width: 1200px) {
+      @include heading("h6", "tablet", "black");
+    }
+    @media screen and (max-width: 650px) {
+      @include heading("h6", "phone", "black");
+    }
   }
 
   textarea {
@@ -278,6 +307,10 @@
   width: 100%;
   gap: 0.5rem;
 
+  @media screen and (max-width: 950px) {
+    flex-wrap: wrap;
+  }
+
   li {
     @include flexCenter(row);
     position: relative;
@@ -286,6 +319,11 @@
       width: 5rem;
       height: 5rem;
       border-radius: 0.5rem;
+
+      @media screen and (max-width: 950px) {
+        width: 3rem;
+        height: 3rem;
+      }
 
       &:hover {
         transform: scale(1.2);
@@ -343,6 +381,13 @@
   label {
     @include heading("h6", "laptop", "black");
     font-weight: 550;
+
+    @media screen and (max-width: 1200px) {
+      @include heading("h6", "tablet", "black");
+    }
+    @media screen and (max-width: 650px) {
+      @include heading("h6", "phone", "black");
+    }
   }
 }
 
@@ -354,11 +399,26 @@
   width: 100%;
   gap: 0.5rem;
 
+  @media screen and (max-width: 600px) {
+    flex-wrap: wrap;
+  }
+
   li {
     @include flexCenter(row);
     width: 5rem;
     height: 5rem;
     border-radius: 0.5rem;
+
+    @media screen and (max-width: 950px) {
+      width: 3rem;
+      height: 3rem;
+    }
+
+    @media screen and (max-width: 600px) {
+      width: 30% !important;
+      align-items: center;
+      justify-content: center;
+    }
 
     img {
       transition:
@@ -367,6 +427,11 @@
       width: 5rem;
       height: 5rem;
       border-radius: 0.5rem;
+
+      @media screen and (max-width: 950px) {
+        width: 3rem;
+        height: 3rem;
+      }
 
       &:hover {
         transform: scale(1.2);

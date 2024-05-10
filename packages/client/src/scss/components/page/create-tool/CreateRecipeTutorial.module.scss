@@ -9,6 +9,13 @@
 
   h5 {
     @include heading("h5", "laptop", "black");
+
+    @media screen and (max-width: 1200px) {
+      @include heading("h5", "tablet", "black");
+    }
+    @media screen and (max-width: 600px) {
+      @include heading("h5", "phone", "black");
+    }
   }
 }
 
