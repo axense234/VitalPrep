@@ -1,44 +1,27 @@
 // Redux Toolkit
 import { State } from "../api/store";
 // Data
-import {
-  defaultTemplateInstanceTemplate,
-  defaultTemplateMealPrepLog,
-} from "@/data";
+import { defaultTemplateInstanceTemplate } from "@/data";
 // Types
 import {
-  EntityState,
   PayloadAction,
   createAsyncThunk,
   createEntityAdapter,
   createSlice,
 } from "@reduxjs/toolkit";
-import InstanceTemplateTemplate from "@/core/types/entity/mutation/InstanceTemplateTemplate";
-// Prisma
-import { InstanceTemplate } from "@prisma/client";
+import InstanceTemplateTemplate from "@/core/types/entity/instanceTemplate/InstanceTemplateTemplate";
+import EntityQueryValues from "@/core/types/entity/EntityQueryValues";
+import LoadingStateType from "@/core/types/LoadingStateType";
+import ObjectKeyValueType from "@/core/types/ObjectKeyValueType";
+import InstanceTemplatesSliceStateType from "@/core/types/entity/instanceTemplate/InstanceTemplatesSliceStateType";
+import InstanceTemplateCreateBodyType from "@/core/types/entity/instanceTemplate/InstanceTemplateCreateBodyType";
+import InstanceTemplateType from "@/core/types/entity/instanceTemplate/InstanceTemplateType";
 // Axios
 import { AxiosError } from "axios";
 import axiosInstance from "@/utils/axios";
-import EntityQueryValues from "@/core/types/entity/EntityQueryValues";
 
-type ObjectKeyValueType = {
-  key: string;
-  value: any;
-};
-
-type LoadingStateType = "IDLE" | "PENDING" | "SUCCEDED" | "FAILED";
-
-type InitialStateType = {
-  // General
-  templateInstanceTemplate: InstanceTemplateTemplate;
-  loadingCreateInstanceTemplate: LoadingStateType;
-  instanceTemplateFormModalErrorMessage: string;
-
-  loadingGetUserInstanceTemplates: LoadingStateType;
-  loadingGetUserInstanceTemplate: LoadingStateType;
-};
-
-export const instanceTemplatesAdapter = createEntityAdapter<InstanceTemplate>();
+export const instanceTemplatesAdapter =
+  createEntityAdapter<InstanceTemplateType>();
 
 const initialState = instanceTemplatesAdapter.getInitialState({
   templateInstanceTemplate: defaultTemplateInstanceTemplate,
@@ -46,16 +29,11 @@ const initialState = instanceTemplatesAdapter.getInitialState({
   instanceTemplateFormModalErrorMessage: "Default Message",
   loadingGetUserInstanceTemplates: "IDLE",
   loadingGetUserInstanceTemplate: "IDLE",
-}) as EntityState<InstanceTemplate, string> & InitialStateType;
-
-type CreateInstanceTemplateBody = {
-  templateInstanceTemplate: InstanceTemplateTemplate;
-  userId: string;
-};
+}) as InstanceTemplatesSliceStateType;
 
 export const createInstanceTemplate = createAsyncThunk<
-  InstanceTemplate | AxiosError,
-  CreateInstanceTemplateBody
+  InstanceTemplateType | AxiosError,
+  InstanceTemplateCreateBodyType
 >(
   "instanceTemplates/createInstanceTemplate",
   async ({ templateInstanceTemplate, userId }) => {
@@ -65,7 +43,7 @@ export const createInstanceTemplate = createAsyncThunk<
         templateInstanceTemplate,
         { params: { userId: userId } }
       );
-      return data.instanceTemplate as InstanceTemplate;
+      return data.instanceTemplate as InstanceTemplateType;
     } catch (error) {
       console.log(error);
       return error as AxiosError;
@@ -74,7 +52,7 @@ export const createInstanceTemplate = createAsyncThunk<
 );
 
 export const getAllUserInstanceTemplates = createAsyncThunk<
-  InstanceTemplate[] | AxiosError,
+  InstanceTemplateType[] | AxiosError,
   { userId: string; entityQueryValues: EntityQueryValues }
 >(
   "instanceTemplates/getAllUserInstanceTemplates",
@@ -98,7 +76,7 @@ export const getAllUserInstanceTemplates = createAsyncThunk<
           includeMealPrepPlans: true,
         },
       });
-      return data.instanceTemplates as InstanceTemplate[];
+      return data.instanceTemplates as InstanceTemplateType[];
     } catch (error) {
       console.log(error);
       return error as AxiosError;
@@ -107,7 +85,7 @@ export const getAllUserInstanceTemplates = createAsyncThunk<
 );
 
 export const getUserInstanceTemplate = createAsyncThunk<
-  InstanceTemplate | AxiosError,
+  InstanceTemplateType | AxiosError,
   { userId: string; instanceTemplateId: string }
 >(
   "instanceTemplates/getUserInstanceTemplate",
@@ -129,7 +107,7 @@ export const getUserInstanceTemplate = createAsyncThunk<
           },
         }
       );
-      return data.instanceTemplate as InstanceTemplate;
+      return data.instanceTemplate as InstanceTemplateType;
     } catch (error) {
       console.log(error);
       return error as AxiosError;
@@ -175,7 +153,7 @@ const instanceTemplatesSlice = createSlice({
         if (axiosError !== undefined && !axiosError.response) {
           instanceTemplatesAdapter.upsertOne(
             state,
-            instanceTemplate as InstanceTemplate
+            instanceTemplate as InstanceTemplateType
           );
           state.loadingGetUserInstanceTemplate = "SUCCEDED";
         } else {
@@ -186,7 +164,7 @@ const instanceTemplatesSlice = createSlice({
         state.loadingGetUserInstanceTemplates = "PENDING";
       })
       .addCase(getAllUserInstanceTemplates.fulfilled, (state, action) => {
-        const instanceTemplates = action.payload as InstanceTemplate[];
+        const instanceTemplates = action.payload as InstanceTemplateType[];
 
         if (instanceTemplates.length >= 1) {
           state.loadingGetUserInstanceTemplates = "SUCCEDED";
@@ -200,7 +178,7 @@ const instanceTemplatesSlice = createSlice({
         state.loadingCreateInstanceTemplate = "PENDING";
       })
       .addCase(createInstanceTemplate.fulfilled, (state, action) => {
-        const instanceTemplate = action.payload as InstanceTemplate;
+        const instanceTemplate = action.payload as InstanceTemplateType;
         const axiosError = action.payload as AxiosError;
 
         if (axiosError !== undefined && !axiosError.response) {

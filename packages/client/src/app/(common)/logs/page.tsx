@@ -77,18 +77,9 @@ const MealPrepLogs = () => {
     }
   }, [loadingGetUserMealPrepLogs, profile.id]);
 
-  const { backgroundImageSrc, pageSubTitleContent, pageTitleTextContent } =
-    pageTitleContent.find(
-      (pageTitle) => pageTitle.specificPagePath === "/logs"
-    ) || pageTitleContent[0];
-
   return (
     <div className={multiViewToolStyles.multiViewToolContainer}>
-      <PageTitle
-        titleContent={pageTitleTextContent}
-        subtitleContent={pageSubTitleContent}
-        backgroundImageSrc={backgroundImageSrc}
-      />
+      <PageTitle />
       <div className={multiViewToolStyles.multiViewToolContent}>
         <ViewEntityOptions viewMealPrepLog={true} />
         <MultiViewToolContent

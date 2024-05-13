@@ -4,40 +4,23 @@ import { State } from "../api/store";
 import { defaultTemplateRecipe } from "@/data";
 // Types
 import {
-  EntityState,
   PayloadAction,
   createAsyncThunk,
   createEntityAdapter,
   createSlice,
 } from "@reduxjs/toolkit";
-import RecipeTemplate from "@/core/types/entity/mutation/RecipeTemplate";
+import RecipeTemplate from "@/core/types/entity/recipe/RecipeTemplate";
 import EntityQueryValues from "@/core/types/entity/EntityQueryValues";
-// Prisma
-import { Recipe } from "@prisma/client";
+import LoadingStateType from "@/core/types/LoadingStateType";
+import ObjectKeyValueType from "@/core/types/ObjectKeyValueType";
+import RecipesSliceStateType from "@/core/types/entity/recipe/RecipesSliceStateType";
+import RecipeCreateBodyType from "@/core/types/entity/recipe/RecipeCreateBodyType";
+import RecipeType from "@/core/types/entity/recipe/RecipeType";
 // Axios
 import { AxiosError } from "axios";
 import axiosInstance from "@/utils/axios";
 
-type ObjectKeyValueType = {
-  key: string;
-  value: any;
-};
-
-type LoadingStateType = "IDLE" | "PENDING" | "SUCCEDED" | "FAILED";
-
-type InitialStateType = {
-  // General
-  templateRecipe: RecipeTemplate;
-  loadingCreateRecipe: LoadingStateType;
-  recipeFormModalErrorMessage: string;
-  showVideoTutorialContent: boolean;
-  showWrittenTutorialContent: boolean;
-
-  loadingGetUserRecipes: LoadingStateType;
-  loadingGetUserRecipe: LoadingStateType;
-};
-
-export const recipesAdapter = createEntityAdapter<Recipe>();
+export const recipesAdapter = createEntityAdapter<RecipeType>();
 
 const initialState = recipesAdapter.getInitialState({
   templateRecipe: defaultTemplateRecipe,
@@ -47,18 +30,11 @@ const initialState = recipesAdapter.getInitialState({
   showWrittenTutorialContent: false,
   loadingGetUserRecipes: "IDLE",
   loadingGetUserRecipe: "IDLE",
-}) as EntityState<Recipe, string> & InitialStateType;
-
-type CreateRecipeBody = {
-  templateRecipe: RecipeTemplate;
-  showVideoTutorialContent: boolean;
-  showWrittenTutorialContent: boolean;
-  userId: string;
-};
+}) as RecipesSliceStateType;
 
 export const createRecipe = createAsyncThunk<
-  Recipe | AxiosError,
-  CreateRecipeBody
+  RecipeType | AxiosError,
+  RecipeCreateBodyType
 >(
   "recipes/createRecipe",
   async ({
@@ -69,11 +45,23 @@ export const createRecipe = createAsyncThunk<
   }) => {
     try {
       if (!showWrittenTutorialContent) {
-        templateRecipe = { ...templateRecipe, writtenTutorial: "" };
+        templateRecipe = {
+          ...templateRecipe,
+          recipeTutorial: {
+            ...templateRecipe.recipeTutorial,
+            writtenTutorial: "",
+          },
+        };
       }
 
       if (!showVideoTutorialContent) {
-        templateRecipe = { ...templateRecipe, videoTutorial: "" };
+        templateRecipe = {
+          ...templateRecipe,
+          recipeTutorial: {
+            ...templateRecipe.recipeTutorial,
+            videoTutorial: "",
+          },
+        };
       }
 
       const { data } = await axiosInstance.post(
@@ -81,7 +69,7 @@ export const createRecipe = createAsyncThunk<
         templateRecipe,
         { params: { userId: userId } }
       );
-      return data.recipe as Recipe;
+      return data.recipe as RecipeType;
     } catch (error) {
       console.log(error);
       return error as AxiosError;
@@ -90,7 +78,7 @@ export const createRecipe = createAsyncThunk<
 );
 
 export const getAllUserRecipes = createAsyncThunk<
-  Recipe[] | AxiosError,
+  RecipeType[] | AxiosError,
   { userId: string; entityQueryValues: EntityQueryValues }
 >("recipes/getAllUserRecipes", async ({ userId, entityQueryValues }) => {
   try {
@@ -109,7 +97,7 @@ export const getAllUserRecipes = createAsyncThunk<
         includeRecipeTutorial: true,
       },
     });
-    return data.recipes as Recipe[];
+    return data.recipes as RecipeType[];
   } catch (error) {
     console.log(error);
     return error as AxiosError;
@@ -117,7 +105,7 @@ export const getAllUserRecipes = createAsyncThunk<
 });
 
 export const getUserRecipe = createAsyncThunk<
-  Recipe | AxiosError,
+  RecipeType | AxiosError,
   { userId: string; recipeId: string }
 >("recipes/getUserRecipe", async ({ userId, recipeId }) => {
   try {
@@ -133,7 +121,7 @@ export const getUserRecipe = createAsyncThunk<
         includeMealPrepPlans: true,
       },
     });
-    return data.recipe as Recipe;
+    return data.recipe as RecipeType;
   } catch (error) {
     console.log(error);
     return error as AxiosError;
@@ -172,11 +160,11 @@ const recipesSlice = createSlice({
         state.loadingGetUserRecipe = "PENDING";
       })
       .addCase(getUserRecipe.fulfilled, (state, action) => {
-        const recipe = action.payload as RecipeTemplate;
+        const recipe = action.payload as RecipeType;
         const axiosError = action.payload as AxiosError;
 
         if (axiosError !== undefined && !axiosError.response) {
-          recipesAdapter.upsertOne(state, recipe as Recipe);
+          recipesAdapter.upsertOne(state, recipe as RecipeType);
           state.loadingGetUserRecipe = "SUCCEDED";
         } else {
           state.loadingGetUserRecipe = "FAILED";
@@ -186,7 +174,7 @@ const recipesSlice = createSlice({
         state.loadingGetUserRecipes = "PENDING";
       })
       .addCase(getAllUserRecipes.fulfilled, (state, action) => {
-        const recipes = action.payload as Recipe[];
+        const recipes = action.payload as RecipeType[];
 
         if (recipes.length >= 1) {
           state.loadingGetUserRecipes = "SUCCEDED";
@@ -200,7 +188,7 @@ const recipesSlice = createSlice({
         state.loadingCreateRecipe = "PENDING";
       })
       .addCase(createRecipe.fulfilled, (state, action) => {
-        const recipe = action.payload as Recipe;
+        const recipe = action.payload as RecipeType;
         const axiosError = action.payload as AxiosError;
 
         if (axiosError !== undefined && !axiosError.response) {

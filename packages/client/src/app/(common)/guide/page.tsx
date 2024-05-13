@@ -8,22 +8,13 @@ import GettingStartedContentMap from "@/components/page/guide/GettingStartedCont
 import GettingStartedContent from "@/components/page/guide/GettingStartedContent";
 // Hooks
 import useAuthorization from "@/hooks/useAuthorization";
-// Helpers
-import getPageTitlePropsBasedOnPathname from "@/helpers/getPageTitlePropsBasedOnPathname";
 
 const GettingStarted = () => {
   useAuthorization();
 
-  const { backgroundImageSrc, pageSubTitleContent, pageTitleTextContent } =
-    getPageTitlePropsBasedOnPathname("/guide");
-
   return (
     <div className={gettingStartedStyles.gettingStartedContainer}>
-      <PageTitle
-        titleContent={pageTitleTextContent}
-        subtitleContent={pageSubTitleContent}
-        backgroundImageSrc={backgroundImageSrc}
-      />
+      <PageTitle />
       <div className={gettingStartedStyles.gettingStartedContent}>
         <GettingStartedContentMap />
         <GettingStartedContent />

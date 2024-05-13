@@ -1,5 +1,5 @@
 // Types
-import EntityType from "@/core/types/entity/EntityType";
+import EntityType from "@/core/types/entity/users/EntityType";
 // Redux
 import { State } from "@/redux/api/store";
 import { selectDayTemplateById } from "@/redux/slices/dayTemplatesSlice";

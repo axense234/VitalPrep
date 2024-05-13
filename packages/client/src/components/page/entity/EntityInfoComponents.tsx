@@ -3,20 +3,20 @@ import entityInfoTutorialStyles from "../../../scss/components/page/EntityInfo.m
 // React
 import { FC } from "react";
 // Types
-import RecipeTemplate from "@/core/types/entity/mutation/RecipeTemplate";
-import EntityType from "@/core/types/entity/EntityType";
-import IngredientTemplate from "@/core/types/entity/mutation/IngredientTemplate";
-import DayTemplateTemplate from "@/core/types/entity/mutation/DayTemplateTemplate";
-import InstanceTemplateTemplate from "@/core/types/entity/mutation/InstanceTemplateTemplate";
-import MealPrepPlanTemplate from "@/core/types/entity/mutation/MealPrepPlanTemplate";
-import UtensilTemplate from "@/core/types/entity/mutation/UtensilTemplate";
+import RecipeTemplate from "@/core/types/entity/recipe/RecipeTemplate";
+import EntityType from "@/core/types/entity/users/EntityType";
+import IngredientTemplate from "@/core/types/entity/ingredient/IngredientTemplate";
+import DayTemplateTemplate from "@/core/types/entity/dayTemplate/DayTemplateTemplate";
+import InstanceTemplateTemplate from "@/core/types/entity/instanceTemplate/InstanceTemplateTemplate";
+import MealPrepPlanTemplate from "@/core/types/entity/mealPrepPlan/MealPrepPlanTemplate";
+import UtensilTemplate from "@/core/types/entity/utensil/UtensilTemplate";
 // Helpers
 import selectEntityById from "@/helpers/selectEntityById";
 // Redux
 import { useAppSelector } from "@/hooks/redux";
 import { State } from "@/redux/api/store";
 // Components
-import EntityCard from "@/components/shared/entity/EntityCard";
+import EntityInfoComponentsSection from "@/components/shared/entity/EntityInfoComponentsSection";
 
 const EntityInfoComponents: FC<{
   entityId: string;
@@ -219,46 +219,6 @@ const EntityInfoComponents: FC<{
     <div className={entityInfoTutorialStyles.entityInfoComponentsContainer}>
       <h4>Components</h4>
       {entityComponents}
-    </div>
-  );
-};
-
-const EntityInfoComponentsSection: FC<{
-  entitiesLabel: string;
-  entityName: string;
-  entityType: EntityType;
-  entityComponents:
-    | IngredientTemplate[]
-    | UtensilTemplate[]
-    | RecipeTemplate[]
-    | DayTemplateTemplate[]
-    | InstanceTemplateTemplate[]
-    | MealPrepPlanTemplate[];
-}> = ({ entityName, entityComponents, entityType, entitiesLabel }) => {
-  if (!entityComponents || entityComponents.length < 1) {
-    return null;
-  }
-
-  return (
-    <div className={entityInfoTutorialStyles.entityInfoSection}>
-      <h5 className={entityInfoTutorialStyles.entityInfoSectionH5}>
-        {entitiesLabel} used in {entityName}:
-      </h5>
-      <ul className={entityInfoTutorialStyles.entityInfoSectionItems}>
-        {entityComponents?.map((entityComponent) => {
-          return (
-            <li key={entityComponent.id}>
-              <EntityCard
-                entity={entityComponent}
-                entityId={entityComponent.id}
-                entityType={entityType}
-                size="medium"
-                isALink={true}
-              />
-            </li>
-          );
-        })}
-      </ul>
     </div>
   );
 };

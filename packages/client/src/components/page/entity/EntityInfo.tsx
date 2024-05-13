@@ -1,7 +1,7 @@
 "use client";
 
 // Types
-import EntityType from "@/core/types/entity/EntityType";
+import EntityType from "@/core/types/entity/users/EntityType";
 // Next
 import { useParams, usePathname } from "next/navigation";
 // Components

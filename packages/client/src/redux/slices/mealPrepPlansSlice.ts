@@ -4,41 +4,22 @@ import { State } from "../api/store";
 import { defaultTemplateMealPrepPlan } from "@/data";
 // Types
 import {
-  EntityState,
   PayloadAction,
   createAsyncThunk,
   createEntityAdapter,
   createSlice,
 } from "@reduxjs/toolkit";
-import MealPrepPlanTemplate from "@/core/types/entity/mutation/MealPrepPlanTemplate";
 import EntityQueryValues from "@/core/types/entity/EntityQueryValues";
-// Prisma
-import { MealPrepPlan } from "@prisma/client";
+import MealPrepPlansSliceStateType from "@/core/types/entity/mealPrepPlan/MealPrepPlansSliceStateType";
+import MealPrepPlanType from "@/core/types/entity/mealPrepPlan/MealPrepPlanType";
+import MealPrepPlanCreateBodyType from "@/core/types/entity/mealPrepPlan/MealPrepPlanCreateBodyType";
+import LoadingStateType from "@/core/types/LoadingStateType";
+import ObjectKeyValueType from "@/core/types/ObjectKeyValueType";
 // Axios
 import { AxiosError } from "axios";
 import axiosInstance from "@/utils/axios";
-import { logoutUser } from "./generalSlice";
 
-type ObjectKeyValueType = {
-  key: string;
-  value: any;
-};
-
-type LoadingStateType = "IDLE" | "PENDING" | "SUCCEDED" | "FAILED";
-
-type InitialStateType = {
-  // General
-  templateMealPrepPlan: MealPrepPlanTemplate;
-  loadingCreateMealPrepPlan: LoadingStateType;
-  mealPrepPlanFormModalErrorMessage: string;
-
-  numberOfInstanceTemplates: number;
-
-  loadingGetUserMealPrepPlans: LoadingStateType;
-  loadingGetUserMealPrepPlan: LoadingStateType;
-};
-
-export const mealPrepPlansAdapter = createEntityAdapter<MealPrepPlan>();
+export const mealPrepPlansAdapter = createEntityAdapter<MealPrepPlanType>();
 
 const initialState = mealPrepPlansAdapter.getInitialState({
   templateMealPrepPlan: defaultTemplateMealPrepPlan,
@@ -47,16 +28,11 @@ const initialState = mealPrepPlansAdapter.getInitialState({
   numberOfInstanceTemplates: 0,
   loadingGetUserMealPrepPlans: "IDLE",
   loadingGetUserMealPrepPlan: "IDLE",
-}) as EntityState<MealPrepPlan, string> & InitialStateType;
-
-type CreateMealPrepPlanBody = {
-  templateMealPrepPlan: MealPrepPlanTemplate;
-  userId: string;
-};
+}) as MealPrepPlansSliceStateType;
 
 export const createMealPrepPlan = createAsyncThunk<
-  MealPrepPlan | AxiosError,
-  CreateMealPrepPlanBody
+  MealPrepPlanType | AxiosError,
+  MealPrepPlanCreateBodyType
 >(
   "mealPrepPlans/createMealPrepPlan",
   async ({ templateMealPrepPlan, userId }) => {
@@ -66,7 +42,7 @@ export const createMealPrepPlan = createAsyncThunk<
         templateMealPrepPlan,
         { params: { userId: userId } }
       );
-      return data.mealPrepPlan as MealPrepPlan;
+      return data.mealPrepPlan as MealPrepPlanType;
     } catch (error) {
       console.log(error);
       return error as AxiosError;
@@ -75,7 +51,7 @@ export const createMealPrepPlan = createAsyncThunk<
 );
 
 export const getAllUserMealPrepPlans = createAsyncThunk<
-  MealPrepPlanTemplate[] | AxiosError,
+  MealPrepPlanType[] | AxiosError,
   { userId: string; entityQueryValues: EntityQueryValues }
 >(
   "mealPrepPlans/getAllUserMealPrepPlans",
@@ -99,7 +75,7 @@ export const getAllUserMealPrepPlans = createAsyncThunk<
           includeInstanceTemplates: true,
         },
       });
-      return data.mealPrepPlans as MealPrepPlanTemplate[];
+      return data.mealPrepPlans as MealPrepPlanType[];
     } catch (error) {
       console.log(error);
       return error as AxiosError;
@@ -108,7 +84,7 @@ export const getAllUserMealPrepPlans = createAsyncThunk<
 );
 
 export const getUserMealPrepPlan = createAsyncThunk<
-  MealPrepPlan | AxiosError,
+  MealPrepPlanType | AxiosError,
   { userId: string; mealPrepPlanId: string }
 >("mealPrepPlans/getUserMealPrepPlan", async ({ userId, mealPrepPlanId }) => {
   try {
@@ -129,7 +105,7 @@ export const getUserMealPrepPlan = createAsyncThunk<
         },
       }
     );
-    return data.mealPrepPlan as MealPrepPlan;
+    return data.mealPrepPlan as MealPrepPlanType;
   } catch (error) {
     console.log(error);
     return error as AxiosError;
@@ -184,11 +160,14 @@ const mealPrepPlansSlice = createSlice({
         state.loadingGetUserMealPrepPlan = "PENDING";
       })
       .addCase(getUserMealPrepPlan.fulfilled, (state, action) => {
-        const mealPrepPlan = action.payload as MealPrepPlanTemplate;
+        const mealPrepPlan = action.payload as MealPrepPlanType;
         const axiosError = action.payload as AxiosError;
 
         if (axiosError !== undefined && !axiosError.response) {
-          mealPrepPlansAdapter.upsertOne(state, mealPrepPlan as MealPrepPlan);
+          mealPrepPlansAdapter.upsertOne(
+            state,
+            mealPrepPlan as MealPrepPlanType
+          );
           state.loadingGetUserMealPrepPlan = "SUCCEDED";
         } else {
           state.loadingGetUserMealPrepPlan = "FAILED";
@@ -198,7 +177,7 @@ const mealPrepPlansSlice = createSlice({
         state.loadingGetUserMealPrepPlans = "PENDING";
       })
       .addCase(getAllUserMealPrepPlans.fulfilled, (state, action) => {
-        const mealPrepPlans = action.payload as MealPrepPlan[];
+        const mealPrepPlans = action.payload as MealPrepPlanType[];
 
         if (mealPrepPlans.length >= 1) {
           state.loadingGetUserMealPrepPlans = "SUCCEDED";
@@ -212,7 +191,7 @@ const mealPrepPlansSlice = createSlice({
         state.loadingCreateMealPrepPlan = "PENDING";
       })
       .addCase(createMealPrepPlan.fulfilled, (state, action) => {
-        const mealPrepPlan = action.payload as MealPrepPlan;
+        const mealPrepPlan = action.payload as MealPrepPlanType;
         const axiosError = action.payload as AxiosError;
 
         if (axiosError !== undefined && !axiosError.response) {

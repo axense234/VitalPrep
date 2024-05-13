@@ -3,13 +3,13 @@ import { FC } from "react";
 // SCSS
 import entityInfoStyles from "../../../scss/components/page/EntityInfo.module.scss";
 // Types
-import EntityType from "@/core/types/entity/EntityType";
-import DayTemplateTemplate from "@/core/types/entity/mutation/DayTemplateTemplate";
-import IngredientTemplate from "@/core/types/entity/mutation/IngredientTemplate";
-import InstanceTemplateTemplate from "@/core/types/entity/mutation/InstanceTemplateTemplate";
-import MealPrepPlanTemplate from "@/core/types/entity/mutation/MealPrepPlanTemplate";
-import RecipeTemplate from "@/core/types/entity/mutation/RecipeTemplate";
-import UtensilTemplate from "@/core/types/entity/mutation/UtensilTemplate";
+import EntityType from "@/core/types/entity/users/EntityType";
+import DayTemplateTemplate from "@/core/types/entity/dayTemplate/DayTemplateTemplate";
+import IngredientTemplate from "@/core/types/entity/ingredient/IngredientTemplate";
+import InstanceTemplateTemplate from "@/core/types/entity/instanceTemplate/InstanceTemplateTemplate";
+import MealPrepPlanTemplate from "@/core/types/entity/mealPrepPlan/MealPrepPlanTemplate";
+import RecipeTemplate from "@/core/types/entity/recipe/RecipeTemplate";
+import UtensilTemplate from "@/core/types/entity/utensil/UtensilTemplate";
 // Components
 import EntityCard from "../../shared/entity/EntityCard";
 // Next

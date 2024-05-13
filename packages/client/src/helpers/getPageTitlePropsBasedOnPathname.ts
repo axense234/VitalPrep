@@ -5,7 +5,11 @@ const getPageTitlePropsBasedOnPathname = (pathname: string) => {
     pageTitleContent.find((pageTitle) =>
       pageTitle.specificPagePath.startsWith(pathname)
     ) || pageTitleContent[0];
-  return { backgroundImageSrc, pageSubTitleContent, pageTitleTextContent };
+  return {
+    imageSrc: backgroundImageSrc,
+    subtitleTextContent: pageSubTitleContent,
+    titleTextContent: pageTitleTextContent,
+  };
 };
 
 export default getPageTitlePropsBasedOnPathname;

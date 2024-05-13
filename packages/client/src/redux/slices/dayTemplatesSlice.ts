@@ -10,33 +10,20 @@ import {
   createEntityAdapter,
   createSlice,
 } from "@reduxjs/toolkit";
-import DayTemplateTemplate from "@/core/types/entity/mutation/DayTemplateTemplate";
+import DayTemplateTemplate from "@/core/types/entity/dayTemplate/DayTemplateTemplate";
+import EntityQueryValues from "@/core/types/entity/EntityQueryValues";
+import LoadingStateType from "@/core/types/LoadingStateType";
+import ObjectKeyValueType from "@/core/types/ObjectKeyValueType";
+import DayTemplatesSliceStateType from "@/core/types/entity/dayTemplate/DayTemplatesSliceStateType";
+import DayTemplateCreateBodyType from "@/core/types/entity/dayTemplate/DayTemplateCreateBodyType";
 // Prisma
 import { DayTemplate } from "@prisma/client";
 // Axios
 import { AxiosError } from "axios";
 import axiosInstance from "@/utils/axios";
-import EntityQueryValues from "@/core/types/entity/EntityQueryValues";
+import DayTemplateType from "@/core/types/entity/dayTemplate/DayTemplateType";
 
-type ObjectKeyValueType = {
-  key: string;
-  value: any;
-};
-
-type LoadingStateType = "IDLE" | "PENDING" | "SUCCEDED" | "FAILED";
-
-type InitialStateType = {
-  // General
-  templateDayTemplate: DayTemplateTemplate;
-  loadingCreateDayTemplate: LoadingStateType;
-  dayTemplateFormModalErrorMessage: string;
-  numberOfMeals: number;
-
-  loadingGetUserDayTemplates: LoadingStateType;
-  loadingGetUserDayTemplate: LoadingStateType;
-};
-
-export const dayTemplatesAdapter = createEntityAdapter<DayTemplate>();
+export const dayTemplatesAdapter = createEntityAdapter<DayTemplateType>();
 
 const initialState = dayTemplatesAdapter.getInitialState({
   templateDayTemplate: defaultTemplateDayTemplate,
@@ -46,16 +33,11 @@ const initialState = dayTemplatesAdapter.getInitialState({
   mealsInOrder: [],
   loadingGetUserDayTemplates: "IDLE",
   loadingGetUserDayTemplate: "IDLE",
-}) as EntityState<DayTemplate, string> & InitialStateType;
-
-type CreateDayTemplateBody = {
-  templateDayTemplate: DayTemplateTemplate;
-  userId: string;
-};
+}) as DayTemplatesSliceStateType;
 
 export const createDayTemplate = createAsyncThunk<
-  DayTemplate | AxiosError,
-  CreateDayTemplateBody
+  DayTemplateType | AxiosError,
+  DayTemplateCreateBodyType
 >("dayTemplates/createDayTemplate", async ({ templateDayTemplate, userId }) => {
   try {
     const { data } = await axiosInstance.post(
@@ -63,7 +45,7 @@ export const createDayTemplate = createAsyncThunk<
       templateDayTemplate,
       { params: { userId: userId } }
     );
-    return data.dayTemplate as DayTemplate;
+    return data.dayTemplate as DayTemplateType;
   } catch (error) {
     console.log(error);
     return error as AxiosError;
@@ -71,7 +53,7 @@ export const createDayTemplate = createAsyncThunk<
 });
 
 export const getAllUserDayTemplates = createAsyncThunk<
-  DayTemplate[] | AxiosError,
+  DayTemplateType[] | AxiosError,
   { userId: string; entityQueryValues: EntityQueryValues }
 >(
   "dayTemplates/getAllUserDayTemplates",
@@ -95,7 +77,7 @@ export const getAllUserDayTemplates = createAsyncThunk<
           includeMealPrepPlans: true,
         },
       });
-      return data.dayTemplates as DayTemplate[];
+      return data.dayTemplates as DayTemplateType[];
     } catch (error) {
       console.log(error);
       return error as AxiosError;
@@ -104,7 +86,7 @@ export const getAllUserDayTemplates = createAsyncThunk<
 );
 
 export const getUserDayTemplate = createAsyncThunk<
-  DayTemplate | AxiosError,
+  DayTemplateType | AxiosError,
   { userId: string; dayTemplateId: string }
 >("dayTemplates/getUserDayTemplate", async ({ userId, dayTemplateId }) => {
   try {
@@ -123,7 +105,7 @@ export const getUserDayTemplate = createAsyncThunk<
         },
       }
     );
-    return data.dayTemplate as DayTemplate;
+    return data.dayTemplate as DayTemplateType;
   } catch (error) {
     console.log(error);
     return error as AxiosError;
@@ -169,7 +151,7 @@ const dayTemplatesSlice = createSlice({
         const axiosError = action.payload as AxiosError;
 
         if (axiosError !== undefined && !axiosError.response) {
-          dayTemplatesAdapter.upsertOne(state, dayTemplate as DayTemplate);
+          dayTemplatesAdapter.upsertOne(state, dayTemplate as DayTemplateType);
           state.loadingGetUserDayTemplate = "SUCCEDED";
         } else {
           state.loadingGetUserDayTemplate = "FAILED";
@@ -179,7 +161,7 @@ const dayTemplatesSlice = createSlice({
         state.loadingGetUserDayTemplates = "PENDING";
       })
       .addCase(getAllUserDayTemplates.fulfilled, (state, action) => {
-        const dayTemplates = action.payload as DayTemplate[];
+        const dayTemplates = action.payload as DayTemplateType[];
 
         if (dayTemplates.length >= 1) {
           state.loadingGetUserDayTemplates = "SUCCEDED";
@@ -193,7 +175,7 @@ const dayTemplatesSlice = createSlice({
         state.loadingCreateDayTemplate = "PENDING";
       })
       .addCase(createDayTemplate.fulfilled, (state, action) => {
-        const dayTemplate = action.payload as DayTemplate;
+        const dayTemplate = action.payload as DayTemplateType;
         const axiosError = action.payload as AxiosError;
 
         if (axiosError !== undefined && !axiosError.response) {

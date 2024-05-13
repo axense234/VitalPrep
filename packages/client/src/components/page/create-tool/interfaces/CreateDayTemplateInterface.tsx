@@ -11,23 +11,16 @@ import EntityPreview from "@/components/shared/entity/EntityPreview";
 import {
   defaultCreateDayTemplateImageUrls,
   defaultDayTemplateImageUrl,
-  defaultEntityQueryValues,
 } from "@/data";
-// Types
-import RecipeTemplate from "@/core/types/entity/mutation/RecipeTemplate";
 // React
-import { ChangeEvent, useEffect, useRef } from "react";
+import { ChangeEvent, useEffect } from "react";
 // Redux
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import {
-  changeShowFormModal,
-  changeShowGeneralModal,
   createCloudinaryImage,
   selectLoadingCloudinaryImage,
-  selectLoadingGetProfile,
   selectProfile,
   selectTemplateImageUrl,
-  setTemplateModalMessage,
 } from "@/redux/slices/generalSlice";
 import {
   createDayTemplate,
@@ -45,142 +38,53 @@ import {
   selectAllRecipesIds,
   selectLoadingGetUserRecipes,
 } from "@/redux/slices/recipesSlice";
-// Helpers
-import calculateEntityMacrosBasedOnComponents from "@/helpers/calculateEntityMacrosBasedOnComponents";
+// Helpers and Hooks
+import useShowCreatedEntity from "@/hooks/useShowCreatedEntity";
+import useUpdateEntityTemplateImageUrl from "@/hooks/useUpdateEntityTemplateImageUrl";
+import useGetEntityComponents from "@/hooks/useGetEntityComponents";
+import useUpdateEntityMacrosBasedOnComponentEntities from "@/hooks/useUpdateEntityMacrosBasedOnComponentEntities";
+import handleUpdateArrayEntities from "@/helpers/handleUpdateArrayEntities";
+import useSliceEntityComponents from "@/hooks/useSliceEntityComponents";
+import createArrayFromNumber from "@/helpers/createArrayFromNumber";
 
 const CreateDayTemplateInterface = () => {
   const dispatch = useAppDispatch();
-  const hasEffectRun = useRef(false);
   const profile = useAppSelector(selectProfile);
   const dayTemplateFormModalErrorMessage = useAppSelector(
     selectDayTemplateFormModalErrorMessage
   );
-  const templateImageUrl = useAppSelector(selectTemplateImageUrl);
 
   const templateDayTemplate = useAppSelector(selectTemplateDayTemplate);
   const recipesIds = useAppSelector(selectAllRecipesIds);
 
   const numberOfMeals = useAppSelector(selectNumberOfMeals);
-  const numberOfMealsIterable = Array.from(
-    { length: numberOfMeals },
-    (_, index) => ({
-      id: index + 1,
-    })
-  );
+  const numberOfMealsIterable = createArrayFromNumber(numberOfMeals);
 
   const loadingCreateDayTemplate = useAppSelector(
     selectLoadingCreateDayTemplate
   );
   const loadingCloudinaryImage = useAppSelector(selectLoadingCloudinaryImage);
-  const loadingProfile = useAppSelector(selectLoadingGetProfile);
   const loadingGetUserRecipes = useAppSelector(selectLoadingGetUserRecipes);
 
-  const handleUpdateArrayEntities = (
-    entityIds: string[] = [],
-    entityId: string,
-    entityIndex: number,
-    entityType: "ingredients" | "utensils" | "recipes"
-  ) => {
-    if (
-      entityIds?.find((id) => id === entityId) &&
-      templateDayTemplate.recipes[entityIndex] === entityId
-    ) {
-      const newEntityIds = [...entityIds];
-      newEntityIds[entityIndex] = "";
-      dispatch(
-        updateTemplateDayTemplate({
-          key: entityType,
-          value: newEntityIds,
-        })
-      );
-    } else {
-      const newEntityIds = [...entityIds];
-      newEntityIds[entityIndex] = entityId;
-      dispatch(
-        updateTemplateDayTemplate({
-          key: entityType,
-          value: newEntityIds,
-        })
-      );
-    }
-  };
-
-  const recipesBasedOnRecipeIds = useAppSelector(selectAllRecipes).filter(
-    (recipe) => {
-      return templateDayTemplate.recipes.find(
-        (tdtRecipeId) => tdtRecipeId === recipe.id
-      );
-    }
-  ) as RecipeTemplate[];
-
-  useEffect(() => {
-    dispatch(
-      updateTemplateDayTemplate({
-        key: "macros",
-        value: calculateEntityMacrosBasedOnComponents(
-          recipesBasedOnRecipeIds.map(
-            (recipe: RecipeTemplate) => recipe?.macros
-          )
-        ),
-      })
-    );
-  }, [templateDayTemplate.recipes]);
-
-  useEffect(() => {
-    if (
-      loadingGetUserRecipes === "IDLE" &&
-      loadingProfile &&
-      !hasEffectRun.current
-    ) {
-      dispatch(
-        getAllUserRecipes({
-          userId: profile.id,
-          entityQueryValues: defaultEntityQueryValues,
-        })
-      );
-    }
-    hasEffectRun.current = true;
-  }, [loadingGetUserRecipes, loadingProfile]);
-
-  useEffect(() => {
-    if (loadingCreateDayTemplate === "SUCCEDED") {
-      dispatch(changeShowGeneralModal(true));
-      dispatch(
-        setTemplateModalMessage(
-          `Successfully created day template: ${templateDayTemplate.name}.`
-        )
-      );
-    } else if (loadingCreateDayTemplate === "FAILED") {
-      dispatch(changeShowGeneralModal(false));
-      dispatch(changeShowFormModal(true));
-      dispatch(setTemplateModalMessage(dayTemplateFormModalErrorMessage));
-    }
-    const timeout = setTimeout(() => {
-      dispatch(updateLoadingCreateDayTemplate("IDLE"));
-    }, 10);
-    return () => {
-      clearTimeout(timeout);
-    };
-  }, [loadingCreateDayTemplate]);
-
-  useEffect(() => {
-    if (loadingCloudinaryImage === "SUCCEDED") {
-      dispatch(
-        updateTemplateDayTemplate({ key: "imageUrl", value: templateImageUrl })
-      );
-    }
-  }, [loadingCloudinaryImage]);
-
-  useEffect(() => {
-    if (numberOfMeals >= 1) {
-      dispatch(
-        updateTemplateDayTemplate({
-          key: "recipes",
-          value: templateDayTemplate.recipes.slice(0, numberOfMeals),
-        })
-      );
-    }
-  }, [numberOfMeals]);
+  useUpdateEntityMacrosBasedOnComponentEntities(
+    selectAllRecipes,
+    templateDayTemplate?.recipes as string[],
+    updateTemplateDayTemplate
+  );
+  useGetEntityComponents(loadingGetUserRecipes, getAllUserRecipes);
+  useShowCreatedEntity(
+    loadingCreateDayTemplate,
+    `Successfully created day template: ${templateDayTemplate.name}.`,
+    dayTemplateFormModalErrorMessage,
+    updateLoadingCreateDayTemplate
+  );
+  useUpdateEntityTemplateImageUrl(updateTemplateDayTemplate);
+  useSliceEntityComponents(
+    numberOfMeals,
+    "recipes",
+    updateTemplateDayTemplate,
+    templateDayTemplate?.recipes as string[]
+  );
 
   console.log(templateDayTemplate.recipes);
 
@@ -289,10 +193,13 @@ const CreateDayTemplateInterface = () => {
                     entityTypeUsed="recipe"
                     onEntityPropertyValueChange={(id) =>
                       handleUpdateArrayEntities(
-                        templateDayTemplate.recipes as string[],
+                        recipesIds,
+                        templateDayTemplate?.recipes as string[],
                         id,
                         mealOption.id - 1,
-                        "recipes"
+                        "recipes",
+                        updateTemplateDayTemplate,
+                        dispatch
                       )
                     }
                     areOptionsLoading={loadingGetUserRecipes === "PENDING"}

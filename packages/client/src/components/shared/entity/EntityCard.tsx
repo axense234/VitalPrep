@@ -1,14 +1,15 @@
 // SCSS
 import entityCardStyles from "../../../scss/components/shared/EntityCard.module.scss";
 // Types
-import EntityType from "@/core/types/entity/EntityType";
-import DayTemplateTemplate from "@/core/types/entity/mutation/DayTemplateTemplate";
-import IngredientTemplate from "@/core/types/entity/mutation/IngredientTemplate";
-import InstanceTemplateTemplate from "@/core/types/entity/mutation/InstanceTemplateTemplate";
-import MealPrepPlanTemplate from "@/core/types/entity/mutation/MealPrepPlanTemplate";
-import RecipeTemplate from "@/core/types/entity/mutation/RecipeTemplate";
-import UtensilTemplate from "@/core/types/entity/mutation/UtensilTemplate";
-import MealPrepLogTemplate from "@/core/types/entity/mutation/MealPrepLogTemplate";
+import EntityType from "@/core/types/entity/users/EntityType";
+import DayTemplateTemplate from "@/core/types/entity/dayTemplate/DayTemplateTemplate";
+import IngredientTemplate from "@/core/types/entity/ingredient/IngredientTemplate";
+import InstanceTemplateTemplate from "@/core/types/entity/instanceTemplate/InstanceTemplateTemplate";
+import MealPrepPlanTemplate from "@/core/types/entity/mealPrepPlan/MealPrepPlanTemplate";
+import RecipeTemplate from "@/core/types/entity/recipe/RecipeTemplate";
+import UtensilTemplate from "@/core/types/entity/utensil/UtensilTemplate";
+import MealPrepLogTemplate from "@/core/types/entity/mealPrepLog/MealPrepLogTemplate";
+import EntityCardProps from "@/core/interfaces/entity/EntityCardProps";
 // Next
 import Image from "next/image";
 import Link from "next/link";
@@ -30,20 +31,13 @@ import selectEntityById from "@/helpers/selectEntityById";
 // Hooks
 import useGetWindowWidth from "@/hooks/useGetWindowWidth";
 
-const EntityCard: FC<{
-  isALink: boolean;
-  size: "large" | "medium";
-  entityType: EntityType;
-  entity:
-    | IngredientTemplate
-    | UtensilTemplate
-    | RecipeTemplate
-    | DayTemplateTemplate
-    | InstanceTemplateTemplate
-    | MealPrepPlanTemplate
-    | MealPrepLogTemplate;
-  entityId?: string;
-}> = ({ entityType, entity, entityId, size = "large", isALink = false }) => {
+const EntityCard: FC<EntityCardProps> = ({
+  entityType,
+  entity,
+  entityId,
+  size = "large",
+  isALink = false,
+}) => {
   const entityFromState = useAppSelector((state) =>
     selectEntityById(state, entityId || "", entityType)
   );

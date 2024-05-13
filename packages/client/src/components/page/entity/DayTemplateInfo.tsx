@@ -14,8 +14,6 @@ import {
   getUserDayTemplate,
   selectLoadingGetUserDayTemplate,
 } from "@/redux/slices/dayTemplatesSlice";
-// Data
-import { pageTitleContent } from "@/data";
 
 const DayTemplateInfo: FC<{ entityId: string; userId: string }> = ({
   entityId,
@@ -33,18 +31,9 @@ const DayTemplateInfo: FC<{ entityId: string; userId: string }> = ({
     }
   }, [entityId, userId, loadingGetUserDayTemplate]);
 
-  const { backgroundImageSrc, pageSubTitleContent, pageTitleTextContent } =
-    pageTitleContent.find((pageTitle) =>
-      pageTitle.specificPagePath.startsWith("/dayTemplate")
-    ) || pageTitleContent[0];
-
   return (
     <div className={entityInfoStyles.entityInfoContainer}>
-      <PageTitle
-        titleContent={pageTitleTextContent}
-        subtitleContent={pageSubTitleContent}
-        backgroundImageSrc={backgroundImageSrc}
-      />
+      <PageTitle />
       <div className={entityInfoStyles.entityInfoContent}>
         <EntityInfoDetails entityId={entityId} entityType="dayTemplate" />
         <EntityInfoComponents entityId={entityId} entityType="dayTemplate" />

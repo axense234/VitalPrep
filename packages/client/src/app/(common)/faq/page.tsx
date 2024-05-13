@@ -12,16 +12,9 @@ import getPageTitlePropsBasedOnPathname from "@/helpers/getPageTitlePropsBasedOn
 const FAQ = () => {
   useAuthorization();
 
-  const { backgroundImageSrc, pageSubTitleContent, pageTitleTextContent } =
-    getPageTitlePropsBasedOnPathname("/faq");
-
   return (
     <div className={faqStyles.faqContainer}>
-      <PageTitle
-        titleContent={pageTitleTextContent}
-        subtitleContent={pageSubTitleContent}
-        backgroundImageSrc={backgroundImageSrc}
-      />
+      <PageTitle />
       <FAQContent />
     </div>
   );

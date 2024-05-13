@@ -6,7 +6,7 @@ import { State } from "@/redux/api/store";
 // Helpers
 import selectEntityById from "@/helpers/selectEntityById";
 // Types
-import RecipeTemplate from "@/core/types/entity/mutation/RecipeTemplate";
+import RecipeTemplate from "@/core/types/entity/recipe/RecipeTemplate";
 // Hooks
 import useVideoUrlFormat from "@/hooks/useVideoUrlFormat";
 // Redux

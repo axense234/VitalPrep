@@ -21,19 +21,17 @@ import {
   updateTemplateIngredientMacros,
 } from "@/redux/slices/ingredientsSlice";
 import {
-  changeShowFormModal,
-  changeShowGeneralModal,
   createCloudinaryImage,
   selectLoadingCloudinaryImage,
   selectProfile,
-  selectTemplateImageUrl,
-  setTemplateModalMessage,
 } from "@/redux/slices/generalSlice";
-// React
-import { useEffect } from "react";
+// Hooks
+import useShowCreatedEntity from "@/hooks/useShowCreatedEntity";
+import useUpdateEntityTemplateImageUrl from "@/hooks/useUpdateEntityTemplateImageUrl";
 
 const CreateIngredientInterface = () => {
   const dispatch = useAppDispatch();
+
   const templateIngredient = useAppSelector(selectTemplateIngredient);
   const profile = useAppSelector(selectProfile);
 
@@ -43,36 +41,14 @@ const CreateIngredientInterface = () => {
   );
 
   const loadingCloudinaryImage = useAppSelector(selectLoadingCloudinaryImage);
-  const templateImageUrl = useAppSelector(selectTemplateImageUrl);
 
-  useEffect(() => {
-    if (loadingCreateIngredient === "SUCCEDED") {
-      dispatch(changeShowGeneralModal(true));
-      dispatch(
-        setTemplateModalMessage(
-          `Successfully created ingredient: ${templateIngredient.name}.`
-        )
-      );
-    } else if (loadingCreateIngredient === "FAILED") {
-      dispatch(changeShowGeneralModal(false));
-      dispatch(changeShowFormModal(true));
-      dispatch(setTemplateModalMessage(ingredientFormModalErrorMessage));
-    }
-    const timeout = setTimeout(() => {
-      dispatch(updateLoadingCreateIngredient("IDLE"));
-    }, 10);
-    return () => {
-      clearTimeout(timeout);
-    };
-  }, [loadingCreateIngredient]);
-
-  useEffect(() => {
-    if (loadingCloudinaryImage === "SUCCEDED") {
-      dispatch(
-        updateTemplateIngredient({ key: "imageUrl", value: templateImageUrl })
-      );
-    }
-  }, [loadingCloudinaryImage]);
+  useShowCreatedEntity(
+    loadingCreateIngredient,
+    `Successfully created ingredient: ${templateIngredient.name}.`,
+    ingredientFormModalErrorMessage,
+    updateLoadingCreateIngredient
+  );
+  useUpdateEntityTemplateImageUrl(updateTemplateIngredient);
 
   return (
     <section className={createToolStyles.createInterface}>

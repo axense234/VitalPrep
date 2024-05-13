@@ -5,7 +5,7 @@ import EntityComponent from "@/components/shared/entity/EntityComponent";
 // React
 import { FC } from "react";
 // Types
-import EntityType from "@/core/types/entity/EntityType";
+import EntityType from "@/core/types/entity/users/EntityType";
 // Next
 import Link from "next/link";
 // Redux

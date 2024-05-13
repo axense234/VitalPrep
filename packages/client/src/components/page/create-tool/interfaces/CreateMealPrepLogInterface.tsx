@@ -8,21 +8,18 @@ import PopupModal from "@/components/shared/modals/PopupModal";
 import SelectFormControl from "@/components/shared/form/SelectFormControl";
 import CheckboxFormControl from "@/components/shared/form/CheckboxFormControl";
 import EntityPreview from "@/components/shared/entity/EntityPreview";
+// Types
+import InstanceTemplateTemplate from "@/core/types/entity/instanceTemplate/InstanceTemplateTemplate";
 // React
-import React, { ChangeEvent, useEffect, useRef } from "react";
+import React, { ChangeEvent } from "react";
 // Data
-import { defaultEntityQueryValues, defaultMealPrepLogImageUrl } from "@/data";
+import { defaultMealPrepLogImageUrl } from "@/data";
 // Redux
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import {
-  changeShowFormModal,
-  changeShowGeneralModal,
   createCloudinaryImage,
   selectLoadingCloudinaryImage,
-  selectLoadingGetProfile,
   selectProfile,
-  selectTemplateImageUrl,
-  setTemplateModalMessage,
 } from "@/redux/slices/generalSlice";
 import {
   getAllUserInstanceTemplates,
@@ -37,9 +34,15 @@ import {
   updateLoadingCreateMealPrepLog,
   updateTemplateMealPrepLog,
 } from "@/redux/slices/mealPrepLogsSlice";
-import selectEntityById from "@/helpers/selectEntityById";
-import InstanceTemplateTemplate from "@/core/types/entity/mutation/InstanceTemplateTemplate";
 import { State } from "@/redux/api/store";
+// Hooks and helpers
+import selectEntityById from "@/helpers/selectEntityById";
+import useShowCreatedEntity from "@/hooks/useShowCreatedEntity";
+import useUpdateEntityTemplateImageUrl from "@/hooks/useUpdateEntityTemplateImageUrl";
+import useGetEntityComponents from "@/hooks/useGetEntityComponents";
+import handleToggleEntityProperty from "@/helpers/handleToggleEntityProperty";
+import useUpdateEntityMacrosBasedOnComponent from "@/hooks/useUpdateEntityMacrosBasedOnComponent";
+import handleOnCreateMealPrepLogSubmit from "@/helpers/handleOnCreateMealPrepLogSubmit";
 
 const CreateMealPrepLogInterface = () => {
   const dispatch = useAppDispatch();
@@ -47,17 +50,17 @@ const CreateMealPrepLogInterface = () => {
   const mealPrepLogFormModalErrorMessage = useAppSelector(
     selectMealPrepLogFormModalErrorMessage
   );
-  const templateImageUrl = useAppSelector(selectTemplateImageUrl);
 
   const templateMealPrepLog = useAppSelector(selectTemplateMealPrepLog);
 
   const instanceTemplatesIds = useAppSelector(selectAllInstanceTemplatesIds);
-  const instanceTemplateChosen = useAppSelector((state: State) =>
-    selectEntityById(
-      state,
-      templateMealPrepLog?.instanceTemplateId || "",
-      "instanceTemplate"
-    )
+  const instanceTemplateChosen = useAppSelector(
+    (state: State) =>
+      selectEntityById(
+        state,
+        templateMealPrepLog?.instanceTemplateId || "",
+        "instanceTemplate"
+      ) as InstanceTemplateTemplate
   );
 
   const loadingCreateMealPrepLog = useAppSelector(
@@ -68,94 +71,21 @@ const CreateMealPrepLogInterface = () => {
   );
   const loadingCloudinaryImage = useAppSelector(selectLoadingCloudinaryImage);
 
-  const handleUpdateArrayEntities = (entityId: string) => {
-    if (templateMealPrepLog.instanceTemplateId === entityId) {
-      dispatch(
-        updateTemplateMealPrepLog({
-          key: "instanceTemplateId",
-          value: "",
-        })
-      );
-    } else {
-      dispatch(
-        updateTemplateMealPrepLog({
-          key: "instanceTemplateId",
-          value: entityId,
-        })
-      );
-    }
-  };
-
-  const onCreateMealPrepLogSubmit = (e: React.SyntheticEvent) => {
-    e.preventDefault();
-    dispatch(
-      createMealPrepLog({
-        templateMealPrepLog: {
-          ...templateMealPrepLog,
-          date:
-            (new Date(
-              templateMealPrepLog.date as Date
-            ).toISOString() as unknown as Date) || new Date().toISOString(),
-        },
-        userId: profile.id,
-      })
-    );
-  };
-
-  useEffect(() => {
-    if (instanceTemplateChosen) {
-      dispatch(
-        updateTemplateMealPrepLog({
-          key: "macros",
-          value: (instanceTemplateChosen as InstanceTemplateTemplate)?.macros,
-        })
-      );
-    }
-  }, [instanceTemplateChosen]);
-
-  useEffect(() => {
-    if (loadingGetUserInstanceTemplates === "IDLE" && profile.id) {
-      console.log(profile);
-      dispatch(
-        getAllUserInstanceTemplates({
-          userId: profile.id,
-          entityQueryValues: defaultEntityQueryValues,
-        })
-      );
-    }
-  }, [loadingGetUserInstanceTemplates, profile.id]);
-
-  useEffect(() => {
-    if (loadingCreateMealPrepLog === "SUCCEDED") {
-      dispatch(changeShowGeneralModal(true));
-      dispatch(
-        setTemplateModalMessage(
-          `Successfully added Meal Prep Log: ${templateMealPrepLog.name}.`
-        )
-      );
-    } else if (loadingCreateMealPrepLog === "FAILED") {
-      dispatch(changeShowGeneralModal(false));
-      dispatch(changeShowFormModal(true));
-      dispatch(setTemplateModalMessage(mealPrepLogFormModalErrorMessage));
-    }
-    const timeout = setTimeout(() => {
-      dispatch(updateLoadingCreateMealPrepLog("IDLE"));
-    }, 10);
-    return () => {
-      clearTimeout(timeout);
-    };
-  }, [loadingCreateMealPrepLog]);
-
-  useEffect(() => {
-    if (loadingCloudinaryImage === "SUCCEDED") {
-      dispatch(
-        updateTemplateMealPrepLog({
-          key: "imageUrl",
-          value: templateImageUrl,
-        })
-      );
-    }
-  }, [loadingCloudinaryImage]);
+  useUpdateEntityMacrosBasedOnComponent(
+    instanceTemplateChosen,
+    updateTemplateMealPrepLog
+  );
+  useGetEntityComponents(
+    loadingGetUserInstanceTemplates,
+    getAllUserInstanceTemplates
+  );
+  useShowCreatedEntity(
+    loadingCreateMealPrepLog,
+    `Successfully added Meal Prep Log: ${templateMealPrepLog.name}.`,
+    mealPrepLogFormModalErrorMessage,
+    updateLoadingCreateMealPrepLog
+  );
+  useUpdateEntityTemplateImageUrl(updateTemplateMealPrepLog);
 
   console.log(templateMealPrepLog.instanceTemplate);
 
@@ -243,7 +173,14 @@ const CreateMealPrepLogInterface = () => {
                 loadingCreateMealPrepLog === "PENDING" ||
                 loadingCloudinaryImage === "PENDING"
               }
-              onClickFunction={(e) => onCreateMealPrepLogSubmit(e)}
+              onClickFunction={(e) =>
+                handleOnCreateMealPrepLogSubmit(
+                  e,
+                  templateMealPrepLog,
+                  profile.id,
+                  dispatch
+                )
+              }
             />
           </form>
         </div>
@@ -261,7 +198,15 @@ const CreateMealPrepLogInterface = () => {
             templateMealPrepLog.instanceTemplateId as string
           }
           entityTypeUsed="instanceTemplate"
-          onEntityPropertyValueChange={(id) => handleUpdateArrayEntities(id)}
+          onEntityPropertyValueChange={(id) =>
+            handleToggleEntityProperty(
+              templateMealPrepLog.instanceTemplateId === id,
+              updateTemplateMealPrepLog,
+              "instanceTemplateId",
+              id,
+              dispatch
+            )
+          }
           areOptionsLoading={loadingGetUserInstanceTemplates === "PENDING"}
           canSelectMultipleEntities={false}
         />

@@ -4,6 +4,7 @@ import { FC } from "react";
 import entityInfoStyles from "../../../scss/components/page/EntityInfo.module.scss";
 // Types
 import EntityInfoAppearancesSectionProps from "@/core/interfaces/entity/EntityInfoAppearancesSection";
+import EntityType from "@/core/types/entity/users/EntityType";
 // Components
 import EntityComponent from "@/components/shared/entity/EntityComponent";
 // React Spinners
@@ -14,37 +15,12 @@ const EntityInfoAppearancesSection: FC<EntityInfoAppearancesSectionProps> = ({
   entities,
   entityTypeUsed,
 }) => {
-  let sectionTitleUsed = "Entities:";
-
-  switch (entityTypeUsed) {
-    case "ingredient":
-      sectionTitleUsed = "Ingredients:";
-      break;
-    case "utensil":
-      sectionTitleUsed = "Utensils:";
-      break;
-    case "recipe":
-      sectionTitleUsed = "Recipes:";
-      break;
-    case "dayTemplate":
-      sectionTitleUsed = "Day Templates:";
-      break;
-    case "instanceTemplate":
-      sectionTitleUsed = "Instance Templates:";
-      break;
-    case "mealPrepPlan":
-      sectionTitleUsed = "Meal Prep Plans:";
-      break;
-    case "mealPrepLog":
-      sectionTitleUsed = "Meal Prep Logs:";
-      break;
-    default:
-      break;
-  }
-
   if (!entities || entities?.length < 1) {
     return null;
   }
+
+  const sectionTitleUsed =
+    useChooseEntityInfoAppearancesSectionTitle(entityTypeUsed);
 
   return (
     <div className={entityInfoStyles.entityInfoAppearancesContainer}>
@@ -71,6 +47,36 @@ const EntityInfoAppearancesSection: FC<EntityInfoAppearancesSectionProps> = ({
       )}
     </div>
   );
+};
+
+const useChooseEntityInfoAppearancesSectionTitle = (entityType: EntityType) => {
+  let sectionTitleUsed = "Entities:";
+  switch (entityType) {
+    case "ingredient":
+      sectionTitleUsed = "Ingredients:";
+      break;
+    case "utensil":
+      sectionTitleUsed = "Utensils:";
+      break;
+    case "recipe":
+      sectionTitleUsed = "Recipes:";
+      break;
+    case "dayTemplate":
+      sectionTitleUsed = "Day Templates:";
+      break;
+    case "instanceTemplate":
+      sectionTitleUsed = "Instance Templates:";
+      break;
+    case "mealPrepPlan":
+      sectionTitleUsed = "Meal Prep Plans:";
+      break;
+    case "mealPrepLog":
+      sectionTitleUsed = "Meal Prep Logs:";
+      break;
+    default:
+      throw new Error("Invalid entity type!");
+  }
+  return sectionTitleUsed;
 };
 
 export default EntityInfoAppearancesSection;

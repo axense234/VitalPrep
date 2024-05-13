@@ -12,8 +12,6 @@ import {
   getUserUtensil,
   selectLoadingGetUserUtensil,
 } from "@/redux/slices/utensilsSlice";
-// Data
-import { pageTitleContent } from "@/data";
 
 const UtensilInfo: FC<{ entityId: string; userId: string }> = ({
   entityId,
@@ -28,18 +26,9 @@ const UtensilInfo: FC<{ entityId: string; userId: string }> = ({
     }
   }, [entityId, userId, loadingGetUserUtensil]);
 
-  const { backgroundImageSrc, pageSubTitleContent, pageTitleTextContent } =
-    pageTitleContent.find((pageTitle) =>
-      pageTitle.specificPagePath.startsWith("/utensil")
-    ) || pageTitleContent[0];
-
   return (
     <div className={entityInfoStyles.entityInfoContainer}>
-      <PageTitle
-        titleContent={pageTitleTextContent}
-        subtitleContent={pageSubTitleContent}
-        backgroundImageSrc={backgroundImageSrc}
-      />
+      <PageTitle />
       <div className={entityInfoStyles.entityInfoContent}>
         <EntityInfoDetails entityId={entityId} entityType="utensil" />
         <EntityInfoAppearances entityId={entityId} entityType="utensil" />

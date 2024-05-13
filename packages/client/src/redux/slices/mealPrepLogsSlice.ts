@@ -11,31 +11,19 @@ import {
   createSlice,
 } from "@reduxjs/toolkit";
 import EntityQueryValues from "@/core/types/entity/EntityQueryValues";
-import MealPrepLogTemplate from "@/core/types/entity/mutation/MealPrepLogTemplate";
+import MealPrepLogTemplate from "@/core/types/entity/mealPrepLog/MealPrepLogTemplate";
+import LoadingStateType from "@/core/types/LoadingStateType";
+import ObjectKeyValueType from "@/core/types/ObjectKeyValueType";
+import MealPrepLogsSliceStateType from "@/core/types/entity/mealPrepLog/MealPrepLogsSliceStateType";
+import MealPrepLogCreateBodyType from "@/core/types/entity/mealPrepLog/MealPrepLogCreateBodyType";
+import MealPrepLogType from "@/core/types/entity/mealPrepLog/MealPrepLogType";
 // Prisma
 import { MealPrepLog } from "@prisma/client";
 // Axios
 import { AxiosError } from "axios";
 import axiosInstance from "@/utils/axios";
 
-type ObjectKeyValueType = {
-  key: string;
-  value: any;
-};
-
-type LoadingStateType = "IDLE" | "PENDING" | "SUCCEDED" | "FAILED";
-
-type InitialStateType = {
-  // General
-  templateMealPrepLog: MealPrepLogTemplate;
-  loadingCreateMealPrepLog: LoadingStateType;
-  mealPrepLogFormModalErrorMessage: string;
-
-  loadingGetUserMealPrepLogs: LoadingStateType;
-  loadingGetUserMealPrepLog: LoadingStateType;
-};
-
-export const mealPrepLogsAdapter = createEntityAdapter<MealPrepLog>();
+export const mealPrepLogsAdapter = createEntityAdapter<MealPrepLogType>();
 
 const initialState = mealPrepLogsAdapter.getInitialState({
   templateMealPrepLog: defaultTemplateMealPrepLog,
@@ -43,16 +31,11 @@ const initialState = mealPrepLogsAdapter.getInitialState({
   mealPrepLogFormModalErrorMessage: "Default Message",
   loadingGetUserMealPrepLogs: "IDLE",
   loadingGetUserMealPrepLog: "IDLE",
-}) as EntityState<MealPrepLog, string> & InitialStateType;
-
-type CreateMealPrepLog = {
-  templateMealPrepLog: MealPrepLogTemplate;
-  userId: string;
-};
+}) as MealPrepLogsSliceStateType;
 
 export const createMealPrepLog = createAsyncThunk<
-  MealPrepLog | AxiosError,
-  CreateMealPrepLog
+  MealPrepLogType | AxiosError,
+  MealPrepLogCreateBodyType
 >("mealPrepLogs/createMealPrepLog", async ({ templateMealPrepLog, userId }) => {
   try {
     const { data } = await axiosInstance.post(
@@ -60,7 +43,7 @@ export const createMealPrepLog = createAsyncThunk<
       templateMealPrepLog,
       { params: { userId: userId } }
     );
-    return data.mealPrepLog as MealPrepLog;
+    return data.mealPrepLog as MealPrepLogType;
   } catch (error) {
     console.log(error);
     return error as AxiosError;
@@ -68,7 +51,7 @@ export const createMealPrepLog = createAsyncThunk<
 });
 
 export const getAllUserMealPrepLogs = createAsyncThunk<
-  MealPrepLog[] | AxiosError,
+  MealPrepLogType[] | AxiosError,
   { userId: string; entityQueryValues: EntityQueryValues }
 >(
   "mealPrepLogs/getAllUserMealPrepLogs",
@@ -94,7 +77,7 @@ export const getAllUserMealPrepLogs = createAsyncThunk<
           includeInstanceTemplateMacros: true,
         },
       });
-      return data.mealPrepLogs as MealPrepLog[];
+      return data.mealPrepLogs as MealPrepLogType[];
     } catch (error) {
       console.log(error);
       return error as AxiosError;
@@ -103,7 +86,7 @@ export const getAllUserMealPrepLogs = createAsyncThunk<
 );
 
 export const getUserMealPrepLog = createAsyncThunk<
-  MealPrepLog | AxiosError,
+  MealPrepLogType | AxiosError,
   { userId: string; mealPrepLogId: string }
 >("mealPrepLogs/getUserMealPrepLog", async ({ userId, mealPrepLogId }) => {
   try {
@@ -125,7 +108,7 @@ export const getUserMealPrepLog = createAsyncThunk<
         },
       }
     );
-    return data.mealPrepLog as MealPrepLog;
+    return data.mealPrepLog as MealPrepLogType;
   } catch (error) {
     console.log(error);
     return error as AxiosError;
@@ -164,11 +147,11 @@ const mealPrepLogsSlice = createSlice({
         state.loadingGetUserMealPrepLog = "PENDING";
       })
       .addCase(getUserMealPrepLog.fulfilled, (state, action) => {
-        const mealPrepLog = action.payload as MealPrepLogTemplate;
+        const mealPrepLog = action.payload as MealPrepLogType;
         const axiosError = action.payload as AxiosError;
 
         if (axiosError !== undefined && !axiosError.response) {
-          mealPrepLogsAdapter.upsertOne(state, mealPrepLog as MealPrepLog);
+          mealPrepLogsAdapter.upsertOne(state, mealPrepLog as MealPrepLogType);
           state.loadingGetUserMealPrepLog = "SUCCEDED";
         } else {
           state.loadingGetUserMealPrepLog = "FAILED";
@@ -178,7 +161,7 @@ const mealPrepLogsSlice = createSlice({
         state.loadingGetUserMealPrepLogs = "PENDING";
       })
       .addCase(getAllUserMealPrepLogs.fulfilled, (state, action) => {
-        const mealPrepLogs = action.payload as MealPrepLog[];
+        const mealPrepLogs = action.payload as MealPrepLogType[];
 
         if (mealPrepLogs.length >= 1) {
           state.loadingGetUserMealPrepLogs = "SUCCEDED";
@@ -192,7 +175,7 @@ const mealPrepLogsSlice = createSlice({
         state.loadingCreateMealPrepLog = "PENDING";
       })
       .addCase(createMealPrepLog.fulfilled, (state, action) => {
-        const mealPrepLog = action.payload as MealPrepLog;
+        const mealPrepLog = action.payload as MealPrepLogType;
         const axiosError = action.payload as AxiosError;
 
         if (axiosError !== undefined && !axiosError.response) {

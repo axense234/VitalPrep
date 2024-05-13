@@ -2,7 +2,7 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { State } from "../api/store";
 // Types
-import UserType from "@/core/types/entity/UserType";
+import UserType from "@/core/types/entity/users/UserType";
 import UserTemplate from "@/core/types/entity/mutation/UserTemplate";
 import EntityQueryValues from "@/core/types/entity/EntityQueryValues";
 import { User } from "@prisma/client";
@@ -21,6 +21,7 @@ import {
   defaultTemplateProfile,
 } from "@/data";
 import { SectionValueType } from "@/core/types/GettingStartedContentMapContentType";
+import EntityType from "@/core/types/entity/users/EntityType";
 
 type ObjectKeyValueType = {
   key: string;
@@ -40,7 +41,7 @@ type InitialStateType = {
   showGeneralModal: boolean;
   isModalUsedWhenLoading: boolean;
 
-  selectedEntityOption: string;
+  selectedEntityOption: EntityType;
   selectedViewOption: "grid" | "list";
 
   showProfileEmail: boolean;
@@ -354,7 +355,7 @@ const generalSlice = createSlice({
     changeInvalidJWT(state, action: PayloadAction<boolean>) {
       state.invalidJWT = action.payload;
     },
-    setSelectedEntityOption(state, action: PayloadAction<string>) {
+    setSelectedEntityOption(state, action: PayloadAction<EntityType>) {
       state.selectedEntityOption = action.payload;
     },
     changeIsUserABot(state, action: PayloadAction<boolean>) {

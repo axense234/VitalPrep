@@ -1,4 +1,4 @@
-import EntityType from "@/core/types/entity/EntityType";
+import EntityType from "@/core/types/entity/users/EntityType";
 
 export default interface SelectFormControlProps {
   labelContent: string;

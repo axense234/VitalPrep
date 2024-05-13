@@ -22,7 +22,7 @@ import {
 } from "@/redux/slices/generalSlice";
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 // Types
-import UserType from "@/core/types/entity/UserType";
+import UserType from "@/core/types/entity/users/UserType";
 
 const NotificationSettings = () => {
   const dispatch = useAppDispatch();

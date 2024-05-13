@@ -1,42 +1,25 @@
-// Redux Toolkit
-import IngredientTemplate from "@/core/types/entity/mutation/IngredientTemplate";
-import { State } from "../api/store";
 // Data
 import { defaultTemplateIngredient } from "@/data";
 // Types
 import EntityQueryValues from "@/core/types/entity/EntityQueryValues";
+import LoadingStateType from "@/core/types/LoadingStateType";
+import ObjectKeyValueType from "@/core/types/ObjectKeyValueType";
+import IngredientsSliceStateType from "@/core/types/entity/ingredient/IngredientsSliceStateType";
+import IngredientCreateBodyType from "@/core/types/entity/ingredient/IngredientCreateBodyType";
+import IngredientType from "@/core/types/entity/ingredient/IngredientType";
+// Redux Toolkit
+import { State } from "../api/store";
 import {
-  EntityState,
   PayloadAction,
   createAsyncThunk,
   createEntityAdapter,
-  createSelector,
   createSlice,
 } from "@reduxjs/toolkit";
-// Prisma
-import { Ingredient } from "@prisma/client";
 // Axios
 import { AxiosError } from "axios";
 import axiosInstance from "@/utils/axios";
 
-type ObjectKeyValueType = {
-  key: string;
-  value: any;
-};
-
-type LoadingStateType = "IDLE" | "PENDING" | "SUCCEDED" | "FAILED";
-
-type InitialStateType = {
-  // General
-  templateIngredient: IngredientTemplate;
-  loadingCreateIngredient: LoadingStateType;
-  ingredientFormModalErrorMessage: string;
-
-  loadingGetUserIngredients: LoadingStateType;
-  loadingGetUserIngredient: LoadingStateType;
-};
-
-export const ingredientsAdapter = createEntityAdapter<Ingredient>();
+export const ingredientsAdapter = createEntityAdapter<IngredientType>();
 
 const initialState = ingredientsAdapter.getInitialState({
   templateIngredient: defaultTemplateIngredient,
@@ -44,32 +27,26 @@ const initialState = ingredientsAdapter.getInitialState({
   ingredientFormModalErrorMessage: "Default Message",
   loadingGetUserIngredients: "IDLE",
   loadingGetUserIngredient: "IDLE",
-}) as EntityState<Ingredient, string> & InitialStateType;
-
-type CreateIngredientBody = {
-  templateIngredient: IngredientTemplate;
-  userId: string;
-};
+}) as IngredientsSliceStateType;
 
 export const createIngredient = createAsyncThunk<
-  Ingredient | AxiosError,
-  CreateIngredientBody
+  IngredientType | AxiosError,
+  IngredientCreateBodyType
 >("ingredients/createIngredient", async ({ templateIngredient, userId }) => {
   try {
-    console.log(templateIngredient);
     const { data } = await axiosInstance.post(
       "/ingredients/create",
       templateIngredient,
       { params: { userId: userId } }
     );
-    return data.ingredient as Ingredient;
+    return data.ingredient as IngredientType;
   } catch (error) {
     return error as AxiosError;
   }
 });
 
 export const getAllUserIngredients = createAsyncThunk<
-  Ingredient[] | AxiosError,
+  IngredientType[] | AxiosError,
   { userId: string; entityQueryValues: EntityQueryValues }
 >(
   "ingredients/getAllUserIngredients",
@@ -88,7 +65,7 @@ export const getAllUserIngredients = createAsyncThunk<
           includeMacros: true,
         },
       });
-      return data.ingredients as Ingredient[];
+      return data.ingredients as IngredientType[];
     } catch (error) {
       console.log(error);
       return error as AxiosError;
@@ -97,7 +74,7 @@ export const getAllUserIngredients = createAsyncThunk<
 );
 
 export const getUserIngredient = createAsyncThunk<
-  Ingredient | AxiosError,
+  IngredientType | AxiosError,
   { userId: string; ingredientId: string }
 >("ingredients/getUserIngredient", async ({ userId, ingredientId }) => {
   try {
@@ -114,7 +91,7 @@ export const getUserIngredient = createAsyncThunk<
         },
       }
     );
-    return data.ingredient as Ingredient;
+    return data.ingredient as IngredientType;
   } catch (error) {
     console.log(error);
     return error as AxiosError;
@@ -159,11 +136,11 @@ const ingredientsSlice = createSlice({
         state.loadingGetUserIngredient = "PENDING";
       })
       .addCase(getUserIngredient.fulfilled, (state, action) => {
-        const ingredient = action.payload as IngredientTemplate;
+        const ingredient = action.payload as IngredientType;
         const axiosError = action.payload as AxiosError;
 
         if (axiosError !== undefined && !axiosError.response) {
-          ingredientsAdapter.upsertOne(state, ingredient as Ingredient);
+          ingredientsAdapter.upsertOne(state, ingredient);
           state.loadingGetUserIngredient = "SUCCEDED";
         } else {
           state.loadingGetUserIngredient = "FAILED";
@@ -173,7 +150,7 @@ const ingredientsSlice = createSlice({
         state.loadingGetUserIngredients = "PENDING";
       })
       .addCase(getAllUserIngredients.fulfilled, (state, action) => {
-        const ingredients = action.payload as Ingredient[];
+        const ingredients = action.payload as IngredientType[];
 
         if (ingredients.length >= 1) {
           state.loadingGetUserIngredients = "SUCCEDED";
@@ -187,7 +164,7 @@ const ingredientsSlice = createSlice({
         state.loadingCreateIngredient = "PENDING";
       })
       .addCase(createIngredient.fulfilled, (state, action) => {
-        const ingredient = action.payload as Ingredient;
+        const ingredient = action.payload as IngredientType;
         const axiosError = action.payload as AxiosError;
 
         if (axiosError !== undefined && !axiosError.response) {

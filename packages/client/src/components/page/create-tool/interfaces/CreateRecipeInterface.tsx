@@ -8,11 +8,8 @@ import PopupModal from "@/components/shared/modals/PopupModal";
 import SelectFormControl from "@/components/shared/form/SelectFormControl";
 import EntityPreview from "@/components/shared/entity/EntityPreview";
 import CreateRecipeTutorial from "../CreateRecipeTutorial";
-import IngredientTemplate from "@/core/types/entity/mutation/IngredientTemplate";
 // Data
-import { defaultEntityQueryValues, defaultUtensilImageUrl } from "@/data";
-// React
-import { useEffect, useRef } from "react";
+import { defaultUtensilImageUrl } from "@/data";
 // Redux
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import {
@@ -21,15 +18,9 @@ import {
   selectLoadingGetUserUtensils,
 } from "@/redux/slices/utensilsSlice";
 import {
-  changeShowFormModal,
-  changeShowGeneralModal,
   createCloudinaryImage,
   selectLoadingCloudinaryImage,
-  selectLoadingGetOAuthProfile,
-  selectLoadingGetProfile,
   selectProfile,
-  selectTemplateImageUrl,
-  setTemplateModalMessage,
 } from "@/redux/slices/generalSlice";
 import {
   createRecipe,
@@ -47,12 +38,15 @@ import {
   selectAllIngredientsIds,
   selectLoadingGetUserIngredients,
 } from "@/redux/slices/ingredientsSlice";
-// Helpers
-import calculateEntityMacrosBasedOnComponents from "@/helpers/calculateEntityMacrosBasedOnComponents";
+// Helpers and Hooks
+import useShowCreatedEntity from "@/hooks/useShowCreatedEntity";
+import useUpdateEntityTemplateImageUrl from "@/hooks/useUpdateEntityTemplateImageUrl";
+import useUpdateEntityMacrosBasedOnComponentEntities from "@/hooks/useUpdateEntityMacrosBasedOnComponentEntities";
+import useGetEntityComponents from "@/hooks/useGetEntityComponents";
+import handleUpdateMultipleArrayEntities from "@/helpers/handleUpdateMultipleArrayEntities";
 
 const CreateRecipeInterface = () => {
   const dispatch = useAppDispatch();
-  const hasEffectRun = useRef(false);
   const profile = useAppSelector(selectProfile);
 
   const showVideoTutorialContent = useAppSelector(
@@ -66,123 +60,31 @@ const CreateRecipeInterface = () => {
     selectRecipeFormModalErrorMessage
   );
   const templateRecipe = useAppSelector(selectTemplateRecipe);
-  const templateImageUrl = useAppSelector(selectTemplateImageUrl);
 
   const ingredientsIds = useAppSelector(selectAllIngredientsIds);
   const utensilsIds = useAppSelector(selectAllUtensilsIds);
 
-  const loadingGetProfile = useAppSelector(selectLoadingGetProfile);
-  const loadingGetOAuthProfile = useAppSelector(selectLoadingGetOAuthProfile);
   const loadingCreateRecipe = useAppSelector(selectLoadingCreateRecipe);
   const loadingCloudinaryImage = useAppSelector(selectLoadingCloudinaryImage);
+  const loadingGetUserUtensils = useAppSelector(selectLoadingGetUserUtensils);
   const loadingGetUserIngredients = useAppSelector(
     selectLoadingGetUserIngredients
   );
-  const loadingGetUserUtensils = useAppSelector(selectLoadingGetUserUtensils);
-  const loadingProfile =
-    loadingGetProfile === "SUCCEDED"
-      ? loadingGetProfile
-      : loadingGetOAuthProfile;
 
-  const ingredientsBasedOnIngredientIds = useAppSelector(
-    selectAllIngredients
-  ).filter((ingredient) => {
-    return templateRecipe.ingredients.find(
-      (trIngredientId) => trIngredientId === ingredient.id
-    );
-  }) as IngredientTemplate[];
-
-  useEffect(() => {
-    dispatch(
-      updateTemplateRecipe({
-        key: "macros",
-        value: calculateEntityMacrosBasedOnComponents(
-          ingredientsBasedOnIngredientIds.map(
-            (ingredient: IngredientTemplate) => ingredient?.macros
-          )
-        ),
-      })
-    );
-  }, [templateRecipe.ingredients]);
-
-  const handleUpdateArrayEntities = (
-    entityIds: string[] = [],
-    entityId: string,
-    entityType: "ingredients" | "utensils"
-  ) => {
-    if (entityIds?.find((id) => id === entityId)) {
-      dispatch(
-        updateTemplateRecipe({
-          key: entityType,
-          value: entityIds.filter((id) => id !== entityId),
-        })
-      );
-    } else {
-      dispatch(
-        updateTemplateRecipe({
-          key: entityType,
-          value: [...entityIds, entityId],
-        })
-      );
-    }
-  };
-
-  useEffect(() => {
-    if (
-      loadingGetUserIngredients === "IDLE" &&
-      loadingProfile &&
-      !hasEffectRun.current
-    ) {
-      dispatch(
-        getAllUserIngredients({
-          userId: profile.id,
-          entityQueryValues: defaultEntityQueryValues,
-        })
-      );
-    }
-    if (
-      loadingGetUserUtensils === "IDLE" &&
-      loadingProfile &&
-      !hasEffectRun.current
-    ) {
-      dispatch(
-        getAllUserUtensils({
-          userId: profile.id,
-          entityQueryValues: defaultEntityQueryValues,
-        })
-      );
-    }
-    hasEffectRun.current = true;
-  }, [loadingGetUserIngredients, loadingGetUserUtensils, loadingProfile]);
-
-  useEffect(() => {
-    if (loadingCreateRecipe === "SUCCEDED") {
-      dispatch(changeShowGeneralModal(true));
-      dispatch(
-        setTemplateModalMessage(
-          `Successfully created recipe: ${templateRecipe.name}.`
-        )
-      );
-    } else if (loadingCreateRecipe === "FAILED") {
-      dispatch(changeShowGeneralModal(false));
-      dispatch(changeShowFormModal(true));
-      dispatch(setTemplateModalMessage(recipeFormModalErrorMessage));
-    }
-    const timeout = setTimeout(() => {
-      dispatch(updateLoadingCreateRecipe("IDLE"));
-    }, 10);
-    return () => {
-      clearTimeout(timeout);
-    };
-  }, [loadingCreateRecipe]);
-
-  useEffect(() => {
-    if (loadingCloudinaryImage === "SUCCEDED") {
-      dispatch(
-        updateTemplateRecipe({ key: "imageUrl", value: templateImageUrl })
-      );
-    }
-  }, [loadingCloudinaryImage]);
+  useGetEntityComponents(loadingGetUserIngredients, getAllUserIngredients);
+  useGetEntityComponents(loadingGetUserUtensils, getAllUserUtensils);
+  useUpdateEntityMacrosBasedOnComponentEntities(
+    selectAllIngredients,
+    templateRecipe.ingredients as string[],
+    updateTemplateRecipe
+  );
+  useShowCreatedEntity(
+    loadingCreateRecipe,
+    `Successfully created recipe: ${templateRecipe.name}.`,
+    recipeFormModalErrorMessage,
+    updateLoadingCreateRecipe
+  );
+  useUpdateEntityTemplateImageUrl(updateTemplateRecipe);
 
   return (
     <section className={createToolStyles.createInterface}>
@@ -255,10 +157,12 @@ const CreateRecipeInterface = () => {
           }
           entityTypeUsed="ingredient"
           onEntityPropertyValueChange={(id) =>
-            handleUpdateArrayEntities(
+            handleUpdateMultipleArrayEntities(
               templateRecipe.ingredients as string[],
               id,
-              "ingredients"
+              "ingredients",
+              updateTemplateRecipe,
+              dispatch
             )
           }
           areOptionsLoading={loadingGetUserIngredients === "PENDING"}
@@ -271,10 +175,12 @@ const CreateRecipeInterface = () => {
           }
           entityTypeUsed="utensil"
           onEntityPropertyValueChange={(id) =>
-            handleUpdateArrayEntities(
+            handleUpdateMultipleArrayEntities(
               templateRecipe.utensils as string[],
               id,
-              "utensils"
+              "utensils",
+              updateTemplateRecipe,
+              dispatch
             )
           }
           areOptionsLoading={loadingGetUserUtensils === "PENDING"}

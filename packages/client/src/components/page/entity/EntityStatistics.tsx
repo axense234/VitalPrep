@@ -4,25 +4,12 @@ import EntityStatisticsType from "@/core/types/entity/EntityStatisticsType";
 import entityStatisticsStyles from "../../../scss/components/shared/EntityStatistics.module.scss";
 // React
 import { FC } from "react";
+// Helpers
+import chooseEntityStatPrefix from "@/helpers/chooseEntityStatPrefix";
 
 const EntityStatistics: FC<{ statistics: EntityStatisticsType }> = ({
   statistics,
 }) => {
-  const chooseEntityStatPrefix = (
-    essence: "usable" | "component" | "count"
-  ) => {
-    switch (essence) {
-      case "usable":
-        return "Used in ";
-      case "component":
-        return "Uses ";
-      case "count":
-        return "Number of ";
-      default:
-        return "Used in ";
-    }
-  };
-
   return (
     <div className={entityStatisticsStyles.entityStatisticsContainer}>
       <h4>Statistics</h4>

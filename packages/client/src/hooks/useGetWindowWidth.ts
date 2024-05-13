@@ -18,9 +18,7 @@ const useGetWindowWidth = () => {
     }, []);
 
     return windowWidth;
-  } catch (error) {
-    console.log(error);
-  }
+  } catch (error) {}
 };
 
 export default useGetWindowWidth;

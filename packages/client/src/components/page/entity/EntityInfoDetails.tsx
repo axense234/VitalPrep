@@ -3,15 +3,15 @@ import { FC } from "react";
 // SCSS
 import entityInfoStyles from "../../../scss/components/page/EntityInfo.module.scss";
 // Types
-import EntityType from "@/core/types/entity/EntityType";
-import RecipeTemplate from "@/core/types/entity/mutation/RecipeTemplate";
-import IngredientTemplate from "@/core/types/entity/mutation/IngredientTemplate";
-import UtensilTemplate from "@/core/types/entity/mutation/UtensilTemplate";
+import EntityType from "@/core/types/entity/users/EntityType";
+import RecipeTemplate from "@/core/types/entity/recipe/RecipeTemplate";
+import IngredientTemplate from "@/core/types/entity/ingredient/IngredientTemplate";
+import UtensilTemplate from "@/core/types/entity/utensil/UtensilTemplate";
 import EntityPreview from "@/components/shared/entity/EntityPreview";
-import DayTemplateTemplate from "@/core/types/entity/mutation/DayTemplateTemplate";
-import InstanceTemplateTemplate from "@/core/types/entity/mutation/InstanceTemplateTemplate";
-import MealPrepPlanTemplate from "@/core/types/entity/mutation/MealPrepPlanTemplate";
-import MealPrepLogTemplate from "@/core/types/entity/mutation/MealPrepLogTemplate";
+import DayTemplateTemplate from "@/core/types/entity/dayTemplate/DayTemplateTemplate";
+import InstanceTemplateTemplate from "@/core/types/entity/instanceTemplate/InstanceTemplateTemplate";
+import MealPrepPlanTemplate from "@/core/types/entity/mealPrepPlan/MealPrepPlanTemplate";
+import MealPrepLogTemplate from "@/core/types/entity/mealPrepLog/MealPrepLogTemplate";
 // Components
 import EntityStatistics from "./EntityStatistics";
 // Redux

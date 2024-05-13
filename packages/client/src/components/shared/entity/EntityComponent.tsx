@@ -14,32 +14,17 @@ import EntityCard from "./EntityCard";
 // Next
 import Link from "next/link";
 // Types
-import IngredientTemplate from "@/core/types/entity/mutation/IngredientTemplate";
-import UtensilTemplate from "@/core/types/entity/mutation/UtensilTemplate";
-import RecipeTemplate from "@/core/types/entity/mutation/RecipeTemplate";
-import DayTemplateTemplate from "@/core/types/entity/mutation/DayTemplateTemplate";
-import InstanceTemplateTemplate from "@/core/types/entity/mutation/InstanceTemplateTemplate";
-import MealPrepPlanTemplate from "@/core/types/entity/mutation/MealPrepPlanTemplate";
-import EntityType from "@/core/types/entity/EntityType";
-import MealPrepLogTemplate from "@/core/types/entity/mutation/MealPrepLogTemplate";
+import IngredientTemplate from "@/core/types/entity/ingredient/IngredientTemplate";
+import UtensilTemplate from "@/core/types/entity/utensil/UtensilTemplate";
+import RecipeTemplate from "@/core/types/entity/recipe/RecipeTemplate";
+import DayTemplateTemplate from "@/core/types/entity/dayTemplate/DayTemplateTemplate";
+import InstanceTemplateTemplate from "@/core/types/entity/instanceTemplate/InstanceTemplateTemplate";
+import MealPrepPlanTemplate from "@/core/types/entity/mealPrepPlan/MealPrepPlanTemplate";
+import EntityComponentSchemeProps from "@/core/interfaces/entity/EntityComponentSchemeProps";
+import MealPrepLogTemplate from "@/core/types/entity/mealPrepLog/MealPrepLogTemplate";
 // Redux
 import { useAppSelector } from "@/hooks/redux";
 import { selectSelectedViewOption } from "@/redux/slices/generalSlice";
-
-type EntityComponentSchemeProps = {
-  isALink: boolean;
-  clicked: boolean;
-  entityId: string;
-  selectedViewOption?: "grid" | "list";
-  entityType: EntityType;
-  entity?:
-    | IngredientTemplate
-    | UtensilTemplate
-    | RecipeTemplate
-    | DayTemplateTemplate
-    | InstanceTemplateTemplate
-    | MealPrepPlanTemplate;
-};
 
 const EntityComponent: FC<EntityComponentSchemeProps> = ({
   clicked,
@@ -53,14 +38,14 @@ const EntityComponent: FC<EntityComponentSchemeProps> = ({
   const usedSelectedViewOption =
     selectedViewOption || selectedViewOptionFromState;
 
-  const entityComponentShown = useSelectEntityComponentShown(
+  const entityComponentShown = useSelectEntityComponentShown({
     entityType,
     clicked,
     entityId,
     isALink,
-    usedSelectedViewOption,
-    entity
-  );
+    entity,
+    selectedViewOption: usedSelectedViewOption,
+  });
 
   if (entityComponentShown) {
     return entityComponentShown;
@@ -68,20 +53,14 @@ const EntityComponent: FC<EntityComponentSchemeProps> = ({
   return null;
 };
 
-const useSelectEntityComponentShown = (
-  entityType: EntityType,
-  clicked: boolean,
-  entityId: string,
-  isALink: boolean,
-  selectedViewOption: "grid" | "list",
-  entity?:
-    | IngredientTemplate
-    | UtensilTemplate
-    | RecipeTemplate
-    | DayTemplateTemplate
-    | InstanceTemplateTemplate
-    | MealPrepPlanTemplate
-) => {
+const useSelectEntityComponentShown: FC<EntityComponentSchemeProps> = ({
+  clicked,
+  entityId,
+  entityType,
+  isALink,
+  entity,
+  selectedViewOption,
+}) => {
   let entityComponentShown = null;
   let entityComponentDestination = "";
 

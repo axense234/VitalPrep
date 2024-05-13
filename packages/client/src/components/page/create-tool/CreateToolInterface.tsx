@@ -14,7 +14,7 @@ import CreateInstanceTemplateInterface from "./interfaces/CreateInstanceTemplate
 import CreateMealPrepPlanInterface from "./interfaces/CreateMealPrepPlanInterface";
 import CreateMealPrepLogInterface from "./interfaces/CreateMealPrepLogInterface";
 // Types
-import EntityType from "@/core/types/entity/EntityType";
+import EntityType from "@/core/types/entity/users/EntityType";
 
 const CreateToolInterface: FC<{ forcedSelectedEntityOption?: EntityType }> = ({
   forcedSelectedEntityOption,
@@ -22,9 +22,17 @@ const CreateToolInterface: FC<{ forcedSelectedEntityOption?: EntityType }> = ({
   const selectedCreateToolOption = useAppSelector(selectSelectedEntityOption);
   const usedCreateToolOption =
     forcedSelectedEntityOption || selectedCreateToolOption;
+  const shownInterface =
+    useChooseCreateToolShownInterface(usedCreateToolOption);
 
+  return (
+    <div className={createToolStyles.createToolInterface}>{shownInterface}</div>
+  );
+};
+
+const useChooseCreateToolShownInterface = (usedOption: EntityType) => {
   let shownInterface: ReactElement = <CreateIngredientInterface />;
-  switch (usedCreateToolOption) {
+  switch (usedOption) {
     case "ingredient":
       shownInterface = <CreateIngredientInterface />;
       break;
@@ -49,10 +57,7 @@ const CreateToolInterface: FC<{ forcedSelectedEntityOption?: EntityType }> = ({
     default:
       throw new Error("What?");
   }
-
-  return (
-    <div className={createToolStyles.createToolInterface}>{shownInterface}</div>
-  );
+  return shownInterface;
 };
 
 export default CreateToolInterface;

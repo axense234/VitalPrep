@@ -3,12 +3,12 @@ import { FC } from "react";
 // SCSS
 import entityInfoStyles from "../../../scss/components/page/EntityInfo.module.scss";
 // Types
-import EntityType from "@/core/types/entity/EntityType";
-import IngredientTemplate from "@/core/types/entity/mutation/IngredientTemplate";
-import RecipeTemplate from "@/core/types/entity/mutation/RecipeTemplate";
-import DayTemplateTemplate from "@/core/types/entity/mutation/DayTemplateTemplate";
-import InstanceTemplateTemplate from "@/core/types/entity/mutation/InstanceTemplateTemplate";
-import UserType from "@/core/types/entity/UserType";
+import EntityType from "@/core/types/entity/users/EntityType";
+import IngredientTemplate from "@/core/types/entity/ingredient/IngredientTemplate";
+import RecipeTemplate from "@/core/types/entity/recipe/RecipeTemplate";
+import DayTemplateTemplate from "@/core/types/entity/dayTemplate/DayTemplateTemplate";
+import InstanceTemplateTemplate from "@/core/types/entity/instanceTemplate/InstanceTemplateTemplate";
+import UserType from "@/core/types/entity/users/UserType";
 // Helpers
 import selectEntityById from "@/helpers/selectEntityById";
 // Redux
@@ -26,7 +26,6 @@ const EntityInfoAppearances: FC<{
     selectEntityById(state, entityId, entityType as EntityType)
   );
 
-  console.log(entity);
   console.log(entity, entityType);
 
   if (entity || profileEntity) {
@@ -176,8 +175,6 @@ const EntityInfoAppearances: FC<{
         const profileInstanceTemplates = profileEntity?.instanceTemplates;
         const profileMealPrepPlans = profileEntity?.mealPrepPlans;
         const profileMealPrepLogs = profileEntity?.mealPrepLogs;
-
-        console.log(profileEntity);
 
         entityInfoAppearancesShown = (
           <div className={entityInfoStyles.entityInfoDetailsHero}>

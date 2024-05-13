@@ -8,30 +8,24 @@ import PopupModal from "@/components/shared/modals/PopupModal";
 import SelectFormControl from "@/components/shared/form/SelectFormControl";
 import WeekdayFormControl from "@/components/shared/form/WeekdayFormControl";
 import EntityPreview from "@/components/shared/entity/EntityPreview";
-import InstanceTemplateTemplate from "@/core/types/entity/mutation/InstanceTemplateTemplate";
 // React
-import React, { ChangeEvent, useEffect, useRef } from "react";
+import React, { ChangeEvent } from "react";
 // Data
-import { defaultEntityQueryValues, defaultMealPrepPlanImageUrl } from "@/data";
+import { defaultMealPrepPlanImageUrl } from "@/data";
 // Redux
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import {
-  changeShowFormModal,
-  changeShowGeneralModal,
   createCloudinaryImage,
   selectLoadingCloudinaryImage,
   selectProfile,
-  selectTemplateImageUrl,
-  setTemplateModalMessage,
 } from "@/redux/slices/generalSlice";
 import {
   getAllUserInstanceTemplates,
-  selectAllInstanceTemplates,
   selectAllInstanceTemplatesIds,
   selectLoadingGetUserInstanceTemplates,
 } from "@/redux/slices/instanceTemplatesSlice";
 import {
-  createMealPrepPlan,
+  selectAllMealPrepPlans,
   selectLoadingCreateMealPrepPlan,
   selectMealPrepPlanFormModalErrorMessage,
   selectMealPrepPlanTemplate,
@@ -41,17 +35,22 @@ import {
   updateNumberOfInstanceTemplates,
   updateTemplateMealPrepPlan,
 } from "@/redux/slices/mealPrepPlansSlice";
-// Helpers
-import calculateEntityMacrosBasedOnComponents from "@/helpers/calculateEntityMacrosBasedOnComponents";
+// Hooks
+import useShowCreatedEntity from "@/hooks/useShowCreatedEntity";
+import useUpdateEntityTemplateImageUrl from "@/hooks/useUpdateEntityTemplateImageUrl";
+import useUpdateEntityMacrosBasedOnComponentEntities from "@/hooks/useUpdateEntityMacrosBasedOnComponentEntities";
+import useSliceEntityComponents from "@/hooks/useSliceEntityComponents";
+import useGetEntityComponents from "@/hooks/useGetEntityComponents";
+import handleUpdateArrayEntities from "@/helpers/handleUpdateArrayEntities";
+import handleOnCreateMealPrepPlanSubmit from "@/helpers/handleOnCreateMealPrepPlanSubmit";
+import createArrayFromNumber from "@/helpers/createArrayFromNumber";
 
 const CreateMealPrepPlanInterface = () => {
   const dispatch = useAppDispatch();
-  const hasEffectRun = useRef(false);
   const profile = useAppSelector(selectProfile);
   const mealPrepPlanFormModalErrorMessage = useAppSelector(
     selectMealPrepPlanFormModalErrorMessage
   );
-  const templateImageUrl = useAppSelector(selectTemplateImageUrl);
 
   const numberOfInstanceTemplates = useAppSelector(
     selectNumberOfInstanceTemplates
@@ -68,155 +67,32 @@ const CreateMealPrepPlanInterface = () => {
     selectLoadingGetUserInstanceTemplates
   );
 
-  const numberOfInstanceTemplatesIterable = Array.from(
-    { length: numberOfInstanceTemplates || 0 },
-    (_, index) => ({
-      id: index + 1,
-    })
+  const numberOfInstanceTemplatesIterable = createArrayFromNumber(
+    numberOfInstanceTemplates
   );
 
-  const onCreateMealPrepPlanSubmit = (e: React.SyntheticEvent) => {
-    e.preventDefault();
-    if (
-      numberOfInstanceTemplates !==
-      templateMealPrepPlan.instanceTemplatesTimings.length
-    ) {
-      dispatch(changeShowGeneralModal(false));
-      dispatch(changeShowFormModal(true));
-      dispatch(
-        setTemplateModalMessage("Please verify the Meal Prep Plan Timings!")
-      );
-    } else if (
-      numberOfInstanceTemplates ===
-      templateMealPrepPlan.instanceTemplatesTimings.length
-    ) {
-      dispatch(
-        createMealPrepPlan({
-          templateMealPrepPlan: templateMealPrepPlan,
-          userId: profile.id,
-        })
-      );
-    }
-  };
-
-  const handleUpdateArrayEntities = (
-    entityIds: string[] = [],
-    entityId: string,
-    entityIndex: number,
-    entityType:
-      | "ingredients"
-      | "utensils"
-      | "recipes"
-      | "dayTemplates"
-      | "instanceTemplates"
-  ) => {
-    if (
-      entityIds?.find((id) => id === entityId) &&
-      templateMealPrepPlan.instanceTemplates[entityIndex] === entityId
-    ) {
-      const newEntityIds = [...entityIds];
-      newEntityIds[entityIndex] = "";
-      dispatch(
-        updateTemplateMealPrepPlan({
-          key: entityType,
-          value: newEntityIds,
-        })
-      );
-    } else {
-      const newEntityIds = [...entityIds];
-      newEntityIds[entityIndex] = entityId;
-      dispatch(
-        updateTemplateMealPrepPlan({
-          key: entityType,
-          value: newEntityIds,
-        })
-      );
-    }
-  };
-
-  const instanceTemplatesBasedOnInstanceTemplateIds = useAppSelector(
-    selectAllInstanceTemplates
-  ).filter((instanceTemplate) => {
-    return templateMealPrepPlan.instanceTemplates.find(
-      (tmppInstanceTemplateId) => tmppInstanceTemplateId === instanceTemplate.id
-    );
-  }) as InstanceTemplateTemplate[];
-
-  useEffect(() => {
-    dispatch(
-      updateTemplateMealPrepPlan({
-        key: "macros",
-        value: calculateEntityMacrosBasedOnComponents(
-          instanceTemplatesBasedOnInstanceTemplateIds.map(
-            (instanceTemplate: InstanceTemplateTemplate) =>
-              instanceTemplate?.macros
-          )
-        ),
-      })
-    );
-  }, [templateMealPrepPlan.instanceTemplates]);
-
-  useEffect(() => {
-    if (
-      loadingGetUserInstanceTemplates === "IDLE" &&
-      profile.id &&
-      !hasEffectRun.current
-    ) {
-      dispatch(
-        getAllUserInstanceTemplates({
-          userId: profile.id,
-          entityQueryValues: defaultEntityQueryValues,
-        })
-      );
-    }
-    hasEffectRun.current = true;
-  }, [loadingGetUserInstanceTemplates, profile.id]);
-
-  useEffect(() => {
-    if (loadingCreateMealPrepPlan === "SUCCEDED") {
-      dispatch(changeShowGeneralModal(true));
-      dispatch(
-        setTemplateModalMessage(
-          `Successfully created Meal Prep Plan: ${templateMealPrepPlan.name}.`
-        )
-      );
-    } else if (loadingCreateMealPrepPlan === "FAILED") {
-      dispatch(changeShowGeneralModal(false));
-      dispatch(changeShowFormModal(true));
-      dispatch(setTemplateModalMessage(mealPrepPlanFormModalErrorMessage));
-    }
-    const timeout = setTimeout(() => {
-      dispatch(updateLoadingCreateMealPrepPlan("IDLE"));
-    }, 10);
-    return () => {
-      clearTimeout(timeout);
-    };
-  }, [loadingCreateMealPrepPlan]);
-
-  useEffect(() => {
-    if (loadingCloudinaryImage === "SUCCEDED") {
-      dispatch(
-        updateTemplateMealPrepPlan({
-          key: "imageUrl",
-          value: templateImageUrl,
-        })
-      );
-    }
-  }, [loadingCloudinaryImage]);
-
-  useEffect(() => {
-    if (numberOfInstanceTemplates > 0) {
-      dispatch(
-        updateTemplateMealPrepPlan({
-          key: "instanceTemplates",
-          value: templateMealPrepPlan.instanceTemplates.slice(
-            0,
-            numberOfInstanceTemplates
-          ),
-        })
-      );
-    }
-  }, [numberOfInstanceTemplates]);
+  useUpdateEntityMacrosBasedOnComponentEntities(
+    selectAllMealPrepPlans,
+    templateMealPrepPlan.instanceTemplates as string[],
+    updateTemplateMealPrepPlan
+  );
+  useUpdateEntityTemplateImageUrl(updateTemplateMealPrepPlan);
+  useGetEntityComponents(
+    loadingGetUserInstanceTemplates,
+    getAllUserInstanceTemplates
+  );
+  useShowCreatedEntity(
+    loadingCreateMealPrepPlan,
+    `Successfully created Meal Prep Plan: ${templateMealPrepPlan.name}.`,
+    mealPrepPlanFormModalErrorMessage,
+    updateLoadingCreateMealPrepPlan
+  );
+  useSliceEntityComponents(
+    numberOfInstanceTemplates,
+    "instanceTemplates",
+    updateTemplateMealPrepPlan,
+    templateMealPrepPlan?.instanceTemplates as string[]
+  );
 
   console.log(templateMealPrepPlan.instanceTemplatesTimings);
 
@@ -276,7 +152,15 @@ const CreateMealPrepPlanInterface = () => {
                 loadingCreateMealPrepPlan === "PENDING" ||
                 loadingCloudinaryImage === "PENDING"
               }
-              onClickFunction={(e) => onCreateMealPrepPlanSubmit(e)}
+              onClickFunction={(e) =>
+                handleOnCreateMealPrepPlanSubmit(
+                  e,
+                  templateMealPrepPlan,
+                  numberOfInstanceTemplates,
+                  profile.id,
+                  dispatch
+                )
+              }
             />
           </form>
         </div>
@@ -315,21 +199,24 @@ const CreateMealPrepPlanInterface = () => {
                     entityTypeUsed="instanceTemplate"
                     onEntityPropertyValueChange={(id) =>
                       handleUpdateArrayEntities(
-                        templateMealPrepPlan.instanceTemplates as string[],
+                        instanceTemplatesIds,
+                        templateMealPrepPlan?.instanceTemplates as string[],
                         id,
                         instanceTemplateOption.id - 1,
-                        "instanceTemplates"
+                        "instanceTemplates",
+                        updateTemplateMealPrepPlan,
+                        dispatch
                       )
                     }
                     areOptionsLoading={
                       loadingGetUserInstanceTemplates === "PENDING"
                     }
                     showEntityExtraCondition={(id) => {
-                      return (
-                        templateMealPrepPlan.instanceTemplates[
-                          instanceTemplateOption.id - 1
-                        ] === id
-                      );
+                      return templateMealPrepPlan?.instanceTemplates
+                        ? templateMealPrepPlan.instanceTemplates[
+                            instanceTemplateOption.id - 1
+                          ] === id
+                        : false;
                     }}
                   />
                   <div

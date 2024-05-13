@@ -6,6 +6,7 @@ import PrimaryButton from "@/components/shared/PrimaryButton";
 import ImageFormControl from "@/components/shared/form/ImageFormControl";
 import CheckboxFormControl from "@/components/shared/form/CheckboxFormControl";
 import PopupModal from "@/components/shared/modals/PopupModal";
+import EntityPreview from "@/components/shared/entity/EntityPreview";
 // Data
 import { defaultUtensilImageUrl } from "@/data";
 // Redux
@@ -19,17 +20,13 @@ import {
   updateTemplateUtensil,
 } from "@/redux/slices/utensilsSlice";
 import {
-  changeShowFormModal,
-  changeShowGeneralModal,
   createCloudinaryImage,
   selectLoadingCloudinaryImage,
   selectProfile,
-  selectTemplateImageUrl,
-  setTemplateModalMessage,
 } from "@/redux/slices/generalSlice";
-// React
-import { useEffect } from "react";
-import EntityPreview from "@/components/shared/entity/EntityPreview";
+// Hooks
+import useShowCreatedEntity from "@/hooks/useShowCreatedEntity";
+import useUpdateEntityTemplateImageUrl from "@/hooks/useUpdateEntityTemplateImageUrl";
 
 const CreateUtensilInterface = () => {
   const dispatch = useAppDispatch();
@@ -42,38 +39,14 @@ const CreateUtensilInterface = () => {
   );
 
   const loadingCloudinaryImage = useAppSelector(selectLoadingCloudinaryImage);
-  const templateImageUrl = useAppSelector(selectTemplateImageUrl);
 
-  useEffect(() => {
-    if (loadingCreateUtensil === "SUCCEDED") {
-      dispatch(changeShowGeneralModal(true));
-      dispatch(
-        setTemplateModalMessage(
-          `Successfully created utensil: ${templateUtensil.name}.`
-        )
-      );
-    } else if (loadingCreateUtensil === "FAILED") {
-      dispatch(changeShowGeneralModal(false));
-      dispatch(changeShowFormModal(true));
-      dispatch(setTemplateModalMessage(utensilFormModalErrorMessage));
-    }
-    const timeout = setTimeout(() => {
-      dispatch(updateLoadingCreateUtensil("IDLE"));
-    }, 10);
-    return () => {
-      clearTimeout(timeout);
-    };
-  }, [loadingCreateUtensil]);
-
-  useEffect(() => {
-    if (loadingCloudinaryImage === "SUCCEDED") {
-      dispatch(
-        updateTemplateUtensil({ key: "imageUrl", value: templateImageUrl })
-      );
-    }
-  }, [loadingCloudinaryImage]);
-
-  console.log(templateUtensil.enabled);
+  useShowCreatedEntity(
+    loadingCreateUtensil,
+    `Successfully created utensil: ${templateUtensil.name}.`,
+    utensilFormModalErrorMessage,
+    updateLoadingCreateUtensil
+  );
+  useUpdateEntityTemplateImageUrl(updateTemplateUtensil);
 
   return (
     <section className={createToolStyles.createInterface}>

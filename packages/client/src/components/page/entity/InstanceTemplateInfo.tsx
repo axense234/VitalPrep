@@ -4,17 +4,15 @@ import entityInfoStyles from "../../../scss/components/page/EntityInfo.module.sc
 import PageTitle from "@/components/shared/PageTitle";
 import EntityInfoDetails from "./EntityInfoDetails";
 import EntityInfoAppearances from "./EntityInfoAppearances";
+import EntityInfoComponents from "./EntityInfoComponents";
 // React
 import { FC, useEffect } from "react";
 // Redux
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
-import {} from "@/redux/slices/recipesSlice";
 import {
   getUserInstanceTemplate,
   selectLoadingGetUserInstanceTemplate,
 } from "@/redux/slices/instanceTemplatesSlice";
-import { pageTitleContent } from "@/data";
-import EntityInfoComponents from "./EntityInfoComponents";
 
 const InstanceTemplateInfo: FC<{ entityId: string; userId: string }> = ({
   entityId,
@@ -34,18 +32,9 @@ const InstanceTemplateInfo: FC<{ entityId: string; userId: string }> = ({
     }
   }, [entityId, userId, loadingGetUserInstanceTemplate]);
 
-  const { backgroundImageSrc, pageSubTitleContent, pageTitleTextContent } =
-    pageTitleContent.find((pageTitle) =>
-      pageTitle.specificPagePath.startsWith("/instanceTemplate")
-    ) || pageTitleContent[0];
-
   return (
     <div className={entityInfoStyles.entityInfoContainer}>
-      <PageTitle
-        titleContent={pageTitleTextContent}
-        subtitleContent={pageSubTitleContent}
-        backgroundImageSrc={backgroundImageSrc}
-      />
+      <PageTitle />
       <div className={entityInfoStyles.entityInfoContent}>
         <EntityInfoDetails entityId={entityId} entityType="instanceTemplate" />
         <EntityInfoComponents

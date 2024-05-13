@@ -12,8 +12,6 @@ import {
   getUserIngredient,
   selectLoadingGetUserIngredient,
 } from "@/redux/slices/ingredientsSlice";
-// Datas
-import { pageTitleContent } from "@/data";
 
 const IngredientInfo: FC<{ entityId: string; userId: string }> = ({
   entityId,
@@ -30,18 +28,9 @@ const IngredientInfo: FC<{ entityId: string; userId: string }> = ({
     }
   }, [entityId, userId, loadingGetUserIngredient]);
 
-  const { backgroundImageSrc, pageSubTitleContent, pageTitleTextContent } =
-    pageTitleContent.find((pageTitle) =>
-      pageTitle.specificPagePath.startsWith("/ingredient")
-    ) || pageTitleContent[0];
-
   return (
     <div className={entityInfoStyles.entityInfoContainer}>
-      <PageTitle
-        titleContent={pageTitleTextContent}
-        subtitleContent={pageSubTitleContent}
-        backgroundImageSrc={backgroundImageSrc}
-      />
+      <PageTitle />
       <div className={entityInfoStyles.entityInfoContent}>
         <EntityInfoDetails entityId={entityId} entityType="ingredient" />
         <EntityInfoAppearances entityId={entityId} entityType="ingredient" />

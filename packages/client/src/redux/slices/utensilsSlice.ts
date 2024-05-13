@@ -1,41 +1,26 @@
 // Redux Toolkit
-import UtensilTemplate from "@/core/types/entity/mutation/UtensilTemplate";
+import UtensilTemplate from "@/core/types/entity/utensil/UtensilTemplate";
 import { State } from "../api/store";
 // Data
 import { defaultTemplateUtensil } from "@/data";
 // Types
 import {
-  EntityState,
   PayloadAction,
   createAsyncThunk,
   createEntityAdapter,
   createSlice,
 } from "@reduxjs/toolkit";
-// Prisma
-import { Utensil } from "@prisma/client";
+import EntityQueryValues from "@/core/types/entity/EntityQueryValues";
+import LoadingStateType from "@/core/types/LoadingStateType";
+import ObjectKeyValueType from "@/core/types/ObjectKeyValueType";
+import UtensilsSliceStateType from "@/core/types/entity/utensil/UtensilsSliceStateType";
+import UtensilCreateBodyType from "@/core/types/entity/utensil/UtensilCreateBodyType";
+import UtensilType from "@/core/types/entity/utensil/UtensilType";
 // Axios
 import { AxiosError } from "axios";
 import axiosInstance from "@/utils/axios";
-import EntityQueryValues from "@/core/types/entity/EntityQueryValues";
 
-type ObjectKeyValueType = {
-  key: string;
-  value: any;
-};
-
-type LoadingStateType = "IDLE" | "PENDING" | "SUCCEDED" | "FAILED";
-
-type InitialStateType = {
-  // General
-  templateUtensil: UtensilTemplate;
-  loadingCreateUtensil: LoadingStateType;
-  utensilFormModalErrorMessage: string;
-
-  loadingGetUserUtensils: LoadingStateType;
-  loadingGetUserUtensil: LoadingStateType;
-};
-
-export const utensilsAdapter = createEntityAdapter<Utensil>();
+export const utensilsAdapter = createEntityAdapter<UtensilType>();
 
 const initialState = utensilsAdapter.getInitialState({
   templateUtensil: defaultTemplateUtensil,
@@ -43,16 +28,11 @@ const initialState = utensilsAdapter.getInitialState({
   utensilFormModalErrorMessage: "Default Message",
   loadingGetUserUtensils: "IDLE",
   loadingGetUserUtensil: "IDLE",
-}) as EntityState<Utensil, string> & InitialStateType;
-
-type CreateUtensilBody = {
-  templateUtensil: UtensilTemplate;
-  userId: string;
-};
+}) as UtensilsSliceStateType;
 
 export const createUtensil = createAsyncThunk<
-  Utensil | AxiosError,
-  CreateUtensilBody
+  UtensilType | AxiosError,
+  UtensilCreateBodyType
 >("utensils/createUtensil", async ({ templateUtensil, userId }) => {
   try {
     console.log(templateUtensil);
@@ -61,14 +41,14 @@ export const createUtensil = createAsyncThunk<
       templateUtensil,
       { params: { userId: userId } }
     );
-    return data.utensil as Utensil;
+    return data.utensil as UtensilType;
   } catch (error) {
     return error as AxiosError;
   }
 });
 
 export const getAllUserUtensils = createAsyncThunk<
-  Utensil[] | AxiosError,
+  UtensilType[] | AxiosError,
   { userId: string; entityQueryValues: EntityQueryValues }
 >("utensils/getAllUserUtensils", async ({ userId, entityQueryValues }) => {
   try {
@@ -84,7 +64,7 @@ export const getAllUserUtensils = createAsyncThunk<
         sortByOrder,
       },
     });
-    return data.utensils as Utensil[];
+    return data.utensils as UtensilType[];
   } catch (error) {
     console.log(error);
     return error as AxiosError;
@@ -92,7 +72,7 @@ export const getAllUserUtensils = createAsyncThunk<
 });
 
 export const getUserUtensil = createAsyncThunk<
-  Utensil | AxiosError,
+  UtensilType | AxiosError,
   { userId: string; utensilId: string }
 >("utensils/getUserUtensil", async ({ userId, utensilId }) => {
   try {
@@ -108,7 +88,7 @@ export const getUserUtensil = createAsyncThunk<
         },
       }
     );
-    return data.utensil as Utensil;
+    return data.utensil as UtensilType;
   } catch (error) {
     console.log(error);
     return error as AxiosError;
@@ -145,7 +125,7 @@ const utensilsSlice = createSlice({
         const axiosError = action.payload as AxiosError;
 
         if (axiosError !== undefined && !axiosError.response) {
-          utensilsAdapter.upsertOne(state, utensil as Utensil);
+          utensilsAdapter.upsertOne(state, utensil as UtensilType);
           state.loadingGetUserUtensil = "SUCCEDED";
         } else {
           state.loadingGetUserUtensil = "FAILED";
@@ -155,7 +135,7 @@ const utensilsSlice = createSlice({
         state.loadingGetUserUtensils = "PENDING";
       })
       .addCase(getAllUserUtensils.fulfilled, (state, action) => {
-        const utensils = action.payload as Utensil[];
+        const utensils = action.payload as UtensilType[];
 
         if (utensils.length >= 1) {
           state.loadingGetUserUtensils = "SUCCEDED";
@@ -169,7 +149,7 @@ const utensilsSlice = createSlice({
         state.loadingCreateUtensil = "PENDING";
       })
       .addCase(createUtensil.fulfilled, (state, action) => {
-        const utensil = action.payload as Utensil;
+        const utensil = action.payload as UtensilType;
         const axiosError = action.payload as AxiosError;
 
         if (axiosError !== undefined && !axiosError.response) {

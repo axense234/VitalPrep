@@ -4,7 +4,7 @@ import entityComponentStyles from "../../../scss/components/shared/EntityCompone
 import { FC } from "react";
 // Types
 import EntityComponentProps from "@/core/interfaces/entity/EntityComponentProps";
-import DayTemplateTemplate from "@/core/types/entity/mutation/DayTemplateTemplate";
+import DayTemplateTemplate from "@/core/types/entity/dayTemplate/DayTemplateTemplate";
 // Data
 import { defaultDayTemplateImageUrl } from "@/data";
 // Helpers

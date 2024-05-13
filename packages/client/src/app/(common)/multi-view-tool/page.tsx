@@ -18,8 +18,6 @@ import {
 import useGetMultiViewToolContentEntities from "@/hooks/useGetMultiViewToolContentEntities";
 // Helpers
 import selectEntityIds from "@/helpers/selectEntityIds";
-// Data
-import { pageTitleContent } from "@/data";
 
 const MultiViewTool = () => {
   useAuthorization();
@@ -30,18 +28,9 @@ const MultiViewTool = () => {
 
   const entityIds = selectEntityIds(entityType);
 
-  const { backgroundImageSrc, pageSubTitleContent, pageTitleTextContent } =
-    pageTitleContent.find(
-      (pageTitle) => pageTitle.specificPagePath === "/multi-view-tool"
-    ) || pageTitleContent[0];
-
   return (
     <div className={multiViewToolStyles.multiViewToolContainer}>
-      <PageTitle
-        titleContent={pageTitleTextContent}
-        subtitleContent={pageSubTitleContent}
-        backgroundImageSrc={backgroundImageSrc}
-      />
+      <PageTitle />
       <div className={multiViewToolStyles.multiViewToolContent}>
         <ViewEntityOptions />
         <MultiViewToolContent

@@ -8,7 +8,7 @@ import selectEntityById from "@/helpers/selectEntityById";
 import { useAppSelector } from "@/hooks/redux";
 import { State } from "@/redux/api/store";
 // Types
-import MealPrepLogTemplate from "@/core/types/entity/mutation/MealPrepLogTemplate";
+import MealPrepLogTemplate from "@/core/types/entity/mealPrepLog/MealPrepLogTemplate";
 // Components
 import EntityCard from "@/components/shared/entity/EntityCard";
 import EntityMacros from "@/components/shared/entity/EntityMacros";
