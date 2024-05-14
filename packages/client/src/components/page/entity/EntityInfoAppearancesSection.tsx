@@ -62,16 +62,16 @@ const useChooseEntityInfoAppearancesSectionTitle = (entityType: EntityType) => {
       sectionTitleUsed = "Recipes:";
       break;
     case "dayTemplate":
-      sectionTitleUsed = "Day Templates:";
+      sectionTitleUsed = "Day Plans:";
       break;
     case "instanceTemplate":
-      sectionTitleUsed = "Instance Templates:";
+      sectionTitleUsed = "Session Templates:";
       break;
     case "mealPrepPlan":
       sectionTitleUsed = "Meal Prep Plans:";
       break;
     case "mealPrepLog":
-      sectionTitleUsed = "Meal Prep Logs:";
+      sectionTitleUsed = "Session Logs:";
       break;
     default:
       throw new Error("Invalid entity type!");

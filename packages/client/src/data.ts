@@ -171,7 +171,7 @@ export const pageTitleContent: PageTitleContentType[] = [
     specificPagePath: "/create-log",
     backgroundImageSrc:
       "https://res.cloudinary.com/birthdayreminder/image/upload/v1714922259/VitalPrep/pre_prepared_meals_pqenm1.png",
-    pageTitleTextContent: "Add Log",
+    pageTitleTextContent: "Add Session Log",
     pageSubTitleContent: "save your session log",
   },
   {
@@ -187,7 +187,7 @@ export const pageTitleContent: PageTitleContentType[] = [
     specificPagePath: "/logs",
     backgroundImageSrc:
       "https://res.cloudinary.com/birthdayreminder/image/upload/v1714923610/VitalPrep/iamge6_mosykq.png",
-    pageTitleTextContent: "Meal Prep Logs",
+    pageTitleTextContent: "Session Logs",
     pageSubTitleContent: "see all your logs",
   },
   {
@@ -721,10 +721,10 @@ export const entitySearchByOptions: EntitySortingOptions = {
   ingredient: [{ label: "Name of Ingredient", value: "name" }],
   utensil: [{ label: "Name of Utensil", value: "name" }],
   recipe: [{ label: "Name of Recipe", value: "name" }],
-  dayTemplate: [{ label: "Name of Day Template", value: "name" }],
-  instanceTemplate: [{ label: "Name of Instance Template", value: "name" }],
+  dayTemplate: [{ label: "Name of Day Plan", value: "name" }],
+  instanceTemplate: [{ label: "Name of Session Template", value: "name" }],
   mealPrepPlan: [{ label: "Name of Meal Prep Plan", value: "name" }],
-  mealPrepLog: [{ label: "Name of Meal Prep Log", value: "name" }],
+  mealPrepLog: [{ label: "Name of Session Log", value: "name" }],
 };
 
 export const entitySortingOptions: EntitySortingOptions = {
@@ -768,25 +768,25 @@ export const entitySortingOptions: EntitySortingOptions = {
   ],
   dayTemplate: [
     {
-      label: "Name of Day Templates",
+      label: "Name of Day Plans",
       value: "name",
     },
     {
-      label: "Commonly used Day Templates",
+      label: "Commonly used Day Plans",
       value: "numberOfInstanceTemplates",
     },
   ],
   instanceTemplate: [
     {
-      label: "Name of Instance Templates",
+      label: "Name of Session Templates",
       value: "name",
     },
     {
-      label: "Commonly used Instance Templates",
+      label: "Commonly used Session Templates",
       value: "numberOfMealPrepPlans",
     },
     {
-      label: "Coverage Of Instance Templates",
+      label: "Coverage Of Session Templates",
       value: "coverage",
     },
   ],
@@ -797,9 +797,9 @@ export const entitySortingOptions: EntitySortingOptions = {
     },
   ],
   mealPrepLog: [
-    { label: "Name of Meal Prep Logs", value: "name" },
+    { label: "Name of Session Logs", value: "name" },
     {
-      label: "Completion of Meal Prep Logs",
+      label: "Completion of Session Logs",
       value: "completed",
     },
   ],
@@ -898,14 +898,14 @@ export const createToolOptions: CreateToolOption[] = [
   },
   {
     id: 4,
-    label: "Day Template",
+    label: "Day Plan",
     optionValue: "dayTemplate",
     associatedColor: "#013310",
     associatedTextColor: "#DDD9D5",
   },
   {
     id: 5,
-    label: "Instance Template",
+    label: "Session Template",
     optionValue: "instanceTemplate",
     associatedColor: "#012433",
     associatedTextColor: "#DDD9D5",
@@ -1132,14 +1132,14 @@ export const pageLinks: PageLink[] = [
     id: 2,
     linkDest: "/logs",
     reactIcon: IoIosPaper({}),
-    linkTitle: "Meal Prep Logs",
+    linkTitle: "Session Logs",
     linkType: "normal",
   },
   {
     id: 3,
     linkDest: "/create-log",
     reactIcon: MdCreate({}),
-    linkTitle: "Add Log",
+    linkTitle: "Add Session Log",
     linkType: "normal",
   },
   {

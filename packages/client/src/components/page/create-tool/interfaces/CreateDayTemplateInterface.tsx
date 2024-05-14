@@ -13,14 +13,13 @@ import {
   defaultDayTemplateImageUrl,
 } from "@/data";
 // React
-import { ChangeEvent, useEffect } from "react";
+import { ChangeEvent } from "react";
 // Redux
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import {
   createCloudinaryImage,
   selectLoadingCloudinaryImage,
   selectProfile,
-  selectTemplateImageUrl,
 } from "@/redux/slices/generalSlice";
 import {
   createDayTemplate,
@@ -74,7 +73,7 @@ const CreateDayTemplateInterface = () => {
   useGetEntityComponents(loadingGetUserRecipes, getAllUserRecipes);
   useShowCreatedEntity(
     loadingCreateDayTemplate,
-    `Successfully created day template: ${templateDayTemplate.name}.`,
+    `Successfully created day plan: ${templateDayTemplate.name}.`,
     dayTemplateFormModalErrorMessage,
     updateLoadingCreateDayTemplate
   );
@@ -93,11 +92,11 @@ const CreateDayTemplateInterface = () => {
       <div className={createToolStyles.createInterfaceWrapper}>
         <div className={createToolStyles.createInterfaceFormContainer}>
           <PopupModal hasBorder={false} modalType="form" />
-          <h4>Create Day Template</h4>
+          <h4>Create Day Plan</h4>
           <form className={createToolStyles.createInterfaceForm}>
             <TextFormControl
               entityProperty={templateDayTemplate.name}
-              labelContent="Day Template Name:"
+              labelContent="Name:"
               onEntityPropertyValueChange={(e) =>
                 dispatch(
                   updateTemplateDayTemplate({
@@ -109,7 +108,7 @@ const CreateDayTemplateInterface = () => {
               type="text"
             />
             <ImageFormControl
-              labelContent="Day Template Image:"
+              labelContent="Image:"
               defaultImageUsedUrl={defaultDayTemplateImageUrl}
               entityPropertyLoadingStatus={loadingCloudinaryImage}
               entityProperty={templateDayTemplate.imageUrl as string}
@@ -145,7 +144,7 @@ const CreateDayTemplateInterface = () => {
               type="number"
             />
             <PrimaryButton
-              content="Create Day Template"
+              content="Create Day Plan"
               type="functional"
               disabled={
                 loadingCreateDayTemplate === "PENDING" ||

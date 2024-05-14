@@ -117,7 +117,7 @@ const EntityInfoComponents: FC<{
                 ?.dayTemplates as DayTemplateTemplate[]
             }
             entityName={entity?.name || "Entity Name"}
-            entitiesLabel="Day Templates"
+            entitiesLabel="Day Plans"
           />
         </div>
       );
@@ -157,7 +157,7 @@ const EntityInfoComponents: FC<{
                 ?.dayTemplates as DayTemplateTemplate[]
             }
             entityName={entity?.name || "Entity Name"}
-            entitiesLabel="Day Templates"
+            entitiesLabel="Day Plans"
           />
           <EntityInfoComponentsSection
             entityType="instanceTemplate"
@@ -166,7 +166,7 @@ const EntityInfoComponents: FC<{
                 ?.instanceTemplates as InstanceTemplateTemplate[]
             }
             entityName={entity?.name || "Entity Name"}
-            entitiesLabel="Instance Templates"
+            entitiesLabel="Session Templates"
           />
         </div>
       );
@@ -206,7 +206,7 @@ const EntityInfoComponents: FC<{
                 ?.dayTemplates as DayTemplateTemplate[]
             }
             entityName={entity?.name || "Entity Name"}
-            entitiesLabel="Day Templates"
+            entitiesLabel="Day Plans"
           />
         </div>
       );

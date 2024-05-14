@@ -59,7 +59,7 @@ const CreateIngredientInterface = () => {
           <form className={createToolStyles.createInterfaceForm}>
             <TextFormControl
               entityProperty={templateIngredient.name}
-              labelContent="Ingredient Name:"
+              labelContent="Name:"
               onEntityPropertyValueChange={(e) =>
                 dispatch(
                   updateTemplateIngredient({
@@ -71,7 +71,7 @@ const CreateIngredientInterface = () => {
               type="text"
             />
             <ImageFormControl
-              labelContent="Ingredient Image:"
+              labelContent="Image:"
               defaultImageUsedUrl={defaultIngredientImageUrl}
               entityPropertyLoadingStatus={loadingCloudinaryImage}
               entityProperty={templateIngredient.imageUrl as string}

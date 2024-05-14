@@ -17,7 +17,7 @@ const ProfileDetails = () => {
           {
             id: 1,
             count: profile?.mealPrepLogs?.length || 0,
-            entityType: "Meal Prep Logs",
+            entityType: "Session Logs",
             essence: "count",
           },
           {
@@ -29,13 +29,13 @@ const ProfileDetails = () => {
           {
             id: 3,
             count: profile?.instanceTemplates?.length || 0,
-            entityType: "Instance Templates",
+            entityType: "Session Templates",
             essence: "count",
           },
           {
             id: 4,
             count: profile?.dayTemplates?.length || 0,
-            entityType: "Day Templates",
+            entityType: "Day Plans",
             essence: "count",
           },
           {

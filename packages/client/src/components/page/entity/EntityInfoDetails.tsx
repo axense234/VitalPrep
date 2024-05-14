@@ -52,13 +52,13 @@ const EntityInfoDetails: FC<{ entityId: string; entityType: EntityType }> = ({
               {
                 id: 2,
                 count: entityAsIngredient?.instanceTemplates?.length || 0,
-                entityType: "Instance Templates",
+                entityType: "Session Templates",
                 essence: "usable",
               },
               {
                 id: 3,
                 count: entityAsIngredient?.dayTemplates?.length || 0,
-                entityType: "Day Templates",
+                entityType: "Day Plans",
                 essence: "usable",
               },
               {
@@ -93,13 +93,13 @@ const EntityInfoDetails: FC<{ entityId: string; entityType: EntityType }> = ({
               {
                 id: 2,
                 count: entityAsUtensil?.instanceTemplates?.length || 0,
-                entityType: "Instance Templates",
+                entityType: "Session Templates",
                 essence: "usable",
               },
               {
                 id: 3,
                 count: entityAsUtensil?.dayTemplates?.length || 0,
-                entityType: "Day Templates",
+                entityType: "Day Plans",
                 essence: "usable",
               },
               {
@@ -134,13 +134,13 @@ const EntityInfoDetails: FC<{ entityId: string; entityType: EntityType }> = ({
               {
                 id: 2,
                 count: entityAsRecipe?.instanceTemplates?.length || 0,
-                entityType: "Instance Templates",
+                entityType: "Session Templates",
                 essence: "usable",
               },
               {
                 id: 3,
                 count: entityAsRecipe?.dayTemplates?.length || 0,
-                entityType: "Day Templates",
+                entityType: "Day Plans",
                 essence: "usable",
               },
               {
@@ -181,7 +181,7 @@ const EntityInfoDetails: FC<{ entityId: string; entityType: EntityType }> = ({
               {
                 id: 2,
                 count: entityAsDayTemplate?.instanceTemplates?.length || 0,
-                entityType: "Instance Templates",
+                entityType: "Session Templates",
                 essence: "usable",
               },
               {
@@ -228,7 +228,7 @@ const EntityInfoDetails: FC<{ entityId: string; entityType: EntityType }> = ({
               {
                 id: 2,
                 count: entityAsInstanceTemplate?.dayTemplates?.length || 0,
-                entityType: "Day Templates",
+                entityType: "Day Plans",
                 essence: "component",
               },
               {
@@ -269,13 +269,13 @@ const EntityInfoDetails: FC<{ entityId: string; entityType: EntityType }> = ({
               {
                 id: 1,
                 count: entityAsMealPrepPlan?.instanceTemplates?.length || 0,
-                entityType: "Instance Templates",
+                entityType: "Session Templates",
                 essence: "component",
               },
               {
                 id: 2,
                 count: entityAsMealPrepPlan?.dayTemplates?.length || 0,
-                entityType: "Day Templates",
+                entityType: "Day Plans",
                 essence: "component",
               },
               {
@@ -316,7 +316,7 @@ const EntityInfoDetails: FC<{ entityId: string; entityType: EntityType }> = ({
               {
                 id: 1,
                 count: entityAsMealPrepLog?.dayTemplates?.length || 0,
-                entityType: "Day Templates",
+                entityType: "Day Plans",
                 essence: "component",
               },
               {

@@ -93,11 +93,11 @@ const CreateMealPrepLogInterface = () => {
       <div className={createToolStyles.createInterfaceWrapper}>
         <div className={createToolStyles.createInterfaceFormContainer}>
           <PopupModal hasBorder={false} modalType="form" />
-          <h4>Create Meal Prep Log</h4>
+          <h4>Add Session Log</h4>
           <form className={createToolStyles.createInterfaceForm}>
             <TextFormControl
               entityProperty={templateMealPrepLog.name}
-              labelContent="Meal Prep Log Name:"
+              labelContent="Name:"
               onEntityPropertyValueChange={(e) =>
                 dispatch(
                   updateTemplateMealPrepLog({
@@ -109,7 +109,7 @@ const CreateMealPrepLogInterface = () => {
               type="text"
             />
             <ImageFormControl
-              labelContent="Meal Prep Log Image:"
+              labelContent="Image:"
               defaultImageUsedUrl={defaultMealPrepLogImageUrl}
               entityPropertyLoadingStatus={loadingCloudinaryImage}
               entityProperty={templateMealPrepLog.imageUrl as string}
@@ -129,7 +129,7 @@ const CreateMealPrepLogInterface = () => {
             />
             <TextFormControl
               entityProperty={templateMealPrepLog.date}
-              labelContent="Meal Prep Log Date:"
+              labelContent="Date:"
               onEntityPropertyValueChange={(e) =>
                 dispatch(
                   updateTemplateMealPrepLog({
@@ -166,7 +166,7 @@ const CreateMealPrepLogInterface = () => {
               type="number"
             />
             <PrimaryButton
-              content="Add Meal Prep Log"
+              content="Add Session Log"
               type="functional"
               disabled={
                 loadingCreateMealPrepLog === "PENDING" ||
@@ -191,7 +191,7 @@ const CreateMealPrepLogInterface = () => {
       </div>
       <div className={createToolStyles.createInterfaceComponentsContainer}>
         <SelectFormControl
-          labelContent="Instance Template Used:"
+          labelContent="Session Template Used:"
           entityPropertyOptions={instanceTemplatesIds}
           entityPropertyChosenOptions={
             templateMealPrepLog.instanceTemplateId as string

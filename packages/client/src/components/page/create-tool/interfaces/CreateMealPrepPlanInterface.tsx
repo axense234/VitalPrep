@@ -137,7 +137,7 @@ const CreateMealPrepPlanInterface = () => {
             />
             <TextFormControl
               entityProperty={numberOfInstanceTemplates}
-              labelContent="Number of Instances Used:"
+              labelContent="Number of Templates Used:"
               onEntityPropertyValueChange={(e) =>
                 dispatch(
                   updateNumberOfInstanceTemplates(e.target.valueAsNumber)
@@ -176,7 +176,7 @@ const CreateMealPrepPlanInterface = () => {
             createToolStyles.createInterfaceMultipleComponentsContainer
           }
         >
-          <h4>Individual Instance Templates:</h4>
+          <h4>Individual Session Templates:</h4>
           <ul
             className={
               createToolStyles.createInterfaceMultipleComponentsSelectControls
@@ -191,7 +191,7 @@ const CreateMealPrepPlanInterface = () => {
                   }
                 >
                   <SelectFormControl
-                    labelContent={`Number #${instanceTemplateOption.id} Instance:`}
+                    labelContent={`Number #${instanceTemplateOption.id} Template:`}
                     entityPropertyOptions={instanceTemplatesIds}
                     entityPropertyChosenOptions={
                       (templateMealPrepPlan.instanceTemplates as string[]) || []

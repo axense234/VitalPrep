@@ -73,7 +73,7 @@ const CreateInstanceTemplateInterface = () => {
   useGetEntityComponents(loadingGetUserDayTemplates, getAllUserDayTemplates);
   useShowCreatedEntity(
     loadingCreateInstanceTemplate,
-    `Successfully created instance template: ${templateInstanceTemplate.name}.`,
+    `Successfully created session template: ${templateInstanceTemplate.name}.`,
     instanceTemplateFormModalErrorMessage,
     updateLoadingCreateInstanceTemplate
   );
@@ -92,11 +92,11 @@ const CreateInstanceTemplateInterface = () => {
       <div className={createToolStyles.createInterfaceWrapper}>
         <div className={createToolStyles.createInterfaceFormContainer}>
           <PopupModal hasBorder={false} modalType="form" />
-          <h4>Create Instance Template</h4>
+          <h4>Create Session Template</h4>
           <form className={createToolStyles.createInterfaceForm}>
             <TextFormControl
               entityProperty={templateInstanceTemplate.name}
-              labelContent="Instance Template Name:"
+              labelContent="Name:"
               onEntityPropertyValueChange={(e) =>
                 dispatch(
                   updateTemplateInstanceTemplate({
@@ -108,7 +108,7 @@ const CreateInstanceTemplateInterface = () => {
               type="text"
             />
             <ImageFormControl
-              labelContent="Instance Template Image:"
+              labelContent="Image:"
               defaultImageUsedUrl={defaultInstanceTemplateImageUrl}
               entityPropertyLoadingStatus={loadingCloudinaryImage}
               entityProperty={templateInstanceTemplate.imageUrl as string}
@@ -140,7 +140,7 @@ const CreateInstanceTemplateInterface = () => {
               type="number"
             />
             <PrimaryButton
-              content="Create Instance Template"
+              content="Create Session Template"
               type="functional"
               disabled={
                 loadingCreateInstanceTemplate === "PENDING" ||
@@ -171,7 +171,7 @@ const CreateInstanceTemplateInterface = () => {
             createToolStyles.createInterfaceMultipleComponentsContainer
           }
         >
-          <h4>Individual Day Templates:</h4>
+          <h4>Individual Day Plans:</h4>
           <ul
             className={
               createToolStyles.createInterfaceMultipleComponentsSelectControls

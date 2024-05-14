@@ -90,10 +90,10 @@ const useGetMultiViewToolContentTitle = (entityType: EntityType) => {
       multiViewToolContentTitle = "Recipes";
       break;
     case "dayTemplate":
-      multiViewToolContentTitle = "Day Templates";
+      multiViewToolContentTitle = "Day Plans";
       break;
     case "instanceTemplate":
-      multiViewToolContentTitle = "Instance Templates";
+      multiViewToolContentTitle = "Session Templates";
       break;
     case "mealPrepPlan":
       multiViewToolContentTitle = "Meal Prep Plans";

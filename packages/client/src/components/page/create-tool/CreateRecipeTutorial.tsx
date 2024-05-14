@@ -45,7 +45,7 @@ const CreateRecipeTutorial = () => {
         />
         {showVideoTutorialContent && (
           <VideoFormControl
-            labelContent="Recipe Tutorial URL:"
+            labelContent="Tutorial URL:"
             entityProperty={templateRecipe.recipeTutorial?.videoTutorial}
             onEntityPropertyValueChange={(e) =>
               dispatch(

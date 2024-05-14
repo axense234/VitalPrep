@@ -57,7 +57,7 @@ const CreateUtensilInterface = () => {
           <form className={createToolStyles.createInterfaceForm}>
             <TextFormControl
               entityProperty={templateUtensil.name}
-              labelContent="Utensil Name:"
+              labelContent="Name:"
               onEntityPropertyValueChange={(e) =>
                 dispatch(
                   updateTemplateUtensil({ key: "name", value: e.target.value })
@@ -66,7 +66,7 @@ const CreateUtensilInterface = () => {
               type="text"
             />
             <ImageFormControl
-              labelContent="Utensil Image:"
+              labelContent="Image:"
               defaultImageUsedUrl={defaultUtensilImageUrl}
               entityPropertyLoadingStatus={loadingCloudinaryImage}
               entityProperty={templateUtensil.imageUrl as string}
