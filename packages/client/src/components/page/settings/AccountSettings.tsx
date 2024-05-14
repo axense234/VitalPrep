@@ -15,19 +15,17 @@ import {
   selectTemplateProfile,
   selectProfile,
   selectVerifiedPassword,
-  selectTemplateImageUrl,
   selectLoadingCloudinaryImage,
   selectLoadingUpdateProfile,
   setTemplateProfile,
   updateTemplateProfile,
-  changeShowGeneralModal,
-  changeShowFormModal,
-  setTemplateModalMessage,
-  updateUser,
   changeVerifiedPassword,
   createCloudinaryImage,
-  setTypeOfUpdateAccountQuery,
 } from "@/redux/slices/generalSlice";
+// Hooks and Helpers
+import useUpdateEntityTemplateImageUrl from "@/hooks/useUpdateEntityTemplateImageUrl";
+import handleOnUpdateAccountSettingsSubmit from "@/helpers/handleOnUpdateAccountSettingsSubmit";
+import UserType from "@/core/types/entity/users/UserType";
 
 const AccountSettings = () => {
   const dispatch = useAppDispatch();
@@ -35,40 +33,11 @@ const AccountSettings = () => {
   const profile = useAppSelector(selectProfile);
   const verifiedPassword = useAppSelector(selectVerifiedPassword);
 
-  const templateImageUrl = useAppSelector(selectTemplateImageUrl);
-
   const loadingCloudinaryImage = useAppSelector(selectLoadingCloudinaryImage);
   const loadingUpdateProfile = useAppSelector(selectLoadingUpdateProfile);
 
-  useEffect(() => {
-    if (profile) {
-      dispatch(setTemplateProfile(profile));
-      dispatch(updateTemplateProfile({ key: "password", value: "" }));
-    }
-  }, [profile]);
-
-  useEffect(() => {
-    if (loadingCloudinaryImage === "SUCCEDED") {
-      dispatch(
-        updateTemplateProfile({ key: "imageUrl", value: templateImageUrl })
-      );
-    }
-  }, [loadingCloudinaryImage]);
-
-  const handleOnAccountSettingsSubmit = (e: React.SyntheticEvent) => {
-    e.preventDefault();
-
-    if (templateProfile.password !== verifiedPassword) {
-      dispatch(changeShowGeneralModal(false));
-      dispatch(changeShowFormModal(true));
-      dispatch(setTemplateModalMessage("Passwords must match!"));
-    } else if (templateProfile.password === verifiedPassword) {
-      dispatch(setTypeOfUpdateAccountQuery("account"));
-      dispatch(
-        updateUser({ userTemplate: templateProfile, typeOfUpdate: "account" })
-      );
-    }
-  };
+  useSetTemplateProfile(profile);
+  useUpdateEntityTemplateImageUrl(updateTemplateProfile);
 
   return (
     <section className={accountSettingsStyles.accountSettingsContainer}>
@@ -145,11 +114,28 @@ const AccountSettings = () => {
             loadingCloudinaryImage === "PENDING" ||
             loadingUpdateProfile === "PENDING"
           }
-          onClickFunction={(e) => handleOnAccountSettingsSubmit(e)}
+          onClickFunction={(e) =>
+            handleOnUpdateAccountSettingsSubmit(
+              e,
+              dispatch,
+              templateProfile,
+              verifiedPassword
+            )
+          }
         />
       </form>
     </section>
   );
+};
+
+const useSetTemplateProfile = (profile: UserType) => {
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    if (profile) {
+      dispatch(setTemplateProfile(profile));
+      dispatch(updateTemplateProfile({ key: "password", value: "" }));
+    }
+  }, [profile]);
 };
 
 export default AccountSettings;

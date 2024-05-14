@@ -2,8 +2,8 @@
 
 .socialMediaIconsList {
   @include flexCenter(row);
-  max-width: $socialMediaIconsMaxWidth;
-  gap: $socialMediaIconsGap;
+  max-width: 14.75rem;
+  gap: 2rem;
   list-style: none;
 
   @media screen and (max-width: 600px) {
@@ -13,8 +13,8 @@
 
 .socialMediaIcon {
   @include flexCenter(row);
-  width: $socialMediaIconDimensions;
-  height: $socialMediaIconDimensions;
+  width: 2.1875rem;
+  height: 2.1875rem;
   text-decoration: none;
   transition: $crispyTransformTransition;
 

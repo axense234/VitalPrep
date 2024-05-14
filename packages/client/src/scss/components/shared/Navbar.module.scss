@@ -4,9 +4,9 @@
   @include flexCenter(row);
   justify-content: space-between;
   width: 100%;
-  max-height: $maxNavbarHeight;
-  padding: $navbarPadding;
-  background-color: $navbarBackgroundColor;
+  max-height: 8.25rem;
+  padding: 1rem 4rem;
+  background-color: getColor("primary-1");
 
   @media screen and (max-width: 650px) {
     padding: 1rem 2rem;

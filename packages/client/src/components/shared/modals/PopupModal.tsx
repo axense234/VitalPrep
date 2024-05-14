@@ -1,11 +1,10 @@
 "use client";
-
 // React Icons
 import { AiFillCloseSquare } from "react-icons/ai";
 // Types
 import PopupModalProps from "@/core/interfaces/modals/PopupModalProps";
 // React
-import { FC, useEffect, useRef } from "react";
+import { FC, useRef } from "react";
 // SCSS
 import popupModalStyles from "../../../scss/components/others/Modals.module.scss";
 // Hooks
@@ -22,6 +21,10 @@ import {
   selectShowGeneralModal,
   selectTemplateModalMessage,
 } from "@/redux/slices/generalSlice";
+// Helpers and Hooks
+import closePopupModal from "@/helpers/closePopupModal";
+import useClosePopupModal from "@/hooks/useClosePopupModal";
+import useScrollPopupModalIntoView from "@/hooks/useScrollPopupModalIntoView";
 
 const PopupModal: FC<PopupModalProps> = ({
   modalColor,
@@ -40,33 +43,9 @@ const PopupModal: FC<PopupModalProps> = ({
 
   const showModal = modalType === "general" ? showGeneralModal : showFormModal;
 
-  const closeModal = () => {
-    if (modalType === "form") {
-      dispatch(changeShowFormModal(false));
-    } else if (modalType === "general") {
-      dispatch(changeShowGeneralModal(false));
-    }
-  };
-
   useModalTransition(showModal, modalRef);
-
-  useEffect(() => {
-    let timeout: NodeJS.Timeout;
-    if (showModal) {
-      timeout = setTimeout(() => {
-        closeModal();
-      }, 5000);
-    }
-    return () => {
-      clearTimeout(timeout);
-    };
-  }, [showModal, changeShowFormModal, changeShowGeneralModal]);
-
-  useEffect(() => {
-    if (modalRef.current && showModal) {
-      modalRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-  }, [showModal, modalRef.current, modalType]);
+  useClosePopupModal(modalType, showModal, dispatch);
+  useScrollPopupModalIntoView(modalRef, showModal, modalType);
 
   return (
     <div
@@ -78,7 +57,17 @@ const PopupModal: FC<PopupModalProps> = ({
       }}
       ref={modalRef}
     >
-      <AiFillCloseSquare onClick={closeModal} />
+      <AiFillCloseSquare
+        onClick={() =>
+          closePopupModal(
+            dispatch,
+            modalType,
+            modalType === "general"
+              ? changeShowGeneralModal
+              : changeShowFormModal
+          )
+        }
+      />
       <p style={{ color: textColor || "#ddd9d5" }}>
         {modalMessage || "Default Modal Message"}
         {isModalUsedWhenLoading && (

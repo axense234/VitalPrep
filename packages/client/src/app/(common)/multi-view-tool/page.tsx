@@ -7,13 +7,10 @@ import useAuthorization from "@/hooks/useAuthorization";
 // Components
 import PageTitle from "@/components/shared/PageTitle";
 import MultiViewToolContent from "@/components/page/multi-view-tool/MultiViewToolContent";
-import ViewEntityOptions from "@/components/page/entity/ViewEntityOptions";
+import ViewEntityOptions from "@/components/page/multi-view-tool/ViewEntityOptions";
 // Redux
 import { useAppSelector } from "@/hooks/redux";
-import {
-  selectProfile,
-  selectSelectedEntityOption,
-} from "@/redux/slices/generalSlice";
+import { selectSelectedEntityOption } from "@/redux/slices/generalSlice";
 // Hooks
 import useGetMultiViewToolContentEntities from "@/hooks/useGetMultiViewToolContentEntities";
 // Helpers
@@ -21,10 +18,9 @@ import selectEntityIds from "@/helpers/selectEntityIds";
 
 const MultiViewTool = () => {
   useAuthorization();
-  const profile = useAppSelector(selectProfile);
 
   const entityType = useAppSelector(selectSelectedEntityOption);
-  useGetMultiViewToolContentEntities(entityType, profile.id);
+  useGetMultiViewToolContentEntities();
 
   const entityIds = selectEntityIds(entityType);
 
@@ -33,18 +29,7 @@ const MultiViewTool = () => {
       <PageTitle />
       <div className={multiViewToolStyles.multiViewToolContent}>
         <ViewEntityOptions />
-        <MultiViewToolContent
-          entityType={
-            entityType as
-              | "ingredient"
-              | "utensil"
-              | "recipe"
-              | "dayTemplate"
-              | "instanceTemplate"
-              | "mealPrepPlan"
-          }
-          entityIds={entityIds}
-        />
+        <MultiViewToolContent entityType={entityType} entityIds={entityIds} />
       </div>
     </div>
   );

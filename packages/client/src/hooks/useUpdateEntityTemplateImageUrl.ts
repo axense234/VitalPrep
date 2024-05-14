@@ -9,12 +9,14 @@ import {
 import { UnknownAction } from "@reduxjs/toolkit";
 
 type updateTemplateEntityReducerType = (payload: {
-  key: "imageUrl";
+  key: string;
   value: string;
 }) => UnknownAction;
 
 const useUpdateEntityTemplateImageUrl = (
-  updateTemplateEntityReducer: updateTemplateEntityReducerType
+  updateTemplateEntityReducer: updateTemplateEntityReducerType,
+  entityPropertyKeyToUpdate?: string,
+  entityPropertyValueToUpdate?: string
 ) => {
   const dispatch = useAppDispatch();
   const loadingCloudinaryImage = useAppSelector(selectLoadingCloudinaryImage);
@@ -24,8 +26,8 @@ const useUpdateEntityTemplateImageUrl = (
     if (loadingCloudinaryImage === "SUCCEDED") {
       dispatch(
         updateTemplateEntityReducer({
-          key: "imageUrl",
-          value: templateImageUrl,
+          key: entityPropertyKeyToUpdate || "imageUrl",
+          value: entityPropertyValueToUpdate || templateImageUrl,
         })
       );
     }

@@ -1,7 +1,4 @@
-type EntitySortingOption = {
-  label: string;
-  value: string;
-};
+import EntitySortingOption from "./EntitySortingOption";
 
 type EntitySortingOptions = {
   ingredient: EntitySortingOption[];

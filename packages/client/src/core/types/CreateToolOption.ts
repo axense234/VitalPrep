@@ -1,7 +1,9 @@
+import EntityType from "./entity/users/EntityType";
+
 type CreateToolOption = {
   id?: number;
   label: string;
-  optionValue: string;
+  optionValue: EntityType;
   associatedColor: string;
   associatedTextColor: string;
 };

@@ -5,13 +5,12 @@ import Image from "next/image";
 // React
 import { useEffect, useRef, useState } from "react";
 // Data
-import { defaultEntityQueryValues, defaultMealPrepPlanImageUrl } from "@/data";
+import { defaultMealPrepPlanImageUrl } from "@/data";
 // Redux
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import {
-  selectLoadingGetOAuthProfile,
-  selectLoadingGetProfile,
   selectProfile,
+  selectSelectedEntityOption,
   setTypeOfUpdateAccountQuery,
   updateUser,
 } from "@/redux/slices/generalSlice";
@@ -20,7 +19,10 @@ import {
   selectAllMealPrepPlans,
   selectLoadingGetUserMealPrepPlans,
 } from "@/redux/slices/mealPrepPlansSlice";
+// Helpers and Hooks
 import useGetWindowWidth from "@/hooks/useGetWindowWidth";
+import getLoadingProfile from "@/helpers/getLoadingProfile";
+import useGetEntityComponents from "@/hooks/useGetEntityComponents";
 
 const ActiveMealPrepPlan = () => {
   const dispatch = useAppDispatch();
@@ -29,17 +31,13 @@ const ActiveMealPrepPlan = () => {
   const activeMealPrepPlanRef = useRef<HTMLDivElement | null>(null);
 
   const profile = useAppSelector(selectProfile);
-  const loadingGetProfile = useAppSelector(selectLoadingGetProfile);
-  const loadingGetOAuthProfile = useAppSelector(selectLoadingGetOAuthProfile);
 
-  const loadingProfile =
-    loadingGetProfile === "SUCCEDED"
-      ? loadingGetProfile
-      : loadingGetOAuthProfile;
-
+  const loadingProfile = getLoadingProfile();
   const loadingGetUserMealPrepPlans = useAppSelector(
     selectLoadingGetUserMealPrepPlans
   );
+
+  const selectedEntityOption = useAppSelector(selectSelectedEntityOption);
 
   const mealPrepPlans = useAppSelector(selectAllMealPrepPlans);
 
@@ -71,20 +69,11 @@ const ActiveMealPrepPlan = () => {
     }
   }, [loadingProfile, profile.mealPrepPlanInUseId, mealPrepPlans, dispatch]);
 
-  useEffect(() => {
-    if (
-      loadingGetUserMealPrepPlans === "IDLE" &&
-      loadingProfile === "SUCCEDED" &&
-      profile.id
-    ) {
-      dispatch(
-        getAllUserMealPrepPlans({
-          entityQueryValues: defaultEntityQueryValues,
-          userId: profile.id,
-        })
-      );
-    }
-  }, [loadingGetUserMealPrepPlans, loadingProfile, profile.id]);
+  useGetEntityComponents(
+    loadingGetUserMealPrepPlans,
+    getAllUserMealPrepPlans,
+    selectedEntityOption !== "mealPrepPlan"
+  );
 
   useEffect(() => {
     if (mealPrepPlans.length >= 1) {

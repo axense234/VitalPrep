@@ -26,7 +26,7 @@
 .sidebarHeader {
   @include flexCenter(column);
   align-items: flex-start;
-  gap: $sidebarHeaderGap;
+  gap: 2rem;
   position: relative;
   width: 100%;
 
@@ -35,8 +35,8 @@
     margin-top: 1rem;
     margin-left: 1rem;
     border: none;
-    width: $sidebarHeaderCloseSidebarButtonDimensions;
-    height: $sidebarHeaderCloseSidebarButtonDimensions;
+    width: 2.8125rem;
+    height: 2.8125rem;
     background-color: inherit;
     transition: $crispyTransformTransition;
     cursor: crosshair;
@@ -72,8 +72,8 @@
   @include flexCenter(column);
   list-style: none;
   width: 100%;
-  padding: $sidebarPageLinksPadding;
-  gap: $sidebarPageLinksGap;
+  padding: 1.5rem;
+  gap: 1rem;
 
   li {
     @include flexCenter(row);
@@ -86,13 +86,13 @@
   width: 100%;
   justify-content: flex-start;
   text-decoration: none;
-  gap: $sidebarPageLinkDistanceBetweenIconAndTitle;
+  gap: 0.75rem;
   background-color: inherit;
   border: none;
 
   svg {
-    width: $sidebarPageLinkDimensions;
-    height: $sidebarPageLinkDimensions;
+    width: 0.75rem;
+    height: 0.75rem;
     color: getColor("secondary-color-2.4");
   }
 
@@ -118,5 +118,5 @@
   width: 100%;
   margin-top: auto;
   justify-content: space-between;
-  padding: $sidebarFooterPadding;
+  padding: 0.5rem 1.5rem;
 }

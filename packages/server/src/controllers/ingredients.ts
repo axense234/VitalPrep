@@ -196,45 +196,12 @@ const createIngredient = async (req: Request, res: Response) => {
     });
   }
 
-  if (!ingredientBody.calories) {
+  if (!ingredientBody.macros) {
     return res.status(StatusCodes.BAD_REQUEST).json({
-      message: "Please enter the number of calories!",
+      message: "Please enter the macros of your ingredient!",
       ingredient: {},
     });
   }
-
-  if (!ingredientBody.fats) {
-    return res.status(StatusCodes.BAD_REQUEST).json({
-      message: "Please enter the number of fats!",
-      ingredient: {},
-    });
-  }
-
-  if (!ingredientBody.proteins) {
-    return res.status(StatusCodes.BAD_REQUEST).json({
-      message: "Please enter the number of proteins!",
-      ingredient: {},
-    });
-  }
-
-  if (!ingredientBody.carbs) {
-    return res.status(StatusCodes.BAD_REQUEST).json({
-      message: "Please enter the number of carbs!",
-      ingredient: {},
-    });
-  }
-
-  const macrosBody = {
-    calories: ingredientBody.calories,
-    proteinAmount: ingredientBody.proteins,
-    carbsAmount: ingredientBody.carbs,
-    fatsAmount: ingredientBody.fats,
-  };
-
-  delete ingredientBody.calories;
-  delete ingredientBody.proteins;
-  delete ingredientBody.carbs;
-  delete ingredientBody.fats;
 
   if (userId) {
     ingredientBody.user = { connect: { id: userId } };
@@ -246,11 +213,15 @@ const createIngredient = async (req: Request, res: Response) => {
       .json({ message: "Please enter a request body!", ingredient: {} });
   }
 
+  delete ingredientBody.macros.id;
+  const ingredientMacros = ingredientBody.macros;
+  delete ingredientBody.macros;
+
   const createdIngredient = await IngredientClient.create({
     data: {
       ...ingredientBody,
       macros: {
-        create: macrosBody,
+        create: ingredientMacros,
       },
     },
     include: {

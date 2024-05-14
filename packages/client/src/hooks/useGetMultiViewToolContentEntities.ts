@@ -1,15 +1,12 @@
-// React
-import { useEffect } from "react";
-// Redix
+// Redux
 import {
   selectLoadingGetUserDayTemplates,
   getAllUserDayTemplates,
   updateLoadingGetUserDayTemplates,
 } from "@/redux/slices/dayTemplatesSlice";
 import {
-  selectLoadingGetProfile,
-  selectLoadingGetOAuthProfile,
   selectEntityQueryValues,
+  selectSelectedEntityOption,
 } from "@/redux/slices/generalSlice";
 import {
   selectLoadingGetUserIngredients,
@@ -36,21 +33,13 @@ import {
   getAllUserUtensils,
   updateLoadingGetUserUtensils,
 } from "@/redux/slices/utensilsSlice";
-import { useAppDispatch, useAppSelector } from "./redux";
+import { useAppSelector } from "./redux";
+// Hooks
+import useGetEntityComponents from "./useGetEntityComponents";
 
-const useGetMultiViewToolContentEntities = (
-  selectedEntityOption: string,
-  profileId: string
-) => {
-  const dispatch = useAppDispatch();
+const useGetMultiViewToolContentEntities = () => {
+  const selectedEntityOption = useAppSelector(selectSelectedEntityOption);
   const entityQueryValues = useAppSelector(selectEntityQueryValues);
-
-  const loadingGetProfile = useAppSelector(selectLoadingGetProfile);
-  const loadingGetOAuthProfile = useAppSelector(selectLoadingGetOAuthProfile);
-  const loadingProfile =
-    loadingGetProfile === "SUCCEDED"
-      ? loadingGetProfile
-      : loadingGetOAuthProfile;
 
   const loadingGetUserIngredients = useAppSelector(
     selectLoadingGetUserIngredients
@@ -67,127 +56,54 @@ const useGetMultiViewToolContentEntities = (
     selectLoadingGetUserMealPrepPlans
   );
 
-  useEffect(() => {
-    switch (selectedEntityOption) {
-      case "ingredient":
-        if (
-          loadingGetUserIngredients === "FAILED" ||
-          loadingGetUserIngredients === "SUCCEDED"
-        ) {
-          dispatch(updateLoadingGetUserIngredients("IDLE"));
-        }
-        break;
-      case "utensil":
-        if (
-          loadingGetUserUtensils === "FAILED" ||
-          loadingGetUserUtensils === "SUCCEDED"
-        ) {
-          dispatch(updateLoadingGetUserUtensils("IDLE"));
-        }
-        break;
-      case "recipe":
-        if (
-          loadingGetUserRecipes === "FAILED" ||
-          loadingGetUserRecipes === "SUCCEDED"
-        ) {
-          dispatch(updateLoadingGetUserRecipes("IDLE"));
-        }
-        break;
-      case "dayTemplate":
-        if (
-          loadingGetUserDayTemplates === "FAILED" ||
-          loadingGetUserDayTemplates === "SUCCEDED"
-        ) {
-          dispatch(updateLoadingGetUserDayTemplates("IDLE"));
-        }
-        break;
-      case "instanceTemplate":
-        if (
-          loadingGetUserInstanceTemplates === "FAILED" ||
-          loadingGetUserInstanceTemplates === "SUCCEDED"
-        ) {
-          dispatch(updateLoadingGetUserInstanceTemplates("IDLE"));
-        }
-        break;
-      case "mealPrepPlan":
-        if (
-          loadingGetUserMealPrepPlans === "FAILED" ||
-          loadingGetUserMealPrepPlans === "SUCCEDED"
-        ) {
-          dispatch(updateLoadingGetUserMealPrepPlans("IDLE"));
-        }
-        break;
-      default:
-        break;
-    }
-  }, [entityQueryValues]);
-
-  useEffect(() => {
-    if (
-      loadingGetUserIngredients === "IDLE" &&
-      loadingProfile &&
-      selectedEntityOption === "ingredient" &&
-      profileId
-    ) {
-      dispatch(getAllUserIngredients({ userId: profileId, entityQueryValues }));
-    }
-    if (
-      loadingGetUserUtensils === "IDLE" &&
-      loadingProfile &&
-      selectedEntityOption === "utensil" &&
-      profileId
-    ) {
-      dispatch(getAllUserUtensils({ userId: profileId, entityQueryValues }));
-    }
-    if (
-      loadingGetUserRecipes === "IDLE" &&
-      loadingProfile &&
-      selectedEntityOption === "recipe" &&
-      profileId
-    ) {
-      dispatch(getAllUserRecipes({ userId: profileId, entityQueryValues }));
-    }
-    if (
-      loadingGetUserDayTemplates === "IDLE" &&
-      loadingProfile &&
-      selectedEntityOption === "dayTemplate" &&
-      profileId
-    ) {
-      dispatch(
-        getAllUserDayTemplates({ userId: profileId, entityQueryValues })
-      );
-    }
-    if (
-      loadingGetUserInstanceTemplates === "IDLE" &&
-      loadingProfile &&
-      selectedEntityOption === "instanceTemplate" &&
-      profileId
-    ) {
-      dispatch(
-        getAllUserInstanceTemplates({ userId: profileId, entityQueryValues })
-      );
-    }
-    if (
-      loadingGetUserMealPrepPlans === "IDLE" &&
-      loadingProfile &&
-      selectedEntityOption === "mealPrepPlan" &&
-      profileId
-    ) {
-      dispatch(
-        getAllUserMealPrepPlans({ userId: profileId, entityQueryValues })
-      );
-    }
-  }, [
-    loadingProfile,
-    selectedEntityOption,
-    loadingGetUserIngredients,
-    loadingGetUserUtensils,
-    loadingGetUserRecipes,
-    loadingGetUserDayTemplates,
-    loadingGetUserInstanceTemplates,
+  useGetEntityComponents(
     loadingGetUserMealPrepPlans,
-    profileId,
-  ]);
+    getAllUserMealPrepPlans,
+    selectedEntityOption === "mealPrepPlan",
+    entityQueryValues,
+    true,
+    updateLoadingGetUserMealPrepPlans
+  );
+  useGetEntityComponents(
+    loadingGetUserInstanceTemplates,
+    getAllUserInstanceTemplates,
+    selectedEntityOption === "instanceTemplate",
+    entityQueryValues,
+    true,
+    updateLoadingGetUserInstanceTemplates
+  );
+  useGetEntityComponents(
+    loadingGetUserDayTemplates,
+    getAllUserDayTemplates,
+    selectedEntityOption === "dayTemplate",
+    entityQueryValues,
+    true,
+    updateLoadingGetUserDayTemplates
+  );
+  useGetEntityComponents(
+    loadingGetUserRecipes,
+    getAllUserRecipes,
+    selectedEntityOption === "recipe",
+    entityQueryValues,
+    true,
+    updateLoadingGetUserRecipes
+  );
+  useGetEntityComponents(
+    loadingGetUserUtensils,
+    getAllUserUtensils,
+    selectedEntityOption === "utensil",
+    entityQueryValues,
+    true,
+    updateLoadingGetUserUtensils
+  );
+  useGetEntityComponents(
+    loadingGetUserIngredients,
+    getAllUserIngredients,
+    selectedEntityOption === "ingredient",
+    entityQueryValues,
+    true,
+    updateLoadingGetUserIngredients
+  );
 };
 
 export default useGetMultiViewToolContentEntities;

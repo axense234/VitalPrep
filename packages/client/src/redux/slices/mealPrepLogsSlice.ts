@@ -2,23 +2,20 @@
 import { State } from "../api/store";
 // Data
 import { defaultTemplateMealPrepLog } from "@/data";
-// Types
+// Redux
 import {
-  EntityState,
   PayloadAction,
   createAsyncThunk,
   createEntityAdapter,
   createSlice,
 } from "@reduxjs/toolkit";
+// Types
 import EntityQueryValues from "@/core/types/entity/EntityQueryValues";
-import MealPrepLogTemplate from "@/core/types/entity/mealPrepLog/MealPrepLogTemplate";
 import LoadingStateType from "@/core/types/LoadingStateType";
 import ObjectKeyValueType from "@/core/types/ObjectKeyValueType";
 import MealPrepLogsSliceStateType from "@/core/types/entity/mealPrepLog/MealPrepLogsSliceStateType";
 import MealPrepLogCreateBodyType from "@/core/types/entity/mealPrepLog/MealPrepLogCreateBodyType";
 import MealPrepLogType from "@/core/types/entity/mealPrepLog/MealPrepLogType";
-// Prisma
-import { MealPrepLog } from "@prisma/client";
 // Axios
 import { AxiosError } from "axios";
 import axiosInstance from "@/utils/axios";

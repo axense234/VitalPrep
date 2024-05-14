@@ -26,6 +26,7 @@ const PrimaryButton: FC<PrimaryButtonProps> = ({
         <button
           className={primaryButtonStyles.primaryButton}
           disabled={disabled}
+          style={{ filter: disabled ? "brightness(0.5)" : "brightness(1)" }}
         >
           {content}
         </button>
@@ -36,6 +37,7 @@ const PrimaryButton: FC<PrimaryButtonProps> = ({
     return (
       <button
         className={primaryButtonStyles.primaryButton}
+        style={{ filter: disabled ? "brightness(0.5)" : "brightness(1)" }}
         title={onHoverContent || content}
         aria-label={onHoverContent || content}
         type="submit"

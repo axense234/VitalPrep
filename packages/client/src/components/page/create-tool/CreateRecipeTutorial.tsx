@@ -7,11 +7,11 @@ import VideoFormControl from "@/components/shared/form/VideoFormControl";
 // Redux
 import {
   changeShowVideoTutorialContent,
-  updateTemplateRecipe,
   changeShowWrittenTutorialContent,
   selectShowVideoTutorialContent,
   selectShowWrittenTutorialContent,
   selectTemplateRecipe,
+  updateTemplateRecipeTutorial,
 } from "@/redux/slices/recipesSlice";
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 
@@ -46,10 +46,10 @@ const CreateRecipeTutorial = () => {
         {showVideoTutorialContent && (
           <VideoFormControl
             labelContent="Recipe Tutorial URL:"
-            entityProperty={templateRecipe.videoTutorial}
+            entityProperty={templateRecipe.recipeTutorial?.videoTutorial}
             onEntityPropertyValueChange={(e) =>
               dispatch(
-                updateTemplateRecipe({
+                updateTemplateRecipeTutorial({
                   key: "videoTutorial",
                   value: e.target.value,
                 })
@@ -57,7 +57,7 @@ const CreateRecipeTutorial = () => {
             }
             onEntityPropertyValueUpdate={(urlInput) =>
               dispatch(
-                updateTemplateRecipe({
+                updateTemplateRecipeTutorial({
                   key: "videoTutorial",
                   value: urlInput,
                 })
@@ -78,11 +78,11 @@ const CreateRecipeTutorial = () => {
         />
         {showWrittenTutorialContent && (
           <TextAreaFormControl
-            entityProperty={templateRecipe.writtenTutorial}
+            entityProperty={templateRecipe?.recipeTutorial?.writtenTutorial}
             labelContent="Written Tutorial:"
             onEntityPropertyValueChange={(e) =>
               dispatch(
-                updateTemplateRecipe({
+                updateTemplateRecipeTutorial({
                   key: "writtenTutorial",
                   value: e.target.value,
                 })

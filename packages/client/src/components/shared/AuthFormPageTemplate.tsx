@@ -17,32 +17,12 @@ import Link from "next/link";
 import { authFormPageTemplateImageUrls } from "@/data";
 
 const AuthFormPageTemplate: FC<AuthFormPageTemplateProps> = ({ type }) => {
-  let pageTitleUsed = "Title";
-  let pageImageUrlUsed = authFormPageTemplateImageUrls[0].imageUrl;
-  let pageSubtitleUsed = "Subtitle";
-  let pageSubtitleLinkUsed = {
-    textContent: "Text Content",
-    linkDest: "/",
-  };
-
-  switch (type) {
-    case "login":
-      pageTitleUsed = "Login";
-      pageSubtitleUsed = "Have an account?";
-      pageImageUrlUsed = authFormPageTemplateImageUrls[1].imageUrl;
-      pageSubtitleLinkUsed.textContent = "Sign Up";
-      pageSubtitleLinkUsed.linkDest = "/";
-      break;
-    case "signup":
-      pageTitleUsed = "Signup";
-      pageSubtitleUsed = "Don't have an account?";
-      pageImageUrlUsed = authFormPageTemplateImageUrls[0].imageUrl;
-      pageSubtitleLinkUsed.textContent = "Log In";
-      pageSubtitleLinkUsed.linkDest = "/login";
-      break;
-    default:
-      throw new Error("Invalid auth form page template title.");
-  }
+  const {
+    pageImageUrlUsed,
+    pageSubtitleLinkUsed,
+    pageSubtitleUsed,
+    pageTitleUsed,
+  } = useGetAuthFormPageTemplateDetails(type);
 
   return (
     <div className={authFormPageTemplateStyles.authContainer}>
@@ -77,6 +57,41 @@ const AuthFormPageTemplate: FC<AuthFormPageTemplateProps> = ({ type }) => {
       />
     </div>
   );
+};
+
+const useGetAuthFormPageTemplateDetails = (type: "login" | "signup") => {
+  let pageTitleUsed = "Title";
+  let pageImageUrlUsed = authFormPageTemplateImageUrls[0].imageUrl;
+  let pageSubtitleUsed = "Subtitle";
+  let pageSubtitleLinkUsed = {
+    textContent: "Text Content",
+    linkDest: "/",
+  };
+
+  switch (type) {
+    case "login":
+      pageTitleUsed = "Login";
+      pageSubtitleUsed = "Have an account?";
+      pageImageUrlUsed = authFormPageTemplateImageUrls[1].imageUrl;
+      pageSubtitleLinkUsed.textContent = "Sign Up";
+      pageSubtitleLinkUsed.linkDest = "/";
+      break;
+    case "signup":
+      pageTitleUsed = "Signup";
+      pageSubtitleUsed = "Don't have an account?";
+      pageImageUrlUsed = authFormPageTemplateImageUrls[0].imageUrl;
+      pageSubtitleLinkUsed.textContent = "Log In";
+      pageSubtitleLinkUsed.linkDest = "/login";
+      break;
+    default:
+      throw new Error("Invalid auth form page template title.");
+  }
+  return {
+    pageTitleUsed,
+    pageImageUrlUsed,
+    pageSubtitleUsed,
+    pageSubtitleLinkUsed,
+  };
 };
 
 export default AuthFormPageTemplate;

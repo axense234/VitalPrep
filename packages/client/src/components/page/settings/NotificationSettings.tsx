@@ -1,5 +1,3 @@
-// React
-import { useEffect } from "react";
 // SCSS
 import notificationSettingsStyles from "../../../scss/pages/Settings.module.scss";
 // Components
@@ -14,7 +12,7 @@ import {
   createCloudinaryImage,
   selectLoadingCloudinaryImage,
   selectLoadingUpdateProfile,
-  selectTemplateImageUrl,
+  selectTemplateNotificationsImageUrl,
   selectTemplateProfile,
   setTypeOfUpdateAccountQuery,
   updateTemplateProfileNotificationSettings,
@@ -23,24 +21,23 @@ import {
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 // Types
 import UserType from "@/core/types/entity/users/UserType";
+// Hooks
+import useUpdateEntityTemplateImageUrl from "@/hooks/useUpdateEntityTemplateImageUrl";
 
 const NotificationSettings = () => {
   const dispatch = useAppDispatch();
   const templateProfile = useAppSelector(selectTemplateProfile) as UserType;
   const loadingCloudinaryImage = useAppSelector(selectLoadingCloudinaryImage);
-  const templateImageUrl = useAppSelector(selectTemplateImageUrl);
+  const templateNotificationsImageUrl = useAppSelector(
+    selectTemplateNotificationsImageUrl
+  );
   const loadingUpdateProfile = useAppSelector(selectLoadingUpdateProfile);
 
-  useEffect(() => {
-    if (loadingCloudinaryImage === "SUCCEDED") {
-      dispatch(
-        updateTemplateProfileNotificationSettings({
-          key: "notificationImageUrl",
-          value: templateImageUrl,
-        })
-      );
-    }
-  }, [loadingCloudinaryImage]);
+  useUpdateEntityTemplateImageUrl(
+    updateTemplateProfileNotificationSettings,
+    "notificationImageUrl",
+    templateNotificationsImageUrl
+  );
 
   console.log(templateProfile?.notificationSettings);
 
@@ -77,6 +74,7 @@ const NotificationSettings = () => {
                 createCloudinaryImage({
                   entity: "users",
                   imageFile: e.target.files[0],
+                  type: "notifications",
                 })
               );
             }

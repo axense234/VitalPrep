@@ -22,6 +22,7 @@ import {
 } from "@/data";
 import { SectionValueType } from "@/core/types/GettingStartedContentMapContentType";
 import EntityType from "@/core/types/entity/users/EntityType";
+import EntitiesType from "@/core/types/entity/EntitiesType";
 
 type ObjectKeyValueType = {
   key: string;
@@ -36,6 +37,7 @@ type InitialStateType = {
   isSidebarOpened: boolean;
   loadingCloudinaryImage: LoadingStateType;
   templateImageUrl: string;
+  templateNotificationsImageUrl: string;
   templateModalMessage: string;
   showFormModal: boolean;
   showGeneralModal: boolean;
@@ -72,15 +74,8 @@ type InitialStateType = {
 
 type CreateCloudinaryImageTemplate = {
   imageFile: File;
-  entity:
-    | "users"
-    | "utensils"
-    | "ingredients"
-    | "recipes"
-    | "dayTemplates"
-    | "instanceTemplates"
-    | "mealPrepPlans"
-    | "mealPrepLogs";
+  entity: EntitiesType | "users";
+  type?: "general" | "notifications";
 };
 
 type SigninUserThroughOAuth = {
@@ -93,6 +88,7 @@ const initialState: InitialStateType = {
   isSidebarOpened: false,
   loadingCloudinaryImage: "IDLE",
   templateImageUrl: "",
+  templateNotificationsImageUrl: "",
   templateModalMessage: "",
   showFormModal: false,
   showGeneralModal: false,
@@ -307,22 +303,25 @@ export const loginUser = createAsyncThunk<User | AxiosError, UserTemplate>(
 );
 
 export const createCloudinaryImage = createAsyncThunk<
-  any,
+  { type: "general" | "notifications"; imageUrl: string } | any,
   CreateCloudinaryImageTemplate
->("general/createCloudinaryImage", async ({ imageFile, entity }) => {
-  try {
-    const formData = new FormData();
-    formData.append("file", imageFile);
-    formData.append("upload_preset", `vitalprep-${entity}`);
-    const { data } = await axios.post(
-      process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_IMAGE_URL as string,
-      formData
-    );
-    return data.secure_url;
-  } catch (error) {
-    return error;
+>(
+  "general/createCloudinaryImage",
+  async ({ imageFile, entity, type = "general" }) => {
+    try {
+      const formData = new FormData();
+      formData.append("file", imageFile);
+      formData.append("upload_preset", `vitalprep-${entity}`);
+      const { data } = await axios.post(
+        process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_IMAGE_URL as string,
+        formData
+      );
+      return { imageUrl: data.secure_url, type: type };
+    } catch (error) {
+      return error;
+    }
   }
-});
+);
 
 const generalSlice = createSlice({
   name: "general",
@@ -623,10 +622,23 @@ const generalSlice = createSlice({
       .addCase(createCloudinaryImage.pending, (state, action) => {
         state.loadingCloudinaryImage = "PENDING";
       })
-      .addCase(createCloudinaryImage.fulfilled, (state, action) => {
-        state.templateImageUrl = action.payload as string;
-        state.loadingCloudinaryImage = "SUCCEDED";
-      });
+      .addCase(
+        createCloudinaryImage.fulfilled,
+        (
+          state,
+          action: PayloadAction<{
+            type: "general" | "notifications";
+            imageUrl: string;
+          }>
+        ) => {
+          if (action.payload.type === "general") {
+            state.templateImageUrl = action.payload.imageUrl;
+          } else if (action.payload.type === "notifications") {
+            state.templateNotificationsImageUrl = action.payload.imageUrl;
+          }
+          state.loadingCloudinaryImage = "SUCCEDED";
+        }
+      );
   },
 });
 
@@ -643,6 +655,9 @@ export const selectLoadingCloudinaryImage = (state: State) =>
 
 export const selectTemplateImageUrl = (state: State) =>
   state.general.templateImageUrl;
+
+export const selectTemplateNotificationsImageUrl = (state: State) =>
+  state.general.templateNotificationsImageUrl;
 
 export const selectTemplateModalMessage = (state: State) =>
   state.general.templateModalMessage;

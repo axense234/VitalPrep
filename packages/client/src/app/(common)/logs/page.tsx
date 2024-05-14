@@ -8,74 +8,36 @@ import useAuthorization from "@/hooks/useAuthorization";
 // Components
 import PageTitle from "@/components/shared/PageTitle";
 import MultiViewToolContent from "@/components/page/multi-view-tool/MultiViewToolContent";
-import ViewEntityOptions from "@/components/page/entity/ViewEntityOptions";
+import ViewEntityOptions from "@/components/page/multi-view-tool/ViewEntityOptions";
 // Redux
-import { useAppDispatch, useAppSelector } from "@/hooks/redux";
-import {
-  selectEntityQueryValues,
-  selectLoadingGetOAuthProfile,
-  selectLoadingGetProfile,
-  selectProfile,
-} from "@/redux/slices/generalSlice";
+import { useAppSelector } from "@/hooks/redux";
+import { selectEntityQueryValues } from "@/redux/slices/generalSlice";
 import {
   getAllUserMealPrepLogs,
   selectAllMealPrepLogsIds,
   selectLoadingGetUserMealPrepLogs,
   updateLoadingGetUserMealPrepLogs,
 } from "@/redux/slices/mealPrepLogsSlice";
-// Data
-import { pageTitleContent } from "@/data";
+// Hooks
+import useGetEntityComponents from "@/hooks/useGetEntityComponents";
 
 const MealPrepLogs = () => {
   useAuthorization();
 
-  const dispatch = useAppDispatch();
-  const profile = useAppSelector(selectProfile);
   const loadingGetUserMealPrepLogs = useAppSelector(
     selectLoadingGetUserMealPrepLogs
   );
-
-  const loadingGetProfile = useAppSelector(selectLoadingGetProfile);
-  const loadingGetOAuthProfile = useAppSelector(selectLoadingGetOAuthProfile);
-  const loadingProfile =
-    loadingGetProfile === "SUCCEDED"
-      ? loadingGetProfile
-      : loadingGetOAuthProfile;
-
   const mealPrepLogsQueryValues = useAppSelector(selectEntityQueryValues);
-
   const mealPrepLogsIds = useAppSelector(selectAllMealPrepLogsIds);
 
-  useEffect(() => {
-    if (
-      loadingGetUserMealPrepLogs === "FAILED" ||
-      loadingGetUserMealPrepLogs === "SUCCEDED"
-    ) {
-      dispatch(updateLoadingGetUserMealPrepLogs("IDLE"));
-    }
-  }, [mealPrepLogsQueryValues]);
-
-  useEffect(() => {
-    if (loadingGetUserMealPrepLogs === "IDLE" && loadingProfile && profile.id) {
-      dispatch(
-        getAllUserMealPrepLogs({
-          userId: profile.id,
-          entityQueryValues: mealPrepLogsQueryValues,
-        })
-      );
-    }
-  }, [loadingProfile, profile.id, loadingGetUserMealPrepLogs]);
-
-  useEffect(() => {
-    if (loadingGetUserMealPrepLogs === "IDLE" && profile.id) {
-      dispatch(
-        getAllUserMealPrepLogs({
-          entityQueryValues: mealPrepLogsQueryValues,
-          userId: profile.id,
-        })
-      );
-    }
-  }, [loadingGetUserMealPrepLogs, profile.id]);
+  useGetEntityComponents(
+    loadingGetUserMealPrepLogs,
+    getAllUserMealPrepLogs,
+    true,
+    mealPrepLogsQueryValues,
+    true,
+    updateLoadingGetUserMealPrepLogs
+  );
 
   return (
     <div className={multiViewToolStyles.multiViewToolContainer}>

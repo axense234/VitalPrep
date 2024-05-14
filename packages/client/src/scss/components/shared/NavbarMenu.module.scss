@@ -2,9 +2,9 @@
 
 .navbarMenuContainer {
   @include flexCenter(row);
-  width: $navbarMenuDimensions;
-  height: $navbarMenuDimensions;
-  color: $navbarMenuColor;
+  width: 4rem;
+  height: 4rem;
+  color: getColor("tan-color-extra-light");
   transition: $crispyTransformTransition;
   background-color: inherit;
   border: none;

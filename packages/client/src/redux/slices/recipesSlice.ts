@@ -153,6 +153,15 @@ const recipesSlice = createSlice({
         [action.payload.key]: action.payload.value,
       };
     },
+    updateTemplateRecipeTutorial(
+      state,
+      action: PayloadAction<ObjectKeyValueType>
+    ) {
+      state.templateRecipe.recipeTutorial = {
+        ...state.templateRecipe.recipeTutorial,
+        [action.payload.key]: action.payload.value,
+      };
+    },
   },
   extraReducers(builder) {
     builder
@@ -241,6 +250,7 @@ export const {
   changeShowVideoTutorialContent,
   changeShowWrittenTutorialContent,
   updateLoadingGetUserRecipes,
+  updateTemplateRecipeTutorial,
 } = recipesSlice.actions;
 
 export default recipesSlice.reducer;

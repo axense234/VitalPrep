@@ -1,6 +1,6 @@
 "use client";
 // React
-import { FC, useEffect } from "react";
+import { FC } from "react";
 // SCSS
 import authFormControlsStyles from "../../scss/components/shared/AuthFormControls.module.scss";
 // Components
@@ -19,15 +19,16 @@ import {
   selectLoadingCloudinaryImage,
   selectLoadingCreateProfile,
   selectLoadingLoginProfile,
-  selectTemplateImageUrl,
   selectTemplateProfile,
   signupUser,
   updateTemplateProfile,
 } from "@/redux/slices/generalSlice";
 // Data
 import { defaultProfileImageUrl } from "@/data";
+// Hooks
+import useUpdateEntityTemplateImageUrl from "@/hooks/useUpdateEntityTemplateImageUrl";
 
-export const AuthFormControls: FC<AuthFormControlsProps> = ({ type }) => {
+const AuthFormControls: FC<AuthFormControlsProps> = ({ type }) => {
   const dispatch = useAppDispatch();
   const templateProfile = useAppSelector(selectTemplateProfile);
 
@@ -42,15 +43,8 @@ export const AuthFormControls: FC<AuthFormControlsProps> = ({ type }) => {
       : loadingLoginProfile === "PENDING";
 
   const loadingCloudinaryImage = useAppSelector(selectLoadingCloudinaryImage);
-  const templateImageUrl = useAppSelector(selectTemplateImageUrl);
 
-  useEffect(() => {
-    if (loadingCloudinaryImage === "SUCCEDED") {
-      dispatch(
-        updateTemplateProfile({ key: "imageUrl", value: templateImageUrl })
-      );
-    }
-  }, [loadingCloudinaryImage]);
+  useUpdateEntityTemplateImageUrl(updateTemplateProfile);
 
   if (type === "signup") {
     return (

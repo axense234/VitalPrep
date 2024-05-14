@@ -18,47 +18,11 @@ const MultiViewToolContent: FC<{
   entityType: EntityType;
   entityIds: string[] | undefined;
 }> = ({ entityType, entityIds }) => {
-  let multiViewToolContentTitle = "Ingredients";
-
   const selectedViewOption = useAppSelector(selectSelectedViewOption);
 
-  let windowWidth = useGetWindowWidth();
-  let listItemMaxWidthBasedOnWindowWidth = "20%";
-  if (windowWidth && windowWidth <= 1600) {
-    listItemMaxWidthBasedOnWindowWidth = "30%";
-  }
-  if (windowWidth && windowWidth <= 1150) {
-    listItemMaxWidthBasedOnWindowWidth = "45%";
-  }
-  if (windowWidth && windowWidth <= 875) {
-    listItemMaxWidthBasedOnWindowWidth = "100%";
-  }
-
-  switch (entityType) {
-    case "ingredient":
-      multiViewToolContentTitle = "Ingredients";
-      break;
-    case "utensil":
-      multiViewToolContentTitle = "Utensils";
-      break;
-    case "recipe":
-      multiViewToolContentTitle = "Recipes";
-      break;
-    case "dayTemplate":
-      multiViewToolContentTitle = "Day Templates";
-      break;
-    case "instanceTemplate":
-      multiViewToolContentTitle = "Instance Templates";
-      break;
-    case "mealPrepPlan":
-      multiViewToolContentTitle = "Meal Prep Plans";
-      break;
-    case "mealPrepLog":
-      multiViewToolContentTitle = "Your Logs";
-      break;
-    default:
-      break;
-  }
+  const multiViewToolContentTitle = useGetMultiViewToolContentTitle(entityType);
+  const listItemMaxWidthBasedOnWindowWidth =
+    useGetListItemMaxWidthBasedOnWindowWidth();
 
   return (
     <div className={multiViewToolStyles.multiViewEntitiesWrapper}>
@@ -111,6 +75,51 @@ const MultiViewToolContent: FC<{
       </ul>
     </div>
   );
+};
+
+const useGetMultiViewToolContentTitle = (entityType: EntityType) => {
+  let multiViewToolContentTitle = "Ingredients";
+  switch (entityType) {
+    case "ingredient":
+      multiViewToolContentTitle = "Ingredients";
+      break;
+    case "utensil":
+      multiViewToolContentTitle = "Utensils";
+      break;
+    case "recipe":
+      multiViewToolContentTitle = "Recipes";
+      break;
+    case "dayTemplate":
+      multiViewToolContentTitle = "Day Templates";
+      break;
+    case "instanceTemplate":
+      multiViewToolContentTitle = "Instance Templates";
+      break;
+    case "mealPrepPlan":
+      multiViewToolContentTitle = "Meal Prep Plans";
+      break;
+    case "mealPrepLog":
+      multiViewToolContentTitle = "Your Logs";
+      break;
+    default:
+      break;
+  }
+  return multiViewToolContentTitle;
+};
+
+const useGetListItemMaxWidthBasedOnWindowWidth = () => {
+  let windowWidth = useGetWindowWidth();
+  let listItemMaxWidthBasedOnWindowWidth = "20%";
+  if (windowWidth && windowWidth <= 1600) {
+    listItemMaxWidthBasedOnWindowWidth = "30%";
+  }
+  if (windowWidth && windowWidth <= 1150) {
+    listItemMaxWidthBasedOnWindowWidth = "45%";
+  }
+  if (windowWidth && windowWidth <= 875) {
+    listItemMaxWidthBasedOnWindowWidth = "100%";
+  }
+  return listItemMaxWidthBasedOnWindowWidth;
 };
 
 export default MultiViewToolContent;

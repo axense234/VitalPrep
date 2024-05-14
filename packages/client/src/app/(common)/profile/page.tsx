@@ -9,22 +9,15 @@ import EntityInfoAppearances from "@/components/page/entity/EntityInfoAppearance
 import useAuthorization from "@/hooks/useAuthorization";
 // Redux
 import { useAppSelector } from "@/hooks/redux";
-import {
-  selectLoadingGetOAuthProfile,
-  selectLoadingGetProfile,
-  selectProfile,
-} from "@/redux/slices/generalSlice";
+import { selectProfile } from "@/redux/slices/generalSlice";
+// Helpers
+import getLoadingProfile from "@/helpers/getLoadingProfile";
 
 const Profile = () => {
   useAuthorization();
 
   const profile = useAppSelector(selectProfile);
-  const loadingGetProfile = useAppSelector(selectLoadingGetProfile);
-  const loadingGetOAuthProfile = useAppSelector(selectLoadingGetOAuthProfile);
-  const loadingProfile =
-    loadingGetProfile === "SUCCEDED"
-      ? loadingGetProfile
-      : loadingGetOAuthProfile;
+  const loadingProfile = getLoadingProfile();
 
   return (
     <div className={profileStyles.profileContainer}>

@@ -6,6 +6,8 @@ import IngredientType from "./entity/ingredient/IngredientType";
 import InstanceTemplateType from "./entity/instanceTemplate/InstanceTemplateType";
 import RecipeType from "./entity/recipe/RecipeType";
 import UtensilType from "./entity/utensil/UtensilType";
+import MealPrepLogType from "./entity/mealPrepLog/MealPrepLogType";
+import MealPrepPlanType from "./entity/mealPrepPlan/MealPrepPlanType";
 
 type GetAllUserEntitiesAsyncThunkType =
   | AsyncThunk<
@@ -30,6 +32,16 @@ type GetAllUserEntitiesAsyncThunkType =
     >
   | AsyncThunk<
       AxiosError<unknown, any> | InstanceTemplateType[],
+      { userId: string; entityQueryValues: EntityQueryValues },
+      {}
+    >
+  | AsyncThunk<
+      AxiosError<unknown, any> | MealPrepPlanType[],
+      { userId: string; entityQueryValues: EntityQueryValues },
+      {}
+    >
+  | AsyncThunk<
+      AxiosError<unknown, any> | MealPrepLogType[],
       { userId: string; entityQueryValues: EntityQueryValues },
       {}
     >;

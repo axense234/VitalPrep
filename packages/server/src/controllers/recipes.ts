@@ -227,14 +227,6 @@ const createRecipe = async (req: Request, res: Response) => {
     recipeBody.utensils = [];
   }
 
-  const recipeTutorial = {
-    writtenTutorial: recipeBody.writtenTutorial || "",
-    videoTutorial: recipeBody.videoTutorial || "",
-  };
-
-  delete recipeBody.writtenTutorial;
-  delete recipeBody.videoTutorial;
-
   const ingredientsIds = recipeBody.ingredients as string[];
   const utensilsIds = recipeBody.utensils as string[];
 
@@ -249,6 +241,10 @@ const createRecipe = async (req: Request, res: Response) => {
       ingredients: [],
     });
   }
+
+  delete recipeBody.recipeTutorial.id;
+  const recipeTutorial = recipeBody.recipeTutorial;
+  delete recipeBody.recipeTutorial;
 
   let recipeMacros = {
     calories: 0,

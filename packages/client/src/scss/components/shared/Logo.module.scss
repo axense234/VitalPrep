@@ -3,7 +3,7 @@
 .logoContainer {
   @include flexCenter(column);
   border-radius: 50%;
-  width: $logoDimensions;
+  width: 6.25rem;
   transition: $crispyTransformTransition;
 
   &:hover {

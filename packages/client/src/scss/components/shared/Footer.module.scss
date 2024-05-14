@@ -3,10 +3,10 @@
 .footerContainer {
   @include flexCenter(column);
   width: 100%;
-  padding: $footerPadding;
-  background-color: $footerBackgroundColor;
+  padding: 4rem 16rem;
+  background-color: getColor("primary-1");
   margin-top: auto;
-  gap: $footerDistanceBetweenSections;
+  gap: 4rem;
 
   @media screen and (max-width: 1500px) {
     padding: 4rem 8rem;
@@ -27,7 +27,7 @@
   width: 100%;
   list-style: none;
   flex-wrap: wrap;
-  row-gap: $rowGapOfFooterPageLinks;
+  row-gap: 1.5rem;
 
   li {
     @include flexCenter(row);
@@ -112,7 +112,7 @@
       color: getColor("secondary-color-light-2.4");
     }
 
-    margin-left: $footerDistanceBetweenContactInfoSections;
+    margin-left: 2rem;
     color: getColor("secondary-color-light-2.4");
   }
 }
@@ -130,7 +130,7 @@
 
 .footerCopyright {
   @include flexCenter(column);
-  gap: $footerDistanceBetweenLogoAndCopyright;
+  gap: 1rem;
 
   p {
     color: getColor("tan-color");
