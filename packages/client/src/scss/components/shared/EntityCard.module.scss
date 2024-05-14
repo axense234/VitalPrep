@@ -27,10 +27,13 @@
   @include flexCenter(column);
   padding: 1rem 0;
   gap: 0.5rem;
+  overflow: hidden;
 
   h5 {
     @include heading("h5", "laptop", "white");
+    @include handlePossibleLongWord(2);
     width: 100%;
+    max-width: 100%;
     text-align: center;
     padding: 0 0.5rem;
   }

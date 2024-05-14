@@ -22,3 +22,13 @@
     color: getColor("tan-color-extra-light");
   }
 }
+
+@mixin handlePossibleLongWord($maxNumberOfLines) {
+  display: -webkit-box;
+  -webkit-line-clamp: $maxNumberOfLines;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}

@@ -74,6 +74,7 @@
 
   h3 {
     @include heading("h6", "tablet", "black");
+    @include handlePossibleLongWord(2);
     text-align: center;
     width: 75%;
     color: getColor("tan-color-extra-light");

@@ -35,5 +35,7 @@
     letter-spacing: 1.25px;
     text-align: center;
     @include paragraph("laptop", "black");
+    @include handlePossibleLongWord(2);
+    width: 80%;
   }
 }
