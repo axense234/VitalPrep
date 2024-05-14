@@ -962,10 +962,6 @@ export const defaultTemplateIngredient: IngredientTemplate = {
   name: "Carrot",
   imageUrl: defaultIngredientImageUrl,
   enabled: false,
-  calories: 200,
-  carbs: 20,
-  proteins: 20,
-  fats: 2,
   macros: {
     id: "blah",
     calories: 200,
@@ -986,8 +982,6 @@ export const defaultTemplateRecipe: RecipeTemplate = {
   imageUrl: defaultRecipeImageUrl,
   ingredients: [],
   utensils: [],
-  writtenTutorial: "",
-  videoTutorial: "",
   macros: {
     id: "blah",
     calories: 200,
@@ -1049,6 +1043,13 @@ export const defaultTemplateMealPrepPlan: MealPrepPlanTemplate = {
   instanceTemplates: [],
   imageUrl: defaultMealPrepPlanImageUrl,
   instanceTemplatesTimings: [],
+  macros: {
+    id: "blah",
+    calories: 200,
+    carbsAmount: 20,
+    proteinAmount: 20,
+    fatsAmount: 2,
+  },
 };
 
 export const OAuthOptionsContent: OAuthOptionContent[] = [

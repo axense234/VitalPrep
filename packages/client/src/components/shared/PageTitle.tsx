@@ -15,8 +15,14 @@ const PageTitle: FC<PageTitleProps> = ({
   backgroundImageSrc,
 }) => {
   const pathname = usePathname();
+  let curatedPathname = pathname;
+  const indexOfSecondSlash = pathname.indexOf("/", 1);
+  if (indexOfSecondSlash !== -1) {
+    curatedPathname = pathname.substring(0, indexOfSecondSlash);
+  }
+
   const { imageSrc, subtitleTextContent, titleTextContent } =
-    getPageTitlePropsBasedOnPathname(pathname);
+    getPageTitlePropsBasedOnPathname(curatedPathname);
 
   return (
     <section
