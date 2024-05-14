@@ -53,7 +53,9 @@ const MealPrepPlanComponent: FC<EntityComponentProps> = ({
       >
         {phoneRedesign ? null : (
           <p>
-            {instanceTemplates?.length > 0 ? instanceTemplates.length : "???"}{" "}
+            {instanceTemplates?.length && instanceTemplates?.length > 0
+              ? instanceTemplates?.length
+              : "???"}{" "}
             instance templates used
           </p>
         )}
