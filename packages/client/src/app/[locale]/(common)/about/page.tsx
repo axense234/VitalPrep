@@ -1,6 +1,6 @@
 "use client";
 // SCSS
-import aboutStyles from "../../../scss/pages/About.module.scss";
+import aboutStyles from "@/scss/pages/About.module.scss";
 // Components
 import PageTitle from "@/components/shared/PageTitle";
 import AboutContent from "@/components/page/about/AboutContent";

@@ -28,7 +28,8 @@ export const dayTemplatesAdapter = createEntityAdapter<DayTemplateType>();
 const initialState = dayTemplatesAdapter.getInitialState({
   templateDayTemplate: defaultTemplateDayTemplate,
   loadingCreateDayTemplate: "IDLE",
-  dayTemplateFormModalErrorMessage: "Default Message",
+  dayTemplateFormModalErrorMessage:
+    "Something went wrong, please refresh the page!",
   numberOfMeals: 0,
   mealsInOrder: [],
   loadingGetUserDayTemplates: "IDLE",

@@ -7,7 +7,6 @@ import PageLink from "@/core/types/PageLink";
 // React
 import { FC, useEffect, useRef } from "react";
 // Next
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 // Data
 import { pageLinks } from "@/data";
@@ -23,6 +22,9 @@ import {
 } from "@/redux/slices/generalSlice";
 // Hooks
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
+// Translations
+import { useTranslations } from "next-intl";
+import { Link } from "@/navigation";
 
 const Sidebar = () => {
   const dispatch = useAppDispatch();
@@ -67,11 +69,16 @@ const SidebarHeader = () => {
 };
 
 const SidebarPageLinks = () => {
+  const translate = useTranslations("pageLinks.labels");
   return (
     <ul className={sidebarStyles.sidebarPageLinks}>
       {pageLinks.map((pageLink) => {
         return (
-          <li key={pageLink.id}>
+          <li
+            key={pageLink.id}
+            title={translate(`${pageLink.linkDest}`)}
+            aria-label={translate(`${pageLink.linkDest}`)}
+          >
             <SidebarPageLink {...pageLink} />
           </li>
         );
@@ -80,35 +87,31 @@ const SidebarPageLinks = () => {
   );
 };
 
-const SidebarPageLink: FC<PageLink> = ({
-  linkDest,
-  linkTitle,
-  reactIcon,
-  linkType,
-}) => {
+const SidebarPageLink: FC<PageLink> = ({ linkDest, reactIcon, linkType }) => {
   const dispatch = useAppDispatch();
+  const translate = useTranslations("pageLinks.labels");
   if (linkType === "logout") {
     return (
       <button
-        title={linkTitle}
-        aria-label={linkTitle}
+        title={translate(`${linkDest}`)}
+        aria-label={translate(`${linkDest}`)}
         className={sidebarStyles.sidebarPageLink}
         onClick={() => dispatch(logoutUser())}
       >
         {reactIcon}
-        <p>{linkTitle}</p>
+        <p>{translate(`${linkDest}`)}</p>
       </button>
     );
   }
   return (
     <Link
-      href={linkDest}
-      title={linkTitle}
-      aria-label={linkTitle}
+      href={linkDest as any}
+      title={translate(`${linkDest}`)}
+      aria-label={translate(`${linkDest}`)}
       className={sidebarStyles.sidebarPageLink}
     >
       {reactIcon}
-      <p>{linkTitle}</p>
+      <p>{translate(`${linkDest}`)}</p>
     </Link>
   );
 };

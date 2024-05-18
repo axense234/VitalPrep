@@ -1,6 +1,6 @@
 "use client";
 // SCSS
-import homeStyles from "../../../scss/pages/Home.module.scss";
+import homeStyles from "@/scss/pages/Home.module.scss";
 // Hooks
 import useAuthorization from "@/hooks/useAuthorization";
 // Components

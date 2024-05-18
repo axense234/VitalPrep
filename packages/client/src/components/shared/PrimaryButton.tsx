@@ -1,11 +1,11 @@
 // Types
 import PrimaryButtonProps from "@/core/interfaces/PrimaryButtonProps";
 // SCSS
-import primaryButtonStyles from "../../scss/components/shared/PrimaryButton.module.scss";
+import primaryButtonStyles from "@/scss/components/shared/PrimaryButton.module.scss";
 // React
 import { FC } from "react";
-// NEXT
-import Link from "next/link";
+// Translations
+import { Link } from "@/navigation";
 
 const PrimaryButton: FC<PrimaryButtonProps> = ({
   content,
@@ -18,7 +18,7 @@ const PrimaryButton: FC<PrimaryButtonProps> = ({
   if (type === "link")
     return (
       <Link
-        href={linkDest as string}
+        href={linkDest as any}
         title={content}
         aria-label={content}
         className={primaryButtonStyles.primaryButtonLink}

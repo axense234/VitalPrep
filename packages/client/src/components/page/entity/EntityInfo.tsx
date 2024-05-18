@@ -3,7 +3,7 @@
 // Types
 import EntityType from "@/core/types/entity/users/EntityType";
 // Next
-import { useParams, usePathname } from "next/navigation";
+import { useParams } from "next/navigation";
 // Components
 import IngredientInfo from "./IngredientInfo";
 import UtensilInfo from "./UtensilInfo";
@@ -16,6 +16,8 @@ import PageTitle from "@/components/shared/PageTitle";
 // Redux
 import { useAppSelector } from "@/hooks/redux";
 import { selectProfile } from "@/redux/slices/generalSlice";
+// Translations
+import { usePathname } from "@/navigation";
 
 const EntityInfo = () => {
   const pathname = usePathname();

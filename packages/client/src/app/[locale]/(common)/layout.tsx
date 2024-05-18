@@ -14,7 +14,7 @@ import {
   selectLoadingGetOAuthProfile,
   selectLoadingGetProfile,
   selectProfile,
-  selectTemplateImageUrl,
+  selectSelectedEntityOption,
   signupUserOAuth,
 } from "@/redux/slices/generalSlice";
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
@@ -42,11 +42,12 @@ const SpecialLayout = ({ children }: { children: React.ReactNode }) => {
   const loadingGetOAuthProfile = useAppSelector(selectLoadingGetOAuthProfile);
 
   const pathname = usePathname();
+  const createEntityOption = useAppSelector(selectSelectedEntityOption);
   Chart.register([LineElement, PointElement, BarElement, ArcElement]);
 
   useEffect(() => {
     dispatch(resetTemplateImageUrl());
-  }, [pathname]);
+  }, [pathname, createEntityOption]);
 
   useEffect(() => {
     const initialize = async () => {

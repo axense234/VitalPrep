@@ -3,7 +3,7 @@
 import OAuthOptions from "@/components/shared/OAuthOptions";
 import AuthFormControls from "./AuthFormControls";
 import PopupModal from "./modals/PopupModal";
-import SignupLogo from "./SignupLogo";
+import SignupBar from "./SignupLogo";
 // SCSS
 import authFormPageTemplateStyles from "../../scss/components/shared/AuthFormPageTemplate.module.scss";
 // Types
@@ -12,17 +12,20 @@ import AuthFormPageTemplateProps from "@/core/interfaces/AuthFormPageTemplatePro
 import { FC } from "react";
 // Next
 import Image from "next/image";
-import Link from "next/link";
 // Data
 import { authFormPageTemplateImageUrls } from "@/data";
+// Translations
+import { useTranslations } from "next-intl";
+import { Link } from "@/navigation";
 
 const AuthFormPageTemplate: FC<AuthFormPageTemplateProps> = ({ type }) => {
-  const {
-    pageImageUrlUsed,
-    pageSubtitleLinkUsed,
-    pageSubtitleUsed,
-    pageTitleUsed,
-  } = useGetAuthFormPageTemplateDetails(type);
+  const { pageImageUrlUsed, pageSubtitleLinkDestUsed } =
+    useGetAuthFormPageTemplateDetails(type);
+
+  const translate = useTranslations(type);
+  const pageTitleUsed = translate("title");
+  const pageSubtitleUsed = translate("subtitle");
+  const pageSubtitleLinkTextContentUsed = translate("subtitleLink");
 
   return (
     <div className={authFormPageTemplateStyles.authContainer}>
@@ -35,13 +38,13 @@ const AuthFormPageTemplate: FC<AuthFormPageTemplateProps> = ({ type }) => {
       <section className={authFormPageTemplateStyles.formContainer}>
         <PopupModal hasBorder={false} modalType="form" />
         <div className={authFormPageTemplateStyles.formContainerContentWrapper}>
-          <SignupLogo />
+          <SignupBar />
           <div className={authFormPageTemplateStyles.formContainerContent}>
             <header>
               <h3>{pageTitleUsed}</h3>
               <h6>{pageSubtitleUsed}</h6>
-              <Link href={pageSubtitleLinkUsed.linkDest}>
-                {pageSubtitleLinkUsed.textContent}
+              <Link href={pageSubtitleLinkDestUsed as any}>
+                {pageSubtitleLinkTextContentUsed}
               </Link>
             </header>
             <OAuthOptions type={type} />
@@ -60,37 +63,24 @@ const AuthFormPageTemplate: FC<AuthFormPageTemplateProps> = ({ type }) => {
 };
 
 const useGetAuthFormPageTemplateDetails = (type: "login" | "signup") => {
-  let pageTitleUsed = "Title";
   let pageImageUrlUsed = authFormPageTemplateImageUrls[0].imageUrl;
-  let pageSubtitleUsed = "Subtitle";
-  let pageSubtitleLinkUsed = {
-    textContent: "Text Content",
-    linkDest: "/",
-  };
+  let pageSubtitleLinkDestUsed = "/";
 
   switch (type) {
     case "login":
-      pageTitleUsed = "Login";
-      pageSubtitleUsed = "Have an account?";
       pageImageUrlUsed = authFormPageTemplateImageUrls[1].imageUrl;
-      pageSubtitleLinkUsed.textContent = "Sign Up";
-      pageSubtitleLinkUsed.linkDest = "/";
+      pageSubtitleLinkDestUsed = "/";
       break;
     case "signup":
-      pageTitleUsed = "Signup";
-      pageSubtitleUsed = "Don't have an account?";
       pageImageUrlUsed = authFormPageTemplateImageUrls[0].imageUrl;
-      pageSubtitleLinkUsed.textContent = "Log In";
-      pageSubtitleLinkUsed.linkDest = "/login";
+      pageSubtitleLinkDestUsed = "/login";
       break;
     default:
       throw new Error("Invalid auth form page template title.");
   }
   return {
-    pageTitleUsed,
     pageImageUrlUsed,
-    pageSubtitleUsed,
-    pageSubtitleLinkUsed,
+    pageSubtitleLinkDestUsed,
   };
 };
 

@@ -3,7 +3,7 @@ import RadioFormControlProps from "@/core/interfaces/form/RadioFormControlProps"
 // React
 import { FC } from "react";
 // SCSS
-import formControlsStyles from "../../../scss/components/others/FormControls.module.scss";
+import formControlsStyles from "@/scss/components/others/FormControls.module.scss";
 
 const RadioFormControl: FC<RadioFormControlProps> = ({
   labelContent,
@@ -11,22 +11,24 @@ const RadioFormControl: FC<RadioFormControlProps> = ({
   onEntityPropertyValueChange,
   chosenEntityProperty,
 }) => {
+  console.log(chosenEntityProperty);
   return (
     <div className={formControlsStyles.radioFormControlContainer}>
       <label htmlFor={labelContent}>{labelContent}</label>
       <ul className={formControlsStyles.radioFormControlContent}>
-        {entityPropertyOptions.map((name) => {
+        {entityPropertyOptions.map((style) => {
+          console.log(style.value.toLowerCase());
           return (
-            <li key={name}>
+            <li key={style.label}>
               <input
                 type="radio"
                 name="notificationStyle"
-                id={name}
-                value={name}
-                onChange={() => onEntityPropertyValueChange(name)}
-                checked={chosenEntityProperty === name.toLowerCase()}
+                id={style.label}
+                value={style.label}
+                onChange={() => onEntityPropertyValueChange(style.value)}
+                checked={chosenEntityProperty === style.value.toLowerCase()}
               />
-              <label htmlFor={name}>{name}</label>
+              <label htmlFor={style.label}>{style.label}</label>
             </li>
           );
         })}

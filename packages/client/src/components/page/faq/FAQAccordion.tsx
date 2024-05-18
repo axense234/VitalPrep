@@ -1,5 +1,5 @@
 // SCSS
-import faqStyles from "../../../scss/pages/FAQ.module.scss";
+import faqStyles from "@/scss/pages/FAQ.module.scss";
 // Types
 import FAQAccordionType from "@/core/types/FAQAccordion";
 import useGetWindowWidth from "@/hooks/useGetWindowWidth";
@@ -7,11 +7,14 @@ import useGetWindowWidth from "@/hooks/useGetWindowWidth";
 import { FC, useState } from "react";
 // React Icons
 import { FaPlus, FaMinus } from "react-icons/fa";
+// Translations
+import { useTranslations } from "next-intl";
 
 const FAQAccordion: FC<FAQAccordionType> = ({
   accordionTitle,
   accordionContent,
 }) => {
+  const translate = useTranslations("faq");
   const [showAccordionContent, setShowAccordionContent] =
     useState<boolean>(false);
 
@@ -32,14 +35,18 @@ const FAQAccordion: FC<FAQAccordionType> = ({
       <header className={faqStyles.faqAccordionHeader}>
         {!showAccordionContent ? (
           <FaPlus
-            title={`Show ${accordionTitle} Content`}
-            aria-label={`Show ${accordionTitle} Content`}
+            title={translate("accordionShowTitle", { title: accordionTitle })}
+            aria-label={translate("accordionShowTitle", {
+              title: accordionTitle,
+            })}
             onClick={() => setShowAccordionContent(true)}
           />
         ) : (
           <FaMinus
-            title={`Hide ${accordionTitle} Content`}
-            aria-label={`Hide ${accordionTitle} Content`}
+            title={translate("accordionHideTitle", { title: accordionTitle })}
+            aria-label={translate("accordionHideTitle", {
+              title: accordionTitle,
+            })}
             onClick={() => setShowAccordionContent(false)}
           />
         )}

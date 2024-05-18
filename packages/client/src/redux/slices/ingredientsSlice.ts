@@ -24,7 +24,8 @@ export const ingredientsAdapter = createEntityAdapter<IngredientType>();
 const initialState = ingredientsAdapter.getInitialState({
   templateIngredient: defaultTemplateIngredient,
   loadingCreateIngredient: "IDLE",
-  ingredientFormModalErrorMessage: "Default Message",
+  ingredientFormModalErrorMessage:
+    "Something went wrong, please refresh the page!",
   loadingGetUserIngredients: "IDLE",
   loadingGetUserIngredient: "IDLE",
 }) as IngredientsSliceStateType;

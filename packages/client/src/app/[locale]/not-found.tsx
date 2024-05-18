@@ -1,5 +1,5 @@
 // SCSS
-import errorPageStyles from "../scss/pages/ErrorPage.module.scss";
+import errorPageStyles from "@/scss/pages/ErrorPage.module.scss";
 // Components
 import PrimaryButton from "@/components/shared/PrimaryButton";
 // Data

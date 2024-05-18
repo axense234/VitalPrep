@@ -20,6 +20,7 @@ import {
   defaultProfile,
   defaultTemplateProfile,
 } from "@/data";
+// Types
 import { SectionValueType } from "@/core/types/GettingStartedContentMapContentType";
 import EntityType from "@/core/types/entity/users/EntityType";
 import EntitiesType from "@/core/types/entity/EntitiesType";
@@ -81,6 +82,7 @@ type CreateCloudinaryImageTemplate = {
 type SigninUserThroughOAuth = {
   providerName: "google" | "github";
   pageType: "login" | "signup";
+  locale: string;
 };
 
 const initialState: InitialStateType = {
@@ -231,17 +233,20 @@ export const signupUserOAuth = createAsyncThunk<User | AxiosError>(
 export const signinUserThroughOAuth = createAsyncThunk<
   "login" | "signup" | unknown,
   SigninUserThroughOAuth
->("general/signinUserThroughOAuth", async ({ providerName, pageType }) => {
-  try {
-    await signIn(providerName, {
-      redirect: true,
-      callbackUrl: `${baseSiteUrl}/home`,
-    });
-    return pageType;
-  } catch (error) {
-    return error;
+>(
+  "general/signinUserThroughOAuth",
+  async ({ providerName, pageType, locale }) => {
+    try {
+      await signIn(providerName, {
+        redirect: true,
+        callbackUrl: `${baseSiteUrl}/${locale}/home`,
+      });
+      return pageType;
+    } catch (error) {
+      return error;
+    }
   }
-});
+);
 
 export const signupUser = createAsyncThunk<User | AxiosError, UserTemplate>(
   "general/signupUser",

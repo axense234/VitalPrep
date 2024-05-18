@@ -1,33 +1,37 @@
 // Types
 import EntityStatisticsType from "@/core/types/entity/EntityStatisticsType";
 // SCSS
-import entityStatisticsStyles from "../../../scss/components/shared/EntityStatistics.module.scss";
+import entityStatisticsStyles from "@/scss/components/shared/EntityStatistics.module.scss";
 // React
 import { FC } from "react";
-// Helpers
-import chooseEntityStatPrefix from "@/helpers/chooseEntityStatPrefix";
+// Translations
+import { useTranslations } from "next-intl";
 
 const EntityStatistics: FC<{ statistics: EntityStatisticsType }> = ({
   statistics,
 }) => {
+  const translate = useTranslations("entityStatistics");
+  const translateEntityType = useTranslations("multiViewPage.entitiesTitle");
+
   return (
     <div className={entityStatisticsStyles.entityStatisticsContainer}>
-      <h4>Statistics</h4>
+      <h4>{translate("title")}</h4>
       <ul className={entityStatisticsStyles.entityStatisticsList}>
         {statistics.map((stat) => {
-          const prefix = chooseEntityStatPrefix(stat.essence);
-          if (prefix === "Number of ") {
+          const prefix = translate(`prefix.${stat.essence}`);
+          if (stat.essence === "count") {
             return (
               <li key={stat.id}>
                 {prefix}
-                <span>{`${stat.entityType}`}</span>: {stat.count || 0}
+                <span>{translateEntityType(stat.entityType)}</span>:{" "}
+                {stat.count || 0}
               </li>
             );
           }
           return (
             <li key={stat.id}>
               {`${prefix}${stat.count} `}
-              <span>{`${stat.entityType}`}</span>
+              <span>{translateEntityType(stat.entityType)}</span>
             </li>
           );
         })}

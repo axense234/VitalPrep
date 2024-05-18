@@ -2,7 +2,7 @@
 // Hooks
 import useAuthorization from "@/hooks/useAuthorization";
 // SCSS
-import settingsStyles from "../../../scss/pages/Settings.module.scss";
+import settingsStyles from "@/scss/pages/Settings.module.scss";
 // Components
 import PageTitle from "@/components/shared/PageTitle";
 // Components

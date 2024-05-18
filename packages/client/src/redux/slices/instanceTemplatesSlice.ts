@@ -26,7 +26,8 @@ export const instanceTemplatesAdapter =
 const initialState = instanceTemplatesAdapter.getInitialState({
   templateInstanceTemplate: defaultTemplateInstanceTemplate,
   loadingCreateInstanceTemplate: "IDLE",
-  instanceTemplateFormModalErrorMessage: "Default Message",
+  instanceTemplateFormModalErrorMessage:
+    "Something went wrong, please refresh the page!",
   loadingGetUserInstanceTemplates: "IDLE",
   loadingGetUserInstanceTemplate: "IDLE",
 }) as InstanceTemplatesSliceStateType;

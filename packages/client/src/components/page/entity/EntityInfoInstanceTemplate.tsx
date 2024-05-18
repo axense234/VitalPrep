@@ -12,6 +12,8 @@ import MealPrepLogTemplate from "@/core/types/entity/mealPrepLog/MealPrepLogTemp
 // Components
 import EntityCard from "@/components/shared/entity/EntityCard";
 import EntityMacros from "@/components/shared/entity/EntityMacros";
+// Translations
+import { useTranslations } from "next-intl";
 
 const EntityInfoInstanceTemplate: FC<{ entityId: string }> = ({ entityId }) => {
   const entityThatHasAInstanceTemplate = useAppSelector((state: State) =>
@@ -21,11 +23,16 @@ const EntityInfoInstanceTemplate: FC<{ entityId: string }> = ({ entityId }) => {
   const entityInstanceTemplate =
     entityThatHasAInstanceTemplate?.instanceTemplate;
 
+  const translate = useTranslations("entityInstanceTemplate");
+
   return (
     <div className={entityInfoStyles.entityInfoInstanceTemplateContainer}>
       <h4>
-        Instance Template used by{" "}
-        {entityThatHasAInstanceTemplate?.name || "Entity Example"}
+        {translate("sectionTitle", {
+          name:
+            entityThatHasAInstanceTemplate?.name ||
+            translate("defaultEntityName"),
+        })}
       </h4>
       <div
         className={entityInfoStyles.entityInfoInstanceTemplateContainerContent}

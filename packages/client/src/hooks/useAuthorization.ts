@@ -9,10 +9,8 @@ import {
   selectProfile,
 } from "@/redux/slices/generalSlice";
 import { useAppDispatch, useAppSelector } from "./redux";
-// Next
-import { usePathname } from "next/navigation";
-import { useRouter } from "next/navigation";
-import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
+// Translations
+import { pathnames, usePathname, useRouter } from "@/navigation";
 
 const useAuthorization = () => {
   const dispatch = useAppDispatch();
@@ -62,7 +60,7 @@ const useAuthorization = () => {
 
 export const useRedirect = (
   pathname: string | undefined,
-  router: AppRouterInstance | undefined,
+  router: any,
   loading: boolean
 ) => {
   const profile = useAppSelector(selectProfile);
@@ -71,12 +69,12 @@ export const useRedirect = (
     if (pathname && router && loading) {
       if (
         profile.email &&
-        pathname !== "/home" &&
-        (pathname === "/" || pathname === "/login")
+        pathname !== `/home` &&
+        (pathname === `/` || pathname === `/login`)
       ) {
-        router.push("/home");
-      } else if (!profile.email && pathname !== "/" && pathname !== "/login") {
-        router.push("/");
+        router.push(`/home`);
+      } else if (!profile.email && pathname !== `/` && pathname !== `/login`) {
+        router.push(`/`);
       }
     }
   }, [pathname, router, loading, profile]);

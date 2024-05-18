@@ -1,15 +1,19 @@
 // SCSS
-import signupLogoStyles from "../../scss/components/shared/AuthFormPageTemplate.module.scss";
+import signupBarStyles from "@/scss/components/shared/AuthFormPageTemplate.module.scss";
 // Components
 import Logo from "./Logo";
+import LangSwitcher from "./LangSwitcher";
 
-const SignupLogo = () => {
+const SignupBar = () => {
   return (
-    <div className={signupLogoStyles.signupLogoContainer}>
-      <Logo dimensions={64} logoImageUrlIndex={0} clickable={false} />
-      <h6>Vital Prep</h6>
+    <div className={signupBarStyles.signupBarContainer}>
+      <div className={signupBarStyles.signupBarLogo}>
+        <Logo dimensions={64} logoImageUrlIndex={0} clickable={false} />
+        <h6>Vital Prep</h6>
+      </div>
+      <LangSwitcher />
     </div>
   );
 };
 
-export default SignupLogo;
+export default SignupBar;

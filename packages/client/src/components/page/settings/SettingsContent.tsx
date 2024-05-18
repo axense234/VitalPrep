@@ -1,5 +1,5 @@
 // SCSS
-import settingsContentStyles from "../../../scss/pages/Settings.module.scss";
+import settingsContentStyles from "@/scss/pages/Settings.module.scss";
 // Components
 import AccountSettings from "./AccountSettings";
 import NotificationSettings from "./NotificationSettings";

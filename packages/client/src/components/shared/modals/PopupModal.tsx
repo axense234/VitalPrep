@@ -69,7 +69,9 @@ const PopupModal: FC<PopupModalProps> = ({
         }
       />
       <p style={{ color: textColor || "#ddd9d5" }}>
-        {modalMessage || "Default Modal Message"}
+        <span>
+          {modalMessage || "Something went wrong, please refresh the page!"}
+        </span>
         {isModalUsedWhenLoading && (
           <BeatLoader size={16} color="#120a06" margin={4} />
         )}

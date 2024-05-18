@@ -98,14 +98,14 @@
     gap: 8px;
 
     h3 {
-      @include heading("h3", "laptop", "black");
+      @include heading("h4", "laptop", "black");
 
       @media screen and (max-width: 1200px) {
-        @include heading("h3", "tablet", "black");
+        @include heading("h4", "tablet", "black");
       }
 
       @media screen and (max-width: 650px) {
-        @include heading("h3", "phone", "black");
+        @include heading("h4", "phone", "black");
       }
     }
 
@@ -144,11 +144,17 @@
   }
 }
 
-.signupLogoContainer {
+.signupBarContainer {
+  @include flexCenter(row);
+  justify-content: space-between;
+  padding: 1rem;
+  width: 100%;
+}
+
+.signupBarLogo {
   @include flexCenter(row);
   width: 100%;
   gap: 1rem;
-  padding: 1rem;
   justify-content: flex-start;
 
   @media screen and (max-width: 650px) {

@@ -1,20 +1,24 @@
+"use client";
 // SCSS
 import PrimaryButton from "@/components/shared/PrimaryButton";
-import homeSectionsStyles from "../../../scss/pages/Home.module.scss";
+import homeSectionsStyles from "@/scss/pages/Home.module.scss";
 // React
 import { FC } from "react";
 // Next
 import Image from "next/image";
-import Link from "next/link";
 // Types
 import HomeSectionContentProps from "@/core/interfaces/HomeSectionContentProps";
 // Data
 import { homeSectionsContent } from "@/data";
 // Hooks
 import useGetWindowWidth from "@/hooks/useGetWindowWidth";
+// Translations
+import { useTranslations } from "next-intl";
+import { Link } from "@/navigation";
 
 const HomeSections = () => {
   const windowWidth = useGetWindowWidth();
+
   let sectionPaddingBasedOnWindowWidth = "6rem";
   let tabletAndPhoneRedesign = windowWidth && windowWidth <= 1200;
 
@@ -70,15 +74,14 @@ const HomeSections = () => {
 
 const HomeSectionPositional: FC<HomeSectionContentProps> = ({
   backgroundImageSrc,
-  ctaButtonContent,
   position,
-  sectionDescription,
-  sectionTitle,
-  sectionSubTitle,
   contentBackgroundImageSrc,
   sectionPaddingBasedOnWindowWidth,
   tabletAndPhoneRedesign,
+  id,
+  ctaButtonLinkDest,
 }) => {
+  const translate = useTranslations(`home.sections.section-${id}`);
   return (
     <section
       className={homeSectionsStyles.homeSectionContainer}
@@ -112,16 +115,16 @@ const HomeSectionPositional: FC<HomeSectionContentProps> = ({
         >
           <div className={homeSectionsStyles.homeSectionContentDetails}>
             <header className={homeSectionsStyles.homeSectionContentHeader}>
-              <h1>{sectionTitle}</h1>
-              <h4>{sectionSubTitle}</h4>
+              <h1>{translate("sectionTitle")}</h1>
+              <h4>{translate("sectionSubTitle")}</h4>
             </header>
-            <p>{sectionDescription}</p>
+            <p>{translate("sectionDescription")}</p>
           </div>
           <PrimaryButton
-            content={ctaButtonContent as string}
+            content={translate("ctaButtonContent")}
             disabled={false}
             type="link"
-            linkDest="/guide"
+            linkDest={ctaButtonLinkDest}
           />
         </div>
       </div>
@@ -130,11 +133,11 @@ const HomeSectionPositional: FC<HomeSectionContentProps> = ({
 };
 
 const HomeSectionMiddle: FC<HomeSectionContentProps> = ({
-  sectionSubTitle,
-  sectionTitle,
   sectionItems,
   tabletAndPhoneRedesign,
+  id,
 }) => {
+  const translate = useTranslations(`home.sections.section-${id}`);
   return (
     <section
       className={homeSectionsStyles.homeSectionContainer}
@@ -151,8 +154,10 @@ const HomeSectionMiddle: FC<HomeSectionContentProps> = ({
               alignItems: "center",
             }}
           >
-            <h1 style={{ textAlign: "center" }}>{sectionTitle}</h1>
-            <h4 style={{ textAlign: "center" }}>{sectionSubTitle}</h4>
+            <h1 style={{ textAlign: "center" }}>{translate("sectionTitle")}</h1>
+            <h4 style={{ textAlign: "center" }}>
+              {translate("sectionSubTitle")}
+            </h4>
           </header>
           <ul className={homeSectionsStyles.homeSectionContentItems}>
             {sectionItems?.map((sectionItem) => {
@@ -162,7 +167,7 @@ const HomeSectionMiddle: FC<HomeSectionContentProps> = ({
                   className={homeSectionsStyles.homeSectionContentItem}
                 >
                   <Image
-                    alt={sectionItem.itemTitle}
+                    alt={translate(`items.item-${sectionItem.id}.itemTitle`)}
                     src={sectionItem.imageSrc}
                     width={tabletAndPhoneRedesign ? 100 : 128}
                     height={tabletAndPhoneRedesign ? 100 : 128}
@@ -170,8 +175,14 @@ const HomeSectionMiddle: FC<HomeSectionContentProps> = ({
                   <div
                     className={homeSectionsStyles.homeSectionContentItemHeader}
                   >
-                    <h4>{sectionItem.itemTitle}</h4>
-                    <p>{sectionItem.itemDescription}</p>
+                    <h4>
+                      {translate(`items.item-${sectionItem.id}.itemTitle`)}
+                    </h4>
+                    <p>
+                      {translate(
+                        `items.item-${sectionItem.id}.itemDescription`
+                      )}
+                    </p>
                   </div>
                 </li>
               );
@@ -186,12 +197,12 @@ const HomeSectionMiddle: FC<HomeSectionContentProps> = ({
 const HomeSectionDescriptionBased: FC<HomeSectionContentProps> = ({
   backgroundImageSrc,
   position,
-  sectionSubTitle,
-  sectionTitle,
   contentBackgroundImageSrc,
   sectionPaddingBasedOnWindowWidth,
   tabletAndPhoneRedesign,
+  id,
 }) => {
+  const translate = useTranslations(`home.sections.section-${id}`);
   return (
     <section
       className={homeSectionsStyles.homeSectionContainer}
@@ -225,19 +236,17 @@ const HomeSectionDescriptionBased: FC<HomeSectionContentProps> = ({
         >
           <div className={homeSectionsStyles.homeSectionContentDetails}>
             <header className={homeSectionsStyles.homeSectionContentHeader}>
-              <h1>{sectionTitle}</h1>
-              <h4>{sectionSubTitle}</h4>
+              <h1>{translate("sectionTitle")}</h1>
+              <h4>{translate("sectionSubTitle")}</h4>
             </header>
             <div className={homeSectionsStyles.homeSectionContentDescriptions}>
               <p>
-                Given the app’s complexity, sometimes you will find yourself
-                confused. We have a guide that serves as a way to help you use
-                our app. Checkout the <Link href="/guide">Guide Page.</Link>
+                {translate("appHelpDescription")}
+                <Link href="/guide">{translate("appHelpLinkLabel")}.</Link>
               </p>
               <p>
-                In the case that you have a question about Meal Prepping in
-                general that needs to be answered, we can help. Checkout the{" "}
-                <Link href="/guide">FAQ Page.</Link>
+                {translate("mealPrepHelpDescription")}
+                <Link href="/faq">{translate("mealPrepHelpLinkLabel")}.</Link>
               </p>
             </div>
           </div>

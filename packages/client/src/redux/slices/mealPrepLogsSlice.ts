@@ -25,7 +25,8 @@ export const mealPrepLogsAdapter = createEntityAdapter<MealPrepLogType>();
 const initialState = mealPrepLogsAdapter.getInitialState({
   templateMealPrepLog: defaultTemplateMealPrepLog,
   loadingCreateMealPrepLog: "IDLE",
-  mealPrepLogFormModalErrorMessage: "Default Message",
+  mealPrepLogFormModalErrorMessage:
+    "Something went wrong, please refresh the page!",
   loadingGetUserMealPrepLogs: "IDLE",
   loadingGetUserMealPrepLog: "IDLE",
 }) as MealPrepLogsSliceStateType;

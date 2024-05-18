@@ -3,18 +3,22 @@ import { homePageUrl, logoImageUrls } from "@/data";
 // React
 import { FC } from "react";
 // Next
-import Link from "next/link";
 import Image from "next/image";
 // SCSS
 import logoStyles from "../../scss/components/shared/Logo.module.scss";
 // Types
 import LogoProps from "@/core/interfaces/LogoProps";
+// Translations
+import { Link } from "@/navigation";
+import { useTranslations } from "next-intl";
 
 const Logo: FC<LogoProps> = ({ logoImageUrlIndex, dimensions, clickable }) => {
+  const translate = useTranslations("pageLinks.labels");
   return (
     <Link
       href={clickable ? homePageUrl : "/"}
-      title={clickable ? "Home" : "Vital Prep"}
+      title={clickable ? translate("/home") : "Vital Prep"}
+      aria-label={clickable ? translate("/home") : "Vital Prep"}
       className={logoStyles.logoContainer}
       style={{ width: dimensions, height: dimensions }}
     >

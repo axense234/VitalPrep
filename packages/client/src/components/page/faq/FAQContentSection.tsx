@@ -6,31 +6,35 @@ import FAQPageSection from "@/core/types/FAQPageSection";
 import { FC } from "react";
 // Components
 import FAQAccordion from "./FAQAccordion";
+// Translations
+import { useTranslations } from "next-intl";
 
-const FAQContentSection: FC<FAQPageSection> = ({
-  sectionTitle,
-  sectionDescription,
-  sectionAccordions,
-}) => {
+const FAQContentSection: FC<FAQPageSection> = ({ sectionAccordions, id }) => {
+  const translateFAQ = useTranslations(`faq.sections.${id}`);
   return (
     <section className={faqStyles.faqContentSection}>
-      <h1>{sectionTitle}</h1>
+      <h1>{translateFAQ("sectionTitle")}</h1>
       <p
         className={faqStyles.faqContentSectionParagraph}
         style={{
-          color:
-            sectionTitle === "Meal Prep Recipes and Ideas"
-              ? "#ddd9d5"
-              : "#120a06",
+          color: id === 3 ? "#ddd9d5" : "#120a06",
         }}
       >
-        {sectionDescription}
+        {translateFAQ("sectionDescription")}
       </p>
       <ul className={faqStyles.faqContentSectionAccordions}>
         {sectionAccordions.map((sectionAccordion) => {
           return (
             <li key={sectionAccordion.id}>
-              <FAQAccordion {...sectionAccordion} />
+              <FAQAccordion
+                accordionContent={translateFAQ(
+                  `sectionAccordions.${sectionAccordion.id}.accordionContent`
+                )}
+                accordionTitle={translateFAQ(
+                  `sectionAccordions.${sectionAccordion.id}.accordionTitle`
+                )}
+                id={sectionAccordion.id}
+              />
             </li>
           );
         })}

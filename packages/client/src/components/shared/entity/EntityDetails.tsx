@@ -1,13 +1,13 @@
 // Interfaces
 import EntityDetailsProps from "@/core/interfaces/entity/EntityDetailsProps";
-// Types
-import EntityType from "@/core/types/entity/users/EntityType";
 // React
 import { FC } from "react";
 // Components
 import EntityCard from "./EntityCard";
 // SCSS
 import entityPreviewStyles from "../../../scss/components/shared/EntityPreview.module.scss";
+// Translations
+import { useTranslations } from "next-intl";
 
 const EntityDetails: FC<EntityDetailsProps> = ({
   type,
@@ -15,11 +15,12 @@ const EntityDetails: FC<EntityDetailsProps> = ({
   entity,
   entityId,
 }) => {
-  const viewLabel = useChooseEntityDetailsLabel(entityType);
+  const translate = useTranslations("entityPreview.entityDetails");
+  const viewLabel = translate(`entityLabels.${entityType}`);
 
   return (
     <div className={entityPreviewStyles.entityPreviewDetailsContainer}>
-      <h4>{type === "preview" ? "Preview" : viewLabel}</h4>
+      <h4>{type === "preview" ? translate("title") : viewLabel}</h4>
       <EntityCard
         entity={entity}
         entityType={entityType}
@@ -29,36 +30,6 @@ const EntityDetails: FC<EntityDetailsProps> = ({
       />
     </div>
   );
-};
-
-const useChooseEntityDetailsLabel = (entityType: EntityType) => {
-  let viewLabel = "Ingredient";
-  switch (entityType) {
-    case "ingredient":
-      viewLabel = "Ingredient";
-      break;
-    case "utensil":
-      viewLabel = "Utensil";
-      break;
-    case "recipe":
-      viewLabel = "Recipe";
-      break;
-    case "dayTemplate":
-      viewLabel = "Day Template";
-      break;
-    case "instanceTemplate":
-      viewLabel = "Instance Template";
-      break;
-    case "mealPrepPlan":
-      viewLabel = "Meal Prep Plan";
-      break;
-    case "mealPrepLog":
-      viewLabel = "Meal Prep Log";
-      break;
-    default:
-      throw new Error("Invalid entity type!");
-  }
-  return viewLabel;
 };
 
 export default EntityDetails;

@@ -1,0 +1,999 @@
+{
+  "login": {
+    "title": "Login",
+    "subtitle": "Don't have an account?",
+    "subtitleLink": "Sign Up",
+    "oauth": {
+      "firstMessage": "- quick login with OAuth - ",
+      "secondMessage": "- or with email and password - ",
+      "buttons": {
+        "google": "Log In with Google",
+        "github": "Log In with Github"
+      }
+    },
+    "formLabels": {
+      "email": "Email:",
+      "password": "Password:",
+      "button": "Log In"
+    }
+  },
+  "signup": {
+    "title": "Signup",
+    "subtitle": "Have an account?",
+    "subtitleLink": "Log In",
+    "oauth": {
+      "firstMessage": "- quick signup with OAuth - ",
+      "secondMessage": "- or with email and password - ",
+      "buttons": {
+        "google": "Sign Up with Google",
+        "github": "Sign Up with Github"
+      }
+    },
+    "formLabels": {
+      "username": "Username:",
+      "email": "Email:",
+      "password": "Password:",
+      "profileImage": "Profile Image:",
+      "age": "Age:",
+      "button": "Sign Up",
+      "reCAPTCHA": "Confirm that you are not a robot!"
+    }
+  },
+  "home": {
+    "sections": {
+      "section-1": {
+        "sectionTitle": "VitalPrep",
+        "sectionSubTitle": "meal prep helper",
+        "ctaButtonContent": "Get Started",
+        "sectionDescription": "VitalPrep is a complex meal prep helper app that helps people create meal prep plans and to follow those respective plans."
+      },
+      "section-2": {
+        "sectionTitle": "Meal Prep",
+        "sectionSubTitle": "what is it?",
+        "ctaButtonContent": "Learn More",
+        "sectionDescription": "Meal Prep, short for meal preparation, is the practice of planning and preparing meals in advance, typically for a period of several days to a week."
+      },
+      "section-3": {
+        "sectionTitle": "Meal Prep Benefits",
+        "sectionSubTitle": "what you're after",
+        "items": {
+          "item-1": {
+            "itemTitle": "Money and Time",
+            "itemDescription": "Meal Prepping saves you time by not having to cook everyday and money since ingredients tend to cost way less compared to other options."
+          },
+          "item-2": {
+            "itemTitle": "Health",
+            "itemDescription": "Meal Prepping tends to use ingredients that are often extremely nutritious with a high satiety index and low calorie density."
+          },
+          "item-3": {
+            "itemTitle": "Stress Reduction",
+            "itemDescription": "Meal Prepping leaves you with no worries about food since you have prepared meals available. Cooking in general is a very relaxing activity, reducing stress and helping manage it in the future."
+          }
+        }
+      },
+      "section-4": {
+        "sectionTitle": "Difficulties?",
+        "sectionSubTitle": "we can help",
+        "appHelpDescription": "Given the app’s complexity, sometimes you will find yourself confused. We have a guide that serves as a way to help you use our app. Checkout the ",
+        "appHelpLinkLabel": "Guide Page",
+        "mealPrepHelpDescription": "In the case that you have a question about Meal Prepping in general that needs to be answered, we can help. Checkout the ",
+        "mealPrepHelpLinkLabel": "FAQ Page"
+      }
+    }
+  },
+  "navbar": {
+    "navbarTitleTextContent": "Go to Profile",
+    "navbarImageAltTextContent": "Profile Image",
+    "navbarUsernameDefaultValue": "Username"
+  },
+  "pageLinks": {
+    "labels": {
+      "/home": "Home",
+      "/logs": "Session Logs",
+      "/create-log": "Add Session Log",
+      "/create-tool": "Create Tool",
+      "/multi-view-tool": "Multi-View Tool",
+      "/profile": "Profile",
+      "/settings": "Settings",
+      "/guide": "Getting Started",
+      "/faq": "FAQ",
+      "/about": "About",
+      "/contact": "Contact",
+      "/logout": "Logout"
+    }
+  },
+  "footer": {
+    "contact": {
+      "phoneNumberTitle": "Phone Number:",
+      "emailTitle": "Email:"
+    }
+  },
+  "pageTitles": {
+    "titles": {
+      "/logs": {
+        "titleTextContent": "Session Logs",
+        "subTitleTextContent": "see all your logs"
+      },
+      "/create-tool": {
+        "titleTextContent": "Create Tool",
+        "subTitleTextContent": "create what you need"
+      },
+      "/create-log": {
+        "titleTextContent": "Add Session Log",
+        "subTitleTextContent": "save your session log"
+      },
+      "/multi-view-tool": {
+        "titleTextContent": "Multi-View Tool",
+        "subTitleTextContent": "see all the stuff you need"
+      },
+      "/profile": {
+        "titleTextContent": "Profile",
+        "subTitleTextContent": "view your profile"
+      },
+      "/settings": {
+        "titleTextContent": "Settings",
+        "subTitleTextContent": "update your settings"
+      },
+      "/guide": {
+        "titleTextContent": "Getting Started",
+        "subTitleTextContent": "the basic guide to VitalPrep"
+      },
+      "/faq": {
+        "titleTextContent": "FAQ",
+        "subTitleTextContent": "frequently asked questions"
+      },
+      "/about": {
+        "titleTextContent": "About",
+        "subTitleTextContent": "find more about us and the app"
+      },
+      "/contact": {
+        "titleTextContent": "Contact",
+        "subTitleTextContent": "get in touch with us"
+      },
+      "/ingredient": {
+        "titleTextContent": "View Ingredient",
+        "subTitleTextContent": "the base of every recipe"
+      },
+      "/utensil": {
+        "titleTextContent": "View Utensil",
+        "subTitleTextContent": "your cooking tool"
+      },
+      "/recipe": {
+        "titleTextContent": "View Recipe",
+        "subTitleTextContent": "savor and enjoy"
+      },
+      "/dayTemplate": {
+        "titleTextContent": "View Day Plan",
+        "subTitleTextContent": "your day plan"
+      },
+      "/instanceTemplate": {
+        "titleTextContent": "View Session Template",
+        "subTitleTextContent": "your weekly session scheme"
+      },
+      "/mealPrepPlan": {
+        "titleTextContent": "View Meal Prep Plan",
+        "subTitleTextContent": "your plan to follow"
+      },
+      "/mealPrepLog": {
+        "titleTextContent": "View Session Log",
+        "subTitleTextContent": "your saved meal prep log"
+      }
+    }
+  },
+  "createTool": {
+    "formLabels": {
+      "ingredient": {
+        "formTitle": "Create Ingredient",
+        "name": "Name:",
+        "image": "Image:",
+        "calories": "Calories(per 100g):",
+        "proteinAmount": "Protein(in grams):",
+        "carbsAmount": "Carbs(in grams):",
+        "fatsAmount": "Fats(in grams):",
+        "enabled": "Enabled?:",
+        "createButtonLabel": "Create Ingredient"
+      },
+      "utensil": {
+        "formTitle": "Create Utensil",
+        "name": "Name:",
+        "image": "Image:",
+        "enabled": "Enabled?:",
+        "createButtonLabel": "Create Utensil"
+      },
+      "recipe": {
+        "formTitle": "Create Recipe",
+        "name": "Name:",
+        "image": "Image:",
+        "tutorial": {
+          "videoTutorialCheckboxLabel": "Use Video Tutorial?:",
+          "videoTutorialUrlPrompt": "Tutorial Url:",
+          "writtenTutorialCheckboxLabel": "Use Written Tutorial?:",
+          "writtenTutorialUrlPrompt": "Written Tutorial:"
+        },
+        "createButtonLabel": "Create Recipe",
+        "selectFormControlsLabels": {
+          "ingredients": "Ingredients Used:",
+          "utensils": "Utensils Used"
+        }
+      },
+      "dayTemplate": {
+        "formTitle": "Create Day Plan",
+        "name": "Name:",
+        "image": "Image:",
+        "nbOfEntities": "Number of Meals:",
+        "createButtonLabel": "Create Day Plan",
+        "selectFormControlsLabels": {
+          "componentsLabel": "Recipes",
+          "componentLabel": "Meal"
+        }
+      },
+      "instanceTemplate": {
+        "formTitle": "Create Session Template",
+        "name": "Name:",
+        "image": "Image:",
+        "nbOfEntities": "Number of Days Covered:",
+        "createButtonLabel": "Create Session Template",
+        "selectFormControlsLabels": {
+          "componentsLabel": "Individual Day Plans:",
+          "componentLabel": "Day"
+        }
+      },
+      "mealPrepPlan": {
+        "formTitle": "Create Meal Prep Plan",
+        "name": "Name:",
+        "image": "Image:",
+        "nbOfEntities": "Number of Templates Used:",
+        "createButtonLabel": "Create Meal Prep Plan",
+        "selectFormControlsLabels": {
+          "componentsLabel": "Individual Session Templates:",
+          "componentLabel": "Number #{id} Template",
+          "weekdayLabel": "Weekday:",
+          "timeLabel": "Session Starting Time:"
+        }
+      },
+      "mealPrepLog": {
+        "formTitle": "Add Session Log",
+        "name": "Name:",
+        "image": "Image:",
+        "date": "Date:",
+        "completed": "Completed?:",
+        "cookingDuration": "Cooking Duration:",
+        "createButtonLabel": "Add Session Log",
+        "selectFormControlsLabels": {
+          "instanceTemplate": "Session Template Used"
+        }
+      }
+    },
+    "entityOptions": {
+      "labels": {
+        "ingredient": "Ingredient",
+        "utensil": "Utensil",
+        "recipe": "Recipe",
+        "dayTemplate": "Day Plan",
+        "instanceTemplate": "Session Template",
+        "mealPrepPlan": "Meal Prep Plan",
+        "mealPrepLog": "Session Log"
+      }
+    }
+  },
+  "entityPreview": {
+    "entityDetails": {
+      "title": "Preview",
+      "entityLabels": {
+        "ingredient": "Ingredient",
+        "utensil": "Utensil",
+        "recipe": "Recipe",
+        "dayTemplate": "Day Plan",
+        "instanceTemplate": "Session Template",
+        "mealPrepPlan": "Meal Prep Plan",
+        "mealPrepLog": "Session Log"
+      }
+    },
+    "entityMacros": {
+      "noMacrosMessage": "No macros to display.",
+      "macrosTitle": "Macros"
+    }
+  },
+  "entityMenu": {
+    "openActionTitle": "Open Entity Type Menu",
+    "closeActionTitle": "Close Entity Type Menu",
+    "selectLabel": "Select"
+  },
+  "viewEntityOptions": {
+    "chooseEntity": {
+      "labelContent": "Selected Entity:",
+      "labelName": "chooseEntityOption",
+      "selectLabel": "Select"
+    },
+    "sortBy": {
+      "labelContent": "Sort By:",
+      "labelName": "sortByOptions",
+      "labelTitle": "Sort by {label}",
+      "selectLabel": "Sort By:",
+      "orderBy": {
+        "titleLabel": "Current Order: {order}",
+        "titleOption": {
+          "asc": "Ascending",
+          "desc": "Descending"
+        }
+      },
+      "sortingOptions": {
+        "labels": {
+          "ingredient": {
+            "enabled": "Availability of Ingredients",
+            "name": "Ingredient Name",
+            "numberOfRecipes": "Commonly used Ingredients"
+          },
+          "utensil": {
+            "enabled": "Availability of Utensils",
+            "name": "Utensil Name",
+            "numberOfRecipes": "Commonly used Utensils"
+          },
+          "recipe": {
+            "name": "Recipe Name",
+            "numberOfDayTemplates": "Commonly used Recipes"
+          },
+          "dayTemplate": {
+            "name": "Day Plan Name",
+            "numberOfInstanceTemplates": "Commonly used Day Plans"
+          },
+          "instanceTemplate": {
+            "name": "Session Template Name",
+            "numberOfMealPrepPlans": "Commonly used Session Templates",
+            "coverage": "Coverage Of Session Templates"
+          },
+          "mealPrepPlan": {
+            "name": "Meal Prep Plan Name"
+          },
+          "mealPrepLog": {
+            "name": "Session Log Name",
+            "completed": "Completion of Session Logs"
+          }
+        }
+      }
+    },
+    "searchEntity": {
+      "labelContent": "Search:",
+      "labelName": "searchEntity",
+      "magGlassTitle": "Search",
+      "viewType": {
+        "title": "Change View Option to {type}",
+        "typeOptions": {
+          "grid": "Grid",
+          "list": "List"
+        }
+      }
+    }
+  },
+  "multiViewPage": {
+    "entitiesTitle": {
+      "ingredient": "Ingredients",
+      "utensil": "Utensils",
+      "recipe": "Recipes",
+      "dayTemplate": "Day Plans",
+      "instanceTemplate": "Session Templates",
+      "mealPrepPlan": "Meal Prep Plans",
+      "mealPrepLog": "Session Log"
+    },
+    "noEntitiesCase": {
+      "message": "You have no {title} available. If you want to create some checkout the ",
+      "messageLinkTitle": "Go to Create Tool Page",
+      "messageLinkLabel": "Create Tool Page"
+    }
+  },
+  "profile": {
+    "profileInfo": {
+      "profileImageAlt": "Profile Image",
+      "defaultProfileUsername": "Username",
+      "defaultProfileEmail": "profileemail@gmail.com",
+      "defaultProfileAge": "Unknown Age",
+      "profileAge": "{age} years old"
+    }
+  },
+  "entityStatistics": {
+    "title": "Statistics",
+    "prefix": {
+      "usable": "Used in ",
+      "component": "Uses ",
+      "count": "Number of "
+    }
+  },
+  "entityAppearances": {
+    "ingredient": {
+      "title": "Appearances",
+      "sectionTitle": "Ingredients:"
+    },
+    "utensil": {
+      "title": "Appearances",
+      "sectionTitle": "Utensils:"
+    },
+    "recipe": {
+      "title": "Appearances",
+      "sectionTitle": "Recipes:"
+    },
+    "dayTemplate": {
+      "title": "Appearances",
+      "sectionTitle": "Day Plans:"
+    },
+    "instanceTemplate": {
+      "title": "Appearances",
+      "sectionTitle": "Session Templates:"
+    },
+    "mealPrepPlan": {
+      "title": "Appearances",
+      "sectionTitle": "Meal Prep Plans:"
+    },
+    "mealPrepLog": {
+      "title": "Appearances",
+      "sectionTitle": "Session Logs:"
+    },
+    "profile": {
+      "title": "Created Entities"
+    }
+  },
+  "entityTutorial": {
+    "iframeTitle": "Recipe Tutorial",
+    "videoTutorial": {
+      "title": "Video Tutorial",
+      "notFoundMessage": "No Video Tutorial Available."
+    },
+    "writtenTutorial": {
+      "title": "Written Tutorial",
+      "notFoundMessage": "No Written Tutorial Available."
+    }
+  },
+  "entityComponents": {
+    "title": "Components",
+    "sectionTitle": "{type} used in {name}:",
+    "defaultEntityName": "Entity Name"
+  },
+  "entityInstanceTemplate": {
+    "title": "Componente",
+    "defaultEntityName": "Entity Example"
+  },
+  "settings": {
+    "accountSettings": {
+      "title": "Account Settings",
+      "formLabels": {
+        "name": "New Username:",
+        "email": "New Email:",
+        "password": "New Password",
+        "verifyPassword": "Verify Password",
+        "image": "New Account Image",
+        "submitButtonContent": "Update Account Settings"
+      }
+    },
+    "notificationSettings": {
+      "title": "Notification Settings",
+      "formLabels": {
+        "allowNotifications": "Allow Notifications?:",
+        "notificationsImage": "Notification Image:",
+        "notificationStyles": {
+          "formLabel": "Notification Style:",
+          "default": "Default",
+          "serious": "Serious",
+          "motivating": "Motivating",
+          "menacing": "Menacing"
+        },
+        "submitButtonContent": "Update Notification Settings"
+      }
+    }
+  },
+  "gettingStarted": {
+    "contentMap": {
+      "title": "Guide Content",
+      "sectionTitleLabel": "Change Section to {section}",
+      "basics": {
+        "title": "Basics",
+        "a": {
+          "linkLabel": "Guide Goal",
+          "linkDest": "#guideGoal"
+        },
+        "b": {
+          "linkLabel": "Create Tool Page",
+          "linkDest": "#createToolPage"
+        },
+        "c": {
+          "linkLabel": "Multi-View Tool Page",
+          "linkDest": "#multiViewToolPage"
+        },
+        "d": {
+          "linkLabel": "View Tool Page",
+          "linkDest": "#viewToolPage"
+        }
+      },
+      "entities": {
+        "title": "Entities",
+        "a": {
+          "linkLabel": "Ingredients",
+          "linkDest": "#ingredients"
+        },
+        "b": {
+          "linkLabel": "Utensils",
+          "linkDest": "#utensils"
+        },
+        "c": {
+          "linkLabel": "Recipes",
+          "linkDest": "#recipes"
+        },
+        "d": {
+          "linkLabel": "Day Plans",
+          "linkDest": "#dayPlans"
+        },
+        "e": {
+          "linkLabel": "Session Templates",
+          "linkDest": "#sessionTemplates"
+        },
+        "f": {
+          "linkLabel": "Meal Prep Plans",
+          "linkDest": "#mealPrepPlans"
+        }
+      },
+      "logs": {
+        "title": "Session Logs",
+        "a": {
+          "linkLabel": "What are Session Logs?",
+          "linkDest": "#whatAreSessionLogs"
+        },
+        "b": {
+          "linkLabel": "How to Create a Session Log?",
+          "linkDest": "#createSessionLogs"
+        },
+        "c": {
+          "linkLabel": "How to View a Session Log?",
+          "linkDest": "#viewSessionLogs"
+        }
+      },
+      "extras": {
+        "title": "Profile, Settings and Extras",
+        "a": {
+          "linkLabel": "Profile Page",
+          "linkDest": "#profilePage"
+        },
+        "b": {
+          "linkLabel": "Settings Page",
+          "linkDest": "#settingsPage"
+        },
+        "c": {
+          "linkLabel": "Feedback",
+          "linkDest": "#feedback"
+        },
+        "d": {
+          "linkLabel": "Notifications",
+          "linkDest": "#notifications"
+        },
+        "e": {
+          "linkLabel": "Conclusion",
+          "linkDest": "#conclusion"
+        }
+      }
+    },
+    "content": {
+      "basics": {
+        "title": "The Basics",
+        "articles": {
+          "1": {
+            "title": "Guide's Goal",
+            "descriptions": {
+              "1": "<span>NOTE:</span> The following tutorial requires prior knowledge of meal prepping. If you do not know anything about meal prepping, try reading a bit online or checkout the <faq>FAQ Page</faq>.",
+              "2": "This guide’s <span>goal</span> is to teach you how to create a <span>Meal Prep Plan</span> in order to use it in a practical way by activating it so you can be notified whenever you need to prepare your meals."
+            },
+            "imageAlt": "Guide Goal Image",
+            "images": {
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715177907/VitalPrep/Screenshot_33_o5fzdm.png"
+            }
+          },
+          "2": {
+            "title": "Create Tool Page",
+            "descriptions": {
+              "1": "In order to create a <span>Meal Prep Plan</span>, you will first need to create quite a few <span>entities</span>. To create <span>entities</span>, you will have to use the <createTool>Create Tool Page</createTool>. Simply complete the form, observe the preview to see if it’s to your liking, then create said entity.",
+              "2": "To change the create tool interface, use the menu on the left of your screen, which can be hidden/shown as needed."
+            },
+            "imageAlt": "Create Tool Page Image",
+            "images": {
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715179083/VitalPrep/Screenshot_35_sh7nyg.png"
+            }
+          },
+          "3": {
+            "title": "Multi-View Tool Page",
+            "descriptions": {
+              "1": "In order to <span>view</span> your created <span>entities</span>, you will need to use the <multiViewTool>Multi-View Tool Page</multiViewTool>. Adjust the filtering options to your needs.",
+              "2": "The <span>filtering options</span> available are: <span>entity type</span>(changes what entity is shown), <span>sort by</span>(sorts shown entity by a property of their, for example their names), <span>search</span>(search entities that contain the text given in their name), <span>list/grid view</span> (changes entity view type)."
+            },
+            "imageAlt": "Multi-View Tool Page Image",
+            "images": {
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715178126/VitalPrep/Screenshot_34_vb9vwf.png"
+            }
+          },
+          "4": {
+            "title": "View Tool Page",
+            "descriptions": {
+              "1": "In order to <span>view</span> your created <span>entities individually</span>, you will need to use the <viewTool>View Tool Page</viewTool>, accessed through by <span>clicking</span> any entity component.",
+              "2": "On said page you can <span>view different properties</span> of the respective entity, like their <span>name</span>, <span>image</span>, <span>calories</span>(if they have any), <span>macros</span>(on any entity type except utensil, duh), etc.",
+              "3": "You can also view the <span>statistics</span> of the respective entity, what entities they are <span>composed of</span>, what other entities are <span>composed of them</span>."
+            },
+            "imageAlt": "View Tool Page Image",
+            "images": {
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715179643/VitalPrep/Screenshot_37_lo4qpe.png",
+              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715179504/VitalPrep/Screenshot_36_yaa7zm.png"
+            }
+          }
+        }
+      },
+      "entities": {
+        "title": "Entities",
+        "articles": {
+          "1": {
+            "title": "Ingredients",
+            "descriptions": {
+              "1": "<span>Ingredients</span> are the main components of a <span>Recipe</span>. Without them, you cannot create Recipes, and without Recipes you cannot create Day Plans and so on. They represent the ingredients used in the recipe.",
+              "2": "Use the <createTool> Create Tool Page</createTool> to create an <span>Ingredient</span>. Give it an appropriate name, image(optional) and specify if it is enabled or not. Don’t forget to also add <span>macros</span>.",
+              "3": "<span>NOTE:</span>: Adding macros is optional, especially for condiments, but in general it is a good idea to accurately add macros to your ingredients when creating them.",
+              "4": "To <span>view</span> all your <span>created entities</span>, use the <multiViewTool>Multi-View Tool Page</multiViewTool>. To view an <span>individual entity</span> in detail, click any <span>Ingredient</span> component on the <multiViewTool> Multi-View Tool Page</multiViewTool>."
+            },
+            "imageAlt": "Ingredient Entity Image",
+            "images": {
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715181329/VitalPrep/Screenshot_38_tdcdyr.png",
+              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715181484/VitalPrep/Screenshot_39_moj2tx.png"
+            }
+          },
+          "2": {
+            "title": "Utensils",
+            "descriptions": {
+              "1": "<span>Utensils</span> are components of a <span>Recipe</span>. Without them, you cannot create Recipes, and without Recipes you cannot create Day Plans and so on. They represent the kitchen utensils/tools that are used in the recipe.",
+              "2": "Use the <createTool> Create Tool Page</createTool> to create an <span>Utensil</span>. Give it an appropriate name, image(optional) and specify if it is enabled or not.",
+              "3": "To <span>view</span> all your <span>created entities</span>, use the <multiViewTool>Multi-View Tool Page</multiViewTool>. To view an <span>individual entity</span> in detail, click any <span>Utensil</span> component on the <multiViewTool>Multi-View Tool Page</multiViewTool>."
+            },
+            "imageAlt": "Utensil Entity Image",
+            "images": {
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715181630/VitalPrep/Screenshot_40_rvtkbe.png",
+              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715181718/VitalPrep/Screenshot_41_sl4fdr.png"
+            }
+          },
+          "3": {
+            "title": "Recipes",
+            "descriptions": {
+              "1": "<span>Recipes</span> are the main components of a <span>Day Plan</span>. Without them, you cannot create <span>Day Plans</span>, and without Day Plans you cannot create <span>Session Templates</span> and so on. They represent the actual recipes used by meals in a <span>Day Plan</span>.",
+              "2": "Use the <createTool> Create Tool Page</createTool> to create a <span>Recipe</span>. Give it an appropriate name, image(optional) and either a <span>Video Tutorial</span>, <span>Written Tutorial</span> or both.",
+              "3": "After that, select all the <span>Ingredients</span> and <span>Utensils</span> the <span>Recipe</span> uses.",
+              "4": "To <span>view</span> all your <span>created entities</span>, use the <multiViewTool>Multi-View Tool Page</multiViewTool>. To view an <span>individual entity</span> in detail, click any <span>Recipe</span> component on the <multiViewTool> Multi-View Tool Page</multiViewTool>."
+            },
+            "imageAlt": "Recipe Entity Image",
+            "images": {
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715181911/VitalPrep/Screenshot_42_gw8stk.png",
+              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715182012/VitalPrep/Screenshot_43_ijmjfh.png",
+              "3": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715182089/VitalPrep/Screenshot_45_erigz6.png"
+            }
+          },
+          "4": {
+            "title": "Day Plans",
+            "descriptions": {
+              "1": "<span>Day Plans</span> are the main components of a <span>Session Template</span>. Without them, you cannot create <span>Session Templates</span>, and without <span>Session Templates</span> you cannot create <span>Meal Prep Plans</span>. They each represent the plan for a specific day in a <span>Session Template</span>.",
+              "2": "Use the <createTool> Create Tool Page</createTool> to create a <span>Day Plan</span>. Give it an appropriate name, image(optional) and the number of meals the day plan will have.",
+              "3": "After that, select a <span>specific Recipe</span> for each meal used.",
+              "4": "To <span>view</span> all your <span>created entities</span>, use the <multiViewTool>Multi-View Tool Page</multiViewTool>. To view an <span>individual entity</span> in detail, click any <span>Day Plan</span> component on the <multiViewTool> Multi-View Tool Page</multiViewTool>."
+            },
+            "imageAlt": "Day Plan Entity Image",
+            "images": {
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715183076/VitalPrep/Screenshot_46_qw9rgz.png",
+              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715183623/VitalPrep/Screenshot_47_qzv7b4.png",
+              "3": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715183690/VitalPrep/Screenshot_48_mompqr.png"
+            }
+          },
+          "5": {
+            "title": "Session Templates",
+            "descriptions": {
+              "1": "<span>Session Templates</span> are the main components of a <span>Meal Prep Plan</span>. Without them, you cannot create <span>Meal Prep Plans</span>. They each represent the specific template/scheme for a specific session in a <span>Meal Prep Plan</span>.",
+              "2": "<span>Session Templates</span> are also used by <span>Session Logs</span>.",
+              "3": "Use the <createTool> Create Tool Page</createTool> to create a <span>Session Template</span>. Give it an appropriate name, image(optional) and the number of days it will cover.",
+              "4": "After that, select a <span>specific Day Plan</span> for each specific day covered.",
+              "5": "To <span>view</span> all your <span>created entities</span>, use the <multiViewTool>Multi-View Tool Page</multiViewTool>. To view an <span>individual entity</span> in detail, click any <span>Session Template</span> component on the <multiViewTool> Multi-View Tool Page</multiViewTool>."
+            },
+            "imageAlt": "Session Template Entity Image",
+            "images": {
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715183829/VitalPrep/Screenshot_49_cnpacm.png",
+              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715183890/VitalPrep/Screenshot_50_p8l6wt.png",
+              "3": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715184001/VitalPrep/Screenshot_52_ctxjaz.png"
+            }
+          },
+          "6": {
+            "title": "Meal Prep Plans",
+            "descriptions": {
+              "1": "<span>Meal Prep Plans</span> represent the actual plans you will follow. In order to receive reminder type <span>notifications</span> for your <span>Meal Prep Plan Sessions</span>, you will need to <span>activate</span> said Meal Prep Plan and also <span>subscribe to our notifications</span>.",
+              "2": "Use the <createTool> Create Tool Page</createTool> to create a <span>Session Template</span>. Give it an appropriate name, image(optional) and the number of sessions it will have.",
+              "3": "After that, select a <span>specific Session Template</span> for each specific session, the <span>weekday</span> and <span>hour</span> you will start meal prepping.",
+              "4": "To <span>view</span> all your <span>created entities</span>, use the <multiViewTool>Multi-View Tool Page</multiViewTool>. To view an <span>individual entity</span> in detail, click any <span>Meal Prep Plan</span> component on the <multiViewTool> Multi-View Tool Page</multiViewTool>."
+            },
+            "imageAlt": "Meal Prep Plan Image",
+            "images": {
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715184134/VitalPrep/Screenshot_53_bgbocc.png",
+              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715184377/VitalPrep/Screenshot_54_qsapvp.png",
+              "3": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715184475/VitalPrep/Screenshot_55_ukdzrs.png"
+            }
+          }
+        }
+      },
+      "logs": {
+        "title": "Session Logs",
+        "articles": {
+          "1": {
+            "title": "What are Session Logs?",
+            "descriptions": {
+              "1": "<span>Session Logs</span> represent the logs of your <span>active Meal Prep Plan Sessions</span>. In other words, they represent the saved instance of a <span>Meal Prep Plan Session</span>. They are very useful for <span>tracking Meal Prep Plan Sessions</span>."
+            },
+            "imageAlt": "Active Meal Prep Plan Image",
+            "images": {
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715177907/VitalPrep/Screenshot_33_o5fzdm.png"
+            }
+          },
+          "2": {
+            "title": "How to create a Session Log?",
+            "descriptions": {
+              "1": "<span>Session Logs</span> by default are <span>automatically</span> created 3 hours <span>after your active Meal Prep Plan Session</span>. This <span>behaviour</span> can be changed on the <settings>Settings Page</settings> to either not create logs automatically, to create logs after a given number of hours instead of 3, or both.",
+              "2": "<span>Session Logs</span> can also be created <span>manually</span> on the <addLog>Add Log Page</addLog>."
+            },
+            "imageAlt": "Add Session Log Image",
+            "images": {
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715185596/VitalPrep/Screenshot_56_dvrgak.png",
+              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715185699/VitalPrep/Screenshot_57_mjxlki.png"
+            }
+          },
+          "3": {
+            "title": "How to view a Session Log?",
+            "descriptions": {
+              "1": "To <span>view</span> all your <span>Session Logs</span>, use the <multiViewTool>Multi-View Tool Page</multiViewTool>. To view an <span>individual Session Log</span> in detail, click any <span>Session Log</span> component on the <multiViewTool>Multi-View Tool Page</multiViewTool>."
+            },
+            "imageAlt": "View Session Log Image",
+            "images": {
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715185923/VitalPrep/Screenshot_59_bdjdnw.png",
+              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715185889/VitalPrep/Screenshot_58_aljwha.png"
+            }
+          }
+        }
+      },
+      "extras": {
+        "title": "Profile, Settings and Extras",
+        "articles": {
+          "1": {
+            "title": "Profile",
+            "descriptions": {
+              "1": "To view your <span>Profile</span>, you can either access it through the <span>Navigation Bar</span> or <span>Side Bar</span> to be sent to the <profile>Profile Page</profile>.",
+              "2": "On the <profile>Profile Page</profile> you can view your username, email, age, statistics and all of the entities you have created."
+            },
+            "imageAlt": "Profile Section Image",
+            "images": {
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715187350/VitalPrep/Screenshot_60_cch6wk.png",
+              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715187384/VitalPrep/Screenshot_61_frtxb0.png",
+              "3": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715187473/VitalPrep/Screenshot_62_u2tbk6.png",
+              "4": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715187500/VitalPrep/Screenshot_63_ovkvtp.png"
+            }
+          },
+          "2": {
+            "title": "Settings",
+            "descriptions": {
+              "1": "Your <span>profile details</span> or <span>notification settings</span> can be changed on the <settings>Settings Page</settings>.",
+              "2": "The available <span>Profile Settings</span> are: username, email, password, profile image."
+            },
+            "imageAlt": "Settings Section Image",
+            "images": {
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715185596/VitalPrep/Screenshot_56_dvrgak.png",
+              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715187685/VitalPrep/Screenshot_64_vxekot.png"
+            }
+          },
+          "3": {
+            "title": "Feedback",
+            "descriptions": {
+              "1": "To give us some <span>feedback</span> on the app, you can do so by emailing us using the email form on the <contact>Contact Page</contact>. All feedback is welcome, even if it is negative."
+            },
+            "imageAlt": "Feedback Section Image",
+            "images": {
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715187774/VitalPrep/Screenshot_65_gkix9r.png"
+            }
+          },
+          "4": {
+            "title": "Notifications",
+            "descriptions": {
+              "1": "To receive <span>reminder type notifications</span> while having a <span>Meal Prep Plan active</span> you have to <span>subscribe to our notifications service</span> either through the <span>bell</span> fixed on the bottom right corner of the screen or through our <span>modal</span>.",
+              "2": "You can <span>unsubscribe</span> whenever you want by clicking the bell then Unsubscribe."
+            },
+            "imageAlt": "Notifications Section Image",
+            "images": {
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715188301/VitalPrep/Screenshot_66_ryl1fc.png"
+            }
+          },
+          "5": {
+            "title": "Conclusion",
+            "descriptions": {
+              "1": "With everything that you learned, you can now use our app to meal prep in a more organized matter, while having logging capabilities and reminder type notifications available to you. We hope that this will help you stay consistent with meal prepping."
+            },
+            "imageAlt": "VitalPrep Logo Image",
+            "images": {
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715188430/VitalPrep/brandmark-design-1920x1080_sp2kds.png"
+            }
+          }
+        }
+      }
+    }
+  },
+  "faq": {
+    "accordionShowTitle": "Show {title} Content",
+    "accordionHideTitle": "Hide {title} Content",
+    "sections": {
+      "1": {
+        "sectionTitle": "Introduction to Meal Prep",
+        "sectionDescription": "The following are some frequently asked questions by people who are new to meal prep and do not know where/how to start.",
+        "sectionAccordions": {
+          "1": {
+            "accordionTitle": "What is Meal Prepping?",
+            "accordionContent": "Meal prepping involves preparing and portioning out meals in advance, typically for several days at a time. It's a strategy for saving time during busy weeks and ensuring you have healthy, homemade meals readily available."
+          },
+          "2": {
+            "accordionTitle": "How does Meal Prepping save time?",
+            "accordionContent": "Meal prepping saves time by allowing you to prepare multiple meals at once, usually on a designated day like a weekend. This means you can cook in bulk, reducing the overall time spent in the kitchen during the week. Additionally, having pre-made meals ready to go eliminates the need to cook from scratch every day, streamlining meal preparation and reducing decision-making time."
+          },
+          "3": {
+            "accordionTitle": "What are the benefits of Meal Prepping?",
+            "accordionContent": "Meal prepping offers several benefits, including time-saving, healthier eating, portion control, cost-effectiveness, reduced food waste, and consistency."
+          },
+          "4": {
+            "accordionTitle": "How do I start Meal Prepping if I'm a beginner?",
+            "accordionContent": "To start meal prepping as a beginner, begin by planning your meals, making a grocery list, setting aside dedicated time, investing in storage containers, cooking in batches, portioning out meals, storing them properly, and reheating when ready to eat."
+          }
+        }
+      },
+      "2": {
+        "sectionTitle": "Meal Prep Essentials",
+        "sectionDescription": "The following are some frequently asked questions by people who have started to meal prep and want to get more in touch with the whole process.",
+        "sectionAccordions": {
+          "1": {
+            "accordionTitle": "What equipment do I need for Meal Prepping?",
+            "accordionContent": "For meal prepping, you'll need basic kitchen equipment such as knives, cutting boards, pots and pans, meal prep containers, a food scale, mixing bowls, and measuring cups and spoons."
+          },
+          "2": {
+            "accordionTitle": "How long do meal-prepped meals typically last in the fridge or freezer?",
+            "accordionContent": "Meal-prepped meals typically last in the refrigerator for about 3-4 days and in the freezer for 1-2 months, depending on the type of food and how well it's packaged. Proper storage in airtight containers helps maintain freshness and extends shelf life."
+          },
+          "3": {
+            "accordionTitle": "How do I ensure my meal-prepped food stays fresh throughout the week?",
+            "accordionContent": "To ensure your meal-prepped food stays fresh throughout the week, use airtight containers, refrigerate promptly, label containers with the date of preparation, portion out meals properly, and avoid opening containers unnecessarily."
+          },
+          "4": {
+            "accordionTitle": "Can I customize my Meal Prep based on my nutritional goals?",
+            "accordionContent": "Yes, you can customize your meal prep based on your nutritional goals. You have the flexibility to choose recipes and ingredients that align with your dietary needs, whether you're focusing on weight loss, muscle gain, or specific nutritional requirements."
+          },
+          "5": {
+            "accordionTitle": "How do I calculate portion sizes for Meal Prepping?",
+            "accordionContent": "To calculate portion sizes for meal prepping, start by determining your nutritional needs based on factors like age, gender, weight, and activity level. Then, use tools like food scales or measuring cups to accurately portion out ingredients according to your dietary goals. It may also be helpful to consult with a nutritionist or use online resources to guide portion size calculations based on your specific needs."
+          },
+          "6": {
+            "accordionTitle": "How often should I Meal Prep?",
+            "accordionContent": "How often you should meal prep depends on your personal schedule and preferences. Many people find it helpful to meal prep once or twice a week, typically on weekends or whenever they have free time. This allows them to prepare meals for several days ahead, reducing the need to cook every day. However, you can adjust the frequency based on your needs and lifestyle, whether it's meal prepping for the entire week or just a few days at a time."
+          },
+          "7": {
+            "accordionTitle": "Is Meal Prepping cost-effective?",
+            "accordionContent": "Yes, meal prepping is often cost-effective. By buying ingredients in bulk and cooking meals at home, you can save money compared to regularly eating out or purchasing pre-made meals."
+          }
+        }
+      },
+      "3": {
+        "sectionTitle": "Meal Prep Recipes and Ideas",
+        "sectionDescription": "The following are some frequently asked questions by people who have more specific questions and/or want to spice up their meal preps.",
+        "sectionAccordions": {
+          "1": {
+            "accordionTitle": "What are some common Meal Prepping mistakes to avoid?",
+            "accordionContent": "Some common meal prepping mistakes to avoid include not planning ahead, using improper storage containers, neglecting variety in meals, not accounting for portion sizes, and not labeling containers with the date of preparation."
+          },
+          "2": {
+            "accordionTitle": "What are some easy Meal Prep recipes for beginners?",
+            "accordionContent": "Some easy meal prep recipes for beginners include overnight oats, sheet pan chicken and vegetables, quinoa salad bowls, veggie stir-fry with rice, and turkey and black bean wraps. These recipes are simple to prepare in bulk and can be customized with your favorite ingredients."
+          },
+          "3": {
+            "accordionTitle": "How do I prevent meal boredom when Meal Prepping?",
+            "accordionContent": "To prevent meal boredom when meal prepping, incorporate variety by experimenting with different recipes, flavors, and cuisines. Rotate your meal options weekly to keep things interesting, and consider trying new ingredients or cooking methods to add excitement to your meals. Additionally, you can create theme days, such as Meatless Mondays or Taco Tuesdays, to add structure and diversity to your meal prep routine."
+          },
+          "4": {
+            "accordionTitle": "Can I still Meal Prep if I have dietary restrictions or food allergies?",
+            "accordionContent": "Absolutely! You can still meal prep with dietary restrictions or food allergies. Just choose recipes and ingredients that align with your dietary needs, and there are plenty of resources available to help you find suitable options."
+          },
+          "5": {
+            "accordionTitle": "Can I Meal Prep for specific diets, like keto, vegan, or gluten-free?",
+            "accordionContent": "Yes, you can meal prep for specific diets like keto, vegan, or gluten-free. There are plenty of recipes and resources available tailored to these dietary preferences. Simply choose recipes and ingredients that align with your chosen diet, and you can effectively meal prep while adhering to your dietary requirements."
+          },
+          "6": {
+            "accordionTitle": "Can I Meal Prep snacks and desserts too?",
+            "accordionContent": "Yes, you can definitely meal prep snacks and desserts. Prepare healthy snacks like fruit and nut packs, yogurt parfaits, or vegetable sticks with hummus for easy grab-and-go options. For desserts, consider making batches of healthier treats like energy balls, granola bars, or baked goods using wholesome ingredients. Meal prepping snacks and desserts can help satisfy cravings while supporting your overall dietary goals."
+          },
+          "7": {
+            "accordionTitle": "How do I keep my meal-prepped meals interesting and flavorful?",
+            "accordionContent": "To keep your meal-prepped meals interesting and flavorful, experiment with a variety of herbs, spices, sauces, and marinades to add depth of flavor. Incorporate different cooking techniques such as grilling, roasting, or sautéing to enhance the taste and texture of your meals. Additionally, try incorporating a mix of colorful fruits and vegetables, whole grains, and lean proteins to create visually appealing and tasty dishes. Don't be afraid to get creative and try new recipes to keep your meals exciting and enjoyable."
+          }
+        }
+      },
+      "4": {
+        "sectionTitle": "Storage and Practical Tips",
+        "sectionDescription": "The following are some frequently asked questions by people who have questions about efficient containment, cooking time, size, reheating of meals in a meal prep.",
+        "sectionAccordions": {
+          "1": {
+            "accordionTitle": "How do I store meal-prepped meals properly?",
+            "accordionContent": "After meal prepping, transfer your meals into airtight containers to maintain freshness and prevent contamination. Store them in the refrigerator at temperatures below 40°F (4°C) to slow bacterial growth and extend their shelf life. Make sure to label containers with the date of preparation to track freshness. When reheating, ensure food reaches an internal temperature of 165°F (74°C) to kill any harmful bacteria."
+          },
+          "2": {
+            "accordionTitle": "What are the best containers for storing meal-prepped meals?",
+            "accordionContent": "The best containers for storing meal-prepped meals are airtight containers made of glass or BPA-free plastic. These containers help to maintain freshness, prevent leaks, and are microwave and dishwasher safe for easy reheating and cleaning. Look for containers with compartments to keep different components of your meal separate, and consider investing in a variety of sizes to accommodate different portion sizes and meal types."
+          },
+          "3": {
+            "accordionTitle": "Can I meal prep for the whole family?",
+            "accordionContent": "Yes, you can definitely meal prep for the whole family. Simply adjust your recipes and portion sizes to accommodate the number of people you're feeding. Consider preparing larger batches of meals and using family-sized containers or multiple individual containers to store portions for everyone. Involving family members in the meal prep process can also make it a fun and collaborative activity."
+          },
+          "4": {
+            "accordionTitle": "What is the ideal number of meals to include in my meal prep?",
+            "accordionContent": "The ideal number of meals to include in your meal prep depends on your personal schedule and dietary needs. Some people prefer to prep all meals for the week, including breakfast, lunch, and dinner, while others may only prep lunches or dinners. Start by considering how many meals you typically eat at home versus dining out, and then plan accordingly. You can always adjust the number of meals as needed based on your preferences and lifestyle."
+          },
+          "5": {
+            "accordionTitle": "How do I reheat meal-prepped food to maintain its quality?",
+            "accordionContent": "To maintain the quality of meal-prepped food when reheating, it's best to use gentle heating methods such as microwaving, steaming, or oven reheating. Avoid overheating, which can cause the food to dry out or become rubbery. Cover the food with a microwave-safe lid or damp paper towel to retain moisture during microwaving. For oven reheating, use a lower temperature and cover the dish with aluminum foil to prevent excessive drying. Stirring or flipping halfway through can also help ensure even reheating."
+          },
+          "6": {
+            "accordionTitle": "What is the recommended duration for my meal prep cooking sessions?",
+            "accordionContent": "The recommended duration for meal prep cooking sessions depends on factors such as the number of meals you're preparing, your cooking skills, and the complexity of the recipes. Generally, aim for a few hours, such as 2-3 hours, to prepare meals for the week. However, you can adjust the duration based on your schedule and preferences. Some people prefer shorter, more frequent meal prep sessions, while others may dedicate a longer block of time to prep for the entire week. Experiment to find what works best for you."
+          }
+        }
+      }
+    }
+  },
+  "about": {
+    "sections": {
+      "1": {
+        "sectionTitle": "Intro",
+        "descriptions": {
+          "1": "This app is all about creating a way for a user to be able to meal prep in a dynamic way, using their own ingredients, recipes, etc...",
+          "2": "When i created this app i wanted to create an app for myself that logs my meal preps and allows me to create more recipes for my future meal preps. Also i wanted to create this app just for fun."
+        }
+      },
+      "2": {
+        "sectionTitle": "Frontend Technologies",
+        "sectionDescription": "The following are the technologies i have used on the frontend to create this app:"
+      },
+      "3": {
+        "sectionTitle": "Backend Technologies",
+        "sectionDescription": "The following are the technologies i have used on the backend to create this app:"
+      },
+      "4": {
+        "sectionTitle": "Cloud Services",
+        "sectionDescription": "The following are the cloud services i have used in order to host the frontend, backend and the databases:"
+      },
+      "5": {
+        "sectionTitle": "Others",
+        "sectionDescription": "The following are other technologies i have used but not included in the above:",
+        "sectionSubTitles": {
+          "1": "Media Management",
+          "2": "Version Control System(VCS)"
+        }
+      }
+    }
+  },
+  "contact": {
+    "emailForm": {
+      "title": "Email Us",
+      "formLabels": {
+        "subject": "Subject:",
+        "message": "Message:",
+        "buttonContent": "Send Email"
+      }
+    },
+    "contactInfo": {
+      "title": "Contact Us",
+      "info": {
+        "phoneNumber": "Phone Number: {phoneNumber}",
+        "email": "Email: {email}"
+      }
+    }
+  },
+  "langSwitcher": {
+    "locale": "Change language to {locale}",
+    "values": {
+      "ro": "Romanian",
+      "en": "English"
+    }
+  }
+}

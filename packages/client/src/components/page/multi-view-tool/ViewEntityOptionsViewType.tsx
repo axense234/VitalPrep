@@ -6,20 +6,32 @@ import { changeSelectedViewOption } from "@/redux/slices/generalSlice";
 // React Icons
 import { MdGridView } from "react-icons/md";
 import { TfiViewListAlt } from "react-icons/tfi";
+// Translations
+import { useTranslations } from "next-intl";
 
 const ViewEntityOptionsViewType = () => {
   const dispatch = useAppDispatch();
+  const translate = useTranslations("viewEntityOptions.searchEntity.viewType");
+
   return (
     <div className={viewEntityOptionsStyles.entityViewTypeContainer}>
       <MdGridView
         onClick={() => dispatch(changeSelectedViewOption("grid"))}
-        title="Change View Option to Grid"
-        aria-label="Change View Option to Grid"
+        title={translate("title", {
+          type: translate(`typeOptions.grid`),
+        })}
+        aria-label={translate("title", {
+          type: translate(`typeOptions.grid`),
+        })}
       />
       <TfiViewListAlt
         onClick={() => dispatch(changeSelectedViewOption("list"))}
-        title="Change View Option to List"
-        aria-label="Change View Option to List"
+        title={translate("title", {
+          type: translate(`typeOptions.list`),
+        })}
+        aria-label={translate("title", {
+          type: translate(`typeOptions.list`),
+        })}
       />
     </div>
   );

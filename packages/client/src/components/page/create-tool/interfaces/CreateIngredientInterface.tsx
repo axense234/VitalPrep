@@ -28,6 +28,8 @@ import {
 // Hooks
 import useShowCreatedEntity from "@/hooks/useShowCreatedEntity";
 import useUpdateEntityTemplateImageUrl from "@/hooks/useUpdateEntityTemplateImageUrl";
+// Translations
+import { useTranslations } from "next-intl";
 
 const CreateIngredientInterface = () => {
   const dispatch = useAppDispatch();
@@ -42,6 +44,8 @@ const CreateIngredientInterface = () => {
 
   const loadingCloudinaryImage = useAppSelector(selectLoadingCloudinaryImage);
 
+  const translate = useTranslations("createTool.formLabels.ingredient");
+
   useShowCreatedEntity(
     loadingCreateIngredient,
     `Successfully created ingredient: ${templateIngredient.name}.`,
@@ -55,11 +59,11 @@ const CreateIngredientInterface = () => {
       <div className={createToolStyles.createInterfaceWrapper}>
         <div className={createToolStyles.createInterfaceFormContainer}>
           <PopupModal hasBorder={true} modalType="form" />
-          <h4>Create Ingredient</h4>
+          <h4>{translate("formTitle")}</h4>
           <form className={createToolStyles.createInterfaceForm}>
             <TextFormControl
               entityProperty={templateIngredient.name}
-              labelContent="Name:"
+              labelContent={translate("name")}
               onEntityPropertyValueChange={(e) =>
                 dispatch(
                   updateTemplateIngredient({
@@ -71,7 +75,7 @@ const CreateIngredientInterface = () => {
               type="text"
             />
             <ImageFormControl
-              labelContent="Image:"
+              labelContent={translate("image")}
               defaultImageUsedUrl={defaultIngredientImageUrl}
               entityPropertyLoadingStatus={loadingCloudinaryImage}
               entityProperty={templateIngredient.imageUrl as string}
@@ -88,7 +92,7 @@ const CreateIngredientInterface = () => {
             />
             <TextFormControl
               entityProperty={templateIngredient.macros.calories}
-              labelContent="Calories(per 100g):"
+              labelContent={translate("calories")}
               onEntityPropertyValueChange={(e) =>
                 dispatch(
                   updateTemplateIngredientMacros({
@@ -101,7 +105,7 @@ const CreateIngredientInterface = () => {
             />
             <TextFormControl
               entityProperty={templateIngredient.macros.proteinAmount}
-              labelContent="Protein(in grams):"
+              labelContent={translate("proteinAmount")}
               onEntityPropertyValueChange={(e) =>
                 dispatch(
                   updateTemplateIngredientMacros({
@@ -115,7 +119,7 @@ const CreateIngredientInterface = () => {
             <TextFormControl
               entityProperty={templateIngredient.macros.carbsAmount}
               labelColor="#120A06"
-              labelContent="Carbs(in grams):"
+              labelContent={translate("carbsAmount")}
               onEntityPropertyValueChange={(e) =>
                 dispatch(
                   updateTemplateIngredientMacros({
@@ -128,7 +132,7 @@ const CreateIngredientInterface = () => {
             />
             <TextFormControl
               entityProperty={templateIngredient.macros.fatsAmount}
-              labelContent="Fats(in grams):"
+              labelContent={translate("fatsAmount")}
               onEntityPropertyValueChange={(e) =>
                 dispatch(
                   updateTemplateIngredientMacros({
@@ -140,7 +144,7 @@ const CreateIngredientInterface = () => {
               type="number"
             />
             <CheckboxFormControl
-              labelContent="Enabled?:"
+              labelContent={translate("enabled")}
               entityProperty={String(templateIngredient.enabled)}
               onEntityPropertyValueChange={(e) =>
                 dispatch(
@@ -152,7 +156,7 @@ const CreateIngredientInterface = () => {
               }
             />
             <PrimaryButton
-              content="Create Ingredient"
+              content={translate("createButtonLabel")}
               type="functional"
               disabled={
                 loadingCreateIngredient === "PENDING" ||

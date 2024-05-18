@@ -11,12 +11,14 @@ import SocialMediaIcons from "./SocialMediaIcons";
 import PageLink from "@/core/types/PageLink";
 // React
 import { FC } from "react";
-// Next
-import Link from "next/link";
 // Redux
 import { useAppDispatch } from "@/hooks/redux";
 import { logoutUser } from "@/redux/slices/generalSlice";
+// Hooks
 import useGetWindowWidth from "@/hooks/useGetWindowWidth";
+// Translations
+import { useTranslations } from "use-intl";
+import { Link } from "@/navigation";
 
 const Footer = () => {
   let windowWidth = useGetWindowWidth();
@@ -32,14 +34,15 @@ const Footer = () => {
 };
 
 const FooterPageLinks = () => {
+  const translate = useTranslations("pageLinks.labels");
   return (
     <ul className={footerStyles.footerPageLinksList}>
       {pageLinks.map((pageLink) => {
         return (
           <li
             key={pageLink.id}
-            title={pageLink.linkTitle}
-            aria-label={pageLink.linkTitle}
+            title={translate(`${pageLink.linkDest}`)}
+            aria-label={translate(`${pageLink.linkDest}`)}
           >
             <FooterPageLink {...pageLink} />
           </li>
@@ -49,41 +52,47 @@ const FooterPageLinks = () => {
   );
 };
 
-const FooterPageLink: FC<PageLink> = ({ linkDest, linkTitle, linkType }) => {
+const FooterPageLink: FC<PageLink> = ({ linkType, linkDest }) => {
   const dispatch = useAppDispatch();
+  const translate = useTranslations("pageLinks.labels");
+
   if (linkType === "logout") {
     return (
       <button
         className={footerStyles.footerPageLink}
-        title={linkTitle}
-        aria-label={linkTitle}
+        title={translate(`${linkDest}`)}
+        aria-label={translate(`${linkDest}`)}
         onClick={() => dispatch(logoutUser())}
       >
-        <p>{linkTitle}</p>
+        <p>{translate(`${linkDest}`)}</p>
       </button>
     );
   }
   return (
     <Link
       className={footerStyles.footerPageLink}
-      href={linkDest}
-      title={linkTitle}
-      aria-label={linkTitle}
+      href={linkDest as any}
+      title={translate(`${linkDest}`)}
+      aria-label={translate(`${linkDest}`)}
     >
-      <p>{linkTitle}</p>
+      <p>{translate(`${linkDest}`)}</p>
     </Link>
   );
 };
 
 const FooterContact = () => {
+  const translate = useTranslations("footer.contact");
   return (
     <div className={footerStyles.footerContact}>
-      <p title="Phone Number" aria-label="Phone Number">
-        Phone Number:
+      <p
+        title={translate("phoneNumberTitle")}
+        aria-label={translate("phoneNumberTitle")}
+      >
+        {translate("phoneNumberTitle")}
         <span>{sitePhoneNumber}</span>
       </p>
-      <p title="Email" aria-label="Email">
-        Email:
+      <p title={translate("emailTitle")} aria-label={translate("emailTitle")}>
+        {translate("emailTitle")}
         <span>{siteEmail}</span>
       </p>
     </div>

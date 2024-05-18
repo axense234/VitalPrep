@@ -8,9 +8,19 @@
   padding: 1rem 4rem;
   background-color: getColor("primary-1");
 
+  > .langSwitcherContainer {
+    margin-left: auto;
+  }
+
   @media screen and (max-width: 650px) {
     padding: 1rem 2rem;
   }
+}
+
+.navbarMenuWrapper {
+  @include flexCenter(row);
+  margin-left: auto;
+  gap: 1rem;
 }
 
 .navbarProfileContainer {

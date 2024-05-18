@@ -1,6 +1,5 @@
 // Next
 import Image from "next/image";
-import Link from "next/link";
 // SCSS
 import navbarProfileStyles from "../../scss/components/shared/Navbar.module.scss";
 // Redux
@@ -8,10 +7,13 @@ import { useAppSelector } from "@/hooks/redux";
 import { selectProfile } from "@/redux/slices/generalSlice";
 // Data
 import { defaultProfileImageUrl } from "@/data";
+// Translations
+import { Link } from "@/navigation";
+import { useTranslations } from "next-intl";
 
 const NavbarProfile = () => {
   const profile = useAppSelector(selectProfile);
-  console.log(profile);
+  const translate = useTranslations("navbar");
 
   if (!profile.email) {
     return null;
@@ -21,17 +23,18 @@ const NavbarProfile = () => {
     <div className={navbarProfileStyles.navbarProfileContainer}>
       <Link
         href="/profile"
-        title="Go to Profile"
+        title={translate("navbarTitleTextContent")}
+        aria-label={translate("navbarTitleTextContent")}
         className={navbarProfileStyles.profileImageContainer}
       >
         <Image
           src={profile.imageUrl || defaultProfileImageUrl}
-          alt="Profile Image"
+          alt={translate("navbarImageAltTextContent")}
           width={64}
           height={64}
         />
       </Link>
-      <h6>{profile.username || "Username"}</h6>
+      <h6>{profile.username || translate("navbarUsernameDefaultValue")}</h6>
     </div>
   );
 };

@@ -1,5 +1,5 @@
 // SCSS
-import notificationSettingsStyles from "../../../scss/pages/Settings.module.scss";
+import notificationSettingsStyles from "@/scss/pages/Settings.module.scss";
 // Components
 import PrimaryButton from "@/components/shared/PrimaryButton";
 import CheckboxFormControl from "@/components/shared/form/CheckboxFormControl";
@@ -23,6 +23,8 @@ import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import UserType from "@/core/types/entity/users/UserType";
 // Hooks
 import useUpdateEntityTemplateImageUrl from "@/hooks/useUpdateEntityTemplateImageUrl";
+// Translations
+import { useTranslations } from "next-intl";
 
 const NotificationSettings = () => {
   const dispatch = useAppDispatch();
@@ -33,20 +35,28 @@ const NotificationSettings = () => {
   );
   const loadingUpdateProfile = useAppSelector(selectLoadingUpdateProfile);
 
+  const translate = useTranslations("settings.notificationSettings");
+  const translatedNotificationStyles = notificationMessageStyles.map(
+    (style) => {
+      return {
+        ...style,
+        label: translate(`formLabels.notificationStyles.${style.value}`),
+      };
+    }
+  );
+
   useUpdateEntityTemplateImageUrl(
     updateTemplateProfileNotificationSettings,
     "notificationImageUrl",
     templateNotificationsImageUrl
   );
 
-  console.log(templateProfile?.notificationSettings);
-
   return (
     <section className={notificationSettingsStyles.accountSettingsContainer}>
-      <h4>Notification Settings</h4>
+      <h4>{translate("title")}</h4>
       <form className={notificationSettingsStyles.accountSettingsForm}>
         <CheckboxFormControl
-          labelContent="Allow Notifications?:"
+          labelContent={translate("formLabels.allowNotifications")}
           entityProperty={String(
             templateProfile?.notificationSettings?.allowedNotifications
           )}
@@ -61,7 +71,7 @@ const NotificationSettings = () => {
           }}
         />
         <ImageFormControl
-          labelContent="Notification Image:"
+          labelContent={translate("formLabels.notificationsImage")}
           defaultImageUsedUrl={defaultProfileImageUrl}
           entityPropertyLoadingStatus={loadingCloudinaryImage}
           entityProperty={
@@ -82,11 +92,9 @@ const NotificationSettings = () => {
           labelFontSize={28}
         />
         <RadioFormControl
-          chosenEntityProperty={
-            templateProfile?.notificationSettings?.notificationStyle
-          }
-          entityPropertyOptions={notificationMessageStyles}
-          labelContent="Notification Style:"
+          chosenEntityProperty={`${templateProfile?.notificationSettings?.notificationStyle.toLowerCase()}`}
+          entityPropertyOptions={translatedNotificationStyles}
+          labelContent={translate("formLabels.notificationStyles.formLabel")}
           onEntityPropertyValueChange={(value: string) =>
             dispatch(
               updateTemplateProfileNotificationSettings({
@@ -97,7 +105,7 @@ const NotificationSettings = () => {
           }
         />
         <PrimaryButton
-          content="Update Notification Settings"
+          content={translate("formLabels.submitButtonContent")}
           type="functional"
           disabled={
             loadingCloudinaryImage === "PENDING" ||

@@ -6,9 +6,11 @@ type SectionItemType = {
 };
 
 interface HomeSectionContentProps {
+  id: number;
   sectionTitle: string;
   sectionSubTitle: string;
   ctaButtonContent?: string;
+  ctaButtonLinkDest?: string;
   position: "left" | "right";
   type: "positional" | "middle" | "descriptionBased";
   sectionPaddingBasedOnWindowWidth: string;

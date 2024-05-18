@@ -31,7 +31,7 @@ const useUpdateEntityTemplateImageUrl = (
         })
       );
     }
-  }, [loadingCloudinaryImage]);
+  }, [loadingCloudinaryImage, templateImageUrl]);
 };
 
 export default useUpdateEntityTemplateImageUrl;

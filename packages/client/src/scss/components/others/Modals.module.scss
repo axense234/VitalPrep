@@ -31,11 +31,22 @@
   }
 
   p {
+    @include flexCenter(column);
+    @include paragraph("laptop", "black");
+    align-self: center;
+    text-align: center;
     font-weight: 550;
     letter-spacing: 1.25px;
-    text-align: center;
-    @include paragraph("laptop", "black");
-    @include handlePossibleLongWord(2);
     width: 80%;
+
+    > svg {
+      @include handlePossibleLongWord(2);
+    }
+
+    span {
+      @include flexCenter(row);
+      text-align: center;
+      width: 100%;
+    }
   }
 }

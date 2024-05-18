@@ -4,11 +4,12 @@ import { FC } from "react";
 import entityInfoStyles from "../../../scss/components/page/EntityInfo.module.scss";
 // Types
 import EntityInfoAppearancesSectionProps from "@/core/interfaces/entity/EntityInfoAppearancesSection";
-import EntityType from "@/core/types/entity/users/EntityType";
 // Components
 import EntityComponent from "@/components/shared/entity/EntityComponent";
 // React Spinners
 import { ClockLoader } from "react-spinners";
+// Translations
+import { useTranslations } from "next-intl";
 
 const EntityInfoAppearancesSection: FC<EntityInfoAppearancesSectionProps> = ({
   areOptionsLoading,
@@ -18,9 +19,9 @@ const EntityInfoAppearancesSection: FC<EntityInfoAppearancesSectionProps> = ({
   if (!entities || entities?.length < 1) {
     return null;
   }
+  const translate = useTranslations(`entityAppearances.${entityTypeUsed}`);
 
-  const sectionTitleUsed =
-    useChooseEntityInfoAppearancesSectionTitle(entityTypeUsed);
+  const sectionTitleUsed = translate("sectionTitle");
 
   return (
     <div className={entityInfoStyles.entityInfoAppearancesContainer}>
@@ -47,36 +48,6 @@ const EntityInfoAppearancesSection: FC<EntityInfoAppearancesSectionProps> = ({
       )}
     </div>
   );
-};
-
-const useChooseEntityInfoAppearancesSectionTitle = (entityType: EntityType) => {
-  let sectionTitleUsed = "Entities:";
-  switch (entityType) {
-    case "ingredient":
-      sectionTitleUsed = "Ingredients:";
-      break;
-    case "utensil":
-      sectionTitleUsed = "Utensils:";
-      break;
-    case "recipe":
-      sectionTitleUsed = "Recipes:";
-      break;
-    case "dayTemplate":
-      sectionTitleUsed = "Day Plans:";
-      break;
-    case "instanceTemplate":
-      sectionTitleUsed = "Session Templates:";
-      break;
-    case "mealPrepPlan":
-      sectionTitleUsed = "Meal Prep Plans:";
-      break;
-    case "mealPrepLog":
-      sectionTitleUsed = "Session Logs:";
-      break;
-    default:
-      throw new Error("Invalid entity type!");
-  }
-  return sectionTitleUsed;
 };
 
 export default EntityInfoAppearancesSection;

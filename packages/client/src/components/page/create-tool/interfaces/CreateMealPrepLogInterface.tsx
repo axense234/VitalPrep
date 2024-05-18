@@ -11,7 +11,7 @@ import EntityPreview from "@/components/shared/entity/EntityPreview";
 // Types
 import InstanceTemplateTemplate from "@/core/types/entity/instanceTemplate/InstanceTemplateTemplate";
 // React
-import React, { ChangeEvent } from "react";
+import React, { ChangeEvent, useTransition } from "react";
 // Data
 import { defaultMealPrepLogImageUrl } from "@/data";
 // Redux
@@ -42,6 +42,7 @@ import useGetEntityComponents from "@/hooks/useGetEntityComponents";
 import handleToggleEntityProperty from "@/helpers/handleToggleEntityProperty";
 import useUpdateEntityMacrosBasedOnComponent from "@/hooks/useUpdateEntityMacrosBasedOnComponent";
 import handleOnCreateMealPrepLogSubmit from "@/helpers/handleOnCreateMealPrepLogSubmit";
+import { useTranslations } from "next-intl";
 
 const CreateMealPrepLogInterface = () => {
   const dispatch = useAppDispatch();
@@ -70,6 +71,8 @@ const CreateMealPrepLogInterface = () => {
   );
   const loadingCloudinaryImage = useAppSelector(selectLoadingCloudinaryImage);
 
+  const translate = useTranslations("createTool.formLabels.mealPrepLog");
+
   useUpdateEntityMacrosBasedOnComponent(
     instanceTemplateChosen,
     updateTemplateMealPrepLog
@@ -93,11 +96,11 @@ const CreateMealPrepLogInterface = () => {
       <div className={createToolStyles.createInterfaceWrapper}>
         <div className={createToolStyles.createInterfaceFormContainer}>
           <PopupModal hasBorder={false} modalType="form" />
-          <h4>Add Session Log</h4>
+          <h4>{translate("formTitle")}</h4>
           <form className={createToolStyles.createInterfaceForm}>
             <TextFormControl
               entityProperty={templateMealPrepLog.name}
-              labelContent="Name:"
+              labelContent={translate("name")}
               onEntityPropertyValueChange={(e) =>
                 dispatch(
                   updateTemplateMealPrepLog({
@@ -109,7 +112,7 @@ const CreateMealPrepLogInterface = () => {
               type="text"
             />
             <ImageFormControl
-              labelContent="Image:"
+              labelContent={translate("image")}
               defaultImageUsedUrl={defaultMealPrepLogImageUrl}
               entityPropertyLoadingStatus={loadingCloudinaryImage}
               entityProperty={templateMealPrepLog.imageUrl as string}
@@ -129,7 +132,7 @@ const CreateMealPrepLogInterface = () => {
             />
             <TextFormControl
               entityProperty={templateMealPrepLog.date}
-              labelContent="Date:"
+              labelContent={translate("date")}
               onEntityPropertyValueChange={(e) =>
                 dispatch(
                   updateTemplateMealPrepLog({
@@ -141,7 +144,7 @@ const CreateMealPrepLogInterface = () => {
               type="date"
             />
             <CheckboxFormControl
-              labelContent="Completed?:"
+              labelContent={translate("completed")}
               entityProperty={String(templateMealPrepLog.completed)}
               onEntityPropertyValueChange={(e) =>
                 dispatch(
@@ -154,7 +157,7 @@ const CreateMealPrepLogInterface = () => {
             />
             <TextFormControl
               entityProperty={templateMealPrepLog.cookingDuration}
-              labelContent="Cooking Duration:"
+              labelContent={translate("cookingDuration")}
               onEntityPropertyValueChange={(e) =>
                 dispatch(
                   updateTemplateMealPrepLog({
@@ -166,7 +169,7 @@ const CreateMealPrepLogInterface = () => {
               type="number"
             />
             <PrimaryButton
-              content="Add Session Log"
+              content={translate("createButtonLabel")}
               type="functional"
               disabled={
                 loadingCreateMealPrepLog === "PENDING" ||
@@ -191,7 +194,7 @@ const CreateMealPrepLogInterface = () => {
       </div>
       <div className={createToolStyles.createInterfaceComponentsContainer}>
         <SelectFormControl
-          labelContent="Session Template Used:"
+          labelContent={translate("selectFormControlsLabels.instanceTemplate")}
           entityPropertyOptions={instanceTemplatesIds}
           entityPropertyChosenOptions={
             templateMealPrepLog.instanceTemplateId as string

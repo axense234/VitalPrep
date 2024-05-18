@@ -27,6 +27,8 @@ import {
 // Hooks
 import useShowCreatedEntity from "@/hooks/useShowCreatedEntity";
 import useUpdateEntityTemplateImageUrl from "@/hooks/useUpdateEntityTemplateImageUrl";
+// Translations
+import { useTranslations } from "next-intl";
 
 const CreateUtensilInterface = () => {
   const dispatch = useAppDispatch();
@@ -39,6 +41,8 @@ const CreateUtensilInterface = () => {
   );
 
   const loadingCloudinaryImage = useAppSelector(selectLoadingCloudinaryImage);
+
+  const translate = useTranslations("createTool.formLabels.utensil");
 
   useShowCreatedEntity(
     loadingCreateUtensil,
@@ -53,11 +57,11 @@ const CreateUtensilInterface = () => {
       <div className={createToolStyles.createInterfaceWrapper}>
         <div className={createToolStyles.createInterfaceFormContainer}>
           <PopupModal hasBorder={false} modalType="form" />
-          <h4>Create Utensil</h4>
+          <h4>{translate("formTitle")}</h4>
           <form className={createToolStyles.createInterfaceForm}>
             <TextFormControl
               entityProperty={templateUtensil.name}
-              labelContent="Name:"
+              labelContent={translate("name")}
               onEntityPropertyValueChange={(e) =>
                 dispatch(
                   updateTemplateUtensil({ key: "name", value: e.target.value })
@@ -66,7 +70,7 @@ const CreateUtensilInterface = () => {
               type="text"
             />
             <ImageFormControl
-              labelContent="Image:"
+              labelContent={translate("image")}
               defaultImageUsedUrl={defaultUtensilImageUrl}
               entityPropertyLoadingStatus={loadingCloudinaryImage}
               entityProperty={templateUtensil.imageUrl as string}
@@ -82,7 +86,7 @@ const CreateUtensilInterface = () => {
               }}
             />
             <CheckboxFormControl
-              labelContent="Enabled?:"
+              labelContent={translate("enabled")}
               entityProperty={String(templateUtensil.enabled)}
               onEntityPropertyValueChange={(e) => {
                 console.log(e.target.value);
@@ -95,7 +99,7 @@ const CreateUtensilInterface = () => {
               }}
             />
             <PrimaryButton
-              content="Create Utensil"
+              content={translate("createButtonLabel")}
               type="functional"
               disabled={
                 loadingCreateUtensil === "PENDING" ||

@@ -13,6 +13,8 @@ import {
   selectShowProfileEmail,
   changeShowProfileEmail,
 } from "@/redux/slices/generalSlice";
+// Translations
+import { useTranslations } from "next-intl";
 
 const ProfileInfo = () => {
   const dispatch = useAppDispatch();
@@ -21,20 +23,22 @@ const ProfileInfo = () => {
 
   const hiddenProfileEmail = profile.email.replace(/[a-zA-Z0-9@.]/g, "*");
 
+  const translate = useTranslations("profile.profileInfo");
+
   return (
     <section className={profileStyles.profileInfoContainer}>
       <Image
-        alt="Profile Image"
+        alt={translate("profilelImageAlt")}
         src={profile.imageUrl || defaultProfileImageUrl}
         width={240}
         height={240}
       />
-      <h4>{profile.username || "Username"}</h4>
+      <h4>{profile.username || translate("defaultProfileUsername")}</h4>
       <div className={profileStyles.profileInfoEmail}>
         {profile.email ? (
           <h6>{showProfileEmail ? profile.email : hiddenProfileEmail}</h6>
         ) : (
-          <h6>"profileemail@gmail.com"</h6>
+          <h6>{translate("defaultProfileEmail")}</h6>
         )}
 
         {showProfileEmail ? (
@@ -43,7 +47,11 @@ const ProfileInfo = () => {
           <FaEyeSlash onClick={() => dispatch(changeShowProfileEmail(true))} />
         )}
       </div>
-      <h3>{profile.age ? `${profile.age} years old` : "Unknown Age"}</h3>
+      <h3>
+        {profile.age
+          ? translate("profileAge", { age: profile.age })
+          : translate("defaultProfileAge")}
+      </h3>
     </section>
   );
 };

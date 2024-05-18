@@ -6,21 +6,29 @@ import EntityInfoComponentsShownProps from "@/core/interfaces/entity/EntityInfoC
 import { FC } from "react";
 // Components
 import EntityCard from "./EntityCard";
+import { useTranslations } from "use-intl";
 
 const EntityInfoComponentsSection: FC<EntityInfoComponentsShownProps> = ({
   entityName,
   entityComponents,
   entityType,
-  entitiesLabel,
 }) => {
   if (!entityComponents || entityComponents.length < 1) {
     return null;
   }
 
+  const translateEntitiesLabels = useTranslations(
+    `multiViewPage.entitiesTitle`
+  );
+  const translate = useTranslations("entityComponents");
+
   return (
     <div className={entityInfoTutorialStyles.entityInfoSection}>
       <h5 className={entityInfoTutorialStyles.entityInfoSectionH5}>
-        {entitiesLabel} used in {entityName}:
+        {translate("sectionTitle", {
+          type: translateEntitiesLabels(entityType),
+          name: entityName || translate("defaultEntityName"),
+        })}
       </h5>
       <ul className={entityInfoTutorialStyles.entityInfoSectionItems}>
         {entityComponents?.map((entityComponent) => {

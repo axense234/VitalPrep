@@ -1,7 +1,7 @@
 "use client";
 
 // SCSS
-import gettingStartedStyles from "../../../scss/pages/GettingStarted.module.scss";
+import gettingStartedStyles from "@/scss/pages/GettingStarted.module.scss";
 // Components
 import PageTitle from "@/components/shared/PageTitle";
 import GettingStartedContentMap from "@/components/page/guide/GettingStartedContentMap";

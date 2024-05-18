@@ -8,18 +8,29 @@ import { setSelectedEntityOption } from "@/redux/slices/generalSlice";
 import { useAppDispatch } from "@/hooks/redux";
 // React
 import { FC } from "react";
+// Translations
+import { useTranslations } from "next-intl";
 
 const ViewEntityOptionsChooseEntity: FC<{
   selectedEntityOption: EntityType;
   viewEntityOptions: CreateToolOption[];
 }> = ({ selectedEntityOption, viewEntityOptions }) => {
   const dispatch = useAppDispatch();
+  const translateEntityOptions = useTranslations(
+    "createTool.entityOptions.labels"
+  );
+  const translateViewEntityOptions = useTranslations(
+    "viewEntityOptions.chooseEntity"
+  );
+
   return (
     <div className={viewEntityOptionsStyles.chooseEntityOptionContainer}>
-      <label htmlFor="chooseEntityOption">Selected Entity:</label>
+      <label htmlFor={translateViewEntityOptions("labelName")}>
+        {translateViewEntityOptions("labelContent")}
+      </label>
       <select
-        name="chooseEntityOption"
-        id="chooseEntityOption"
+        name={translateViewEntityOptions("labelName")}
+        id={translateViewEntityOptions("labelName")}
         value={selectedEntityOption}
         onChange={(e) =>
           dispatch(setSelectedEntityOption(e.target.value as EntityType))
@@ -27,8 +38,13 @@ const ViewEntityOptionsChooseEntity: FC<{
       >
         {viewEntityOptions.map((entityOption) => {
           return (
-            <option value={entityOption.optionValue}>
-              {entityOption.label}
+            <option
+              value={entityOption.optionValue}
+              key={entityOption.optionValue}
+              title={`${translateViewEntityOptions("selectLabel")} ${translateEntityOptions(entityOption.optionValue)}`}
+              aria-label={`${translateViewEntityOptions("selectLabel")} ${translateEntityOptions(entityOption.optionValue)}`}
+            >
+              {translateEntityOptions(entityOption.optionValue)}
             </option>
           );
         })}

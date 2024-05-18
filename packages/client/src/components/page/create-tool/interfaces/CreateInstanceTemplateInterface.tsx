@@ -40,6 +40,8 @@ import useUpdateEntityMacrosBasedOnComponentEntities from "@/hooks/useUpdateEnti
 import handleUpdateArrayEntities from "@/helpers/handleUpdateArrayEntities";
 import useSliceEntityComponents from "@/hooks/useSliceEntityComponents";
 import createArrayFromNumber from "@/helpers/createArrayFromNumber";
+// Translations
+import { useTranslations } from "next-intl";
 
 const CreateInstanceTemplateInterface = () => {
   const dispatch = useAppDispatch();
@@ -64,6 +66,8 @@ const CreateInstanceTemplateInterface = () => {
   const numberOfDaysIterable = createArrayFromNumber(
     templateInstanceTemplate?.coverage
   );
+
+  const translate = useTranslations("createTool.formLabels.instanceTemplate");
 
   useUpdateEntityMacrosBasedOnComponentEntities(
     selectAllDayTemplates,
@@ -92,11 +96,11 @@ const CreateInstanceTemplateInterface = () => {
       <div className={createToolStyles.createInterfaceWrapper}>
         <div className={createToolStyles.createInterfaceFormContainer}>
           <PopupModal hasBorder={false} modalType="form" />
-          <h4>Create Session Template</h4>
+          <h4>{translate("formTitle")}</h4>
           <form className={createToolStyles.createInterfaceForm}>
             <TextFormControl
               entityProperty={templateInstanceTemplate.name}
-              labelContent="Name:"
+              labelContent={translate("name")}
               onEntityPropertyValueChange={(e) =>
                 dispatch(
                   updateTemplateInstanceTemplate({
@@ -108,7 +112,7 @@ const CreateInstanceTemplateInterface = () => {
               type="text"
             />
             <ImageFormControl
-              labelContent="Image:"
+              labelContent={translate("image")}
               defaultImageUsedUrl={defaultInstanceTemplateImageUrl}
               entityPropertyLoadingStatus={loadingCloudinaryImage}
               entityProperty={templateInstanceTemplate.imageUrl as string}
@@ -128,7 +132,7 @@ const CreateInstanceTemplateInterface = () => {
             />
             <TextFormControl
               entityProperty={templateInstanceTemplate.coverage}
-              labelContent="Number of Days Covered:"
+              labelContent={translate("nbOfEntities")}
               onEntityPropertyValueChange={(e) =>
                 dispatch(
                   updateTemplateInstanceTemplate({
@@ -140,7 +144,7 @@ const CreateInstanceTemplateInterface = () => {
               type="number"
             />
             <PrimaryButton
-              content="Create Session Template"
+              content={translate("createButtonLabel")}
               type="functional"
               disabled={
                 loadingCreateInstanceTemplate === "PENDING" ||
@@ -171,7 +175,7 @@ const CreateInstanceTemplateInterface = () => {
             createToolStyles.createInterfaceMultipleComponentsContainer
           }
         >
-          <h4>Individual Day Plans:</h4>
+          <h4>{translate("selectFormControlsLabels.componentsLabel")}</h4>
           <ul
             className={
               createToolStyles.createInterfaceMultipleComponentsSelectControls
@@ -186,7 +190,7 @@ const CreateInstanceTemplateInterface = () => {
                   }
                 >
                   <SelectFormControl
-                    labelContent={`Day #${dayOption.id}:`}
+                    labelContent={`${translate("selectFormControlsLabels.componentLabel")} #${dayOption.id}:`}
                     entityPropertyOptions={dayTemplatesIds}
                     entityPropertyChosenOptions={
                       (templateInstanceTemplate.dayTemplates as string[]) || []

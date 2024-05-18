@@ -140,18 +140,18 @@
   }
 
   h4 {
-    @include heading("h4", "laptop", "black");
+    @include heading("h5", "laptop", "black");
     width: 100%;
 
     @media screen and (max-width: 1200px) {
-      @include heading("h4", "tablet", "black");
+      @include heading("h5", "tablet", "black");
       text-align: center;
     }
     @media screen and (max-width: 650px) {
-      @include heading("h4", "phone", "black");
+      @include heading("h5", "phone", "black");
     }
     @media screen and (max-width: 450px) {
-      @include heading("h5", "phone", "black");
+      @include heading("h6", "phone", "black");
     }
   }
 }

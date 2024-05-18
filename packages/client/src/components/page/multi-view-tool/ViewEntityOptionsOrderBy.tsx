@@ -7,16 +7,24 @@ import { updateEntityQueryValues } from "@/redux/slices/generalSlice";
 import { FC } from "react";
 // React Icons
 import { FaArrowUp } from "react-icons/fa";
+// Translations
+import { useTranslations } from "next-intl";
 
 const ViewEntityOptionsOrderBy: FC<{
   entityQueryValues: EntityQueryValues;
 }> = ({ entityQueryValues }) => {
   const dispatch = useAppDispatch();
+  const translate = useTranslations("viewEntityOptions.sortBy.orderBy");
+
   return (
     <button
       type="button"
-      title={`Current Order: ${entityQueryValues.sortByOrder === "asc" ? "Ascending" : "Descending"}`}
-      aria-label={`Current Order: ${entityQueryValues.sortByOrder === "asc" ? "Ascending" : "Descending"}`}
+      title={translate("titleLabel", {
+        order: translate(`titleOption.${entityQueryValues.sortByOrder}`),
+      })}
+      aria-label={translate("titleLabel", {
+        order: translate(`titleOption.${entityQueryValues.sortByOrder}`),
+      })}
       style={{
         transform:
           entityQueryValues.sortByOrder === "asc"

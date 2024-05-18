@@ -11,6 +11,8 @@ import RecipeTemplate from "@/core/types/entity/recipe/RecipeTemplate";
 import useVideoUrlFormat from "@/hooks/useVideoUrlFormat";
 // Redux
 import { useAppSelector } from "@/hooks/redux";
+// Translations
+import { useTranslations } from "next-intl";
 
 const EntityInfoTutorial: FC<{
   entityId: string;
@@ -28,6 +30,8 @@ const EntityInfoTutorial: FC<{
     setUsedRecipeVideoTutorial(value)
   );
 
+  const translate = useTranslations("entityTutorial");
+
   useEffect(() => {
     if (recipe?.recipeTutorial?.videoTutorial) {
       setUsedRecipeVideoTutorial(recipe.recipeTutorial.videoTutorial);
@@ -39,25 +43,25 @@ const EntityInfoTutorial: FC<{
       <h4>Tutorial</h4>
       <div className={entityInfoTutorialStyles.entityInfoTutorialContent}>
         <div className={entityInfoTutorialStyles.entityInfoVideoTutorial}>
-          <h5>Video Tutorial</h5>
+          <h5>{translate("videoTutorial.title")}</h5>
           {usedRecipeVideoTutorial ? (
             <iframe
               src={usedRecipeVideoTutorial}
-              title="Recipe Tutorial"
-              aria-label="Recipe Tutorial"
+              title={translate("iframeTitle")}
+              aria-label={translate("iframeTitle")}
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen
             />
           ) : (
-            <h6>No Video Tutorial Available.</h6>
+            <h6>{translate("videoTutorial.notFoundMessage")}</h6>
           )}
         </div>
         <div className={entityInfoTutorialStyles.entityInfoWrittenTutorial}>
-          <h5>Written Tutorial</h5>
+          <h5>{translate("writtenTutorial.title")}</h5>
           {recipe?.recipeTutorial?.writtenTutorial ? (
             <p>{recipe?.recipeTutorial?.writtenTutorial}</p>
           ) : (
-            <h6>No Written Tutorial Available.</h6>
+            <h6>{translate("writtenTutorial.notFoundMessage")}</h6>
           )}
         </div>
       </div>

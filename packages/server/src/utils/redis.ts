@@ -1,8 +1,6 @@
 // Redis
 import { redisClient } from "../db/redis";
 
-const DEF_EXP_TIME = 24 * 3600;
-
 const getOrSetCache = async (key, cb) => {
   const data = await redisClient.get(key);
 
@@ -10,7 +8,11 @@ const getOrSetCache = async (key, cb) => {
     return JSON.parse(data);
   }
   const freshData = await cb();
-  await redisClient.setEx(key, DEF_EXP_TIME, JSON.stringify(freshData));
+  await redisClient.setEx(
+    key,
+    Number(process.env.REDIS_CACHE_EXP_TIME) || 24 * 3600,
+    JSON.stringify(freshData)
+  );
   return freshData;
 };
 
@@ -23,7 +25,11 @@ const getCache = async (key) => {
 };
 
 const setCache = async (key, data) => {
-  await redisClient.setEx(key, DEF_EXP_TIME, JSON.stringify(data));
+  await redisClient.setEx(
+    key,
+    Number(process.env.REDIS_CACHE_EXP_TIME) || 24 * 3600,
+    JSON.stringify(data)
+  );
 };
 
 const deleteCache = async (key: string) => {

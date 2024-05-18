@@ -8,19 +8,22 @@ import getEntityMacrosChartData from "@/helpers/getEntityMacrosChartData";
 import { FC } from "react";
 // ChartJS
 import { Pie } from "react-chartjs-2";
+import { useTranslations } from "next-intl";
 
 const EntityMacros: FC<{ macros: Macros }> = ({ macros }) => {
+  const translate = useTranslations("entityPreview.entityMacros");
+
   if (!macros || macros.calories === 0) {
     return (
       <div className={macrosGraphStyles.lineGraphContainer}>
-        <h6>No macros to display.</h6>
+        <h6>{translate("noMacrosMessage")}</h6>
       </div>
     );
   }
 
   return (
     <div className={macrosGraphStyles.lineGraphContainer}>
-      <h4>Macros</h4>
+      <h4>{translate("macrosTitle")}</h4>
       <Pie
         data={getEntityMacrosChartData(macros)}
         className={macrosGraphStyles.lineGraph}

@@ -14,6 +14,8 @@ import {
   updateTemplateRecipeTutorial,
 } from "@/redux/slices/recipesSlice";
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
+// Translations
+import { useTranslations } from "next-intl";
 
 const CreateRecipeTutorial = () => {
   const dispatch = useAppDispatch();
@@ -26,6 +28,8 @@ const CreateRecipeTutorial = () => {
 
   const templateRecipe = useAppSelector(selectTemplateRecipe);
 
+  const translate = useTranslations("createTool.formLabels.recipe.tutorial");
+
   return (
     <div className={createRecipeTutorialStyles.createRecipeTutorialContainer}>
       <h5>Tutorial:</h5>
@@ -33,7 +37,7 @@ const CreateRecipeTutorial = () => {
         className={createRecipeTutorialStyles.createRecipeTutorialCheckboxes}
       >
         <CheckboxFormControl
-          labelContent="Use Video Tutorial?:"
+          labelContent={translate("videoTutorialCheckboxLabel")}
           entityProperty={String(showVideoTutorialContent)}
           onEntityPropertyValueChange={(e) =>
             dispatch(
@@ -45,7 +49,7 @@ const CreateRecipeTutorial = () => {
         />
         {showVideoTutorialContent && (
           <VideoFormControl
-            labelContent="Tutorial URL:"
+            labelContent={translate("videoTutorialUrlPrompt")}
             entityProperty={templateRecipe.recipeTutorial?.videoTutorial}
             onEntityPropertyValueChange={(e) =>
               dispatch(
@@ -66,7 +70,7 @@ const CreateRecipeTutorial = () => {
           />
         )}
         <CheckboxFormControl
-          labelContent="Use Written Tutorial?:"
+          labelContent={translate("writtenTutorialCheckboxLabel")}
           entityProperty={String(showWrittenTutorialContent)}
           onEntityPropertyValueChange={(e) =>
             dispatch(
@@ -79,7 +83,7 @@ const CreateRecipeTutorial = () => {
         {showWrittenTutorialContent && (
           <TextAreaFormControl
             entityProperty={templateRecipe?.recipeTutorial?.writtenTutorial}
-            labelContent="Written Tutorial:"
+            labelContent={translate("writtenTutorialUrlPrompt")}
             onEntityPropertyValueChange={(e) =>
               dispatch(
                 updateTemplateRecipeTutorial({

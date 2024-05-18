@@ -1,0 +1,27 @@
+@use "../../abstracts" as *;
+
+.langSwitcherContainer {
+  @include flexCenter(row);
+  gap: 0.25rem;
+
+  img {
+    width: 4rem;
+    border: 1.5px solid getColor("black-75-1");
+    height: auto;
+  }
+}
+
+.langSwitcherSelect {
+  @include flexCenter(row);
+  select {
+    background-color: inherit;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+
+    option {
+      background-color: black;
+      border: none;
+    }
+  }
+}

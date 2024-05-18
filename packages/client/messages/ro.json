@@ -1,0 +1,999 @@
+{
+  "login": {
+    "title": "Conectați-vă",
+    "subtitle": "Nu aveți un cont?",
+    "subtitleLink": "Creați un cont",
+    "oauth": {
+      "firstMessage": "- conectare rapidă cu OAuth - ",
+      "secondMessage": "- sau cu email si parola - ",
+      "buttons": {
+        "google": "Conectați-vă cu Google",
+        "github": "Conectați-vă cu Github"
+      }
+    },
+    "formLabels": {
+      "email": "Email:",
+      "password": "Parolă:",
+      "button": "Conectați-vă"
+    }
+  },
+  "signup": {
+    "title": "Înregistrați-vă",
+    "subtitle": "Aveți un cont?",
+    "subtitleLink": "Intrați în cont",
+    "oauth": {
+      "firstMessage": "- înregistrare rapidă cu OAuth - ",
+      "secondMessage": "- sau cu email si parola - ",
+      "buttons": {
+        "google": "Înscrieți-vă cu Google",
+        "github": "Înscrieți-vă cu Github"
+      }
+    },
+    "formLabels": {
+      "username": "Nume de Utilizator:",
+      "email": "Email:",
+      "password": "Parolă:",
+      "profileImage": "Imagine de Profil:",
+      "age": "Vârstă:",
+      "button": "Înregistrați-vă",
+      "reCAPTCHA": "Confirmați că nu sunteți un robot!"
+    }
+  },
+  "home": {
+    "sections": {
+      "section-1": {
+        "sectionTitle": "VitalPrep",
+        "sectionSubTitle": "ajutător de pregătire a meselor",
+        "ctaButtonContent": "Începeți",
+        "sectionDescription": "VitalPrep este o aplicație complexă de ajutor pentru pregătirea meselor în avans, care îi ajută pe oameni să creeze planuri de pregătire a mesei și să urmeze planurile respective."
+      },
+      "section-2": {
+        "sectionTitle": "Meal Prep",
+        "sectionSubTitle": "la ce se referă?",
+        "ctaButtonContent": "Aflați mai multe",
+        "sectionDescription": "\"Meal Prep\", prescurtare pentru \"meal preparations\", este practica de a planifica și pregăti mesele în avans, de obicei pentru o perioadă de la câteva zile până la o săptămână."
+      },
+      "section-3": {
+        "sectionTitle": "Beneficiile Meal Prep",
+        "sectionSubTitle": "ce urmărești",
+        "items": {
+          "item-1": {
+            "itemTitle": "Bani și Timp",
+            "itemDescription": "Pregătirea meselor în avans vă economisește timp, nefiind nevoit să gătiți zilnic, și bani deoarece ingredientele tind să coste mult mai puțin în comparație cu alte opțiuni."
+          },
+          "item-2": {
+            "itemTitle": "Sănătate",
+            "itemDescription": "Pregătirea meselor în avans tinde să folosească ingrediente care sunt adesea extrem de hrănitoare, cu un indice de sațietate ridicat și densitate calorică scăzută."
+          },
+          "item-3": {
+            "itemTitle": "Reducerea stresului",
+            "itemDescription": "Pregătirea meselor în avans vă lasă fără griji cu privire la mâncare, deoarece aveți mesele pregătite disponibile. Gătitul în general este o activitate foarte relaxantă, reducând stresul și ajutând la gestionarea lui în viitor."
+          }
+        }
+      },
+      "section-4": {
+        "sectionTitle": "Dificultăți?",
+        "sectionSubTitle": "putem să vă ajutăm",
+        "appHelpDescription": "Având în vedere complexitatea aplicației, uneori vă veți găsi confuz. Avem un ghid care servește ca o modalitate de a vă ajuta să utilizați aplicația noastră. Verificați pagina ",
+        "appHelpLinkLabel": "Ghid",
+        "mealPrepHelpDescription": "În cazul în care aveți o întrebare despre pregătirea meselor in avans în general, vă putem ajuta. Verificați pagina ",
+        "mealPrepHelpLinkLabel": "FAQ"
+      }
+    }
+  },
+  "navbar": {
+    "navbarTitleTextContent": "Accesați pagina Profil",
+    "navbarImageAltTextContent": "Imaginea de Profil",
+    "navbarUsernameDefaultValue": "Utilizator"
+  },
+  "pageLinks": {
+    "labels": {
+      "/home": "Acasă",
+      "/logs": "Jurnale de Sesiune",
+      "/create-log": "Adăugați Jurnal de Sesiune",
+      "/create-tool": "Unealta de Creare",
+      "/multi-view-tool": "Unealta de Multi-Vizualizare",
+      "/profile": "Profil",
+      "/settings": "Setări",
+      "/guide": "Noțiuni de Bază",
+      "/faq": "FAQ",
+      "/about": "Despre",
+      "/contact": "Contact",
+      "/logout": "Deconectare"
+    }
+  },
+  "footer": {
+    "contact": {
+      "phoneNumberTitle": "Număr de Telefon:",
+      "emailTitle": "Email:"
+    }
+  },
+  "pageTitles": {
+    "titles": {
+      "/logs": {
+        "titleTextContent": "Jurnale de Sesiune",
+        "subTitleTextContent": "vedeți toate jurnalele adăugate "
+      },
+      "/create-tool": {
+        "titleTextContent": "Unealta de Creare",
+        "subTitleTextContent": "creați ceea ce aveți nevoie"
+      },
+      "/create-log": {
+        "titleTextContent": "Adăugați Jurnal de Sesiune",
+        "subTitleTextContent": "salvați-vă jurnalul de sesiune"
+      },
+      "/multi-view-tool": {
+        "titleTextContent": "Unealta de Multi-Vizualizare",
+        "subTitleTextContent": "vedeți toate entitățile adăugate"
+      },
+      "/profile": {
+        "titleTextContent": "Profil",
+        "subTitleTextContent": "vizualizați profilul dvs."
+      },
+      "/settings": {
+        "titleTextContent": "Setări",
+        "subTitleTextContent": "actualizați-vă setările"
+      },
+      "/guide": {
+        "titleTextContent": "Noțiuni de Bază",
+        "subTitleTextContent": "ghidul de bază pentru VitalPrep"
+      },
+      "/faq": {
+        "titleTextContent": "FAQ",
+        "subTitleTextContent": "întrebări frecvente"
+      },
+      "/about": {
+        "titleTextContent": "Despre",
+        "subTitleTextContent": "aflați mai multe despre aplicație"
+      },
+      "/contact": {
+        "titleTextContent": "Contact",
+        "subTitleTextContent": "luați legătura cu noi astăzi"
+      },
+      "/ingredient": {
+        "titleTextContent": "Vedeți Ingredient",
+        "subTitleTextContent": "baza fiecărei rețete"
+      },
+      "/utensil": {
+        "titleTextContent": "Vedeți Ustensilă",
+        "subTitleTextContent": "instrumentul dvs. de gătit"
+      },
+      "/recipe": {
+        "titleTextContent": "Vedeți Rețetă",
+        "subTitleTextContent": "savurați și bucurați-vă"
+      },
+      "/dayTemplate": {
+        "titleTextContent": "Vedeți Plan de Zi",
+        "subTitleTextContent": "planul tău de zi"
+      },
+      "/instanceTemplate": {
+        "titleTextContent": "Vedeți Model de Sesiune",
+        "subTitleTextContent": "schema dvs. de sesiune"
+      },
+      "/mealPrepPlan": {
+        "titleTextContent": "Vedeți Plan \"Meal Prep\"",
+        "subTitleTextContent": "planul dvs. de urmat"
+      },
+      "/mealPrepLog": {
+        "titleTextContent": "Vedeți Jurnal de Sesiune",
+        "subTitleTextContent": "jurnalul dvs. de sesiune"
+      }
+    }
+  },
+  "createTool": {
+    "formLabels": {
+      "ingredient": {
+        "formTitle": "Crează Ingredient",
+        "name": "Nume:",
+        "image": "Imagine:",
+        "calories": "Calorii(per 100g):",
+        "proteinAmount": "Proteine(in grams):",
+        "carbsAmount": "Glucide(in grams):",
+        "fatsAmount": "Grasimi(in grams):",
+        "enabled": "Activat?:",
+        "createButtonLabel": "Crează Ingredient"
+      },
+      "utensil": {
+        "formTitle": "Crează Ustensilă",
+        "name": "Nume:",
+        "image": "Imagine:",
+        "enabled": "Activat?:",
+        "createButtonLabel": "Crează Ustensilă"
+      },
+      "recipe": {
+        "formTitle": "Crează Reţetă",
+        "name": "Nume:",
+        "image": "Imagine:",
+        "tutorial": {
+          "videoTutorialCheckboxLabel": "Folosiți tutorial video?:",
+          "videoTutorialUrlPrompt": "Url Tutorial:",
+          "writtenTutorialCheckboxLabel": "Folosiți tutorial scris?:",
+          "writtenTutorialUrlPrompt": "Tutorial scris:"
+        },
+        "createButtonLabel": "Crează Reţetă",
+        "selectFormControlsLabels": {
+          "ingredients": "Ingrediente folosite:",
+          "utensils": "Ustensile folosite:"
+        }
+      },
+      "dayTemplate": {
+        "formTitle": "Crează Plan de Zi",
+        "name": "Nume:",
+        "image": "Imagine:",
+        "nbOfEntities": "Număr de mese:",
+        "createButtonLabel": "Crează Plan de Zi",
+        "selectFormControlsLabels": {
+          "componentsLabel": "Rețete",
+          "componentLabel": "Masă"
+        }
+      },
+      "instanceTemplate": {
+        "formTitle": "Crează Model de Sesiune",
+        "name": "Nume:",
+        "image": "Imagine:",
+        "nbOfEntities": "Număr de zile acoperite:",
+        "createButtonLabel": "Crează Model de Sesiune",
+        "selectFormControlsLabels": {
+          "componentsLabel": "Plan de Zi Individual:",
+          "componentLabel": "Ziua"
+        }
+      },
+      "mealPrepPlan": {
+        "formTitle": "Crează Plan \"Meal Prep\"",
+        "name": "Nume:",
+        "image": "Imagine:",
+        "nbOfEntities": "Număr de modele utilizate:",
+        "createButtonLabel": "Crează Plan \"Meal Prep\"",
+        "selectFormControlsLabels": {
+          "componentsLabel": "Modele de Sesiune Individuale",
+          "componentLabel": "Model #{id}",
+          "weekdayLabel": "Ziua Săptămânii:",
+          "timeLabel": "Ora de începere a sesiunii:"
+        }
+      },
+      "mealPrepLog": {
+        "formTitle": "Adăugați Jurnal de Sesiune",
+        "name": "Nume:",
+        "image": "Imagine:",
+        "date": "Data:",
+        "completed": "Sesiune Completată?:",
+        "cookingDuration": "Durata de gătire:",
+        "createButtonLabel": "Adăugați Jurnal de Sesiune",
+        "selectFormControlsLabels": {
+          "instanceTemplate": "Model de Sesiune Folosit"
+        }
+      }
+    },
+    "entityOptions": {
+      "labels": {
+        "ingredient": "Ingredient",
+        "utensil": "Ustensilă",
+        "recipe": "Reţetă",
+        "dayTemplate": "Plan de Zi",
+        "instanceTemplate": "Model de Sesiune",
+        "mealPrepPlan": "Plan \"Meal Prep\"",
+        "mealPrepLog": "Jurnal de Sesiune"
+      }
+    }
+  },
+  "entityPreview": {
+    "entityDetails": {
+      "title": "Previzualizare",
+      "entityLabels": {
+        "ingredient": "Ingredient",
+        "utensil": "Ustensilă",
+        "recipe": "Reţetă",
+        "dayTemplate": "Plan de Zi",
+        "instanceTemplate": "Model de Sesiune",
+        "mealPrepPlan": "Plan \"Meal Prep\"",
+        "mealPrepLog": "Jurnal de Sesiune"
+      }
+    },
+    "entityMacros": {
+      "noMacrosMessage": "Nu există macro-uri de afișat",
+      "macrosTitle": "Macro-uri"
+    }
+  },
+  "entityMenu": {
+    "openActionTitle": "Deschideți Meniul de Entități",
+    "closeActionTitle": "Închideți Meniul de Entități",
+    "selectLabel": "Selectați"
+  },
+  "viewEntityOptions": {
+    "chooseEntity": {
+      "labelContent": "Entitatea selectată:",
+      "labelName": "alegeEntitatea",
+      "selectLabel": "Selectați"
+    },
+    "sortBy": {
+      "labelContent": "Filtrați după:",
+      "labelName": "optiuniDeFiltrare",
+      "labelTitle": "Filtrați după: {label}",
+      "selectLabel": "Filtrați după:",
+      "orderBy": {
+        "titleLabel": "Ordine curentă: {order}",
+        "titleOption": {
+          "asc": "Ascendent",
+          "desc": "Descendent"
+        }
+      },
+      "sortingOptions": {
+        "labels": {
+          "ingredient": {
+            "enabled": "Disponibilitatea Ingredientelor",
+            "name": "Nume Ingredient",
+            "numberOfRecipes": "Ingrediente utilizate frecvent"
+          },
+          "utensil": {
+            "enabled": "Disponibilitatea Ustensilelor",
+            "name": "Nume Ustensilă",
+            "numberOfRecipes": "Ustensile utilizate frecvent"
+          },
+          "recipe": {
+            "name": "Nume Reţetă",
+            "numberOfDayTemplates": "Reţete utilizate frecvent"
+          },
+          "dayTemplate": {
+            "name": "Nume Plan de Zi",
+            "numberOfInstanceTemplates": "Planuri de Zi utilizate frecvent"
+          },
+          "instanceTemplate": {
+            "name": "Nume Model de Sesiune",
+            "numberOfMealPrepPlans": "Modele de Sesiune utilizate frecvent",
+            "coverage": "Acoperirea modelelor de sesiune"
+          },
+          "mealPrepPlan": {
+            "name": "Nume Plan \"Meal Prep\""
+          },
+          "mealPrepLog": {
+            "name": "Nume Jurnal de Sesiune",
+            "completed": "Finalizarea jurnalelor de sesiune"
+          }
+        }
+      }
+    },
+    "searchEntity": {
+      "labelContent": "Căutați:",
+      "labelName": "cautareEntitate",
+      "magGlassTitle": "Căutați:",
+      "viewType": {
+        "title": "Schimbați opțiunea de vizualizare la {type}",
+        "typeOptions": {
+          "grid": "Grilă",
+          "list": "Listă"
+        }
+      }
+    }
+  },
+  "multiViewPage": {
+    "entitiesTitle": {
+      "ingredient": "Ingrediente",
+      "utensil": "Ustensile",
+      "recipe": "Rețete",
+      "dayTemplate": "Planuri de Zi",
+      "instanceTemplate": "Modele de Jurnal",
+      "mealPrepPlan": "Planuri \"Meal Prep\"",
+      "mealPrepLog": "Jurnale de Sesiune"
+    },
+    "noEntitiesCase": {
+      "message": "Nu aveți {title} disponibile. Dacă doriți să creați câteva accesați: ",
+      "messageLinkTitle": "Accesați pagina Unealta de Creare",
+      "messageLinkLabel": "Unealta de Creare"
+    }
+  },
+  "profile": {
+    "profileInfo": {
+      "profileImageAlt": "Imagine de Profil",
+      "defaultProfileUsername": "Utilizator",
+      "defaultProfileEmail": "profileemail@gmail.com",
+      "defaultProfileAge": "Vârstă Necunoscută",
+      "profileAge": "{age} ani"
+    }
+  },
+  "entityStatistics": {
+    "title": "Statistici",
+    "prefix": {
+      "usable": "Folosit în ",
+      "component": "Folosește ",
+      "count": "Număr de "
+    }
+  },
+  "entityAppearances": {
+    "ingredient": {
+      "title": "Aparențe",
+      "sectionTitle": "Ingrediente:"
+    },
+    "utensil": {
+      "title": "Aparențe",
+      "sectionTitle": "Ustensile:"
+    },
+    "recipe": {
+      "title": "Aparențe",
+      "sectionTitle": "Rețete:"
+    },
+    "dayTemplate": {
+      "title": "Aparențe",
+      "sectionTitle": "Planuri de Zi:"
+    },
+    "instanceTemplate": {
+      "title": "Aparențe",
+      "sectionTitle": "Modele de Sesiune:"
+    },
+    "mealPrepPlan": {
+      "title": "Aparențe",
+      "sectionTitle": "Planuri \"Meal Prep\":"
+    },
+    "mealPrepLog": {
+      "title": "Aparențe",
+      "sectionTitle": "Jurnale de Sesiune:"
+    },
+    "profile": {
+      "title": "Entități create"
+    }
+  },
+  "entityTutorial": {
+    "iframeTitle": "Tutorial Reţetă",
+    "videoTutorial": {
+      "title": "Tutorial Video",
+      "notFoundMessage": "Nu am găsit nici un video tutorial disponibil."
+    },
+    "writtenTutorial": {
+      "title": "Tutorial Scris",
+      "notFoundMessage": "Nu am găsit nici un tutorial scris disponibil."
+    }
+  },
+  "entityComponents": {
+    "title": "Componente",
+    "sectionTitle": "{type} folosite în {name}:",
+    "defaultEntityName": "Nume Entitate"
+  },
+  "entityInstanceTemplate": {
+    "sectionTitle": "Model de Sesiune folosit de {name}",
+    "defaultEntityName": "Entitate Exemplu"
+  },
+  "settings": {
+    "accountSettings": {
+      "title": "Setări de cont",
+      "formLabels": {
+        "name": "Nume de utilizator nou:",
+        "email": "Email nou:",
+        "password": "Parolă nouă:",
+        "verifyPassword": "Verifică parolă nouă:",
+        "image": "Imagine de profil nouă",
+        "submitButtonContent": "Actualizați setările contului"
+      }
+    },
+    "notificationSettings": {
+      "title": "Setări de notificare",
+      "formLabels": {
+        "allowNotifications": "Permiteți notificările?:",
+        "notificationsImage": "Imagine de notificare:",
+        "notificationStyles": {
+          "formLabel": "Stilul de notificare:",
+          "default": "Implicit",
+          "serious": "Serios",
+          "motivating": "Motivant",
+          "menacing": "Ameninţător"
+        },
+        "submitButtonContent": "Actualizați setările de notificare"
+      }
+    }
+  },
+  "gettingStarted": {
+    "contentMap": {
+      "title": "Conținutul Ghidului",
+      "sectionTitleLabel": "Schimbați secțiunea la {section}",
+      "basics": {
+        "title": "Bazele",
+        "a": {
+          "linkLabel": "Scopul Ghidului",
+          "linkDest": "#scopulGhidului"
+        },
+        "b": {
+          "linkLabel": "Unealta de Creare",
+          "linkDest": "#unealtaDeCreare"
+        },
+        "c": {
+          "linkLabel": "Unealta de Multi-Vizualizare",
+          "linkDest": "#unealtaDeMultiVizualizare"
+        },
+        "d": {
+          "linkLabel": "Unealta de Vizualizare",
+          "linkDest": "#unealtaDeVizualizare"
+        }
+      },
+      "entities": {
+        "title": "Entități",
+        "a": {
+          "linkLabel": "Ingrediente",
+          "linkDest": "#ingrediente"
+        },
+        "b": {
+          "linkLabel": "Ustensile",
+          "linkDest": "#ustensile"
+        },
+        "c": {
+          "linkLabel": "Rețete",
+          "linkDest": "#retete"
+        },
+        "d": {
+          "linkLabel": "Planuri de Zi",
+          "linkDest": "#planuriDeZi"
+        },
+        "e": {
+          "linkLabel": "Modele de Sesiune",
+          "linkDest": "#modeleDeSesiune"
+        },
+        "f": {
+          "linkLabel": "Planuri \"Meal Prep\"",
+          "linkDest": "#planuriMealPrep"
+        }
+      },
+      "logs": {
+        "title": "Jurnale de Sesiune",
+        "a": {
+          "linkLabel": "Ce reprezintă Jurnalele de Sesiune?",
+          "linkDest": "#ceReprezintaJurnaleleDeSesiune"
+        },
+        "b": {
+          "linkLabel": "Cum se crează un Jurnal de Sesiune?",
+          "linkDest": "#cumSeCreazaUnJurnalDeSesiune"
+        },
+        "c": {
+          "linkLabel": "Cum se vizualizează un Jurnal de Sesiune?",
+          "linkDest": "#cumSeVizualizeazaUnJurnalDeSesiune"
+        }
+      },
+      "extras": {
+        "title": "Profil, Setari si Extras",
+        "a": {
+          "linkLabel": "Pagina Profil",
+          "linkDest": "#paginaProfil"
+        },
+        "b": {
+          "linkLabel": "Pagina Setări",
+          "linkDest": "#paginaSetari"
+        },
+        "c": {
+          "linkLabel": "Feedback",
+          "linkDest": "#feedback"
+        },
+        "d": {
+          "linkLabel": "Notificări",
+          "linkDest": "#notificari"
+        },
+        "e": {
+          "linkLabel": "Concluzie",
+          "linkDest": "#concluzie"
+        }
+      }
+    },
+    "content": {
+      "basics": {
+        "title": "Bazele",
+        "articles": {
+          "1": {
+            "title": "Scopul Ghidului",
+            "descriptions": {
+              "1": "<span>NOTĂ:</span> Următorul tutorial necesită cunoștințe prealabile despre pregătirea meselor în avans. Dacă nu știți nimic despre pregătirea meselor în avans, încercați să citiți puțin online sau să verificați <faq>Pagina FAQ</faq>.",
+              "2": "<span>Scopul</span> acestui ghid este de a vă învăța cum să creați un <span>Plan \"Meal Prep\"</span> pentru a-l utiliza într-un mod practic activându-l, astfel încât să puteți fi notificat oricând trebuie să vă pregătiți mesele în avans."
+            },
+            "imageAlt": "Imaginea pentru \"Scopul Ghidului\"",
+            "images": {
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715177907/VitalPrep/Screenshot_33_o5fzdm.png"
+            }
+          },
+          "2": {
+            "title": "Unealta de Creare",
+            "descriptions": {
+              "1": "Pentru a crea un <span>Plan \"Meal Prep\"</span>, mai întâi va trebui să creați destul de multe <span>entități</span>. Pentru a crea <span>entități</span>, va trebui să utilizați <createTool>Unealta de Creare</createTool>. Pur și simplu completați formularul, observați previzualizarea pentru a vedea dacă vă place, apoi creați respectiva entitate.",
+              "2": "Pentru a schimba interfața unealtei de creare, utilizați meniul din stânga ecranului, care poate fi ascuns/afișat după cum este necesar."
+            },
+            "imageAlt": "Imaginea pentru \"Unealta de Creare\"",
+            "images": {
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715179083/VitalPrep/Screenshot_35_sh7nyg.png"
+            }
+          },
+          "3": {
+            "title": "Unealta de Multi-Vizualizare",
+            "descriptions": {
+              "1": "Pentru a <span>vizualiza</span> <span>entitățile</span> create de dvs., va trebui să utilizați <multiViewTool>Unealta de Multi-Vizualizare</multiViewTool>. Ajustați opțiunile de filtrare la nevoile dvs.",
+              "2": "<span>Opțiunile de filtrare</span> disponibile sunt: <span>tip de entitate</span>(modifică ce entitate este afișată), <span>sortează după</span>(sortează entitatea afișată după o proprietate a acesteia, de exemplu nume), <span>căutare</span>(caută entități ce conțin textul dat în numele lor), <span>vizualizare listă/grilă</span> (schimbă tipul de vizualizare a entității)."
+            },
+            "imageAlt": "Imaginea pentru \"Unealta de Multi-Vizualizare\"",
+            "images": {
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715178126/VitalPrep/Screenshot_34_vb9vwf.png"
+            }
+          },
+          "4": {
+            "title": "Unealta de Vizualizare",
+            "descriptions": {
+              "1": "Pentru a <span>vizualiza</span> <span>individual entitățile create</span>, va trebui să utilizați <viewTool>Unealta de Multi-Vizualizare</viewTool>, accesată prin <span>apăsarea</span> oricărui component de entitate.",
+              "2": "Pe pagina respectivă puteți <span>vedea diferite proprietăți</span> ale respectivei entități, cum ar fi <span>numele</span>, <span>imaginea</span>, <span>calorii</span>(dacă are), <span>macro</span>(pe orice tip de entitate, cu excepția ustensilelor), etc.",
+              "3": "De asemenea, puteți vizualiza <span>statisticile</span> respectivei entități, din ce entități sunt <span>compuse</span>, ce alte entități sunt <span>compuse din entitatea respectivă</span>."
+            },
+            "imageAlt": "Imaginea pentru \"Unealta de Multi-Vizualizare\"",
+            "images": {
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715179643/VitalPrep/Screenshot_37_lo4qpe.png",
+              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715179504/VitalPrep/Screenshot_36_yaa7zm.png"
+            }
+          }
+        }
+      },
+      "entities": {
+        "title": "Entități",
+        "articles": {
+          "1": {
+            "title": "Ingrediente",
+            "descriptions": {
+              "1": "<span>Ingredientele</span> reprezintă componentele principale ale unei <span>Rețete</span>. Fără ele, nu poți crea Rețete, iar fără Rețete nu poți crea Planuri de Zi și așa mai departe. Ele reprezintă ingredientele folosite într-o rețetă.",
+              "2": "Utilizați <createTool>Unealta de Creare</createTool> pentru a crea un <span>Ingredient</span>. Dați-i un nume adecvat, imagine (opțional) și specificați dacă este activat sau nu. Nu uitați să adăugați și <span>macro-uri</span>.",
+              "3": "<span>NOTĂ:</span> adăugarea de macro-uri este opțională, în special pentru condimente, dar, în general, este o idee bună să adăugați cu precizie macro-uri la ingrediente atunci când le creați.",
+              "4": "Pentru a <span>vizualiza</span> toate <span>entitățile create</span> de dvs., utilizați <multiViewTool>Unealta de Multi-Vizualizare</multiViewTool>. Pentru a vizualiza o <span>entitate individuală</span> în detaliu, apăsați pe orice component <span>Ingredient</span> din <multiViewTool>Unealta de Multi-Vizualizare</multiViewTool>."
+            },
+            "imageAlt": "Imaginea pentru \"Ingredient\"",
+            "images": {
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715181329/VitalPrep/Screenshot_38_tdcdyr.png",
+              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715181484/VitalPrep/Screenshot_39_moj2tx.png"
+            }
+          },
+          "2": {
+            "title": "Ustensile",
+            "descriptions": {
+              "1": "<span>Ustensilele</span> reprezintă componente ale unei <span>Rețete</span>. Fără ele, nu poți crea Rețete, iar fără Rețete nu poți crea Planuri de Zi și așa mai departe. Ele reprezintă ustensilele/uneltele de bucătărie care sunt folosite într-o rețetă.",
+              "2": "Utilizați <createTool>Unealta de Creare</createTool> pentru a crea o <span>Ustensilă</span>. Dați-i un nume adecvat, imagine (opțional) și specificați dacă este activată sau nu.",
+              "3": "Pentru a <span>vizualiza</span> toate <span>entitățile create</span> de dvs., utilizați <multiViewTool>Unealta de Multi-Vizualizare</multiViewTool>. Pentru a vizualiza o <span>entitate individuală</span> în detaliu, apăsați pe orice component <span>Ustensilă</span> din <multiViewTool>Unealta de Multi-Vizualizare</multiViewTool>."
+            },
+            "imageAlt": "Imaginea pentru \"Ustensilă\"",
+            "images": {
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715181630/VitalPrep/Screenshot_40_rvtkbe.png",
+              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715181718/VitalPrep/Screenshot_41_sl4fdr.png"
+            }
+          },
+          "3": {
+            "title": "Rețete",
+            "descriptions": {
+              "1": "<span>Rețetele</span> sunt componentele principale ale unui <span>Plan de Zi</span>. Fără ele, nu puteți crea <span>Planuri de Zi</span>, iar fără Planuri de Zi nu puteți crea <span>Modele de Sesiune</span> și așa mai departe. Acestea reprezintă rețetele efective folosite de mese într-un <span>Plan de Zi</span>.",
+              "2": "Utilizați <createTool>Unealta de Creare</createTool> pentru a crea o <span>Rețetă</span>. Dați-i un nume adecvat, o imagine (opțional) și fie un <span>Tutorial Video</span>, un <span>Tutorial Scris</span> sau ambele.",
+              "3": "După aceea, selectați toate <span>Ingredientele</span> și <span>Ustensilele</span> pe care le folosește <span>Rețeta</span>.",
+              "4": "Pentru a <span>vizualiza</span> toate <span>entitățile create</span> de dvs., utilizați <multiViewTool>Unealta de Multi-Vizualizare</multiViewTool>. Pentru a vizualiza o <span>entitate individuală</span> în detaliu, apăsați pe orice component <span>Reţetă</span> din <multiViewTool>Unealta de Multi-Vizualizare</multiViewTool>."
+            },
+            "imageAlt": "Imaginea pentru \"Rețetă\"",
+            "images": {
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715181911/VitalPrep/Screenshot_42_gw8stk.png",
+              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715182012/VitalPrep/Screenshot_43_ijmjfh.png",
+              "3": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715182089/VitalPrep/Screenshot_45_erigz6.png"
+            }
+          },
+          "4": {
+            "title": "Planuri de Zi",
+            "descriptions": {
+              "1": "<span>Planurile de Zi</span> sunt componentele principale ale unui <span>Model de Sesiune</span>. Fără ele, nu puteți crea <span>Modele de Sesiune</span>, iar fără <span>Modele de Sesiune</span> nu puteți crea <span>Planuri \"Meal Prep\"</span>. Fiecare Plan de Zi reprezintă planul de mese pentru o anumită zi într-un <span>Model de Sesiune</span>.",
+              "2": "Utilizați <createTool>Unealta de Creare</createTool> pentru a crea un <span>Plan de zi</span>. Dați-i un nume adecvat, o imagine (opțional) și numărul de mese pe care le va avea planul de zi.",
+              "3": "După aceea, selectați o <span>Rețetă specifică</span> pentru fiecare masă folosită.",
+              "4": "Pentru a <span>vizualiza</span> toate <span>entitățile create</span> de dvs., utilizați <multiViewTool>Unealta de Multi-Vizualizare</multiViewTool>. Pentru a vizualiza o <span>entitate individuală</span> în detaliu, apăsați pe orice component <span>Plan de Zi</span> din <multiViewTool>Unealta de Multi-Vizualizare</multiViewTool>."
+            },
+            "imageAlt": "Imaginea pentru \"Plan de Zi\"",
+            "images": {
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715183076/VitalPrep/Screenshot_46_qw9rgz.png",
+              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715183623/VitalPrep/Screenshot_47_qzv7b4.png",
+              "3": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715183690/VitalPrep/Screenshot_48_mompqr.png"
+            }
+          },
+          "5": {
+            "title": "Modele de Sesiune",
+            "descriptions": {
+              "1": "<span>Modelele de Sesiune</span> sunt componentele principale ale unui <span>Plan \"Meal Prep\"</span>. Fără ele, nu puteți crea <span>Planuri \"Meal Prep\"</span>. Fiecare reprezintă modelul/schema specifică pentru o anumită sesiune într-un <span>Plan \"Meal Prep\"</span>.",
+              "2": "<span>Modelele de Sesiune</span> sunt folosite și de <span>Jurnalele de Sesiune</span>.",
+              "3": "Utilizați <createTool>Unealta de Creare</createTool> pentru a crea un <span>Model de Sesiune</span>. Dați-i un nume adecvat, o imagine (opțional) și numărul de zile pe care îl va acoperi în total.",
+              "4": "După aceea, selectați un <span>Plan de Zi specific</span> pentru fiecare zi specifică acoperită.",
+              "5": "Pentru a <span>vizualiza</span> toate <span>entitățile create</span> de dvs., utilizați <multiViewTool>Unealta de Multi-Vizualizare</multiViewTool>. Pentru a vizualiza o <span>entitate individuală</span> în detaliu, apăsați pe orice component <span>Model de Sesiune</span> din <multiViewTool>Unealta de Multi-Vizualizare</multiViewTool>."
+            },
+            "imageAlt": "Imaginea pentru \"Model de Sesiune\"",
+            "images": {
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715183829/VitalPrep/Screenshot_49_cnpacm.png",
+              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715183890/VitalPrep/Screenshot_50_p8l6wt.png",
+              "3": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715184001/VitalPrep/Screenshot_52_ctxjaz.png"
+            }
+          },
+          "6": {
+            "title": "Planuri \"Meal Prep\"",
+            "descriptions": {
+              "1": "<span>Planurile \"Meal Prep\"</span> reprezintă planurile reale pe care le veți urma. Pentru a primi <span>notificări de tip memento</span> pentru <span>Sesiunile dvs. de \"Meal Prep\"</span>, va trebui să <span>activați</span> respectivul plan de pregătire a mesei și, de asemenea, să vă <span>abonați la notificările noastre</span>.",
+              "2": "Use the <createTool> Create Tool Page</createTool> to create a <span>Session Template</span>. Give it an appropriate name, image(optional) and the number of sessions it will have.",
+              "3": "După aceea, selectați un <span>Model de Sesiune specific</span> pentru fiecare sesiune specifică, <span>ziua săptămânii</span> și <span>ora</span> la care veți activitatea de \"Meal Prep\".",
+              "4": "Pentru a <span>vizualiza</span> toate <span>entitățile create</span> de dvs., utilizați <multiViewTool>Unealta de Multi-Vizualizare</multiViewTool>. Pentru a vizualiza o <span>entitate individuală</span> în detaliu, apăsați pe orice component <span>Plan \"Meal Prep\"</span> din <multiViewTool>Unealta de Multi-Vizualizare</multiViewTool>."
+            },
+            "imageAlt": "Imaginea pentru \"Plan \"Meal Prep\"\"",
+            "images": {
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715184134/VitalPrep/Screenshot_53_bgbocc.png",
+              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715184377/VitalPrep/Screenshot_54_qsapvp.png",
+              "3": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715184475/VitalPrep/Screenshot_55_ukdzrs.png"
+            }
+          }
+        }
+      },
+      "logs": {
+        "title": "Jurnale de Sesiune",
+        "articles": {
+          "1": {
+            "title": "Ce reprezintă Jurnalele de Sesiune?",
+            "descriptions": {
+              "1": "<span>Jurnalele de Sesiune</span> reprezintă jurnalele <span>sesiunilor dvs. active de planuri \"Meal Prep\"</span>. Cu alte cuvinte, ele reprezintă instanța salvată a unei <span>sesiuni de plan \"Meal Prep\"</span>. Sunt foarte utile pentru <span>urmărirea sesiunilor de plan \"Meal Prep\"</span>."
+            },
+            "imageAlt": "Imaginea pentru \"Plan \"Meal Prep\" Activ\"",
+            "images": {
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715177907/VitalPrep/Screenshot_33_o5fzdm.png"
+            }
+          },
+          "2": {
+            "title": "Cum se crează un Jurnal de Sesiune?",
+            "descriptions": {
+              "1": "<span>Jurnalele de Sesiune</span> sunt create <span>automat</span> în mod implicit la 3 ore <span>după sesiunea activă a planului \"Meal Prep\"</span>. Acest <span>comportament</span> poate fi modificat pe <settings>Pagina de Setări</settings> fie pentru a nu crea jurnalele automat, fie pentru a crea jurnale după un anumit număr de ore în loc de 3, sau ambele.",
+              "2": "<span>Jurnalele de Sesiune</span> pot fi create și <span>manual</span> pe <addLog>Pagina Adăugare Jurnal</addLog>."
+            },
+            "imageAlt": "Imaginea pentru \"Adaugă Jurnal de Sesiune\"",
+            "images": {
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715185596/VitalPrep/Screenshot_56_dvrgak.png",
+              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715185699/VitalPrep/Screenshot_57_mjxlki.png"
+            }
+          },
+          "3": {
+            "title": "Cum se vizualizează un Jurnal de Sesiune?",
+            "descriptions": {
+              "1": "Pentru a <span>vizualiza</span> toate <span>Jurnalele de Sesiune</span> create, utilizați <multiViewTool>Unealta de Multi-Vizualizare</multiViewTool>. Pentru a vizualiza în detaliu un <span>Jurnal de Sesiune individual</span>, apăsați pe orice component <span>Jurnal de Sesiune</span> de pe <multiViewTool>Unealta de Multi-Vizualizare</multiViewTool>."
+            },
+            "imageAlt": "Imaginea pentru \"Vizualizare Jurnal de Sesiune\"",
+            "images": {
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715185923/VitalPrep/Screenshot_59_bdjdnw.png",
+              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715185889/VitalPrep/Screenshot_58_aljwha.png"
+            }
+          }
+        }
+      },
+      "extras": {
+        "title": "Profil, Setări și Extras",
+        "articles": {
+          "1": {
+            "title": "Pagina Profil",
+            "descriptions": {
+              "1": "Pentru a vizualiza <span>Profilul</span> dvs., îl puteți accesa fie prin <span>Bara de Navigare</span>, fie prin <span>Bara Laterală</span> pentru a fi trimis la <profile>Pagina de Profil</profile>.",
+              "2": "Pe <profile>Pagina de Profil</profile> vă puteți vedea numele de utilizator, adresa de e-mail, vârsta, statisticile și toate entitățile pe care le-ați creat."
+            },
+            "imageAlt": "Imaginea pentru \"Secțiunea de Profil\"",
+            "images": {
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715187350/VitalPrep/Screenshot_60_cch6wk.png",
+              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715187384/VitalPrep/Screenshot_61_frtxb0.png",
+              "3": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715187473/VitalPrep/Screenshot_62_u2tbk6.png",
+              "4": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715187500/VitalPrep/Screenshot_63_ovkvtp.png"
+            }
+          },
+          "2": {
+            "title": "Pagina Setări",
+            "descriptions": {
+              "1": "<span>Detaliile Profilului</span> sau <span>Setările de Notificare</span> pot fi modificate pe <settings>Pagina de Setări</settings>.",
+              "2": "<span>Setările Profilului</span> disponibile sunt: nume de utilizator, e-mail, parolă, imagine de profil."
+            },
+            "imageAlt": "Imaginea pentru \"Secțiunea de Setări\"",
+            "images": {
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715185596/VitalPrep/Screenshot_56_dvrgak.png",
+              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715187685/VitalPrep/Screenshot_64_vxekot.png"
+            }
+          },
+          "3": {
+            "title": "Feedback",
+            "descriptions": {
+              "1": "Pentru a ne oferi <span>feedback</span> cu privire la aplicație, puteți face acest lucru trimițându-ne un e-mail folosind formularul de e-mail de pe <contact>Pagina de Contact</contact>. Toate feedback-urile sunt binevenite, chiar dacă sunt negative."
+            },
+            "imageAlt": "Imaginea pentru \"Secțiunea Feedback\"",
+            "images": {
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715187774/VitalPrep/Screenshot_65_gkix9r.png"
+            }
+          },
+          "4": {
+            "title": "Notificări",
+            "descriptions": {
+              "1": "Pentru a primi <span>notificări de tip memento</span> în timp ce aveți un <span>Plan \"Meal Prep\" activ</span>, trebuie să vă <span>abonați la serviciul nostru de notificări</span> fie prin <span>clopot</span> span> fixat în colțul din dreapta jos al ecranului sau prin <span>modal</span>.",
+              "2": "Vă puteți <span>dezabona</span> oricând doriți apăsând pe clopoțel, apoi \"Unsubscribe\" sau \"Dezabonați-vă\"."
+            },
+            "imageAlt": "Imaginea pentru \"Secțiunea de Notificări\"",
+            "images": {
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715188301/VitalPrep/Screenshot_66_ryl1fc.png"
+            }
+          },
+          "5": {
+            "title": "Concluzie",
+            "descriptions": {
+              "1": "Cu tot ce ați învățat, acum puteți utiliza aplicația noastră pentru a va pregăti mesele într-un mod mai organizat, având în același timp la dispoziție capabilități de logare și notificări de tip memento. Sperăm că acest lucru vă va ajuta să rămâneți consistent în activitatea de \"Meal Prep\"."
+            },
+            "imageAlt": "Imaginea \"VitalPrep Logo\"",
+            "images": {
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715188430/VitalPrep/brandmark-design-1920x1080_sp2kds.png"
+            }
+          }
+        }
+      }
+    }
+  },
+  "faq": {
+    "accordionShowTitle": "Vedeți: {title}",
+    "accordionHideTitle": "Ascundeți: {title}",
+    "sections": {
+      "1": {
+        "sectionTitle": "Introducere în \"Meal Prep\"",
+        "sectionDescription": "Următoarele sunt câteva întrebări frecvente puse de către persoanele care sunt noi activitatea de \"Meal Prep\" și nu știu de unde/cum să înceapă.",
+        "sectionAccordions": {
+          "1": {
+            "accordionTitle": "Ce reprezintă \"Meal Prep\"?",
+            "accordionContent": "\"Meal Prep\" implică pregătirea și porționarea meselor în avans, de obicei de la câteva zile la o săptămâna. Este o strategie pentru a economisi timp în general și pentru a vă asigura că aveți la dispoziție mese sănătoase, de casă."
+          },
+          "2": {
+            "accordionTitle": "Cum economisește timp \"Meal Prep\"?",
+            "accordionContent": "\"Meal Prep\" economisește timp permițându-vă să pregătiți mai multe mese simultan, de obicei într-o zi desemnată, cum ar fi un weekend. Aceasta înseamnă că puteți găti în vrac, reducând timpul total petrecut în bucătărie în timpul săptămânii. În plus, faptul că aveți mese pre-preparate gata de utilizare elimină nevoia de a găti de la zero în fiecare zi, simplificând pregătirea mesei și reducând timpul de luare a deciziilor."
+          },
+          "3": {
+            "accordionTitle": "Care sunt beneficiile \"Meal Prep\"?",
+            "accordionContent": "\"Meal Prep\" oferă mai multe beneficii, inclusiv economisirea timpului, o alimentație mai sănătoasă, controlul porțiilor, rentabilitatea, reducerea risipei alimentare și consistența."
+          },
+          "4": {
+            "accordionTitle": "Cum încep activitatea de \"Meal Prep\" dacă sunt începător?",
+            "accordionContent": "Pentru a începe activitatea de \"Meal Prep\" ca începător, începeți prin a vă planifica mesele, a face o listă de cumpărături, a rezerva timp dedicat, a investi în recipiente de depozitare, a găti în loturi, a împărți mesele, a le depozita în mod corespunzător și a le reîncălzi atunci când dvs. vreți să mâncați."
+          }
+        }
+      },
+      "2": {
+        "sectionTitle": "Esențialele \"Meal Prep\"",
+        "sectionDescription": "Următoarele sunt câteva întrebări frecvente puse de către persoanele care au început să-și pregătească mesele în avans și doresc să intre mai mult în contact cu întregul proces.",
+        "sectionAccordions": {
+          "1": {
+            "accordionTitle": "De ce echipament am nevoie pentru \"Meal Prep\"?",
+            "accordionContent": "Pentru \"Meal Prep\", veți avea nevoie de echipamente de bucătărie de bază, cum ar fi cuțite, plăci de tăiat, oale și tigăi, recipiente pentru depozitarea meselor, o cântare pentru alimente, boluri pentru amestecare, cești și linguri de măsurat."
+          },
+          "2": {
+            "accordionTitle": "Cât timp durează de obicei mesele pregătite în frigider sau congelator?",
+            "accordionContent": "Mesele pregătite durează de obicei în frigider aproximativ 3-4 zile și în congelator timp de 1-2 luni, în funcție de tipul de alimente și de cât de bine sunt ambalate. Depozitarea adecvată în recipiente etanșe ajută la menținerea prospețimii și prelungește durata de valabilitate a meselor."
+          },
+          "3": {
+            "accordionTitle": "Îmi pot personaliza activitata de \"Meal Prep\" în funcție de obiectivele mele nutriționale?",
+            "accordionContent": "Da, vă puteți personaliza activitatea de \"Meal Prep\" în funcție de obiectivele dumneavoastră nutriționale. Aveți flexibilitatea de a alege rețete și ingrediente care se aliniază nevoilor dumneavoastră alimentare, indiferent dacă vă concentrați pe pierderea în greutate, creșterea musculară sau cerințe nutriționale specifice."
+          },
+          "4": {
+            "accordionTitle": "Cum mă asigur că mesele mele pregătite rămân proaspete pe tot parcursul săptămânii?",
+            "accordionContent": "Pentru a vă asigura că mesele pregătite rămân proaspete pe tot parcursul săptămânii, utilizați recipiente etanșe, puneți la frigider prompt, etichetați recipientele cu data preparării, împărțiți-vă mesele în mod corespunzător și evitați deschiderea recipientelor inutil."
+          },
+          "5": {
+            "accordionTitle": "Cum calculez dimensiunile porțiilor pentru \"Meal Prep\"?",
+            "accordionContent": "Pentru a calcula dimensiunile porțiilor pentru \"Meal Prep\", începeți prin a vă determina nevoile nutriționale pe baza unor factori precum vârsta, sexul, greutatea și nivelul de activitate. Apoi, utilizați instrumente precum cântare pentru alimente sau pahare de măsurare pentru a împărți cu precizie ingredientele în funcție de obiectivele dvs. dietetice. De asemenea, poate fi util să consultați un nutriționist sau să utilizați resurse online pentru a ghida calculele dimensiunii porțiilor în funcție de nevoile dumneavoastră specifice."
+          },
+          "6": {
+            "accordionTitle": "Cât de des ar trebui să-mi pregătesc mesele în avans?",
+            "accordionContent": "Cât de des ar trebui să vă pregătiți mesele în avans depinde de programul și preferințele dumneavoastră personale. Mulți oameni consideră că este util să pregătească mesele o dată sau de două ori pe săptămână, de obicei în weekend sau ori de câte ori au timp liber. Acest lucru le permite să pregătească mesele cu câteva zile înainte, reducând nevoia de a găti în fiecare zi. Cu toate acestea, puteți ajusta frecvența în funcție de nevoile și stilul dvs. de viață, fie că este vorba despre pregătirea mesei pentru întreaga săptămână sau doar pentru câteva zile la un moment dat."
+          },
+          "7": {
+            "accordionTitle": "Activitatea de \"Meal Prep\" este rentabilă?",
+            "accordionContent": "Da, activitatea de \"Meal Prep\" este adesea rentabilă. Cumpărând ingrediente în vrac și gătind mese acasă, puteți economisi bani în comparație cu mâncarea în mod regulat în oraș sau cumpărarea de mese pre-preparate."
+          }
+        }
+      },
+      "3": {
+        "sectionTitle": "Rețete și Idei pentru \"Meal Prep\"",
+        "sectionDescription": "Următoarele sunt câteva întrebări frecvente puse de către persoanele care au întrebări mai specifice și/sau doresc să-și \"condimenteze\" activitatea de \"Meal Prep\".",
+        "sectionAccordions": {
+          "1": {
+            "accordionTitle": "Care sunt unele greșeli comune de \"Meal Prep\" de evitat?",
+            "accordionContent": "Unele greșeli comune de \"Meal Prep\" care trebuie evitate includ neplanificarea în avans, folosirea recipientelor de depozitare necorespunzătoare, neglijarea varietății în mese, neconsiderarea dimensiunilor porțiilor și neetichetarea recipientelor cu data preparării."
+          },
+          "2": {
+            "accordionTitle": "Care sunt câteva rețete ușoare pentru începători?",
+            "accordionContent": "Unele rețete ușoare pentru începători includ ovăz peste noapte, pui și legume, boluri cu salată de quinoa, prăjeli de legume cu orez și împachetări cu curcan și fasole neagră. Aceste rețete sunt simplu de preparat în vrac și pot fi personalizate cu ingredientele dvs. preferate."
+          },
+          "3": {
+            "accordionTitle": "Cum pot preveni plictiseala referitoare la \"Meal Prep\"?",
+            "accordionContent": "Pentru a preveni plictiseala atunci când pregătiți mesele, includeți varietate prin experimentarea cu diferite rețete, arome și bucătării. Rotiți-vă opțiunile de masă săptămânal pentru a menține lucrurile interesante și luați în considerare să încercați noi ingrediente sau metode de gătit pentru a adăuga entuziasm meselor dvs. În plus, puteți crea zile tematice, cum ar fi \"Lunea fără Carne\" sau \"Marțea Taco\", pentru a adăuga structură și diversitate rutinei dumneavoastră de \"Meal Prep\"."
+          },
+          "4": {
+            "accordionTitle": "Pot în continuare să-mi pregătesc mesele în avans dacă am restricții sau alergii alimentare?",
+            "accordionContent": "Absolut! Puteți încă să vă pregătiți mesele în avans cu restricții sau alergii alimentare. Doar alegeți rețete și ingrediente care se aliniază nevoilor dumneavoastră alimentare și există o mulțime de resurse disponibile pentru a vă ajuta să găsiți opțiunile potrivite."
+          },
+          "5": {
+            "accordionTitle": "Pot să-mi pregătesc mesele în avans pentru anumite diete, cum ar fi keto, vegan sau fără gluten?",
+            "accordionContent": "Da, puteți să vă pregătiți mesele în avans pentru diete specifice, cum ar fi keto, vegan sau fără gluten. Există o mulțime de rețete și resurse disponibile adaptate acestor preferințe alimentare. Pur și simplu alegeți rețete și ingrediente care se aliniază cu dieta aleasă și puteți pregăti efectiv mesele respectând cerințele dumneavoastră alimentare."
+          },
+          "6": {
+            "accordionTitle": "Pot să-mi pregătesc în avans gustări și deserturi?",
+            "accordionContent": "Da, cu siguranță puteți să vă pregătiți gustări și deserturi în avans. Pregătiți gustări sănătoase, cum ar fi pachete cu fructe și nuci, parfaituri de iaurt sau bastoane de legume cu hummus pentru opțiuni ușoare de preparat. Pentru deserturi, luați în considerare prepararea unor loturi de delicii mai sănătoase, cum ar fi bile energizante, batoane granola sau produse de patiserie, folosind ingrediente sănătoase. Pregătirea gustările și deserturile pot ajuta la satisfacerea poftelor, susținând în același timp obiectivele dietetice generale."
+          },
+          "7": {
+            "accordionTitle": "Cum îmi păstrez mesele pregătite în avans interesante și aromate?",
+            "accordionContent": "Pentru a vă menține mesele pregătite interesante și aromate, experimentați cu o varietate de ierburi, condimente, sosuri și marinate pentru a adăuga profunzime a aromei. Încorporează diferite tehnici de gătit, cum ar fi grătar, prăjire sau sotare, pentru a îmbunătăți gustul și textura meselor tale. În plus, încercați să încorporați un amestec de fructe și legume colorate, cereale integrale și proteine slabe pentru a crea mâncăruri atrăgătoare și gustoase din punct de vedere vizual. Nu vă fie teamă să fiți creativi și să încercați rețete noi pentru a vă menține mesele interesante și plăcute."
+          }
+        }
+      },
+      "4": {
+        "sectionTitle": "Depozitare și Sfaturi Practice",
+        "sectionDescription": "Următoarele sunt câteva întrebări frecvente puse de către persoanele care au întrebări despre izolarea eficientă, timpul de gătire, dimensiunea, reîncălzirea meselor.",
+        "sectionAccordions": {
+          "1": {
+            "accordionTitle": "Cum păstrez în mod corespunzător mesele pregătite în avans?",
+            "accordionContent": "După pregătirea meseleor în avans, transferați-vă mesele în recipiente etanșe pentru a menține prospețimea și a preveni contaminarea. Păstrați-le la frigider la temperaturi sub 40°F (4°C) pentru a încetini creșterea bacteriilor și a prelungi perioada de valabilitate a acestora. Asigurați-vă că etichetați recipientele cu data pregătirii pentru a urmări prospețimea. Când reîncălziți, asigurați-vă că alimentele ajung la o temperatură internă de 165 ° F (74 ° C) pentru a ucide orice bacterie dăunătoare."
+          },
+          "2": {
+            "accordionTitle": "Care sunt cele mai bune recipiente pentru depozitarea meselor pregătite în avans?",
+            "accordionContent": "Cele mai bune recipiente pentru depozitarea mâncărurilor pregătite sunt recipientele etanșe din sticlă sau plastic fără BPA. Aceste recipiente ajută la menținerea prospețimii, la prevenirea scurgerilor și sunt sigure pentru cuptorul cu microunde și mașina de spălat vase pentru reîncălzire și curățare ușoară. Căutați recipiente cu compartimente pentru a păstra diferite componente ale mesei separate și luați în considerare investiția într-o varietate de dimensiuni pentru a se potrivi diferitelor dimensiuni și tipuri de masă."
+          },
+          "3": {
+            "accordionTitle": "Pot pregăti mese în avans pentru întreaga familie?",
+            "accordionContent": "Da, cu siguranță puteți pregăti mese în avans pentru întreaga familie. Pur și simplu ajustați rețetele și dimensiunile porțiilor pentru a se potrivi cu numărul de persoane pe care le hrăniți. Luați în considerare pregătirea unor loturi mai mari de mese și utilizarea recipientelor de dimensiuni mai mari sau a mai multor recipiente individuale pentru a păstra porții pentru toată lumea. Implicarea membrilor familiei în procesul de pregătire a mesei poate face, de asemenea, o activitate distractivă și colaborare."
+          },
+          "4": {
+            "accordionTitle": "Care este numărul ideal de mese pe care ar trebui le includ în activitatea de \"Meal Prep\"?",
+            "accordionContent": "Numărul ideal de mese de inclus în activitatea de \"Meal Prep\" depinde de programul dumneavoastră personal și de nevoile dietetice. Unii oameni preferă să pregătească toate mesele pentru o săptămână, inclusiv micul dejun, prânzul și cina, în timp ce alții pot pregăti doar prânzurile sau cinele. Începeți prin a lua în considerare câte mese mâncați în mod obișnuit acasă și nu luați masa în oraș, apoi planificați în consecință. Puteți ajusta oricând numărul de mese după cum este necesar, în funcție de preferințele și stilul dvs. de viață."
+          },
+          "5": {
+            "accordionTitle": "Cum reîncălzesc mesele pregătite în avans pentru a-și menține calitatea?",
+            "accordionContent": "Pentru a menține calitatea meselor pregătite la reîncălzire, cel mai bine este să utilizați metode blânde de încălzire, cum ar fi gătirea cu microunde, abur sau reîncălzirea cuptorului. Evitați supraîncălzirea, care poate face ca alimentele să se usuce sau să devină cauciucate. Acoperiți alimentele cu un capac adecvat pentru cuptorul cu microunde sau cu un prosop de hârtie umed pentru a reține umezeala în timpul gătirii cu microunde. Pentru reîncălzirea cuptorului, utilizați o temperatură mai scăzută și acoperiți vasul cu folie de aluminiu pentru a preveni uscarea excesivă. Amestecarea sau răsturnarea la jumătate poate ajuta, de asemenea, la asigurarea unei reîncălziri uniforme."
+          },
+          "6": {
+            "accordionTitle": "Care este durata recomandată pentru sesiunile mele de pregătire a mesei?",
+            "accordionContent": "Durata recomandată pentru sesiunile de pregătire a mesei depinde de factori precum numărul de mese pe care le pregătiți, abilitățile dumneavoastră de gătit și complexitatea rețetelor. În general, urmăriți câteva ore, cum ar fi 2-3 ore, pentru a pregăti mesele pentru săptămână. Cu toate acestea, puteți ajusta durata în funcție de programul și preferințele dvs. Unii oameni preferă sesiuni de pregătire a mesei mai scurte și mai frecvente, în timp ce alții pot dedica un interval mai lung de timp pregătirii pentru întreaga săptămână. Experimentați pentru a găsi ce funcționează cel mai bine pentru dvs."
+          }
+        }
+      }
+    }
+  },
+  "about": {
+    "sections": {
+      "1": {
+        "sectionTitle": "Introducere",
+        "descriptions": {
+          "1": "Această aplicație face referință la crearea unei modalități prin care un utilizator își poate pregăti mesele în avans într-un mod dinamic, folosindu-și propriile ingrediente, rețete etc.",
+          "2": "Când am creat această aplicație, am vrut să creez o aplicație pentru mine care să-mi înregistreze pregătirile de mese în avans și să îmi permită să creez mai multe rețete pentru pregătirile mele viitoare. De asemenea, am vrut să creez această aplicație doar pentru a mă distra."
+        }
+      },
+      "2": {
+        "sectionTitle": "Tehnologii Frontend",
+        "sectionDescription": "Următoarele sunt tehnologiile pe care le-am folosit pe front-end pentru a crea această aplicație:"
+      },
+      "3": {
+        "sectionTitle": "Tehnologii Backend",
+        "sectionDescription": "Următoarele sunt tehnologiile pe care le-am folosit pe backend pentru a crea această aplicație:"
+      },
+      "4": {
+        "sectionTitle": "Servicii Cloud",
+        "sectionDescription": "Următoarele sunt serviciile cloud pe care le-am folosit pentru a găzdui interfața, backend-ul și bazele de date:"
+      },
+      "5": {
+        "sectionTitle": "Alte Tehnologii",
+        "sectionDescription": "Următoarele sunt alte tehnologii pe care le-am folosit, dar nu sunt incluse în cele de mai sus:",
+        "sectionSubTitles": {
+          "1": "Managementul Media(imagini)",
+          "2": "Sistem de Control al Versiunilor(VCS)"
+        }
+      }
+    }
+  },
+  "contact": {
+    "emailForm": {
+      "title": "Trimite-ți-ne un e-mail",
+      "formLabels": {
+        "subject": "Subiect:",
+        "message": "Mesaj:",
+        "buttonContent": "Trimite"
+      }
+    },
+    "contactInfo": {
+      "title": "Contactaţi-ne",
+      "info": {
+        "phoneNumber": "Număr de telefon: {phoneNumber}",
+        "email": "Email: {email}"
+      }
+    }
+  },
+  "langSwitcher": {
+    "locale": "Schimbă limba la {locale}",
+    "values": {
+      "ro": "Romană",
+      "en": "Engleză"
+    }
+  }
+}

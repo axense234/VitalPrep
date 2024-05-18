@@ -13,11 +13,15 @@ import OAuthOptionsStyles from "../../scss/components/shared/OAuthOptions.module
 import { useAppDispatch } from "@/hooks/redux";
 // Redux
 import { signinUserThroughOAuth } from "@/redux/slices/generalSlice";
+// Translations
+import { useLocale, useTranslations } from "next-intl";
 
 const OAuthOptions: FC<OAuthOptionsProps> = ({ type }) => {
+  const OAuthTranslations = useTranslations(`${type}.oauth`);
+
   return (
     <div className={OAuthOptionsStyles.authContainer}>
-      <p>-quick {type} with OAuth-</p>
+      <p>{OAuthTranslations("firstMessage")}</p>
       <ul className={OAuthOptionsStyles.authButtons}>
         {OAuthOptionsContent.map((option) => {
           return (
@@ -27,39 +31,39 @@ const OAuthOptions: FC<OAuthOptionsProps> = ({ type }) => {
           );
         })}
       </ul>
-      <p>-or with email and password-</p>
+      <p>{OAuthTranslations("secondMessage")}</p>
     </div>
   );
 };
 
 const OAuthOptionsButton: FC<OAuthOptionContent> = ({
   optionType,
-  signUpTextContent,
-  logInTextContent,
   reactIcon,
   pageType,
 }) => {
   const dispatch = useAppDispatch();
-  const buttonTextContent =
-    pageType === "signup" ? signUpTextContent : logInTextContent;
+  const OAuthButtonsTranslations = useTranslations(`${pageType}.oauth.buttons`);
+  const locale = useLocale();
 
   return (
     <button
       className={OAuthOptionsStyles.authButton}
-      title={buttonTextContent}
-      aria-label={buttonTextContent}
+      title={OAuthButtonsTranslations(optionType)}
+      aria-label={OAuthButtonsTranslations(optionType)}
       onClick={() => {
+        console.log(locale);
         dispatch(
           signinUserThroughOAuth({
             providerName: optionType,
             pageType: pageType as "signup" | "login",
+            locale,
           })
         );
       }}
       type="button"
     >
       {reactIcon}
-      <span>{buttonTextContent}</span>
+      <span>{OAuthButtonsTranslations(optionType)}</span>
     </button>
   );
 };

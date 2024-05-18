@@ -35,6 +35,23 @@ export const homePageUrl = "/home";
 export const sitePhoneNumber = "0754 189 293(fake)";
 export const siteEmail = "thisemaildoesnotexit@nothing.com";
 
+export const langFlagsImages = [
+  {
+    id: 1,
+    imageSrc:
+      "https://res.cloudinary.com/birthdayreminder/image/upload/v1716043250/Flag_of_Romania_bcoghi.png",
+    imageLabel: "Romanian",
+    value: "ro",
+  },
+  {
+    id: 2,
+    imageSrc:
+      "https://res.cloudinary.com/birthdayreminder/image/upload/v1716043251/18165_bswuth.jpg",
+    imageLabel: "English",
+    value: "en",
+  },
+];
+
 export const gettingStartedGuideContentMapContent: GettingStartedContentMapContentType =
   [
     {
@@ -130,12 +147,12 @@ export const gettingStartedGuideContentMapContent: GettingStartedContentMapConte
       sectionContent: [
         {
           orderLetter: "a",
-          subsectionLabel: "Profile Page?",
+          subsectionLabel: "Profile Page",
           subsectionLinkDest: "#profilePage",
         },
         {
           orderLetter: "b",
-          subsectionLabel: "Settings Page?",
+          subsectionLabel: "Settings Page",
           subsectionLinkDest: "#settingsPage",
         },
         {
@@ -219,7 +236,7 @@ export const pageTitleContent: PageTitleContentType[] = [
     specificPagePath: "/dayTemplate",
     backgroundImageSrc:
       "https://res.cloudinary.com/birthdayreminder/image/upload/v1714923609/VitalPrep/iamge4_vgdmkb.png",
-    pageTitleTextContent: "View Day Template",
+    pageTitleTextContent: "View Day Plan",
     pageSubTitleContent: "your day plan",
   },
   {
@@ -227,7 +244,7 @@ export const pageTitleContent: PageTitleContentType[] = [
     specificPagePath: "/instanceTemplate",
     backgroundImageSrc:
       "https://res.cloudinary.com/birthdayreminder/image/upload/v1714923609/VitalPrep/iamge4_vgdmkb.png",
-    pageTitleTextContent: "View Instance Template",
+    pageTitleTextContent: "View Session Template",
     pageSubTitleContent: "your weekly session scheme",
   },
   {
@@ -243,7 +260,7 @@ export const pageTitleContent: PageTitleContentType[] = [
     specificPagePath: "/mealPrepLog",
     backgroundImageSrc:
       "https://res.cloudinary.com/birthdayreminder/image/upload/v1714923609/VitalPrep/iamge4_vgdmkb.png",
-    pageTitleTextContent: "View Meal Prep Log",
+    pageTitleTextContent: "View Session Log",
     pageSubTitleContent: "your saved meal prep log",
   },
   {
@@ -296,89 +313,90 @@ export const pageTitleContent: PageTitleContentType[] = [
   },
 ];
 
-export const homeSectionsContent: (HomeSectionContentProps & { id: number })[] =
-  [
-    {
-      id: 1,
-      sectionTitle: "Vital Prep",
-      sectionSubTitle: "meal prep helper",
-      contentBackgroundImageSrc:
-        "https://res.cloudinary.com/birthdayreminder/image/upload/v1714932026/VitalPrep/Frame_15hmwkp5_i6n4jw.png",
-      backgroundImageSrc:
-        "https://res.cloudinary.com/birthdayreminder/image/upload/v1714922259/VitalPrep/pre_prepared_meals_pqenm1.png",
-      ctaButtonContent: "Get Started",
-      position: "left",
-      type: "positional",
-      sectionDescription:
-        "VitalPrep is a complex meal prep helper app that helps people create meal prep plans and to follow those respective plans.",
-      sectionPaddingBasedOnWindowWidth: "",
-      tabletAndPhoneRedesign: false,
-    },
-    {
-      id: 2,
-      sectionTitle: "Meal Prep",
-      sectionSubTitle: "what is it?",
-      contentBackgroundImageSrc:
-        "https://res.cloudinary.com/birthdayreminder/image/upload/v1714932222/VitalPrep/Group_6LOL_kdbrjk.png",
-      backgroundImageSrc:
-        "https://res.cloudinary.com/birthdayreminder/image/upload/v1714922258/VitalPrep/iamge2_fwhqee.png",
-      ctaButtonContent: "Learn More",
-      position: "right",
-      type: "positional",
-      sectionDescription:
-        "Meal Prep, short for meal preparation, is the practice of planning and preparing meals in advance, typically for a period of several days to a week.",
-      sectionPaddingBasedOnWindowWidth: "",
-      tabletAndPhoneRedesign: false,
-    },
-    {
-      id: 3,
-      sectionTitle: "Meal Prep Benefits",
-      sectionSubTitle: "what you want",
-      position: "left",
-      type: "middle",
-      sectionItems: [
-        {
-          id: 1,
-          imageSrc:
-            "https://res.cloudinary.com/birthdayreminder/image/upload/v1714930835/VitalPrep/128x128_fztzec.png",
-          itemDescription:
-            "Meal Prepping saves you time by not having to cook everyday and money since ingredients tend to cost way less compared to other options.",
-          itemTitle: "Money and Time",
-        },
-        {
-          id: 2,
-          imageSrc:
-            "https://res.cloudinary.com/birthdayreminder/image/upload/v1714930846/VitalPrep/128x128_xw9f3j.png",
-          itemDescription:
-            "Meal Prepping tends to use ingredients that are often extremely nutritious with a high satiety index and low calorie density.",
-          itemTitle: "Health",
-        },
-        {
-          id: 3,
-          imageSrc:
-            "https://res.cloudinary.com/birthdayreminder/image/upload/v1714930857/VitalPrep/128x128_qr2440.png",
-          itemDescription:
-            "Meal Prepping leaves you with no worries about food since you have prepared meals available. Cooking in general is a very relaxing activity, reducing stress and helping manage it in the future.",
-          itemTitle: "Stress Reduction",
-        },
-      ],
-      sectionPaddingBasedOnWindowWidth: "",
-      tabletAndPhoneRedesign: false,
-    },
-    {
-      id: 4,
-      sectionTitle: "Difficulties?",
-      sectionSubTitle: "we can help",
-      contentBackgroundImageSrc:
-        "https://res.cloudinary.com/birthdayreminder/image/upload/v1715355285/difficulties_shtsqm.png",
-      backgroundImageSrc:
-        "https://res.cloudinary.com/birthdayreminder/image/upload/v1714923610/VitalPrep/iamge5_p2bca4.png",
-      position: "left",
-      type: "descriptionBased",
-      sectionPaddingBasedOnWindowWidth: "",
-      tabletAndPhoneRedesign: false,
-    },
-  ];
+export const homeSectionsContent: HomeSectionContentProps[] = [
+  {
+    id: 1,
+    sectionTitle: "Vital Prep",
+    sectionSubTitle: "meal prep helper",
+    contentBackgroundImageSrc:
+      "https://res.cloudinary.com/birthdayreminder/image/upload/v1714932026/VitalPrep/Frame_15hmwkp5_i6n4jw.png",
+    backgroundImageSrc:
+      "https://res.cloudinary.com/birthdayreminder/image/upload/v1714922259/VitalPrep/pre_prepared_meals_pqenm1.png",
+    ctaButtonContent: "Get Started",
+    position: "left",
+    type: "positional",
+    sectionDescription:
+      "VitalPrep is a complex meal prep helper app that helps people create meal prep plans and to follow those respective plans.",
+    sectionPaddingBasedOnWindowWidth: "",
+    tabletAndPhoneRedesign: false,
+    ctaButtonLinkDest: "/guide",
+  },
+  {
+    id: 2,
+    sectionTitle: "Meal Prep",
+    sectionSubTitle: "what is it?",
+    contentBackgroundImageSrc:
+      "https://res.cloudinary.com/birthdayreminder/image/upload/v1714932222/VitalPrep/Group_6LOL_kdbrjk.png",
+    backgroundImageSrc:
+      "https://res.cloudinary.com/birthdayreminder/image/upload/v1714922258/VitalPrep/iamge2_fwhqee.png",
+    ctaButtonContent: "Learn More",
+    position: "right",
+    type: "positional",
+    sectionDescription:
+      "Meal Prep, short for meal preparation, is the practice of planning and preparing meals in advance, typically for a period of several days to a week.",
+    sectionPaddingBasedOnWindowWidth: "",
+    tabletAndPhoneRedesign: false,
+    ctaButtonLinkDest: "/faq",
+  },
+  {
+    id: 3,
+    sectionTitle: "Meal Prep Benefits",
+    sectionSubTitle: "what you want",
+    position: "left",
+    type: "middle",
+    sectionItems: [
+      {
+        id: 1,
+        imageSrc:
+          "https://res.cloudinary.com/birthdayreminder/image/upload/v1714930835/VitalPrep/128x128_fztzec.png",
+        itemDescription:
+          "Meal Prepping saves you time by not having to cook everyday and money since ingredients tend to cost way less compared to other options.",
+        itemTitle: "Money and Time",
+      },
+      {
+        id: 2,
+        imageSrc:
+          "https://res.cloudinary.com/birthdayreminder/image/upload/v1714930846/VitalPrep/128x128_xw9f3j.png",
+        itemDescription:
+          "Meal Prepping tends to use ingredients that are often extremely nutritious with a high satiety index and low calorie density.",
+        itemTitle: "Health",
+      },
+      {
+        id: 3,
+        imageSrc:
+          "https://res.cloudinary.com/birthdayreminder/image/upload/v1714930857/VitalPrep/128x128_qr2440.png",
+        itemDescription:
+          "Meal Prepping leaves you with no worries about food since you have prepared meals available. Cooking in general is a very relaxing activity, reducing stress and helping manage it in the future.",
+        itemTitle: "Stress Reduction",
+      },
+    ],
+    sectionPaddingBasedOnWindowWidth: "",
+    tabletAndPhoneRedesign: false,
+  },
+  {
+    id: 4,
+    sectionTitle: "Difficulties?",
+    sectionSubTitle: "we can help",
+    contentBackgroundImageSrc:
+      "https://res.cloudinary.com/birthdayreminder/image/upload/v1715355285/difficulties_shtsqm.png",
+    backgroundImageSrc:
+      "https://res.cloudinary.com/birthdayreminder/image/upload/v1714923610/VitalPrep/iamge5_p2bca4.png",
+    position: "left",
+    type: "descriptionBased",
+    sectionPaddingBasedOnWindowWidth: "",
+    tabletAndPhoneRedesign: false,
+  },
+];
 
 export const aboutFrontendTechnologies = [
   {
@@ -537,13 +555,13 @@ export const faqPageContent: FAQPageSection[] = [
         id: 3,
         accordionTitle: "What are the benefits of Meal Prepping?",
         accordionContent:
-          "Meal prepping offers several benefits, including time-saving, healthier eating, portion control, cost-effectiveness, reduced food waste, and consistency.        ",
+          "Meal prepping offers several benefits, including time-saving, healthier eating, portion control, cost-effectiveness, reduced food waste, and consistency.",
       },
       {
         id: 4,
         accordionTitle: "How do I start Meal Prepping if I'm a beginner?",
         accordionContent:
-          "To start meal prepping as a beginner, begin by planning your meals, making a grocery list, setting aside dedicated time, investing in storage containers, cooking in batches, portioning out meals, storing them properly, and reheating when ready to eat.        ",
+          "To start meal prepping as a beginner, begin by planning your meals, making a grocery list, setting aside dedicated time, investing in storage containers, cooking in batches, portioning out meals, storing them properly, and reheating when ready to eat.",
       },
     ],
   },
@@ -578,7 +596,7 @@ export const faqPageContent: FAQPageSection[] = [
         accordionTitle:
           "Can I customize my Meal Prep based on my nutritional goals?",
         accordionContent:
-          "Yes, you can customize your meal prep based on your nutritional goals. You have the flexibility to choose recipes and ingredients that align with your dietary needs, whether you're focusing on weight loss, muscle gain, or specific nutritional requirements.        ",
+          "Yes, you can customize your meal prep based on your nutritional goals. You have the flexibility to choose recipes and ingredients that align with your dietary needs, whether you're focusing on weight loss, muscle gain, or specific nutritional requirements.",
       },
       {
         id: 5,
@@ -704,10 +722,10 @@ export const faqPageContent: FAQPageSection[] = [
 ];
 
 export const notificationMessageStyles = [
-  "Default",
-  "Serious",
-  "Motivating",
-  "Menacing",
+  { id: 1, label: "Default", value: "default" },
+  { id: 2, label: "Serious", value: "serious" },
+  { id: 3, label: "Motivating", value: "motivating" },
+  { id: 4, label: "Menacing", value: "menacing" },
 ];
 
 export const defaultEntityQueryValues: EntityQueryValues = {
@@ -1055,15 +1073,11 @@ export const defaultTemplateMealPrepPlan: MealPrepPlanTemplate = {
 export const OAuthOptionsContent: OAuthOptionContent[] = [
   {
     id: 1,
-    signUpTextContent: "Sign Up with Google",
-    logInTextContent: "Log In with Google",
     reactIcon: FcGoogle({}),
     optionType: "google",
   },
   {
     id: 2,
-    signUpTextContent: "Sign Up with Github",
-    logInTextContent: "Log In with Github",
     reactIcon: FaGithub({}),
     optionType: "github",
   },
@@ -1200,7 +1214,7 @@ export const pageLinks: PageLink[] = [
   },
   {
     id: 12,
-    linkDest: "",
+    linkDest: "/logout",
     reactIcon: CiLogout({}),
     linkTitle: "Logout",
     linkType: "logout",

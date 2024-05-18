@@ -1,12 +1,14 @@
 // React
 import { useEffect } from "react";
 // SCSS
-import accountSettingsStyles from "../../../scss/pages/Settings.module.scss";
+import accountSettingsStyles from "@/scss/pages/Settings.module.scss";
 // Components
 import PrimaryButton from "@/components/shared/PrimaryButton";
 import ImageFormControl from "@/components/shared/form/ImageFormControl";
 import TextFormControl from "@/components/shared/form/TextFormControl";
 import PopupModal from "@/components/shared/modals/PopupModal";
+// Types
+import UserType from "@/core/types/entity/users/UserType";
 // Data
 import { defaultProfileImageUrl } from "@/data";
 // Redux
@@ -25,7 +27,8 @@ import {
 // Hooks and Helpers
 import useUpdateEntityTemplateImageUrl from "@/hooks/useUpdateEntityTemplateImageUrl";
 import handleOnUpdateAccountSettingsSubmit from "@/helpers/handleOnUpdateAccountSettingsSubmit";
-import UserType from "@/core/types/entity/users/UserType";
+// Translations
+import { useTranslations } from "next-intl";
 
 const AccountSettings = () => {
   const dispatch = useAppDispatch();
@@ -36,17 +39,19 @@ const AccountSettings = () => {
   const loadingCloudinaryImage = useAppSelector(selectLoadingCloudinaryImage);
   const loadingUpdateProfile = useAppSelector(selectLoadingUpdateProfile);
 
+  const translate = useTranslations("settings.accountSettings");
+
   useSetTemplateProfile(profile);
   useUpdateEntityTemplateImageUrl(updateTemplateProfile);
 
   return (
     <section className={accountSettingsStyles.accountSettingsContainer}>
       <PopupModal hasBorder={false} modalType="form" />
-      <h4>Account Settings</h4>
+      <h4>{translate("title")}</h4>
       <form className={accountSettingsStyles.accountSettingsForm}>
         <TextFormControl
           type="text"
-          labelContent="New Username:"
+          labelContent={translate("formLabels.name")}
           entityProperty={templateProfile.username as string}
           onEntityPropertyValueChange={(e) =>
             dispatch(
@@ -58,7 +63,7 @@ const AccountSettings = () => {
         />
         <TextFormControl
           type="email"
-          labelContent="New Email:"
+          labelContent={translate("formLabels.email")}
           entityProperty={templateProfile.email as string}
           onEntityPropertyValueChange={(e) =>
             dispatch(
@@ -70,7 +75,7 @@ const AccountSettings = () => {
         />
         <TextFormControl
           type="password"
-          labelContent="New Password:"
+          labelContent={translate("formLabels.password")}
           entityProperty={templateProfile.password as string}
           onEntityPropertyValueChange={(e) =>
             dispatch(
@@ -82,7 +87,7 @@ const AccountSettings = () => {
         />
         <TextFormControl
           type="password"
-          labelContent="Verify Password:"
+          labelContent={translate("formLabels.verifyPassword")}
           entityProperty={verifiedPassword as string}
           onEntityPropertyValueChange={(e) =>
             dispatch(changeVerifiedPassword(e.target.value))
@@ -91,7 +96,7 @@ const AccountSettings = () => {
           labelFontSize={28}
         />
         <ImageFormControl
-          labelContent="New Account Image:"
+          labelContent={translate("formLabels.image")}
           defaultImageUsedUrl={defaultProfileImageUrl}
           entityPropertyLoadingStatus={loadingCloudinaryImage}
           entityProperty={templateProfile.imageUrl as string}
@@ -108,7 +113,7 @@ const AccountSettings = () => {
           labelFontSize={28}
         />
         <PrimaryButton
-          content="Update Account Settings"
+          content={translate("formLabels.submitButtonContent")}
           type="functional"
           disabled={
             loadingCloudinaryImage === "PENDING" ||

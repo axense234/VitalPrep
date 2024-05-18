@@ -6,21 +6,23 @@ import EntityComponent from "@/components/shared/entity/EntityComponent";
 import { FC } from "react";
 // Types
 import EntityType from "@/core/types/entity/users/EntityType";
-// Next
-import Link from "next/link";
 // Redux
 import { useAppSelector } from "@/hooks/redux";
 import { selectSelectedViewOption } from "@/redux/slices/generalSlice";
 // Hooks
 import useGetWindowWidth from "@/hooks/useGetWindowWidth";
+// Translations
+import { useTranslations } from "next-intl";
+import { Link } from "@/navigation";
 
 const MultiViewToolContent: FC<{
   entityType: EntityType;
   entityIds: string[] | undefined;
 }> = ({ entityType, entityIds }) => {
   const selectedViewOption = useAppSelector(selectSelectedViewOption);
+  const translate = useTranslations("multiViewPage");
 
-  const multiViewToolContentTitle = useGetMultiViewToolContentTitle(entityType);
+  const multiViewToolContentTitle = translate(`entitiesTitle.${entityType}`);
   const listItemMaxWidthBasedOnWindowWidth =
     useGetListItemMaxWidthBasedOnWindowWidth();
 
@@ -60,14 +62,15 @@ const MultiViewToolContent: FC<{
           })
         ) : (
           <p className={multiViewToolStyles.multiViewEntitiesNoEntitiesMessage}>
-            You have no {multiViewToolContentTitle} available. If you want to
-            create some checkout the{" "}
+            {translate("noEntitiesCase.message", {
+              title: multiViewToolContentTitle,
+            })}
             <Link
               href="/create-tool"
-              title="Go to Create Tool Page"
-              aria-label="Go to Create Tool Page"
+              title={translate("noEntitiesCase.messageLinkTitle")}
+              aria-label={translate("noEntitiesCase.messageLinkTitle")}
             >
-              Create Tool Page
+              {translate("noEntitiesCase.messageLinkLabel")}
             </Link>
             .
           </p>
@@ -75,36 +78,6 @@ const MultiViewToolContent: FC<{
       </ul>
     </div>
   );
-};
-
-const useGetMultiViewToolContentTitle = (entityType: EntityType) => {
-  let multiViewToolContentTitle = "Ingredients";
-  switch (entityType) {
-    case "ingredient":
-      multiViewToolContentTitle = "Ingredients";
-      break;
-    case "utensil":
-      multiViewToolContentTitle = "Utensils";
-      break;
-    case "recipe":
-      multiViewToolContentTitle = "Recipes";
-      break;
-    case "dayTemplate":
-      multiViewToolContentTitle = "Day Plans";
-      break;
-    case "instanceTemplate":
-      multiViewToolContentTitle = "Session Templates";
-      break;
-    case "mealPrepPlan":
-      multiViewToolContentTitle = "Meal Prep Plans";
-      break;
-    case "mealPrepLog":
-      multiViewToolContentTitle = "Your Logs";
-      break;
-    default:
-      break;
-  }
-  return multiViewToolContentTitle;
 };
 
 const useGetListItemMaxWidthBasedOnWindowWidth = () => {

@@ -104,6 +104,11 @@
   border-radius: 25px;
   background-color: getColorWithOpacity("secondary-color-3.1", 0.5);
 
+  // For the error modal
+  > div {
+    align-self: center;
+  }
+
   @media screen and (max-width: 1300px) {
     padding: 4rem 2rem;
   }

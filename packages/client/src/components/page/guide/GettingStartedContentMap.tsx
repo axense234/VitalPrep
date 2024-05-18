@@ -8,10 +8,13 @@ import {
   changeCurrentGuideSection,
   selectCurrentGuideSection,
 } from "@/redux/slices/generalSlice";
+// Translations
+import { useTranslations } from "next-intl";
 
 const GettingStartedContentMap = () => {
   const dispatch = useAppDispatch();
   const currentGuideSection = useAppSelector(selectCurrentGuideSection);
+  const translate = useTranslations("gettingStarted.contentMap");
 
   return (
     <section
@@ -19,7 +22,7 @@ const GettingStartedContentMap = () => {
         gettingStartedContentMapStyles.gettingStartedContentMapContainer
       }
     >
-      <h5>Guide Contents</h5>
+      <h5>{translate("title")}</h5>
       <ul
         className={
           gettingStartedContentMapStyles.gettingStartedContentMapSections
@@ -43,10 +46,15 @@ const GettingStartedContentMap = () => {
                       ? "blue"
                       : "black",
                 }}
-                title={`Change Section to ${guideSection.sectionLabel}`}
-                aria-label={`Change Section to ${guideSection.sectionLabel}`}
+                title={translate("sectionTitleLabel", {
+                  section: translate(`${guideSection.sectionValue}.title`),
+                })}
+                aria-label={translate("sectionTitleLabel", {
+                  section: translate(`${guideSection.sectionValue}.title`),
+                })}
               >
-                {guideSection.id}. {guideSection.sectionLabel}
+                {guideSection.id}.{" "}
+                {translate(`${guideSection.sectionValue}.title`)}
               </h6>
               <ul
                 className={
@@ -57,7 +65,10 @@ const GettingStartedContentMap = () => {
                   return (
                     <li key={section.orderLetter + section.subsectionLabel}>
                       <p>
-                        {section.orderLetter}. {section.subsectionLabel}
+                        {section.orderLetter}.{" "}
+                        {translate(
+                          `${guideSection.sectionValue}.${section.orderLetter}.linkLabel`
+                        )}
                       </p>
                     </li>
                   );

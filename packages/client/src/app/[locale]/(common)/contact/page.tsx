@@ -1,6 +1,6 @@
 "use client";
 // SCSS
-import contactStyles from "../../../scss/pages/Contact.module.scss";
+import contactStyles from "@/scss/pages/Contact.module.scss";
 // Hooks
 import useAuthorization from "@/hooks/useAuthorization";
 // Components

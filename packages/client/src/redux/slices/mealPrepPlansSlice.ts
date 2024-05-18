@@ -24,7 +24,8 @@ export const mealPrepPlansAdapter = createEntityAdapter<MealPrepPlanType>();
 const initialState = mealPrepPlansAdapter.getInitialState({
   templateMealPrepPlan: defaultTemplateMealPrepPlan,
   loadingCreateMealPrepPlan: "IDLE",
-  mealPrepPlanFormModalErrorMessage: "Default Message",
+  mealPrepPlanFormModalErrorMessage:
+    "Something went wrong, please refresh the page!",
   numberOfInstanceTemplates: 0,
   loadingGetUserMealPrepPlans: "IDLE",
   loadingGetUserMealPrepPlan: "IDLE",

@@ -13,6 +13,7 @@ import {
 } from "@/redux/slices/generalSlice";
 // React
 import { useEffect, useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 
 const EntityTypeMenu = () => {
   const dispatch = useAppDispatch();
@@ -21,6 +22,11 @@ const EntityTypeMenu = () => {
 
   const entityTypeOptions = createToolOptions;
   const selectedEntityType = useAppSelector(selectSelectedEntityOption);
+
+  const translateEntityLabels = useTranslations(
+    "createTool.entityOptions.labels"
+  );
+  const translateEntityMenu = useTranslations("entityMenu");
 
   useEffect(() => {
     const menu = entityMenuRef.current as HTMLElement;
@@ -36,8 +42,8 @@ const EntityTypeMenu = () => {
       <div className={entityTypeMenuStyles.hiddenEntityTypeMenuContainer}>
         <IoOptions
           onClick={() => setIsMenuOpen(true)}
-          title="Open Entity Type Menu"
-          aria-label="Open Entity Type Menu"
+          title={translateEntityMenu("openActionTitle")}
+          aria-label={translateEntityMenu("openActionTitle")}
         />
       </div>
       <div
@@ -46,16 +52,16 @@ const EntityTypeMenu = () => {
       >
         <AiFillCloseSquare
           onClick={() => setIsMenuOpen(false)}
-          title="Close Entity Type Menu"
-          aria-label="Close Entity Type Menu"
+          title={translateEntityMenu("closeActionTitle")}
+          aria-label={translateEntityMenu("closeActionTitle")}
         />
         <ul className={entityTypeMenuStyles.entityTypeMenuOptions}>
           {entityTypeOptions.map((entityType) => {
             return (
               <li
                 key={entityType.id}
-                title={`Select ${entityType.label}`}
-                aria-label={`Select ${entityType.label}`}
+                title={`${translateEntityMenu("selectLabel")} ${translateEntityLabels(entityType.optionValue)}`}
+                aria-label={`${translateEntityMenu("selectLabel")} ${translateEntityLabels(entityType.optionValue)}`}
                 onClick={() =>
                   dispatch(setSelectedEntityOption(entityType.optionValue))
                 }
@@ -66,7 +72,7 @@ const EntityTypeMenu = () => {
                       : "#ddd9d5",
                 }}
               >
-                {entityType.label}
+                {translateEntityLabels(entityType.optionValue)}
               </li>
             );
           })}

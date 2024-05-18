@@ -1,7 +1,9 @@
+import EntityType from "./users/EntityType";
+
 type EntityStatisticsType = {
   id: number;
   essence: "component" | "usable" | "count";
-  entityType: string;
+  entityType: EntityType;
   count: number;
 }[];
 

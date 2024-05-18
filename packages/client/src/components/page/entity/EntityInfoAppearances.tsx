@@ -1,7 +1,7 @@
 // React
 import { FC } from "react";
 // SCSS
-import entityInfoStyles from "../../../scss/components/page/EntityInfo.module.scss";
+import entityInfoStyles from "@/scss/components/page/EntityInfo.module.scss";
 // Types
 import EntityType from "@/core/types/entity/users/EntityType";
 import IngredientTemplate from "@/core/types/entity/ingredient/IngredientTemplate";
@@ -15,6 +15,7 @@ import selectEntityById from "@/helpers/selectEntityById";
 import { useAppSelector } from "@/hooks/redux";
 // Components
 import EntityInfoAppearancesSection from "./EntityInfoAppearancesSection";
+import { useTranslations } from "next-intl";
 
 const EntityInfoAppearances: FC<{
   entityId: string;
@@ -27,6 +28,8 @@ const EntityInfoAppearances: FC<{
   );
 
   console.log(entity, entityType);
+
+  const translate = useTranslations(`entityAppearances.${entityType}`);
 
   if (entity || profileEntity) {
     switch (entityType) {
@@ -41,7 +44,7 @@ const EntityInfoAppearances: FC<{
 
         entityInfoAppearancesShown = (
           <div className={entityInfoStyles.entityInfoDetailsHero}>
-            <h4>Appearances</h4>
+            <h4>{translate("title")}</h4>
             <EntityInfoAppearancesSection
               areOptionsLoading={false}
               entities={ingredientRecipes || []}
@@ -75,7 +78,7 @@ const EntityInfoAppearances: FC<{
 
         entityInfoAppearancesShown = (
           <div className={entityInfoStyles.entityInfoDetailsHero}>
-            <h4>Appearances</h4>
+            <h4>{translate("title")}</h4>
             <EntityInfoAppearancesSection
               areOptionsLoading={false}
               entities={utensilRecipes || []}
@@ -108,7 +111,7 @@ const EntityInfoAppearances: FC<{
 
         entityInfoAppearancesShown = (
           <div className={entityInfoStyles.entityInfoDetailsHero}>
-            <h4>Appearances</h4>
+            <h4>{translate("title")}</h4>
             <EntityInfoAppearancesSection
               areOptionsLoading={false}
               entities={recipeDayTemplates || []}
@@ -136,7 +139,7 @@ const EntityInfoAppearances: FC<{
 
         entityInfoAppearancesShown = (
           <div className={entityInfoStyles.entityInfoDetailsHero}>
-            <h4>Appearances</h4>
+            <h4>{translate("title")}</h4>
             <EntityInfoAppearancesSection
               areOptionsLoading={false}
               entities={dayTemplateInstanceTemplates || []}
@@ -158,7 +161,7 @@ const EntityInfoAppearances: FC<{
 
         entityInfoAppearancesShown = (
           <div className={entityInfoStyles.entityInfoDetailsHero}>
-            <h4>Appearances</h4>
+            <h4>{translate("title")}</h4>
             <EntityInfoAppearancesSection
               areOptionsLoading={false}
               entities={instanceTemplateMealPrepPlans || []}
@@ -178,7 +181,7 @@ const EntityInfoAppearances: FC<{
 
         entityInfoAppearancesShown = (
           <div className={entityInfoStyles.entityInfoDetailsHero}>
-            <h4>Created Entities</h4>
+            <h4>{translate("title")}</h4>
             <EntityInfoAppearancesSection
               areOptionsLoading={false}
               entities={profileIngredients || []}

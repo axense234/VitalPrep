@@ -9,7 +9,7 @@ import SelectFormControl from "@/components/shared/form/SelectFormControl";
 import EntityPreview from "@/components/shared/entity/EntityPreview";
 import CreateRecipeTutorial from "../CreateRecipeTutorial";
 // Data
-import { defaultUtensilImageUrl } from "@/data";
+import { defaultRecipeImageUrl } from "@/data";
 // Redux
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import {
@@ -44,6 +44,8 @@ import useUpdateEntityTemplateImageUrl from "@/hooks/useUpdateEntityTemplateImag
 import useUpdateEntityMacrosBasedOnComponentEntities from "@/hooks/useUpdateEntityMacrosBasedOnComponentEntities";
 import useGetEntityComponents from "@/hooks/useGetEntityComponents";
 import handleUpdateMultipleArrayEntities from "@/helpers/handleUpdateMultipleArrayEntities";
+// Translations
+import { useTranslations } from "next-intl";
 
 const CreateRecipeInterface = () => {
   const dispatch = useAppDispatch();
@@ -71,6 +73,8 @@ const CreateRecipeInterface = () => {
     selectLoadingGetUserIngredients
   );
 
+  const translate = useTranslations("createTool.formLabels.recipe");
+
   useGetEntityComponents(loadingGetUserIngredients, getAllUserIngredients);
   useGetEntityComponents(loadingGetUserUtensils, getAllUserUtensils);
   useUpdateEntityMacrosBasedOnComponentEntities(
@@ -91,11 +95,11 @@ const CreateRecipeInterface = () => {
       <div className={createToolStyles.createInterfaceWrapper}>
         <div className={createToolStyles.createInterfaceFormContainer}>
           <PopupModal hasBorder={false} modalType="form" />
-          <h4>Create Recipe</h4>
+          <h4>{translate("formTitle")}</h4>
           <form className={createToolStyles.createInterfaceForm}>
             <TextFormControl
               entityProperty={templateRecipe.name}
-              labelContent="Name:"
+              labelContent={translate("name")}
               onEntityPropertyValueChange={(e) =>
                 dispatch(
                   updateTemplateRecipe({ key: "name", value: e.target.value })
@@ -104,8 +108,8 @@ const CreateRecipeInterface = () => {
               type="text"
             />
             <ImageFormControl
-              labelContent="Image:"
-              defaultImageUsedUrl={defaultUtensilImageUrl}
+              labelContent={translate("image")}
+              defaultImageUsedUrl={defaultRecipeImageUrl}
               entityPropertyLoadingStatus={loadingCloudinaryImage}
               entityProperty={templateRecipe.imageUrl as string}
               onEntityPropertyValueChange={(e) => {
@@ -122,7 +126,7 @@ const CreateRecipeInterface = () => {
             />
             <CreateRecipeTutorial />
             <PrimaryButton
-              content="Create Recipe"
+              content={translate("createButtonLabel")}
               type="functional"
               disabled={
                 loadingCreateRecipe === "PENDING" ||
@@ -150,7 +154,7 @@ const CreateRecipeInterface = () => {
       </div>
       <div className={createToolStyles.createInterfaceComponentsContainer}>
         <SelectFormControl
-          labelContent="Ingredients Used:"
+          labelContent={translate("selectFormControlsLabels.ingredients")}
           entityPropertyOptions={ingredientsIds}
           entityPropertyChosenOptions={
             (templateRecipe.ingredients as string[]) || []
@@ -168,7 +172,7 @@ const CreateRecipeInterface = () => {
           areOptionsLoading={loadingGetUserIngredients === "PENDING"}
         />
         <SelectFormControl
-          labelContent="Utensils Used:"
+          labelContent={translate("selectFormControlsLabels.utensils")}
           entityPropertyOptions={utensilsIds}
           entityPropertyChosenOptions={
             (templateRecipe.utensils as string[]) || []

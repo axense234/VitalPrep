@@ -1,6 +1,6 @@
 "use client";
 // SCSS
-import faqStyles from "../../../scss/pages/FAQ.module.scss";
+import faqStyles from "@/scss/pages/FAQ.module.scss";
 // Components
 import PageTitle from "@/components/shared/PageTitle";
 import FAQContent from "@/components/page/faq/FAQContent";

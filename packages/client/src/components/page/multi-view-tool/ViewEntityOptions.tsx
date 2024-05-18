@@ -42,6 +42,9 @@ const ViewEntityOptions: FC<{ viewMealPrepLog?: boolean }> = ({
       <ViewEntityOptionsSortBy
         entityQueryValues={entityQueryValues}
         entitySortingOptionUsed={entitySortingOptionUsed}
+        selectedEntityOption={
+          viewMealPrepLog ? "mealPrepLog" : selectedEntityOption
+        }
       />
       <ViewEntityOptionsSearchEntity entityQueryValues={entityQueryValues} />
     </section>

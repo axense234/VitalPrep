@@ -2,7 +2,7 @@
 // Hooks
 import useAuthorization from "@/hooks/useAuthorization";
 // SCSS
-import createToolStyles from "../../../scss/pages/CreateTool.module.scss";
+import createToolStyles from "@/scss/pages/CreateTool.module.scss";
 // Components
 import PageTitle from "@/components/shared/PageTitle";
 import CreateToolInterface from "@/components/page/create-tool/CreateToolInterface";

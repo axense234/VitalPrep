@@ -1,7 +1,6 @@
 // SCSS
 import entityCardStyles from "../../../scss/components/shared/EntityCard.module.scss";
 // Types
-import EntityType from "@/core/types/entity/users/EntityType";
 import DayTemplateTemplate from "@/core/types/entity/dayTemplate/DayTemplateTemplate";
 import IngredientTemplate from "@/core/types/entity/ingredient/IngredientTemplate";
 import InstanceTemplateTemplate from "@/core/types/entity/instanceTemplate/InstanceTemplateTemplate";
@@ -12,7 +11,6 @@ import MealPrepLogTemplate from "@/core/types/entity/mealPrepLog/MealPrepLogTemp
 import EntityCardProps from "@/core/interfaces/entity/EntityCardProps";
 // Next
 import Image from "next/image";
-import Link from "next/link";
 // Data
 import {
   defaultIngredientImageUrl,
@@ -30,6 +28,8 @@ import { useAppSelector } from "@/hooks/redux";
 import selectEntityById from "@/helpers/selectEntityById";
 // Hooks
 import useGetWindowWidth from "@/hooks/useGetWindowWidth";
+// Translations
+import { Link } from "@/navigation";
 
 const EntityCard: FC<EntityCardProps> = ({
   entityType,
@@ -54,13 +54,11 @@ const EntityCard: FC<EntityCardProps> = ({
 
   switch (entityType) {
     case "ingredient":
-      entityComponentDestination = `/ingredient/${entityId || entity?.id}`;
       defaultImageUrlShownBasedOnEntityType = defaultIngredientImageUrl;
       entityIdentifier = "Ingredient";
       entityDetails = `${(entityUsed as IngredientTemplate)?.macros?.calories || 0} calories / 100g`;
       break;
     case "utensil":
-      entityComponentDestination = `/utensil/${entityId || entity?.id}`;
       defaultImageUrlShownBasedOnEntityType = defaultUtensilImageUrl;
       entityIdentifier = "Utensil";
       entityDetails =
@@ -69,34 +67,29 @@ const EntityCard: FC<EntityCardProps> = ({
           : "DISABLED ❌";
       break;
     case "recipe":
-      entityComponentDestination = `/recipe/${entityId || entity?.id}`;
       defaultImageUrlShownBasedOnEntityType = defaultRecipeImageUrl;
       entityIdentifier = "Recipe";
       entityDetails = `${(entityUsed as RecipeTemplate)?.macros?.calories || 0} calories`;
       break;
     case "dayTemplate":
-      entityComponentDestination = `/dayTemplate/${entityId || entity?.id}`;
       defaultImageUrlShownBasedOnEntityType = defaultDayTemplateImageUrl;
       entityIdentifier = "Day Template";
       entityDetails = `${(entityUsed as DayTemplateTemplate)?.recipes?.filter((recipe) => recipe !== "")?.length} meals`;
       entitySubDetails = `${(entityUsed as DayTemplateTemplate)?.macros?.calories || 0} calories`;
       break;
     case "instanceTemplate":
-      entityComponentDestination = `/instanceTemplate/${entityId || entity?.id}`;
       defaultImageUrlShownBasedOnEntityType = defaultInstanceTemplateImageUrl;
       entityIdentifier = "Instance Template";
       entityDetails = `${(entityUsed as InstanceTemplateTemplate)?.coverage || 0} days covered`;
       entitySubDetails = `${(entityUsed as InstanceTemplateTemplate)?.macros?.calories || 0} calories`;
       break;
     case "mealPrepPlan":
-      entityComponentDestination = `/mealPrepPlan/${entityId || entity?.id}`;
       defaultImageUrlShownBasedOnEntityType = defaultMealPrepPlanImageUrl;
       entityIdentifier = "Meal Prep Plan";
       entityDetails = `${(entityUsed as MealPrepPlanTemplate)?.instanceTemplates?.filter((instanceTemplate) => instanceTemplate !== "").length || 0} instances used`;
       entitySubDetails = `${(entityUsed as MealPrepPlanTemplate)?.macros?.calories || 0} calories`;
       break;
     case "mealPrepLog":
-      entityComponentDestination = `/mealPrepLog/${entityId || entity?.id}`;
       defaultImageUrlShownBasedOnEntityType = defaultInstanceTemplateImageUrl;
       entityIdentifier = "Meal Prep Log";
       entityDetails = `${(entityUsed as MealPrepLogTemplate)?.completed ? `COMPLETED ✔️` : "ABANDONED ❌"}`;
@@ -109,7 +102,10 @@ const EntityCard: FC<EntityCardProps> = ({
   if (isALink) {
     return (
       <Link
-        href={entityComponentDestination}
+        href={{
+          pathname: `/${entityType}/[id]` as any,
+          params: { id: entityId || entity?.id },
+        }}
         className={entityCardStyles.entityCardLinkWrapper}
       >
         <div

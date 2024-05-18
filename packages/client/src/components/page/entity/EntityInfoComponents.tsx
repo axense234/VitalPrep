@@ -17,6 +17,8 @@ import { useAppSelector } from "@/hooks/redux";
 import { State } from "@/redux/api/store";
 // Components
 import EntityInfoComponentsSection from "@/components/shared/entity/EntityInfoComponentsSection";
+// Translations
+import { useTranslations } from "next-intl";
 
 const EntityInfoComponents: FC<{
   entityId: string;
@@ -27,6 +29,8 @@ const EntityInfoComponents: FC<{
     selectEntityById(state, entityId, entityType)
   );
 
+  const translate = useTranslations("entityComponents");
+
   switch (entityType) {
     case "recipe":
       entityComponents = (
@@ -36,16 +40,14 @@ const EntityInfoComponents: FC<{
             entityComponents={
               (entity as RecipeTemplate)?.ingredients as IngredientTemplate[]
             }
-            entityName={entity?.name || "Entity Name"}
-            entitiesLabel="Ingredients"
+            entityName={entity?.name}
           />
           <EntityInfoComponentsSection
             entityType="utensil"
             entityComponents={
               (entity as RecipeTemplate)?.utensils as UtensilTemplate[]
             }
-            entityName={entity?.name || "Entity Name"}
-            entitiesLabel="Utensils"
+            entityName={entity?.name}
           />
         </div>
       );
@@ -59,24 +61,21 @@ const EntityInfoComponents: FC<{
               (entity as DayTemplateTemplate)
                 ?.ingredients as IngredientTemplate[]
             }
-            entityName={entity?.name || "Entity Name"}
-            entitiesLabel="Ingredients"
+            entityName={entity?.name}
           />
           <EntityInfoComponentsSection
             entityType="utensil"
             entityComponents={
               (entity as DayTemplateTemplate)?.utensils as UtensilTemplate[]
             }
-            entityName={entity?.name || "Entity Name"}
-            entitiesLabel="Utensils"
+            entityName={entity?.name}
           />
           <EntityInfoComponentsSection
             entityType="utensil"
             entityComponents={
               (entity as DayTemplateTemplate)?.recipes as RecipeTemplate[]
             }
-            entityName={entity?.name || "Entity Name"}
-            entitiesLabel="Recipes"
+            entityName={entity?.name}
           />
         </div>
       );
@@ -90,8 +89,7 @@ const EntityInfoComponents: FC<{
               (entity as InstanceTemplateTemplate)
                 ?.ingredients as IngredientTemplate[]
             }
-            entityName={entity?.name || "Entity Name"}
-            entitiesLabel="Ingredients"
+            entityName={entity?.name}
           />
           <EntityInfoComponentsSection
             entityType="utensil"
@@ -99,16 +97,14 @@ const EntityInfoComponents: FC<{
               (entity as InstanceTemplateTemplate)
                 ?.utensils as UtensilTemplate[]
             }
-            entityName={entity?.name || "Entity Name"}
-            entitiesLabel="Utensils"
+            entityName={entity?.name}
           />
           <EntityInfoComponentsSection
             entityType="utensil"
             entityComponents={
               (entity as InstanceTemplateTemplate)?.recipes as RecipeTemplate[]
             }
-            entityName={entity?.name || "Entity Name"}
-            entitiesLabel="Recipes"
+            entityName={entity?.name}
           />
           <EntityInfoComponentsSection
             entityType="utensil"
@@ -116,8 +112,7 @@ const EntityInfoComponents: FC<{
               (entity as InstanceTemplateTemplate)
                 ?.dayTemplates as DayTemplateTemplate[]
             }
-            entityName={entity?.name || "Entity Name"}
-            entitiesLabel="Day Plans"
+            entityName={entity?.name}
           />
         </div>
       );
@@ -131,24 +126,21 @@ const EntityInfoComponents: FC<{
               (entity as MealPrepPlanTemplate)
                 ?.ingredients as IngredientTemplate[]
             }
-            entityName={entity?.name || "Entity Name"}
-            entitiesLabel="Ingredients"
+            entityName={entity?.name}
           />
           <EntityInfoComponentsSection
             entityType="utensil"
             entityComponents={
               (entity as MealPrepPlanTemplate)?.utensils as UtensilTemplate[]
             }
-            entityName={entity?.name || "Entity Name"}
-            entitiesLabel="Utensils"
+            entityName={entity?.name}
           />
           <EntityInfoComponentsSection
             entityType="recipe"
             entityComponents={
               (entity as MealPrepPlanTemplate)?.recipes as RecipeTemplate[]
             }
-            entityName={entity?.name || "Entity Name"}
-            entitiesLabel="Recipes"
+            entityName={entity?.name}
           />
           <EntityInfoComponentsSection
             entityType="dayTemplate"
@@ -156,8 +148,7 @@ const EntityInfoComponents: FC<{
               (entity as MealPrepPlanTemplate)
                 ?.dayTemplates as DayTemplateTemplate[]
             }
-            entityName={entity?.name || "Entity Name"}
-            entitiesLabel="Day Plans"
+            entityName={entity?.name}
           />
           <EntityInfoComponentsSection
             entityType="instanceTemplate"
@@ -165,8 +156,7 @@ const EntityInfoComponents: FC<{
               (entity as MealPrepPlanTemplate)
                 ?.instanceTemplates as InstanceTemplateTemplate[]
             }
-            entityName={entity?.name || "Entity Name"}
-            entitiesLabel="Session Templates"
+            entityName={entity?.name}
           />
         </div>
       );
@@ -180,24 +170,21 @@ const EntityInfoComponents: FC<{
               (entity as MealPrepPlanTemplate)
                 ?.ingredients as IngredientTemplate[]
             }
-            entityName={entity?.name || "Entity Name"}
-            entitiesLabel="Ingredients"
+            entityName={entity?.name}
           />
           <EntityInfoComponentsSection
             entityType="utensil"
             entityComponents={
               (entity as MealPrepPlanTemplate)?.utensils as UtensilTemplate[]
             }
-            entityName={entity?.name || "Entity Name"}
-            entitiesLabel="Utensils"
+            entityName={entity?.name}
           />
           <EntityInfoComponentsSection
             entityType="utensil"
             entityComponents={
               (entity as MealPrepPlanTemplate)?.recipes as RecipeTemplate[]
             }
-            entityName={entity?.name || "Entity Name"}
-            entitiesLabel="Recipes"
+            entityName={entity?.name}
           />
           <EntityInfoComponentsSection
             entityType="utensil"
@@ -205,8 +192,7 @@ const EntityInfoComponents: FC<{
               (entity as MealPrepPlanTemplate)
                 ?.dayTemplates as DayTemplateTemplate[]
             }
-            entityName={entity?.name || "Entity Name"}
-            entitiesLabel="Day Plans"
+            entityName={entity?.name}
           />
         </div>
       );
@@ -217,7 +203,7 @@ const EntityInfoComponents: FC<{
 
   return (
     <div className={entityInfoTutorialStyles.entityInfoComponentsContainer}>
-      <h4>Components</h4>
+      <h4>{translate("title")}</h4>
       {entityComponents}
     </div>
   );

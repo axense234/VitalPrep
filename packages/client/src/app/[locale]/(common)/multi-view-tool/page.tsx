@@ -1,7 +1,7 @@
 "use client";
 
 // SCSS
-import multiViewToolStyles from "../../../scss/pages/MultiViewTool.module.scss";
+import multiViewToolStyles from "@/scss/pages/MultiViewTool.module.scss";
 // Hooks
 import useAuthorization from "@/hooks/useAuthorization";
 // Components

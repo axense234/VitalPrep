@@ -1,6 +1,7 @@
 // Types
 import EntityQueryValues from "@/core/types/entity/EntityQueryValues";
 import EntitySortingOption from "@/core/types/entity/EntitySortingOption";
+import EntityType from "@/core/types/entity/users/EntityType";
 // Redux
 import { useAppDispatch } from "@/hooks/redux";
 import { updateEntityQueryValues } from "@/redux/slices/generalSlice";
@@ -10,21 +11,28 @@ import { FC } from "react";
 import viewEntityOptionsStyles from "../../../scss/components/shared/ViewEntityOptions.module.scss";
 // Components
 import ViewEntityOptionsOrderBy from "./ViewEntityOptionsOrderBy";
+// Translations
+import { useTranslations } from "next-intl";
 
 const ViewEntityOptionsSortBy: FC<{
   entityQueryValues: EntityQueryValues;
   entitySortingOptionUsed: EntitySortingOption[];
-}> = ({ entityQueryValues, entitySortingOptionUsed }) => {
+  selectedEntityOption: EntityType;
+}> = ({ entityQueryValues, entitySortingOptionUsed, selectedEntityOption }) => {
   const dispatch = useAppDispatch();
+  const translate = useTranslations("viewEntityOptions.sortBy");
+
   return (
     <div className={viewEntityOptionsStyles.sortByEntityPropertyContainer}>
-      <label htmlFor="sortByOptions">Sort By:</label>
+      <label htmlFor={translate("labelContent")}>
+        {translate("selectLabel")}
+      </label>
       <div
         className={viewEntityOptionsStyles.sortByEntityPropertyContainerOrder}
       >
         <select
-          name="sortByOptions"
-          id="sortByOptions"
+          name={translate("labelName")}
+          id={translate("labelName")}
           value={entityQueryValues.sortByKey}
           onChange={(e) =>
             dispatch(
@@ -40,10 +48,16 @@ const ViewEntityOptionsSortBy: FC<{
               <option
                 key={entitySortingOption.label}
                 value={entitySortingOption.value}
-                title={`Sort By: ${entitySortingOption.label}`}
-                aria-label={`Sort By: ${entitySortingOption.label}`}
+                title={translate("labelTitle", {
+                  label: entitySortingOption.label,
+                })}
+                aria-label={translate("labelTitle", {
+                  label: entitySortingOption.label,
+                })}
               >
-                {entitySortingOption.label}
+                {translate(
+                  `sortingOptions.labels.${selectedEntityOption}.${entitySortingOption.value}`
+                )}
               </option>
             );
           })}

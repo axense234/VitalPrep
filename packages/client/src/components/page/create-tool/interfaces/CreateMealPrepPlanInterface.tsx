@@ -44,6 +44,8 @@ import useGetEntityComponents from "@/hooks/useGetEntityComponents";
 import handleUpdateArrayEntities from "@/helpers/handleUpdateArrayEntities";
 import handleOnCreateMealPrepPlanSubmit from "@/helpers/handleOnCreateMealPrepPlanSubmit";
 import createArrayFromNumber from "@/helpers/createArrayFromNumber";
+// Translations
+import { useTranslations } from "next-intl";
 
 const CreateMealPrepPlanInterface = () => {
   const dispatch = useAppDispatch();
@@ -70,6 +72,8 @@ const CreateMealPrepPlanInterface = () => {
   const numberOfInstanceTemplatesIterable = createArrayFromNumber(
     numberOfInstanceTemplates
   );
+
+  const translate = useTranslations("createTool.formLabels.mealPrepPlan");
 
   useUpdateEntityMacrosBasedOnComponentEntities(
     selectAllMealPrepPlans,
@@ -101,11 +105,11 @@ const CreateMealPrepPlanInterface = () => {
       <div className={createToolStyles.createInterfaceWrapper}>
         <div className={createToolStyles.createInterfaceFormContainer}>
           <PopupModal hasBorder={false} modalType="form" />
-          <h4>Create Meal Prep Plan</h4>
+          <h4>{translate("formTitle")}</h4>
           <form className={createToolStyles.createInterfaceForm}>
             <TextFormControl
               entityProperty={templateMealPrepPlan.name}
-              labelContent="Meal Prep Plan Name:"
+              labelContent={translate("name")}
               onEntityPropertyValueChange={(e) =>
                 dispatch(
                   updateTemplateMealPrepPlan({
@@ -117,7 +121,7 @@ const CreateMealPrepPlanInterface = () => {
               type="text"
             />
             <ImageFormControl
-              labelContent="Meal Prep Plan Image:"
+              labelContent={translate("image")}
               defaultImageUsedUrl={defaultMealPrepPlanImageUrl}
               entityPropertyLoadingStatus={loadingCloudinaryImage}
               entityProperty={templateMealPrepPlan.imageUrl as string}
@@ -137,7 +141,7 @@ const CreateMealPrepPlanInterface = () => {
             />
             <TextFormControl
               entityProperty={numberOfInstanceTemplates}
-              labelContent="Number of Templates Used:"
+              labelContent={translate("nbOfEntities")}
               onEntityPropertyValueChange={(e) =>
                 dispatch(
                   updateNumberOfInstanceTemplates(e.target.valueAsNumber)
@@ -146,7 +150,7 @@ const CreateMealPrepPlanInterface = () => {
               type="number"
             />
             <PrimaryButton
-              content="Create Meal Prep Plan"
+              content={translate("createButtonLabel")}
               type="functional"
               disabled={
                 loadingCreateMealPrepPlan === "PENDING" ||
@@ -176,7 +180,7 @@ const CreateMealPrepPlanInterface = () => {
             createToolStyles.createInterfaceMultipleComponentsContainer
           }
         >
-          <h4>Individual Session Templates:</h4>
+          <h4>{translate("selectFormControlsLabels.componentsLabel")}</h4>
           <ul
             className={
               createToolStyles.createInterfaceMultipleComponentsSelectControls
@@ -191,7 +195,10 @@ const CreateMealPrepPlanInterface = () => {
                   }
                 >
                   <SelectFormControl
-                    labelContent={`Number #${instanceTemplateOption.id} Template:`}
+                    labelContent={translate(
+                      "selectFormControlsLabels.componentLabel",
+                      { id: instanceTemplateOption.id }
+                    )}
                     entityPropertyOptions={instanceTemplatesIds}
                     entityPropertyChosenOptions={
                       (templateMealPrepPlan.instanceTemplates as string[]) || []
@@ -226,7 +233,9 @@ const CreateMealPrepPlanInterface = () => {
                     }
                   >
                     <WeekdayFormControl
-                      labelContent="Weekday:"
+                      labelContent={translate(
+                        "selectFormControlsLabels.weekdayLabel"
+                      )}
                       onEntityPropertyValueChange={(weekday: string) =>
                         dispatch(
                           updateInstanceTemplatesTiming({
@@ -247,7 +256,9 @@ const CreateMealPrepPlanInterface = () => {
                           instanceTemplateOption.id - 1
                         ]?.sessionStartingTime
                       }
-                      labelContent="Session Starting Time:"
+                      labelContent={translate(
+                        "selectFormControlsLabels.timeLabel"
+                      )}
                       onEntityPropertyValueChange={(e) =>
                         dispatch(
                           updateInstanceTemplatesTiming({

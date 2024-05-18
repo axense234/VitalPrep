@@ -11,8 +11,6 @@ import InstanceTemplateComponent from "./InstanceTemplateComponent";
 import MealPrepPlanComponent from "./MealPrepPlanComponent";
 import MealPrepLogComponent from "./MealPrepLogComponent";
 import EntityCard from "./EntityCard";
-// Next
-import Link from "next/link";
 // Types
 import IngredientTemplate from "@/core/types/entity/ingredient/IngredientTemplate";
 import UtensilTemplate from "@/core/types/entity/utensil/UtensilTemplate";
@@ -25,6 +23,8 @@ import MealPrepLogTemplate from "@/core/types/entity/mealPrepLog/MealPrepLogTemp
 // Redux
 import { useAppSelector } from "@/hooks/redux";
 import { selectSelectedViewOption } from "@/redux/slices/generalSlice";
+// Translations
+import { Link } from "@/navigation";
 
 const EntityComponent: FC<EntityComponentSchemeProps> = ({
   clicked,
@@ -62,11 +62,9 @@ const useSelectEntityComponentShown: FC<EntityComponentSchemeProps> = ({
   selectedViewOption,
 }) => {
   let entityComponentShown = null;
-  let entityComponentDestination = "";
 
   switch (entityType) {
     case "ingredient":
-      entityComponentDestination = `/ingredient/${entityId || entity?.id}`;
       if (selectedViewOption === "grid") {
         entityComponentShown = (
           <EntityCard
@@ -88,7 +86,6 @@ const useSelectEntityComponentShown: FC<EntityComponentSchemeProps> = ({
       }
       break;
     case "utensil":
-      entityComponentDestination = `/utensil/${entityId || entity?.id}`;
       if (selectedViewOption === "grid") {
         entityComponentShown = (
           <EntityCard
@@ -110,7 +107,6 @@ const useSelectEntityComponentShown: FC<EntityComponentSchemeProps> = ({
       }
       break;
     case "recipe":
-      entityComponentDestination = `/recipe/${entityId || entity?.id}`;
       if (selectedViewOption === "grid") {
         entityComponentShown = (
           <EntityCard
@@ -132,7 +128,6 @@ const useSelectEntityComponentShown: FC<EntityComponentSchemeProps> = ({
       }
       break;
     case "dayTemplate":
-      entityComponentDestination = `/dayTemplate/${entityId || entity?.id}`;
       if (selectedViewOption === "grid") {
         entityComponentShown = (
           <EntityCard
@@ -154,7 +149,6 @@ const useSelectEntityComponentShown: FC<EntityComponentSchemeProps> = ({
       }
       break;
     case "instanceTemplate":
-      entityComponentDestination = `/instanceTemplate/${entityId || entity?.id}`;
       if (selectedViewOption === "grid") {
         entityComponentShown = (
           <EntityCard
@@ -176,7 +170,6 @@ const useSelectEntityComponentShown: FC<EntityComponentSchemeProps> = ({
       }
       break;
     case "mealPrepPlan":
-      entityComponentDestination = `/mealPrepPlan/${entityId || entity?.id}`;
       if (selectedViewOption === "grid") {
         entityComponentShown = (
           <EntityCard
@@ -198,7 +191,6 @@ const useSelectEntityComponentShown: FC<EntityComponentSchemeProps> = ({
       }
       break;
     case "mealPrepLog":
-      entityComponentDestination = `/mealPrepLog/${entityId || entity?.id}`;
       if (selectedViewOption === "grid") {
         entityComponentShown = (
           <EntityCard
@@ -226,7 +218,10 @@ const useSelectEntityComponentShown: FC<EntityComponentSchemeProps> = ({
   if (isALink) {
     return (
       <Link
-        href={entityComponentDestination}
+        href={{
+          pathname: `/${entityType}/[id]` as any,
+          params: { id: entityId || entity?.id },
+        }}
         className={entityComponentStyles.entityComponentLinkWrapper}
       >
         {entityComponentShown}

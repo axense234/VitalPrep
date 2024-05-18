@@ -8,7 +8,6 @@ import AuthFormControlsProps from "@/core/interfaces/AuthFormControlsProps";
 import PrimaryButton from "./PrimaryButton";
 import TextFormControl from "./form/TextFormControl";
 import ImageFormControl from "./form/ImageFormControl";
-import CheckboxFormControl from "./form/CheckboxFormControl";
 import ReCAPTCHAControl from "./form/ReCAPTCHAControl";
 // Redux
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
@@ -27,10 +26,13 @@ import {
 import { defaultProfileImageUrl } from "@/data";
 // Hooks
 import useUpdateEntityTemplateImageUrl from "@/hooks/useUpdateEntityTemplateImageUrl";
+import { useTranslations } from "use-intl";
 
 const AuthFormControls: FC<AuthFormControlsProps> = ({ type }) => {
   const dispatch = useAppDispatch();
   const templateProfile = useAppSelector(selectTemplateProfile);
+
+  const translate = useTranslations(`${type}.formLabels`);
 
   const isUserABot = useAppSelector(selectIsUserABot);
 
@@ -51,7 +53,7 @@ const AuthFormControls: FC<AuthFormControlsProps> = ({ type }) => {
       <form className={authFormControlsStyles.formContainer}>
         <TextFormControl
           type="text"
-          labelContent="Username:"
+          labelContent={translate("username")}
           entityProperty={templateProfile.username as string}
           onEntityPropertyValueChange={(e) =>
             dispatch(
@@ -61,7 +63,7 @@ const AuthFormControls: FC<AuthFormControlsProps> = ({ type }) => {
         />
         <TextFormControl
           type="email"
-          labelContent="Email:"
+          labelContent={translate("email")}
           entityProperty={templateProfile.email as string}
           onEntityPropertyValueChange={(e) =>
             dispatch(
@@ -71,7 +73,7 @@ const AuthFormControls: FC<AuthFormControlsProps> = ({ type }) => {
         />
         <TextFormControl
           type="password"
-          labelContent="Password:"
+          labelContent={translate("password")}
           entityProperty={templateProfile.password as string}
           onEntityPropertyValueChange={(e) =>
             dispatch(
@@ -80,7 +82,7 @@ const AuthFormControls: FC<AuthFormControlsProps> = ({ type }) => {
           }
         />
         <ImageFormControl
-          labelContent="Profile Image:"
+          labelContent={translate("profileImage")}
           defaultImageUsedUrl={defaultProfileImageUrl}
           entityPropertyLoadingStatus={loadingCloudinaryImage}
           entityProperty={templateProfile.imageUrl as string}
@@ -97,7 +99,7 @@ const AuthFormControls: FC<AuthFormControlsProps> = ({ type }) => {
         />
         <TextFormControl
           type="number"
-          labelContent="Age:"
+          labelContent={translate("age")}
           entityProperty={templateProfile.age as number}
           onEntityPropertyValueChange={(e) =>
             dispatch(
@@ -108,16 +110,11 @@ const AuthFormControls: FC<AuthFormControlsProps> = ({ type }) => {
             )
           }
         />
-        <CheckboxFormControl
-          labelContent="Default Plan?:"
-          entityProperty={undefined}
-          onEntityPropertyValueChange={(e) => undefined}
-        />
         <ReCAPTCHAControl />
         <PrimaryButton
           type="functional"
-          onHoverContent={isUserABot ? "Confirm you are not a robot!" : ""}
-          content="Sign Up"
+          onHoverContent={isUserABot ? translate("reCAPTCHA") : ""}
+          content={translate("button")}
           disabled={
             loadingCloudinaryImage === "PENDING" ||
             isRequestPending ||
@@ -135,7 +132,7 @@ const AuthFormControls: FC<AuthFormControlsProps> = ({ type }) => {
       <form className={authFormControlsStyles.formContainer}>
         <TextFormControl
           type="email"
-          labelContent="Email:"
+          labelContent={translate("email")}
           entityProperty={templateProfile.email as string}
           onEntityPropertyValueChange={(e) =>
             dispatch(
@@ -145,7 +142,7 @@ const AuthFormControls: FC<AuthFormControlsProps> = ({ type }) => {
         />
         <TextFormControl
           type="password"
-          labelContent="Password:"
+          labelContent={translate("password")}
           entityProperty={templateProfile.password as string}
           onEntityPropertyValueChange={(e) =>
             dispatch(
@@ -155,7 +152,7 @@ const AuthFormControls: FC<AuthFormControlsProps> = ({ type }) => {
         />
         <PrimaryButton
           type="functional"
-          content="Log In"
+          content={translate("button")}
           disabled={isRequestPending}
           onClickFunction={(e) => {
             e.preventDefault();

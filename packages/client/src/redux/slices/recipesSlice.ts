@@ -25,7 +25,7 @@ export const recipesAdapter = createEntityAdapter<RecipeType>();
 const initialState = recipesAdapter.getInitialState({
   templateRecipe: defaultTemplateRecipe,
   loadingCreateRecipe: "IDLE",
-  recipeFormModalErrorMessage: "Default Message",
+  recipeFormModalErrorMessage: "Something went wrong, please refresh the page!",
   showVideoTutorialContent: false,
   showWrittenTutorialContent: false,
   loadingGetUserRecipes: "IDLE",

@@ -25,7 +25,8 @@ export const utensilsAdapter = createEntityAdapter<UtensilType>();
 const initialState = utensilsAdapter.getInitialState({
   templateUtensil: defaultTemplateUtensil,
   loadingCreateUtensil: "IDLE",
-  utensilFormModalErrorMessage: "Default Message",
+  utensilFormModalErrorMessage:
+    "Something went wrong, please refresh the page!",
   loadingGetUserUtensils: "IDLE",
   loadingGetUserUtensil: "IDLE",
 }) as UtensilsSliceStateType;

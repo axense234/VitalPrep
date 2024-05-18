@@ -1,5 +1,5 @@
 // SCSS
-import aboutStyles from "../../../scss/pages/About.module.scss";
+import aboutStyles from "@/scss/pages/About.module.scss";
 // Data
 import {
   aboutFrontendTechnologies,
@@ -9,36 +9,29 @@ import {
   aboutVCS,
 } from "@/data";
 // Next
-import Link from "next/link";
 import Image from "next/image";
+// Translations
+import { useTranslations } from "next-intl";
+import { Link } from "@/navigation";
 
 const AboutContent = () => {
+  const translateAbout = useTranslations("about.sections");
   return (
     <div className={aboutStyles.aboutContent}>
       <section className={aboutStyles.aboutContentSection}>
-        <h1>Intro</h1>
-        <p>
-          This app is all about creating a way for a user to be able to meal
-          prep in a dynamic way, using their own ingredients, recipes, etc...
-        </p>
-        <p>
-          When i created this app i wanted to create an app for myself that logs
-          my meal preps and allows me to create more recipes for my future meal
-          preps. Also i wanted to create this app just for fun.
-        </p>
+        <h1>{translateAbout("1.sectionTitle")}</h1>
+        <p>{translateAbout("1.descriptions.1")}</p>
+        <p>{translateAbout("1.descriptions.2")}</p>
       </section>
       <section className={aboutStyles.aboutContentSection}>
-        <h1>Frontend Technologies</h1>
-        <p>
-          The following are the technologies i have used on the frontend to
-          create this app:
-        </p>
+        <h1>{translateAbout("2.sectionTitle")}</h1>
+        <p>{translateAbout("2.sectionDescription")}</p>
         <ul className={aboutStyles.aboutContentSectionLogos}>
           {aboutFrontendTechnologies.map((frontendTech) => {
             return (
               <li key={frontendTech.id}>
                 <Link
-                  href={frontendTech.logoDest}
+                  href={frontendTech.logoDest as any}
                   title={frontendTech.logoLabel}
                   aria-label={frontendTech.logoLabel}
                 >
@@ -55,17 +48,14 @@ const AboutContent = () => {
         </ul>
       </section>
       <section className={aboutStyles.aboutContentSection}>
-        <h1>Backend Technologies</h1>
-        <p>
-          The following are the technologies i have used on the backend to
-          create this app:
-        </p>
+        <h1>{translateAbout("3.sectionTitle")}</h1>
+        <p>{translateAbout("3.sectionDescription")}</p>
         <ul className={aboutStyles.aboutContentSectionLogos}>
           {aboutBackendTechnologies.map((backendTech) => {
             return (
               <li key={backendTech.id}>
                 <Link
-                  href={backendTech.logoDest}
+                  href={backendTech.logoDest as any}
                   title={backendTech.logoLabel}
                   aria-label={backendTech.logoLabel}
                 >
@@ -82,17 +72,14 @@ const AboutContent = () => {
         </ul>
       </section>
       <section className={aboutStyles.aboutContentSection}>
-        <h1>Cloud Services</h1>
-        <p>
-          The following are the cloud services i have used in order to host the
-          frontend, backend and the databases:
-        </p>
+        <h1>{translateAbout("4.sectionTitle")}</h1>
+        <p>{translateAbout("4.sectionDescription")}</p>
         <ul className={aboutStyles.aboutContentSectionLogos}>
           {aboutCloudServices.map((cloudService) => {
             return (
               <li key={cloudService.id}>
                 <Link
-                  href={cloudService.logoDest}
+                  href={cloudService.logoDest as any}
                   title={cloudService.logoLabel}
                   aria-label={cloudService.logoLabel}
                 >
@@ -109,12 +96,9 @@ const AboutContent = () => {
         </ul>
       </section>
       <section className={aboutStyles.aboutContentSection}>
-        <h1>Others</h1>
-        <p>
-          The following are other technologies i have used but not included in
-          the above:
-        </p>
-        <h4>Media Management</h4>
+        <h1>{translateAbout("5.sectionTitle")}</h1>
+        <p>{translateAbout("5.sectionDescription")}</p>
+        <h4>{translateAbout("5.sectionSubTitles.1")}</h4>
         <ul
           className={aboutStyles.aboutContentSectionLogos}
           style={{
@@ -128,7 +112,7 @@ const AboutContent = () => {
             return (
               <li key={mediaManagement.id}>
                 <Link
-                  href={mediaManagement.logoDest}
+                  href={mediaManagement.logoDest as any}
                   title={mediaManagement.logoLabel}
                   aria-label={mediaManagement.logoLabel}
                 >
@@ -143,7 +127,7 @@ const AboutContent = () => {
             );
           })}
         </ul>
-        <h4>Version Control System(VCS)</h4>
+        <h4>{translateAbout("5.sectionSubTitles.2")}</h4>
         <ul
           className={aboutStyles.aboutContentSectionLogos}
           style={{
@@ -157,7 +141,7 @@ const AboutContent = () => {
             return (
               <li key={vcs.id}>
                 <Link
-                  href={vcs.logoDest}
+                  href={vcs.logoDest as any}
                   title={vcs.logoLabel}
                   aria-label={vcs.logoLabel}
                 >

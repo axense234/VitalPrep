@@ -40,34 +40,31 @@
     }
 
     h1 {
-      @include heading("h1", "laptop", "black");
+      @include heading("h2", "laptop", "black");
       text-align: center;
 
       @media screen and (max-width: 1200px) {
-        @include heading("h1", "tablet", "black");
+        @include heading("h2", "tablet", "black");
       }
 
       @media screen and (max-width: 800px) {
-        @include heading("h1", "phone", "black");
+        @include heading("h2", "phone", "black");
       }
 
       @media screen and (max-width: 600px) {
-        @include heading("h2", "phone", "black");
+        @include heading("h3", "phone", "black");
       }
     }
 
     h3 {
-      @include heading("h3", "laptop", "black");
+      @include heading("h4", "laptop", "black");
       text-align: center;
 
       @media screen and (max-width: 1200px) {
-        @include heading("h3", "tablet", "black");
+        @include heading("h4", "tablet", "black");
       }
 
       @media screen and (max-width: 800px) {
-        @include heading("h3", "phone", "black");
-      }
-      @media screen and (max-width: 600px) {
         @include heading("h4", "phone", "black");
       }
     }

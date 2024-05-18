@@ -1,6 +1,6 @@
 "use client";
 // SCSS
-import profileStyles from "../../../scss/pages/Profile.module.scss";
+import profileStyles from "@/scss/pages/Profile.module.scss";
 // Components
 import PageTitle from "@/components/shared/PageTitle";
 import ProfileDetails from "@/components/page/profile/ProfileDetails";
