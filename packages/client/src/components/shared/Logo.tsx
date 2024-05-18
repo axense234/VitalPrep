@@ -16,7 +16,7 @@ const Logo: FC<LogoProps> = ({ logoImageUrlIndex, dimensions, clickable }) => {
   const translate = useTranslations("pageLinks.labels");
   return (
     <Link
-      href={clickable ? homePageUrl : "/"}
+      href={clickable ? (homePageUrl as any) : "/"}
       title={clickable ? translate("/home") : "Vital Prep"}
       aria-label={clickable ? translate("/home") : "Vital Prep"}
       className={logoStyles.logoContainer}
