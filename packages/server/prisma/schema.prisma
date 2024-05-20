@@ -33,7 +33,7 @@ model NotificationSettings {
   id                   String  @id @default(uuid())
   allowedNotifications Boolean @default(true)
   notificationImageUrl String  @default("")
-  notificationStyle    String  @default("Default")
+  notificationStyle    String  @default("default")
 
   user User?
 }
