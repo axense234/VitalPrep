@@ -37,7 +37,7 @@
     align-items: center;
   }
 
-  img {
+  > img {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -109,6 +109,10 @@
     gap: 3rem;
     padding: 4rem 1rem;
   }
+  @media screen and (max-width: 450px) {
+    gap: 3rem;
+    padding: 4rem 0.5rem;
+  }
 }
 
 .homeSectionContentHeader {
@@ -136,6 +140,25 @@
     }
     @media screen and (max-width: 450px) {
       @include heading("h2", "phone", "black");
+    }
+  }
+
+  h2 {
+    @include heading("h2", "laptop", "black");
+    width: 100%;
+
+    @media screen and (max-width: 1650px) {
+      @include heading("h2", "tablet", "black");
+    }
+
+    @media screen and (max-width: 1200px) {
+      text-align: center;
+    }
+    @media screen and (max-width: 650px) {
+      @include heading("h2", "phone", "black");
+    }
+    @media screen and (max-width: 450px) {
+      @include heading("h3", "phone", "black");
     }
   }
 
@@ -194,7 +217,7 @@
   width: 100%;
   gap: 2rem;
 
-  img {
+  > img {
     width: 8rem;
     height: 8rem;
     position: relative;
@@ -255,6 +278,151 @@
     @media screen and (max-width: 450px) {
       @include paragraph("phone", "black");
       max-width: 80%;
+    }
+  }
+}
+
+.homeSectionImageBasedContent {
+  @include flexCenter(row);
+  align-items: flex-start;
+  width: 100%;
+  gap: 4rem;
+  justify-content: space-between;
+
+  @media screen and (max-width: 1500px) {
+    @include flexCenter(column);
+  }
+
+  @media screen and (max-width: 550px) {
+    > ul {
+      order: 2;
+    }
+    > img {
+      order: 1;
+    }
+  }
+
+  > img {
+    width: 45rem;
+    height: auto;
+    transition: filter 0.135s ease-in;
+    filter: brightness(1);
+    border-radius: 10px;
+
+    @media screen and (max-width: 1500px) {
+      width: 80%;
+    }
+    @media screen and (max-width: 650px) {
+      width: 90%;
+    }
+
+    &:hover {
+      filter: brightness(0.5);
+    }
+  }
+}
+
+.homeSectionImageBasedDescriptions {
+  @include flexCenter(column);
+  align-items: flex-start;
+  width: 100%;
+  list-style: none;
+  gap: 1rem;
+
+  @media screen and (max-width: 1500px) {
+    gap: 1.5rem;
+    align-items: center;
+  }
+
+  > li {
+    @include flexCenter(row);
+    justify-content: flex-start;
+    width: 90%;
+
+    @media screen and (max-width: 1500px) {
+      justify-content: center;
+      width: 100%;
+    }
+
+    > p {
+      @include heading("h6", "laptop", "black");
+      width: 100%;
+
+      @media screen and (max-width: 1500px) {
+        @include heading("h6", "tablet", "black");
+        text-align: center;
+      }
+      @media screen and (max-width: 600px) {
+        @include paragraph("phone", "black");
+        text-align: center;
+      }
+    }
+  }
+}
+
+.homeSectionImageOverlay {
+  @include flexCenter(column);
+  justify-content: flex-start;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: getColorWithOpacity("black-75-1", 0.5);
+  z-index: 100;
+  transition:
+    transform 0.135s linear,
+    opacity 0.135s linear;
+  transform: scale(0);
+  opacity: 0;
+
+  @media screen and (max-width: 1200px) {
+    gap: 3rem;
+  }
+
+  button {
+    @include flexCenter(row);
+    align-self: flex-end;
+    margin-top: 1rem;
+    margin-left: 1rem;
+    border: none;
+    width: 6rem;
+    height: 6rem;
+    background-color: transparent;
+    transition: $crispyTransformTransition;
+    cursor: crosshair;
+
+    @media screen and (max-width: 1200px) {
+      width: 3.5rem;
+      height: 3.5rem;
+    }
+
+    &:hover {
+      transform: rotate(45deg);
+    }
+
+    svg {
+      width: 100%;
+      height: 100%;
+      color: getColor("secondary-color-3.4");
+    }
+
+    @media screen and (max-width: 600px) {
+      margin-top: 0.5rem;
+      margin-left: 0.5rem;
+    }
+  }
+  > img {
+    width: 55%;
+    height: auto;
+    align-self: center;
+    border-radius: 10px;
+
+    @media screen and (max-width: 1200px) {
+      width: 80%;
+    }
+    @media screen and (max-width: 700px) {
+      width: 90%;
     }
   }
 }

@@ -350,6 +350,39 @@ export const homeSectionsContent: HomeSectionContentProps[] = [
   },
   {
     id: 3,
+    sectionTitle: "Plan Scheme",
+    sectionSubTitle: "the meal prep plan scheme?",
+    sectionImage:
+      "https://res.cloudinary.com/birthdayreminder/image/upload/v1716111050/mpp-scheme-en_jpit3n.jpg",
+    type: "imageBased",
+    position: "right",
+    sectionDescriptions: [
+      {
+        id: 1,
+        stringValue:
+          "A Meal Prep Plan can be easily understood by observing the following scheme.",
+      },
+      {
+        id: 2,
+        stringValue:
+          "A Meal Prep Plan can be easily understood by observing the following scheme.",
+      },
+      {
+        id: 3,
+        stringValue:
+          "When you prepare said meals, you will prepare them for an interval of days. This interval of days can be represented by a Session that uses a Session Template.",
+      },
+      {
+        id: 4,
+        stringValue:
+          "Each Session Template is composed of Day Plans. Day Plans represent the plan of meals for that specific day. Each meal is also represented by a Recipe that uses Ingredients w/wo Utensils.",
+      },
+    ],
+    sectionPaddingBasedOnWindowWidth: "",
+    tabletAndPhoneRedesign: false,
+  },
+  {
+    id: 4,
     sectionTitle: "Meal Prep Benefits",
     sectionSubTitle: "what you want",
     position: "left",
@@ -384,7 +417,7 @@ export const homeSectionsContent: HomeSectionContentProps[] = [
     tabletAndPhoneRedesign: false,
   },
   {
-    id: 4,
+    id: 5,
     sectionTitle: "Difficulties?",
     sectionSubTitle: "we can help",
     contentBackgroundImageSrc:

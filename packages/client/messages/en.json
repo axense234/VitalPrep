@@ -54,6 +54,21 @@
         "sectionDescription": "Meal Prep, short for meal preparation, is the practice of planning and preparing meals in advance, typically for a period of several days to a week."
       },
       "section-3": {
+        "sectionTitle": "Plan Scheme",
+        "sectionSubTitle": "the meal prep plan scheme",
+        "sectionImage": "https://res.cloudinary.com/birthdayreminder/image/upload/v1716111050/mpp-scheme-en_jpit3n.jpg",
+        "imageOverlay": {
+          "closeOverlayTitle": "Close Image Fullscreen"
+        },
+        "sectionImageTitle": "Meal Prep Plan Scheme Image",
+        "sectionDescriptions": {
+          "1": "A Meal Prep Plan can be easily understood by observing the following scheme.",
+          "2": "To explain the scheme in a few words, a Meal Prep Plan represents the weekly plan that you will follow to prepare your meals. You will usually prepare meals 1-3 times a week, at specific hours.",
+          "3": "When you prepare said meals, you will prepare them for an interval of days. This interval of days can be represented by a Session that uses a Session Template.",
+          "4": "Each Session Template is composed of Day Plans. Day Plans represent the plan of meals for that specific day. Each meal is also represented by a Recipe that uses Ingredients w/wo Utensils."
+        }
+      },
+      "section-4": {
         "sectionTitle": "Meal Prep Benefits",
         "sectionSubTitle": "what you're after",
         "items": {
@@ -71,7 +86,7 @@
           }
         }
       },
-      "section-4": {
+      "section-5": {
         "sectionTitle": "Difficulties?",
         "sectionSubTitle": "we can help",
         "appHelpDescription": "Given the app’s complexity, sometimes you will find yourself confused. We have a guide that serves as a way to help you use our app. Checkout the ",

@@ -6,6 +6,15 @@
   width: 6.25rem;
   transition: $crispyTransformTransition;
 
+  @media screen and (max-width: 600px) {
+    width: 4rem;
+    height: 4rem;
+  }
+  @media screen and (max-width: 400px) {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
   &:hover {
     transform: scale(1.05);
   }

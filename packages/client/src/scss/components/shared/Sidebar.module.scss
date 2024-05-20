@@ -15,11 +15,15 @@
   gap: 2rem;
   transform: translateX(150%);
   transition: $crispyTransformTransition;
+  overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    width: 0px;
+  }
 
   @media screen and (max-width: 900px) {
     width: 100%;
     min-width: 100%;
-    overflow-y: scroll;
   }
 }
 

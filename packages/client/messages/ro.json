@@ -54,6 +54,21 @@
         "sectionDescription": "\"Meal Prep\", prescurtare pentru \"meal preparations\", este practica de a planifica și pregăti mesele în avans, de obicei pentru o perioadă de la câteva zile până la o săptămână."
       },
       "section-3": {
+        "sectionTitle": "Schema \"Meal Prep\"",
+        "sectionSubTitle": "înțelege-ți mai bine planul",
+        "sectionImage": "https://res.cloudinary.com/birthdayreminder/image/upload/v1716111050/mpp-scheme-ro_no9eut.jpg",
+        "imageOverlay": {
+          "closeOverlayTitle": "Inchide ecranul complet"
+        },
+        "sectionImageTitle": "Imaginea \"Schema pentru Plan \"Meal Prep\"\"",
+        "sectionDescriptions": {
+          "1": "Un plan \"Meal Prep\" poate fi ușor de înțeles urmărind următoarea schemă.",
+          "2": "Pentru a explica schema în câteva cuvinte, un plan \"Meal Prep\" reprezintă planul săptămânal pe care îl veți urma pentru a vă pregăti mesele. De obicei vei pregăti mesele de 1-3 ori pe săptămână, la anumite ore.",
+          "3": "Când pregătiți aceste mese, le veți pregăti pentru un interval de zile. Acest interval de zile poate fi reprezentat de o Sesiune care folosește un Model de Sesiune.",
+          "4": "Fiecare Model de Sesiune este compus din Planuri de Zi. Planurile de Zi reprezintă planul de mese pentru ziua respectivă. Fiecare masă este reprezentată de o Rețetă care folosește Ingrediente cu sau fără Ustensile."
+        }
+      },
+      "section-4": {
         "sectionTitle": "Beneficiile Meal Prep",
         "sectionSubTitle": "ce urmărești",
         "items": {
@@ -71,7 +86,7 @@
           }
         }
       },
-      "section-4": {
+      "section-5": {
         "sectionTitle": "Dificultăți?",
         "sectionSubTitle": "putem să vă ajutăm",
         "appHelpDescription": "Având în vedere complexitatea aplicației, uneori vă veți găsi confuz. Avem un ghid care servește ca o modalitate de a vă ajuta să utilizați aplicația noastră. Verificați pagina ",

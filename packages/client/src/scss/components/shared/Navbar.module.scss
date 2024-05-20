@@ -13,7 +13,7 @@
   }
 
   @media screen and (max-width: 650px) {
-    padding: 1rem 2rem;
+    padding: 1rem 1rem;
   }
 }
 
@@ -21,6 +21,10 @@
   @include flexCenter(row);
   margin-left: auto;
   gap: 1rem;
+
+  @media screen and (max-width: 650px) {
+    gap: 0.35rem;
+  }
 }
 
 .navbarProfileContainer {
@@ -30,7 +34,8 @@
   gap: 1rem;
 
   @media screen and (max-width: 650px) {
-    gap: 0.5rem;
+    width: 100%;
+    gap: 0.35rem;
   }
 
   h6 {
@@ -51,11 +56,16 @@
   height: 4rem;
   transition: $crispyTransformTransition;
 
+  @media screen and (max-width: 500px) {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
   &:hover {
     transform: scale(1.05);
   }
 
-  img {
+  > img {
     width: 100%;
     height: 100%;
     border-radius: 50%;
