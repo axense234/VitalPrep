@@ -1,7 +1,7 @@
 // SCSS
 import entityComponentStyles from "../../../scss/components/shared/EntityComponents.module.scss";
 // React
-import { FC } from "react";
+import { FC, useRef } from "react";
 // Types
 import EntityComponentProps from "@/core/interfaces/entity/EntityComponentProps";
 import { Utensil } from "@prisma/client";
@@ -16,6 +16,8 @@ import { State } from "@/redux/api/store";
 import Image from "next/image";
 // Hooks
 import useGetWindowWidth from "@/hooks/useGetWindowWidth";
+// Components
+import EntityMutationMenu from "./EntityMutationMenu";
 
 const UtensilComponent: FC<EntityComponentProps> = ({
   clicked,
@@ -26,6 +28,7 @@ const UtensilComponent: FC<EntityComponentProps> = ({
     selectEntityById(state, entityId, "utensil")
   ) as Utensil;
   const utensilEntityShown = utensilEntity || entity;
+  const utensilContainerRef = useRef<HTMLDivElement | null>(null);
 
   const { name, imageUrl, enabled } = utensilEntityShown;
   let windowWidth = useGetWindowWidth();
@@ -35,7 +38,12 @@ const UtensilComponent: FC<EntityComponentProps> = ({
     <div
       className={entityComponentStyles.entityComponent}
       style={{ filter: clicked ? "brightness(1)" : "brightness(0.5)" }}
+      ref={utensilContainerRef}
     >
+      <EntityMutationMenu
+        type="entityComponent"
+        parentRef={utensilContainerRef}
+      />
       <header className={entityComponentStyles.entityComponentHeader}>
         <Image
           alt={`${name} Image`}

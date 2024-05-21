@@ -20,7 +20,10 @@ const handleDayOfTheWeekReminders = async () => {
     const userNotificationSettings = user.notificationSettings;
     console.log(user.username);
     console.log(userNotificationSettings);
-    if (userNotificationSettings.allowedNotifications) {
+    if (
+      userNotificationSettings.allowedNotifications &&
+      userNotificationSettings.allowDayReminderNotifications
+    ) {
       const userMealPrepPlan = await getUserMealPrepPlan(
         user.id,
         user.mealPrepPlanInUseId

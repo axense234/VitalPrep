@@ -1,7 +1,7 @@
 // SCSS
 import entityComponentStyles from "../../../scss/components/shared/EntityComponents.module.scss";
 // React
-import { FC } from "react";
+import { FC, useRef } from "react";
 // Types
 import EntityComponentProps from "@/core/interfaces/entity/EntityComponentProps";
 import MealPrepPlanTemplate from "@/core/types/entity/mealPrepPlan/MealPrepPlanTemplate";
@@ -16,6 +16,8 @@ import { State } from "@/redux/api/store";
 import Image from "next/image";
 // Hooks
 import useGetWindowWidth from "@/hooks/useGetWindowWidth";
+// Components
+import EntityMutationMenu from "./EntityMutationMenu";
 
 const MealPrepPlanComponent: FC<EntityComponentProps> = ({
   clicked,
@@ -26,6 +28,7 @@ const MealPrepPlanComponent: FC<EntityComponentProps> = ({
     selectEntityById(state, entityId, "mealPrepPlan")
   ) as MealPrepPlanTemplate;
   const mealPrepPlanEntityShown = mealPrepPlanEntity || entity;
+  const mealPrepPlanContainerRef = useRef<HTMLDivElement | null>(null);
 
   const { name, imageUrl, instanceTemplates } = mealPrepPlanEntityShown;
   let windowWidth = useGetWindowWidth();
@@ -35,7 +38,12 @@ const MealPrepPlanComponent: FC<EntityComponentProps> = ({
     <div
       className={entityComponentStyles.entityComponent}
       style={{ filter: clicked ? "brightness(1)" : "brightness(0.5)" }}
+      ref={mealPrepPlanContainerRef}
     >
+      <EntityMutationMenu
+        type="entityComponent"
+        parentRef={mealPrepPlanContainerRef}
+      />
       <header className={entityComponentStyles.entityComponentHeader}>
         <Image
           alt={`${name} Image`}

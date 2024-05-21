@@ -21,7 +21,7 @@ import {
   defaultMealPrepPlanImageUrl,
 } from "@/data";
 // React
-import { FC } from "react";
+import { FC, useRef } from "react";
 // Redux
 import { useAppSelector } from "@/hooks/redux";
 // Helpers
@@ -30,6 +30,7 @@ import selectEntityById from "@/helpers/selectEntityById";
 import useGetWindowWidth from "@/hooks/useGetWindowWidth";
 // Translations
 import { Link } from "@/navigation";
+import EntityMutationMenu from "./EntityMutationMenu";
 
 const EntityCard: FC<EntityCardProps> = ({
   entityType,
@@ -41,8 +42,8 @@ const EntityCard: FC<EntityCardProps> = ({
   const entityFromState = useAppSelector((state) =>
     selectEntityById(state, entityId || "", entityType)
   );
+  const entityCardRef = useRef<HTMLDivElement | null>(null);
   const entityUsed = entity || entityFromState;
-  let entityComponentDestination = "";
 
   let defaultImageUrlShownBasedOnEntityType = defaultIngredientImageUrl;
   let entityIdentifier = "Ingredient";
@@ -114,7 +115,9 @@ const EntityCard: FC<EntityCardProps> = ({
             maxWidth:
               size === "large" && !tabletAndPhoneRedesign ? "24rem" : "16rem",
           }}
+          ref={entityCardRef}
         >
+          <EntityMutationMenu type="entityCard" parentRef={entityCardRef} />
           <Image
             width={384}
             height={384}
@@ -162,7 +165,9 @@ const EntityCard: FC<EntityCardProps> = ({
         maxWidth:
           size === "large" && !tabletAndPhoneRedesign ? "24rem" : "16rem",
       }}
+      ref={entityCardRef}
     >
+      <EntityMutationMenu type="entityCard" parentRef={entityCardRef} />
       <Image
         width={384}
         height={384}

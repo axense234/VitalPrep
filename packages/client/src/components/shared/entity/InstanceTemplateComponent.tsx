@@ -1,7 +1,7 @@
 // SCSS
 import entityComponentStyles from "../../../scss/components/shared/EntityComponents.module.scss";
 // React
-import { FC } from "react";
+import { FC, useRef } from "react";
 // Types
 import EntityComponentProps from "@/core/interfaces/entity/EntityComponentProps";
 import InstanceTemplateTemplate from "@/core/types/entity/instanceTemplate/InstanceTemplateTemplate";
@@ -16,6 +16,8 @@ import { State } from "@/redux/api/store";
 import Image from "next/image";
 // Hooks
 import useGetWindowWidth from "@/hooks/useGetWindowWidth";
+// Components
+import EntityMutationMenu from "./EntityMutationMenu";
 
 const InstanceTemplateComponent: FC<EntityComponentProps> = ({
   clicked,
@@ -26,6 +28,7 @@ const InstanceTemplateComponent: FC<EntityComponentProps> = ({
     selectEntityById(state, entityId, "instanceTemplate")
   ) as InstanceTemplateTemplate;
   const instanceTemplateShown = instanceTemplate || entity;
+  const instanceTemplateContainerRef = useRef<HTMLDivElement | null>(null);
 
   const { name, imageUrl, coverage, dayTemplates } = instanceTemplateShown;
   let windowWidth = useGetWindowWidth();
@@ -35,7 +38,12 @@ const InstanceTemplateComponent: FC<EntityComponentProps> = ({
     <div
       className={entityComponentStyles.entityComponent}
       style={{ filter: clicked ? "brightness(1)" : "brightness(0.5)" }}
+      ref={instanceTemplateContainerRef}
     >
+      <EntityMutationMenu
+        type="entityComponent"
+        parentRef={instanceTemplateContainerRef}
+      />
       <header className={entityComponentStyles.entityComponentHeader}>
         <Image
           alt={`${name} Image`}

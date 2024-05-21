@@ -1,7 +1,7 @@
 // SCSS
 import entityComponentStyles from "../../../scss/components/shared/EntityComponents.module.scss";
 // React
-import { FC } from "react";
+import { FC, useRef } from "react";
 // Types
 import EntityComponentProps from "@/core/interfaces/entity/EntityComponentProps";
 import RecipeTemplate from "@/core/types/entity/recipe/RecipeTemplate";
@@ -16,6 +16,8 @@ import { State } from "@/redux/api/store";
 import Image from "next/image";
 // Hooks
 import useGetWindowWidth from "@/hooks/useGetWindowWidth";
+// Components
+import EntityMutationMenu from "./EntityMutationMenu";
 
 const RecipeComponent: FC<EntityComponentProps> = ({
   clicked,
@@ -26,6 +28,7 @@ const RecipeComponent: FC<EntityComponentProps> = ({
     selectEntityById(state, entityId, "recipe")
   ) as RecipeTemplate;
   const recipeEntityShown = recipeEntity || entity;
+  const recipeContainerRef = useRef<HTMLDivElement | null>(null);
 
   const { name, imageUrl, macros } = recipeEntityShown;
   let windowWidth = useGetWindowWidth();
@@ -36,7 +39,12 @@ const RecipeComponent: FC<EntityComponentProps> = ({
     <div
       className={entityComponentStyles.entityComponent}
       style={{ filter: clicked ? "brightness(1)" : "brightness(0.5)" }}
+      ref={recipeContainerRef}
     >
+      <EntityMutationMenu
+        type="entityComponent"
+        parentRef={recipeContainerRef}
+      />
       <header className={entityComponentStyles.entityComponentHeader}>
         <Image
           alt={`${name} Image`}

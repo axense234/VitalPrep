@@ -482,6 +482,11 @@
       "title": "Notification Settings",
       "formLabels": {
         "allowNotifications": "Allow Notifications?:",
+        "allowAutomaticCreationOfLogs": "Automatically create Session Logs?:",
+        "allowDayReminderNotifications": "Allow Day Reminder Notifications?:",
+        "allowPreSessionReminderNotifications": "Allow Pre Session Notifications?:",
+        "allowPostSessionReminderNotifications": "Allow Post Session Notifications?:",
+        "reminderIntervalInHours": "Change pre/post notifications interval:",
         "notificationsImage": "Notification Image:",
         "notificationStyles": {
           "formLabel": "Notification Style:",

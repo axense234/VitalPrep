@@ -25,6 +25,7 @@ import UserType from "@/core/types/entity/users/UserType";
 import useUpdateEntityTemplateImageUrl from "@/hooks/useUpdateEntityTemplateImageUrl";
 // Translations
 import { useTranslations } from "next-intl";
+import TextFormControl from "@/components/shared/form/TextFormControl";
 
 const NotificationSettings = () => {
   const dispatch = useAppDispatch();
@@ -65,6 +66,87 @@ const NotificationSettings = () => {
             dispatch(
               updateTemplateProfileNotificationSettings({
                 key: "allowedNotifications",
+                value: e.target.value === "true" ? false : true,
+              })
+            );
+          }}
+        />
+        <TextFormControl
+          entityProperty={
+            templateProfile?.notificationSettings?.reminderIntervalInHours
+          }
+          labelContent={translate("formLabels.reminderIntervalInHours")}
+          onEntityPropertyValueChange={(e) =>
+            dispatch(
+              updateTemplateProfileNotificationSettings({
+                key: "reminderIntervalInHours",
+                value: e.target.valueAsNumber,
+              })
+            )
+          }
+          type="number"
+        />
+        <CheckboxFormControl
+          labelContent={translate("formLabels.allowAutomaticCreationOfLogs")}
+          entityProperty={String(
+            templateProfile?.notificationSettings?.allowAutomaticCreationOfLogs
+          )}
+          onEntityPropertyValueChange={(e) => {
+            console.log(e.target.value);
+            dispatch(
+              updateTemplateProfileNotificationSettings({
+                key: "allowAutomaticCreationOfLogs",
+                value: e.target.value === "true" ? false : true,
+              })
+            );
+          }}
+        />
+        <CheckboxFormControl
+          labelContent={translate("formLabels.allowDayReminderNotifications")}
+          entityProperty={String(
+            templateProfile?.notificationSettings?.allowDayReminderNotifications
+          )}
+          onEntityPropertyValueChange={(e) => {
+            console.log(e.target.value);
+            dispatch(
+              updateTemplateProfileNotificationSettings({
+                key: "allowDayReminderNotifications",
+                value: e.target.value === "true" ? false : true,
+              })
+            );
+          }}
+        />
+        <CheckboxFormControl
+          labelContent={translate(
+            "formLabels.allowPreSessionReminderNotifications"
+          )}
+          entityProperty={String(
+            templateProfile?.notificationSettings
+              ?.allowPreSessionReminderNotifications
+          )}
+          onEntityPropertyValueChange={(e) => {
+            console.log(e.target.value);
+            dispatch(
+              updateTemplateProfileNotificationSettings({
+                key: "allowPreSessionReminderNotifications",
+                value: e.target.value === "true" ? false : true,
+              })
+            );
+          }}
+        />
+        <CheckboxFormControl
+          labelContent={translate(
+            "formLabels.allowPostSessionReminderNotifications"
+          )}
+          entityProperty={String(
+            templateProfile?.notificationSettings
+              ?.allowPostSessionReminderNotifications
+          )}
+          onEntityPropertyValueChange={(e) => {
+            console.log(e.target.value);
+            dispatch(
+              updateTemplateProfileNotificationSettings({
+                key: "allowPostSessionReminderNotifications",
                 value: e.target.value === "true" ? false : true,
               })
             );

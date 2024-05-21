@@ -483,6 +483,11 @@
       "formLabels": {
         "allowNotifications": "Permiteți notificările?:",
         "notificationsImage": "Imagine de notificare:",
+        "allowAutomaticCreationOfLogs": "Creați automat Jurnale de Sesiune?:",
+        "allowDayReminderNotifications": "Permiteți notificările de zi?:",
+        "allowPreSessionReminderNotifications": "Permiteți notificările înainte de sesiune?",
+        "allowPostSessionReminderNotifications": "Permiteți notificările după sesiune?",
+        "reminderIntervalInHours": "Modificați intervalul de notificări înainte/după:",
         "notificationStyles": {
           "formLabel": "Stilul de notificare:",
           "default": "Implicit",

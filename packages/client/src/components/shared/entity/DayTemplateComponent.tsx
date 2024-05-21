@@ -1,7 +1,7 @@
 // SCSS
 import entityComponentStyles from "../../../scss/components/shared/EntityComponents.module.scss";
 // React
-import { FC } from "react";
+import { FC, useRef } from "react";
 // Types
 import EntityComponentProps from "@/core/interfaces/entity/EntityComponentProps";
 import DayTemplateTemplate from "@/core/types/entity/dayTemplate/DayTemplateTemplate";
@@ -16,6 +16,8 @@ import { State } from "@/redux/api/store";
 import Image from "next/image";
 // Hooks
 import useGetWindowWidth from "@/hooks/useGetWindowWidth";
+// Components
+import EntityMutationMenu from "./EntityMutationMenu";
 
 const DayTemplateComponent: FC<EntityComponentProps> = ({
   clicked,
@@ -27,6 +29,7 @@ const DayTemplateComponent: FC<EntityComponentProps> = ({
   ) as DayTemplateTemplate;
 
   const dayTemplateEntityUsed = dayTemplateEntity || entity;
+  const dayTemplateContainerRef = useRef<HTMLDivElement | null>(null);
 
   const { name, imageUrl, macros, recipes } = dayTemplateEntityUsed;
   let windowWidth = useGetWindowWidth();
@@ -36,7 +39,12 @@ const DayTemplateComponent: FC<EntityComponentProps> = ({
     <div
       className={entityComponentStyles.entityComponent}
       style={{ filter: clicked ? "brightness(1)" : "brightness(0.5)" }}
+      ref={dayTemplateContainerRef}
     >
+      <EntityMutationMenu
+        type="entityComponent"
+        parentRef={dayTemplateContainerRef}
+      />
       <header className={entityComponentStyles.entityComponentHeader}>
         <Image
           alt={`${name} Image`}

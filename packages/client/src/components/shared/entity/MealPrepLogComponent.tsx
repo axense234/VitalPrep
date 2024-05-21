@@ -1,7 +1,7 @@
 // SCSS
 import entityComponentStyles from "../../../scss/components/shared/EntityComponents.module.scss";
 // React
-import { FC } from "react";
+import { FC, useRef } from "react";
 // Types
 import EntityComponentProps from "@/core/interfaces/entity/EntityComponentProps";
 import MealPrepLogTemplate from "@/core/types/entity/mealPrepLog/MealPrepLogTemplate";
@@ -16,6 +16,8 @@ import { State } from "@/redux/api/store";
 import Image from "next/image";
 // Hooks
 import useGetWindowWidth from "@/hooks/useGetWindowWidth";
+// Components
+import EntityMutationMenu from "./EntityMutationMenu";
 
 const MealPrepLogComponent: FC<EntityComponentProps> = ({
   clicked,
@@ -26,6 +28,7 @@ const MealPrepLogComponent: FC<EntityComponentProps> = ({
     selectEntityById(state, entityId, "mealPrepLog")
   ) as MealPrepLogTemplate;
   const mealPrepLogEntityShown = mealPrepLogEntity || entity;
+  const mealPrepLogContainerRef = useRef<HTMLDivElement | null>(null);
 
   const { name, imageUrl, cookingDuration, date, completed } =
     mealPrepLogEntityShown;
@@ -37,7 +40,12 @@ const MealPrepLogComponent: FC<EntityComponentProps> = ({
     <div
       className={entityComponentStyles.entityComponent}
       style={{ filter: clicked ? "brightness(1)" : "brightness(0.5)" }}
+      ref={mealPrepLogContainerRef}
     >
+      <EntityMutationMenu
+        type="entityComponent"
+        parentRef={mealPrepLogContainerRef}
+      />
       <header className={entityComponentStyles.entityComponentHeader}>
         <Image
           alt={`${name} Image`}

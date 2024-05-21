@@ -1,7 +1,7 @@
 // SCSS
 import entityComponentStyles from "../../../scss/components/shared/EntityComponents.module.scss";
 // React
-import { FC } from "react";
+import { FC, useRef, useState } from "react";
 // Types
 import EntityComponentProps from "@/core/interfaces/entity/EntityComponentProps";
 import IngredientTemplate from "@/core/types/entity/ingredient/IngredientTemplate";
@@ -16,6 +16,8 @@ import { State } from "@/redux/api/store";
 import Image from "next/image";
 // Hooks
 import useGetWindowWidth from "@/hooks/useGetWindowWidth";
+// Components
+import EntityMutationMenu from "./EntityMutationMenu";
 
 const IngredientComponent: FC<EntityComponentProps> = ({
   clicked,
@@ -26,7 +28,7 @@ const IngredientComponent: FC<EntityComponentProps> = ({
     selectEntityById(state, entityId, "ingredient")
   ) as IngredientTemplate;
   const ingredientEntityShown = ingredientEntity || entity;
-  console.log(ingredientEntityShown);
+  const ingredientContainerRef = useRef<HTMLDivElement | null>(null);
 
   const { name, imageUrl, macros, enabled } = ingredientEntityShown;
 
@@ -38,7 +40,12 @@ const IngredientComponent: FC<EntityComponentProps> = ({
     <div
       className={entityComponentStyles.entityComponent}
       style={{ filter: clicked ? "brightness(1)" : "brightness(0.5)" }}
+      ref={ingredientContainerRef}
     >
+      <EntityMutationMenu
+        type="entityComponent"
+        parentRef={ingredientContainerRef}
+      />
       <header className={entityComponentStyles.entityComponentHeader}>
         <Image
           alt={`${name} Image`}

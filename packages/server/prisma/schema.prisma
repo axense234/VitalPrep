@@ -30,10 +30,19 @@ model User {
 }
 
 model NotificationSettings {
-  id                   String  @id @default(uuid())
+  id String @id @default(uuid())
+
   allowedNotifications Boolean @default(true)
-  notificationImageUrl String  @default("")
-  notificationStyle    String  @default("default")
+
+  allowAutomaticCreationOfLogs Boolean @default(true)
+
+  allowDayReminderNotifications         Boolean @default(true)
+  allowPreSessionReminderNotifications  Boolean @default(true)
+  allowPostSessionReminderNotifications Boolean @default(true)
+
+  reminderIntervalInHours Int    @default(3)
+  notificationImageUrl    String @default("")
+  notificationStyle       String @default("default")
 
   user User?
 }
