@@ -5,6 +5,7 @@ import PageTitle from "@/components/shared/PageTitle";
 import EntityInfoDetails from "./EntityInfoDetails";
 import EntityInfoAppearances from "./EntityInfoAppearances";
 import EntityInfoComponents from "./EntityInfoComponents";
+import EntityMutationMenu from "@/components/shared/entity/EntityMutationMenu";
 // React
 import { FC, useEffect } from "react";
 // Redux
@@ -13,14 +14,27 @@ import {
   getUserInstanceTemplate,
   selectLoadingGetUserInstanceTemplate,
 } from "@/redux/slices/instanceTemplatesSlice";
+// Types
+import EntityInfoProps from "@/core/interfaces/entity/EntityInfoProps";
+// Hooks
+import useGetHandleOnDeleteEntity from "@/hooks/useGetHandleOnDeleteEntity";
+import useNavigateToPathname from "@/hooks/useNavigateToPathname";
 
-const InstanceTemplateInfo: FC<{ entityId: string; userId: string }> = ({
+const InstanceTemplateInfo: FC<EntityInfoProps> = ({
   entityId,
   userId,
+  hasEntityMutationMenu = true,
 }) => {
   const dispatch = useAppDispatch();
   const loadingGetUserInstanceTemplate = useAppSelector(
     selectLoadingGetUserInstanceTemplate
+  );
+
+  const navigateToPathname = useNavigateToPathname();
+  const handleOnDeleteEntity = useGetHandleOnDeleteEntity(
+    "instanceTemplate",
+    entityId,
+    userId
   );
 
   useEffect(() => {
@@ -35,6 +49,13 @@ const InstanceTemplateInfo: FC<{ entityId: string; userId: string }> = ({
   return (
     <div className={entityInfoStyles.entityInfoContainer}>
       <PageTitle />
+      {hasEntityMutationMenu && (
+        <EntityMutationMenu
+          type="entityInfo"
+          handleEntityDeletion={handleOnDeleteEntity}
+          handleEntityModification={() => navigateToPathname({})}
+        />
+      )}
       <div className={entityInfoStyles.entityInfoContent}>
         <EntityInfoDetails entityId={entityId} entityType="instanceTemplate" />
         <EntityInfoComponents

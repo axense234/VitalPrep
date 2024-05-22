@@ -9,7 +9,6 @@ import {
   createEntityAdapter,
   createSlice,
 } from "@reduxjs/toolkit";
-import RecipeTemplate from "@/core/types/entity/recipe/RecipeTemplate";
 import EntityQueryValues from "@/core/types/entity/EntityQueryValues";
 import LoadingStateType from "@/core/types/LoadingStateType";
 import ObjectKeyValueType from "@/core/types/ObjectKeyValueType";
@@ -25,6 +24,7 @@ export const recipesAdapter = createEntityAdapter<RecipeType>();
 const initialState = recipesAdapter.getInitialState({
   templateRecipe: defaultTemplateRecipe,
   loadingCreateRecipe: "IDLE",
+  loadingDeleteRecipe: "IDLE",
   recipeFormModalErrorMessage: "Something went wrong, please refresh the page!",
   showVideoTutorialContent: false,
   showWrittenTutorialContent: false,
@@ -128,6 +128,21 @@ export const getUserRecipe = createAsyncThunk<
   }
 });
 
+export const deleteRecipe = createAsyncThunk<
+  RecipeType | AxiosError,
+  { recipeId: string; userId: string }
+>("recipes/deleteRecipe", async ({ recipeId, userId }) => {
+  try {
+    const { data } = await axiosInstance.delete(
+      `/recipes/delete/${recipeId}?userId=${userId}`
+    );
+    return data.recipe as RecipeType;
+  } catch (error) {
+    console.log(error);
+    return error as AxiosError;
+  }
+});
+
 const recipesSlice = createSlice({
   name: "recipes",
   initialState,
@@ -212,6 +227,27 @@ const recipesSlice = createSlice({
             state.recipeFormModalErrorMessage = error.message;
           }
           state.loadingCreateRecipe = "FAILED";
+        }
+      })
+      .addCase(deleteRecipe.pending, (state, action) => {
+        state.loadingDeleteRecipe = "PENDING";
+      })
+      .addCase(deleteRecipe.fulfilled, (state, action) => {
+        const recipe = action.payload as RecipeType;
+        const axiosError = action.payload as AxiosError;
+
+        if (axiosError !== undefined && !axiosError.response) {
+          recipesAdapter.removeOne(state, recipe.id);
+          state.loadingDeleteRecipe = "SUCCEDED";
+        } else {
+          const error = axiosError.response?.data as {
+            message: string;
+            type: string;
+          };
+          if (error.type !== "jwt") {
+            state.recipeFormModalErrorMessage = error.message;
+          }
+          state.loadingDeleteRecipe = "FAILED";
         }
       });
   },

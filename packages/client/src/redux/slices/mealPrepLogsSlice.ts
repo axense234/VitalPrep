@@ -25,6 +25,7 @@ export const mealPrepLogsAdapter = createEntityAdapter<MealPrepLogType>();
 const initialState = mealPrepLogsAdapter.getInitialState({
   templateMealPrepLog: defaultTemplateMealPrepLog,
   loadingCreateMealPrepLog: "IDLE",
+  loadingDeleteMealPrepLog: "IDLE",
   mealPrepLogFormModalErrorMessage:
     "Something went wrong, please refresh the page!",
   loadingGetUserMealPrepLogs: "IDLE",
@@ -113,6 +114,21 @@ export const getUserMealPrepLog = createAsyncThunk<
   }
 });
 
+export const deleteMealPrepLog = createAsyncThunk<
+  MealPrepLogType | AxiosError,
+  { mealPrepLogId: string; userId: string }
+>("mealPrepLogs/deleteMealPrepLog", async ({ mealPrepLogId, userId }) => {
+  try {
+    const { data } = await axiosInstance.delete(
+      `/mealPrepLogs/delete/${mealPrepLogId}?userId=${userId}`
+    );
+    return data.mealPrepLog as MealPrepLogType;
+  } catch (error) {
+    console.log(error);
+    return error as AxiosError;
+  }
+});
+
 const mealPrepLogsSlice = createSlice({
   name: "mealPrepLogs",
   initialState,
@@ -188,6 +204,27 @@ const mealPrepLogsSlice = createSlice({
             state.mealPrepLogFormModalErrorMessage = error.message;
           }
           state.loadingCreateMealPrepLog = "FAILED";
+        }
+      })
+      .addCase(deleteMealPrepLog.pending, (state, action) => {
+        state.loadingDeleteMealPrepLog = "PENDING";
+      })
+      .addCase(deleteMealPrepLog.fulfilled, (state, action) => {
+        const mealPrepLog = action.payload as MealPrepLogType;
+        const axiosError = action.payload as AxiosError;
+
+        if (axiosError !== undefined && !axiosError.response) {
+          mealPrepLogsAdapter.removeOne(state, mealPrepLog.id);
+          state.loadingDeleteMealPrepLog = "SUCCEDED";
+        } else {
+          const error = axiosError.response?.data as {
+            message: string;
+            type: string;
+          };
+          if (error.type !== "jwt") {
+            state.mealPrepLogFormModalErrorMessage = error.message;
+          }
+          state.loadingDeleteMealPrepLog = "FAILED";
         }
       });
   },

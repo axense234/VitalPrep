@@ -1,0 +1,65 @@
+@use "../../abstracts" as *;
+
+.warningOverlayContainer {
+  @include flexCenter(column);
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: getColorWithOpacity("black-75-1", 0.5);
+  z-index: 100;
+  transition:
+    transform 0.135s linear,
+    opacity 0.135s linear;
+  transform: scale(0);
+  opacity: 0;
+
+  @media screen and (max-width: 1200px) {
+    gap: 3rem;
+  }
+}
+
+.warningOverlayContent {
+  @include flexCenter(column);
+  border: 1.5px solid getColor("black-75-1");
+  padding: 4rem 4rem;
+  background-color: getColor("tan-color-extra-light");
+  border-radius: 20px;
+  margin-bottom: 8rem;
+  gap: 4rem;
+  max-width: 60%;
+
+  h6 {
+    @include heading("h5", "laptop", "black");
+    text-align: center;
+  }
+}
+
+.warningOverlayButtons {
+  @include flexCenter(row);
+  width: 100%;
+  gap: 2rem;
+  justify-content: space-evenly;
+
+  button {
+    @include flexCenter(row);
+    @include heading("h6", "phone", "white");
+    font-weight: 550;
+    border: 1.5px solid getColor("black-75-1");
+    background-color: getColor("primary-1");
+    border-radius: 10px;
+    padding: 0.5rem 2.5rem;
+
+    @media screen and (max-width: 600px) {
+      @include paragraph("phone", "white");
+      padding: 0.5rem 1.5rem;
+    }
+
+    transition: $crispyTransformTransition;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+}

@@ -27,6 +27,7 @@ const EntityDetails: FC<EntityDetailsProps> = ({
         entityId={entityId}
         size="large"
         isALink={false}
+        hasEntityMutationMenu={false}
       />
     </div>
   );

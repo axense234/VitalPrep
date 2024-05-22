@@ -5,6 +5,7 @@ type InstanceTemplatesSliceInitialStateType = {
   // General
   templateInstanceTemplate: InstanceTemplateTemplate;
   loadingCreateInstanceTemplate: LoadingStateType;
+  loadingDeleteInstanceTemplate: LoadingStateType;
   instanceTemplateFormModalErrorMessage: string;
 
   loadingGetUserInstanceTemplates: LoadingStateType;

@@ -24,6 +24,7 @@ export const mealPrepPlansAdapter = createEntityAdapter<MealPrepPlanType>();
 const initialState = mealPrepPlansAdapter.getInitialState({
   templateMealPrepPlan: defaultTemplateMealPrepPlan,
   loadingCreateMealPrepPlan: "IDLE",
+  loadingDeleteMealPrepPlan: "IDLE",
   mealPrepPlanFormModalErrorMessage:
     "Something went wrong, please refresh the page!",
   numberOfInstanceTemplates: 0,
@@ -105,6 +106,21 @@ export const getUserMealPrepPlan = createAsyncThunk<
           includeInstanceTemplatesMacros: true,
         },
       }
+    );
+    return data.mealPrepPlan as MealPrepPlanType;
+  } catch (error) {
+    console.log(error);
+    return error as AxiosError;
+  }
+});
+
+export const deleteMealPrepPlan = createAsyncThunk<
+  MealPrepPlanType | AxiosError,
+  { mealPrepPlanId: string; userId: string }
+>("mealPrepPlans/deleteMealPrepPlan", async ({ mealPrepPlanId, userId }) => {
+  try {
+    const { data } = await axiosInstance.delete(
+      `/mealPrepPlans/delete/${mealPrepPlanId}?userId=${userId}`
     );
     return data.mealPrepPlan as MealPrepPlanType;
   } catch (error) {
@@ -207,6 +223,27 @@ const mealPrepPlansSlice = createSlice({
             state.mealPrepPlanFormModalErrorMessage = error.message;
           }
           state.loadingCreateMealPrepPlan = "FAILED";
+        }
+      })
+      .addCase(deleteMealPrepPlan.pending, (state, action) => {
+        state.loadingDeleteMealPrepPlan = "PENDING";
+      })
+      .addCase(deleteMealPrepPlan.fulfilled, (state, action) => {
+        const mealPrepPlan = action.payload as MealPrepPlanType;
+        const axiosError = action.payload as AxiosError;
+
+        if (axiosError !== undefined && !axiosError.response) {
+          mealPrepPlansAdapter.removeOne(state, mealPrepPlan.id);
+          state.loadingDeleteMealPrepPlan = "SUCCEDED";
+        } else {
+          const error = axiosError.response?.data as {
+            message: string;
+            type: string;
+          };
+          if (error.type !== "jwt") {
+            state.mealPrepPlanFormModalErrorMessage = error.message;
+          }
+          state.loadingDeleteMealPrepPlan = "FAILED";
         }
       });
   },

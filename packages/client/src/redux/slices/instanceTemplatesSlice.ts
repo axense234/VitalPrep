@@ -26,6 +26,7 @@ export const instanceTemplatesAdapter =
 const initialState = instanceTemplatesAdapter.getInitialState({
   templateInstanceTemplate: defaultTemplateInstanceTemplate,
   loadingCreateInstanceTemplate: "IDLE",
+  loadingDeleteInstanceTemplate: "IDLE",
   instanceTemplateFormModalErrorMessage:
     "Something went wrong, please refresh the page!",
   loadingGetUserInstanceTemplates: "IDLE",
@@ -116,6 +117,24 @@ export const getUserInstanceTemplate = createAsyncThunk<
   }
 );
 
+export const deleteInstanceTemplate = createAsyncThunk<
+  InstanceTemplateType | AxiosError,
+  { instanceTemplateId: string; userId: string }
+>(
+  "instanceTemplates/deleteInstanceTemplate",
+  async ({ instanceTemplateId, userId }) => {
+    try {
+      const { data } = await axiosInstance.delete(
+        `/instanceTemplates/delete/${instanceTemplateId}?userId=${userId}`
+      );
+      return data.instanceTemplate as InstanceTemplateType;
+    } catch (error) {
+      console.log(error);
+      return error as AxiosError;
+    }
+  }
+);
+
 const instanceTemplatesSlice = createSlice({
   name: "instanceTemplates",
   initialState,
@@ -194,6 +213,27 @@ const instanceTemplatesSlice = createSlice({
             state.instanceTemplateFormModalErrorMessage = error.message;
           }
           state.loadingCreateInstanceTemplate = "FAILED";
+        }
+      })
+      .addCase(deleteInstanceTemplate.pending, (state, action) => {
+        state.loadingDeleteInstanceTemplate = "PENDING";
+      })
+      .addCase(deleteInstanceTemplate.fulfilled, (state, action) => {
+        const instanceTemplate = action.payload as InstanceTemplateType;
+        const axiosError = action.payload as AxiosError;
+
+        if (axiosError !== undefined && !axiosError.response) {
+          instanceTemplatesAdapter.removeOne(state, instanceTemplate.id);
+          state.loadingDeleteInstanceTemplate = "SUCCEDED";
+        } else {
+          const error = axiosError.response?.data as {
+            message: string;
+            type: string;
+          };
+          if (error.type !== "jwt") {
+            state.instanceTemplateFormModalErrorMessage = error.message;
+          }
+          state.loadingDeleteInstanceTemplate = "FAILED";
         }
       });
   },

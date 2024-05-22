@@ -18,11 +18,17 @@ import Image from "next/image";
 import useGetWindowWidth from "@/hooks/useGetWindowWidth";
 // Components
 import EntityMutationMenu from "./EntityMutationMenu";
+// Translations
+import { Link } from "@/navigation";
 
 const MealPrepPlanComponent: FC<EntityComponentProps> = ({
   clicked,
   entityId,
   entity,
+  hasEntityMutationMenu = true,
+  deleteEntityFunction,
+  updateEntityFunction,
+  isALink,
 }) => {
   const mealPrepPlanEntity = useAppSelector((state: State) =>
     selectEntityById(state, entityId, "mealPrepPlan")
@@ -34,16 +40,84 @@ const MealPrepPlanComponent: FC<EntityComponentProps> = ({
   let windowWidth = useGetWindowWidth();
   let phoneRedesign = windowWidth && windowWidth <= 700;
 
+  if (isALink) {
+    return (
+      <div
+        className={entityComponentStyles.entityComponentWrapper}
+        ref={mealPrepPlanContainerRef}
+      >
+        {hasEntityMutationMenu && (
+          <EntityMutationMenu
+            type="entityComponent"
+            parentRef={mealPrepPlanContainerRef}
+            handleEntityDeletion={deleteEntityFunction}
+            handleEntityModification={updateEntityFunction}
+          />
+        )}
+        <Link
+          href={{
+            pathname: `/mealPrepPlan/[id]` as any,
+            params: { id: entityId || entity?.id },
+          }}
+          className={entityComponentStyles.entityComponentLinkWrapper}
+        >
+          <div
+            className={entityComponentStyles.entityComponent}
+            style={{ filter: clicked ? "brightness(1)" : "brightness(0.5)" }}
+            ref={mealPrepPlanContainerRef}
+          >
+            {hasEntityMutationMenu && (
+              <EntityMutationMenu
+                type="entityComponent"
+                parentRef={mealPrepPlanContainerRef}
+                handleEntityDeletion={deleteEntityFunction}
+                handleEntityModification={updateEntityFunction}
+              />
+            )}
+            <header className={entityComponentStyles.entityComponentHeader}>
+              <Image
+                alt={`${name} Image`}
+                src={imageUrl || defaultMealPrepPlanImageUrl}
+                title={name}
+                aria-label={name}
+                width={80}
+                height={80}
+              />
+              <h6>{name}</h6>
+            </header>
+            <div
+              className={entityComponentStyles.entityComponentDetails}
+              style={{ alignItems: "center" }}
+            >
+              {phoneRedesign ? null : (
+                <p>
+                  {instanceTemplates?.length && instanceTemplates?.length > 0
+                    ? instanceTemplates?.length
+                    : "???"}{" "}
+                  instance templates used
+                </p>
+              )}
+            </div>
+          </div>
+        </Link>
+      </div>
+    );
+  }
+
   return (
     <div
       className={entityComponentStyles.entityComponent}
       style={{ filter: clicked ? "brightness(1)" : "brightness(0.5)" }}
       ref={mealPrepPlanContainerRef}
     >
-      <EntityMutationMenu
-        type="entityComponent"
-        parentRef={mealPrepPlanContainerRef}
-      />
+      {hasEntityMutationMenu && (
+        <EntityMutationMenu
+          type="entityComponent"
+          parentRef={mealPrepPlanContainerRef}
+          handleEntityDeletion={deleteEntityFunction}
+          handleEntityModification={updateEntityFunction}
+        />
+      )}
       <header className={entityComponentStyles.entityComponentHeader}>
         <Image
           alt={`${name} Image`}

@@ -18,11 +18,17 @@ import Image from "next/image";
 import useGetWindowWidth from "@/hooks/useGetWindowWidth";
 // Components
 import EntityMutationMenu from "./EntityMutationMenu";
+// Translations
+import { Link } from "@/navigation";
 
 const MealPrepLogComponent: FC<EntityComponentProps> = ({
   clicked,
   entityId,
   entity,
+  hasEntityMutationMenu = true,
+  deleteEntityFunction,
+  updateEntityFunction,
+  isALink,
 }) => {
   const mealPrepLogEntity = useAppSelector((state: State) =>
     selectEntityById(state, entityId, "mealPrepLog")
@@ -36,16 +42,85 @@ const MealPrepLogComponent: FC<EntityComponentProps> = ({
   let tabletOrPhoneRedesign = windowWidth && windowWidth <= 1100;
   let phoneRedesign = windowWidth && windowWidth <= 500;
 
+  if (isALink) {
+    return (
+      <div
+        className={entityComponentStyles.entityComponentWrapper}
+        ref={mealPrepLogContainerRef}
+      >
+        {hasEntityMutationMenu && (
+          <EntityMutationMenu
+            type="entityComponent"
+            parentRef={mealPrepLogContainerRef}
+            handleEntityDeletion={deleteEntityFunction}
+            handleEntityModification={updateEntityFunction}
+          />
+        )}
+        <Link
+          href={{
+            pathname: `/mealPrepLog/[id]` as any,
+            params: { id: entityId || entity?.id },
+          }}
+          className={entityComponentStyles.entityComponentLinkWrapper}
+        >
+          <div
+            className={entityComponentStyles.entityComponent}
+            style={{ filter: clicked ? "brightness(1)" : "brightness(0.5)" }}
+            ref={mealPrepLogContainerRef}
+          >
+            {hasEntityMutationMenu && (
+              <EntityMutationMenu
+                type="entityComponent"
+                parentRef={mealPrepLogContainerRef}
+                handleEntityDeletion={deleteEntityFunction}
+                handleEntityModification={updateEntityFunction}
+              />
+            )}
+            <header className={entityComponentStyles.entityComponentHeader}>
+              <Image
+                alt={`${name} Image`}
+                src={imageUrl || defaultInstanceTemplateImageUrl}
+                title={name}
+                aria-label={name}
+                width={80}
+                height={80}
+              />
+              <h6>{name}</h6>
+            </header>
+            <div
+              className={entityComponentStyles.entityComponentDetails}
+              style={{ alignItems: "center" }}
+            >
+              {phoneRedesign ? null : (
+                <p>{new Date(date || "")?.toLocaleDateString() || "???"}</p>
+              )}
+              {tabletOrPhoneRedesign ? null : (
+                <>
+                  <p>{cookingDuration || "???"} hours spent</p>
+                  <p>{completed ? "COMPLETED" : "NOT COMPLETED"}</p>
+                </>
+              )}
+            </div>
+          </div>
+        </Link>
+      </div>
+    );
+  }
+
   return (
     <div
       className={entityComponentStyles.entityComponent}
       style={{ filter: clicked ? "brightness(1)" : "brightness(0.5)" }}
       ref={mealPrepLogContainerRef}
     >
-      <EntityMutationMenu
-        type="entityComponent"
-        parentRef={mealPrepLogContainerRef}
-      />
+      {hasEntityMutationMenu && (
+        <EntityMutationMenu
+          type="entityComponent"
+          parentRef={mealPrepLogContainerRef}
+          handleEntityDeletion={deleteEntityFunction}
+          handleEntityModification={updateEntityFunction}
+        />
+      )}
       <header className={entityComponentStyles.entityComponentHeader}>
         <Image
           alt={`${name} Image`}

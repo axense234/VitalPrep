@@ -24,6 +24,8 @@ import {
 import { SectionValueType } from "@/core/types/GettingStartedContentMapContentType";
 import EntityType from "@/core/types/entity/users/EntityType";
 import EntitiesType from "@/core/types/entity/EntitiesType";
+import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
+import { KeyObjectType } from "crypto";
 
 type ObjectKeyValueType = {
   key: string;
@@ -50,6 +52,17 @@ type InitialStateType = {
   showProfileEmail: boolean;
 
   currentGuideSection: SectionValueType;
+
+  locale: string;
+  pathname: string;
+  params: Params;
+
+  // Overlay
+  warningOverlay: {
+    overlayMessage: string;
+    showOverlay: boolean;
+    onConfirmFunction: any;
+  };
 
   // Query
   entityQueryValues: EntityQueryValues;
@@ -102,6 +115,17 @@ const initialState: InitialStateType = {
   selectedViewOption: "grid",
 
   showProfileEmail: false,
+
+  locale: "en",
+  params: {},
+  pathname: "/en",
+
+  // Overlay
+  warningOverlay: {
+    overlayMessage: "Default Overlay Message",
+    showOverlay: false,
+    onConfirmFunction: () => {},
+  },
 
   // Query
   entityQueryValues: defaultEntityQueryValues,
@@ -279,8 +303,6 @@ export const updateUser = createAsyncThunk<
     } else if (typeOfUpdate === "mealPrepPlanUsed") {
       requestParams.accountMealPrepPlanInUseIdModifications = true;
     }
-    // @ts-ignore
-    console.log(userTemplate.notificationSettings);
 
     const { data } = await axiosInstance.patch(
       `/users/update/${userTemplate.id}`,
@@ -332,6 +354,25 @@ const generalSlice = createSlice({
   name: "general",
   initialState,
   reducers: {
+    updateWarningOverlay(
+      state,
+      action: PayloadAction<{
+        overlayMessage: string;
+        showOverlay: boolean;
+        onConfirmFunction: any;
+      }>
+    ) {
+      state.warningOverlay = action.payload;
+    },
+    setLocale(state, action: PayloadAction<string>) {
+      state.locale = action.payload;
+    },
+    setPathname(state, action: PayloadAction<string>) {
+      state.pathname = action.payload;
+    },
+    setParams(state, action: PayloadAction<Params>) {
+      state.params = action.payload;
+    },
     resetTemplateImageUrl(state) {
       state.templateImageUrl = "";
     },
@@ -722,6 +763,13 @@ export const selectTypeOfUpdateAccountQuery = (state: State) =>
 export const selectCurrentGuideSection = (state: State) =>
   state.general.currentGuideSection;
 
+export const selectLocale = (state: State) => state.general.locale;
+export const selectPathname = (state: State) => state.general.pathname;
+export const selectParams = (state: State) => state.general.params;
+
+export const selectWarningOverlay = (state: State) =>
+  state.general.warningOverlay;
+
 export const {
   changeIsSidebarOpened,
   updateTemplateProfile,
@@ -742,6 +790,10 @@ export const {
   setTypeOfUpdateAccountQuery,
   changeCurrentGuideSection,
   resetTemplateImageUrl,
+  setLocale,
+  setParams,
+  setPathname,
+  updateWarningOverlay,
 } = generalSlice.actions;
 
 export default generalSlice.reducer;

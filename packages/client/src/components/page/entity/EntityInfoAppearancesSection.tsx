@@ -30,7 +30,7 @@ const EntityInfoAppearancesSection: FC<EntityInfoAppearancesSectionProps> = ({
         <ClockLoader />
       ) : (
         <ul className={entityInfoStyles.entityInfoAppearancesSectionEntities}>
-          {entities?.map((entity) => {
+          {entities?.map((entity, index) => {
             return (
               <li key={entity.id}>
                 <EntityComponent
@@ -40,6 +40,7 @@ const EntityInfoAppearancesSection: FC<EntityInfoAppearancesSectionProps> = ({
                   isALink={true}
                   entity={entity}
                   selectedViewOption="list"
+                  hasEntityMutationMenu={index !== 0}
                 />
               </li>
             );

@@ -18,11 +18,17 @@ import Image from "next/image";
 import useGetWindowWidth from "@/hooks/useGetWindowWidth";
 // Components
 import EntityMutationMenu from "./EntityMutationMenu";
+// Translations
+import { Link } from "@/navigation";
 
 const DayTemplateComponent: FC<EntityComponentProps> = ({
   clicked,
   entityId,
   entity,
+  hasEntityMutationMenu = true,
+  deleteEntityFunction,
+  updateEntityFunction,
+  isALink,
 }) => {
   const dayTemplateEntity = useAppSelector((state: State) =>
     selectEntityById(state, entityId, "dayTemplate")
@@ -35,16 +41,74 @@ const DayTemplateComponent: FC<EntityComponentProps> = ({
   let windowWidth = useGetWindowWidth();
   let phoneRedesign = windowWidth && windowWidth <= 800;
 
+  if (isALink) {
+    return (
+      <div
+        className={entityComponentStyles.entityComponentWrapper}
+        ref={dayTemplateContainerRef}
+      >
+        {hasEntityMutationMenu && (
+          <EntityMutationMenu
+            type="entityComponent"
+            parentRef={dayTemplateContainerRef}
+            handleEntityDeletion={deleteEntityFunction}
+            handleEntityModification={updateEntityFunction}
+          />
+        )}
+        <Link
+          href={{
+            pathname: `/dayTemplate/[id]` as any,
+            params: { id: entityId || entity?.id },
+          }}
+          className={entityComponentStyles.entityComponentLinkWrapper}
+        >
+          <div
+            className={entityComponentStyles.entityComponent}
+            style={{ filter: clicked ? "brightness(1)" : "brightness(0.5)" }}
+            ref={dayTemplateContainerRef}
+          >
+            <header className={entityComponentStyles.entityComponentHeader}>
+              <Image
+                alt={`${name} Image`}
+                src={imageUrl || defaultDayTemplateImageUrl}
+                title={name}
+                aria-label={name}
+                width={80}
+                height={80}
+              />
+              <h6>{name}</h6>
+            </header>
+            <div
+              className={entityComponentStyles.entityComponentDetails}
+              style={{ alignItems: "center" }}
+            >
+              {phoneRedesign ? null : (
+                <>
+                  <p>{recipes?.length || "0"} meals</p>
+                  <p>{macros?.calories} calories</p>
+                </>
+              )}
+            </div>
+          </div>
+        </Link>
+      </div>
+    );
+  }
+
   return (
     <div
       className={entityComponentStyles.entityComponent}
       style={{ filter: clicked ? "brightness(1)" : "brightness(0.5)" }}
       ref={dayTemplateContainerRef}
     >
-      <EntityMutationMenu
-        type="entityComponent"
-        parentRef={dayTemplateContainerRef}
-      />
+      {hasEntityMutationMenu && (
+        <EntityMutationMenu
+          type="entityComponent"
+          parentRef={dayTemplateContainerRef}
+          handleEntityDeletion={deleteEntityFunction}
+          handleEntityModification={updateEntityFunction}
+        />
+      )}
       <header className={entityComponentStyles.entityComponentHeader}>
         <Image
           alt={`${name} Image`}

@@ -4,7 +4,6 @@ import { State } from "../api/store";
 import { defaultTemplateDayTemplate } from "@/data";
 // Types
 import {
-  EntityState,
   PayloadAction,
   createAsyncThunk,
   createEntityAdapter,
@@ -16,18 +15,17 @@ import LoadingStateType from "@/core/types/LoadingStateType";
 import ObjectKeyValueType from "@/core/types/ObjectKeyValueType";
 import DayTemplatesSliceStateType from "@/core/types/entity/dayTemplate/DayTemplatesSliceStateType";
 import DayTemplateCreateBodyType from "@/core/types/entity/dayTemplate/DayTemplateCreateBodyType";
-// Prisma
-import { DayTemplate } from "@prisma/client";
+import DayTemplateType from "@/core/types/entity/dayTemplate/DayTemplateType";
 // Axios
 import { AxiosError } from "axios";
 import axiosInstance from "@/utils/axios";
-import DayTemplateType from "@/core/types/entity/dayTemplate/DayTemplateType";
 
 export const dayTemplatesAdapter = createEntityAdapter<DayTemplateType>();
 
 const initialState = dayTemplatesAdapter.getInitialState({
   templateDayTemplate: defaultTemplateDayTemplate,
   loadingCreateDayTemplate: "IDLE",
+  loadingDeleteDayTemplate: "IDLE",
   dayTemplateFormModalErrorMessage:
     "Something went wrong, please refresh the page!",
   numberOfMeals: 0,
@@ -105,6 +103,21 @@ export const getUserDayTemplate = createAsyncThunk<
           includeMealPrepPlans: true,
         },
       }
+    );
+    return data.dayTemplate as DayTemplateType;
+  } catch (error) {
+    console.log(error);
+    return error as AxiosError;
+  }
+});
+
+export const deleteDayTemplate = createAsyncThunk<
+  DayTemplateType | AxiosError,
+  { dayTemplateId: string; userId: string }
+>("dayTemplates/deleteDayTemplate", async ({ dayTemplateId, userId }) => {
+  try {
+    const { data } = await axiosInstance.delete(
+      `/dayTemplates/delete/${dayTemplateId}?userId=${userId}`
     );
     return data.dayTemplate as DayTemplateType;
   } catch (error) {
@@ -191,6 +204,27 @@ const dayTemplatesSlice = createSlice({
             state.dayTemplateFormModalErrorMessage = error.message;
           }
           state.loadingCreateDayTemplate = "FAILED";
+        }
+      })
+      .addCase(deleteDayTemplate.pending, (state, action) => {
+        state.loadingDeleteDayTemplate = "PENDING";
+      })
+      .addCase(deleteDayTemplate.fulfilled, (state, action) => {
+        const dayTemplate = action.payload as DayTemplateType;
+        const axiosError = action.payload as AxiosError;
+
+        if (axiosError !== undefined && !axiosError.response) {
+          dayTemplatesAdapter.removeOne(state, dayTemplate.id);
+          state.loadingDeleteDayTemplate = "SUCCEDED";
+        } else {
+          const error = axiosError.response?.data as {
+            message: string;
+            type: string;
+          };
+          if (error.type !== "jwt") {
+            state.dayTemplateFormModalErrorMessage = error.message;
+          }
+          state.loadingDeleteDayTemplate = "FAILED";
         }
       });
   },

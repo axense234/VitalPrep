@@ -6,6 +6,7 @@ import Footer from "@/components/shared/Footer";
 import Sidebar from "@/components/shared/Sidebar";
 import PopupModal from "@/components/shared/modals/PopupModal";
 import ActiveMealPrepPlan from "@/components/shared/ActiveMealPrepPlan";
+import WarningOverlay from "@/components/shared/overlays/WarningOverlay";
 // Redux
 import {
   logoutUser,
@@ -15,6 +16,9 @@ import {
   selectLoadingGetProfile,
   selectProfile,
   selectSelectedEntityOption,
+  setLocale,
+  setParams,
+  setPathname,
   signupUserOAuth,
 } from "@/redux/slices/generalSlice";
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
@@ -30,7 +34,10 @@ import {
 } from "@/helpers/initializeOneSignal";
 // Next
 import Script from "next/script";
-import { usePathname } from "next/navigation";
+import { useParams } from "next/navigation";
+// Translations
+import { usePathname } from "@/navigation";
+import { useLocale } from "next-intl";
 
 const SpecialLayout = ({ children }: { children: React.ReactNode }) => {
   const dispatch = useAppDispatch();
@@ -41,9 +48,18 @@ const SpecialLayout = ({ children }: { children: React.ReactNode }) => {
   const loadingGetProfile = useAppSelector(selectLoadingGetProfile);
   const loadingGetOAuthProfile = useAppSelector(selectLoadingGetOAuthProfile);
 
-  const pathname = usePathname();
   const createEntityOption = useAppSelector(selectSelectedEntityOption);
   Chart.register([LineElement, PointElement, BarElement, ArcElement]);
+
+  const locale = useLocale();
+  const params = useParams();
+  const pathname = usePathname();
+
+  useEffect(() => {
+    dispatch(setLocale(locale));
+    dispatch(setParams(params));
+    dispatch(setPathname(pathname));
+  }, [pathname, params, locale]);
 
   useEffect(() => {
     dispatch(resetTemplateImageUrl());
@@ -88,6 +104,7 @@ const SpecialLayout = ({ children }: { children: React.ReactNode }) => {
       <Navbar />
       <ActiveMealPrepPlan />
       <Sidebar />
+      <WarningOverlay />
       <PopupModal
         modalColor="#cfbea7"
         textColor="#120a06"

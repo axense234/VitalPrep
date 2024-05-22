@@ -6,21 +6,31 @@ import EntityInfoComponentsShownProps from "@/core/interfaces/entity/EntityInfoC
 import { FC } from "react";
 // Components
 import EntityCard from "./EntityCard";
-import { useTranslations } from "use-intl";
+// Translations
+import { useTranslations } from "next-intl";
+// Helpers
+import getDeleteEntityFunction from "@/helpers/getDeleteEntityFunction";
+// Redux
+import { useAppDispatch } from "@/hooks/redux";
+// Hooks
+import useNavigateToPathname from "@/hooks/useNavigateToPathname";
 
 const EntityInfoComponentsSection: FC<EntityInfoComponentsShownProps> = ({
   entityName,
   entityComponents,
   entityType,
 }) => {
-  if (!entityComponents || entityComponents.length < 1) {
-    return null;
-  }
-
+  const dispatch = useAppDispatch();
   const translateEntitiesLabels = useTranslations(
     `multiViewPage.entitiesTitle`
   );
   const translate = useTranslations("entityComponents");
+
+  const navigateToPathname = useNavigateToPathname();
+
+  if (!entityComponents || entityComponents.length < 1) {
+    return null;
+  }
 
   return (
     <div className={entityInfoTutorialStyles.entityInfoSection}>
@@ -40,6 +50,14 @@ const EntityInfoComponentsSection: FC<EntityInfoComponentsShownProps> = ({
                 entityType={entityType}
                 size="medium"
                 isALink={true}
+                hasEntityMutationMenu={true}
+                deleteEntityFunction={getDeleteEntityFunction(
+                  entityType,
+                  dispatch,
+                  entityComponent.id as string,
+                  entityComponent.userId as string
+                )}
+                updateEntityFunction={() => navigateToPathname()}
               />
             </li>
           );

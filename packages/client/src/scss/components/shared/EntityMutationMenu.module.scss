@@ -5,7 +5,7 @@
   position: absolute;
   transition: $crispyTransformTransition;
   top: -4rem;
-  left: 0;
+  left: 0.5rem;
 
   transform: translateY(-100%);
   opacity: 0;
@@ -15,17 +15,106 @@
     color: getColor("black-100-1");
     margin-top: -0.65rem;
   }
+
+  z-index: 9;
+}
+
+.hiddenEntityMutationMenuInfoContainer {
+  @include flexCenter(column);
+  position: fixed;
+  top: 27.5%;
+  left: 0%;
+  z-index: 2;
+  background-color: getColor("secondary-color-1.2");
+  padding: 1.5rem;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+
+  z-index: 9;
+
+  @media screen and (max-width: 500px) {
+    padding: 0.75rem;
+  }
+
+  > svg {
+    height: 3rem;
+    width: 3rem;
+    color: getColor("tan-color-extra-light");
+    transition: $crispyTransformTransition;
+
+    &:hover {
+      transform: rotate(-90deg) scale(1.2);
+    }
+  }
+}
+
+.entityMutationMenuInfoContainer {
+  @include flexCenter(column);
+  position: fixed;
+  top: 26.5%;
+  left: 0;
+  padding: 0.5rem;
+  padding-top: 3.5rem;
+  min-width: 6rem;
+  background-color: getColor("tan-color-extra-light");
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  z-index: 9;
+  transition: transform 0.135s linear;
+  border: 1px solid getColor("black-50-1");
+  border-left: none;
+  opacity: 1;
+  transform: translateX(0%);
+
+  @media screen and (max-width: 500px) {
+    min-width: 15rem;
+    padding: 1rem;
+    padding-top: 2rem;
+  }
+
+  > svg {
+    position: absolute;
+    top: 0.5rem;
+    color: red;
+    width: 1.25rem;
+    height: 1.25rem;
+    transition: $crispyTransformTransition;
+    cursor: crosshair;
+
+    &:hover {
+      transform: rotate(45deg);
+    }
+  }
 }
 
 .entityMutationMenuOptions {
   @include flexCenter(row);
   gap: 0.5rem;
   background-color: getColor("tan-color-extra-light");
-  padding: 1rem;
-
+  padding: 0.5rem;
   border: 1.5px solid getColor("black-75-1");
-
   border-radius: 10px;
+
+  > svg {
+    font-size: 2rem;
+    transition: $crispyTransformTransition;
+
+    &:nth-of-type(1) {
+      color: red;
+    }
+    &:nth-of-type(2) {
+      color: green;
+    }
+
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
+}
+
+.entityMutationMenuInfoOptions {
+  @include flexCenter(column);
+  gap: 0.5rem;
 
   > svg {
     font-size: 2rem;

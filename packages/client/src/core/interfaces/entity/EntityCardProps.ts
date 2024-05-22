@@ -7,5 +7,8 @@ interface EntityCardProps {
   entityType: EntityType;
   entity: EntityTemplateType;
   entityId?: string;
+  hasEntityMutationMenu?: boolean;
+  deleteEntityFunction?: any;
+  updateEntityFunction?: any;
 }
 export default EntityCardProps;

@@ -314,6 +314,14 @@
     "closeActionTitle": "Închideți Meniul de Entități",
     "selectLabel": "Selectați"
   },
+  "entityMutation": {
+    "entityMenu": {
+      "openMenuTitle": "Deschideți Meniul \"Mutație Entitate\"",
+      "closeMenuTitle": "Închideți Meniul \"Mutație Entitate\"",
+      "deleteEntityTitle": "Ștergeți entitatea",
+      "updateEntityTitle": "Modificați entitatea"
+    }
+  },
   "viewEntityOptions": {
     "chooseEntity": {
       "labelContent": "Entitatea selectată:",

@@ -24,6 +24,7 @@ export const ingredientsAdapter = createEntityAdapter<IngredientType>();
 const initialState = ingredientsAdapter.getInitialState({
   templateIngredient: defaultTemplateIngredient,
   loadingCreateIngredient: "IDLE",
+  loadingDeleteIngredient: "IDLE",
   ingredientFormModalErrorMessage:
     "Something went wrong, please refresh the page!",
   loadingGetUserIngredients: "IDLE",
@@ -92,6 +93,21 @@ export const getUserIngredient = createAsyncThunk<
           includeMealPrepPlans: true,
         },
       }
+    );
+    return data.ingredient as IngredientType;
+  } catch (error) {
+    console.log(error);
+    return error as AxiosError;
+  }
+});
+
+export const deleteIngredient = createAsyncThunk<
+  IngredientType | AxiosError,
+  { ingredientId: string; userId: string }
+>("ingredients/deleteIngredient", async ({ ingredientId, userId }) => {
+  try {
+    const { data } = await axiosInstance.delete(
+      `/ingredients/delete/${ingredientId}?userId=${userId}`
     );
     return data.ingredient as IngredientType;
   } catch (error) {
@@ -181,6 +197,27 @@ const ingredientsSlice = createSlice({
             state.ingredientFormModalErrorMessage = error.message;
           }
           state.loadingCreateIngredient = "FAILED";
+        }
+      })
+      .addCase(deleteIngredient.pending, (state, action) => {
+        state.loadingDeleteIngredient = "PENDING";
+      })
+      .addCase(deleteIngredient.fulfilled, (state, action) => {
+        const ingredient = action.payload as IngredientType;
+        const axiosError = action.payload as AxiosError;
+
+        if (axiosError !== undefined && !axiosError.response) {
+          ingredientsAdapter.removeOne(state, ingredient.id);
+          state.loadingDeleteIngredient = "SUCCEDED";
+        } else {
+          const error = axiosError.response?.data as {
+            message: string;
+            type: string;
+          };
+          if (error.type !== "jwt") {
+            state.ingredientFormModalErrorMessage = error.message;
+          }
+          state.loadingDeleteIngredient = "FAILED";
         }
       });
   },

@@ -5,7 +5,7 @@ import entityInfoStyles from "../../../scss/components/page/EntityInfo.module.sc
 // Helpers
 import selectEntityById from "@/helpers/selectEntityById";
 // Redux
-import { useAppSelector } from "@/hooks/redux";
+import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import { State } from "@/redux/api/store";
 // Types
 import MealPrepLogTemplate from "@/core/types/entity/mealPrepLog/MealPrepLogTemplate";
@@ -14,8 +14,13 @@ import EntityCard from "@/components/shared/entity/EntityCard";
 import EntityMacros from "@/components/shared/entity/EntityMacros";
 // Translations
 import { useTranslations } from "next-intl";
+// Helpers
+import getDeleteEntityFunction from "@/helpers/getDeleteEntityFunction";
+// Hooks
+import useNavigateToPathname from "@/hooks/useNavigateToPathname";
 
 const EntityInfoInstanceTemplate: FC<{ entityId: string }> = ({ entityId }) => {
+  const dispatch = useAppDispatch();
   const entityThatHasAInstanceTemplate = useAppSelector((state: State) =>
     selectEntityById(state, entityId, "mealPrepLog")
   ) as MealPrepLogTemplate;
@@ -24,6 +29,8 @@ const EntityInfoInstanceTemplate: FC<{ entityId: string }> = ({ entityId }) => {
     entityThatHasAInstanceTemplate?.instanceTemplate;
 
   const translate = useTranslations("entityInstanceTemplate");
+
+  const navigateToPathname = useNavigateToPathname();
 
   return (
     <div className={entityInfoStyles.entityInfoInstanceTemplateContainer}>
@@ -43,6 +50,14 @@ const EntityInfoInstanceTemplate: FC<{ entityId: string }> = ({ entityId }) => {
           entityType="instanceTemplate"
           isALink={true}
           size="large"
+          hasEntityMutationMenu={true}
+          deleteEntityFunction={getDeleteEntityFunction(
+            "instanceTemplate",
+            dispatch,
+            entityInstanceTemplate.id as string,
+            entityInstanceTemplate.userId as string
+          )}
+          updateEntityFunction={() => navigateToPathname()}
         />
         <EntityMacros macros={entityInstanceTemplate?.macros} />
       </div>

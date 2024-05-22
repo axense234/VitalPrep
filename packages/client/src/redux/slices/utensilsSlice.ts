@@ -25,6 +25,7 @@ export const utensilsAdapter = createEntityAdapter<UtensilType>();
 const initialState = utensilsAdapter.getInitialState({
   templateUtensil: defaultTemplateUtensil,
   loadingCreateUtensil: "IDLE",
+  loadingDeleteUtensil: "IDLE",
   utensilFormModalErrorMessage:
     "Something went wrong, please refresh the page!",
   loadingGetUserUtensils: "IDLE",
@@ -88,6 +89,21 @@ export const getUserUtensil = createAsyncThunk<
           includeMealPrepPlans: true,
         },
       }
+    );
+    return data.utensil as UtensilType;
+  } catch (error) {
+    console.log(error);
+    return error as AxiosError;
+  }
+});
+
+export const deleteUtensil = createAsyncThunk<
+  UtensilType | AxiosError,
+  { utensilId: string; userId: string }
+>("utensils/deleteUtensil", async ({ utensilId, userId }) => {
+  try {
+    const { data } = await axiosInstance.delete(
+      `/utensils/delete/${utensilId}?userId=${userId}`
     );
     return data.utensil as UtensilType;
   } catch (error) {
@@ -165,6 +181,27 @@ const utensilsSlice = createSlice({
             state.utensilFormModalErrorMessage = error.message;
           }
           state.loadingCreateUtensil = "FAILED";
+        }
+      })
+      .addCase(deleteUtensil.pending, (state, action) => {
+        state.loadingDeleteUtensil = "PENDING";
+      })
+      .addCase(deleteUtensil.fulfilled, (state, action) => {
+        const utensil = action.payload as UtensilType;
+        const axiosError = action.payload as AxiosError;
+
+        if (axiosError !== undefined && !axiosError.response) {
+          utensilsAdapter.removeOne(state, utensil.id);
+          state.loadingDeleteUtensil = "SUCCEDED";
+        } else {
+          const error = axiosError.response?.data as {
+            message: string;
+            type: string;
+          };
+          if (error.type !== "jwt") {
+            state.utensilFormModalErrorMessage = error.message;
+          }
+          state.loadingDeleteUtensil = "FAILED";
         }
       });
   },

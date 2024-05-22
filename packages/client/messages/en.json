@@ -314,6 +314,14 @@
     "closeActionTitle": "Close Entity Type Menu",
     "selectLabel": "Select"
   },
+  "entityMutation": {
+    "entityMenu": {
+      "openMenuTitle": "Open Entity Mutation Menu",
+      "closeMenuTitle": "Close Entity Mutation Menu",
+      "deleteEntityTitle": "Delete entity named",
+      "updateEntityTitle": "Update entity named"
+    }
+  },
   "viewEntityOptions": {
     "chooseEntity": {
       "labelContent": "Selected Entity:",

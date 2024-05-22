@@ -1,7 +1,5 @@
 // React
 import { FC } from "react";
-// SCSS
-import entityComponentStyles from "../../../scss/components/shared/EntityComponents.module.scss";
 // Components
 import IngredientComponent from "./IngredientComponent";
 import UtensilComponent from "./UtensilComponent";
@@ -21,10 +19,15 @@ import MealPrepPlanTemplate from "@/core/types/entity/mealPrepPlan/MealPrepPlanT
 import EntityComponentSchemeProps from "@/core/interfaces/entity/EntityComponentSchemeProps";
 import MealPrepLogTemplate from "@/core/types/entity/mealPrepLog/MealPrepLogTemplate";
 // Redux
-import { useAppSelector } from "@/hooks/redux";
-import { selectSelectedViewOption } from "@/redux/slices/generalSlice";
-// Translations
-import { Link } from "@/navigation";
+import { useAppDispatch, useAppSelector } from "@/hooks/redux";
+import {
+  selectProfile,
+  selectSelectedViewOption,
+} from "@/redux/slices/generalSlice";
+// Helpers
+import getDeleteEntityFunction from "@/helpers/getDeleteEntityFunction";
+// Hooks
+import useNavigateToPathname from "@/hooks/useNavigateToPathname";
 
 const EntityComponent: FC<EntityComponentSchemeProps> = ({
   clicked,
@@ -33,7 +36,9 @@ const EntityComponent: FC<EntityComponentSchemeProps> = ({
   entity,
   isALink,
   selectedViewOption,
+  hasEntityMutationMenu = true,
 }) => {
+  const profile = useAppSelector(selectProfile);
   const selectedViewOptionFromState = useAppSelector(selectSelectedViewOption);
   const usedSelectedViewOption =
     selectedViewOption || selectedViewOptionFromState;
@@ -45,6 +50,8 @@ const EntityComponent: FC<EntityComponentSchemeProps> = ({
     isALink,
     entity,
     selectedViewOption: usedSelectedViewOption,
+    hasEntityMutationMenu,
+    profile,
   });
 
   if (entityComponentShown) {
@@ -60,8 +67,13 @@ const useSelectEntityComponentShown: FC<EntityComponentSchemeProps> = ({
   isALink,
   entity,
   selectedViewOption,
+  hasEntityMutationMenu,
+  profile,
 }) => {
   let entityComponentShown = null;
+
+  const dispatch = useAppDispatch();
+  const navigateToPathname = useNavigateToPathname();
 
   switch (entityType) {
     case "ingredient":
@@ -72,7 +84,15 @@ const useSelectEntityComponentShown: FC<EntityComponentSchemeProps> = ({
             entityType={entityType}
             entityId={entityId}
             size="medium"
-            isALink={false}
+            isALink={true}
+            hasEntityMutationMenu={hasEntityMutationMenu}
+            deleteEntityFunction={getDeleteEntityFunction(
+              entityType,
+              dispatch,
+              entity?.id || entityId,
+              profile?.id as string
+            )}
+            updateEntityFunction={() => navigateToPathname({})}
           />
         );
       } else if (selectedViewOption === "list") {
@@ -81,6 +101,15 @@ const useSelectEntityComponentShown: FC<EntityComponentSchemeProps> = ({
             clicked={clicked}
             entityId={entityId}
             entity={entity}
+            isALink={isALink}
+            hasEntityMutationMenu={hasEntityMutationMenu}
+            deleteEntityFunction={getDeleteEntityFunction(
+              entityType,
+              dispatch,
+              entity?.id || entityId,
+              profile?.id as string
+            )}
+            updateEntityFunction={() => navigateToPathname({})}
           />
         );
       }
@@ -92,8 +121,16 @@ const useSelectEntityComponentShown: FC<EntityComponentSchemeProps> = ({
             entity={entity as UtensilTemplate}
             entityType={entityType}
             entityId={entityId}
-            isALink={false}
+            isALink={true}
             size="medium"
+            hasEntityMutationMenu={hasEntityMutationMenu}
+            deleteEntityFunction={getDeleteEntityFunction(
+              entityType,
+              dispatch,
+              entity?.id || entityId,
+              profile?.id as string
+            )}
+            updateEntityFunction={() => navigateToPathname({})}
           />
         );
       } else if (selectedViewOption === "list") {
@@ -102,6 +139,15 @@ const useSelectEntityComponentShown: FC<EntityComponentSchemeProps> = ({
             clicked={clicked}
             entityId={entityId}
             entity={entity}
+            isALink={isALink}
+            hasEntityMutationMenu={hasEntityMutationMenu}
+            deleteEntityFunction={getDeleteEntityFunction(
+              entityType,
+              dispatch,
+              entity?.id || entityId,
+              profile?.id as string
+            )}
+            updateEntityFunction={() => navigateToPathname({})}
           />
         );
       }
@@ -113,8 +159,16 @@ const useSelectEntityComponentShown: FC<EntityComponentSchemeProps> = ({
             entity={entity as RecipeTemplate}
             entityType={entityType}
             entityId={entityId}
-            isALink={false}
+            isALink={true}
             size="medium"
+            hasEntityMutationMenu={hasEntityMutationMenu}
+            deleteEntityFunction={getDeleteEntityFunction(
+              entityType,
+              dispatch,
+              entity?.id || entityId,
+              profile?.id as string
+            )}
+            updateEntityFunction={() => navigateToPathname({})}
           />
         );
       } else if (selectedViewOption === "list") {
@@ -123,6 +177,15 @@ const useSelectEntityComponentShown: FC<EntityComponentSchemeProps> = ({
             clicked={clicked}
             entityId={entityId}
             entity={entity}
+            isALink={isALink}
+            hasEntityMutationMenu={hasEntityMutationMenu}
+            deleteEntityFunction={getDeleteEntityFunction(
+              entityType,
+              dispatch,
+              entity?.id || entityId,
+              profile?.id as string
+            )}
+            updateEntityFunction={() => navigateToPathname({})}
           />
         );
       }
@@ -134,8 +197,16 @@ const useSelectEntityComponentShown: FC<EntityComponentSchemeProps> = ({
             entity={entity as DayTemplateTemplate}
             entityType={entityType}
             entityId={entityId}
-            isALink={false}
+            isALink={true}
             size="medium"
+            hasEntityMutationMenu={hasEntityMutationMenu}
+            deleteEntityFunction={getDeleteEntityFunction(
+              entityType,
+              dispatch,
+              entity?.id || entityId,
+              profile?.id as string
+            )}
+            updateEntityFunction={() => navigateToPathname({})}
           />
         );
       } else if (selectedViewOption === "list") {
@@ -144,6 +215,15 @@ const useSelectEntityComponentShown: FC<EntityComponentSchemeProps> = ({
             clicked={clicked}
             entityId={entityId}
             entity={entity}
+            isALink={isALink}
+            hasEntityMutationMenu={hasEntityMutationMenu}
+            deleteEntityFunction={getDeleteEntityFunction(
+              entityType,
+              dispatch,
+              entity?.id || entityId,
+              profile?.id as string
+            )}
+            updateEntityFunction={() => navigateToPathname({})}
           />
         );
       }
@@ -155,8 +235,16 @@ const useSelectEntityComponentShown: FC<EntityComponentSchemeProps> = ({
             entity={entity as InstanceTemplateTemplate}
             entityType={entityType}
             entityId={entityId}
-            isALink={false}
+            isALink={true}
             size="medium"
+            hasEntityMutationMenu={hasEntityMutationMenu}
+            deleteEntityFunction={getDeleteEntityFunction(
+              entityType,
+              dispatch,
+              entity?.id || entityId,
+              profile?.id as string
+            )}
+            updateEntityFunction={() => navigateToPathname({})}
           />
         );
       } else if (selectedViewOption === "list") {
@@ -165,6 +253,15 @@ const useSelectEntityComponentShown: FC<EntityComponentSchemeProps> = ({
             clicked={clicked}
             entityId={entityId}
             entity={entity}
+            isALink={isALink}
+            hasEntityMutationMenu={hasEntityMutationMenu}
+            deleteEntityFunction={getDeleteEntityFunction(
+              entityType,
+              dispatch,
+              entity?.id || entityId,
+              profile?.id as string
+            )}
+            updateEntityFunction={() => navigateToPathname({})}
           />
         );
       }
@@ -176,8 +273,16 @@ const useSelectEntityComponentShown: FC<EntityComponentSchemeProps> = ({
             entity={entity as MealPrepPlanTemplate}
             entityType={entityType}
             entityId={entityId}
-            isALink={false}
+            isALink={true}
             size="medium"
+            hasEntityMutationMenu={hasEntityMutationMenu}
+            deleteEntityFunction={getDeleteEntityFunction(
+              entityType,
+              dispatch,
+              entity?.id || entityId,
+              profile?.id as string
+            )}
+            updateEntityFunction={() => navigateToPathname({})}
           />
         );
       } else if (selectedViewOption === "list") {
@@ -186,6 +291,15 @@ const useSelectEntityComponentShown: FC<EntityComponentSchemeProps> = ({
             clicked={clicked}
             entityId={entityId}
             entity={entity}
+            isALink={isALink}
+            hasEntityMutationMenu={hasEntityMutationMenu}
+            deleteEntityFunction={getDeleteEntityFunction(
+              entityType,
+              dispatch,
+              entity?.id || entityId,
+              profile?.id as string
+            )}
+            updateEntityFunction={() => navigateToPathname({})}
           />
         );
       }
@@ -197,8 +311,16 @@ const useSelectEntityComponentShown: FC<EntityComponentSchemeProps> = ({
             entity={entity as MealPrepLogTemplate}
             entityType={entityType}
             entityId={entityId}
-            isALink={false}
+            isALink={true}
             size="medium"
+            hasEntityMutationMenu={hasEntityMutationMenu}
+            deleteEntityFunction={getDeleteEntityFunction(
+              entityType,
+              dispatch,
+              entity?.id || entityId,
+              profile?.id as string
+            )}
+            updateEntityFunction={() => navigateToPathname({})}
           />
         );
       } else if (selectedViewOption === "list") {
@@ -207,6 +329,15 @@ const useSelectEntityComponentShown: FC<EntityComponentSchemeProps> = ({
             clicked={clicked}
             entityId={entityId}
             entity={entity}
+            isALink={isALink}
+            hasEntityMutationMenu={hasEntityMutationMenu}
+            deleteEntityFunction={getDeleteEntityFunction(
+              entityType,
+              dispatch,
+              entity?.id || entityId,
+              profile?.id as string
+            )}
+            updateEntityFunction={() => navigateToPathname({})}
           />
         );
       }
@@ -215,19 +346,6 @@ const useSelectEntityComponentShown: FC<EntityComponentSchemeProps> = ({
       throw new Error("Invalid entity type!");
   }
 
-  if (isALink) {
-    return (
-      <Link
-        href={{
-          pathname: `/${entityType}/[id]` as any,
-          params: { id: entityId || entity?.id },
-        }}
-        className={entityComponentStyles.entityComponentLinkWrapper}
-      >
-        {entityComponentShown}
-      </Link>
-    );
-  }
   return entityComponentShown;
 };
 

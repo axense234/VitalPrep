@@ -77,3 +77,10 @@
     }
   }
 }
+
+.entityComponentWrapper {
+  @include flexCenter(column);
+  position: relative;
+  width: 100%;
+  height: auto;
+}

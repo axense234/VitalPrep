@@ -13,6 +13,7 @@ import {
 } from "@/redux/slices/generalSlice";
 // React
 import { useEffect, useRef, useState } from "react";
+// Translations
 import { useTranslations } from "next-intl";
 
 const EntityTypeMenu = () => {

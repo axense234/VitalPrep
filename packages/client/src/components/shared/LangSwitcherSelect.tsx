@@ -2,31 +2,19 @@
 import langSwitcherStyles from "../../scss/components/shared/LangSwitcher.module.scss";
 // Next
 import Image from "next/image";
-import { useParams } from "next/navigation";
 // Data
 import { langFlagsImages } from "@/data";
-// Navigation
-import { useRouter, usePathname } from "@/navigation";
 // React
-import { ChangeEvent, FC, ReactNode, useTransition } from "react";
+import { FC, ReactNode } from "react";
+// Hooks
+import useNavigateToPathname from "@/hooks/useNavigateToPathname";
 
 const LangSwitcherSelect: FC<{
   defaultValue: string;
   children: ReactNode;
   locale: string;
 }> = ({ defaultValue, children, locale }) => {
-  const router = useRouter();
-  const pathname = usePathname() as any;
-  const params = useParams();
-
-  const [isPending, startTransition] = useTransition();
-
-  const onSelectChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    const nextLocale = event.target.value;
-    startTransition(() => {
-      router.replace({ pathname, params }, { locale: nextLocale });
-    });
-  };
+  const navigateToPathanme = useNavigateToPathname();
 
   return (
     <div className={langSwitcherStyles.langSwitcherContainer}>
@@ -44,8 +32,7 @@ const LangSwitcherSelect: FC<{
           name="langSwitcher"
           id="langSwitcher"
           defaultValue={defaultValue}
-          onChange={onSelectChange}
-          disabled={isPending}
+          onChange={(e) => navigateToPathanme({ forcedLocale: e.target.value })}
         >
           {children}
         </select>

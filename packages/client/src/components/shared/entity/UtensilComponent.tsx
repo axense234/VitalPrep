@@ -18,11 +18,17 @@ import Image from "next/image";
 import useGetWindowWidth from "@/hooks/useGetWindowWidth";
 // Components
 import EntityMutationMenu from "./EntityMutationMenu";
+// Translations
+import { Link } from "@/navigation";
 
 const UtensilComponent: FC<EntityComponentProps> = ({
   clicked,
   entityId,
   entity,
+  hasEntityMutationMenu = true,
+  deleteEntityFunction,
+  updateEntityFunction,
+  isALink,
 }) => {
   const utensilEntity = useAppSelector((state: State) =>
     selectEntityById(state, entityId, "utensil")
@@ -34,16 +40,71 @@ const UtensilComponent: FC<EntityComponentProps> = ({
   let windowWidth = useGetWindowWidth();
   let phoneRedesign = windowWidth && windowWidth <= 600;
 
+  if (isALink) {
+    return (
+      <div
+        className={entityComponentStyles.entityComponentWrapper}
+        ref={utensilContainerRef}
+      >
+        {hasEntityMutationMenu && (
+          <EntityMutationMenu
+            type="entityComponent"
+            parentRef={utensilContainerRef}
+            handleEntityDeletion={deleteEntityFunction}
+            handleEntityModification={updateEntityFunction}
+          />
+        )}
+        <Link
+          href={{
+            pathname: `/utensil/[id]` as any,
+            params: { id: entityId || entity?.id },
+          }}
+          className={entityComponentStyles.entityComponentLinkWrapper}
+        >
+          <div
+            className={entityComponentStyles.entityComponent}
+            style={{ filter: clicked ? "brightness(1)" : "brightness(0.5)" }}
+            ref={utensilContainerRef}
+          >
+            <header className={entityComponentStyles.entityComponentHeader}>
+              <Image
+                alt={`${name} Image`}
+                src={imageUrl || defaultUtensilImageUrl}
+                title={name}
+                aria-label={name}
+                width={80}
+                height={80}
+              />
+              <h6>{name}</h6>
+            </header>
+            <div
+              className={entityComponentStyles.entityComponentDetails}
+              style={{ alignItems: "center" }}
+            >
+              {phoneRedesign ? null : (
+                <p>{enabled ? `ENABLED ✔️` : `DISABLED ❌`}</p>
+              )}
+            </div>
+          </div>
+        </Link>
+      </div>
+    );
+  }
+
   return (
     <div
       className={entityComponentStyles.entityComponent}
       style={{ filter: clicked ? "brightness(1)" : "brightness(0.5)" }}
       ref={utensilContainerRef}
     >
-      <EntityMutationMenu
-        type="entityComponent"
-        parentRef={utensilContainerRef}
-      />
+      {hasEntityMutationMenu && (
+        <EntityMutationMenu
+          type="entityComponent"
+          parentRef={utensilContainerRef}
+          handleEntityDeletion={deleteEntityFunction}
+          handleEntityModification={updateEntityFunction}
+        />
+      )}
       <header className={entityComponentStyles.entityComponentHeader}>
         <Image
           alt={`${name} Image`}

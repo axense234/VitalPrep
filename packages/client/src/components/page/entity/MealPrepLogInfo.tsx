@@ -13,14 +13,29 @@ import {
   getUserMealPrepLog,
   selectLoadingGetUserMealPrepLog,
 } from "@/redux/slices/mealPrepLogsSlice";
+// Types
+import EntityInfoProps from "@/core/interfaces/entity/EntityInfoProps";
+// Components
+import EntityMutationMenu from "@/components/shared/entity/EntityMutationMenu";
+// Hooks
+import useGetHandleOnDeleteEntity from "@/hooks/useGetHandleOnDeleteEntity";
+import useNavigateToPathname from "@/hooks/useNavigateToPathname";
 
-const MealPrepLogInfo: FC<{ entityId: string; userId: string }> = ({
+const MealPrepLogInfo: FC<EntityInfoProps> = ({
   entityId,
   userId,
+  hasEntityMutationMenu = true,
 }) => {
   const dispatch = useAppDispatch();
   const loadingGetUserMealPrepLog = useAppSelector(
     selectLoadingGetUserMealPrepLog
+  );
+
+  const navigateToPathname = useNavigateToPathname();
+  const handleOnDeleteEntity = useGetHandleOnDeleteEntity(
+    "mealPrepLog",
+    entityId,
+    userId
   );
 
   useEffect(() => {
@@ -33,6 +48,13 @@ const MealPrepLogInfo: FC<{ entityId: string; userId: string }> = ({
   return (
     <div className={entityInfoStyles.entityInfoContainer}>
       <PageTitle />
+      {hasEntityMutationMenu && (
+        <EntityMutationMenu
+          type="entityInfo"
+          handleEntityDeletion={handleOnDeleteEntity}
+          handleEntityModification={() => navigateToPathname({})}
+        />
+      )}
       <div className={entityInfoStyles.entityInfoContent}>
         <EntityInfoDetails entityId={entityId} entityType="mealPrepLog" />
         <EntityInfoInstanceTemplate entityId={entityId} />
