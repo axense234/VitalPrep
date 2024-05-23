@@ -86,7 +86,7 @@ const CreateInstanceTemplateInterface = () => {
     templateInstanceTemplate?.coverage as number,
     "dayTemplates",
     updateTemplateInstanceTemplate,
-    templateInstanceTemplate?.dayTemplates as string[]
+    templateInstanceTemplate?.dayTemplates as []
   );
 
   console.log(templateInstanceTemplate.dayTemplates);

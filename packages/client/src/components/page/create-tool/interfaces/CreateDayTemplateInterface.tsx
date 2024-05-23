@@ -86,7 +86,7 @@ const CreateDayTemplateInterface = () => {
     numberOfMeals,
     "recipes",
     updateTemplateDayTemplate,
-    templateDayTemplate?.recipes as string[]
+    templateDayTemplate?.recipes as []
   );
 
   console.log(templateDayTemplate.recipes);
