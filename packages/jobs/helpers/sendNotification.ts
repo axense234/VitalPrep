@@ -32,18 +32,22 @@ const sendNotification = async (
     de: "",
   };
 
-  notificationContents.ro = notificationMessages[typeOfNotification].ro[
-    notificationStyle || "default"
-  ](username, everyHourReminderInterval);
-  notificationContents.en = notificationMessages[typeOfNotification].en[
-    notificationStyle || "default"
-  ](username, everyHourReminderInterval);
-  notificationContents.fr = notificationMessages[typeOfNotification].fr[
-    notificationStyle || "default"
-  ](username, everyHourReminderInterval);
-  notificationContents.de = notificationMessages[typeOfNotification].de[
-    notificationStyle || "default"
-  ](username, everyHourReminderInterval);
+  const generateMessage = (lang: string) => {
+    const messageFunc =
+      notificationMessages[typeOfNotification][lang][
+        notificationStyle || "default"
+      ];
+    if (typeOfNotification === "preSessionReminder") {
+      return messageFunc(username, everyHourReminderInterval);
+    } else {
+      return messageFunc(username);
+    }
+  };
+
+  notificationContents.ro = generateMessage("ro");
+  notificationContents.en = generateMessage("en");
+  notificationContents.fr = generateMessage("fr");
+  notificationContents.de = generateMessage("de");
 
   console.log(userId, username);
 
