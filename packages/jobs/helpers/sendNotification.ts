@@ -23,15 +23,25 @@ const sendNotification = async (
   const notificationContents: {
     en: string;
     ro: string;
+    fr: string;
+    de: string;
   } = {
     en: "",
     ro: "",
+    fr: "",
+    de: "",
   };
 
   notificationContents.ro = notificationMessages[typeOfNotification].ro[
     notificationStyle || "default"
   ](username, everyHourReminderInterval);
   notificationContents.en = notificationMessages[typeOfNotification].en[
+    notificationStyle || "default"
+  ](username, everyHourReminderInterval);
+  notificationContents.fr = notificationMessages[typeOfNotification].fr[
+    notificationStyle || "default"
+  ](username, everyHourReminderInterval);
+  notificationContents.de = notificationMessages[typeOfNotification].de[
     notificationStyle || "default"
   ](username, everyHourReminderInterval);
 

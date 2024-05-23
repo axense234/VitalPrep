@@ -33,6 +33,26 @@ export const notificationMessages = {
       menacing: (username: string) =>
         `${username}, umbrele îți șoptesc numele. O sesiune de pregătire a meselor în avans te așteaptă astăzi... și nu există scăpare. 👁️`,
     },
+    fr: {
+      default: (username: string) =>
+        `${username}, vous avez une séance de préparation de repas à terminer aujourd'hui !`,
+      serious: (username: string) =>
+        `Bonjour ${username}, nous vous rappelons que vous avez une séance de préparation de repas à terminer aujourd'hui !`,
+      motivating: (username: string) =>
+        `Levez-vous ${username}, vous devez terminer votre séance de préparation de repas aujourd'hui, cela va vous aider à l'avenir ! 💪💪`,
+      menacing: (username: string) =>
+        `${username}, les ombres murmurent votre nom. Une séance de préparation de repas vous attend aujourd'hui... et il n'y a pas d'échappatoire. 👁️`,
+    },
+    de: {
+      default: (username: string) =>
+        `${username}, du hast heute eine Mahlzeitenvorbereitungssitzung zu erledigen!`,
+      serious: (username: string) =>
+        `Hallo ${username}, wir erinnern dich daran, dass du heute eine Mahlzeitenvorbereitungssitzung zu erledigen hast!`,
+      motivating: (username: string) =>
+        `Steh auf ${username}, du musst heute deine Mahlzeitenvorbereitungssitzung erledigen, es wird dir in der Zukunft helfen! 💪💪`,
+      menacing: (username: string) =>
+        `${username}, die Schatten flüstern deinen Namen. Eine Mahlzeitenvorbereitungssitzung erwartet dich heute... und es gibt kein Entkommen. 👁️`,
+    },
   },
   preSessionReminder: {
     en: {
@@ -55,6 +75,26 @@ export const notificationMessages = {
       menacing: (username: string, interval: number) =>
         `${username}, ai o sesiune de pregătire a meselor în avans care începe în ${interval} ore. Nu întârzia, sau vei regreta. 😠`,
     },
+    fr: {
+      default: (username: string, interval: number) =>
+        `${username}, vous avez une séance de préparation de repas à commencer dans ${interval} heures !`,
+      serious: (username: string, interval: number) =>
+        `Bonjour ${username}, nous vous rappelons que vous avez une séance de préparation de repas à commencer dans ${interval} heures !`,
+      motivating: (username: string, interval: number) =>
+        `Levez-vous ${username}, vous devez commencer votre séance de préparation de repas dans ${interval} heures, cela va vous aider à l'avenir ! 💪💪`,
+      menacing: (username: string, interval: number) =>
+        `${username}, vous avez une séance de préparation de repas à commencer dans ${interval} heures. Ne soyez pas en retard, ou vous le regretterez. 😠`,
+    },
+    de: {
+      default: (username: string, interval: number) =>
+        `${username}, vous avez une séance de préparation de repas à commencer dans ${interval} heures !`,
+      serious: (username: string, interval: number) =>
+        `Bonjour ${username}, nous vous rappelons que vous avez une séance de préparation de repas à commencer dans ${interval} heures !`,
+      motivating: (username: string, interval: number) =>
+        `Levez-vous ${username}, vous devez commencer votre séance de préparation de repas dans ${interval} heures, cela va vous aider à l'avenir ! 💪💪`,
+      menacing: (username: string, interval: number) =>
+        `${username}, vous avez une séance de préparation de repas à commencer dans ${interval} heures. Ne soyez pas en retard, ou vous le regretterez. 😠`,
+    },
   },
   postSessionReminder: {
     en: {
@@ -76,6 +116,26 @@ export const notificationMessages = {
         `${username}, cred că ai terminat sesiunea ta de pregătire a meselor în avans. Nu vrei să mă dezamăgești, nu-i așa? 😞`,
       menacing: (username: string) =>
         `${username}, ți-ai terminat sesiunea de pregătire a meselor în avans, sau ar trebui să încep să-mi ascuț cuțitele? 😈`,
+    },
+    fr: {
+      default: (username: string) =>
+        `${username}, avez-vous terminé votre séance de préparation de repas ?`,
+      serious: (username: string) =>
+        `Bonjour ${username}, nous voulons juste vous rappeler l'état de votre séance de préparation de repas. Nous espérons que vous l'avez terminée.`,
+      motivating: (username: string) =>
+        `${username}, je crois que vous avez terminé votre séance de préparation de repas. Vous ne voulez pas me décevoir, n'est-ce pas ? 😞`,
+      menacing: (username: string) =>
+        `${username}, avez-vous terminé votre séance de préparation de repas, ou devrais-je commencer à aiguiser mes couteaux ? 😈`,
+    },
+    de: {
+      default: (username: string) =>
+        `${username}, hast du deine Mahlzeitenvorbereitung abgeschlossen?`,
+      serious: (username: string) =>
+        `Hallo ${username}, wir möchten dich nur an den Status deiner Mahlzeitenvorbereitung erinnern. Wir hoffen, dass du sie abgeschlossen hast.`,
+      motivating: (username: string) =>
+        `${username}, ich glaube, du hast deine Mahlzeitenvorbereitung abgeschlossen. Du willst mich doch nicht enttäuschen, oder? 😞`,
+      menacing: (username: string) =>
+        `${username}, hast du deine Mahlzeitenvorbereitung abgeschlossen, oder soll ich anfangen, meine Messer zu schärfen? 😈`,
     },
   },
 };
