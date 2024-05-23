@@ -32,13 +32,10 @@ const handleDayOfTheWeekReminders = async () => {
         userMealPrepPlan.instanceTemplatesTimings;
 
       mealPrepPlanInstanceTemplatesTimings.forEach(async (timing) => {
-        const currentDayOfTheWeekIndex = new Date().getUTCDay();
+        const currentDayOfTheWeekIndex = new Date().getDay();
         const currentDayOfTheWeekString = days[currentDayOfTheWeekIndex];
 
-        const timingWeekdayIndex = days.indexOf(timing.weekday);
-        const timingWeekdayIndexUTC = (timingWeekdayIndex + 1) % 7;
-
-        if (currentDayOfTheWeekString === days[timingWeekdayIndexUTC]) {
+        if (currentDayOfTheWeekString === timing.weekday) {
           await sendNotification(
             user.id,
             user.username,

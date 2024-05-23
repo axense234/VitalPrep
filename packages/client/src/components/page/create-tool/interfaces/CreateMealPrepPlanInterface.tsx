@@ -9,7 +9,7 @@ import SelectFormControl from "@/components/shared/form/SelectFormControl";
 import WeekdayFormControl from "@/components/shared/form/WeekdayFormControl";
 import EntityPreview from "@/components/shared/entity/EntityPreview";
 // React
-import React, { ChangeEvent } from "react";
+import React, { ChangeEvent, useEffect } from "react";
 // Data
 import { defaultMealPrepPlanImageUrl } from "@/data";
 // Redux
@@ -104,7 +104,7 @@ const CreateMealPrepPlanInterface = () => {
     templateMealPrepPlan?.instanceTemplatesTimings as []
   );
 
-  console.log(templateMealPrepPlan.instanceTemplatesTimings);
+  console.log(templateMealPrepPlan.instanceTemplatesTimings, "here");
   console.log(templateMealPrepPlan?.instanceTemplates as string[]);
 
   return (

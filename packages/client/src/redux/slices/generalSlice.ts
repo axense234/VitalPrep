@@ -26,6 +26,7 @@ import EntityType from "@/core/types/entity/users/EntityType";
 import EntitiesType from "@/core/types/entity/EntitiesType";
 import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
 import { KeyObjectType } from "crypto";
+import { logoutOneSignal } from "@/helpers/initializeOneSignal";
 
 type ObjectKeyValueType = {
   key: string;
@@ -148,6 +149,7 @@ export const logoutUser = createAsyncThunk("general/logoutUser", async () => {
     await axiosInstance.post(`/users/signout/${userId}`).then(() => {
       localStorage.removeItem("userId");
     });
+    logoutOneSignal();
     await signOut({
       redirect: true,
       callbackUrl: `${process.env.NEXT_PUBLIC_PRODUCTION_CLIENT_SITE_URL}/`,

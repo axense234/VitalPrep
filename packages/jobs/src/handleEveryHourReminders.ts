@@ -29,25 +29,15 @@ const handleEveryHourReminders = async () => {
         userMealPrepPlan.instanceTemplatesTimings;
 
       mealPrepPlanInstanceTemplatesTimings.forEach(async (timing) => {
-        const currentDayOfTheWeekIndex = new Date().getUTCDay();
+        const currentDayOfTheWeekIndex = new Date().getDay();
         const currentDayOfTheWeekString = days[currentDayOfTheWeekIndex];
 
-        const timingWeekdayIndex = days.indexOf(timing.weekday);
-        const timingWeekdayIndexUTC = (timingWeekdayIndex + 1) % 7;
-
-        if (currentDayOfTheWeekString === days[timingWeekdayIndexUTC]) {
-          const currentHourUTC = new Date().getUTCHours();
-          const timingHourLocal = Number(
-            timing.sessionStartingTime.slice(0, 2)
-          );
-
-          const localDate = new Date();
-          localDate.setHours(timingHourLocal, 0, 0, 0);
-
-          const timingHourUTC = localDate.getUTCHours();
+        if (currentDayOfTheWeekString === timing.weekday) {
+          const currentHour = new Date().getHours();
+          const timingHour = Number(timing.sessionStartingTime.slice(0, 2));
 
           if (
-            currentHourUTC === timingHourUTC - everyHourReminderInterval &&
+            currentHour === timingHour - everyHourReminderInterval &&
             userNotificationSettings.allowPreSessionReminderNotifications
           ) {
             await sendNotification(
@@ -57,10 +47,7 @@ const handleEveryHourReminders = async () => {
               userNotificationSettings.notificationImageUrl,
               userNotificationSettings.notificationStyle
             );
-          } else if (
-            currentHourUTC ===
-            timingHourUTC + everyHourReminderInterval
-          ) {
+          } else if (currentHour === timingHour + everyHourReminderInterval) {
             if (userNotificationSettings.allowAutomaticCreationOfLogs) {
               await createSessionLog(
                 user.id,
