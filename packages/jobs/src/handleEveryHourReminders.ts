@@ -19,7 +19,6 @@ const handleEveryHourReminders = async () => {
 
   usersWithMealPrepPlansInUse.forEach(async (user) => {
     const userNotificationSettings = user.notificationSettings;
-    console.log(userNotificationSettings);
     if (userNotificationSettings.allowedNotifications) {
       const userMealPrepPlan = await getUserMealPrepPlan(
         user.id,
@@ -43,18 +42,18 @@ const handleEveryHourReminders = async () => {
           usedTimingWeekday = days[weekdayTimingIndexInDays + 1];
         }
 
-        console.log(timing);
+        console.log(currentDayOfTheWeekString, usedTimingWeekday);
 
         if (currentDayOfTheWeekString === usedTimingWeekday) {
           const currentHour = new Date().getUTCHours();
           const timingHour = Number(timing.sessionStartingTime.slice(0, 2));
 
           let newPreTimingHour =
-            timingHour -
+            timingHour +
             timing.timezoneOffsetInHours -
             everyHourReminderInterval;
           let newPostTimingHour =
-            timingHour -
+            timingHour +
             timing.timezoneOffsetInHours +
             everyHourReminderInterval;
 
@@ -68,6 +67,8 @@ const handleEveryHourReminders = async () => {
           } else if (newPostTimingHour >= 24) {
             newPostTimingHour -= 24;
           }
+
+          console.log(currentHour, newPreTimingHour, newPostTimingHour);
 
           if (
             currentHour === newPreTimingHour &&
