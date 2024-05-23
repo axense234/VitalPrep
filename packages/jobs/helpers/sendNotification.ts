@@ -34,7 +34,7 @@ const sendNotification = async (
 
   const generateMessage = (lang: string) => {
     const messageFunc =
-      notificationMessages[typeOfNotification][lang][
+      notificationMessages[typeOfNotification]?.[lang]?.[
         notificationStyle || "default"
       ];
     if (typeOfNotification === "preSessionReminder") {
