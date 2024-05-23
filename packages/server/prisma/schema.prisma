@@ -88,11 +88,12 @@ model MealPrepPlan {
 }
 
 model MealPrepPlanTiming {
-  id                  String        @id @default(uuid())
-  weekday             String
-  sessionStartingTime String        @default("12:00")
-  mealPrepPlan        MealPrepPlan? @relation(fields: [mealPrepPlanId], references: [id])
-  mealPrepPlanId      String?
+  id                    String        @id @default(uuid())
+  weekday               String
+  sessionStartingTime   String        @default("12:00")
+  timezoneOffsetInHours Float         @default(0)
+  mealPrepPlan          MealPrepPlan? @relation(fields: [mealPrepPlanId], references: [id])
+  mealPrepPlanId        String?
 }
 
 model InstanceTemplate {

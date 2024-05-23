@@ -9,8 +9,6 @@ import {
 } from "@/redux/slices/generalSlice";
 import { createMealPrepPlan } from "@/redux/slices/mealPrepPlansSlice";
 import { ThunkDispatch, UnknownAction } from "@reduxjs/toolkit";
-import convertLocalToUTCWeekday from "./convertLocalToUTCWeekday";
-import { weekdayFormControlContent } from "@/data";
 
 const handleOnCreateMealPrepPlanSubmit = (
   e: React.SyntheticEvent,
@@ -33,22 +31,18 @@ const handleOnCreateMealPrepPlanSubmit = (
     numberOfInstanceTemplates ===
     templateMealPrepPlan.instanceTemplatesTimings.length
   ) {
+    const updatedInstanceTemplatesTimings =
+      templateMealPrepPlan.instanceTemplatesTimings.map((timing) => {
+        return {
+          ...timing,
+          timezoneOffsetInHours: new Date().getTimezoneOffset() / 60,
+        };
+      });
     dispatch(
       createMealPrepPlan({
         templateMealPrepPlan: {
           ...templateMealPrepPlan,
-          instanceTemplatesTimings:
-            templateMealPrepPlan.instanceTemplatesTimings.map((timing) => {
-              return {
-                ...timing,
-                weekday:
-                  convertLocalToUTCWeekday(
-                    (weekdayFormControlContent.find(
-                      (content) => content.titleContent === timing.weekday
-                    )?.id as number) || 0
-                  ) || timing.weekday,
-              };
-            }),
+          instanceTemplatesTimings: updatedInstanceTemplatesTimings,
         },
         userId: profileId,
       })
