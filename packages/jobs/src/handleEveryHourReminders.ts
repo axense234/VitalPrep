@@ -29,15 +29,48 @@ const handleEveryHourReminders = async () => {
         userMealPrepPlan.instanceTemplatesTimings;
 
       mealPrepPlanInstanceTemplatesTimings.forEach(async (timing) => {
-        const currentDayOfTheWeekIndex = new Date().getDay();
+        const currentDayOfTheWeekIndex = new Date().getUTCDay();
         const currentDayOfTheWeekString = days[currentDayOfTheWeekIndex];
 
-        if (currentDayOfTheWeekString === timing.weekday) {
-          const currentHour = new Date().getHours();
+        let usedTimingWeekday = timing.weekday;
+        const weekdayTimingIndexInDays = days.indexOf(timing.weekday);
+
+        const timingHour = Number(timing.sessionStartingTime.slice(0, 2));
+        const newHour = timingHour + timing.timezoneOffsetInHours;
+        if (newHour < 0) {
+          usedTimingWeekday = days[weekdayTimingIndexInDays - 1];
+        } else if (newHour >= 24) {
+          usedTimingWeekday = days[weekdayTimingIndexInDays + 1];
+        }
+
+        console.log(timing);
+
+        if (currentDayOfTheWeekString === usedTimingWeekday) {
+          const currentHour = new Date().getUTCHours();
           const timingHour = Number(timing.sessionStartingTime.slice(0, 2));
 
+          let newPreTimingHour =
+            timingHour -
+            timing.timezoneOffsetInHours -
+            everyHourReminderInterval;
+          let newPostTimingHour =
+            timingHour -
+            timing.timezoneOffsetInHours +
+            everyHourReminderInterval;
+
+          if (newPreTimingHour < 0) {
+            newPreTimingHour += 24;
+          } else if (newPreTimingHour >= 24) {
+            newPreTimingHour -= 24;
+          }
+          if (newPostTimingHour < 0) {
+            newPostTimingHour += 24;
+          } else if (newPostTimingHour >= 24) {
+            newPostTimingHour -= 24;
+          }
+
           if (
-            currentHour === timingHour - everyHourReminderInterval &&
+            currentHour === newPreTimingHour &&
             userNotificationSettings.allowPreSessionReminderNotifications
           ) {
             await sendNotification(
@@ -47,7 +80,7 @@ const handleEveryHourReminders = async () => {
               userNotificationSettings.notificationImageUrl,
               userNotificationSettings.notificationStyle
             );
-          } else if (currentHour === timingHour + everyHourReminderInterval) {
+          } else if (currentHour === newPostTimingHour) {
             if (userNotificationSettings.allowAutomaticCreationOfLogs) {
               await createSessionLog(
                 user.id,
