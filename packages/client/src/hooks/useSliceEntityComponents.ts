@@ -9,9 +9,9 @@ import { UnknownAction } from "@reduxjs/toolkit";
 
 const useSliceEntityComponents = (
   sliceTopDelimiter: number,
-  componentEntityType: EntitiesType,
+  componentEntityType: EntitiesType | "instanceTemplatesTimings",
   updateTemplateEntityReducer: (payload: ObjectKeyValueType) => UnknownAction,
-  entityComponentsToBeSliced: string[]
+  entityComponentsToBeSliced: []
 ) => {
   const dispatch = useAppDispatch();
   useEffect(() => {

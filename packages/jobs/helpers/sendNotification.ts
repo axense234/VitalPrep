@@ -1,6 +1,9 @@
+// Notifications
 import * as OneSignal from "onesignal-node";
+// Data
 import {
   defaultNotificationImageUrl,
+  defaultNotificationLogoUrl,
   everyHourReminderInterval,
   notificationMessages,
 } from "../data/data";
@@ -54,7 +57,7 @@ const sendNotification = async (
   await oneSignalClient.createNotification({
     contents: notificationContents,
     include_external_user_ids: [userId],
-    chrome_web_image: notificationImageUrl || defaultNotificationImageUrl,
+    chrome_web_image: notificationImageUrl || defaultNotificationLogoUrl,
     chrome_web_icon: defaultNotificationImageUrl,
   });
 };

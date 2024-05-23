@@ -95,10 +95,17 @@ const CreateMealPrepPlanInterface = () => {
     numberOfInstanceTemplates,
     "instanceTemplates",
     updateTemplateMealPrepPlan,
-    templateMealPrepPlan?.instanceTemplates as string[]
+    templateMealPrepPlan?.instanceTemplates as []
+  );
+  useSliceEntityComponents(
+    numberOfInstanceTemplates,
+    "instanceTemplatesTimings",
+    updateTemplateMealPrepPlan,
+    templateMealPrepPlan?.instanceTemplatesTimings as []
   );
 
   console.log(templateMealPrepPlan.instanceTemplatesTimings);
+  console.log(templateMealPrepPlan?.instanceTemplates as string[]);
 
   return (
     <section className={createToolStyles.createInterface}>

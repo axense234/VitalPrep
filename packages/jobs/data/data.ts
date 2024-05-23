@@ -11,6 +11,9 @@ export const days = [
 export const defaultNotificationImageUrl =
   "https://res.cloudinary.com/birthdayreminder/image/upload/v1716209021/VitalPrep/brandmark-design-256x256_zdzu6z.png";
 
+export const defaultNotificationLogoUrl =
+  "https://res.cloudinary.com/birthdayreminder/image/upload/v1716216034/VitalPrep/users/bqn3p4nbpbqgyxj6f02q.jpg";
+
 export const notificationMessages = {
   dayReminder: {
     en: {
