@@ -1,18 +1,14 @@
 // Next
-import { useRouter } from "@/navigation";
-// Redux
-import { useAppSelector } from "./redux";
-import {
-  selectLocale,
-  selectParams,
-  selectPathname,
-} from "@/redux/slices/generalSlice";
+import { usePathname, useRouter } from "@/navigation";
+import { useParams } from "next/navigation";
+// Translations
+import { useLocale } from "next-intl";
 
 const useNavigateToPathname = () => {
   const router = useRouter();
-  const pathname = useAppSelector(selectPathname);
-  const params = useAppSelector(selectParams);
-  const locale = useAppSelector(selectLocale);
+  const pathname = usePathname();
+  const params = useParams();
+  const locale = useLocale();
 
   return ({
     forcedPathname,

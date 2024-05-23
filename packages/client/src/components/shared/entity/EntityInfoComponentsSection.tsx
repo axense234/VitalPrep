@@ -57,7 +57,7 @@ const EntityInfoComponentsSection: FC<EntityInfoComponentsShownProps> = ({
                   entityComponent.id as string,
                   entityComponent.userId as string
                 )}
-                updateEntityFunction={() => navigateToPathname()}
+                updateEntityFunction={() => navigateToPathname({})}
               />
             </li>
           );

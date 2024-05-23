@@ -11,16 +11,29 @@ import { useTranslations } from "next-intl";
 // Redux
 import { useAppDispatch } from "@/hooks/redux";
 import { updateWarningOverlay } from "@/redux/slices/generalSlice";
+// Types
+import EntityType from "@/core/types/entity/users/EntityType";
 
 const EntityMutationMenuEntityInfo: FC<{
   handleEntityDeletion: any;
   handleEntityModification: any;
-}> = ({ handleEntityDeletion, handleEntityModification }) => {
+  entityType?: EntityType;
+  entityName?: string;
+}> = ({
+  handleEntityDeletion,
+  handleEntityModification,
+  entityName,
+  entityType,
+}) => {
   const dispatch = useAppDispatch();
   const entityMutationMenuRef = useRef<HTMLDivElement | null>(null);
   const [showMenu, setShowMenu] = useState<boolean>(false);
 
-  const translate = useTranslations("entityMutation.entityMenu");
+  const translateMenu = useTranslations("entityMutation.entityMenu");
+  const translateOverlayMessage = useTranslations("warningOverlay.messages");
+  const translateEntityLabels = useTranslations(
+    "entityPreview.entityDetails.entityLabels"
+  );
 
   useEffect(() => {
     const menu = entityMutationMenuRef.current as HTMLDivElement;
@@ -39,8 +52,8 @@ const EntityMutationMenuEntityInfo: FC<{
         onClick={() => setShowMenu(true)}
       >
         <BsThreeDotsVertical
-          title={translate("openMenuTitle")}
-          aria-label={translate("openMenuTitle")}
+          title={translateMenu("openMenuTitle")}
+          aria-label={translateMenu("openMenuTitle")}
         />
       </div>
       <div
@@ -49,27 +62,33 @@ const EntityMutationMenuEntityInfo: FC<{
       >
         <AiFillCloseSquare
           onClick={() => setShowMenu(false)}
-          title={translate("closeMenuTitle")}
-          aria-label={translate("closeMenuTitle")}
+          title={translateMenu("closeMenuTitle")}
+          aria-label={translateMenu("closeMenuTitle")}
         />
         <div className={entityMutationMenuStyles.entityMutationMenuInfoOptions}>
           <MdDelete
-            title={translate("deleteEntityTitle")}
-            aria-label={translate("deleteEntityTitle")}
+            title={translateMenu("deleteEntityTitle")}
+            aria-label={translateMenu("deleteEntityTitle")}
             onClick={() =>
               dispatch(
                 updateWarningOverlay({
-                  overlayMessage:
-                    "Are you really sure you want to permanently delete this entity?",
+                  overlayMessage: translateOverlayMessage(
+                    "deleteEntityMessage",
+                    {
+                      entityName,
+                      entityType: translateEntityLabels(entityType),
+                    }
+                  ),
                   onConfirmFunction: handleEntityDeletion,
                   showOverlay: true,
+                  countdownSeconds: 10,
                 })
               )
             }
           />
           <MdEdit
-            title={translate("updateEntityTitle")}
-            aria-label={translate("updateEntityTitle")}
+            title={translateMenu("updateEntityTitle")}
+            aria-label={translateMenu("updateEntityTitle")}
             onClick={handleEntityModification}
           />
         </div>

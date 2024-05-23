@@ -52,6 +52,8 @@ const InstanceTemplateComponent: FC<EntityComponentProps> = ({
             parentRef={instanceTemplateContainerRef}
             handleEntityDeletion={deleteEntityFunction}
             handleEntityModification={updateEntityFunction}
+            entityName={instanceTemplateShown.name}
+            entityType="instanceTemplate"
           />
         )}
         <Link
@@ -106,6 +108,8 @@ const InstanceTemplateComponent: FC<EntityComponentProps> = ({
           parentRef={instanceTemplateContainerRef}
           handleEntityDeletion={deleteEntityFunction}
           handleEntityModification={updateEntityFunction}
+          entityName={instanceTemplateShown.name}
+          entityType="instanceTemplate"
         />
       )}
       <header className={entityComponentStyles.entityComponentHeader}>

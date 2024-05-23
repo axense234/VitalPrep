@@ -18,6 +18,8 @@ import EntityInfoProps from "@/core/interfaces/entity/EntityInfoProps";
 // Hooks
 import useNavigateToPathname from "@/hooks/useNavigateToPathname";
 import useGetHandleOnDeleteEntity from "@/hooks/useGetHandleOnDeleteEntity";
+// Translations
+import { useTranslations } from "next-intl";
 
 const IngredientInfo: FC<EntityInfoProps> = ({
   entityId,
@@ -36,6 +38,8 @@ const IngredientInfo: FC<EntityInfoProps> = ({
     userId
   );
 
+  const translate = useTranslations("warningOverlay.pageInfo");
+
   useEffect(() => {
     if (loadingGetUserIngredient === "IDLE" && userId && entityId) {
       dispatch(getUserIngredient({ userId, ingredientId: entityId }));
@@ -50,6 +54,8 @@ const IngredientInfo: FC<EntityInfoProps> = ({
           type="entityInfo"
           handleEntityDeletion={handleOnDeleteEntity}
           handleEntityModification={() => navigateToPathname({})}
+          entityType="ingredient"
+          entityName={translate("ingredient")}
         />
       )}
       <div className={entityInfoStyles.entityInfoContent}>

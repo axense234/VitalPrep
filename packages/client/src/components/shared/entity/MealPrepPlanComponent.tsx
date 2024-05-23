@@ -52,6 +52,8 @@ const MealPrepPlanComponent: FC<EntityComponentProps> = ({
             parentRef={mealPrepPlanContainerRef}
             handleEntityDeletion={deleteEntityFunction}
             handleEntityModification={updateEntityFunction}
+            entityName={mealPrepPlanEntityShown.name}
+            entityType="mealPrepPlan"
           />
         )}
         <Link
@@ -66,14 +68,6 @@ const MealPrepPlanComponent: FC<EntityComponentProps> = ({
             style={{ filter: clicked ? "brightness(1)" : "brightness(0.5)" }}
             ref={mealPrepPlanContainerRef}
           >
-            {hasEntityMutationMenu && (
-              <EntityMutationMenu
-                type="entityComponent"
-                parentRef={mealPrepPlanContainerRef}
-                handleEntityDeletion={deleteEntityFunction}
-                handleEntityModification={updateEntityFunction}
-              />
-            )}
             <header className={entityComponentStyles.entityComponentHeader}>
               <Image
                 alt={`${name} Image`}
@@ -116,6 +110,8 @@ const MealPrepPlanComponent: FC<EntityComponentProps> = ({
           parentRef={mealPrepPlanContainerRef}
           handleEntityDeletion={deleteEntityFunction}
           handleEntityModification={updateEntityFunction}
+          entityName={mealPrepPlanEntityShown.name}
+          entityType="mealPrepPlan"
         />
       )}
       <header className={entityComponentStyles.entityComponentHeader}>

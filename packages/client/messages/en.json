@@ -1021,7 +1021,35 @@
     "locale": "Change language to {locale}",
     "values": {
       "ro": "Romanian",
-      "en": "English"
+      "en": "English",
+      "fr": "French",
+      "de": "German"
+    }
+  },
+  "warningOverlay": {
+    "pageInfo": {
+      "ingredient": "Page Ingredient",
+      "utensil": "Page Utensil",
+      "recipe": "Page Recipe",
+      "dayTemplate": "Page Day Plan",
+      "instanceTemplate": "Page Session Template",
+      "mealPrepPlan": "Page Meal Prep Plan",
+      "mealPrepLog": "Page Session Log"
+    },
+    "buttons": {
+      "titles": {
+        "no": "Go Back",
+        "yes": "Accept"
+      },
+      "content": {
+        "no": "No",
+        "yes": "Yes"
+      }
+    },
+    "messages": {
+      "deleteEntityMessage": "Are you really sure you want to permanently delete the following {entityType}: {entityName}?",
+      "saveAccountSettingsMessage": "Are you sure you want to save your account settings?",
+      "saveNotificationSettingsMessage": "Are you sure you want to save your notification settings?"
     }
   }
 }

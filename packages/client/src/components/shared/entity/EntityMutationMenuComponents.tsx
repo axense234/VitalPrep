@@ -9,21 +9,35 @@ import { MdDelete, MdEdit } from "react-icons/md";
 import { VscTriangleDown } from "react-icons/vsc";
 // Redux
 import { useAppDispatch } from "@/hooks/redux";
+import { updateWarningOverlay } from "@/redux/slices/generalSlice";
 // Translations
 import { useTranslations } from "next-intl";
-import { updateWarningOverlay } from "@/redux/slices/generalSlice";
+// Types
+import EntityType from "@/core/types/entity/users/EntityType";
 
 const EntityMutationMenuComponents: FC<{
   parentRef: MutableRefObject<HTMLDivElement | null>;
   handleEntityDeletion: any;
   handleEntityModification: any;
-}> = ({ parentRef, handleEntityDeletion, handleEntityModification }) => {
+  entityType?: EntityType;
+  entityName?: string;
+}> = ({
+  parentRef,
+  handleEntityDeletion,
+  handleEntityModification,
+  entityName,
+  entityType,
+}) => {
   const dispatch = useAppDispatch();
   const entityMutationMenuRef = useRef<HTMLDivElement | null>(null);
   const [showMenu, setShowMenu] = useState<boolean>(false);
   useModalTransition(showMenu, entityMutationMenuRef);
 
-  const translate = useTranslations("entityMutation.entityMenu");
+  const translateMenu = useTranslations("entityMutation.entityMenu");
+  const translateOverlayMessage = useTranslations("warningOverlay.messages");
+  const translateEntityLabels = useTranslations(
+    "entityPreview.entityDetails.entityLabels"
+  );
 
   useEffect(() => {
     if (parentRef && parentRef.current) {
@@ -38,22 +52,25 @@ const EntityMutationMenuComponents: FC<{
     >
       <div className={entityMutationMenuStyles.entityMutationMenuOptions}>
         <MdDelete
-          title={translate("deleteEntityTitle")}
-          aria-label={translate("deleteEntityTitle")}
+          title={translateMenu("deleteEntityTitle")}
+          aria-label={translateMenu("deleteEntityTitle")}
           onClick={() =>
             dispatch(
               updateWarningOverlay({
-                overlayMessage:
-                  "Are you really sure you want to permanently delete this entity?",
+                overlayMessage: translateOverlayMessage("deleteEntityMessage", {
+                  entityName,
+                  entityType: translateEntityLabels(entityType),
+                }),
                 onConfirmFunction: handleEntityDeletion,
                 showOverlay: true,
+                countdownSeconds: 1,
               })
             )
           }
         />
         <MdEdit
-          title={translate("updateEntityTitle")}
-          aria-label={translate("updateEntityTitle")}
+          title={translateMenu("updateEntityTitle")}
+          aria-label={translateMenu("updateEntityTitle")}
           onClick={handleEntityModification}
         />
       </div>

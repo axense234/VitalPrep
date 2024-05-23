@@ -54,6 +54,8 @@ const IngredientComponent: FC<EntityComponentProps> = ({
             parentRef={ingredientContainerRef}
             handleEntityDeletion={deleteEntityFunction}
             handleEntityModification={updateEntityFunction}
+            entityName={ingredientEntityShown.name}
+            entityType="ingredient"
           />
         )}
         <Link
@@ -110,6 +112,8 @@ const IngredientComponent: FC<EntityComponentProps> = ({
           parentRef={ingredientContainerRef}
           handleEntityDeletion={deleteEntityFunction}
           handleEntityModification={updateEntityFunction}
+          entityName={ingredientEntityShown.name}
+          entityType="ingredient"
         />
       )}
       <header className={entityComponentStyles.entityComponentHeader}>

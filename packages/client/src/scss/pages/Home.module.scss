@@ -127,6 +127,8 @@
   h1 {
     @include heading("h1", "laptop", "black");
     width: 100%;
+    word-break: break-word;
+    overflow-wrap: break-word;
 
     @media screen and (max-width: 1650px) {
       @include heading("h1", "tablet", "black");

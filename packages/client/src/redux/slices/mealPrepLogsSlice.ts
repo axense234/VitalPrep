@@ -60,6 +60,7 @@ export const getAllUserMealPrepLogs = createAsyncThunk<
         entityQueryValues;
       const { data } = await axiosInstance.get(`/mealPrepLogs`, {
         params: {
+          userMealPrepLogs: true,
           userId,
           searchByKey,
           searchByValue,

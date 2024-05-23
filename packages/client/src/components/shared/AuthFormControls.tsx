@@ -26,7 +26,9 @@ import {
 import { defaultProfileImageUrl } from "@/data";
 // Hooks
 import useUpdateEntityTemplateImageUrl from "@/hooks/useUpdateEntityTemplateImageUrl";
-import { useTranslations } from "use-intl";
+// Translations
+import { useTranslations } from "next-intl";
+import { useLocale } from "next-intl";
 
 const AuthFormControls: FC<AuthFormControlsProps> = ({ type }) => {
   const dispatch = useAppDispatch();
@@ -35,6 +37,8 @@ const AuthFormControls: FC<AuthFormControlsProps> = ({ type }) => {
   const translate = useTranslations(`${type}.formLabels`);
 
   const isUserABot = useAppSelector(selectIsUserABot);
+
+  const locale = useLocale();
 
   const loadingCreateProfile = useAppSelector(selectLoadingCreateProfile);
   const loadingLoginProfile = useAppSelector(selectLoadingLoginProfile);
@@ -122,7 +126,7 @@ const AuthFormControls: FC<AuthFormControlsProps> = ({ type }) => {
           }
           onClickFunction={(e) => {
             e.preventDefault();
-            dispatch(signupUser(templateProfile));
+            dispatch(signupUser({ userTemplate: templateProfile, locale }));
           }}
         />
       </form>

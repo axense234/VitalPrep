@@ -52,6 +52,8 @@ const UtensilComponent: FC<EntityComponentProps> = ({
             parentRef={utensilContainerRef}
             handleEntityDeletion={deleteEntityFunction}
             handleEntityModification={updateEntityFunction}
+            entityName={utensilEntityShown.name}
+            entityType="utensil"
           />
         )}
         <Link
@@ -103,6 +105,8 @@ const UtensilComponent: FC<EntityComponentProps> = ({
           parentRef={utensilContainerRef}
           handleEntityDeletion={deleteEntityFunction}
           handleEntityModification={updateEntityFunction}
+          entityName={utensilEntityShown.name}
+          entityType="utensil"
         />
       )}
       <header className={entityComponentStyles.entityComponentHeader}>

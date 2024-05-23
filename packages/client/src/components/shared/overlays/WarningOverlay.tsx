@@ -8,15 +8,24 @@ import {
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 // Hooks
 import useOverlayTransition from "@/hooks/useOverlayTransition";
+import useCountdown from "@/hooks/useCountdown";
 // React
-import { useRef } from "react";
+import { FC, useRef } from "react";
+// Translations
+import { useTranslations } from "next-intl";
 
 const WarningOverlay = () => {
   const dispatch = useAppDispatch();
   const warningOverlayRef = useRef<HTMLDivElement | null>(null);
   const warningOverlay = useAppSelector(selectWarningOverlay);
 
+  const translateOverlay = useTranslations("warningOverlay");
+
   useOverlayTransition(warningOverlay.showOverlay, warningOverlayRef);
+  const countdown = useCountdown(
+    warningOverlay.countdownSeconds,
+    warningOverlay.showOverlay
+  );
 
   return (
     <div
@@ -33,8 +42,10 @@ const WarningOverlay = () => {
                 updateWarningOverlay({ ...warningOverlay, showOverlay: false })
               )
             }
+            title={translateOverlay("buttons.titles.no")}
+            aria-label={translateOverlay("buttons.titles.no")}
           >
-            No
+            {translateOverlay("buttons.content.no")}
           </button>
           <button
             onClick={() => {
@@ -43,8 +54,16 @@ const WarningOverlay = () => {
               );
               warningOverlay.onConfirmFunction();
             }}
+            disabled={countdown > 0}
+            style={{
+              filter: countdown > 0 ? "brigthness(0.1)" : "brightness(1)",
+            }}
+            title={translateOverlay("buttons.titles.yes")}
+            aria-label={translateOverlay("buttons.titles.yes")}
           >
-            Yes
+            {countdown <= 0
+              ? translateOverlay("buttons.content.yes")
+              : countdown}
           </button>
         </div>
       </div>

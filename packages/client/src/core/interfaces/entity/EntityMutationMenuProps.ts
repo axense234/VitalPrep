@@ -1,3 +1,4 @@
+import EntityType from "@/core/types/entity/users/EntityType";
 import { MutableRefObject } from "react";
 
 interface EntityMutationMenuProps {
@@ -5,6 +6,8 @@ interface EntityMutationMenuProps {
   parentRef?: MutableRefObject<HTMLDivElement | null>;
   handleEntityDeletion: any;
   handleEntityModification: any;
+  entityType?: EntityType;
+  entityName?: string;
 }
 
 export default EntityMutationMenuProps;

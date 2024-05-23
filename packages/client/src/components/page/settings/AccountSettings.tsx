@@ -1,5 +1,5 @@
 // React
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 // SCSS
 import accountSettingsStyles from "@/scss/pages/Settings.module.scss";
 // Components
@@ -23,6 +23,7 @@ import {
   updateTemplateProfile,
   changeVerifiedPassword,
   createCloudinaryImage,
+  updateWarningOverlay,
 } from "@/redux/slices/generalSlice";
 // Hooks and Helpers
 import useUpdateEntityTemplateImageUrl from "@/hooks/useUpdateEntityTemplateImageUrl";
@@ -39,7 +40,10 @@ const AccountSettings = () => {
   const loadingCloudinaryImage = useAppSelector(selectLoadingCloudinaryImage);
   const loadingUpdateProfile = useAppSelector(selectLoadingUpdateProfile);
 
-  const translate = useTranslations("settings.accountSettings");
+  const translateAccountSettings = useTranslations("settings.accountSettings");
+  const translateWarningOverlayMessages = useTranslations(
+    "warningOverlay.messages"
+  );
 
   useSetTemplateProfile(profile);
   useUpdateEntityTemplateImageUrl(updateTemplateProfile);
@@ -47,11 +51,11 @@ const AccountSettings = () => {
   return (
     <section className={accountSettingsStyles.accountSettingsContainer}>
       <PopupModal hasBorder={false} modalType="form" />
-      <h4>{translate("title")}</h4>
+      <h4>{translateAccountSettings("title")}</h4>
       <form className={accountSettingsStyles.accountSettingsForm}>
         <TextFormControl
           type="text"
-          labelContent={translate("formLabels.name")}
+          labelContent={translateAccountSettings("formLabels.name")}
           entityProperty={templateProfile.username as string}
           onEntityPropertyValueChange={(e) =>
             dispatch(
@@ -63,7 +67,7 @@ const AccountSettings = () => {
         />
         <TextFormControl
           type="email"
-          labelContent={translate("formLabels.email")}
+          labelContent={translateAccountSettings("formLabels.email")}
           entityProperty={templateProfile.email as string}
           onEntityPropertyValueChange={(e) =>
             dispatch(
@@ -75,7 +79,7 @@ const AccountSettings = () => {
         />
         <TextFormControl
           type="password"
-          labelContent={translate("formLabels.password")}
+          labelContent={translateAccountSettings("formLabels.password")}
           entityProperty={templateProfile.password as string}
           onEntityPropertyValueChange={(e) =>
             dispatch(
@@ -87,7 +91,7 @@ const AccountSettings = () => {
         />
         <TextFormControl
           type="password"
-          labelContent={translate("formLabels.verifyPassword")}
+          labelContent={translateAccountSettings("formLabels.verifyPassword")}
           entityProperty={verifiedPassword as string}
           onEntityPropertyValueChange={(e) =>
             dispatch(changeVerifiedPassword(e.target.value))
@@ -96,7 +100,7 @@ const AccountSettings = () => {
           labelFontSize={28}
         />
         <ImageFormControl
-          labelContent={translate("formLabels.image")}
+          labelContent={translateAccountSettings("formLabels.image")}
           defaultImageUsedUrl={defaultProfileImageUrl}
           entityPropertyLoadingStatus={loadingCloudinaryImage}
           entityProperty={templateProfile.imageUrl as string}
@@ -113,20 +117,31 @@ const AccountSettings = () => {
           labelFontSize={28}
         />
         <PrimaryButton
-          content={translate("formLabels.submitButtonContent")}
+          content={translateAccountSettings("formLabels.submitButtonContent")}
           type="functional"
           disabled={
             loadingCloudinaryImage === "PENDING" ||
             loadingUpdateProfile === "PENDING"
           }
-          onClickFunction={(e) =>
-            handleOnUpdateAccountSettingsSubmit(
-              e,
-              dispatch,
-              templateProfile,
-              verifiedPassword
-            )
-          }
+          onClickFunction={(e) => {
+            e.preventDefault();
+            dispatch(
+              updateWarningOverlay({
+                countdownSeconds: 5,
+                onConfirmFunction: () => {
+                  handleOnUpdateAccountSettingsSubmit(
+                    dispatch,
+                    templateProfile,
+                    verifiedPassword
+                  );
+                },
+                overlayMessage: translateWarningOverlayMessages(
+                  "saveAccountSettingsMessage"
+                ),
+                showOverlay: true,
+              })
+            );
+          }}
         />
       </form>
     </section>

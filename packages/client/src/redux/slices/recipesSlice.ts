@@ -86,6 +86,7 @@ export const getAllUserRecipes = createAsyncThunk<
       entityQueryValues;
     const { data } = await axiosInstance.get(`/recipes`, {
       params: {
+        userRecipes: true,
         userId,
         includeIngredients: true,
         includeUtensils: true,

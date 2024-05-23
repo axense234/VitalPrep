@@ -185,10 +185,10 @@ model Ingredient {
 
 model Macros {
   id            String @id @default(uuid())
-  calories      Int    @default(0)
-  proteinAmount Int    @default(0)
-  carbsAmount   Int    @default(0)
-  fatsAmount    Int    @default(0)
+  calories      Float  @default(0)
+  proteinAmount Float  @default(0)
+  carbsAmount   Float  @default(0)
+  fatsAmount    Float  @default(0)
 
   ingredient       Ingredient?
   recipe           Recipe?

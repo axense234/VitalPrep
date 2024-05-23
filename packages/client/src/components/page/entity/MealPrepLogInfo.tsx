@@ -20,6 +20,8 @@ import EntityMutationMenu from "@/components/shared/entity/EntityMutationMenu";
 // Hooks
 import useGetHandleOnDeleteEntity from "@/hooks/useGetHandleOnDeleteEntity";
 import useNavigateToPathname from "@/hooks/useNavigateToPathname";
+// Translations
+import { useTranslations } from "next-intl";
 
 const MealPrepLogInfo: FC<EntityInfoProps> = ({
   entityId,
@@ -38,6 +40,8 @@ const MealPrepLogInfo: FC<EntityInfoProps> = ({
     userId
   );
 
+  const translate = useTranslations("warningOverlay.pageInfo");
+
   useEffect(() => {
     console.log(loadingGetUserMealPrepLog, userId, entityId);
     if (loadingGetUserMealPrepLog === "IDLE" && userId && entityId) {
@@ -53,6 +57,8 @@ const MealPrepLogInfo: FC<EntityInfoProps> = ({
           type="entityInfo"
           handleEntityDeletion={handleOnDeleteEntity}
           handleEntityModification={() => navigateToPathname({})}
+          entityType="mealPrepLog"
+          entityName={translate("mealPrepLog")}
         />
       )}
       <div className={entityInfoStyles.entityInfoContent}>

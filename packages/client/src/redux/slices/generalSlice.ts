@@ -53,15 +53,12 @@ type InitialStateType = {
 
   currentGuideSection: SectionValueType;
 
-  locale: string;
-  pathname: string;
-  params: Params;
-
   // Overlay
   warningOverlay: {
     overlayMessage: string;
     showOverlay: boolean;
     onConfirmFunction: any;
+    countdownSeconds: number;
   };
 
   // Query
@@ -116,15 +113,12 @@ const initialState: InitialStateType = {
 
   showProfileEmail: false,
 
-  locale: "en",
-  params: {},
-  pathname: "/en",
-
   // Overlay
   warningOverlay: {
     overlayMessage: "Default Overlay Message",
     showOverlay: false,
     onConfirmFunction: () => {},
+    countdownSeconds: 5,
   },
 
   // Query
@@ -230,9 +224,9 @@ export const getProfileJWT = createAsyncThunk(
   }
 );
 
-export const signupUserOAuth = createAsyncThunk<User | AxiosError>(
+export const signupUserOAuth = createAsyncThunk<User | AxiosError, string>(
   "general/signupUserOAuth",
-  async () => {
+  async (locale: string) => {
     try {
       const session = await getSession();
       const userTemplate = { ...defaultTemplateProfile } as UserTemplate;
@@ -243,7 +237,7 @@ export const signupUserOAuth = createAsyncThunk<User | AxiosError>(
         (session?.user?.image as string) || userTemplate.imageUrl;
 
       const { data } = await axiosInstance.post("/users/signup", userTemplate, {
-        params: { throughOAuth: true },
+        params: { throughOAuth: true, locale },
       });
       localStorage.setItem("userId", data.user.id);
       return data.user as User;
@@ -272,19 +266,21 @@ export const signinUserThroughOAuth = createAsyncThunk<
   }
 );
 
-export const signupUser = createAsyncThunk<User | AxiosError, UserTemplate>(
-  "general/signupUser",
-  async (userTemplate) => {
-    try {
-      const { data } = await axiosInstance.post("/users/signup", userTemplate);
-      localStorage.setItem("userId", data.user.id);
-      return data.user as User;
-    } catch (error) {
-      console.log(error);
-      return error as AxiosError;
-    }
+export const signupUser = createAsyncThunk<
+  User | AxiosError,
+  { userTemplate: UserTemplate; locale: string }
+>("general/signupUser", async ({ userTemplate, locale }) => {
+  try {
+    const { data } = await axiosInstance.post("/users/signup", userTemplate, {
+      params: { locale },
+    });
+    localStorage.setItem("userId", data.user.id);
+    return data.user as User;
+  } catch (error) {
+    console.log(error);
+    return error as AxiosError;
   }
-);
+});
 
 export const updateUser = createAsyncThunk<
   User | AxiosError,
@@ -360,19 +356,12 @@ const generalSlice = createSlice({
         overlayMessage: string;
         showOverlay: boolean;
         onConfirmFunction: any;
+        countdownSeconds: number;
       }>
     ) {
       state.warningOverlay = action.payload;
     },
-    setLocale(state, action: PayloadAction<string>) {
-      state.locale = action.payload;
-    },
-    setPathname(state, action: PayloadAction<string>) {
-      state.pathname = action.payload;
-    },
-    setParams(state, action: PayloadAction<Params>) {
-      state.params = action.payload;
-    },
+
     resetTemplateImageUrl(state) {
       state.templateImageUrl = "";
     },
@@ -763,10 +752,6 @@ export const selectTypeOfUpdateAccountQuery = (state: State) =>
 export const selectCurrentGuideSection = (state: State) =>
   state.general.currentGuideSection;
 
-export const selectLocale = (state: State) => state.general.locale;
-export const selectPathname = (state: State) => state.general.pathname;
-export const selectParams = (state: State) => state.general.params;
-
 export const selectWarningOverlay = (state: State) =>
   state.general.warningOverlay;
 
@@ -790,9 +775,7 @@ export const {
   setTypeOfUpdateAccountQuery,
   changeCurrentGuideSection,
   resetTemplateImageUrl,
-  setLocale,
-  setParams,
-  setPathname,
+
   updateWarningOverlay,
 } = generalSlice.actions;
 

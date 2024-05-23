@@ -1021,7 +1021,35 @@
     "locale": "Schimbă limba la {locale}",
     "values": {
       "ro": "Romană",
-      "en": "Engleză"
+      "en": "Engleză",
+      "fr": "Franceză",
+      "de": "Germană"
+    }
+  },
+  "warningOverlay": {
+    "pageInfo": {
+      "ingredient": "Ingredientul de pe Pagină",
+      "utensil": "Ustensila de pe Pagină",
+      "recipe": "Rețeta de pe Pagină",
+      "dayTemplate": "Planul de Zi de pe Pagină",
+      "instanceTemplate": "Modelul de Sesiune de pe Pagină",
+      "mealPrepPlan": "Planul \"Meal Prep\" de pe Pagină",
+      "mealPrepLog": "Jurnalul de Sesiune de pe Pagină"
+    },
+    "buttons": {
+      "titles": {
+        "no": "Întoarce-te",
+        "yes": "Acceptă"
+      },
+      "content": {
+        "no": "Nu",
+        "yes": "Da"
+      }
+    },
+    "messages": {
+      "deleteEntityMessage": "Sunteți cu adevărat sigur că doriți să ștergeți permanent entitatea {entityType} numită {entityName}?",
+      "saveAccountSettingsMessage": "Ești sigur că vrei să-ți salvezi setările contului?",
+      "saveNotificationSettingsMessage": "Sigur doriți să vă salvați setările de notificare?"
     }
   }
 }

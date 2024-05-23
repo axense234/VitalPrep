@@ -54,10 +54,10 @@ const EntityInfoInstanceTemplate: FC<{ entityId: string }> = ({ entityId }) => {
           deleteEntityFunction={getDeleteEntityFunction(
             "instanceTemplate",
             dispatch,
-            entityInstanceTemplate.id as string,
-            entityInstanceTemplate.userId as string
+            entityInstanceTemplate?.id as string,
+            entityInstanceTemplate?.userId as string
           )}
-          updateEntityFunction={() => navigateToPathname()}
+          updateEntityFunction={() => navigateToPathname({})}
         />
         <EntityMacros macros={entityInstanceTemplate?.macros} />
       </div>

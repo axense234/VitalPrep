@@ -1,0 +1,1055 @@
+{
+  "login": {
+    "title": "Anmeldung",
+    "subtitle": "Sie haben noch kein Konto?",
+    "subtitleLink": "Melden Sie sich an",
+    "oauth": {
+      "firstMessage": "- Schnellanmeldung mit OAuth - ",
+      "secondMessage": "- oder mit E-Mail und Passwort - ",
+      "buttons": {
+        "google": "Melden Sie sich mit Google an",
+        "github": "Melden Sie sich mit Github an"
+      }
+    },
+    "formLabels": {
+      "email": "Email:",
+      "password": "Passwort:",
+      "button": "Anmeldung"
+    }
+  },
+  "signup": {
+    "title": "Melden Sie sich an",
+    "subtitle": "Ein Konto haben?",
+    "subtitleLink": "Anmeldung",
+    "oauth": {
+      "firstMessage": "- Schnelle Anmeldung mit OAuth - ",
+      "secondMessage": "- oder mit E-Mail und Passwort - ",
+      "buttons": {
+        "google": "Melden Sie sich bei Google an",
+        "github": "Melden Sie sich bei Github an"
+      }
+    },
+    "formLabels": {
+      "username": "Nutzername:",
+      "email": "Email:",
+      "password": "Passwort:",
+      "profileImage": "Profilbild:",
+      "age": "Alter:",
+      "button": "Melden Sie sich an",
+      "reCAPTCHA": "Bestätigen Sie, dass Sie kein Roboter sind!"
+    }
+  },
+  "home": {
+    "sections": {
+      "section-1": {
+        "sectionTitle": "VitalPrep",
+        "sectionSubTitle": "Helfer bei der Essenszubereitung",
+        "ctaButtonContent": "Loslegen",
+        "sectionDescription": "VitalPrep ist eine komplexe Hilfs-App für die Essenszubereitung, die Menschen dabei hilft, Pläne für die Essenszubereitung zu erstellen und diese entsprechenden Pläne zu befolgen."
+      },
+      "section-2": {
+        "sectionTitle": "Meal Prep",
+        "sectionSubTitle": "Was ist es?",
+        "ctaButtonContent": "Erfahren Sie mehr",
+        "sectionDescription": "Unter Meal Prep, kurz für Meal Prep, versteht man die Planung und Zubereitung von Mahlzeiten im Voraus, typischerweise für einen Zeitraum von mehreren Tagen bis zu einer Woche."
+      },
+      "section-3": {
+        "sectionTitle": "Planschema",
+        "sectionSubTitle": "das Schema des Essenszubereitungsplans",
+        "sectionImage": "https://res.cloudinary.com/birthdayreminder/image/upload/v1716111050/mpp-scheme-en_jpit3n.jpg",
+        "imageOverlay": {
+          "closeOverlayTitle": "Bild im Vollbildmodus schließen"
+        },
+        "sectionImageTitle": "Bild des Essenszubereitungsplans",
+        "sectionDescriptions": {
+          "1": "Ein Meal-Prep-Plan kann anhand des folgenden Schemas leicht verstanden werden.",
+          "2": "Um das Schema in wenigen Worten zu erklären: Ein Meal-Prep-Plan stellt den wöchentlichen Plan dar, dem Sie bei der Zubereitung Ihrer Mahlzeiten folgen. ",
+          "3": "Wenn Sie diese Mahlzeiten zubereiten, bereiten Sie sie über einen Zeitraum von mehreren Tagen zu. ",
+          "4": "Jede Sitzungsvorlage besteht aus Tagesplänen. "
+        }
+      },
+      "section-4": {
+        "sectionTitle": "Vorteile der Essenszubereitung",
+        "sectionSubTitle": "wonach du suchst",
+        "items": {
+          "item-1": {
+            "itemTitle": "Geld und Zeit",
+            "itemDescription": "Durch die Zubereitung von Mahlzeiten sparen Sie Zeit, da Sie nicht jeden Tag kochen müssen, und Geld, da die Zutaten im Vergleich zu anderen Optionen tendenziell viel weniger kosten."
+          },
+          "item-2": {
+            "itemTitle": "Gesundheit",
+            "itemDescription": "Beim Meal Prepping werden häufig Zutaten verwendet, die äußerst nahrhaft sind und einen hohen Sättigungsindex und eine niedrige Kaloriendichte aufweisen."
+          },
+          "item-3": {
+            "itemTitle": "Stressreduzierung",
+            "itemDescription": "Durch die Zubereitung von Mahlzeiten müssen Sie sich keine Sorgen um das Essen machen, da Ihnen bereits zubereitete Mahlzeiten zur Verfügung stehen. "
+          }
+        }
+      },
+      "section-5": {
+        "sectionTitle": "Schwierigkeiten?",
+        "sectionSubTitle": "wir können helfen",
+        "appHelpDescription": "Angesichts der Komplexität der App sind Sie manchmal verwirrt.  ",
+        "appHelpLinkLabel": "Leitfadenseite",
+        "mealPrepHelpDescription": "Falls Sie eine Frage zum Meal Prepping im Allgemeinen haben, die beantwortet werden muss, können wir Ihnen helfen.  ",
+        "mealPrepHelpLinkLabel": "FAQ-Seite"
+      }
+    }
+  },
+  "navbar": {
+    "navbarTitleTextContent": "Gehen Sie zu Profil",
+    "navbarImageAltTextContent": "Profilbild",
+    "navbarUsernameDefaultValue": "Nutzername"
+  },
+  "pageLinks": {
+    "labels": {
+      "/home": "Heim",
+      "/logs": "Sitzungsprotokolle",
+      "/create-log": "Sitzungsprotokoll hinzufügen",
+      "/create-tool": "Werkzeug erstellen",
+      "/multi-view-tool": "Multi-View-Tool",
+      "/profile": "Profil",
+      "/settings": "Einstellungen",
+      "/guide": "Erste Schritte",
+      "/faq": "FAQ",
+      "/about": "Um",
+      "/contact": "Kontakt",
+      "/logout": "Ausloggen"
+    }
+  },
+  "footer": {
+    "contact": {
+      "phoneNumberTitle": "Telefonnummer:",
+      "emailTitle": "Email:"
+    }
+  },
+  "pageTitles": {
+    "titles": {
+      "/logs": {
+        "titleTextContent": "Sitzungsprotokolle",
+        "subTitleTextContent": "Sehen Sie sich alle Ihre Protokolle an"
+      },
+      "/create-tool": {
+        "titleTextContent": "Werkzeug erstellen",
+        "subTitleTextContent": "Erstellen Sie, was Sie brauchen"
+      },
+      "/create-log": {
+        "titleTextContent": "Sitzungsprotokoll hinzufügen",
+        "subTitleTextContent": "Speichern Sie Ihr Sitzungsprotokoll"
+      },
+      "/multi-view-tool": {
+        "titleTextContent": "Multi-View-Tool",
+        "subTitleTextContent": "Sehen Sie sich alles an, was Sie brauchen"
+      },
+      "/profile": {
+        "titleTextContent": "Profil",
+        "subTitleTextContent": "Sehen Sie sich Ihr Profil an"
+      },
+      "/settings": {
+        "titleTextContent": "Einstellungen",
+        "subTitleTextContent": "Aktualisieren Sie Ihre Einstellungen"
+      },
+      "/guide": {
+        "titleTextContent": "Erste Schritte",
+        "subTitleTextContent": "die grundlegende Anleitung zu VitalPrep"
+      },
+      "/faq": {
+        "titleTextContent": "FAQ",
+        "subTitleTextContent": "Häufig gestellte Fragen"
+      },
+      "/about": {
+        "titleTextContent": "Um",
+        "subTitleTextContent": "Erfahren Sie mehr über uns und die App"
+      },
+      "/contact": {
+        "titleTextContent": "Kontakt",
+        "subTitleTextContent": "Nehmen Sie Kontakt mit uns auf"
+      },
+      "/ingredient": {
+        "titleTextContent": "Zutat anzeigen",
+        "subTitleTextContent": "die Basis jedes Rezepts"
+      },
+      "/utensil": {
+        "titleTextContent": "Utensilien ansehen",
+        "subTitleTextContent": "Ihr Kochwerkzeug"
+      },
+      "/recipe": {
+        "titleTextContent": "Rezept ansehen",
+        "subTitleTextContent": "genießen und genießen"
+      },
+      "/dayTemplate": {
+        "titleTextContent": "Tagesplan anzeigen",
+        "subTitleTextContent": "Ihr Tagesplan"
+      },
+      "/instanceTemplate": {
+        "titleTextContent": "Sitzungsvorlage anzeigen",
+        "subTitleTextContent": "Ihr wöchentlicher Sitzungsplan"
+      },
+      "/mealPrepPlan": {
+        "titleTextContent": "Sehen Sie sich den Essenszubereitungsplan an",
+        "subTitleTextContent": "Ihr Plan, dem Sie folgen möchten"
+      },
+      "/mealPrepLog": {
+        "titleTextContent": "Sitzungsprotokoll anzeigen",
+        "subTitleTextContent": "Ihr gespeichertes Protokoll zur Essenszubereitung"
+      }
+    }
+  },
+  "createTool": {
+    "formLabels": {
+      "ingredient": {
+        "formTitle": "Zutat erstellen",
+        "name": "Name:",
+        "image": "Bild:",
+        "calories": "Kalorien (pro 100g):",
+        "proteinAmount": "Protein (in Gramm):",
+        "carbsAmount": "Kohlenhydrate (in Gramm):",
+        "fatsAmount": "Fette (in Gramm):",
+        "enabled": "Ermöglicht?:",
+        "createButtonLabel": "Zutat erstellen"
+      },
+      "utensil": {
+        "formTitle": "Utensil erstellen",
+        "name": "Name:",
+        "image": "Bild:",
+        "enabled": "Ermöglicht?:",
+        "createButtonLabel": "Utensil erstellen"
+      },
+      "recipe": {
+        "formTitle": "Rezept erstellen",
+        "name": "Name:",
+        "image": "Bild:",
+        "tutorial": {
+          "videoTutorialCheckboxLabel": "Video-Tutorial verwenden?:",
+          "videoTutorialUrlPrompt": "Tutorial-URL:",
+          "writtenTutorialCheckboxLabel": "Schriftliches Tutorial verwenden?:",
+          "writtenTutorialUrlPrompt": "Schriftliches Tutorial:"
+        },
+        "createButtonLabel": "Rezept erstellen",
+        "selectFormControlsLabels": {
+          "ingredients": "Verwendete Zutaten:",
+          "utensils": "Verwendete Utensilien"
+        }
+      },
+      "dayTemplate": {
+        "formTitle": "Tagesplan erstellen",
+        "name": "Name:",
+        "image": "Bild:",
+        "nbOfEntities": "Anzahl der Mahlzeiten:",
+        "createButtonLabel": "Tagesplan erstellen",
+        "selectFormControlsLabels": {
+          "componentsLabel": "Rezepte",
+          "componentLabel": "Mahlzeit"
+        }
+      },
+      "instanceTemplate": {
+        "formTitle": "Sitzungsvorlage erstellen",
+        "name": "Name:",
+        "image": "Bild:",
+        "nbOfEntities": "Anzahl der abgedeckten Tage:",
+        "createButtonLabel": "Sitzungsvorlage erstellen",
+        "selectFormControlsLabels": {
+          "componentsLabel": "Individuelle Tagespläne:",
+          "componentLabel": "Tag"
+        }
+      },
+      "mealPrepPlan": {
+        "formTitle": "Erstellen Sie einen Essensvorbereitungsplan",
+        "name": "Name:",
+        "image": "Bild:",
+        "nbOfEntities": "Anzahl der verwendeten Vorlagen:",
+        "createButtonLabel": "Erstellen Sie einen Essensvorbereitungsplan",
+        "selectFormControlsLabels": {
+          "componentsLabel": "Individuelle Sitzungsvorlagen:",
+          "componentLabel": "Nummer #{id}-Vorlage",
+          "weekdayLabel": "Wochentag:",
+          "timeLabel": "Startzeit der Sitzung:"
+        }
+      },
+      "mealPrepLog": {
+        "formTitle": "Sitzungsprotokoll hinzufügen",
+        "name": "Name:",
+        "image": "Bild:",
+        "date": "Datum:",
+        "completed": "Vollendet?:",
+        "cookingDuration": "Kochdauer:",
+        "createButtonLabel": "Sitzungsprotokoll hinzufügen",
+        "selectFormControlsLabels": {
+          "instanceTemplate": "Verwendete Sitzungsvorlage"
+        }
+      }
+    },
+    "entityOptions": {
+      "labels": {
+        "ingredient": "Zutat",
+        "utensil": "Utensil",
+        "recipe": "Rezept",
+        "dayTemplate": "Tagesplan",
+        "instanceTemplate": "Sitzungsvorlage",
+        "mealPrepPlan": "Essensvorbereitungsplan",
+        "mealPrepLog": "Sitzungsprotokoll"
+      }
+    }
+  },
+  "entityPreview": {
+    "entityDetails": {
+      "title": "Vorschau",
+      "entityLabels": {
+        "ingredient": "Zutat",
+        "utensil": "Utensil",
+        "recipe": "Rezept",
+        "dayTemplate": "Tagesplan",
+        "instanceTemplate": "Sitzungsvorlage",
+        "mealPrepPlan": "Essensvorbereitungsplan",
+        "mealPrepLog": "Sitzungsprotokoll"
+      }
+    },
+    "entityMacros": {
+      "noMacrosMessage": "Keine Makros zum Anzeigen.",
+      "macrosTitle": "Makros"
+    }
+  },
+  "entityMenu": {
+    "openActionTitle": "Öffnen Sie das Menü „Entitätstyp“.",
+    "closeActionTitle": "Menü „Entitätstyp“ schließen",
+    "selectLabel": "Wählen"
+  },
+  "entityMutation": {
+    "entityMenu": {
+      "openMenuTitle": "Öffnen Sie das Entity-Mutationsmenü",
+      "closeMenuTitle": "Entitätsmutationsmenü schließen",
+      "deleteEntityTitle": "Entität namens löschen",
+      "updateEntityTitle": "Die benannte Entität aktualisieren"
+    }
+  },
+  "viewEntityOptions": {
+    "chooseEntity": {
+      "labelContent": "Ausgewählte Entität:",
+      "labelName": "Wählen SieEntityOption",
+      "selectLabel": "Wählen"
+    },
+    "sortBy": {
+      "labelContent": "Sortiere nach:",
+      "labelName": "sortByOptions",
+      "labelTitle": "Sortieren nach {label}",
+      "selectLabel": "Sortiere nach:",
+      "orderBy": {
+        "titleLabel": "Aktuelle Bestellung: {order}",
+        "titleOption": {
+          "asc": "Aufsteigend",
+          "desc": "Absteigend"
+        }
+      },
+      "sortingOptions": {
+        "labels": {
+          "ingredient": {
+            "enabled": "Verfügbarkeit der Zutaten",
+            "name": "Name der Zutat",
+            "numberOfRecipes": "Häufig verwendete Zutaten"
+          },
+          "utensil": {
+            "enabled": "Verfügbarkeit von Utensilien",
+            "name": "Utensilienname",
+            "numberOfRecipes": "Häufig verwendete Utensilien"
+          },
+          "recipe": {
+            "name": "Rezeptname",
+            "numberOfDayTemplates": "Häufig verwendete Rezepte"
+          },
+          "dayTemplate": {
+            "name": "Name des Tagesplans",
+            "numberOfInstanceTemplates": "Häufig verwendete Tagespläne"
+          },
+          "instanceTemplate": {
+            "name": "Name der Sitzungsvorlage",
+            "numberOfMealPrepPlans": "Häufig verwendete Sitzungsvorlagen",
+            "coverage": "Abdeckung von Sitzungsvorlagen"
+          },
+          "mealPrepPlan": {
+            "name": "Name des Essenszubereitungsplans"
+          },
+          "mealPrepLog": {
+            "name": "Name des Sitzungsprotokolls",
+            "completed": "Abschluss der Sitzungsprotokolle"
+          }
+        }
+      }
+    },
+    "searchEntity": {
+      "labelContent": "Suchen:",
+      "labelName": "searchEntity",
+      "magGlassTitle": "Suchen",
+      "viewType": {
+        "title": "Ansichtsoption in {type} ändern",
+        "typeOptions": {
+          "grid": "Netz",
+          "list": "Aufführen"
+        }
+      }
+    }
+  },
+  "multiViewPage": {
+    "entitiesTitle": {
+      "ingredient": "Zutaten",
+      "utensil": "Utensilien",
+      "recipe": "Rezepte",
+      "dayTemplate": "Tagespläne",
+      "instanceTemplate": "Sitzungsvorlagen",
+      "mealPrepPlan": "Essenszubereitungspläne",
+      "mealPrepLog": "Sitzungsprotokoll"
+    },
+    "noEntitiesCase": {
+      "message": "Für Sie ist kein {title} verfügbar.  ",
+      "messageLinkTitle": "Gehen Sie zur Seite „Tool erstellen“.",
+      "messageLinkLabel": "Werkzeugseite erstellen"
+    }
+  },
+  "profile": {
+    "profileInfo": {
+      "profileImageAlt": "Profilbild",
+      "defaultProfileUsername": "Nutzername",
+      "defaultProfileEmail": "Profileemail@gmail.com",
+      "defaultProfileAge": "Unbekanntes Alter",
+      "profileAge": "{age} Jahre alt"
+    }
+  },
+  "entityStatistics": {
+    "title": "Statistiken",
+    "prefix": {
+      "usable": "Benutzt in ",
+      "component": "Verwendet ",
+      "count": "Anzahl "
+    }
+  },
+  "entityAppearances": {
+    "ingredient": {
+      "title": "Auftritte",
+      "sectionTitle": "Zutaten:"
+    },
+    "utensil": {
+      "title": "Auftritte",
+      "sectionTitle": "Utensilien:"
+    },
+    "recipe": {
+      "title": "Auftritte",
+      "sectionTitle": "Rezepte:"
+    },
+    "dayTemplate": {
+      "title": "Auftritte",
+      "sectionTitle": "Tagespläne:"
+    },
+    "instanceTemplate": {
+      "title": "Auftritte",
+      "sectionTitle": "Sitzungsvorlagen:"
+    },
+    "mealPrepPlan": {
+      "title": "Auftritte",
+      "sectionTitle": "Pläne für die Essenszubereitung:"
+    },
+    "mealPrepLog": {
+      "title": "Auftritte",
+      "sectionTitle": "Sitzungsprotokolle:"
+    },
+    "profile": {
+      "title": "Erstellte Entitäten"
+    }
+  },
+  "entityTutorial": {
+    "iframeTitle": "Rezept-Tutorial",
+    "videoTutorial": {
+      "title": "Videoanleitung",
+      "notFoundMessage": "Kein Video-Tutorial verfügbar."
+    },
+    "writtenTutorial": {
+      "title": "Schriftliches Tutorial",
+      "notFoundMessage": "Kein schriftliches Tutorial verfügbar."
+    }
+  },
+  "entityComponents": {
+    "title": "Komponenten",
+    "sectionTitle": "{type} wird in {name} verwendet:",
+    "defaultEntityName": "Entitätsname"
+  },
+  "entityInstanceTemplate": {
+    "title": "Komponente",
+    "defaultEntityName": "Entitätsbeispiel"
+  },
+  "settings": {
+    "accountSettings": {
+      "title": "Account Einstellungen",
+      "formLabels": {
+        "name": "Neuer Benutzername:",
+        "email": "Neue e-mail:",
+        "password": "Neues Kennwort",
+        "verifyPassword": "Passwort bestätigen",
+        "image": "Neues Kontobild",
+        "submitButtonContent": "Kontoeinstellungen aktualisieren"
+      }
+    },
+    "notificationSettings": {
+      "title": "Benachrichtigungseinstellungen",
+      "formLabels": {
+        "allowNotifications": "Benachrichtigungen zulassen?:",
+        "allowAutomaticCreationOfLogs": "Sitzungsprotokolle automatisch erstellen?:",
+        "allowDayReminderNotifications": "Tageserinnerungsbenachrichtigungen zulassen?:",
+        "allowPreSessionReminderNotifications": "Benachrichtigungen vor der Sitzung zulassen?:",
+        "allowPostSessionReminderNotifications": "Benachrichtigungen nach der Sitzung zulassen?:",
+        "reminderIntervalInHours": "Intervall für Vor-/Nach-Benachrichtigungen ändern:",
+        "notificationsImage": "Benachrichtigungsbild:",
+        "notificationStyles": {
+          "formLabel": "Benachrichtigungsstil:",
+          "default": "Standard",
+          "serious": "Ernst",
+          "motivating": "Motivierend",
+          "menacing": "Bedrohlich"
+        },
+        "submitButtonContent": "Benachrichtigungseinstellungen aktualisieren"
+      }
+    }
+  },
+  "gettingStarted": {
+    "contentMap": {
+      "title": "Inhalt des Leitfadens",
+      "sectionTitleLabel": "Abschnitt ändern in {section}",
+      "basics": {
+        "title": "Grundlagen",
+        "a": {
+          "linkLabel": "Leitziel",
+          "linkDest": "#guideGoal"
+        },
+        "b": {
+          "linkLabel": "Werkzeugseite erstellen",
+          "linkDest": "#createToolPage"
+        },
+        "c": {
+          "linkLabel": "Multi-View-Tool-Seite",
+          "linkDest": "#multiViewToolPage"
+        },
+        "d": {
+          "linkLabel": "Werkzeugseite anzeigen",
+          "linkDest": "#viewToolPage"
+        }
+      },
+      "entities": {
+        "title": "Entitäten",
+        "a": {
+          "linkLabel": "Zutaten",
+          "linkDest": "#Zutaten"
+        },
+        "b": {
+          "linkLabel": "Utensilien",
+          "linkDest": "#Utensilien"
+        },
+        "c": {
+          "linkLabel": "Rezepte",
+          "linkDest": "#Rezepte"
+        },
+        "d": {
+          "linkLabel": "Tagespläne",
+          "linkDest": "#Tagespläne"
+        },
+        "e": {
+          "linkLabel": "Sitzungsvorlagen",
+          "linkDest": "#sessionTemplates"
+        },
+        "f": {
+          "linkLabel": "Essenszubereitungspläne",
+          "linkDest": "#mealPrepPlans"
+        }
+      },
+      "logs": {
+        "title": "Sitzungsprotokolle",
+        "a": {
+          "linkLabel": "Was sind Sitzungsprotokolle?",
+          "linkDest": "#whatAreSessionLogs"
+        },
+        "b": {
+          "linkLabel": "Wie erstelle ich ein Sitzungsprotokoll?",
+          "linkDest": "#createSessionLogs"
+        },
+        "c": {
+          "linkLabel": "Wie kann ich ein Sitzungsprotokoll anzeigen?",
+          "linkDest": "#viewSessionLogs"
+        }
+      },
+      "extras": {
+        "title": "Profil, Einstellungen und Extras",
+        "a": {
+          "linkLabel": "Profilseite",
+          "linkDest": "#Profilseite"
+        },
+        "b": {
+          "linkLabel": "Einstellungsseite",
+          "linkDest": "#settingsPage"
+        },
+        "c": {
+          "linkLabel": "Rückmeldung",
+          "linkDest": "#Rückmeldung"
+        },
+        "d": {
+          "linkLabel": "Benachrichtigungen",
+          "linkDest": "#Benachrichtigungen"
+        },
+        "e": {
+          "linkLabel": "Abschluss",
+          "linkDest": "#Abschluss"
+        }
+      }
+    },
+    "content": {
+      "basics": {
+        "title": "Die Grundlagen",
+        "articles": {
+          "1": {
+            "title": "Ziel des Führers",
+            "descriptions": {
+              "1": "<span>NOTIZ:</span> Für das folgende Tutorial sind Vorkenntnisse in der Essenszubereitung erforderlich.  <faq>FAQ-Seite</faq>.",
+              "2": "Dieser Leitfaden <span>Ziel</span> ist es, Ihnen beizubringen, wie man ein erstellt <span>Essensvorbereitungsplan</span> Um es auf praktische Weise zu nutzen, indem Sie es aktivieren, damit Sie benachrichtigt werden, wann immer Sie Ihre Mahlzeiten zubereiten müssen."
+            },
+            "imageAlt": "Leitzielbild",
+            "images": {
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715177907/VitalPrep/Screenshot_33_o5fzdm.png"
+            }
+          },
+          "2": {
+            "title": "Werkzeugseite erstellen",
+            "descriptions": {
+              "1": "Um eine zu erstellen <span>Essensvorbereitungsplan</span>, müssen Sie zunächst einige erstellen <span>Entitäten</span>.  <span>Entitäten</span>, müssen Sie das verwenden <createTool>Werkzeugseite erstellen</createTool>. ",
+              "2": "Um die Benutzeroberfläche des Erstellungstools zu ändern, verwenden Sie das Menü auf der linken Seite Ihres Bildschirms, das bei Bedarf ausgeblendet/angezeigt werden kann."
+            },
+            "imageAlt": "Erstellen Sie ein Werkzeugseitenbild",
+            "images": {
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715179083/VitalPrep/Screenshot_35_sh7nyg.png"
+            }
+          },
+          "3": {
+            "title": "Multi-View-Tool-Seite",
+            "descriptions": {
+              "1": "Um zu <span>Sicht</span> Ihr erstellt <span>Entitäten</span>, müssen Sie die verwenden <multiViewTool>Multi-View-Tool-Seite</multiViewTool>. ",
+              "2": "Der <span>Filteroptionen</span> Verfügbar sind: <span>Entitätstyp</span>(Ändert, welche Entität angezeigt wird), <span>Sortieren nach</span>(sortiert die angezeigte Entität nach ihrer Eigenschaft, zum Beispiel ihrem Namen), <span>suchen</span>(Suchobjekte, die den in ihrem Namen angegebenen Text enthalten), <span>Listen-/Rasteransicht</span> (Ändert den Ansichtstyp der Entität)."
+            },
+            "imageAlt": "Bild der Multi-View-Tool-Seite",
+            "images": {
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715178126/VitalPrep/Screenshot_34_vb9vwf.png"
+            }
+          },
+          "4": {
+            "title": "Werkzeugseite anzeigen",
+            "descriptions": {
+              "1": "Um zu <span>Sicht</span> Ihr erstellt <span>Einheiten einzeln</span>, müssen Sie die verwenden <viewTool>Werkzeugseite anzeigen</viewTool>, Zugriff über von <span>Klicken</span> jede Entitätskomponente.",
+              "2": "Auf dieser Seite können Sie <span>verschiedene Eigenschaften anzeigen</span> der jeweiligen Entität, wie deren <span>Name</span>, <span>Bild</span>, <span>Kalorien</span>(falls sie welche haben), <span>Makros</span>(auf jedem Entitätstyp außer Utensil, duh) usw.",
+              "3": "Sie können auch die anzeigen <span>Statistiken</span> der jeweiligen Entität, um welche Entitäten es sich handelt <span>zusammengesetzt aus</span>, was andere Entitäten sind <span>aus ihnen zusammengesetzt</span>."
+            },
+            "imageAlt": "Bild der Werkzeugseite anzeigen",
+            "images": {
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715179643/VitalPrep/Screenshot_37_lo4qpe.png",
+              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715179504/VitalPrep/Screenshot_36_yaa7zm.png"
+            }
+          }
+        }
+      },
+      "entities": {
+        "title": "Entitäten",
+        "articles": {
+          "1": {
+            "title": "Zutaten",
+            "descriptions": {
+              "1": "<span>Zutaten</span> sind die Hauptbestandteile von a <span>Rezept</span>. ",
+              "2": "Benutzen Sie die <createTool> Werkzeugseite erstellen</createTool> eine erstellen <span>Zutat</span>.  <span>Makros</span>.",
+              "3": "<span>NOTIZ:</span>: Das Hinzufügen von Makros ist optional, insbesondere für Gewürze, aber im Allgemeinen ist es eine gute Idee, Ihren Zutaten beim Erstellen genau Makros hinzuzufügen.",
+              "4": "Zu <span>Sicht</span> all dein <span>erstellte Einheiten</span>, verwenden Sie die <multiViewTool>Multi-View-Tool-Seite</multiViewTool>.  <span>Einzelwesen</span> Klicken Sie im Detail auf eine beliebige <span>Zutat</span> Komponente auf der <multiViewTool> Multi-View-Tool-Seite</multiViewTool>."
+            },
+            "imageAlt": "Bild der Zutatentität",
+            "images": {
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715181329/VitalPrep/Screenshot_38_tdcdyr.png",
+              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715181484/VitalPrep/Screenshot_39_moj2tx.png"
+            }
+          },
+          "2": {
+            "title": "Utensilien",
+            "descriptions": {
+              "1": "<span>Utensilien</span> sind Bestandteile von a <span>Rezept</span>. ",
+              "2": "Benutzen Sie die <createTool> Werkzeugseite erstellen</createTool> eine erstellen <span>Utensil</span>. ",
+              "3": "Zu <span>Sicht</span> all dein <span>erstellte Einheiten</span>, verwenden Sie die <multiViewTool>Multi-View-Tool-Seite</multiViewTool>.  <span>Einzelwesen</span> Klicken Sie im Detail auf eine beliebige <span>Utensil</span> Komponente auf der <multiViewTool>Multi-View-Tool-Seite</multiViewTool>."
+            },
+            "imageAlt": "Utensilienbild",
+            "images": {
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715181630/VitalPrep/Screenshot_40_rvtkbe.png",
+              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715181718/VitalPrep/Screenshot_41_sl4fdr.png"
+            }
+          },
+          "3": {
+            "title": "Rezepte",
+            "descriptions": {
+              "1": "<span>Rezepte</span> sind die Hauptbestandteile von a <span>Tagesplan</span>.  <span>Tagespläne</span>, und ohne Tagespläne können Sie keine erstellen <span>Sitzungsvorlagen</span> und so weiter.  <span>Tagesplan</span>.",
+              "2": "Benutzen Sie die <createTool> Werkzeugseite erstellen</createTool> eine erstellen <span>Rezept</span>.  <span>Videoanleitung</span>, <span>Schriftliches Tutorial</span> oder beides.",
+              "3": "Wählen Sie anschließend alle aus <span>Zutaten</span> Und <span>Utensilien</span> Die <span>Rezept</span> Verwendet.",
+              "4": "Zu <span>Sicht</span> all dein <span>erstellte Einheiten</span>, verwenden Sie die <multiViewTool>Multi-View-Tool-Seite</multiViewTool>.  <span>Einzelwesen</span> Klicken Sie im Detail auf eine beliebige <span>Rezept</span> Komponente auf der <multiViewTool> Multi-View-Tool-Seite</multiViewTool>."
+            },
+            "imageAlt": "Rezept-Entitätsbild",
+            "images": {
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715181911/VitalPrep/Screenshot_42_gw8stk.png",
+              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715182012/VitalPrep/Screenshot_43_ijmjfh.png",
+              "3": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715182089/VitalPrep/Screenshot_45_erigz6.png"
+            }
+          },
+          "4": {
+            "title": "Tagespläne",
+            "descriptions": {
+              "1": "<span>Tagespläne</span> sind die Hauptbestandteile von a <span>Sitzungsvorlage</span>.  <span>Sitzungsvorlagen</span>, und ohne <span>Sitzungsvorlagen</span> du kannst nicht erschaffen <span>Essenszubereitungspläne</span>.  <span>Sitzungsvorlage</span>.",
+              "2": "Benutzen Sie die <createTool> Werkzeugseite erstellen</createTool> eine erstellen <span>Tagesplan</span>. ",
+              "3": "Wählen Sie anschließend a aus <span>spezifisches Rezept</span> für jede verwendete Mahlzeit.",
+              "4": "Zu <span>Sicht</span> all dein <span>erstellte Einheiten</span>, verwenden Sie die <multiViewTool>Multi-View-Tool-Seite</multiViewTool>.  <span>Einzelwesen</span> Klicken Sie im Detail auf eine beliebige <span>Tagesplan</span> Komponente auf der <multiViewTool> Multi-View-Tool-Seite</multiViewTool>."
+            },
+            "imageAlt": "Tagesplan-Entitätsbild",
+            "images": {
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715183076/VitalPrep/Screenshot_46_qw9rgz.png",
+              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715183623/VitalPrep/Screenshot_47_qzv7b4.png",
+              "3": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715183690/VitalPrep/Screenshot_48_mompqr.png"
+            }
+          },
+          "5": {
+            "title": "Sitzungsvorlagen",
+            "descriptions": {
+              "1": "<span>Sitzungsvorlagen</span> sind die Hauptbestandteile von a <span>Essensvorbereitungsplan</span>.  <span>Essenszubereitungspläne</span>.  <span>Essensvorbereitungsplan</span>.",
+              "2": "<span>Sitzungsvorlagen</span> werden auch von verwendet <span>Sitzungsprotokolle</span>.",
+              "3": "Benutzen Sie die <createTool> Werkzeugseite erstellen</createTool> eine erstellen <span>Sitzungsvorlage</span>. ",
+              "4": "Wählen Sie anschließend a aus <span>spezifischer Tagesplan</span> für jeden einzelnen abgedeckten Tag.",
+              "5": "Zu <span>Sicht</span> all dein <span>erstellte Einheiten</span>, verwenden Sie die <multiViewTool>Multi-View-Tool-Seite</multiViewTool>.  <span>Einzelwesen</span> Klicken Sie im Detail auf eine beliebige <span>Sitzungsvorlage</span> Komponente auf der <multiViewTool> Multi-View-Tool-Seite</multiViewTool>."
+            },
+            "imageAlt": "Sitzungsvorlagen-Entitätsbild",
+            "images": {
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715183829/VitalPrep/Screenshot_49_cnpacm.png",
+              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715183890/VitalPrep/Screenshot_50_p8l6wt.png",
+              "3": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715184001/VitalPrep/Screenshot_52_ctxjaz.png"
+            }
+          },
+          "6": {
+            "title": "Essenszubereitungspläne",
+            "descriptions": {
+              "1": "<span>Essenszubereitungspläne</span> Stellen Sie die tatsächlichen Pläne dar, denen Sie folgen werden.  <span>Benachrichtigungen</span> für dein <span>Essensvorbereitungsplan-Sitzungen</span>, du wirst brauchen <span>aktivieren Sie</span> sagte Meal Prep Plan und auch <span>Abonnieren Sie unsere Benachrichtigungen</span>.",
+              "2": "Benutzen Sie die <createTool> Werkzeugseite erstellen</createTool> eine erstellen <span>Sitzungsvorlage</span>. ",
+              "3": "Wählen Sie anschließend a aus <span>spezifische Sitzungsvorlage</span> für jede spezifische Sitzung die <span>Wochentag</span> Und <span>Stunde</span> Sie beginnen mit der Essenszubereitung.",
+              "4": "Zu <span>Sicht</span> all dein <span>erstellte Einheiten</span>, verwenden Sie die <multiViewTool>Multi-View-Tool-Seite</multiViewTool>.  <span>Einzelwesen</span> Klicken Sie im Detail auf eine beliebige <span>Essensvorbereitungsplan</span> Komponente auf der <multiViewTool> Multi-View-Tool-Seite</multiViewTool>."
+            },
+            "imageAlt": "Bild des Essenszubereitungsplans",
+            "images": {
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715184134/VitalPrep/Screenshot_53_bgbocc.png",
+              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715184377/VitalPrep/Screenshot_54_qsapvp.png",
+              "3": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715184475/VitalPrep/Screenshot_55_ukdzrs.png"
+            }
+          }
+        }
+      },
+      "logs": {
+        "title": "Sitzungsprotokolle",
+        "articles": {
+          "1": {
+            "title": "Was sind Sitzungsprotokolle?",
+            "descriptions": {
+              "1": "<span>Sitzungsprotokolle</span> repräsentieren die Protokolle Ihrer <span>aktive Essensvorbereitungsplan-Sitzungen</span>.  <span>Sitzung zum Essensvorbereitungsplan</span>.  <span>Verfolgung von Essensvorbereitungsplan-Sitzungen</span>."
+            },
+            "imageAlt": "Bild eines aktiven Essenszubereitungsplans",
+            "images": {
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715177907/VitalPrep/Screenshot_33_o5fzdm.png"
+            }
+          },
+          "2": {
+            "title": "Wie erstelle ich ein Sitzungsprotokoll?",
+            "descriptions": {
+              "1": "<span>Sitzungsprotokolle</span> standardmäßig sind <span>automatisch</span> 3 Stunden erstellt <span>nach Ihrer aktiven Meal-Prep-Plan-Sitzung</span>.  <span>Verhalten</span> kann auf der geändert werden <settings>Einstellungsseite</settings> entweder keine Protokolle automatisch zu erstellen, Protokolle nach einer bestimmten Anzahl von Stunden statt nach 3 zu erstellen oder beides.",
+              "2": "<span>Sitzungsprotokolle</span> können ebenfalls erstellt werden <span>manuell</span> auf der <addLog>Protokollseite hinzufügen</addLog>."
+            },
+            "imageAlt": "Sitzungsprotokollbild hinzufügen",
+            "images": {
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715185596/VitalPrep/Screenshot_56_dvrgak.png",
+              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715185699/VitalPrep/Screenshot_57_mjxlki.png"
+            }
+          },
+          "3": {
+            "title": "Wie kann ich ein Sitzungsprotokoll anzeigen?",
+            "descriptions": {
+              "1": "Zu <span>Sicht</span> all dein <span>Sitzungsprotokolle</span>, verwenden Sie die <multiViewTool>Multi-View-Tool-Seite</multiViewTool>.  <span>individuelles Sitzungsprotokoll</span> Klicken Sie im Detail auf eine beliebige <span>Sitzungsprotokoll</span> Komponente auf der <multiViewTool>Multi-View-Tool-Seite</multiViewTool>."
+            },
+            "imageAlt": "Sitzungsprotokollbild anzeigen",
+            "images": {
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715185923/VitalPrep/Screenshot_59_bdjdnw.png",
+              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715185889/VitalPrep/Screenshot_58_aljwha.png"
+            }
+          }
+        }
+      },
+      "extras": {
+        "title": "Profil, Einstellungen und Extras",
+        "articles": {
+          "1": {
+            "title": "Profil",
+            "descriptions": {
+              "1": "Um Ihre anzuzeigen <span>Profil</span>, Sie können entweder über das darauf zugreifen <span>Navigationsleiste</span> oder <span>Seitenleiste</span> an die gesendet werden <profile>Profilseite</profile>.",
+              "2": "Auf der <profile>Profilseite</profile> Sie können Ihren Benutzernamen, Ihre E-Mail-Adresse, Ihr Alter, Statistiken und alle von Ihnen erstellten Entitäten anzeigen."
+            },
+            "imageAlt": "Profilabschnittsbild",
+            "images": {
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715187350/VitalPrep/Screenshot_60_cch6wk.png",
+              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715187384/VitalPrep/Screenshot_61_frtxb0.png",
+              "3": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715187473/VitalPrep/Screenshot_62_u2tbk6.png",
+              "4": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715187500/VitalPrep/Screenshot_63_ovkvtp.png"
+            }
+          },
+          "2": {
+            "title": "Einstellungen",
+            "descriptions": {
+              "1": "Dein <span>Profildetails</span> oder <span>Benachrichtigungseinstellungen</span> kann auf der geändert werden <settings>Einstellungsseite</settings>.",
+              "2": "Das Verfügbare <span>Profileinstellungen</span> sind: Benutzername, E-Mail, Passwort, Profilbild."
+            },
+            "imageAlt": "Bild des Abschnitts „Einstellungen“.",
+            "images": {
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715185596/VitalPrep/Screenshot_56_dvrgak.png",
+              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715187685/VitalPrep/Screenshot_64_vxekot.png"
+            }
+          },
+          "3": {
+            "title": "Rückmeldung",
+            "descriptions": {
+              "1": "Um uns etwas zu geben <span>Rückmeldung</span> In der App können Sie dies tun, indem Sie uns über das E-Mail-Formular eine E-Mail senden <contact>Kontaktseite</contact>. "
+            },
+            "imageAlt": "Bild des Feedback-Abschnitts",
+            "images": {
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715187774/VitalPrep/Screenshot_65_gkix9r.png"
+            }
+          },
+          "4": {
+            "title": "Benachrichtigungen",
+            "descriptions": {
+              "1": "Bekommen <span>Benachrichtigungen vom Typ Erinnerung</span> während ich ein <span>Essensvorbereitungsplan aktiv</span> du musst <span>Abonnieren Sie unseren Benachrichtigungsdienst</span> entweder durch die <span>Glocke</span> in der unteren rechten Ecke des Bildschirms oder durch unsere fixiert <span>modal</span>.",
+              "2": "Du kannst <span>abbestellen</span> wann immer Sie möchten, indem Sie auf die Glocke klicken und dann Abmelden."
+            },
+            "imageAlt": "Bild des Abschnitts „Benachrichtigungen“.",
+            "images": {
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715188301/VitalPrep/Screenshot_66_ryl1fc.png"
+            }
+          },
+          "5": {
+            "title": "Abschluss",
+            "descriptions": {
+              "1": "Mit allem, was Sie gelernt haben, können Sie unsere App jetzt für die organisiertere Zubereitung von Mahlzeiten verwenden und verfügen dabei über Protokollierungsfunktionen und Erinnerungsbenachrichtigungen. "
+            },
+            "imageAlt": "VitalPrep-Logobild",
+            "images": {
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715188430/VitalPrep/brandmark-design-1920x1080_sp2kds.png"
+            }
+          }
+        }
+      }
+    }
+  },
+  "faq": {
+    "accordionShowTitle": "{title}-Inhalt anzeigen",
+    "accordionHideTitle": "{title}-Inhalt ausblenden",
+    "sections": {
+      "1": {
+        "sectionTitle": "Einführung in die Essenszubereitung",
+        "sectionDescription": "Im Folgenden finden Sie einige häufig gestellte Fragen von Leuten, die neu in der Essenszubereitung sind und nicht wissen, wo/wie sie anfangen sollen.",
+        "sectionAccordions": {
+          "1": {
+            "accordionTitle": "Was ist Meal Prepping?",
+            "accordionContent": "Beim Meal Prepping geht es darum, Mahlzeiten im Voraus zuzubereiten und zu portionieren, typischerweise für mehrere Tage am Stück. "
+          },
+          "2": {
+            "accordionTitle": "Wie spart Meal Prepping Zeit?",
+            "accordionContent": "Die Zubereitung von Mahlzeiten spart Zeit, da Sie mehrere Mahlzeiten gleichzeitig zubereiten können, normalerweise an einem bestimmten Tag, z. B. einem Wochenende. "
+          },
+          "3": {
+            "accordionTitle": "Welche Vorteile bietet Meal Prepping?",
+            "accordionContent": "Die Zubereitung von Mahlzeiten bietet mehrere Vorteile, darunter Zeitersparnis, gesündere Ernährung, Portionskontrolle, Kosteneffizienz, weniger Lebensmittelverschwendung und Konsistenz."
+          },
+          "4": {
+            "accordionTitle": "Wie beginne ich als Anfänger mit Meal Prepping?",
+            "accordionContent": "Um als Anfänger mit der Essenszubereitung zu beginnen, planen Sie zunächst Ihre Mahlzeiten, erstellen Sie eine Einkaufsliste, nehmen Sie sich Zeit, investieren Sie in Vorratsbehälter, kochen Sie in Portionen, portionieren Sie die Mahlzeiten, lagern Sie sie richtig und erwärmen Sie sie auf, wenn Sie sie zum Verzehr benötigen."
+          }
+        }
+      },
+      "2": {
+        "sectionTitle": "Grundlagen der Essenszubereitung",
+        "sectionDescription": "Im Folgenden finden Sie einige häufig gestellte Fragen von Personen, die mit der Zubereitung von Mahlzeiten begonnen haben und mehr über den gesamten Prozess erfahren möchten.",
+        "sectionAccordions": {
+          "1": {
+            "accordionTitle": "Welche Ausrüstung benötige ich für das Meal Prepping?",
+            "accordionContent": "Für die Zubereitung von Mahlzeiten benötigen Sie eine grundlegende Küchenausrüstung wie Messer, Schneidebretter, Töpfe und Pfannen, Behälter für die Zubereitung von Mahlzeiten, eine Lebensmittelwaage, Rührschüsseln sowie Messbecher und -löffel."
+          },
+          "2": {
+            "accordionTitle": "Wie lange sind fertig zubereitete Mahlzeiten normalerweise im Kühl- oder Gefrierschrank haltbar?",
+            "accordionContent": "Vorgefertigte Mahlzeiten halten sich im Kühlschrank in der Regel etwa drei bis vier Tage und im Gefrierschrank ein bis zwei Monate, abhängig von der Art der Lebensmittel und der Verpackungsqualität. "
+          },
+          "3": {
+            "accordionTitle": "Wie stelle ich sicher, dass meine zubereiteten Lebensmittel die ganze Woche über frisch bleiben?",
+            "accordionContent": "Um sicherzustellen, dass Ihre zubereiteten Speisen die ganze Woche über frisch bleiben, verwenden Sie luftdichte Behälter, stellen Sie sie umgehend in den Kühlschrank, beschriften Sie die Behälter mit dem Zubereitungsdatum, teilen Sie die Mahlzeiten richtig auf und vermeiden Sie es, Behälter unnötig zu öffnen."
+          },
+          "4": {
+            "accordionTitle": "Kann ich meine Meal Prep an meine Ernährungsziele anpassen?",
+            "accordionContent": "Ja, Sie können die Zubereitung Ihrer Mahlzeiten individuell an Ihre Ernährungsziele anpassen. "
+          },
+          "5": {
+            "accordionTitle": "Wie berechne ich Portionsgrößen für das Meal Prepping?",
+            "accordionContent": "Um die Portionsgrößen für die Zubereitung von Mahlzeiten zu berechnen, ermitteln Sie zunächst Ihren Nährstoffbedarf anhand von Faktoren wie Alter, Geschlecht, Gewicht und Aktivitätsniveau. "
+          },
+          "6": {
+            "accordionTitle": "Wie oft sollte ich Meal Prep zubereiten?",
+            "accordionContent": "Wie oft Sie eine Mahlzeit zubereiten sollten, hängt von Ihrem persönlichen Zeitplan und Ihren Vorlieben ab. "
+          },
+          "7": {
+            "accordionTitle": "Ist Meal Prepping kosteneffektiv?",
+            "accordionContent": "Ja, die Zubereitung von Mahlzeiten ist oft kostengünstig. "
+          }
+        }
+      },
+      "3": {
+        "sectionTitle": "Rezepte und Ideen für die Zubereitung von Mahlzeiten",
+        "sectionDescription": "Im Folgenden finden Sie einige häufig gestellte Fragen von Personen, die spezifischere Fragen haben und/oder ihre Essenszubereitungen aufpeppen möchten.",
+        "sectionAccordions": {
+          "1": {
+            "accordionTitle": "Welche häufigen Fehler bei der Zubereitung von Mahlzeiten sollten Sie vermeiden?",
+            "accordionContent": "Zu den häufigen Fehlern bei der Essenszubereitung, die es zu vermeiden gilt, gehören mangelnde Planung, die Verwendung falscher Vorratsbehälter, die Vernachlässigung der Speisenvielfalt, die Nichtberücksichtigung der Portionsgrößen und die fehlende Kennzeichnung der Behälter mit dem Zubereitungsdatum."
+          },
+          "2": {
+            "accordionTitle": "Was sind einige einfache Meal-Prep-Rezepte für Anfänger?",
+            "accordionContent": "Einige einfache Meal-Prep-Rezepte für Anfänger umfassen Overnight Oats, Hähnchen und Gemüse aus der Blechpfanne, Quinoa-Salatschüsseln, Gemüsepfanne mit Reis sowie Truthahn- und schwarze Bohnen-Wraps. "
+          },
+          "3": {
+            "accordionTitle": "Wie beuge ich Langeweile beim Meal Prepping vor?",
+            "accordionContent": "Um Langeweile bei der Essenszubereitung zu vermeiden, sorgen Sie für Abwechslung, indem Sie mit verschiedenen Rezepten, Geschmacksrichtungen und Küchen experimentieren. "
+          },
+          "4": {
+            "accordionTitle": "Kann ich Meal Prep trotzdem anwenden, wenn ich diätetische Einschränkungen oder Nahrungsmittelallergien habe?",
+            "accordionContent": "Absolut! "
+          },
+          "5": {
+            "accordionTitle": "Kann ich Meal Prep für bestimmte Diäten wie Keto, vegan oder glutenfrei zubereiten?",
+            "accordionContent": "Ja, Sie können Mahlzeiten für bestimmte Diäten wie Keto, vegan oder glutenfrei zubereiten. "
+          },
+          "6": {
+            "accordionTitle": "Kann ich auch Meal-Prep-Snacks und Desserts zubereiten?",
+            "accordionContent": "Ja, Sie können auf jeden Fall Snacks und Desserts zubereiten. "
+          },
+          "7": {
+            "accordionTitle": "Wie halte ich meine Fertiggerichte interessant und schmackhaft?",
+            "accordionContent": "Damit Ihre zubereiteten Mahlzeiten interessant und aromatisch bleiben, experimentieren Sie mit einer Vielzahl von Kräutern, Gewürzen, Saucen und Marinaden, um dem Geschmack mehr Tiefe zu verleihen. "
+          }
+        }
+      },
+      "4": {
+        "sectionTitle": "Lagerung und praktische Tipps",
+        "sectionDescription": "Im Folgenden finden Sie einige häufig gestellte Fragen von Personen, die Fragen zu effizienter Eindämmung, Garzeit, Größe und Aufwärmen von Mahlzeiten bei der Zubereitung von Mahlzeiten haben.",
+        "sectionAccordions": {
+          "1": {
+            "accordionTitle": "Wie lagere ich Fertiggerichte richtig?",
+            "accordionContent": "Füllen Sie Ihre Mahlzeiten nach der Essenszubereitung in luftdichte Behälter, um die Frische zu bewahren und Kontaminationen zu vermeiden. "
+          },
+          "2": {
+            "accordionTitle": "Was sind die besten Behälter für die Aufbewahrung von Fertiggerichten?",
+            "accordionContent": "Die besten Behälter zum Aufbewahren von Fertiggerichten sind luftdichte Behälter aus Glas oder BPA-freiem Kunststoff. "
+          },
+          "3": {
+            "accordionTitle": "Kann ich Mahlzeiten für die ganze Familie zubereiten?",
+            "accordionContent": "Ja, Sie können definitiv Mahlzeiten für die ganze Familie zubereiten. "
+          },
+          "4": {
+            "accordionTitle": "Wie viele Mahlzeiten sollte ich idealerweise in meine Meal Prep einbeziehen?",
+            "accordionContent": "Die ideale Anzahl an Mahlzeiten, die Sie in Ihre Meal Prep einbeziehen sollten, hängt von Ihrem persönlichen Zeitplan und Ihren Ernährungsbedürfnissen ab. "
+          },
+          "5": {
+            "accordionTitle": "Wie erwärme ich vorgefertigte Speisen, um ihre Qualität zu erhalten?",
+            "accordionContent": "Um die Qualität der zubereiteten Speisen beim Aufwärmen beizubehalten, ist es am besten, sanfte Erhitzungsmethoden wie Mikrowelle, Dämpfen oder Aufwärmen im Ofen zu verwenden. "
+          },
+          "6": {
+            "accordionTitle": "Was ist die empfohlene Dauer für meine Meal-Prep-Kochsitzungen?",
+            "accordionContent": "Die empfohlene Dauer für Meal-Prep-Kochsitzungen hängt von Faktoren wie der Anzahl der Mahlzeiten, die Sie zubereiten, Ihren Kochkünsten und der Komplexität der Rezepte ab. "
+          }
+        }
+      }
+    }
+  },
+  "about": {
+    "sections": {
+      "1": {
+        "sectionTitle": "Einführung",
+        "descriptions": {
+          "1": "Bei dieser App geht es darum, einem Benutzer die Möglichkeit zu geben, auf dynamische Weise Mahlzeiten zuzubereiten und dabei seine eigenen Zutaten, Rezepte usw. zu verwenden.",
+          "2": "Als ich diese App erstellt habe, wollte ich eine App für mich selbst erstellen, die meine Essenszubereitungen protokolliert und es mir ermöglicht, weitere Rezepte für meine zukünftigen Essenszubereitungen zu erstellen. "
+        }
+      },
+      "2": {
+        "sectionTitle": "Frontend-Technologien",
+        "sectionDescription": "Die folgenden Technologien habe ich im Frontend verwendet, um diese App zu erstellen:"
+      },
+      "3": {
+        "sectionTitle": "Backend-Technologien",
+        "sectionDescription": "Die folgenden Technologien habe ich im Backend verwendet, um diese App zu erstellen:"
+      },
+      "4": {
+        "sectionTitle": "Cloud-Services",
+        "sectionDescription": "Die folgenden Cloud-Dienste habe ich zum Hosten des Frontends, Backends und der Datenbanken verwendet:"
+      },
+      "5": {
+        "sectionTitle": "Andere",
+        "sectionDescription": "Im Folgenden sind weitere Technologien aufgeführt, die ich verwendet habe, die oben jedoch nicht aufgeführt sind:",
+        "sectionSubTitles": {
+          "1": "Medienmanagement",
+          "2": "Versionskontrollsystem (VCS)"
+        }
+      }
+    }
+  },
+  "contact": {
+    "emailForm": {
+      "title": "Schreiben Sie uns eine E-Mail",
+      "formLabels": {
+        "subject": "Thema:",
+        "message": "Nachricht:",
+        "buttonContent": "E-Mail senden"
+      }
+    },
+    "contactInfo": {
+      "title": "Kontaktiere uns",
+      "info": {
+        "phoneNumber": "Telefonnummer: {phoneNumber}",
+        "email": "Email Email}"
+      }
+    }
+  },
+  "langSwitcher": {
+    "locale": "Sprache in {locale} ändern",
+    "values": {
+      "ro": "Rumänisch",
+      "en": "Englisch",
+      "fr": "Französisch",
+      "de": "Deutsch"
+    }
+  },
+  "warningOverlay": {
+    "pageInfo": {
+      "ingredient": "Seitenzutat",
+      "utensil": "Seite Utensil",
+      "recipe": "Seite Rezept",
+      "dayTemplate": "Seitentagesplan",
+      "instanceTemplate": "Seitensitzungsvorlage",
+      "mealPrepPlan": "Seite Essenszubereitungsplan",
+      "mealPrepLog": "Seitensitzungsprotokoll"
+    },
+    "buttons": {
+      "titles": {
+        "no": "Geh zurück",
+        "yes": "Akzeptieren"
+      },
+      "content": {
+        "no": "NEIN",
+        "yes": "Ja"
+      }
+    },
+    "messages": {
+      "deleteEntityMessage": "Sind Sie wirklich sicher, dass Sie den folgenden {entityType} dauerhaft löschen möchten: {entityName}?",
+      "saveAccountSettingsMessage": "Sind Sie sicher, dass Sie Ihre Kontoeinstellungen speichern möchten?",
+      "saveNotificationSettingsMessage": "Sind Sie sicher, dass Sie Ihre Benachrichtigungseinstellungen speichern möchten?"
+    }
+  }
+}

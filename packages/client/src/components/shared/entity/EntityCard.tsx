@@ -37,6 +37,8 @@ const EntityCard: FC<EntityCardProps> = ({
   let windowWidth = useGetWindowWidth();
   let tabletAndPhoneRedesign = windowWidth && windowWidth <= 600;
 
+  console.log(entityType, entityUsed?.userId);
+
   const {
     defaultImageUrlShownBasedOnEntityType,
     entityIdentifier,
@@ -56,6 +58,8 @@ const EntityCard: FC<EntityCardProps> = ({
             parentRef={entityCardRef}
             handleEntityDeletion={deleteEntityFunction}
             handleEntityModification={updateEntityFunction}
+            entityName={entityUsed?.name}
+            entityType={entityType}
           />
         )}
         <Link

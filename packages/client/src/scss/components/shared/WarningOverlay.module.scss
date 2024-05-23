@@ -14,10 +14,6 @@
     opacity 0.135s linear;
   transform: scale(0);
   opacity: 0;
-
-  @media screen and (max-width: 1200px) {
-    gap: 3rem;
-  }
 }
 
 .warningOverlayContent {
@@ -30,9 +26,27 @@
   gap: 4rem;
   max-width: 60%;
 
+  @media screen and (max-width: 1500px) {
+    padding: 4rem 2rem;
+  }
+  @media screen and (max-width: 600px) {
+    padding: 4rem 0.5rem;
+    max-width: 80%;
+  }
+  @media screen and (max-width: 350px) {
+    max-width: 90%;
+  }
+
   h6 {
     @include heading("h5", "laptop", "black");
     text-align: center;
+
+    @media screen and (max-width: 1200px) {
+      @include heading("h5", "tablet", "black");
+    }
+    @media screen and (max-width: 600px) {
+      @include heading("h6", "phone", "black");
+    }
   }
 }
 
@@ -42,18 +56,27 @@
   gap: 2rem;
   justify-content: space-evenly;
 
+  @media screen and (max-width: 1200px) {
+    gap: 0.5rem;
+  }
+
   button {
     @include flexCenter(row);
-    @include heading("h6", "phone", "white");
+    @include heading("h5", "phone", "white");
     font-weight: 550;
     border: 1.5px solid getColor("black-75-1");
     background-color: getColor("primary-1");
     border-radius: 10px;
-    padding: 0.5rem 2.5rem;
+    padding: 0.75rem 3.75rem;
 
+    @media screen and (max-width: 1200px) {
+      @include heading("h6", "phone", "white");
+      padding: 0.5rem 2.5rem;
+      gap: 0.5rem;
+    }
     @media screen and (max-width: 600px) {
       @include paragraph("phone", "white");
-      padding: 0.5rem 1.5rem;
+      padding: 0.45rem 2.4rem;
     }
 
     transition: $crispyTransformTransition;

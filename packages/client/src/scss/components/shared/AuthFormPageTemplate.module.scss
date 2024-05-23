@@ -98,14 +98,15 @@
     gap: 8px;
 
     h3 {
-      @include heading("h4", "laptop", "black");
+      @include heading("h5", "laptop", "black");
+      text-align: center;
 
       @media screen and (max-width: 1200px) {
-        @include heading("h4", "tablet", "black");
+        @include heading("h5", "tablet", "black");
       }
 
       @media screen and (max-width: 650px) {
-        @include heading("h4", "phone", "black");
+        @include heading("h5", "phone", "black");
       }
     }
 

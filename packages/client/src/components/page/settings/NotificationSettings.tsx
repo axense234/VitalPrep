@@ -5,6 +5,7 @@ import PrimaryButton from "@/components/shared/PrimaryButton";
 import CheckboxFormControl from "@/components/shared/form/CheckboxFormControl";
 import ImageFormControl from "@/components/shared/form/ImageFormControl";
 import RadioFormControl from "@/components/shared/form/RadioFormControl";
+import TextFormControl from "@/components/shared/form/TextFormControl";
 // Data
 import { defaultProfileImageUrl, notificationMessageStyles } from "@/data";
 // Redux
@@ -17,6 +18,7 @@ import {
   setTypeOfUpdateAccountQuery,
   updateTemplateProfileNotificationSettings,
   updateUser,
+  updateWarningOverlay,
 } from "@/redux/slices/generalSlice";
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 // Types
@@ -25,7 +27,6 @@ import UserType from "@/core/types/entity/users/UserType";
 import useUpdateEntityTemplateImageUrl from "@/hooks/useUpdateEntityTemplateImageUrl";
 // Translations
 import { useTranslations } from "next-intl";
-import TextFormControl from "@/components/shared/form/TextFormControl";
 
 const NotificationSettings = () => {
   const dispatch = useAppDispatch();
@@ -36,12 +37,20 @@ const NotificationSettings = () => {
   );
   const loadingUpdateProfile = useAppSelector(selectLoadingUpdateProfile);
 
-  const translate = useTranslations("settings.notificationSettings");
+  const translateNotificationSettings = useTranslations(
+    "settings.notificationSettings"
+  );
+  const translateWarningOverlayMessages = useTranslations(
+    "warningOverlay.messages"
+  );
+
   const translatedNotificationStyles = notificationMessageStyles.map(
     (style) => {
       return {
         ...style,
-        label: translate(`formLabels.notificationStyles.${style.value}`),
+        label: translateNotificationSettings(
+          `formLabels.notificationStyles.${style.value}`
+        ),
       };
     }
   );
@@ -54,10 +63,12 @@ const NotificationSettings = () => {
 
   return (
     <section className={notificationSettingsStyles.accountSettingsContainer}>
-      <h4>{translate("title")}</h4>
+      <h4>{translateNotificationSettings("title")}</h4>
       <form className={notificationSettingsStyles.accountSettingsForm}>
         <CheckboxFormControl
-          labelContent={translate("formLabels.allowNotifications")}
+          labelContent={translateNotificationSettings(
+            "formLabels.allowNotifications"
+          )}
           entityProperty={String(
             templateProfile?.notificationSettings?.allowedNotifications
           )}
@@ -75,7 +86,9 @@ const NotificationSettings = () => {
           entityProperty={
             templateProfile?.notificationSettings?.reminderIntervalInHours
           }
-          labelContent={translate("formLabels.reminderIntervalInHours")}
+          labelContent={translateNotificationSettings(
+            "formLabels.reminderIntervalInHours"
+          )}
           onEntityPropertyValueChange={(e) =>
             dispatch(
               updateTemplateProfileNotificationSettings({
@@ -87,7 +100,9 @@ const NotificationSettings = () => {
           type="number"
         />
         <CheckboxFormControl
-          labelContent={translate("formLabels.allowAutomaticCreationOfLogs")}
+          labelContent={translateNotificationSettings(
+            "formLabels.allowAutomaticCreationOfLogs"
+          )}
           entityProperty={String(
             templateProfile?.notificationSettings?.allowAutomaticCreationOfLogs
           )}
@@ -102,7 +117,9 @@ const NotificationSettings = () => {
           }}
         />
         <CheckboxFormControl
-          labelContent={translate("formLabels.allowDayReminderNotifications")}
+          labelContent={translateNotificationSettings(
+            "formLabels.allowDayReminderNotifications"
+          )}
           entityProperty={String(
             templateProfile?.notificationSettings?.allowDayReminderNotifications
           )}
@@ -117,7 +134,7 @@ const NotificationSettings = () => {
           }}
         />
         <CheckboxFormControl
-          labelContent={translate(
+          labelContent={translateNotificationSettings(
             "formLabels.allowPreSessionReminderNotifications"
           )}
           entityProperty={String(
@@ -135,7 +152,7 @@ const NotificationSettings = () => {
           }}
         />
         <CheckboxFormControl
-          labelContent={translate(
+          labelContent={translateNotificationSettings(
             "formLabels.allowPostSessionReminderNotifications"
           )}
           entityProperty={String(
@@ -153,7 +170,9 @@ const NotificationSettings = () => {
           }}
         />
         <ImageFormControl
-          labelContent={translate("formLabels.notificationsImage")}
+          labelContent={translateNotificationSettings(
+            "formLabels.notificationsImage"
+          )}
           defaultImageUsedUrl={defaultProfileImageUrl}
           entityPropertyLoadingStatus={loadingCloudinaryImage}
           entityProperty={
@@ -176,7 +195,9 @@ const NotificationSettings = () => {
         <RadioFormControl
           chosenEntityProperty={`${templateProfile?.notificationSettings?.notificationStyle.toLowerCase()}`}
           entityPropertyOptions={translatedNotificationStyles}
-          labelContent={translate("formLabels.notificationStyles.formLabel")}
+          labelContent={translateNotificationSettings(
+            "formLabels.notificationStyles.formLabel"
+          )}
           onEntityPropertyValueChange={(value: string) =>
             dispatch(
               updateTemplateProfileNotificationSettings({
@@ -187,19 +208,33 @@ const NotificationSettings = () => {
           }
         />
         <PrimaryButton
-          content={translate("formLabels.submitButtonContent")}
+          content={translateNotificationSettings(
+            "formLabels.submitButtonContent"
+          )}
           type="functional"
           disabled={
             loadingCloudinaryImage === "PENDING" ||
             loadingUpdateProfile === "PENDING"
           }
-          onClickFunction={() => {
+          onClickFunction={(e) => {
             {
-              dispatch(setTypeOfUpdateAccountQuery("notification"));
+              e.preventDefault();
               dispatch(
-                updateUser({
-                  typeOfUpdate: "notification",
-                  userTemplate: templateProfile,
+                updateWarningOverlay({
+                  countdownSeconds: 5,
+                  onConfirmFunction: () => {
+                    dispatch(setTypeOfUpdateAccountQuery("notification"));
+                    dispatch(
+                      updateUser({
+                        typeOfUpdate: "notification",
+                        userTemplate: templateProfile,
+                      })
+                    );
+                  },
+                  overlayMessage: translateWarningOverlayMessages(
+                    "saveNotificationSettingsMessage"
+                  ),
+                  showOverlay: true,
                 })
               );
             }

@@ -18,6 +18,8 @@ import EntityInfoProps from "@/core/interfaces/entity/EntityInfoProps";
 // Hooks
 import useNavigateToPathname from "@/hooks/useNavigateToPathname";
 import useGetHandleOnDeleteEntity from "@/hooks/useGetHandleOnDeleteEntity";
+// Translations
+import { useTranslations } from "next-intl";
 
 const MealPrepPlanInfo: FC<EntityInfoProps> = ({
   entityId,
@@ -36,6 +38,8 @@ const MealPrepPlanInfo: FC<EntityInfoProps> = ({
     userId
   );
 
+  const translate = useTranslations("warningOverlay.pageInfo");
+
   useEffect(() => {
     console.log(loadingGetUserMealPrepPlan, userId, entityId);
     if (loadingGetUserMealPrepPlan === "IDLE" && userId && entityId) {
@@ -51,6 +55,8 @@ const MealPrepPlanInfo: FC<EntityInfoProps> = ({
           type="entityInfo"
           handleEntityDeletion={handleOnDeleteEntity}
           handleEntityModification={() => navigateToPathname({})}
+          entityType="mealPrepPlan"
+          entityName={translate("mealPrepPlan")}
         />
       )}
       <div className={entityInfoStyles.entityInfoContent}>

@@ -50,6 +50,20 @@ export const langFlagsImages = [
     imageLabel: "English",
     value: "en",
   },
+  {
+    id: 3,
+    imageSrc:
+      "https://res.cloudinary.com/birthdayreminder/image/upload/v1716454499/Flag_of_France_wl0boq.png",
+    imageLabel: "French",
+    value: "fr",
+  },
+  {
+    id: 4,
+    imageSrc:
+      "https://res.cloudinary.com/birthdayreminder/image/upload/v1716455526/Flag_of_Germany__3-2_.svg_jxwz7r.png",
+    imageLabel: "German",
+    value: "de",
+  },
 ];
 
 export const gettingStartedGuideContentMapContent: GettingStartedContentMapContentType =

@@ -58,6 +58,7 @@ export const getAllUserUtensils = createAsyncThunk<
       entityQueryValues;
     const { data } = await axiosInstance.get(`/utensils`, {
       params: {
+        userUtensils: true,
         userId,
         userIngredients: true,
         searchByKey,

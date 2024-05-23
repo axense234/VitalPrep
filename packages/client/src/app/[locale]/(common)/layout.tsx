@@ -16,9 +16,6 @@ import {
   selectLoadingGetProfile,
   selectProfile,
   selectSelectedEntityOption,
-  setLocale,
-  setParams,
-  setPathname,
   signupUserOAuth,
 } from "@/redux/slices/generalSlice";
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
@@ -34,7 +31,6 @@ import {
 } from "@/helpers/initializeOneSignal";
 // Next
 import Script from "next/script";
-import { useParams } from "next/navigation";
 // Translations
 import { usePathname } from "@/navigation";
 import { useLocale } from "next-intl";
@@ -51,15 +47,9 @@ const SpecialLayout = ({ children }: { children: React.ReactNode }) => {
   const createEntityOption = useAppSelector(selectSelectedEntityOption);
   Chart.register([LineElement, PointElement, BarElement, ArcElement]);
 
-  const locale = useLocale();
-  const params = useParams();
   const pathname = usePathname();
 
-  useEffect(() => {
-    dispatch(setLocale(locale));
-    dispatch(setParams(params));
-    dispatch(setPathname(pathname));
-  }, [pathname, params, locale]);
+  const locale = useLocale();
 
   useEffect(() => {
     dispatch(resetTemplateImageUrl());
@@ -95,7 +85,7 @@ const SpecialLayout = ({ children }: { children: React.ReactNode }) => {
     );
     if (createVitalPrepAccount === "create" && !hasEffectRun.current) {
       hasEffectRun.current = true;
-      dispatch(signupUserOAuth());
+      dispatch(signupUserOAuth(locale));
     }
   }, []);
 

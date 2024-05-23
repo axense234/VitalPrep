@@ -1,0 +1,1055 @@
+{
+  "login": {
+    "title": "Se connecter",
+    "subtitle": "Vous n'avez pas de compte ?",
+    "subtitleLink": "S'inscrire",
+    "oauth": {
+      "firstMessage": "- connexion rapide avec OAuth - ",
+      "secondMessage": "- ou avec email et mot de passe - ",
+      "buttons": {
+        "google": "Connectez-vous avec Google",
+        "github": "Connectez-vous avec Github"
+      }
+    },
+    "formLabels": {
+      "email": "E-mail:",
+      "password": "Mot de passe:",
+      "button": "Se connecter"
+    }
+  },
+  "signup": {
+    "title": "S'inscrire",
+    "subtitle": "Avoir un compte?",
+    "subtitleLink": "Se connecter",
+    "oauth": {
+      "firstMessage": "- inscription rapide avec OAuth - ",
+      "secondMessage": "- ou avec email et mot de passe - ",
+      "buttons": {
+        "google": "Inscrivez-vous avec Google",
+        "github": "Inscrivez-vous avec Github"
+      }
+    },
+    "formLabels": {
+      "username": "Nom d'utilisateur:",
+      "email": "E-mail:",
+      "password": "Mot de passe:",
+      "profileImage": "Image de profil :",
+      "age": "Âge:",
+      "button": "S'inscrire",
+      "reCAPTCHA": "Confirmez que vous n'êtes pas un robot !"
+    }
+  },
+  "home": {
+    "sections": {
+      "section-1": {
+        "sectionTitle": "VitalPrep",
+        "sectionSubTitle": "aide à la préparation des repas",
+        "ctaButtonContent": "Commencer",
+        "sectionDescription": "VitalPrep est une application complexe d'aide à la préparation des repas qui aide les gens à créer des plans de préparation des repas et à suivre ces plans respectifs."
+      },
+      "section-2": {
+        "sectionTitle": "Meal Prep",
+        "sectionSubTitle": "qu'est-ce que c'est?",
+        "ctaButtonContent": "Apprendre encore plus",
+        "sectionDescription": "Meal Prep, abréviation de préparation des repas, est la pratique consistant à planifier et préparer des repas à l'avance, généralement pour une période de plusieurs jours à une semaine."
+      },
+      "section-3": {
+        "sectionTitle": "Schéma du plan",
+        "sectionSubTitle": "le plan de préparation des repas",
+        "sectionImage": "https://res.cloudinary.com/birthdayreminder/image/upload/v1716111050/mpp-scheme-en_jpit3n.jpg",
+        "imageOverlay": {
+          "closeOverlayTitle": "Fermer l'image en plein écran"
+        },
+        "sectionImageTitle": "Image du plan de préparation des repas",
+        "sectionDescriptions": {
+          "1": "Un plan de préparation de repas peut être facilement compris en observant le schéma suivant.",
+          "2": "Pour expliquer le schéma en quelques mots, un Meal Prep Plan représente le plan hebdomadaire que vous suivrez pour préparer vos repas. ",
+          "3": "Lorsque vous préparerez ces repas, vous les préparerez pendant un intervalle de plusieurs jours. ",
+          "4": "Chaque modèle de session est composé de plans de jour. "
+        }
+      },
+      "section-4": {
+        "sectionTitle": "Avantages de la Meal Prep",
+        "sectionSubTitle": "ce que tu cherches",
+        "items": {
+          "item-1": {
+            "itemTitle": "Argent et temps",
+            "itemDescription": "La préparation des repas vous fait gagner du temps en n'ayant pas à cuisiner tous les jours et de l'argent puisque les ingrédients ont tendance à coûter beaucoup moins cher que les autres options."
+          },
+          "item-2": {
+            "itemTitle": "Santé",
+            "itemDescription": "La préparation des repas a tendance à utiliser des ingrédients souvent extrêmement nutritifs avec un indice de satiété élevé et une faible densité calorique."
+          },
+          "item-3": {
+            "itemTitle": "Réduction du stress",
+            "itemDescription": "Meal Prepping ne vous laisse aucun souci concernant la nourriture puisque vous avez préparé des repas disponibles. "
+          }
+        }
+      },
+      "section-5": {
+        "sectionTitle": "Des difficultés?",
+        "sectionSubTitle": "nous pouvons aider",
+        "appHelpDescription": "Compte tenu de la complexité de l’application, vous vous retrouverez parfois confus.  ",
+        "appHelpLinkLabel": "Page de Guide",
+        "mealPrepHelpDescription": "Si vous avez une question sur la préparation des repas en général à laquelle il faut répondre, nous pouvons vous aider.  ",
+        "mealPrepHelpLinkLabel": "Page FAQ"
+      }
+    }
+  },
+  "navbar": {
+    "navbarTitleTextContent": "Aller au profil",
+    "navbarImageAltTextContent": "Image de profil",
+    "navbarUsernameDefaultValue": "Nom d'utilisateur"
+  },
+  "pageLinks": {
+    "labels": {
+      "/home": "Maison",
+      "/logs": "Journaux de session",
+      "/create-log": "Ajouter un journal de session",
+      "/create-tool": "Créer un Outil",
+      "/multi-view-tool": "Outil Multi-Vues",
+      "/profile": "Profil",
+      "/settings": "Paramètres",
+      "/guide": "Commencer",
+      "/faq": "FAQ",
+      "/about": "À propos",
+      "/contact": "Contact",
+      "/logout": "Se déconnecter"
+    }
+  },
+  "footer": {
+    "contact": {
+      "phoneNumberTitle": "Numéro de téléphone:",
+      "emailTitle": "E-mail:"
+    }
+  },
+  "pageTitles": {
+    "titles": {
+      "/logs": {
+        "titleTextContent": "Journaux de session",
+        "subTitleTextContent": "voir tous vos journaux"
+      },
+      "/create-tool": {
+        "titleTextContent": "Créer un Outil",
+        "subTitleTextContent": "créez ce dont vous avez besoin"
+      },
+      "/create-log": {
+        "titleTextContent": "Ajouter un journal de session",
+        "subTitleTextContent": "enregistrez votre journal de session"
+      },
+      "/multi-view-tool": {
+        "titleTextContent": "Outil Multi-Vues",
+        "subTitleTextContent": "voir tout ce dont vous avez besoin"
+      },
+      "/profile": {
+        "titleTextContent": "Profil",
+        "subTitleTextContent": "voir votre profil"
+      },
+      "/settings": {
+        "titleTextContent": "Paramètres",
+        "subTitleTextContent": "mettez à jour vos paramètres"
+      },
+      "/guide": {
+        "titleTextContent": "Commencer",
+        "subTitleTextContent": "le guide de base de VitalPrep"
+      },
+      "/faq": {
+        "titleTextContent": "FAQ",
+        "subTitleTextContent": "Questions fréquemment posées"
+      },
+      "/about": {
+        "titleTextContent": "À propos",
+        "subTitleTextContent": "en savoir plus sur nous et l'application"
+      },
+      "/contact": {
+        "titleTextContent": "Contact",
+        "subTitleTextContent": "Prenez contact avec nous"
+      },
+      "/ingredient": {
+        "titleTextContent": "Voir l'ingrédient",
+        "subTitleTextContent": "la base de chaque recette"
+      },
+      "/utensil": {
+        "titleTextContent": "Voir l'ustensile",
+        "subTitleTextContent": "votre outil de cuisine"
+      },
+      "/recipe": {
+        "titleTextContent": "Voir la recette",
+        "subTitleTextContent": "savourer et apprécier"
+      },
+      "/dayTemplate": {
+        "titleTextContent": "Voir le plan journalier",
+        "subTitleTextContent": "votre programme de journée"
+      },
+      "/instanceTemplate": {
+        "titleTextContent": "Afficher le modèle de session",
+        "subTitleTextContent": "votre programme de séances hebdomadaires"
+      },
+      "/mealPrepPlan": {
+        "titleTextContent": "Voir le plan de préparation des repas",
+        "subTitleTextContent": "votre plan à suivre"
+      },
+      "/mealPrepLog": {
+        "titleTextContent": "Afficher le journal de session",
+        "subTitleTextContent": "votre journal de préparation de repas enregistré"
+      }
+    }
+  },
+  "createTool": {
+    "formLabels": {
+      "ingredient": {
+        "formTitle": "Créer un ingrédient",
+        "name": "Nom:",
+        "image": "Image:",
+        "calories": "Calories (pour 100g) :",
+        "proteinAmount": "Protéine(en grammes) :",
+        "carbsAmount": "Glucides (en grammes) :",
+        "fatsAmount": "Graisses (en grammes) :",
+        "enabled": "Activé?:",
+        "createButtonLabel": "Créer un ingrédient"
+      },
+      "utensil": {
+        "formTitle": "Créer un ustensile",
+        "name": "Nom:",
+        "image": "Image:",
+        "enabled": "Activé?:",
+        "createButtonLabel": "Créer un ustensile"
+      },
+      "recipe": {
+        "formTitle": "Créer une recette",
+        "name": "Nom:",
+        "image": "Image:",
+        "tutorial": {
+          "videoTutorialCheckboxLabel": "Utiliser le didacticiel vidéo ? :",
+          "videoTutorialUrlPrompt": "URL du didacticiel :",
+          "writtenTutorialCheckboxLabel": "Utiliser un didacticiel écrit ? :",
+          "writtenTutorialUrlPrompt": "Tutoriel écrit :"
+        },
+        "createButtonLabel": "Créer une recette",
+        "selectFormControlsLabels": {
+          "ingredients": "Ingrédients utilisés :",
+          "utensils": "Ustensiles utilisés"
+        }
+      },
+      "dayTemplate": {
+        "formTitle": "Créer un plan de journée",
+        "name": "Nom:",
+        "image": "Image:",
+        "nbOfEntities": "Nombre de repas :",
+        "createButtonLabel": "Créer un plan de journée",
+        "selectFormControlsLabels": {
+          "componentsLabel": "Recettes",
+          "componentLabel": "Repas"
+        }
+      },
+      "instanceTemplate": {
+        "formTitle": "Créer un modèle de session",
+        "name": "Nom:",
+        "image": "Image:",
+        "nbOfEntities": "Nombre de jours couverts :",
+        "createButtonLabel": "Créer un modèle de session",
+        "selectFormControlsLabels": {
+          "componentsLabel": "Plans de journée individuels :",
+          "componentLabel": "Jour"
+        }
+      },
+      "mealPrepPlan": {
+        "formTitle": "Créer un plan de préparation des repas",
+        "name": "Nom:",
+        "image": "Image:",
+        "nbOfEntities": "Nombre de modèles utilisés :",
+        "createButtonLabel": "Créer un plan de préparation des repas",
+        "selectFormControlsLabels": {
+          "componentsLabel": "Modèles de séances individuelles :",
+          "componentLabel": "Modèle de numéro #{id}",
+          "weekdayLabel": "Jour de la semaine:",
+          "timeLabel": "Heure de début de la séance :"
+        }
+      },
+      "mealPrepLog": {
+        "formTitle": "Ajouter un journal de session",
+        "name": "Nom:",
+        "image": "Image:",
+        "date": "Date:",
+        "completed": "Complété?:",
+        "cookingDuration": "Durée de cuisson :",
+        "createButtonLabel": "Ajouter un journal de session",
+        "selectFormControlsLabels": {
+          "instanceTemplate": "Modèle de session utilisé"
+        }
+      }
+    },
+    "entityOptions": {
+      "labels": {
+        "ingredient": "Ingrédient",
+        "utensil": "Ustensile",
+        "recipe": "Recette",
+        "dayTemplate": "Plan de jour",
+        "instanceTemplate": "Modèle de séance",
+        "mealPrepPlan": "Plan de préparation des repas",
+        "mealPrepLog": "Journal de session"
+      }
+    }
+  },
+  "entityPreview": {
+    "entityDetails": {
+      "title": "Aperçu",
+      "entityLabels": {
+        "ingredient": "Ingrédient",
+        "utensil": "Ustensile",
+        "recipe": "Recette",
+        "dayTemplate": "Plan de jour",
+        "instanceTemplate": "Modèle de séance",
+        "mealPrepPlan": "Plan de préparation des repas",
+        "mealPrepLog": "Journal de session"
+      }
+    },
+    "entityMacros": {
+      "noMacrosMessage": "Aucune macro à afficher.",
+      "macrosTitle": "Macro"
+    }
+  },
+  "entityMenu": {
+    "openActionTitle": "Ouvrir le menu Type d'entité",
+    "closeActionTitle": "Fermer le menu Type d'entité",
+    "selectLabel": "Sélectionner"
+  },
+  "entityMutation": {
+    "entityMenu": {
+      "openMenuTitle": "Ouvrir le menu de mutation d'entité",
+      "closeMenuTitle": "Fermer le menu de mutation d'entité",
+      "deleteEntityTitle": "Supprimer l'entité nommée",
+      "updateEntityTitle": "Mettre à jour l'entité nommée"
+    }
+  },
+  "viewEntityOptions": {
+    "chooseEntity": {
+      "labelContent": "Entité sélectionnée :",
+      "labelName": "choisirEntityOption",
+      "selectLabel": "Sélectionner"
+    },
+    "sortBy": {
+      "labelContent": "Trier par:",
+      "labelName": "trierParOptions",
+      "labelTitle": "Trier par {étiquette}",
+      "selectLabel": "Trier par:",
+      "orderBy": {
+        "titleLabel": "Commande actuelle : {commande}",
+        "titleOption": {
+          "asc": "Ascendant",
+          "desc": "Descendant"
+        }
+      },
+      "sortingOptions": {
+        "labels": {
+          "ingredient": {
+            "enabled": "Disponibilité des ingrédients",
+            "name": "Nom de l'ingrédient",
+            "numberOfRecipes": "Ingrédients couramment utilisés"
+          },
+          "utensil": {
+            "enabled": "Disponibilité des ustensiles",
+            "name": "Nom de l'ustensile",
+            "numberOfRecipes": "Ustensiles couramment utilisés"
+          },
+          "recipe": {
+            "name": "Nom de la recette",
+            "numberOfDayTemplates": "Recettes couramment utilisées"
+          },
+          "dayTemplate": {
+            "name": "Nom du forfait journalier",
+            "numberOfInstanceTemplates": "Plans journaliers couramment utilisés"
+          },
+          "instanceTemplate": {
+            "name": "Nom du modèle de session",
+            "numberOfMealPrepPlans": "Modèles de session couramment utilisés",
+            "coverage": "Couverture des modèles de session"
+          },
+          "mealPrepPlan": {
+            "name": "Nom du plan de préparation des repas"
+          },
+          "mealPrepLog": {
+            "name": "Nom du journal de session",
+            "completed": "Achèvement des journaux de session"
+          }
+        }
+      }
+    },
+    "searchEntity": {
+      "labelContent": "Recherche:",
+      "labelName": "rechercheEntité",
+      "magGlassTitle": "Recherche",
+      "viewType": {
+        "title": "Remplacez l'option d'affichage par {type}",
+        "typeOptions": {
+          "grid": "Grille",
+          "list": "Liste"
+        }
+      }
+    }
+  },
+  "multiViewPage": {
+    "entitiesTitle": {
+      "ingredient": "Ingrédients",
+      "utensil": "Ustensiles",
+      "recipe": "Recettes",
+      "dayTemplate": "Plans de journée",
+      "instanceTemplate": "Modèles de séances",
+      "mealPrepPlan": "Plans de préparation de repas",
+      "mealPrepLog": "Journal de session"
+    },
+    "noEntitiesCase": {
+      "message": "Vous n'avez pas de {title} disponible.  ",
+      "messageLinkTitle": "Accédez à la page Créer un Outil",
+      "messageLinkLabel": "Créer une page d'outil"
+    }
+  },
+  "profile": {
+    "profileInfo": {
+      "profileImageAlt": "Image de profil",
+      "defaultProfileUsername": "Nom d'utilisateur",
+      "defaultProfileEmail": "profilemail@gmail.com",
+      "defaultProfileAge": "Âge inconnu",
+      "profileAge": "{age} ans"
+    }
+  },
+  "entityStatistics": {
+    "title": "Statistiques",
+    "prefix": {
+      "usable": "Utilisé dans ",
+      "component": "Les usages ",
+      "count": "Nombre de "
+    }
+  },
+  "entityAppearances": {
+    "ingredient": {
+      "title": "Les apparences",
+      "sectionTitle": "Ingrédients:"
+    },
+    "utensil": {
+      "title": "Les apparences",
+      "sectionTitle": "Ustensiles:"
+    },
+    "recipe": {
+      "title": "Les apparences",
+      "sectionTitle": "Recettes:"
+    },
+    "dayTemplate": {
+      "title": "Les apparences",
+      "sectionTitle": "Plans de journée :"
+    },
+    "instanceTemplate": {
+      "title": "Les apparences",
+      "sectionTitle": "Modèles de séances :"
+    },
+    "mealPrepPlan": {
+      "title": "Les apparences",
+      "sectionTitle": "Plans de préparation des repas :"
+    },
+    "mealPrepLog": {
+      "title": "Les apparences",
+      "sectionTitle": "Journaux de session :"
+    },
+    "profile": {
+      "title": "Entités créées"
+    }
+  },
+  "entityTutorial": {
+    "iframeTitle": "Tutoriel de recette",
+    "videoTutorial": {
+      "title": "Didacticiel vidéo",
+      "notFoundMessage": "Aucun didacticiel vidéo disponible."
+    },
+    "writtenTutorial": {
+      "title": "Tutoriel écrit",
+      "notFoundMessage": "Aucun didacticiel écrit disponible."
+    }
+  },
+  "entityComponents": {
+    "title": "Composants",
+    "sectionTitle": "{type} utilisé dans {name} :",
+    "defaultEntityName": "Nom de l'entité"
+  },
+  "entityInstanceTemplate": {
+    "title": "Composant",
+    "defaultEntityName": "Exemple d'entité"
+  },
+  "settings": {
+    "accountSettings": {
+      "title": "Paramètres du compte",
+      "formLabels": {
+        "name": "Nouveau nom d'utilisateur:",
+        "email": "Nouveau courriel:",
+        "password": "nouveau mot de passe",
+        "verifyPassword": "vérifier le mot de passe",
+        "image": "Image du nouveau compte",
+        "submitButtonContent": "Mettre à jour les paramètres du compte"
+      }
+    },
+    "notificationSettings": {
+      "title": "Paramètres de notification",
+      "formLabels": {
+        "allowNotifications": "Autoriser les notifications ? :",
+        "allowAutomaticCreationOfLogs": "Créer automatiquement des journaux de session ? :",
+        "allowDayReminderNotifications": "Autoriser les notifications de rappel de jour ? :",
+        "allowPreSessionReminderNotifications": "Autoriser les notifications de pré-session ? :",
+        "allowPostSessionReminderNotifications": "Autoriser les notifications post-session ? :",
+        "reminderIntervalInHours": "Modifier l'intervalle de notifications pré/post :",
+        "notificationsImage": "Image de notification :",
+        "notificationStyles": {
+          "formLabel": "Style de notification :",
+          "default": "Défaut",
+          "serious": "Sérieux",
+          "motivating": "Motivant",
+          "menacing": "Menaçant"
+        },
+        "submitButtonContent": "Mettre à jour les paramètres de notification"
+      }
+    }
+  },
+  "gettingStarted": {
+    "contentMap": {
+      "title": "Contenu du guide",
+      "sectionTitleLabel": "Remplacer la section par {section}",
+      "basics": {
+        "title": "Les bases",
+        "a": {
+          "linkLabel": "Objectif du guide",
+          "linkDest": "#guideObjectif"
+        },
+        "b": {
+          "linkLabel": "Créer une page d'outil",
+          "linkDest": "#createToolPage"
+        },
+        "c": {
+          "linkLabel": "Page d'outils multi-vues",
+          "linkDest": "#multiViewToolPage"
+        },
+        "d": {
+          "linkLabel": "Afficher la page de l'outil",
+          "linkDest": "#viewToolPage"
+        }
+      },
+      "entities": {
+        "title": "Entités",
+        "a": {
+          "linkLabel": "Ingrédients",
+          "linkDest": "#ingrédients"
+        },
+        "b": {
+          "linkLabel": "Ustensiles",
+          "linkDest": "#ustensiles"
+        },
+        "c": {
+          "linkLabel": "Recettes",
+          "linkDest": "#recettes"
+        },
+        "d": {
+          "linkLabel": "Plans de journée",
+          "linkDest": "#plansjour"
+        },
+        "e": {
+          "linkLabel": "Modèles de séances",
+          "linkDest": "#sessionModèles"
+        },
+        "f": {
+          "linkLabel": "Plans de préparation de repas",
+          "linkDest": "#mealPrepPlans"
+        }
+      },
+      "logs": {
+        "title": "Journaux de session",
+        "a": {
+          "linkLabel": "Que sont les journaux de session ?",
+          "linkDest": "#whatAreSessionLogs"
+        },
+        "b": {
+          "linkLabel": "Comment créer un journal de session ?",
+          "linkDest": "#createSessionLogs"
+        },
+        "c": {
+          "linkLabel": "Comment afficher un journal de session ?",
+          "linkDest": "#viewSessionLogs"
+        }
+      },
+      "extras": {
+        "title": "Profil, paramètres et extras",
+        "a": {
+          "linkLabel": "Page de profil",
+          "linkDest": "#page de profil"
+        },
+        "b": {
+          "linkLabel": "Page Paramètres",
+          "linkDest": "#pageparamètres"
+        },
+        "c": {
+          "linkLabel": "Retour",
+          "linkDest": "#retour"
+        },
+        "d": {
+          "linkLabel": "Notifications",
+          "linkDest": "#notifications"
+        },
+        "e": {
+          "linkLabel": "Conclusion",
+          "linkDest": "#conclusion"
+        }
+      }
+    },
+    "content": {
+      "basics": {
+        "title": "Les bases",
+        "articles": {
+          "1": {
+            "title": "Objectif du guide",
+            "descriptions": {
+              "1": "<span>NOTE:</span> Le didacticiel suivant nécessite des connaissances préalables en préparation de repas.  <faq>Page FAQ</faq>.",
+              "2": "Ce guide <span>but</span> est de vous apprendre à créer un <span>Plan de préparation des repas</span> afin de l'utiliser de manière pratique en l'activant pour être averti chaque fois que vous avez besoin de préparer vos repas."
+            },
+            "imageAlt": "Image de l’objectif du guide",
+            "images": {
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715177907/VitalPrep/Screenshot_33_o5fzdm.png"
+            }
+          },
+          "2": {
+            "title": "Créer une page d'outil",
+            "descriptions": {
+              "1": "Afin de créer un <span>Plan de préparation des repas</span>, vous devrez d'abord en créer plusieurs <span>entités</span>.  <span>entités</span>, vous devrez utiliser le <createTool>Créer une page d'outil</createTool>. ",
+              "2": "Pour modifier l'interface de l'outil de création, utilisez le menu à gauche de votre écran, qui peut être masqué/affiché selon vos besoins."
+            },
+            "imageAlt": "Créer une image de page d'outils",
+            "images": {
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715179083/VitalPrep/Screenshot_35_sh7nyg.png"
+            }
+          },
+          "3": {
+            "title": "Page d'outils multi-vues",
+            "descriptions": {
+              "1": "Pour <span>voir</span> votre créé <span>entités</span>, vous devrez utiliser le <multiViewTool>Page d'outils multi-vues</multiViewTool>. ",
+              "2": "Le <span>options de filtrage</span> disponibles sont : <span>type d'entité</span>(change l'entité affichée), <span>Trier par</span>(trie les entités affichées par une propriété de celles-ci, par exemple leurs noms), <span>recherche</span>(rechercher les entités qui contiennent le texte donné dans leur nom), <span>vue liste/grille</span> (modifie le type de vue d'entité)."
+            },
+            "imageAlt": "Image de la page d'outils multi-vues",
+            "images": {
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715178126/VitalPrep/Screenshot_34_vb9vwf.png"
+            }
+          },
+          "4": {
+            "title": "Afficher la page de l'outil",
+            "descriptions": {
+              "1": "Pour <span>voir</span> votre créé <span>entités individuellement</span>, vous devrez utiliser le <viewTool>Afficher la page de l'outil</viewTool>, accessible via <span>en cliquant</span> n’importe quel composant d’entité.",
+              "2": "Sur ladite page, vous pouvez <span>voir différentes propriétés</span> de l'entité respective, comme leur <span>nom</span>, <span>image</span>, <span>calories</span>(s'ils en ont), <span>macro</span>(sur tout type d'entité sauf ustensile, duh), etc.",
+              "3": "Vous pouvez également consulter le <span>statistiques</span> de l'entité respective, de quelles entités il s'agit <span>composé de</span>, quelles sont les autres entités <span>composé d'eux</span>."
+            },
+            "imageAlt": "Afficher l'image de la page d'outils",
+            "images": {
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715179643/VitalPrep/Screenshot_37_lo4qpe.png",
+              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715179504/VitalPrep/Screenshot_36_yaa7zm.png"
+            }
+          }
+        }
+      },
+      "entities": {
+        "title": "Entités",
+        "articles": {
+          "1": {
+            "title": "Ingrédients",
+            "descriptions": {
+              "1": "<span>Ingrédients</span> sont les principaux composants d'un <span>Recette</span>. ",
+              "2": "Utilisez le <createTool> Créer une page d'outil</createTool> pour créer un <span>Ingrédient</span>.  <span>macro</span>.",
+              "3": "<span>NOTE:</span>: L'ajout de macros est facultatif, notamment pour les condiments, mais en général, c'est une bonne idée d'ajouter avec précision des macros à vos ingrédients lors de leur création.",
+              "4": "À <span>voir</span> tout votre <span>entités créées</span>, Utilisez le <multiViewTool>Page d'outils multi-vues</multiViewTool>.  <span>entité individuelle</span> en détail, cliquez sur n'importe quel <span>Ingrédient</span> composant sur le <multiViewTool> Page d'outils multi-vues</multiViewTool>."
+            },
+            "imageAlt": "Image de l'entité ingrédient",
+            "images": {
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715181329/VitalPrep/Screenshot_38_tdcdyr.png",
+              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715181484/VitalPrep/Screenshot_39_moj2tx.png"
+            }
+          },
+          "2": {
+            "title": "Ustensiles",
+            "descriptions": {
+              "1": "<span>Ustensiles</span> sont des composants d'un <span>Recette</span>. ",
+              "2": "Utilisez le <createTool> Créer une page d'outil</createTool> pour créer un <span>Ustensile</span>. ",
+              "3": "À <span>voir</span> tout votre <span>entités créées</span>, Utilisez le <multiViewTool>Page d'outils multi-vues</multiViewTool>.  <span>entité individuelle</span> en détail, cliquez sur n'importe quel <span>Ustensile</span> composant sur le <multiViewTool>Page d'outils multi-vues</multiViewTool>."
+            },
+            "imageAlt": "Image de l’entité ustensile",
+            "images": {
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715181630/VitalPrep/Screenshot_40_rvtkbe.png",
+              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715181718/VitalPrep/Screenshot_41_sl4fdr.png"
+            }
+          },
+          "3": {
+            "title": "Recettes",
+            "descriptions": {
+              "1": "<span>Recettes</span> sont les principaux composants d'un <span>Plan de jour</span>.  <span>Plans de journée</span>, et sans plans journaliers, vous ne pouvez pas créer <span>Modèles de séances</span> et ainsi de suite.  <span>Plan de jour</span>.",
+              "2": "Utilisez le <createTool> Créer une page d'outil</createTool> créer un <span>Recette</span>.  <span>Didacticiel vidéo</span>, <span>Tutoriel écrit</span> ou les deux.",
+              "3": "Après cela, sélectionnez tous les <span>Ingrédients</span> et <span>Ustensiles</span> le <span>Recette</span> les usages.",
+              "4": "À <span>voir</span> tout votre <span>entités créées</span>, Utilisez le <multiViewTool>Page d'outils multi-vues</multiViewTool>.  <span>entité individuelle</span> en détail, cliquez sur n'importe quel <span>Recette</span> composant sur le <multiViewTool> Page d'outils multi-vues</multiViewTool>."
+            },
+            "imageAlt": "Image de l'entité de recette",
+            "images": {
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715181911/VitalPrep/Screenshot_42_gw8stk.png",
+              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715182012/VitalPrep/Screenshot_43_ijmjfh.png",
+              "3": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715182089/VitalPrep/Screenshot_45_erigz6.png"
+            }
+          },
+          "4": {
+            "title": "Plans de journée",
+            "descriptions": {
+              "1": "<span>Plans de journée</span> sont les principaux composants d'un <span>Modèle de séance</span>.  <span>Modèles de séances</span>, Et sans <span>Modèles de séances</span> tu ne peux pas créer <span>Plans de préparation de repas</span>.  <span>Modèle de séance</span>.",
+              "2": "Utilisez le <createTool> Créer une page d'outil</createTool> créer un <span>Plan de jour</span>. ",
+              "3": "Après cela, sélectionnez un <span>Recette spécifique</span> pour chaque repas consommé.",
+              "4": "À <span>voir</span> tout votre <span>entités créées</span>, Utilisez le <multiViewTool>Page d'outils multi-vues</multiViewTool>.  <span>entité individuelle</span> en détail, cliquez sur n'importe quel <span>Plan de jour</span> composant sur le <multiViewTool> Page d'outils multi-vues</multiViewTool>."
+            },
+            "imageAlt": "Image de l'entité du plan journalier",
+            "images": {
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715183076/VitalPrep/Screenshot_46_qw9rgz.png",
+              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715183623/VitalPrep/Screenshot_47_qzv7b4.png",
+              "3": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715183690/VitalPrep/Screenshot_48_mompqr.png"
+            }
+          },
+          "5": {
+            "title": "Modèles de séances",
+            "descriptions": {
+              "1": "<span>Modèles de séances</span> sont les principaux composants d'un <span>Plan de préparation des repas</span>.  <span>Plans de préparation de repas</span>.  <span>Plan de préparation des repas</span>.",
+              "2": "<span>Modèles de séances</span> sont également utilisés par <span>Journaux de session</span>.",
+              "3": "Utilisez le <createTool> Créer une page d'outil</createTool> créer un <span>Modèle de séance</span>. ",
+              "4": "Après cela, sélectionnez un <span>Plan de jour spécifique</span> pour chaque jour spécifique couvert.",
+              "5": "À <span>voir</span> tout votre <span>entités créées</span>, Utilisez le <multiViewTool>Page d'outils multi-vues</multiViewTool>.  <span>entité individuelle</span> en détail, cliquez sur n'importe quel <span>Modèle de séance</span> composant sur le <multiViewTool> Page d'outils multi-vues</multiViewTool>."
+            },
+            "imageAlt": "Image de l'entité du modèle de session",
+            "images": {
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715183829/VitalPrep/Screenshot_49_cnpacm.png",
+              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715183890/VitalPrep/Screenshot_50_p8l6wt.png",
+              "3": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715184001/VitalPrep/Screenshot_52_ctxjaz.png"
+            }
+          },
+          "6": {
+            "title": "Plans de préparation de repas",
+            "descriptions": {
+              "1": "<span>Plans de préparation de repas</span> représentent les plans réels que vous suivrez.  <span>avis</span> pour votre <span>Séances de préparation de repas</span>, tu devras <span>Activer</span> a déclaré le plan de préparation des repas et également <span>abonnez-vous à nos notifications</span>.",
+              "2": "Utilisez le <createTool> Créer une page d'outil</createTool> créer un <span>Modèle de séance</span>. ",
+              "3": "Après cela, sélectionnez un <span>Modèle de session spécifique</span> pour chaque séance spécifique, le <span>jour de la semaine</span> et <span>heure</span> vous commencerez à préparer les repas.",
+              "4": "À <span>voir</span> tout votre <span>entités créées</span>, Utilisez le <multiViewTool>Page d'outils multi-vues</multiViewTool>.  <span>entité individuelle</span> en détail, cliquez sur n'importe quel <span>Plan de préparation des repas</span> composant sur le <multiViewTool> Page d'outils multi-vues</multiViewTool>."
+            },
+            "imageAlt": "Image du plan de préparation des repas",
+            "images": {
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715184134/VitalPrep/Screenshot_53_bgbocc.png",
+              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715184377/VitalPrep/Screenshot_54_qsapvp.png",
+              "3": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715184475/VitalPrep/Screenshot_55_ukdzrs.png"
+            }
+          }
+        }
+      },
+      "logs": {
+        "title": "Journaux de session",
+        "articles": {
+          "1": {
+            "title": "Que sont les journaux de session ?",
+            "descriptions": {
+              "1": "<span>Journaux de session</span> représentent les journaux de votre <span>Séances actives de plan de préparation de repas</span>.  <span>Séance de préparation des repas</span>.  <span>suivi des sessions du plan de préparation des repas</span>."
+            },
+            "imageAlt": "Image du plan de préparation de repas actif",
+            "images": {
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715177907/VitalPrep/Screenshot_33_o5fzdm.png"
+            }
+          },
+          "2": {
+            "title": "Comment créer un journal de session ?",
+            "descriptions": {
+              "1": "<span>Journaux de session</span> par défaut sont <span>automatiquement</span> créé 3 heures <span>après votre séance active de plan de préparation de repas</span>.  <span>comportement</span> peut être modifié sur le <settings>Page Paramètres</settings> soit ne pas créer de journaux automatiquement, soit créer des journaux après un nombre d'heures donné au lieu de 3, ou les deux.",
+              "2": "<span>Journaux de session</span> peut également être créé <span>manuellement</span> sur le <addLog>Ajouter une page de journal</addLog>."
+            },
+            "imageAlt": "Ajouter une image du journal de session",
+            "images": {
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715185596/VitalPrep/Screenshot_56_dvrgak.png",
+              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715185699/VitalPrep/Screenshot_57_mjxlki.png"
+            }
+          },
+          "3": {
+            "title": "Comment afficher un journal de session ?",
+            "descriptions": {
+              "1": "À <span>voir</span> tout votre <span>Journaux de session</span>, Utilisez le <multiViewTool>Page d'outils multi-vues</multiViewTool>.  <span>Journal de session individuel</span> en détail, cliquez sur n'importe quel <span>Journal de session</span> composant sur le <multiViewTool>Page d'outils multi-vues</multiViewTool>."
+            },
+            "imageAlt": "Afficher l'image du journal de session",
+            "images": {
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715185923/VitalPrep/Screenshot_59_bdjdnw.png",
+              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715185889/VitalPrep/Screenshot_58_aljwha.png"
+            }
+          }
+        }
+      },
+      "extras": {
+        "title": "Profil, paramètres et extras",
+        "articles": {
+          "1": {
+            "title": "Profil",
+            "descriptions": {
+              "1": "Pour visualiser votre <span>Profil</span>, vous pouvez y accéder soit via le <span>Barre de navigation</span> ou <span>Barre latérale</span> à envoyer au <profile>Page de profil</profile>.",
+              "2": "Sur le <profile>Page de profil</profile> vous pouvez consulter votre nom d'utilisateur, votre e-mail, votre âge, vos statistiques et toutes les entités que vous avez créées."
+            },
+            "imageAlt": "Image de la section de profil",
+            "images": {
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715187350/VitalPrep/Screenshot_60_cch6wk.png",
+              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715187384/VitalPrep/Screenshot_61_frtxb0.png",
+              "3": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715187473/VitalPrep/Screenshot_62_u2tbk6.png",
+              "4": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715187500/VitalPrep/Screenshot_63_ovkvtp.png"
+            }
+          },
+          "2": {
+            "title": "Paramètres",
+            "descriptions": {
+              "1": "Ton <span>Détails du profil</span> ou <span>paramètres de notification</span> peut être modifié sur le <settings>Page Paramètres</settings>.",
+              "2": "Le disponible <span>Paramètres de profil</span> sont : nom d’utilisateur, email, mot de passe, image de profil."
+            },
+            "imageAlt": "Image de la section Paramètres",
+            "images": {
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715185596/VitalPrep/Screenshot_56_dvrgak.png",
+              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715187685/VitalPrep/Screenshot_64_vxekot.png"
+            }
+          },
+          "3": {
+            "title": "Retour",
+            "descriptions": {
+              "1": "Pour nous en donner <span>retour</span> sur l'application, vous pouvez le faire en nous envoyant un e-mail en utilisant le formulaire de courrier électronique sur le <contact>Page de contact</contact>. "
+            },
+            "imageAlt": "Image de la section Commentaires",
+            "images": {
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715187774/VitalPrep/Screenshot_65_gkix9r.png"
+            }
+          },
+          "4": {
+            "title": "Notifications",
+            "descriptions": {
+              "1": "Recevoir <span>notifications de type rappel</span> tout en ayant un <span>Plan de préparation de repas actif</span> vous devez <span>abonnez-vous à notre service de notifications</span> soit par l'intermédiaire du <span>cloche</span> fixé dans le coin inférieur droit de l'écran ou via notre <span>modal</span>.",
+              "2": "Tu peux <span>Se désabonner</span> quand vous le souhaitez en cliquant sur la cloche puis Désabonnez-vous."
+            },
+            "imageAlt": "Image de la section Notifications",
+            "images": {
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715188301/VitalPrep/Screenshot_66_ryl1fc.png"
+            }
+          },
+          "5": {
+            "title": "Conclusion",
+            "descriptions": {
+              "1": "Avec tout ce que vous avez appris, vous pouvez désormais utiliser notre application pour préparer vos repas de manière plus organisée, tout en disposant de fonctionnalités de journalisation et de notifications de type rappel. "
+            },
+            "imageAlt": "Image du logo VitalPrep",
+            "images": {
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715188430/VitalPrep/brandmark-design-1920x1080_sp2kds.png"
+            }
+          }
+        }
+      }
+    }
+  },
+  "faq": {
+    "accordionShowTitle": "Afficher le contenu {title}",
+    "accordionHideTitle": "Masquer le contenu {title}",
+    "sections": {
+      "1": {
+        "sectionTitle": "Introduction à la préparation des repas",
+        "sectionDescription": "Voici quelques questions fréquemment posées par les personnes qui débutent dans la préparation des repas et qui ne savent pas par où ni comment commencer.",
+        "sectionAccordions": {
+          "1": {
+            "accordionTitle": "Qu’est-ce que la préparation des repas ?",
+            "accordionContent": "La préparation des repas consiste à préparer et à répartir les repas à l'avance, généralement sur plusieurs jours à la fois. "
+          },
+          "2": {
+            "accordionTitle": "Comment Meal Prepping fait-il gagner du temps ?",
+            "accordionContent": "La préparation des repas vous fait gagner du temps en vous permettant de préparer plusieurs repas à la fois, généralement un jour désigné comme un week-end. "
+          },
+          "3": {
+            "accordionTitle": "Quels sont les avantages de la préparation des repas ?",
+            "accordionContent": "La préparation des repas offre plusieurs avantages, notamment un gain de temps, une alimentation plus saine, le contrôle des portions, la rentabilité, la réduction du gaspillage alimentaire et la cohérence."
+          },
+          "4": {
+            "accordionTitle": "Comment puis-je commencer à préparer des repas si je suis débutant ?",
+            "accordionContent": "Pour commencer à préparer vos repas en tant que débutant, commencez par planifier vos repas, dresser une liste d'épicerie, réserver du temps dédié, investir dans des contenants de stockage, cuisiner par lots, répartir les repas, les conserver correctement et les réchauffer au moment de manger."
+          }
+        }
+      },
+      "2": {
+        "sectionTitle": "Les essentiels de la préparation des repas",
+        "sectionDescription": "Voici quelques questions fréquemment posées par les personnes qui ont commencé à préparer des repas et qui souhaitent en savoir plus sur l'ensemble du processus.",
+        "sectionAccordions": {
+          "1": {
+            "accordionTitle": "De quel matériel ai-je besoin pour préparer les repas ?",
+            "accordionContent": "Pour préparer les repas, vous aurez besoin d'équipements de cuisine de base tels que des couteaux, des planches à découper, des casseroles et des poêles, des récipients pour la préparation des repas, une balance alimentaire, des bols à mélanger et des tasses et cuillères à mesurer."
+          },
+          "2": {
+            "accordionTitle": "Combien de temps les repas préparés se conservent-ils généralement au réfrigérateur ou au congélateur ?",
+            "accordionContent": "Les repas préparés se conservent généralement au réfrigérateur pendant environ 3 à 4 jours et au congélateur pendant 1 à 2 mois, selon le type d'aliment et la qualité de son emballage. "
+          },
+          "3": {
+            "accordionTitle": "Comment puis-je m'assurer que mes plats préparés restent frais tout au long de la semaine ?",
+            "accordionContent": "Pour garantir que vos aliments préparés restent frais tout au long de la semaine, utilisez des contenants hermétiques, réfrigérez-les rapidement, étiquetez les contenants avec la date de préparation, répartissez correctement les repas et évitez d'ouvrir les contenants inutilement."
+          },
+          "4": {
+            "accordionTitle": "Puis-je personnaliser ma préparation de repas en fonction de mes objectifs nutritionnels ?",
+            "accordionContent": "Oui, vous pouvez personnaliser votre préparation de repas en fonction de vos objectifs nutritionnels. "
+          },
+          "5": {
+            "accordionTitle": "Comment puis-je calculer la taille des portions pour la préparation des repas ?",
+            "accordionContent": "Pour calculer la taille des portions pour la préparation des repas, commencez par déterminer vos besoins nutritionnels en fonction de facteurs tels que l'âge, le sexe, le poids et le niveau d'activité. "
+          },
+          "6": {
+            "accordionTitle": "À quelle fréquence dois-je préparer mes repas ?",
+            "accordionContent": "La fréquence à laquelle vous devez préparer vos repas dépend de votre emploi du temps personnel et de vos préférences. "
+          },
+          "7": {
+            "accordionTitle": "La préparation des repas est-elle rentable ?",
+            "accordionContent": "Oui, la préparation des repas est souvent rentable. "
+          }
+        }
+      },
+      "3": {
+        "sectionTitle": "Recettes et idées de préparation de repas",
+        "sectionDescription": "Voici quelques questions fréquemment posées par des personnes qui ont des questions plus spécifiques et/ou souhaitent pimenter leurs préparations de repas.",
+        "sectionAccordions": {
+          "1": {
+            "accordionTitle": "Quelles sont les erreurs courantes de préparation des repas à éviter ?",
+            "accordionContent": "Certaines erreurs courantes de préparation des repas à éviter incluent le fait de ne pas planifier à l'avance, d'utiliser des contenants de conservation inappropriés, de négliger la variété des repas, de ne pas tenir compte de la taille des portions et de ne pas étiqueter les contenants avec la date de préparation."
+          },
+          "2": {
+            "accordionTitle": "Quelles sont les recettes faciles de préparation de repas pour les débutants ?",
+            "accordionContent": "Certaines recettes faciles de préparation de repas pour les débutants comprennent des flocons d'avoine pendant la nuit, du poulet et des légumes sur une plaque, des bols à salade de quinoa, des sautés de légumes avec du riz et des wraps à la dinde et aux haricots noirs. "
+          },
+          "3": {
+            "accordionTitle": "Comment puis-je éviter l'ennui lors des repas lors de la préparation des repas ?",
+            "accordionContent": "Pour éviter l'ennui lors de la préparation des repas, intégrez de la variété en expérimentant différentes recettes, saveurs et cuisines. "
+          },
+          "4": {
+            "accordionTitle": "Puis-je continuer à préparer des repas si j'ai des restrictions alimentaires ou des allergies alimentaires ?",
+            "accordionContent": "Absolument! "
+          },
+          "5": {
+            "accordionTitle": "Puis-je préparer des repas pour des régimes spécifiques, comme le céto, le végétalien ou le sans gluten ?",
+            "accordionContent": "Oui, vous pouvez préparer des repas pour des régimes spécifiques comme le céto, le végétalien ou le sans gluten. "
+          },
+          "6": {
+            "accordionTitle": "Puis-je également préparer des collations et des desserts ?",
+            "accordionContent": "Oui, vous pouvez certainement préparer des collations et des desserts pour préparer vos repas. "
+          },
+          "7": {
+            "accordionTitle": "Comment puis-je garder mes repas préparés intéressants et savoureux ?",
+            "accordionContent": "Pour que vos plats préparés restent intéressants et savoureux, expérimentez avec une variété d'herbes, d'épices, de sauces et de marinades pour ajouter de la profondeur à la saveur. "
+          }
+        }
+      },
+      "4": {
+        "sectionTitle": "Rangement et conseils pratiques",
+        "sectionDescription": "Voici quelques questions fréquemment posées par les personnes qui ont des questions sur le confinement efficace, le temps de cuisson, la taille et le réchauffage des repas lors d'une préparation de repas.",
+        "sectionAccordions": {
+          "1": {
+            "accordionTitle": "Comment conserver correctement les plats préparés ?",
+            "accordionContent": "Après la préparation des repas, transférez vos repas dans des contenants hermétiques pour conserver la fraîcheur et éviter la contamination. "
+          },
+          "2": {
+            "accordionTitle": "Quels sont les meilleurs contenants pour conserver les plats préparés ?",
+            "accordionContent": "Les meilleurs contenants pour conserver les plats préparés sont les contenants hermétiques en verre ou en plastique sans BPA. "
+          },
+          "3": {
+            "accordionTitle": "Puis-je préparer des repas pour toute la famille ?",
+            "accordionContent": "Oui, vous pouvez certainement préparer des repas pour toute la famille. "
+          },
+          "4": {
+            "accordionTitle": "Quel est le nombre idéal de repas à inclure dans ma préparation de repas ?",
+            "accordionContent": "Le nombre idéal de repas à inclure dans votre préparation de repas dépend de votre emploi du temps personnel et de vos besoins alimentaires. "
+          },
+          "5": {
+            "accordionTitle": "Comment réchauffer des aliments préparés pour conserver leur qualité ?",
+            "accordionContent": "Pour maintenir la qualité des aliments préparés lors du réchauffage, il est préférable d'utiliser des méthodes de chauffage douces telles que le micro-ondes, la cuisson à la vapeur ou le réchauffage au four. "
+          },
+          "6": {
+            "accordionTitle": "Quelle est la durée recommandée pour mes séances de préparation de repas culinaires ?",
+            "accordionContent": "La durée recommandée pour les séances de préparation des repas dépend de facteurs tels que le nombre de repas que vous préparez, vos compétences culinaires et la complexité des recettes. "
+          }
+        }
+      }
+    }
+  },
+  "about": {
+    "sections": {
+      "1": {
+        "sectionTitle": "Introduction",
+        "descriptions": {
+          "1": "Cette application vise à créer un moyen permettant à un utilisateur de préparer ses repas de manière dynamique, en utilisant ses propres ingrédients, recettes, etc.",
+          "2": "Lorsque j'ai créé cette application, je voulais créer une application pour moi-même qui enregistre mes préparations de repas et me permet de créer plus de recettes pour mes futures préparations de repas. "
+        }
+      },
+      "2": {
+        "sectionTitle": "Technologies frontales",
+        "sectionDescription": "Voici les technologies que j'ai utilisées sur le frontend pour créer cette application :"
+      },
+      "3": {
+        "sectionTitle": "Technologies back-end",
+        "sectionDescription": "Voici les technologies que j'ai utilisées sur le backend pour créer cette application :"
+      },
+      "4": {
+        "sectionTitle": "Services cloud",
+        "sectionDescription": "Voici les services cloud que j'ai utilisés pour héberger le frontend, le backend et les bases de données :"
+      },
+      "5": {
+        "sectionTitle": "Autres",
+        "sectionDescription": "Voici d'autres technologies que j'ai utilisées mais non incluses dans celles ci-dessus :",
+        "sectionSubTitles": {
+          "1": "Gestion des médias",
+          "2": "Système de contrôle de version (VCS)"
+        }
+      }
+    }
+  },
+  "contact": {
+    "emailForm": {
+      "title": "Envoyez-nous un email",
+      "formLabels": {
+        "subject": "Sujet:",
+        "message": "Message:",
+        "buttonContent": "Envoyer un e-mail"
+      }
+    },
+    "contactInfo": {
+      "title": "Contactez-nous",
+      "info": {
+        "phoneNumber": "Numéro de téléphone : {phoneNumber}",
+        "email": "E-mail : {e-mail}"
+      }
+    }
+  },
+  "langSwitcher": {
+    "locale": "Changer la langue en {locale}",
+    "values": {
+      "ro": "Roumain",
+      "en": "Anglais",
+      "fr": "Française",
+      "de": "Allemande"
+    }
+  },
+  "warningOverlay": {
+    "pageInfo": {
+      "ingredient": "Ingrédient de la page",
+      "utensil": "Ustensile de page",
+      "recipe": "Recette de page",
+      "dayTemplate": "Plan de jour des pages",
+      "instanceTemplate": "Modèle de session de page",
+      "mealPrepPlan": "Page Plan de préparation des repas",
+      "mealPrepLog": "Journal de session de page"
+    },
+    "buttons": {
+      "titles": {
+        "no": "Retourner",
+        "yes": "Accepter"
+      },
+      "content": {
+        "no": "Non",
+        "yes": "Oui"
+      }
+    },
+    "messages": {
+      "deleteEntityMessage": "Êtes-vous vraiment sûr de vouloir supprimer définitivement le {entityType} suivant : {entityName} ?",
+      "saveAccountSettingsMessage": "Êtes-vous sûr de vouloir enregistrer les paramètres de votre compte ?",
+      "saveNotificationSettingsMessage": "Êtes-vous sûr de vouloir enregistrer vos paramètres de notification ?"
+    }
+  }
+}

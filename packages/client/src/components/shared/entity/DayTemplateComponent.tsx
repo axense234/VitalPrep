@@ -53,6 +53,8 @@ const DayTemplateComponent: FC<EntityComponentProps> = ({
             parentRef={dayTemplateContainerRef}
             handleEntityDeletion={deleteEntityFunction}
             handleEntityModification={updateEntityFunction}
+            entityName={dayTemplateEntityUsed.name}
+            entityType="dayTemplate"
           />
         )}
         <Link
@@ -107,6 +109,8 @@ const DayTemplateComponent: FC<EntityComponentProps> = ({
           parentRef={dayTemplateContainerRef}
           handleEntityDeletion={deleteEntityFunction}
           handleEntityModification={updateEntityFunction}
+          entityName={dayTemplateEntityUsed.name}
+          entityType="dayTemplate"
         />
       )}
       <header className={entityComponentStyles.entityComponentHeader}>

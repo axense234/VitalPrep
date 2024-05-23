@@ -9,12 +9,15 @@ import { encryptPassword, comparePasswords } from "../utils/bcrypt";
 import { createJWT } from "../utils/jwt";
 import { deleteCache, setCache } from "../utils/redis";
 import { randomUUID } from "crypto";
+// Data
+import { defaultIngredients, defaultUtensils } from "../data";
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const signupUser = async (req: Request, res: Response) => {
   const userBody = req.body;
   const throughOAuth = Boolean(req.query.throughOAuth);
+  const locale = req.query.locale;
 
   if (!userBody) {
     return res
@@ -64,11 +67,21 @@ const signupUser = async (req: Request, res: Response) => {
   const encryptedPass = await encryptPassword(userBody.password);
   userBody.password = encryptedPass;
 
+  // Get default entities data
+  const defaultIngredientsData = defaultIngredients(locale as string);
+  const defaultUtensilsData = defaultUtensils(locale as string);
+
   const createdUser = await UserClient.create({
     data: {
       ...userBody,
       notificationSettings: {
         create: {},
+      },
+      ingredients: {
+        create: defaultIngredientsData,
+      },
+      utensils: {
+        create: defaultUtensilsData,
       },
     },
   });

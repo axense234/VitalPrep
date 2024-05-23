@@ -19,6 +19,8 @@ import EntityInfoProps from "@/core/interfaces/entity/EntityInfoProps";
 // Hooks
 import useGetHandleOnDeleteEntity from "@/hooks/useGetHandleOnDeleteEntity";
 import useNavigateToPathname from "@/hooks/useNavigateToPathname";
+// Translations
+import { useTranslations } from "next-intl";
 
 const InstanceTemplateInfo: FC<EntityInfoProps> = ({
   entityId,
@@ -37,6 +39,8 @@ const InstanceTemplateInfo: FC<EntityInfoProps> = ({
     userId
   );
 
+  const translate = useTranslations("warningOverlay.pageInfo");
+
   useEffect(() => {
     console.log(loadingGetUserInstanceTemplate, userId, entityId);
     if (loadingGetUserInstanceTemplate === "IDLE" && userId && entityId) {
@@ -54,6 +58,8 @@ const InstanceTemplateInfo: FC<EntityInfoProps> = ({
           type="entityInfo"
           handleEntityDeletion={handleOnDeleteEntity}
           handleEntityModification={() => navigateToPathname({})}
+          entityType="instanceTemplate"
+          entityName={translate("instanceTemplate")}
         />
       )}
       <div className={entityInfoStyles.entityInfoContent}>

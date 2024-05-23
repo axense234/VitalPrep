@@ -11,6 +11,8 @@ const EntityMutationMenu: FC<EntityMutationMenuProps> = ({
   parentRef,
   handleEntityDeletion,
   handleEntityModification,
+  entityName,
+  entityType,
 }) => {
   if (type === "entityComponent") {
     return (
@@ -18,6 +20,8 @@ const EntityMutationMenu: FC<EntityMutationMenuProps> = ({
         parentRef={parentRef as MutableRefObject<HTMLDivElement | null>}
         handleEntityDeletion={handleEntityDeletion}
         handleEntityModification={handleEntityModification}
+        entityName={entityName}
+        entityType={entityType}
       />
     );
   }
@@ -27,6 +31,8 @@ const EntityMutationMenu: FC<EntityMutationMenuProps> = ({
       <EntityMutationMenuEntityInfo
         handleEntityDeletion={handleEntityDeletion}
         handleEntityModification={handleEntityModification}
+        entityName={entityName}
+        entityType={entityType}
       />
     );
   }
