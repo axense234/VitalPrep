@@ -35,7 +35,7 @@ const sendNotification = async (
   const generateMessage = (lang: string) => {
     const messageFunc =
       notificationMessages[typeOfNotification]?.[lang]?.[
-        notificationStyle || "default"
+        notificationStyle?.toLowerCase() || "default"
       ];
     if (typeOfNotification === "preSessionReminder") {
       return messageFunc(username, everyHourReminderInterval);
