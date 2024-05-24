@@ -19,7 +19,6 @@ const handleDayOfTheWeekReminders = async () => {
   usersWithMealPrepPlansInUse.forEach(async (user) => {
     const userNotificationSettings = user.notificationSettings;
     console.log(user.username);
-    console.log(userNotificationSettings);
     if (
       userNotificationSettings.allowedNotifications &&
       userNotificationSettings.allowDayReminderNotifications
@@ -46,7 +45,7 @@ const handleDayOfTheWeekReminders = async () => {
           usedTimingWeekday = days[weekdayTimingIndexInDays + 1];
         }
 
-        console.log(timing);
+        console.log(currentDayOfTheWeekString, usedTimingWeekday);
 
         if (currentDayOfTheWeekString === usedTimingWeekday) {
           await sendNotification(
