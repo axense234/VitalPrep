@@ -44,6 +44,7 @@ import useUpdateEntityTemplateImageUrl from "@/hooks/useUpdateEntityTemplateImag
 import useUpdateEntityMacrosBasedOnComponentEntities from "@/hooks/useUpdateEntityMacrosBasedOnComponentEntities";
 import useGetEntityComponents from "@/hooks/useGetEntityComponents";
 import handleUpdateMultipleArrayEntities from "@/helpers/handleUpdateMultipleArrayEntities";
+import useSetDefaultEntityName from "@/hooks/useSetDefaultEntityName";
 // Translations
 import { useTranslations } from "next-intl";
 
@@ -75,6 +76,17 @@ const CreateRecipeInterface = () => {
 
   const translate = useTranslations("createTool.formLabels.recipe");
 
+  useSetDefaultEntityName(
+    () =>
+      dispatch(
+        updateTemplateRecipe({
+          key: "name",
+          value: translate("defaultNameValue"),
+        })
+      ),
+    templateRecipe
+  );
+
   useGetEntityComponents(loadingGetUserIngredients, getAllUserIngredients);
   useGetEntityComponents(loadingGetUserUtensils, getAllUserUtensils);
   useUpdateEntityMacrosBasedOnComponentEntities(
@@ -98,7 +110,9 @@ const CreateRecipeInterface = () => {
           <h4>{translate("formTitle")}</h4>
           <form className={createToolStyles.createInterfaceForm}>
             <TextFormControl
-              entityProperty={templateRecipe.name}
+              entityProperty={
+                templateRecipe.name || translate("defaultNameValue")
+              }
               labelContent={translate("name")}
               onEntityPropertyValueChange={(e) =>
                 dispatch(

@@ -20,6 +20,7 @@ import useGetWindowWidth from "@/hooks/useGetWindowWidth";
 import EntityMutationMenu from "./EntityMutationMenu";
 // Translations
 import { Link } from "@/navigation";
+import { useTranslations } from "next-intl";
 
 const MealPrepPlanComponent: FC<EntityComponentProps> = ({
   clicked,
@@ -36,7 +37,15 @@ const MealPrepPlanComponent: FC<EntityComponentProps> = ({
   const mealPrepPlanEntityShown = mealPrepPlanEntity || entity;
   const mealPrepPlanContainerRef = useRef<HTMLDivElement | null>(null);
 
+  const translateMealPrepPlan = useTranslations(
+    "entityComponents.details.mealPrepPlan"
+  );
+  const translateMealPrepPlanDefaultName = useTranslations(
+    "createTool.formLabels.mealPrepPlan"
+  );
+
   const { name, imageUrl, instanceTemplates } = mealPrepPlanEntityShown;
+
   let windowWidth = useGetWindowWidth();
   let phoneRedesign = windowWidth && windowWidth <= 700;
 
@@ -70,14 +79,22 @@ const MealPrepPlanComponent: FC<EntityComponentProps> = ({
           >
             <header className={entityComponentStyles.entityComponentHeader}>
               <Image
-                alt={`${name} Image`}
+                alt={
+                  name || translateMealPrepPlanDefaultName("defaultNameValue")
+                }
                 src={imageUrl || defaultMealPrepPlanImageUrl}
-                title={name}
-                aria-label={name}
+                title={
+                  name || translateMealPrepPlanDefaultName("defaultNameValue")
+                }
+                aria-label={
+                  name || translateMealPrepPlanDefaultName("defaultNameValue")
+                }
                 width={80}
                 height={80}
               />
-              <h6>{name}</h6>
+              <h6>
+                {name || translateMealPrepPlanDefaultName("defaultNameValue")}
+              </h6>
             </header>
             <div
               className={entityComponentStyles.entityComponentDetails}
@@ -85,10 +102,12 @@ const MealPrepPlanComponent: FC<EntityComponentProps> = ({
             >
               {phoneRedesign ? null : (
                 <p>
-                  {instanceTemplates?.length && instanceTemplates?.length > 0
-                    ? instanceTemplates?.length
-                    : "???"}{" "}
-                  instance templates used
+                  {translateMealPrepPlan("instances", {
+                    numberOfInstanceTemplatesUsed:
+                      instanceTemplates?.length && instanceTemplates?.length > 0
+                        ? instanceTemplates?.length
+                        : "???",
+                  })}
                 </p>
               )}
             </div>
@@ -116,14 +135,16 @@ const MealPrepPlanComponent: FC<EntityComponentProps> = ({
       )}
       <header className={entityComponentStyles.entityComponentHeader}>
         <Image
-          alt={`${name} Image`}
+          alt={name || translateMealPrepPlanDefaultName("defaultNameValue")}
           src={imageUrl || defaultMealPrepPlanImageUrl}
-          title={name}
-          aria-label={name}
+          title={name || translateMealPrepPlanDefaultName("defaultNameValue")}
+          aria-label={
+            name || translateMealPrepPlanDefaultName("defaultNameValue")
+          }
           width={80}
           height={80}
         />
-        <h6>{name}</h6>
+        <h6>{name || translateMealPrepPlanDefaultName("defaultNameValue")}</h6>
       </header>
       <div
         className={entityComponentStyles.entityComponentDetails}
@@ -131,10 +152,12 @@ const MealPrepPlanComponent: FC<EntityComponentProps> = ({
       >
         {phoneRedesign ? null : (
           <p>
-            {instanceTemplates?.length && instanceTemplates?.length > 0
-              ? instanceTemplates?.length
-              : "???"}{" "}
-            instance templates used
+            {translateMealPrepPlan("instances", {
+              numberOfInstanceTemplatesUsed:
+                instanceTemplates?.length && instanceTemplates?.length > 0
+                  ? instanceTemplates?.length
+                  : "???",
+            })}
           </p>
         )}
       </div>

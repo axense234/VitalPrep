@@ -919,25 +919,25 @@ export const defaultProfileImageUrl =
   "https://res.cloudinary.com/birthdayreminder/image/upload/v1708852560/VitalPrep/defaultprofileimage_tzrh3w.jpg";
 
 export const defaultIngredientImageUrl =
-  "https://res.cloudinary.com/birthdayreminder/image/upload/v1708848204/VitalPrep/doodle-carrot-hand-drawn-black-white-outline-carrot-line-art-vegetable-stock-vector_502320-1096_oenebb.jpg";
+  "https://res.cloudinary.com/birthdayreminder/image/upload/v1716636407/VitalPrep/defaultImages/carrot_xpoyp9.png";
 
 export const defaultUtensilImageUrl =
-  "https://res.cloudinary.com/birthdayreminder/image/upload/v1708848218/VitalPrep/frying-pan-with-food-hand-drawn-doodle-vector-41700255_ni2nh1.jpg";
+  "https://res.cloudinary.com/birthdayreminder/image/upload/v1716636503/VitalPrep/defaultImages/fork_lol_knepjl.png";
 
 export const defaultRecipeImageUrl =
-  "https://res.cloudinary.com/birthdayreminder/image/upload/v1708848563/VitalPrep/depositphotos_86878174-stock-illustration-simple-doodle-of-a-bowl_skeven.webp";
+  "https://res.cloudinary.com/birthdayreminder/image/upload/v1716636514/VitalPrep/defaultImages/fried_eg_qxsqu5.png";
 
 export const defaultDayTemplateImageUrl =
-  "https://res.cloudinary.com/birthdayreminder/image/upload/v1708849436/VitalPrep/Default_Day_Instance_Image_xs53xh.jpg";
+  "https://res.cloudinary.com/birthdayreminder/image/upload/v1716636544/VitalPrep/defaultImages/breakfast_fgotre.png";
 
 export const defaultInstanceTemplateImageUrl =
-  "https://res.cloudinary.com/birthdayreminder/image/upload/v1708849818/VitalPrep/vector-set-foam-container_60352-1353_or48cz.jpg";
+  "https://res.cloudinary.com/birthdayreminder/image/upload/v1716636577/VitalPrep/defaultImages/mushroom_yf6xcn.png";
 
 export const defaultMealPrepPlanImageUrl =
-  "https://res.cloudinary.com/birthdayreminder/image/upload/v1708851067/VitalPrep/Default_Day_Instance_Image_Plan_obbwd9.jpg";
+  "https://res.cloudinary.com/birthdayreminder/image/upload/v1716636589/VitalPrep/defaultImages/potato_teb7ko.png";
 
 export const defaultMealPrepLogImageUrl =
-  "https://res.cloudinary.com/birthdayreminder/image/upload/v1715014493/log-image_lrmtb5.jpg";
+  "https://res.cloudinary.com/birthdayreminder/image/upload/v1716636620/VitalPrep/defaultImages/mushrooms_pcmyy5.png";
 
 export const createToolOptions: CreateToolOption[] = [
   {
@@ -1029,11 +1029,11 @@ export const defaultTemplateProfile = {
 };
 
 export const defaultTemplateIngredient: IngredientTemplate = {
-  name: "Carrot",
+  name: "",
   imageUrl: defaultIngredientImageUrl,
   enabled: false,
   macros: {
-    id: "blah",
+    id: "placeholder",
     calories: 200,
     carbsAmount: 20,
     proteinAmount: 20,
@@ -1042,18 +1042,18 @@ export const defaultTemplateIngredient: IngredientTemplate = {
 };
 
 export const defaultTemplateUtensil: UtensilTemplate = {
-  name: "Pan",
+  name: "",
   enabled: false,
   imageUrl: defaultUtensilImageUrl,
 };
 
 export const defaultTemplateRecipe: RecipeTemplate = {
-  name: "Soup",
+  name: "",
   imageUrl: defaultRecipeImageUrl,
   ingredients: [],
   utensils: [],
   macros: {
-    id: "blah",
+    id: "placeholder",
     calories: 200,
     carbsAmount: 20,
     proteinAmount: 20,
@@ -1062,11 +1062,11 @@ export const defaultTemplateRecipe: RecipeTemplate = {
 };
 
 export const defaultTemplateDayTemplate: DayTemplateTemplate = {
-  name: "Chicken Tuesday",
+  name: "",
   recipes: [],
   imageUrl: defaultDayTemplateImageUrl,
   macros: {
-    id: "blah",
+    id: "placeholder",
     calories: 200,
     carbsAmount: 20,
     proteinAmount: 20,
@@ -1075,12 +1075,12 @@ export const defaultTemplateDayTemplate: DayTemplateTemplate = {
 };
 
 export const defaultTemplateInstanceTemplate: InstanceTemplateTemplate = {
-  name: "Protein Based Instance",
+  name: "",
   dayTemplates: [],
   imageUrl: defaultInstanceTemplateImageUrl,
   coverage: 0,
   macros: {
-    id: "blah",
+    id: "placeholder",
     calories: 200,
     carbsAmount: 20,
     proteinAmount: 20,
@@ -1089,7 +1089,7 @@ export const defaultTemplateInstanceTemplate: InstanceTemplateTemplate = {
 };
 
 export const defaultTemplateMealPrepLog: MealPrepLogTemplate = {
-  name: "Log",
+  name: "",
   imageUrl: defaultMealPrepLogImageUrl,
   completed: true,
   cookingDuration: 1,
@@ -1100,7 +1100,7 @@ export const defaultTemplateMealPrepLog: MealPrepLogTemplate = {
   utensils: [],
   instanceTemplate: defaultTemplateInstanceTemplate,
   macros: {
-    id: "blah",
+    id: "placeholder",
     calories: 200,
     carbsAmount: 20,
     proteinAmount: 20,
@@ -1109,12 +1109,12 @@ export const defaultTemplateMealPrepLog: MealPrepLogTemplate = {
 };
 
 export const defaultTemplateMealPrepPlan: MealPrepPlanTemplate = {
-  name: "Cool Meals Plan",
+  name: "",
   instanceTemplates: [],
   imageUrl: defaultMealPrepPlanImageUrl,
   instanceTemplatesTimings: [],
   macros: {
-    id: "blah",
+    id: "placeholder",
     calories: 200,
     carbsAmount: 20,
     proteinAmount: 20,

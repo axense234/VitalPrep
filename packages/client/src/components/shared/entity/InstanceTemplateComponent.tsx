@@ -20,6 +20,7 @@ import useGetWindowWidth from "@/hooks/useGetWindowWidth";
 import EntityMutationMenu from "./EntityMutationMenu";
 // Translations
 import { Link } from "@/navigation";
+import { useTranslations } from "next-intl";
 
 const InstanceTemplateComponent: FC<EntityComponentProps> = ({
   clicked,
@@ -36,7 +37,15 @@ const InstanceTemplateComponent: FC<EntityComponentProps> = ({
   const instanceTemplateShown = instanceTemplate || entity;
   const instanceTemplateContainerRef = useRef<HTMLDivElement | null>(null);
 
+  const translateInstanceTemplate = useTranslations(
+    "entityComponents.details.instanceTemplate"
+  );
+  const translateInstanceTemplateDefaultName = useTranslations(
+    "createTool.formLabels.instanceTemplate"
+  );
+
   const { name, imageUrl, coverage, dayTemplates } = instanceTemplateShown;
+
   let windowWidth = useGetWindowWidth();
   let tabletOrPhoneRedesign = windowWidth && windowWidth <= 1000;
 
@@ -70,14 +79,26 @@ const InstanceTemplateComponent: FC<EntityComponentProps> = ({
           >
             <header className={entityComponentStyles.entityComponentHeader}>
               <Image
-                alt={`${name} Image`}
+                alt={
+                  name ||
+                  translateInstanceTemplateDefaultName("defaultNameValue")
+                }
                 src={imageUrl || defaultInstanceTemplateImageUrl}
-                title={name}
-                aria-label={name}
+                title={
+                  name ||
+                  translateInstanceTemplateDefaultName("defaultNameValue")
+                }
+                aria-label={
+                  name ||
+                  translateInstanceTemplateDefaultName("defaultNameValue")
+                }
                 width={80}
                 height={80}
               />
-              <h6>{name}</h6>
+              <h6>
+                {name ||
+                  translateInstanceTemplateDefaultName("defaultNameValue")}
+              </h6>
             </header>
             <div
               className={entityComponentStyles.entityComponentDetails}
@@ -85,8 +106,16 @@ const InstanceTemplateComponent: FC<EntityComponentProps> = ({
             >
               {tabletOrPhoneRedesign ? null : (
                 <>
-                  <p>{coverage || "0"} days covered</p>
-                  <p>{dayTemplates?.length || "0"} day templates used</p>
+                  <p>
+                    {translateInstanceTemplate("coverage", {
+                      numberOfDaysCovered: coverage,
+                    })}
+                  </p>
+                  <p>
+                    {translateInstanceTemplate("dayTemplates", {
+                      numberOfDayTemplates: dayTemplates?.length,
+                    })}
+                  </p>
                 </>
               )}
             </div>
@@ -114,14 +143,20 @@ const InstanceTemplateComponent: FC<EntityComponentProps> = ({
       )}
       <header className={entityComponentStyles.entityComponentHeader}>
         <Image
-          alt={`${name} Image`}
+          alt={name || translateInstanceTemplateDefaultName("defaultNameValue")}
           src={imageUrl || defaultInstanceTemplateImageUrl}
-          title={name}
-          aria-label={name}
+          title={
+            name || translateInstanceTemplateDefaultName("defaultNameValue")
+          }
+          aria-label={
+            name || translateInstanceTemplateDefaultName("defaultNameValue")
+          }
           width={80}
           height={80}
         />
-        <h6>{name}</h6>
+        <h6>
+          {name || translateInstanceTemplateDefaultName("defaultNameValue")}
+        </h6>
       </header>
       <div
         className={entityComponentStyles.entityComponentDetails}
@@ -129,8 +164,16 @@ const InstanceTemplateComponent: FC<EntityComponentProps> = ({
       >
         {tabletOrPhoneRedesign ? null : (
           <>
-            <p>{coverage || "0"} days covered</p>
-            <p>{dayTemplates?.length || "0"} day templates used</p>
+            <p>
+              {translateInstanceTemplate("coverage", {
+                numberOfDaysCovered: coverage,
+              })}
+            </p>
+            <p>
+              {translateInstanceTemplate("dayTemplates", {
+                numberOfDayTemplates: dayTemplates?.length,
+              })}
+            </p>
           </>
         )}
       </div>

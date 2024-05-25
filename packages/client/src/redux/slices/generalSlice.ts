@@ -77,6 +77,7 @@ type InitialStateType = {
   loadingCreateOAuthProfile: LoadingStateType;
   loadingLoginProfile: LoadingStateType;
   loadingLoginOAuthProfile: LoadingStateType;
+  loadingSigninProfile: LoadingStateType;
   loadingGetProfile: LoadingStateType;
   loadingGetOAuthProfile: LoadingStateType;
   loadingUpdateProfile: LoadingStateType;
@@ -135,6 +136,7 @@ const initialState: InitialStateType = {
   loadingCreateProfile: "IDLE",
   loadingLoginProfile: "IDLE",
   loadingGetProfile: "IDLE",
+  loadingSigninProfile: "IDLE",
   loadingCreateOAuthProfile: "IDLE",
   loadingLoginOAuthProfile: "IDLE",
   loadingGetOAuthProfile: "IDLE",
@@ -525,6 +527,9 @@ const generalSlice = createSlice({
           if (errorData.type === "email") {
             state.loadingCreateOAuthProfile = "FAILED";
             state.templateModalMessage = `Successfully signed in your account!`;
+            state.loadingGetOAuthProfile = "IDLE";
+            state.loadingGetProfile = "IDLE";
+            state.loadingSigninProfile = "SUCCEDED";
           } else {
             state.loadingCreateOAuthProfile = "FAILED";
             state.templateModalMessage = errorData.message;
@@ -756,6 +761,9 @@ export const selectCurrentGuideSection = (state: State) =>
 
 export const selectWarningOverlay = (state: State) =>
   state.general.warningOverlay;
+
+export const selectLoadingSigninProfile = (state: State) =>
+  state.general.loadingSigninProfile;
 
 export const {
   changeIsSidebarOpened,

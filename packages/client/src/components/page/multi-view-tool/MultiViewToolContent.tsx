@@ -65,13 +65,25 @@ const MultiViewToolContent: FC<{
             {translate("noEntitiesCase.message", {
               title: multiViewToolContentTitle,
             })}
-            <Link
-              href="/create-tool"
-              title={translate("noEntitiesCase.messageLinkTitle")}
-              aria-label={translate("noEntitiesCase.messageLinkTitle")}
-            >
-              {translate("noEntitiesCase.messageLinkLabel")}
-            </Link>
+            {entityType === "mealPrepLog" ? (
+              <Link
+                href="/create-log"
+                title={translate("noEntitiesCase.messageLinkTitleSessionLog")}
+                aria-label={translate(
+                  "noEntitiesCase.messageLinkTitleSessionLog"
+                )}
+              >
+                {translate("noEntitiesCase.messageLinkLabelSessionLog")}
+              </Link>
+            ) : (
+              <Link
+                href="/create-tool"
+                title={translate("noEntitiesCase.messageLinkTitle")}
+                aria-label={translate("noEntitiesCase.messageLinkTitle")}
+              >
+                {translate("noEntitiesCase.messageLinkLabel")}
+              </Link>
+            )}
             .
           </p>
         )}

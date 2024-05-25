@@ -45,6 +45,7 @@ import useUpdateEntityMacrosBasedOnComponentEntities from "@/hooks/useUpdateEnti
 import handleUpdateArrayEntities from "@/helpers/handleUpdateArrayEntities";
 import useSliceEntityComponents from "@/hooks/useSliceEntityComponents";
 import createArrayFromNumber from "@/helpers/createArrayFromNumber";
+import useSetDefaultEntityName from "@/hooks/useSetDefaultEntityName";
 // Translations
 import { useTranslations } from "next-intl";
 
@@ -68,6 +69,17 @@ const CreateDayTemplateInterface = () => {
   const loadingGetUserRecipes = useAppSelector(selectLoadingGetUserRecipes);
 
   const translate = useTranslations("createTool.formLabels.dayTemplate");
+
+  useSetDefaultEntityName(
+    () =>
+      dispatch(
+        updateTemplateDayTemplate({
+          key: "name",
+          value: translate("defaultNameValue"),
+        })
+      ),
+    templateDayTemplate
+  );
 
   useUpdateEntityMacrosBasedOnComponentEntities(
     selectAllRecipes,
@@ -99,7 +111,9 @@ const CreateDayTemplateInterface = () => {
           <h4>{translate("formTitle")}</h4>
           <form className={createToolStyles.createInterfaceForm}>
             <TextFormControl
-              entityProperty={templateDayTemplate.name}
+              entityProperty={
+                templateDayTemplate.name || translate("defaultNameValue")
+              }
               labelContent={translate("name")}
               onEntityPropertyValueChange={(e) =>
                 dispatch(

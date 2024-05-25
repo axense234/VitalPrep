@@ -200,6 +200,7 @@
       "ingredient": {
         "formTitle": "Crează Ingredient",
         "name": "Nume:",
+        "defaultNameValue": "Morcov",
         "image": "Imagine:",
         "calories": "Calorii(per 100g):",
         "proteinAmount": "Proteine(in grams):",
@@ -211,6 +212,7 @@
       "utensil": {
         "formTitle": "Crează Ustensilă",
         "name": "Nume:",
+        "defaultNameValue": "Furculiţă",
         "image": "Imagine:",
         "enabled": "Activat?:",
         "createButtonLabel": "Crează Ustensilă"
@@ -218,6 +220,7 @@
       "recipe": {
         "formTitle": "Crează Reţetă",
         "name": "Nume:",
+        "defaultNameValue": "Ou Prajit",
         "image": "Imagine:",
         "tutorial": {
           "videoTutorialCheckboxLabel": "Folosiți tutorial video?:",
@@ -234,6 +237,7 @@
       "dayTemplate": {
         "formTitle": "Crează Plan de Zi",
         "name": "Nume:",
+        "defaultNameValue": "Ziua Micului Dejun",
         "image": "Imagine:",
         "nbOfEntities": "Număr de mese:",
         "createButtonLabel": "Crează Plan de Zi",
@@ -245,6 +249,7 @@
       "instanceTemplate": {
         "formTitle": "Crează Model de Sesiune",
         "name": "Nume:",
+        "defaultNameValue": "Sesiune cu Ciuperci",
         "image": "Imagine:",
         "nbOfEntities": "Număr de zile acoperite:",
         "createButtonLabel": "Crează Model de Sesiune",
@@ -256,6 +261,7 @@
       "mealPrepPlan": {
         "formTitle": "Crează Plan \"Meal Prep\"",
         "name": "Nume:",
+        "defaultNameValue": "Plan cu Cartofi",
         "image": "Imagine:",
         "nbOfEntities": "Număr de modele utilizate:",
         "createButtonLabel": "Crează Plan \"Meal Prep\"",
@@ -269,8 +275,9 @@
       "mealPrepLog": {
         "formTitle": "Adăugați Jurnal de Sesiune",
         "name": "Nume:",
+        "defaultNameValue": "Jurnal cu Ciuperci",
         "image": "Imagine:",
-        "date": "Data:",
+        "date": "Dată:",
         "completed": "Sesiune Completată?:",
         "cookingDuration": "Durata de gătire:",
         "createButtonLabel": "Adăugați Jurnal de Sesiune",
@@ -401,7 +408,9 @@
     "noEntitiesCase": {
       "message": "Nu aveți {title} disponibile. Dacă doriți să creați câteva accesați: ",
       "messageLinkTitle": "Accesați pagina Unealta de Creare",
-      "messageLinkLabel": "Unealta de Creare"
+      "messageLinkLabel": "Unealta de Creare",
+      "messageLinkTitleSessionLog": "Accesați pagina Adăugați Jurnal de Sesiune",
+      "messageLinkLabelSessionLog": "Adăugați Jurnal de Sesiune"
     }
   },
   "profile": {
@@ -468,7 +477,49 @@
   "entityComponents": {
     "title": "Componente",
     "sectionTitle": "{type} folosite în {name}:",
-    "defaultEntityName": "Nume Entitate"
+    "defaultEntityName": "Nume Entitate",
+    "details": {
+      "ingredient": {
+        "calories": "{numberOfCalories} calorii / 100g",
+        "macros": {
+          "protein": "{grams}g proteine",
+          "carbs": "{grams}g glucide",
+          "fats": "{grams}g grăsimi"
+        },
+        "enabled": "ACTIVAT ✔️",
+        "disabled": "DEZACTIVAT ❌"
+      },
+      "utensil": {
+        "enabled": "ACTIVAT ✔️",
+        "disabled": "DEZACTIVAT ❌"
+      },
+      "recipe": {
+        "calories": "{numberOfCalories} calorii",
+        "macros": {
+          "protein": "{grams}g proteine",
+          "carbs": "{grams}g glucide",
+          "fats": "{grams}g grăsimi"
+        }
+      },
+      "dayTemplate": {
+        "meals": "{numberOfMeals} mese",
+        "calories": "{numberOfCalories} calorii"
+      },
+      "instanceTemplate": {
+        "coverage": "{numberOfDaysCovered} zile acoperite",
+        "calories": "{numberOfCalories} calorii",
+        "dayTemplates": "{numberOfDayTemplates} modele de zi folosite"
+      },
+      "mealPrepPlan": {
+        "instances": "{numberOfInstanceTemplatesUsed} modele folosite",
+        "calories": "{numberOfCalories} calorii"
+      },
+      "mealPrepLog": {
+        "completed": "COMPLETAT ✔️",
+        "abandoned": "ABANDONAT ❌",
+        "cookingDuration": "{cookingDuration} ore"
+      }
+    }
   },
   "entityInstanceTemplate": {
     "sectionTitle": "Model de Sesiune folosit de {name}",

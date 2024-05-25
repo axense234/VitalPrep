@@ -20,6 +20,7 @@ import useGetWindowWidth from "@/hooks/useGetWindowWidth";
 import EntityMutationMenu from "./EntityMutationMenu";
 // Translations
 import { Link } from "@/navigation";
+import { useTranslations } from "next-intl";
 
 const UtensilComponent: FC<EntityComponentProps> = ({
   clicked,
@@ -35,6 +36,11 @@ const UtensilComponent: FC<EntityComponentProps> = ({
   ) as Utensil;
   const utensilEntityShown = utensilEntity || entity;
   const utensilContainerRef = useRef<HTMLDivElement | null>(null);
+
+  const translateUtensil = useTranslations("entityComponents.details.utensil");
+  const translateUtensilDefaultName = useTranslations(
+    "createTool.formLabels.utensil"
+  );
 
   const { name, imageUrl, enabled } = utensilEntityShown;
   let windowWidth = useGetWindowWidth();
@@ -70,21 +76,27 @@ const UtensilComponent: FC<EntityComponentProps> = ({
           >
             <header className={entityComponentStyles.entityComponentHeader}>
               <Image
-                alt={`${name} Image`}
+                alt={name || translateUtensilDefaultName("defaultNameValue")}
                 src={imageUrl || defaultUtensilImageUrl}
-                title={name}
-                aria-label={name}
+                title={name || translateUtensilDefaultName("defaultNameValue")}
+                aria-label={
+                  name || translateUtensilDefaultName("defaultNameValue")
+                }
                 width={80}
                 height={80}
               />
-              <h6>{name}</h6>
+              <h6>{name || translateUtensilDefaultName("defaultNameValue")}</h6>
             </header>
             <div
               className={entityComponentStyles.entityComponentDetails}
               style={{ alignItems: "center" }}
             >
               {phoneRedesign ? null : (
-                <p>{enabled ? `ENABLED ✔️` : `DISABLED ❌`}</p>
+                <p>
+                  {enabled
+                    ? translateUtensil("enabled")
+                    : translateUtensil("disabled")}
+                </p>
               )}
             </div>
           </div>
@@ -111,20 +123,26 @@ const UtensilComponent: FC<EntityComponentProps> = ({
       )}
       <header className={entityComponentStyles.entityComponentHeader}>
         <Image
-          alt={`${name} Image`}
+          alt={name || translateUtensilDefaultName("defaultNameValue")}
           src={imageUrl || defaultUtensilImageUrl}
-          title={name}
-          aria-label={name}
+          title={name || translateUtensilDefaultName("defaultNameValue")}
+          aria-label={name || translateUtensilDefaultName("defaultNameValue")}
           width={80}
           height={80}
         />
-        <h6>{name}</h6>
+        <h6>{name || translateUtensilDefaultName("defaultNameValue")}</h6>
       </header>
       <div
         className={entityComponentStyles.entityComponentDetails}
         style={{ alignItems: "center" }}
       >
-        {phoneRedesign ? null : <p>{enabled ? `ENABLED ✔️` : `DISABLED ❌`}</p>}
+        {phoneRedesign ? null : (
+          <p>
+            {enabled
+              ? translateUtensil("enabled")
+              : translateUtensil("disabled")}
+          </p>
+        )}
       </div>
     </div>
   );

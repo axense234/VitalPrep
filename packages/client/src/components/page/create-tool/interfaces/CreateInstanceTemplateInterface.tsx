@@ -40,6 +40,7 @@ import useUpdateEntityMacrosBasedOnComponentEntities from "@/hooks/useUpdateEnti
 import handleUpdateArrayEntities from "@/helpers/handleUpdateArrayEntities";
 import useSliceEntityComponents from "@/hooks/useSliceEntityComponents";
 import createArrayFromNumber from "@/helpers/createArrayFromNumber";
+import useSetDefaultEntityName from "@/hooks/useSetDefaultEntityName";
 // Translations
 import { useTranslations } from "next-intl";
 
@@ -68,6 +69,17 @@ const CreateInstanceTemplateInterface = () => {
   );
 
   const translate = useTranslations("createTool.formLabels.instanceTemplate");
+
+  useSetDefaultEntityName(
+    () =>
+      dispatch(
+        updateTemplateInstanceTemplate({
+          key: "name",
+          value: translate("defaultNameValue"),
+        })
+      ),
+    templateInstanceTemplate
+  );
 
   useUpdateEntityMacrosBasedOnComponentEntities(
     selectAllDayTemplates,
@@ -99,7 +111,9 @@ const CreateInstanceTemplateInterface = () => {
           <h4>{translate("formTitle")}</h4>
           <form className={createToolStyles.createInterfaceForm}>
             <TextFormControl
-              entityProperty={templateInstanceTemplate.name}
+              entityProperty={
+                templateInstanceTemplate.name || translate("defaultNameValue")
+              }
               labelContent={translate("name")}
               onEntityPropertyValueChange={(e) =>
                 dispatch(

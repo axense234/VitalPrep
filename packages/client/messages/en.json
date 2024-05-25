@@ -200,6 +200,7 @@
       "ingredient": {
         "formTitle": "Create Ingredient",
         "name": "Name:",
+        "defaultNameValue": "Carrot",
         "image": "Image:",
         "calories": "Calories(per 100g):",
         "proteinAmount": "Protein(in grams):",
@@ -211,6 +212,7 @@
       "utensil": {
         "formTitle": "Create Utensil",
         "name": "Name:",
+        "defaultNameValue": "Fork",
         "image": "Image:",
         "enabled": "Enabled?:",
         "createButtonLabel": "Create Utensil"
@@ -219,6 +221,7 @@
         "formTitle": "Create Recipe",
         "name": "Name:",
         "image": "Image:",
+        "defaultNameValue": "Fried Egg",
         "tutorial": {
           "videoTutorialCheckboxLabel": "Use Video Tutorial?:",
           "videoTutorialUrlPrompt": "Tutorial Url:",
@@ -234,6 +237,7 @@
       "dayTemplate": {
         "formTitle": "Create Day Plan",
         "name": "Name:",
+        "defaultNameValue": "Breakfast Day",
         "image": "Image:",
         "nbOfEntities": "Number of Meals:",
         "createButtonLabel": "Create Day Plan",
@@ -245,6 +249,7 @@
       "instanceTemplate": {
         "formTitle": "Create Session Template",
         "name": "Name:",
+        "defaultNameValue": "Mushroom Session",
         "image": "Image:",
         "nbOfEntities": "Number of Days Covered:",
         "createButtonLabel": "Create Session Template",
@@ -257,6 +262,7 @@
         "formTitle": "Create Meal Prep Plan",
         "name": "Name:",
         "image": "Image:",
+        "defaultNameValue": "Potato Plan",
         "nbOfEntities": "Number of Templates Used:",
         "createButtonLabel": "Create Meal Prep Plan",
         "selectFormControlsLabels": {
@@ -269,6 +275,7 @@
       "mealPrepLog": {
         "formTitle": "Add Session Log",
         "name": "Name:",
+        "defaultNameValue": "Mushroom Log",
         "image": "Image:",
         "date": "Date:",
         "completed": "Completed?:",
@@ -401,7 +408,9 @@
     "noEntitiesCase": {
       "message": "You have no {title} available. If you want to create some checkout the ",
       "messageLinkTitle": "Go to Create Tool Page",
-      "messageLinkLabel": "Create Tool Page"
+      "messageLinkLabel": "Create Tool Page",
+      "messageLinkTitleSessionLog": "Go to Add Log Page",
+      "messageLinkLabelSessionLog": " Add Log Page"
     }
   },
   "profile": {
@@ -468,7 +477,49 @@
   "entityComponents": {
     "title": "Components",
     "sectionTitle": "{type} used in {name}:",
-    "defaultEntityName": "Entity Name"
+    "defaultEntityName": "Entity Name",
+    "details": {
+      "ingredient": {
+        "calories": "{numberOfCalories} calories / 100g",
+        "macros": {
+          "protein": "{grams}g protein",
+          "carbs": "{grams}g carbs",
+          "fats": "{grams}g fats"
+        },
+        "enabled": "ENABLED ✔️",
+        "disabled": "DISABLED ❌"
+      },
+      "utensil": {
+        "enabled": "ENABLED ✔️",
+        "disabled": "DISABLED ❌"
+      },
+      "recipe": {
+        "calories": "{numberOfCalories} calories",
+        "macros": {
+          "protein": "{grams}g protein",
+          "carbs": "{grams}g carbs",
+          "fats": "{grams}g fats"
+        }
+      },
+      "dayTemplate": {
+        "meals": "{numberOfMeals} meals",
+        "calories": "{numberOfCalories} calories"
+      },
+      "instanceTemplate": {
+        "coverage": "{numberOfDaysCovered} days covered",
+        "calories": "{numberOfCalories} calories",
+        "dayTemplates": "{numberOfDayTemplates} day templates used"
+      },
+      "mealPrepPlan": {
+        "instances": "{numberOfInstanceTemplatesUsed} models used",
+        "calories": "{numberOfCalories} calories"
+      },
+      "mealPrepLog": {
+        "completed": "COMPLETED ✔️",
+        "abandoned": "ABANDONED ❌",
+        "cookingDuration": "{cookingDuration} hours"
+      }
+    }
   },
   "entityInstanceTemplate": {
     "title": "Componente",

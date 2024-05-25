@@ -18,7 +18,9 @@ import Image from "next/image";
 import useGetWindowWidth from "@/hooks/useGetWindowWidth";
 // Components
 import EntityMutationMenu from "./EntityMutationMenu";
+// Translations
 import { Link } from "@/navigation";
+import { useTranslations } from "next-intl";
 
 const RecipeComponent: FC<EntityComponentProps> = ({
   clicked,
@@ -35,7 +37,13 @@ const RecipeComponent: FC<EntityComponentProps> = ({
   const recipeEntityShown = recipeEntity || entity;
   const recipeContainerRef = useRef<HTMLDivElement | null>(null);
 
+  const translateRecipe = useTranslations("entityComponents.details.recipe");
+  const translateRecipeDefaultName = useTranslations(
+    "createTool.formLabels.recipe"
+  );
+
   const { name, imageUrl, macros } = recipeEntityShown;
+
   let windowWidth = useGetWindowWidth();
   let tabletOrPhoneRedesign = windowWidth && windowWidth <= 1000;
   let phoneRedesign = windowWidth && windowWidth <= 600;
@@ -70,25 +78,45 @@ const RecipeComponent: FC<EntityComponentProps> = ({
           >
             <header className={entityComponentStyles.entityComponentHeader}>
               <Image
-                alt={`${name} Image`}
+                alt={name || translateRecipeDefaultName("defaultNameValue")}
                 src={imageUrl || defaultRecipeImageUrl}
-                title={name}
-                aria-label={name}
+                title={name || translateRecipeDefaultName("defaultNameValue")}
+                aria-label={
+                  name || translateRecipeDefaultName("defaultNameValue")
+                }
                 width={80}
                 height={80}
               />
-              <h6>{name}</h6>
+              <h6>{name || translateRecipeDefaultName("defaultNameValue")}</h6>
             </header>
             <div
               className={entityComponentStyles.entityComponentDetails}
               style={{ alignItems: "center" }}
             >
-              {phoneRedesign ? null : <p>{macros?.calories} calories</p>}
+              {phoneRedesign ? null : (
+                <p>
+                  {translateRecipe("calories", {
+                    numberOfCalories: macros?.calories,
+                  })}
+                </p>
+              )}
               {tabletOrPhoneRedesign ? null : (
                 <>
-                  <p>{macros?.proteinAmount}g protein </p>
-                  <p>{macros?.carbsAmount}g carbs</p>
-                  <p>{macros?.fatsAmount}g fats</p>
+                  <p>
+                    {translateRecipe("macros.protein", {
+                      grams: macros?.proteinAmount,
+                    })}
+                  </p>
+                  <p>
+                    {translateRecipe("macros.carbs", {
+                      grams: macros?.carbsAmount,
+                    })}
+                  </p>
+                  <p>
+                    {translateRecipe("macros.fats", {
+                      grams: macros?.fatsAmount,
+                    })}
+                  </p>
                 </>
               )}
             </div>
@@ -116,25 +144,43 @@ const RecipeComponent: FC<EntityComponentProps> = ({
       )}
       <header className={entityComponentStyles.entityComponentHeader}>
         <Image
-          alt={`${name} Image`}
+          alt={name || translateRecipeDefaultName("defaultNameValue")}
           src={imageUrl || defaultRecipeImageUrl}
-          title={name}
-          aria-label={name}
+          title={name || translateRecipeDefaultName("defaultNameValue")}
+          aria-label={name || translateRecipeDefaultName("defaultNameValue")}
           width={80}
           height={80}
         />
-        <h6>{name}</h6>
+        <h6>{name || translateRecipeDefaultName("defaultNameValue")}</h6>
       </header>
       <div
         className={entityComponentStyles.entityComponentDetails}
         style={{ alignItems: "center" }}
       >
-        {phoneRedesign ? null : <p>{macros?.calories} calories</p>}
+        {phoneRedesign ? null : (
+          <p>
+            {translateRecipe("calories", {
+              numberOfCalories: macros?.calories,
+            })}
+          </p>
+        )}
         {tabletOrPhoneRedesign ? null : (
           <>
-            <p>{macros?.proteinAmount}g protein </p>
-            <p>{macros?.carbsAmount}g carbs</p>
-            <p>{macros?.fatsAmount}g fats</p>
+            <p>
+              {translateRecipe("macros.protein", {
+                grams: macros?.proteinAmount,
+              })}
+            </p>
+            <p>
+              {translateRecipe("macros.carbs", {
+                grams: macros?.carbsAmount,
+              })}
+            </p>
+            <p>
+              {translateRecipe("macros.fats", {
+                grams: macros?.fatsAmount,
+              })}
+            </p>
           </>
         )}
       </div>

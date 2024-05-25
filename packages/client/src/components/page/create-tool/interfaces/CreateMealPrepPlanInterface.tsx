@@ -44,6 +44,7 @@ import useGetEntityComponents from "@/hooks/useGetEntityComponents";
 import handleUpdateArrayEntities from "@/helpers/handleUpdateArrayEntities";
 import handleOnCreateMealPrepPlanSubmit from "@/helpers/handleOnCreateMealPrepPlanSubmit";
 import createArrayFromNumber from "@/helpers/createArrayFromNumber";
+import useSetDefaultEntityName from "@/hooks/useSetDefaultEntityName";
 // Translations
 import { useTranslations } from "next-intl";
 
@@ -74,6 +75,17 @@ const CreateMealPrepPlanInterface = () => {
   );
 
   const translate = useTranslations("createTool.formLabels.mealPrepPlan");
+
+  useSetDefaultEntityName(
+    () =>
+      dispatch(
+        updateTemplateMealPrepPlan({
+          key: "name",
+          value: translate("defaultNameValue"),
+        })
+      ),
+    templateMealPrepPlan
+  );
 
   useUpdateEntityMacrosBasedOnComponentEntities(
     selectAllMealPrepPlans,
@@ -115,7 +127,9 @@ const CreateMealPrepPlanInterface = () => {
           <h4>{translate("formTitle")}</h4>
           <form className={createToolStyles.createInterfaceForm}>
             <TextFormControl
-              entityProperty={templateMealPrepPlan.name}
+              entityProperty={
+                templateMealPrepPlan.name || translate("defaultNameValue")
+              }
               labelContent={translate("name")}
               onEntityPropertyValueChange={(e) =>
                 dispatch(

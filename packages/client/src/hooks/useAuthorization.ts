@@ -1,61 +1,72 @@
 // React
-import { useEffect, useRef } from "react";
+import { useEffect, useState } from "react";
 // Redux
 import {
   getProfileJWT,
   getProfileOAuth,
   selectLoadingGetOAuthProfile,
   selectLoadingGetProfile,
+  selectLoadingSigninProfile,
   selectProfile,
 } from "@/redux/slices/generalSlice";
 import { useAppDispatch, useAppSelector } from "./redux";
 // Translations
-import { pathnames, usePathname, useRouter } from "@/navigation";
+import { usePathname, useRouter } from "@/navigation";
 
 const useAuthorization = () => {
   const dispatch = useAppDispatch();
   const pathname = usePathname();
   const router = useRouter();
 
-  const hasEffectRun = useRef(false);
-
   const loadingGetProfile = useAppSelector(selectLoadingGetProfile);
   const loadingGetOAuthProfile = useAppSelector(selectLoadingGetOAuthProfile);
+  const loadingSigninProfile = useAppSelector(selectLoadingSigninProfile);
+
+  const [canGetProfile, setCanGetProfile] = useState<boolean>(false);
 
   const canRedirect =
     loadingGetProfile === "SUCCEDED" ||
     loadingGetProfile === "FAILED" ||
     loadingGetOAuthProfile === "SUCCEDED";
 
-  useRedirect(pathname, router, canRedirect);
-
   useEffect(() => {
     const createVitalPrepAccount = localStorage.getItem(
       "createVitalPrepAccount"
     );
+    setCanGetProfile(createVitalPrepAccount !== "create");
+  }, [loadingGetProfile, loadingGetOAuthProfile]);
+
+  useEffect(() => {
     if (
       loadingGetOAuthProfile === "FAILED" &&
       loadingGetProfile === "IDLE" &&
-      !createVitalPrepAccount
+      (canGetProfile || loadingSigninProfile === "SUCCEDED")
     ) {
       dispatch(getProfileJWT());
     }
-  }, [loadingGetOAuthProfile, loadingGetProfile]);
+  }, [
+    loadingGetOAuthProfile,
+    loadingGetProfile,
+    canGetProfile,
+    loadingSigninProfile,
+  ]);
 
   useEffect(() => {
-    const createVitalPrepAccount = localStorage.getItem(
-      "createVitalPrepAccount"
-    );
     if (
       loadingGetOAuthProfile === "IDLE" &&
       loadingGetProfile === "IDLE" &&
-      !hasEffectRun.current &&
-      !createVitalPrepAccount
+      (canGetProfile || loadingSigninProfile === "SUCCEDED")
     ) {
-      hasEffectRun.current = true;
       dispatch(getProfileOAuth());
     }
-  }, [loadingGetOAuthProfile, loadingGetProfile]);
+  }, [
+    loadingGetOAuthProfile,
+    loadingGetProfile,
+    canGetProfile,
+    loadingSigninProfile,
+  ]);
+
+  useRedirect(pathname, router, canRedirect);
 };
 
 export const useRedirect = (

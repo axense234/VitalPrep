@@ -27,6 +27,7 @@ import {
 // Hooks
 import useShowCreatedEntity from "@/hooks/useShowCreatedEntity";
 import useUpdateEntityTemplateImageUrl from "@/hooks/useUpdateEntityTemplateImageUrl";
+import useSetDefaultEntityName from "@/hooks/useSetDefaultEntityName";
 // Translations
 import { useTranslations } from "next-intl";
 
@@ -44,6 +45,17 @@ const CreateUtensilInterface = () => {
 
   const translate = useTranslations("createTool.formLabels.utensil");
 
+  useSetDefaultEntityName(
+    () =>
+      dispatch(
+        updateTemplateUtensil({
+          key: "name",
+          value: translate("defaultNameValue"),
+        })
+      ),
+    templateUtensil
+  );
+
   useShowCreatedEntity(
     loadingCreateUtensil,
     `Successfully created utensil: ${templateUtensil.name}.`,
@@ -60,7 +72,9 @@ const CreateUtensilInterface = () => {
           <h4>{translate("formTitle")}</h4>
           <form className={createToolStyles.createInterfaceForm}>
             <TextFormControl
-              entityProperty={templateUtensil.name}
+              entityProperty={
+                templateUtensil.name || translate("defaultNameValue")
+              }
               labelContent={translate("name")}
               onEntityPropertyValueChange={(e) =>
                 dispatch(

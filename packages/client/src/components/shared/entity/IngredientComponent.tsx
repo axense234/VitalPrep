@@ -20,6 +20,7 @@ import useGetWindowWidth from "@/hooks/useGetWindowWidth";
 import EntityMutationMenu from "./EntityMutationMenu";
 // Translations
 import { Link } from "@/navigation";
+import { useTranslations } from "next-intl";
 
 const IngredientComponent: FC<EntityComponentProps> = ({
   clicked,
@@ -37,6 +38,13 @@ const IngredientComponent: FC<EntityComponentProps> = ({
   const ingredientContainerRef = useRef<HTMLDivElement | null>(null);
 
   const { name, imageUrl, macros, enabled } = ingredientEntityShown;
+
+  const translateIngredient = useTranslations(
+    "entityComponents.details.ingredient"
+  );
+  const translateIngredientDefaultName = useTranslations(
+    "createTool.formLabels.ingredient"
+  );
 
   let windowWidth = useGetWindowWidth();
   let tabletOrPhoneRedesign = windowWidth && windowWidth <= 1100;
@@ -71,26 +79,54 @@ const IngredientComponent: FC<EntityComponentProps> = ({
           >
             <header className={entityComponentStyles.entityComponentHeader}>
               <Image
-                alt={`${name} Image`}
+                alt={name || translateIngredientDefaultName("defaultNameValue")}
                 src={imageUrl || defaultIngredientImageUrl}
-                title={name}
-                aria-label={name}
+                title={
+                  name || translateIngredientDefaultName("defaultNameValue")
+                }
+                aria-label={
+                  name || translateIngredientDefaultName("defaultNameValue")
+                }
                 width={80}
                 height={80}
               />
-              <h6>{name}</h6>
+              <h6>
+                {name || translateIngredientDefaultName("defaultNameValue")}
+              </h6>
             </header>
             <div
               className={entityComponentStyles.entityComponentDetails}
               style={{ alignItems: "center" }}
             >
-              {phoneRedesign ? null : <p>{macros?.calories} calories</p>}
+              {phoneRedesign ? null : (
+                <p>
+                  {translateIngredient("calories", {
+                    numberOfCalories: macros?.calories,
+                  })}
+                </p>
+              )}
               {tabletOrPhoneRedesign ? null : (
                 <>
-                  <p>{macros?.proteinAmount}g protein </p>
-                  <p>{macros?.carbsAmount}g carbs</p>
-                  <p>{macros?.fatsAmount}g fats</p>
-                  <p>{enabled ? `ENABLED ✔️` : `DISABLED ❌`}</p>
+                  <p>
+                    {translateIngredient("macros.protein", {
+                      grams: macros?.proteinAmount,
+                    })}
+                  </p>
+                  <p>
+                    {translateIngredient("macros.carbs", {
+                      grams: macros?.carbsAmount,
+                    })}
+                  </p>
+                  <p>
+                    {translateIngredient("macros.fats", {
+                      grams: macros?.fatsAmount,
+                    })}
+                  </p>
+                  <p>
+                    {enabled
+                      ? translateIngredient("enabled")
+                      : translateIngredient("disabled")}
+                  </p>
                 </>
               )}
             </div>
@@ -131,13 +167,35 @@ const IngredientComponent: FC<EntityComponentProps> = ({
         className={entityComponentStyles.entityComponentDetails}
         style={{ alignItems: "center" }}
       >
-        {phoneRedesign ? null : <p>{macros?.calories} calories</p>}
+        {phoneRedesign ? null : (
+          <p>
+            {translateIngredient("calories", {
+              numberOfCalories: macros?.calories,
+            })}
+          </p>
+        )}
         {tabletOrPhoneRedesign ? null : (
           <>
-            <p>{macros?.proteinAmount}g protein </p>
-            <p>{macros?.carbsAmount}g carbs</p>
-            <p>{macros?.fatsAmount}g fats</p>
-            <p>{enabled ? `ENABLED ✔️` : `DISABLED ❌`}</p>
+            <p>
+              {translateIngredient("macros.protein", {
+                grams: macros?.proteinAmount,
+              })}
+            </p>
+            <p>
+              {translateIngredient("macros.carbs", {
+                grams: macros?.carbsAmount,
+              })}
+            </p>
+            <p>
+              {translateIngredient("macros.fats", {
+                grams: macros?.fatsAmount,
+              })}
+            </p>
+            <p>
+              {enabled
+                ? translateIngredient("enabled")
+                : translateIngredient("disabled")}
+            </p>
           </>
         )}
       </div>

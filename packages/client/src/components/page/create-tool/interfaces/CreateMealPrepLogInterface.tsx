@@ -11,7 +11,7 @@ import EntityPreview from "@/components/shared/entity/EntityPreview";
 // Types
 import InstanceTemplateTemplate from "@/core/types/entity/instanceTemplate/InstanceTemplateTemplate";
 // React
-import React, { ChangeEvent, useTransition } from "react";
+import React, { ChangeEvent } from "react";
 // Data
 import { defaultMealPrepLogImageUrl } from "@/data";
 // Redux
@@ -42,6 +42,8 @@ import useGetEntityComponents from "@/hooks/useGetEntityComponents";
 import handleToggleEntityProperty from "@/helpers/handleToggleEntityProperty";
 import useUpdateEntityMacrosBasedOnComponent from "@/hooks/useUpdateEntityMacrosBasedOnComponent";
 import handleOnCreateMealPrepLogSubmit from "@/helpers/handleOnCreateMealPrepLogSubmit";
+import useSetDefaultEntityName from "@/hooks/useSetDefaultEntityName";
+// Translations
 import { useTranslations } from "next-intl";
 
 const CreateMealPrepLogInterface = () => {
@@ -73,6 +75,17 @@ const CreateMealPrepLogInterface = () => {
 
   const translate = useTranslations("createTool.formLabels.mealPrepLog");
 
+  useSetDefaultEntityName(
+    () =>
+      dispatch(
+        updateTemplateMealPrepLog({
+          key: "name",
+          value: translate("defaultNameValue"),
+        })
+      ),
+    templateMealPrepLog
+  );
+
   useUpdateEntityMacrosBasedOnComponent(
     instanceTemplateChosen,
     updateTemplateMealPrepLog
@@ -99,7 +112,9 @@ const CreateMealPrepLogInterface = () => {
           <h4>{translate("formTitle")}</h4>
           <form className={createToolStyles.createInterfaceForm}>
             <TextFormControl
-              entityProperty={templateMealPrepLog.name}
+              entityProperty={
+                templateMealPrepLog.name || translate("defaultNameValue")
+              }
               labelContent={translate("name")}
               onEntityPropertyValueChange={(e) =>
                 dispatch(

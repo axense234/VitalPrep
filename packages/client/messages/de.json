@@ -200,6 +200,7 @@
       "ingredient": {
         "formTitle": "Zutat erstellen",
         "name": "Name:",
+        "defaultNameValue": "Karotte",
         "image": "Bild:",
         "calories": "Kalorien (pro 100g):",
         "proteinAmount": "Protein (in Gramm):",
@@ -211,6 +212,7 @@
       "utensil": {
         "formTitle": "Utensil erstellen",
         "name": "Name:",
+        "defaultNameValue": "Gabel",
         "image": "Bild:",
         "enabled": "Ermöglicht?:",
         "createButtonLabel": "Utensil erstellen"
@@ -218,6 +220,7 @@
       "recipe": {
         "formTitle": "Rezept erstellen",
         "name": "Name:",
+        "defaultNameValue": "Spiegelei",
         "image": "Bild:",
         "tutorial": {
           "videoTutorialCheckboxLabel": "Video-Tutorial verwenden?:",
@@ -234,6 +237,7 @@
       "dayTemplate": {
         "formTitle": "Tagesplan erstellen",
         "name": "Name:",
+        "defaultNameValue": "Frühstückstag",
         "image": "Bild:",
         "nbOfEntities": "Anzahl der Mahlzeiten:",
         "createButtonLabel": "Tagesplan erstellen",
@@ -245,6 +249,7 @@
       "instanceTemplate": {
         "formTitle": "Sitzungsvorlage erstellen",
         "name": "Name:",
+        "defaultNameValue": "Pilzsitzung",
         "image": "Bild:",
         "nbOfEntities": "Anzahl der abgedeckten Tage:",
         "createButtonLabel": "Sitzungsvorlage erstellen",
@@ -256,6 +261,7 @@
       "mealPrepPlan": {
         "formTitle": "Erstellen Sie einen Essensvorbereitungsplan",
         "name": "Name:",
+        "defaultNameValue": "Kartoffelplan",
         "image": "Bild:",
         "nbOfEntities": "Anzahl der verwendeten Vorlagen:",
         "createButtonLabel": "Erstellen Sie einen Essensvorbereitungsplan",
@@ -269,6 +275,7 @@
       "mealPrepLog": {
         "formTitle": "Sitzungsprotokoll hinzufügen",
         "name": "Name:",
+        "defaultNameValue": "Pilztagebuch",
         "image": "Bild:",
         "date": "Datum:",
         "completed": "Vollendet?:",
@@ -401,7 +408,9 @@
     "noEntitiesCase": {
       "message": "Für Sie ist kein {title} verfügbar.  ",
       "messageLinkTitle": "Gehen Sie zur Seite „Tool erstellen“.",
-      "messageLinkLabel": "Werkzeugseite erstellen"
+      "messageLinkLabel": "Werkzeugseite erstellen",
+      "messageLinkTitleSessionLog": "Gehen Sie zur Seite „Protokoll hinzufügen“.",
+      "messageLinkLabelSessionLog": "Protokollseite hinzufügen"
     }
   },
   "profile": {
@@ -468,7 +477,49 @@
   "entityComponents": {
     "title": "Komponenten",
     "sectionTitle": "{type} wird in {name} verwendet:",
-    "defaultEntityName": "Entitätsname"
+    "defaultEntityName": "Entitätsname",
+    "details": {
+      "ingredient": {
+        "calories": "{numberOfCalories} Kalorien / 100g",
+        "macros": {
+          "protein": "{grams}g Proteine",
+          "carbs": "{grams}g Kohlenhydrate",
+          "fats": "{grams}g Fette"
+        },
+        "enabled": "ERMÖGLICHT ✔️",
+        "disabled": "DEAKTIVIERT ❌"
+      },
+      "utensil": {
+        "enabled": "ERMÖGLICHT ✔️",
+        "disabled": "DEAKTIVIERT ❌"
+      },
+      "recipe": {
+        "calories": "{numberOfCalories} Kalorien",
+        "macros": {
+          "protein": "{grams}g Proteine",
+          "carbs": "{grams}g Kohlenhydrate",
+          "fats": "{grams}g Fette"
+        }
+      },
+      "dayTemplate": {
+        "meals": "{numberOfMeals} mahlzeiten",
+        "calories": "{numberOfCalories} Kalorien"
+      },
+      "instanceTemplate": {
+        "coverage": "{numberOfDaysCovered} tage abgedeckt",
+        "calories": "{numberOfCalories} Kalorien",
+        "dayTemplates": "{numberOfDayTemplates} Day -Vorlagen verwendet"
+      },
+      "mealPrepPlan": {
+        "instances": "{numberOfInstanceTemplatesUsed} modelle verwendet",
+        "calories": "{numberOfCalories} Kalorien"
+      },
+      "mealPrepLog": {
+        "completed": "VOLLENDET ✔️",
+        "abandoned": "VERLASSEN ❌",
+        "cookingDuration": "{cookingDuration} stunden"
+      }
+    }
   },
   "entityInstanceTemplate": {
     "title": "Komponente",

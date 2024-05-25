@@ -200,6 +200,7 @@
       "ingredient": {
         "formTitle": "Créer un ingrédient",
         "name": "Nom:",
+        "defaultNameValue": "Carotte",
         "image": "Image:",
         "calories": "Calories (pour 100g) :",
         "proteinAmount": "Protéine(en grammes) :",
@@ -211,6 +212,7 @@
       "utensil": {
         "formTitle": "Créer un ustensile",
         "name": "Nom:",
+        "defaultNameValue": "Fourchette",
         "image": "Image:",
         "enabled": "Activé?:",
         "createButtonLabel": "Créer un ustensile"
@@ -218,6 +220,7 @@
       "recipe": {
         "formTitle": "Créer une recette",
         "name": "Nom:",
+        "defaultNameValue": "Oeuf Frit",
         "image": "Image:",
         "tutorial": {
           "videoTutorialCheckboxLabel": "Utiliser le didacticiel vidéo ? :",
@@ -234,6 +237,7 @@
       "dayTemplate": {
         "formTitle": "Créer un plan de journée",
         "name": "Nom:",
+        "defaultNameValue": "Jour du Petit-Déjeuner",
         "image": "Image:",
         "nbOfEntities": "Nombre de repas :",
         "createButtonLabel": "Créer un plan de journée",
@@ -245,6 +249,7 @@
       "instanceTemplate": {
         "formTitle": "Créer un modèle de session",
         "name": "Nom:",
+        "defaultNameValue": "Séance de Champignons",
         "image": "Image:",
         "nbOfEntities": "Nombre de jours couverts :",
         "createButtonLabel": "Créer un modèle de session",
@@ -256,6 +261,7 @@
       "mealPrepPlan": {
         "formTitle": "Créer un plan de préparation des repas",
         "name": "Nom:",
+        "defaultNameValue": "Plan de Pommes de Terre",
         "image": "Image:",
         "nbOfEntities": "Nombre de modèles utilisés :",
         "createButtonLabel": "Créer un plan de préparation des repas",
@@ -269,6 +275,7 @@
       "mealPrepLog": {
         "formTitle": "Ajouter un journal de session",
         "name": "Nom:",
+        "defaultNameValue": "Journal des Champignons",
         "image": "Image:",
         "date": "Date:",
         "completed": "Complété?:",
@@ -401,7 +408,9 @@
     "noEntitiesCase": {
       "message": "Vous n'avez pas de {title} disponible.  ",
       "messageLinkTitle": "Accédez à la page Créer un Outil",
-      "messageLinkLabel": "Créer une page d'outil"
+      "messageLinkLabel": "Créer une page d'outil",
+      "messageLinkTitleSessionLog": "Accédez à la page Ajouter un journal",
+      "messageLinkLabelSessionLog": "Ajouter un journal"
     }
   },
   "profile": {
@@ -468,7 +477,49 @@
   "entityComponents": {
     "title": "Composants",
     "sectionTitle": "{type} utilisé dans {name} :",
-    "defaultEntityName": "Nom de l'entité"
+    "defaultEntityName": "Nom de l'entité",
+    "details": {
+      "ingredient": {
+        "calories": "{numberOfCalories} calories / 100g",
+        "macros": {
+          "protein": "{grams}g protéines",
+          "carbs": "{grams}g crabes",
+          "fats": "{grams}g graisses"
+        },
+        "enabled": "ACTIVÉ ✔️",
+        "disabled": "DÉSACTIVÉ ❌"
+      },
+      "utensil": {
+        "enabled": "ACTIVÉ ✔️",
+        "disabled": "DÉSACTIVÉ ❌"
+      },
+      "recipe": {
+        "calories": "{numberOfCalories} calories",
+        "macros": {
+          "protein": "{grams}g protéines",
+          "carbs": "{grams}g crabes",
+          "fats": "{grams}g graisses"
+        }
+      },
+      "dayTemplate": {
+        "meals": "{numberOfMeals} repas",
+        "calories": "{numberOfCalories} calories"
+      },
+      "instanceTemplate": {
+        "coverage": "{numberOfDaysCovered} jours couverts",
+        "calories": "{numberOfCalories} calories",
+        "dayTemplates": "{numberOfDayTemplates} modèles de jour utilisés"
+      },
+      "mealPrepPlan": {
+        "instances": "{numberOfInstanceTemplatesUsed} modèles utilisés",
+        "calories": "{numberOfCalories} calories"
+      },
+      "mealPrepLog": {
+        "completed": "COMPLÉTÉ ✔️",
+        "abandoned": "ABANDONNÉ ❌",
+        "cookingDuration": "{cookingDuration} heures"
+      }
+    }
   },
   "entityInstanceTemplate": {
     "title": "Composant",

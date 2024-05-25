@@ -20,6 +20,7 @@ import useGetWindowWidth from "@/hooks/useGetWindowWidth";
 import EntityMutationMenu from "./EntityMutationMenu";
 // Translations
 import { Link } from "@/navigation";
+import { useTranslations } from "next-intl";
 
 const MealPrepLogComponent: FC<EntityComponentProps> = ({
   clicked,
@@ -36,8 +37,16 @@ const MealPrepLogComponent: FC<EntityComponentProps> = ({
   const mealPrepLogEntityShown = mealPrepLogEntity || entity;
   const mealPrepLogContainerRef = useRef<HTMLDivElement | null>(null);
 
+  const translateMealPrepLog = useTranslations(
+    "entityComponents.details.mealPrepLog"
+  );
+  const translateMealPrepLogDefaultName = useTranslations(
+    "createTool.formLabels.mealPrepLog"
+  );
+
   const { name, imageUrl, cookingDuration, date, completed } =
     mealPrepLogEntityShown;
+
   let windowWidth = useGetWindowWidth();
   let tabletOrPhoneRedesign = windowWidth && windowWidth <= 1100;
   let phoneRedesign = windowWidth && windowWidth <= 500;
@@ -72,14 +81,22 @@ const MealPrepLogComponent: FC<EntityComponentProps> = ({
           >
             <header className={entityComponentStyles.entityComponentHeader}>
               <Image
-                alt={`${name} Image`}
+                alt={
+                  name || translateMealPrepLogDefaultName("defaultNameValue")
+                }
                 src={imageUrl || defaultInstanceTemplateImageUrl}
-                title={name}
-                aria-label={name}
+                title={
+                  name || translateMealPrepLogDefaultName("defaultNameValue")
+                }
+                aria-label={
+                  name || translateMealPrepLogDefaultName("defaultNameValue")
+                }
                 width={80}
                 height={80}
               />
-              <h6>{name}</h6>
+              <h6>
+                {name || translateMealPrepLogDefaultName("defaultNameValue")}
+              </h6>
             </header>
             <div
               className={entityComponentStyles.entityComponentDetails}
@@ -90,8 +107,16 @@ const MealPrepLogComponent: FC<EntityComponentProps> = ({
               )}
               {tabletOrPhoneRedesign ? null : (
                 <>
-                  <p>{cookingDuration || "???"} hours spent</p>
-                  <p>{completed ? "COMPLETED" : "NOT COMPLETED"}</p>
+                  <p>
+                    {translateMealPrepLog("cookingDuration", {
+                      cookingDuration: cookingDuration || "???",
+                    })}
+                  </p>
+                  <p>
+                    {completed
+                      ? translateMealPrepLog("completed")
+                      : translateMealPrepLog("abandoned")}
+                  </p>
                 </>
               )}
             </div>
@@ -119,14 +144,16 @@ const MealPrepLogComponent: FC<EntityComponentProps> = ({
       )}
       <header className={entityComponentStyles.entityComponentHeader}>
         <Image
-          alt={`${name} Image`}
+          alt={name || translateMealPrepLogDefaultName("defaultNameValue")}
           src={imageUrl || defaultInstanceTemplateImageUrl}
-          title={name}
-          aria-label={name}
+          title={name || translateMealPrepLogDefaultName("defaultNameValue")}
+          aria-label={
+            name || translateMealPrepLogDefaultName("defaultNameValue")
+          }
           width={80}
           height={80}
         />
-        <h6>{name}</h6>
+        <h6>{name || translateMealPrepLogDefaultName("defaultNameValue")}</h6>
       </header>
       <div
         className={entityComponentStyles.entityComponentDetails}
@@ -137,8 +164,16 @@ const MealPrepLogComponent: FC<EntityComponentProps> = ({
         )}
         {tabletOrPhoneRedesign ? null : (
           <>
-            <p>{cookingDuration || "???"} hours spent</p>
-            <p>{completed ? "COMPLETED" : "NOT COMPLETED"}</p>
+            <p>
+              {translateMealPrepLog("cookingDuration", {
+                cookingDuration: cookingDuration || "???",
+              })}
+            </p>
+            <p>
+              {completed
+                ? translateMealPrepLog("completed")
+                : translateMealPrepLog("abandoned")}
+            </p>
           </>
         )}
       </div>

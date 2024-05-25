@@ -20,6 +20,7 @@ import useGetWindowWidth from "@/hooks/useGetWindowWidth";
 import EntityMutationMenu from "./EntityMutationMenu";
 // Translations
 import { Link } from "@/navigation";
+import { useTranslations } from "next-intl";
 
 const DayTemplateComponent: FC<EntityComponentProps> = ({
   clicked,
@@ -36,6 +37,13 @@ const DayTemplateComponent: FC<EntityComponentProps> = ({
 
   const dayTemplateEntityUsed = dayTemplateEntity || entity;
   const dayTemplateContainerRef = useRef<HTMLDivElement | null>(null);
+
+  const translateDayTemplate = useTranslations(
+    "entityComponents.details.dayTemplate"
+  );
+  const translateDayTemplateDefaultName = useTranslations(
+    "createTool.formLabels.dayTemplate"
+  );
 
   const { name, imageUrl, macros, recipes } = dayTemplateEntityUsed;
   let windowWidth = useGetWindowWidth();
@@ -71,14 +79,22 @@ const DayTemplateComponent: FC<EntityComponentProps> = ({
           >
             <header className={entityComponentStyles.entityComponentHeader}>
               <Image
-                alt={`${name} Image`}
+                alt={
+                  name || translateDayTemplateDefaultName("defaultNameValue")
+                }
                 src={imageUrl || defaultDayTemplateImageUrl}
-                title={name}
-                aria-label={name}
+                title={
+                  name || translateDayTemplateDefaultName("defaultNameValue")
+                }
+                aria-label={
+                  name || translateDayTemplateDefaultName("defaultNameValue")
+                }
                 width={80}
                 height={80}
               />
-              <h6>{name}</h6>
+              <h6>
+                {name || translateDayTemplateDefaultName("defaultNameValue")}
+              </h6>
             </header>
             <div
               className={entityComponentStyles.entityComponentDetails}
@@ -86,8 +102,16 @@ const DayTemplateComponent: FC<EntityComponentProps> = ({
             >
               {phoneRedesign ? null : (
                 <>
-                  <p>{recipes?.length || "0"} meals</p>
-                  <p>{macros?.calories} calories</p>
+                  <p>
+                    {translateDayTemplate("meals", {
+                      numberOfMeals: recipes?.length,
+                    })}
+                  </p>
+                  <p>
+                    {translateDayTemplate("calories", {
+                      numberOfCalories: macros?.calories,
+                    })}
+                  </p>
                 </>
               )}
             </div>
@@ -115,14 +139,16 @@ const DayTemplateComponent: FC<EntityComponentProps> = ({
       )}
       <header className={entityComponentStyles.entityComponentHeader}>
         <Image
-          alt={`${name} Image`}
+          alt={name || translateDayTemplateDefaultName("defaultNameValue")}
           src={imageUrl || defaultDayTemplateImageUrl}
-          title={name}
-          aria-label={name}
+          title={name || translateDayTemplateDefaultName("defaultNameValue")}
+          aria-label={
+            name || translateDayTemplateDefaultName("defaultNameValue")
+          }
           width={80}
           height={80}
         />
-        <h6>{name}</h6>
+        <h6>{name || translateDayTemplateDefaultName("defaultNameValue")}</h6>
       </header>
       <div
         className={entityComponentStyles.entityComponentDetails}
@@ -130,8 +156,16 @@ const DayTemplateComponent: FC<EntityComponentProps> = ({
       >
         {phoneRedesign ? null : (
           <>
-            <p>{recipes?.length || "0"} meals</p>
-            <p>{macros?.calories} calories</p>
+            <p>
+              {translateDayTemplate("meals", {
+                numberOfMeals: recipes?.length,
+              })}
+            </p>
+            <p>
+              {translateDayTemplate("calories", {
+                numberOfCalories: macros?.calories,
+              })}
+            </p>
           </>
         )}
       </div>

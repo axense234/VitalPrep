@@ -13,10 +13,11 @@ import selectEntityById from "@/helpers/selectEntityById";
 import getEntityCardDetails from "@/helpers/getEntityCardDetails";
 // Hooks
 import useGetWindowWidth from "@/hooks/useGetWindowWidth";
-// Translations
-import { Link } from "@/navigation";
 // Components
 import EntityMutationMenu from "./EntityMutationMenu";
+// Translations
+import { Link } from "@/navigation";
+import { useTranslations } from "next-intl";
 
 const EntityCard: FC<EntityCardProps> = ({
   entityType,
@@ -37,14 +38,20 @@ const EntityCard: FC<EntityCardProps> = ({
   let windowWidth = useGetWindowWidth();
   let tabletAndPhoneRedesign = windowWidth && windowWidth <= 600;
 
+  const translateDefaultNameValues = useTranslations(
+    `createTool.formLabels.${entityType}`
+  );
+  const translateEntityCardDetails = useTranslations(
+    "entityComponents.details"
+  );
+
   console.log(entityType, entityUsed?.userId);
 
   const {
     defaultImageUrlShownBasedOnEntityType,
-    entityIdentifier,
     entityDetails,
     entitySubDetails,
-  } = getEntityCardDetails(entityType, entityUsed);
+  } = getEntityCardDetails(entityType, entityUsed, translateEntityCardDetails);
 
   if (isALink) {
     return (
@@ -79,15 +86,27 @@ const EntityCard: FC<EntityCardProps> = ({
             <Image
               width={384}
               height={384}
-              alt={entityUsed?.name || `${entityIdentifier} Image`}
-              title={entityUsed?.name || `${entityIdentifier} Image`}
-              aria-label={entityUsed?.name || `${entityIdentifier} Image`}
+              alt={
+                entityUsed?.name ||
+                translateDefaultNameValues("defaultNameValue")
+              }
+              title={
+                entityUsed?.name ||
+                translateDefaultNameValues("defaultNameValue")
+              }
+              aria-label={
+                entityUsed?.name ||
+                translateDefaultNameValues("defaultNameValue")
+              }
               src={
                 entityUsed?.imageUrl || defaultImageUrlShownBasedOnEntityType
               }
             />
             <div className={entityCardStyles.entityCardContentDetails}>
-              <h5>{entityUsed?.name || `${entityIdentifier} Name`}</h5>
+              <h5>
+                {entityUsed?.name ||
+                  translateDefaultNameValues("defaultNameValue")}
+              </h5>
               <h6
                 style={{
                   fontSize:
@@ -139,13 +158,19 @@ const EntityCard: FC<EntityCardProps> = ({
       <Image
         width={384}
         height={384}
-        alt={entityUsed?.name || `${entityIdentifier} Image`}
-        title={entityUsed?.name || `${entityIdentifier} Image`}
-        aria-label={entityUsed?.name || `${entityIdentifier} Image`}
+        alt={entityUsed?.name || translateDefaultNameValues("defaultNameValue")}
+        title={
+          entityUsed?.name || translateDefaultNameValues("defaultNameValue")
+        }
+        aria-label={
+          entityUsed?.name || translateDefaultNameValues("defaultNameValue")
+        }
         src={entityUsed?.imageUrl || defaultImageUrlShownBasedOnEntityType}
       />
       <div className={entityCardStyles.entityCardContentDetails}>
-        <h5>{entityUsed?.name || `${entityIdentifier} Name`}</h5>
+        <h5>
+          {entityUsed?.name || translateDefaultNameValues("defaultNameValue")}
+        </h5>
         <h6
           style={{
             fontSize:

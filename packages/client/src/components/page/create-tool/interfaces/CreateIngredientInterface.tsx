@@ -28,6 +28,7 @@ import {
 // Hooks
 import useShowCreatedEntity from "@/hooks/useShowCreatedEntity";
 import useUpdateEntityTemplateImageUrl from "@/hooks/useUpdateEntityTemplateImageUrl";
+import useSetDefaultEntityName from "@/hooks/useSetDefaultEntityName";
 // Translations
 import { useTranslations } from "next-intl";
 
@@ -46,6 +47,17 @@ const CreateIngredientInterface = () => {
 
   const translate = useTranslations("createTool.formLabels.ingredient");
 
+  useSetDefaultEntityName(
+    () =>
+      dispatch(
+        updateTemplateIngredient({
+          key: "name",
+          value: translate("defaultNameValue"),
+        })
+      ),
+    templateIngredient
+  );
+
   useShowCreatedEntity(
     loadingCreateIngredient,
     `Successfully created ingredient: ${templateIngredient.name}.`,
@@ -62,7 +74,9 @@ const CreateIngredientInterface = () => {
           <h4>{translate("formTitle")}</h4>
           <form className={createToolStyles.createInterfaceForm}>
             <TextFormControl
-              entityProperty={templateIngredient.name}
+              entityProperty={
+                templateIngredient.name || translate("defaultNameValue")
+              }
               labelContent={translate("name")}
               onEntityPropertyValueChange={(e) =>
                 dispatch(

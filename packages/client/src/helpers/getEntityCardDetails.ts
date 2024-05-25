@@ -20,55 +20,82 @@ import {
 
 const getEntityCardDetails = (
   entityType: EntityType,
-  entityUsed: EntityTemplateType
+  entityUsed: EntityTemplateType,
+  translate: any
 ) => {
   let defaultImageUrlShownBasedOnEntityType = defaultIngredientImageUrl;
-  let entityIdentifier = "Ingredient";
-  let entityDetails = `${(entityUsed as IngredientTemplate)?.macros?.calories || 0} calories / 100g`;
-  let entitySubDetails = `${(entityUsed as DayTemplateTemplate)?.macros?.calories || 0} calories`;
+  let entityDetails = translate("ingredient.calories", {
+    numberOfCalories: (entityUsed as IngredientTemplate)?.macros?.calories || 0,
+  });
+  let entitySubDetails = translate("dayTemplate.calories", {
+    numberOfCalories:
+      (entityUsed as DayTemplateTemplate)?.macros?.calories || 0,
+  });
 
   switch (entityType) {
     case "ingredient":
       defaultImageUrlShownBasedOnEntityType = defaultIngredientImageUrl;
-      entityIdentifier = "Ingredient";
-      entityDetails = `${(entityUsed as IngredientTemplate)?.macros?.calories || 0} calories / 100g`;
+      entityDetails = translate("ingredient.calories", {
+        numberOfCalories:
+          (entityUsed as IngredientTemplate)?.macros?.calories || 0,
+      });
       break;
     case "utensil":
       defaultImageUrlShownBasedOnEntityType = defaultUtensilImageUrl;
-      entityIdentifier = "Utensil";
       entityDetails =
         (entityUsed as UtensilTemplate)?.enabled === true
-          ? `ENABLED ✔️`
-          : "DISABLED ❌";
+          ? translate("utensil.enabled")
+          : translate("utensil.disabled");
       break;
     case "recipe":
       defaultImageUrlShownBasedOnEntityType = defaultRecipeImageUrl;
-      entityIdentifier = "Recipe";
-      entityDetails = `${(entityUsed as RecipeTemplate)?.macros?.calories || 0} calories`;
+      entityDetails = translate("recipe.calories", {
+        numberOfCalories: (entityUsed as RecipeTemplate)?.macros?.calories || 0,
+      });
       break;
     case "dayTemplate":
       defaultImageUrlShownBasedOnEntityType = defaultDayTemplateImageUrl;
-      entityIdentifier = "Day Template";
-      entityDetails = `${(entityUsed as DayTemplateTemplate)?.recipes?.filter((recipe) => recipe !== "")?.length} meals`;
-      entitySubDetails = `${(entityUsed as DayTemplateTemplate)?.macros?.calories || 0} calories`;
+      entityDetails = translate("dayTemplate.meals", {
+        numberOfMeals: (entityUsed as DayTemplateTemplate)?.recipes?.filter(
+          (recipe) => recipe !== ""
+        )?.length,
+      });
+      entitySubDetails = translate("dayTemplate.calories", {
+        numberOfCalories:
+          (entityUsed as DayTemplateTemplate)?.macros?.calories || 0,
+      });
       break;
     case "instanceTemplate":
       defaultImageUrlShownBasedOnEntityType = defaultInstanceTemplateImageUrl;
-      entityIdentifier = "Instance Template";
-      entityDetails = `${(entityUsed as InstanceTemplateTemplate)?.coverage || 0} days covered`;
-      entitySubDetails = `${(entityUsed as InstanceTemplateTemplate)?.macros?.calories || 0} calories`;
+      entityDetails = translate("instanceTemplate.coverage", {
+        numberOfDaysCovered:
+          (entityUsed as InstanceTemplateTemplate)?.coverage || 0,
+      });
+      entitySubDetails = translate("instanceTemplate.calories", {
+        numberOfCalories:
+          (entityUsed as InstanceTemplateTemplate)?.macros?.calories || 0,
+      });
       break;
     case "mealPrepPlan":
       defaultImageUrlShownBasedOnEntityType = defaultMealPrepPlanImageUrl;
-      entityIdentifier = "Meal Prep Plan";
-      entityDetails = `${(entityUsed as MealPrepPlanTemplate)?.instanceTemplates?.filter((instanceTemplate) => instanceTemplate !== "").length || 0} instances used`;
-      entitySubDetails = `${(entityUsed as MealPrepPlanTemplate)?.macros?.calories || 0} calories`;
+      entityDetails = translate("mealPrepPlan.instances", {
+        numberOfInstanceTemplatesUsed:
+          (entityUsed as MealPrepPlanTemplate)?.instanceTemplates?.filter(
+            (instanceTemplate) => instanceTemplate !== ""
+          ).length || 0,
+      });
+      entitySubDetails = translate("mealPrepPlan.calories", {
+        numberOfCalories:
+          (entityUsed as MealPrepPlanTemplate)?.macros?.calories || 0,
+      });
       break;
     case "mealPrepLog":
       defaultImageUrlShownBasedOnEntityType = defaultInstanceTemplateImageUrl;
-      entityIdentifier = "Meal Prep Log";
-      entityDetails = `${(entityUsed as MealPrepLogTemplate)?.completed ? `COMPLETED ✔️` : "ABANDONED ❌"}`;
-      entitySubDetails = `${(entityUsed as MealPrepLogTemplate)?.cookingDuration || 0} hours`;
+      entityDetails = `${(entityUsed as MealPrepLogTemplate)?.completed ? translate("mealPrepLog.completed") : translate("mealPrepLog.abandoned")}`;
+      entitySubDetails = translate("mealPrepLog.cookingDuration", {
+        cookingDuration:
+          (entityUsed as MealPrepLogTemplate)?.cookingDuration || 0,
+      });
       break;
     default:
       break;
@@ -76,7 +103,6 @@ const getEntityCardDetails = (
 
   return {
     defaultImageUrlShownBasedOnEntityType,
-    entityIdentifier,
     entityDetails,
     entitySubDetails,
   };
