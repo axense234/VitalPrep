@@ -26,6 +26,7 @@ const initialState = utensilsAdapter.getInitialState({
   templateUtensil: defaultTemplateUtensil,
   loadingCreateUtensil: "IDLE",
   loadingDeleteUtensil: "IDLE",
+  loadingUpdateUtensil: "IDLE",
   utensilFormModalErrorMessage:
     "Something went wrong, please refresh the page!",
   loadingGetUserUtensils: "IDLE",
@@ -113,12 +114,31 @@ export const deleteUtensil = createAsyncThunk<
   }
 });
 
+export const updateUtensil = createAsyncThunk<
+  UtensilType | AxiosError,
+  UtensilCreateBodyType
+>("utensils/updateUtensil", async ({ templateUtensil, userId }) => {
+  try {
+    const { data } = await axiosInstance.patch(
+      `/utensils/update/${templateUtensil.id}?userId=${userId}&updateUtensilSingle=true`,
+      templateUtensil
+    );
+    return data.utensil as UtensilType;
+  } catch (error) {
+    console.log(error);
+    return error as AxiosError;
+  }
+});
+
 const utensilsSlice = createSlice({
   name: "utensils",
   initialState,
   reducers: {
     updateLoadingCreateUtensil(state, action: PayloadAction<LoadingStateType>) {
       state.loadingCreateUtensil = action.payload;
+    },
+    updateLoadingUpdateUtensil(state, action: PayloadAction<LoadingStateType>) {
+      state.loadingUpdateUtensil = action.payload;
     },
     updateLoadingGetUserUtensils(
       state,
@@ -131,6 +151,9 @@ const utensilsSlice = createSlice({
         ...state.templateUtensil,
         [action.payload.key]: action.payload.value,
       };
+    },
+    setTemplateUtensil(state, action: PayloadAction<UtensilTemplate>) {
+      state.templateUtensil = action.payload;
     },
   },
   extraReducers(builder) {
@@ -204,6 +227,27 @@ const utensilsSlice = createSlice({
           }
           state.loadingDeleteUtensil = "FAILED";
         }
+      })
+      .addCase(updateUtensil.fulfilled, (state, action) => {
+        const utensil = action.payload as UtensilType;
+        const axiosError = action.payload as AxiosError;
+
+        if (axiosError !== undefined && !axiosError.response) {
+          utensilsAdapter.updateOne(state, {
+            changes: { ...utensil },
+            id: utensil.id,
+          });
+          state.loadingUpdateUtensil = "SUCCEDED";
+        } else {
+          const error = axiosError.response?.data as {
+            message: string;
+            type: string;
+          };
+          if (error.type !== "jwt") {
+            state.utensilFormModalErrorMessage = error.message;
+          }
+          state.loadingUpdateUtensil = "FAILED";
+        }
       });
   },
 });
@@ -229,10 +273,18 @@ export const selectLoadingGetUserUtensils = (state: State) =>
 export const selectLoadingGetUserUtensil = (state: State) =>
   state.utensils.loadingGetUserUtensil;
 
+export const selectLoadingUpdateUtensil = (state: State) =>
+  state.utensils.loadingUpdateUtensil;
+
+export const selectLoadingDeleteUtensil = (state: State) =>
+  state.utensils.loadingDeleteUtensil;
+
 export const {
   updateTemplateUtensil,
   updateLoadingCreateUtensil,
   updateLoadingGetUserUtensils,
+  updateLoadingUpdateUtensil,
+  setTemplateUtensil,
 } = utensilsSlice.actions;
 
 export default utensilsSlice.reducer;

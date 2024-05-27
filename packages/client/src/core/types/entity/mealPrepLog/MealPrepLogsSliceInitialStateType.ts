@@ -6,6 +6,7 @@ type MealPrepLogsSliceInitialStateType = {
   templateMealPrepLog: MealPrepLogTemplate;
   loadingCreateMealPrepLog: LoadingStateType;
   loadingDeleteMealPrepLog: LoadingStateType;
+  loadingUpdateMealPrepLog: LoadingStateType;
   mealPrepLogFormModalErrorMessage: string;
 
   loadingGetUserMealPrepLogs: LoadingStateType;

@@ -15,10 +15,20 @@ const router = express.Router();
 
 router.get("/users", allowRouteUse, getAllUsers);
 
-router.get("/users/:userId", authenticationMiddleware, getUserById);
+router.get(
+  "/users/:userId",
+  allowRouteUse,
+  authenticationMiddleware,
+  getUserById
+);
 
-router.patch("/users/update/:userId", authenticationMiddleware, updateUserById);
+router.patch(
+  "/users/update/:userId",
+  allowRouteUse,
+  authenticationMiddleware,
+  updateUserById
+);
 
-router.delete("/users/delete/:userId", deleteUserById);
+router.delete("/users/delete/:userId", allowRouteUse, deleteUserById);
 
 export default router;

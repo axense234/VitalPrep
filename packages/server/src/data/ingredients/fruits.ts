@@ -96,7 +96,6 @@ export const defaultFruits = (locale: string) => [
     name: defaultFruitsTranslations.apple[locale],
     imageUrl:
       "https://res.cloudinary.com/birthdayreminder/image/upload/v1716490419/ingredientImages/067f5b82-9798-4836-b073-0eea78ec8dd9.png",
-    enabled: true,
     macros: {
       create: {
         calories: 52,
@@ -110,7 +109,6 @@ export const defaultFruits = (locale: string) => [
     name: defaultFruitsTranslations.banana[locale],
     imageUrl:
       "https://res.cloudinary.com/birthdayreminder/image/upload/v1716490453/ingredientImages/7994ec20-156a-4617-bed0-489d783604d5.png",
-    enabled: true,
     macros: {
       create: {
         calories: 89,
@@ -124,7 +122,6 @@ export const defaultFruits = (locale: string) => [
     name: defaultFruitsTranslations.orange[locale],
     imageUrl:
       "https://res.cloudinary.com/birthdayreminder/image/upload/v1716490479/ingredientImages/82cf0a07-db9e-4c60-b835-346e8ddf71c8.png",
-    enabled: true,
     macros: {
       create: {
         calories: 49,
@@ -138,7 +135,6 @@ export const defaultFruits = (locale: string) => [
     name: defaultFruitsTranslations.strawberries[locale],
     imageUrl:
       "https://res.cloudinary.com/birthdayreminder/image/upload/v1716490525/ingredientImages/88b0c108-e19e-4136-bcd2-01597215ed6b.png",
-    enabled: true,
     macros: {
       create: {
         calories: 32,
@@ -152,7 +148,6 @@ export const defaultFruits = (locale: string) => [
     name: defaultFruitsTranslations.grapes[locale],
     imageUrl:
       "https://res.cloudinary.com/birthdayreminder/image/upload/v1716490556/ingredientImages/82eaa74c-de3a-4e07-900f-b9b457fbd42b.png",
-    enabled: true,
     macros: {
       create: {
         calories: 34,
@@ -166,7 +161,6 @@ export const defaultFruits = (locale: string) => [
     name: defaultFruitsTranslations.pineapple[locale],
     imageUrl:
       "https://res.cloudinary.com/birthdayreminder/image/upload/v1716490579/ingredientImages/dfeefde5-55ba-466c-b060-4f68eda9c37b.png",
-    enabled: true,
     macros: {
       create: {
         calories: 41,
@@ -180,7 +174,6 @@ export const defaultFruits = (locale: string) => [
     name: defaultFruitsTranslations.blueberries[locale],
     imageUrl:
       "https://res.cloudinary.com/birthdayreminder/image/upload/v1716490635/ingredientImages/547e9b6a-53a9-456f-b71e-421a056df077.png",
-    enabled: true,
     macros: {
       create: {
         calories: 56,
@@ -194,7 +187,6 @@ export const defaultFruits = (locale: string) => [
     name: defaultFruitsTranslations.mangoes[locale],
     imageUrl:
       "https://res.cloudinary.com/birthdayreminder/image/upload/v1716490663/ingredientImages/76b2b4bd-b922-4a1b-9a17-69aed70f1c9e.png",
-    enabled: true,
     macros: {
       create: {
         calories: 62,
@@ -208,7 +200,6 @@ export const defaultFruits = (locale: string) => [
     name: defaultFruitsTranslations.cherries[locale],
     imageUrl:
       "https://res.cloudinary.com/birthdayreminder/image/upload/v1716490702/ingredientImages/bbed345b-bdb8-45fb-b5ad-84c630eb6a90.png",
-    enabled: true,
     macros: {
       create: {
         calories: 67,
@@ -222,7 +213,6 @@ export const defaultFruits = (locale: string) => [
     name: defaultFruitsTranslations.watermelon[locale],
     imageUrl:
       "https://res.cloudinary.com/birthdayreminder/image/upload/v1716490735/ingredientImages/1ff4c6ca-56d4-45cf-9f4c-6285bfc0e062.png",
-    enabled: true,
     macros: {
       create: {
         calories: 34,
@@ -236,7 +226,6 @@ export const defaultFruits = (locale: string) => [
     name: defaultFruitsTranslations.lemon[locale],
     imageUrl:
       "https://res.cloudinary.com/birthdayreminder/image/upload/v1716490758/ingredientImages/c61f368c-5e46-43a0-a583-5aaa388e7593.png",
-    enabled: true,
     macros: {
       create: {
         calories: 28,
@@ -250,7 +239,6 @@ export const defaultFruits = (locale: string) => [
     name: defaultFruitsTranslations.lime[locale],
     imageUrl:
       "https://res.cloudinary.com/birthdayreminder/image/upload/v1716490803/ingredientImages/88556338-e54c-4862-a57a-6007d1e5375d.png",
-    enabled: true,
     macros: {
       create: {
         calories: 30,
@@ -264,7 +252,6 @@ export const defaultFruits = (locale: string) => [
     name: defaultFruitsTranslations.kiwi[locale],
     imageUrl:
       "https://res.cloudinary.com/birthdayreminder/image/upload/v1716490830/ingredientImages/5451cb08-7752-4385-bc7c-5796879a63e8.png",
-    enabled: true,
     macros: {
       create: {
         calories: 58,
@@ -278,7 +265,6 @@ export const defaultFruits = (locale: string) => [
     name: defaultFruitsTranslations.pears[locale],
     imageUrl:
       "https://res.cloudinary.com/birthdayreminder/image/upload/v1716490865/ingredientImages/db20acb7-0d9c-42e5-a129-bc2285d53bd1.png",
-    enabled: true,
     macros: {
       create: {
         calories: 60,
@@ -292,7 +278,6 @@ export const defaultFruits = (locale: string) => [
     name: defaultFruitsTranslations.peaches[locale],
     imageUrl:
       "https://res.cloudinary.com/birthdayreminder/image/upload/v1716490900/ingredientImages/6e4adc68-ece0-48cc-9ac3-e22d576e7072.png",
-    enabled: true,
     macros: {
       create: {
         calories: 40,

@@ -6,6 +6,7 @@ import EntityInfoDetails from "./EntityInfoDetails";
 import EntityInfoAppearances from "./EntityInfoAppearances";
 import EntityInfoComponents from "./EntityInfoComponents";
 import EntityMutationMenu from "@/components/shared/entity/EntityMutationMenu";
+import UpsertDayTemplateInterface from "../create-tool/interfaces/UpsertDayTemplateInterface";
 // React
 import { FC, useEffect } from "react";
 // Redux
@@ -22,12 +23,18 @@ import useGetHandleOnDeleteEntity from "@/hooks/useGetHandleOnDeleteEntity";
 import useNavigateToPathname from "@/hooks/useNavigateToPathname";
 // Translations
 import { useTranslations } from "next-intl";
+// Next
+import { useSearchParams } from "next/navigation";
 
 const DayTemplateInfo: FC<EntityInfoProps> = ({
   entityId,
   userId,
   hasEntityMutationMenu = true,
 }) => {
+  const searchParams = useSearchParams();
+  const editMode = searchParams.get("edit");
+  console.log(editMode);
+
   const dispatch = useAppDispatch();
   const loadingGetUserDayTemplate = useAppSelector(
     selectLoadingGetUserDayTemplate
@@ -56,15 +63,32 @@ const DayTemplateInfo: FC<EntityInfoProps> = ({
         <EntityMutationMenu
           type="entityInfo"
           handleEntityDeletion={handleOnDeleteEntity}
-          handleEntityModification={() => navigateToPathname({})}
+          handleEntityModification={() =>
+            navigateToPathname({ forcedQueryParams: { edit: "true" } })
+          }
+          handleEntityViewing={() =>
+            navigateToPathname({ forcedQueryParams: {} })
+          }
           entityType="dayTemplate"
           entityName={translate("dayTemplate")}
         />
       )}
       <div className={entityInfoStyles.entityInfoContent}>
-        <EntityInfoDetails entityId={entityId} entityType="dayTemplate" />
-        <EntityInfoComponents entityId={entityId} entityType="dayTemplate" />
-        <EntityInfoAppearances entityId={entityId} entityType="dayTemplate" />
+        {editMode === "true" ? (
+          <UpsertDayTemplateInterface interfaceType="update" />
+        ) : (
+          <>
+            <EntityInfoDetails entityId={entityId} entityType="dayTemplate" />
+            <EntityInfoComponents
+              entityId={entityId}
+              entityType="dayTemplate"
+            />
+            <EntityInfoAppearances
+              entityId={entityId}
+              entityType="dayTemplate"
+            />
+          </>
+        )}
       </div>
     </div>
   );

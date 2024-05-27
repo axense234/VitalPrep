@@ -1,5 +1,5 @@
 // SCSS
-import createToolStyles from "../../../../scss/pages/CreateTool.module.scss";
+import createToolStyles from "@/scss/pages/CreateTool.module.scss";
 // Components
 import TextFormControl from "@/components/shared/form/TextFormControl";
 import PrimaryButton from "@/components/shared/PrimaryButton";
@@ -8,9 +8,16 @@ import PopupModal from "@/components/shared/modals/PopupModal";
 import SelectFormControl from "@/components/shared/form/SelectFormControl";
 import EntityPreview from "@/components/shared/entity/EntityPreview";
 // Data
-import { defaultInstanceTemplateImageUrl } from "@/data";
+import {
+  defaultInstanceTemplateImageUrl,
+  defaultTemplateInstanceTemplate,
+} from "@/data";
 // React
-import { ChangeEvent } from "react";
+import { ChangeEvent, FC } from "react";
+// Translations
+import { useTranslations } from "next-intl";
+// Next
+import { useParams } from "next/navigation";
 // Redux
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import {
@@ -23,8 +30,13 @@ import {
   createInstanceTemplate,
   selectInstanceTemplateFormModalErrorMessage,
   selectLoadingCreateInstanceTemplate,
+  selectLoadingGetUserInstanceTemplate,
+  selectLoadingUpdateInstanceTemplate,
   selectTemplateInstanceTemplate,
+  setTemplateInstanceTemplate,
+  updateInstanceTemplate,
   updateLoadingCreateInstanceTemplate,
+  updateLoadingUpdateInstanceTemplate,
   updateTemplateInstanceTemplate,
 } from "@/redux/slices/instanceTemplatesSlice";
 import {
@@ -32,7 +44,7 @@ import {
   selectLoadingCloudinaryImage,
   selectProfile,
 } from "@/redux/slices/generalSlice";
-// Hooks
+// Hooks and Helpers
 import useShowCreatedEntity from "@/hooks/useShowCreatedEntity";
 import useUpdateEntityTemplateImageUrl from "@/hooks/useUpdateEntityTemplateImageUrl";
 import useGetEntityComponents from "@/hooks/useGetEntityComponents";
@@ -40,12 +52,17 @@ import useUpdateEntityMacrosBasedOnComponentEntities from "@/hooks/useUpdateEnti
 import handleUpdateArrayEntities from "@/helpers/handleUpdateArrayEntities";
 import useSliceEntityComponents from "@/hooks/useSliceEntityComponents";
 import createArrayFromNumber from "@/helpers/createArrayFromNumber";
+import useSetTemplateEntity from "@/hooks/useSetTemplateEntity";
+import useGetUpsertEntityInterfaceDetails from "@/hooks/useGetUpsertEntityInterfaceDetails";
+import handleOnUpsertEntitySubmit from "@/helpers/handleOnUpsertEntitySubmit";
 import useSetDefaultEntityName from "@/hooks/useSetDefaultEntityName";
-// Translations
-import { useTranslations } from "next-intl";
 
-const CreateInstanceTemplateInterface = () => {
+const UpsertInstanceTemplateInterface: FC<{
+  interfaceType: "create" | "update";
+}> = ({ interfaceType }) => {
   const dispatch = useAppDispatch();
+  const { id } = useParams();
+
   const profile = useAppSelector(selectProfile);
   const instanceTemplateFormModalErrorMessage = useAppSelector(
     selectInstanceTemplateFormModalErrorMessage
@@ -59,6 +76,13 @@ const CreateInstanceTemplateInterface = () => {
   const loadingCreateInstanceTemplate = useAppSelector(
     selectLoadingCreateInstanceTemplate
   );
+  const loadingUpdateInstanceTemplate = useAppSelector(
+    selectLoadingUpdateInstanceTemplate
+  );
+  const loadingGetInstanceTemplate = useAppSelector(
+    selectLoadingGetUserInstanceTemplate
+  );
+
   const loadingCloudinaryImage = useAppSelector(selectLoadingCloudinaryImage);
   const loadingGetUserDayTemplates = useAppSelector(
     selectLoadingGetUserDayTemplates
@@ -70,6 +94,50 @@ const CreateInstanceTemplateInterface = () => {
 
   const translate = useTranslations("createTool.formLabels.instanceTemplate");
 
+  const handleOnUpsertEntity = (e: React.SyntheticEvent) => {
+    handleOnUpsertEntitySubmit(
+      e,
+      interfaceType,
+      () =>
+        dispatch(
+          createInstanceTemplate({
+            templateInstanceTemplate,
+            userId: profile.id,
+          })
+        ),
+      () =>
+        dispatch(
+          updateInstanceTemplate({
+            templateInstanceTemplate,
+            userId: profile.id,
+          })
+        )
+    );
+  };
+
+  const {
+    loadingUpsertEntity,
+    updateLoadingUpsertEntity,
+    usedButtonLabel,
+    usedSectionTitle,
+  } = useGetUpsertEntityInterfaceDetails({
+    interfaceType: interfaceType,
+    loadingCreateEntity: loadingCreateInstanceTemplate,
+    loadingUpdateEntity: loadingUpdateInstanceTemplate,
+    translate: translate,
+    updateLoadingCreateEntity: updateLoadingCreateInstanceTemplate,
+    updateLoadingUpdateEntity: updateLoadingUpdateInstanceTemplate,
+  });
+
+  useSetTemplateEntity({
+    defaultTemplateEntity: defaultTemplateInstanceTemplate,
+    entityId: id as string,
+    entityType: "instanceTemplate",
+    interfaceType: interfaceType,
+    loadingGetEntity: loadingGetInstanceTemplate,
+    setTemplateEntity: setTemplateInstanceTemplate,
+  });
+
   useSetDefaultEntityName(
     () =>
       dispatch(
@@ -78,7 +146,8 @@ const CreateInstanceTemplateInterface = () => {
           value: translate("defaultNameValue"),
         })
       ),
-    templateInstanceTemplate
+    templateInstanceTemplate,
+    interfaceType === "create"
   );
 
   useUpdateEntityMacrosBasedOnComponentEntities(
@@ -88,10 +157,10 @@ const CreateInstanceTemplateInterface = () => {
   );
   useGetEntityComponents(loadingGetUserDayTemplates, getAllUserDayTemplates);
   useShowCreatedEntity(
-    loadingCreateInstanceTemplate,
-    `Successfully created session template: ${templateInstanceTemplate.name}.`,
+    loadingUpsertEntity,
+    `Successfully ${interfaceType === "create" ? "created" : "updated"} session model: ${templateInstanceTemplate.name}.`,
     instanceTemplateFormModalErrorMessage,
-    updateLoadingCreateInstanceTemplate
+    updateLoadingUpsertEntity
   );
   useUpdateEntityTemplateImageUrl(updateTemplateInstanceTemplate);
   useSliceEntityComponents(
@@ -105,6 +174,7 @@ const CreateInstanceTemplateInterface = () => {
 
   return (
     <section className={createToolStyles.createInterface}>
+      <h2>{usedSectionTitle}</h2>
       <div className={createToolStyles.createInterfaceWrapper}>
         <div className={createToolStyles.createInterfaceFormContainer}>
           <PopupModal hasBorder={false} modalType="form" />
@@ -158,21 +228,14 @@ const CreateInstanceTemplateInterface = () => {
               type="number"
             />
             <PrimaryButton
-              content={translate("createButtonLabel")}
+              content={usedButtonLabel}
               type="functional"
               disabled={
                 loadingCreateInstanceTemplate === "PENDING" ||
+                loadingUpdateInstanceTemplate === "PENDING" ||
                 loadingCloudinaryImage === "PENDING"
               }
-              onClickFunction={(e) => {
-                e.preventDefault();
-                dispatch(
-                  createInstanceTemplate({
-                    templateInstanceTemplate: templateInstanceTemplate,
-                    userId: profile.id,
-                  })
-                );
-              }}
+              onClickFunction={(e) => handleOnUpsertEntity(e)}
             />
           </form>
         </div>
@@ -240,4 +303,4 @@ const CreateInstanceTemplateInterface = () => {
   );
 };
 
-export default CreateInstanceTemplateInterface;
+export default UpsertInstanceTemplateInterface;

@@ -6,13 +6,14 @@ import {
   loginUser,
   signoutUser,
 } from "../controllers/authentication";
+import allowRouteUse from "../middleware/adminUse";
 
 const router = express.Router();
 
-router.post("/users/signup", signupUser);
+router.post("/users/signup", allowRouteUse, signupUser);
 
-router.post("/users/login", loginUser);
+router.post("/users/login", allowRouteUse, loginUser);
 
-router.post("/users/signout/:userId", signoutUser);
+router.post("/users/signout/:userId", allowRouteUse, signoutUser);
 
 export default router;

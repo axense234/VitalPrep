@@ -99,10 +99,12 @@
 .createInterfaceFormContainer {
   @include flexCenter(column);
   align-items: flex-start;
+  position: relative;
   gap: 2rem;
   padding: 4rem;
   border-radius: 25px;
   background-color: getColorWithOpacity("secondary-color-3.1", 0.5);
+  min-width: 35rem;
 
   // For the error modal
   > div {
@@ -111,6 +113,7 @@
 
   @media screen and (max-width: 1300px) {
     padding: 4rem 2rem;
+    min-width: 20rem;
   }
 
   @media screen and (max-width: 1200px) {
@@ -121,6 +124,7 @@
 
   @media screen and (max-width: 800px) {
     padding: 4rem 3rem;
+    min-width: none;
   }
   @media screen and (max-width: 600px) {
     padding: 4rem 1.5rem;
@@ -128,6 +132,7 @@
 
   h4 {
     @include heading("h4", "laptop", "black");
+    width: 100%;
     text-align: center;
 
     @media screen and (max-width: 1200px) {
@@ -149,10 +154,23 @@
   @include flexCenter(column);
   width: 100%;
   gap: 8rem;
+
+  > h2 {
+    @include heading("h2", "laptop", "black");
+    text-align: center;
+
+    @media screen and (max-width: 1200px) {
+      @include heading("h2", "tablet", "black");
+    }
+    @media screen and (max-width: 600px) {
+      @include heading("h3", "phone", "black");
+    }
+  }
 }
 
 .createInterfaceForm {
   @include flexCenter(column);
+  position: relative;
   align-items: flex-start;
   width: 100%;
   gap: 2rem;

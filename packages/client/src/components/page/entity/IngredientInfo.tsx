@@ -1,10 +1,11 @@
 // SCSS
-import entityInfoStyles from "../../../scss/components/page/EntityInfo.module.scss";
+import entityInfoStyles from "@/scss/components/page/EntityInfo.module.scss";
 // Components
 import PageTitle from "@/components/shared/PageTitle";
 import EntityInfoDetails from "./EntityInfoDetails";
 import EntityInfoAppearances from "./EntityInfoAppearances";
 import EntityMutationMenu from "@/components/shared/entity/EntityMutationMenu";
+import UpsertIngredientInterface from "../create-tool/interfaces/UpsertIngredientInterface";
 // React
 import { FC, useEffect } from "react";
 // Redux
@@ -20,12 +21,18 @@ import useNavigateToPathname from "@/hooks/useNavigateToPathname";
 import useGetHandleOnDeleteEntity from "@/hooks/useGetHandleOnDeleteEntity";
 // Translations
 import { useTranslations } from "next-intl";
+// Next
+import { useSearchParams } from "next/navigation";
 
 const IngredientInfo: FC<EntityInfoProps> = ({
   entityId,
   userId,
   hasEntityMutationMenu = true,
 }) => {
+  const searchParams = useSearchParams();
+  const editMode = searchParams.get("edit");
+  console.log(editMode);
+
   const dispatch = useAppDispatch();
   const loadingGetUserIngredient = useAppSelector(
     selectLoadingGetUserIngredient
@@ -53,14 +60,28 @@ const IngredientInfo: FC<EntityInfoProps> = ({
         <EntityMutationMenu
           type="entityInfo"
           handleEntityDeletion={handleOnDeleteEntity}
-          handleEntityModification={() => navigateToPathname({})}
+          handleEntityModification={() =>
+            navigateToPathname({ forcedQueryParams: { edit: "true" } })
+          }
+          handleEntityViewing={() =>
+            navigateToPathname({ forcedQueryParams: {} })
+          }
           entityType="ingredient"
           entityName={translate("ingredient")}
         />
       )}
       <div className={entityInfoStyles.entityInfoContent}>
-        <EntityInfoDetails entityId={entityId} entityType="ingredient" />
-        <EntityInfoAppearances entityId={entityId} entityType="ingredient" />
+        {editMode === "true" ? (
+          <UpsertIngredientInterface interfaceType="update" />
+        ) : (
+          <>
+            <EntityInfoDetails entityId={entityId} entityType="ingredient" />
+            <EntityInfoAppearances
+              entityId={entityId}
+              entityType="ingredient"
+            />
+          </>
+        )}
       </div>
     </div>
   );

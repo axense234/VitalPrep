@@ -75,6 +75,24 @@ const useSelectEntityComponentShown: FC<EntityComponentSchemeProps> = ({
   const dispatch = useAppDispatch();
   const navigateToPathname = useNavigateToPathname();
 
+  const usedDeleteEntityFunction = () => {
+    return getDeleteEntityFunction(
+      entityType,
+      dispatch,
+      entity?.id || entityId,
+      profile?.id as string
+    );
+  };
+
+  const usedUpdateEntityFunction = () => {
+    return () =>
+      navigateToPathname({
+        forcedPathname: `/${entityType}/[id]`,
+        forcedParams: { id: entityId || entity?.id },
+        forcedQueryParams: { edit: "true" },
+      });
+  };
+
   switch (entityType) {
     case "ingredient":
       if (selectedViewOption === "grid") {
@@ -86,13 +104,8 @@ const useSelectEntityComponentShown: FC<EntityComponentSchemeProps> = ({
             size="medium"
             isALink={true}
             hasEntityMutationMenu={hasEntityMutationMenu}
-            deleteEntityFunction={getDeleteEntityFunction(
-              entityType,
-              dispatch,
-              entity?.id || entityId,
-              profile?.id as string
-            )}
-            updateEntityFunction={() => navigateToPathname({})}
+            deleteEntityFunction={usedDeleteEntityFunction()}
+            updateEntityFunction={usedUpdateEntityFunction()}
           />
         );
       } else if (selectedViewOption === "list") {
@@ -103,13 +116,8 @@ const useSelectEntityComponentShown: FC<EntityComponentSchemeProps> = ({
             entity={entity}
             isALink={isALink}
             hasEntityMutationMenu={hasEntityMutationMenu}
-            deleteEntityFunction={getDeleteEntityFunction(
-              entityType,
-              dispatch,
-              entity?.id || entityId,
-              profile?.id as string
-            )}
-            updateEntityFunction={() => navigateToPathname({})}
+            deleteEntityFunction={usedDeleteEntityFunction()}
+            updateEntityFunction={usedUpdateEntityFunction()}
           />
         );
       }
@@ -124,13 +132,8 @@ const useSelectEntityComponentShown: FC<EntityComponentSchemeProps> = ({
             isALink={true}
             size="medium"
             hasEntityMutationMenu={hasEntityMutationMenu}
-            deleteEntityFunction={getDeleteEntityFunction(
-              entityType,
-              dispatch,
-              entity?.id || entityId,
-              profile?.id as string
-            )}
-            updateEntityFunction={() => navigateToPathname({})}
+            deleteEntityFunction={usedDeleteEntityFunction()}
+            updateEntityFunction={usedUpdateEntityFunction()}
           />
         );
       } else if (selectedViewOption === "list") {
@@ -141,13 +144,8 @@ const useSelectEntityComponentShown: FC<EntityComponentSchemeProps> = ({
             entity={entity}
             isALink={isALink}
             hasEntityMutationMenu={hasEntityMutationMenu}
-            deleteEntityFunction={getDeleteEntityFunction(
-              entityType,
-              dispatch,
-              entity?.id || entityId,
-              profile?.id as string
-            )}
-            updateEntityFunction={() => navigateToPathname({})}
+            deleteEntityFunction={usedDeleteEntityFunction()}
+            updateEntityFunction={usedUpdateEntityFunction()}
           />
         );
       }
@@ -162,13 +160,8 @@ const useSelectEntityComponentShown: FC<EntityComponentSchemeProps> = ({
             isALink={true}
             size="medium"
             hasEntityMutationMenu={hasEntityMutationMenu}
-            deleteEntityFunction={getDeleteEntityFunction(
-              entityType,
-              dispatch,
-              entity?.id || entityId,
-              profile?.id as string
-            )}
-            updateEntityFunction={() => navigateToPathname({})}
+            deleteEntityFunction={usedDeleteEntityFunction()}
+            updateEntityFunction={usedUpdateEntityFunction()}
           />
         );
       } else if (selectedViewOption === "list") {
@@ -179,13 +172,8 @@ const useSelectEntityComponentShown: FC<EntityComponentSchemeProps> = ({
             entity={entity}
             isALink={isALink}
             hasEntityMutationMenu={hasEntityMutationMenu}
-            deleteEntityFunction={getDeleteEntityFunction(
-              entityType,
-              dispatch,
-              entity?.id || entityId,
-              profile?.id as string
-            )}
-            updateEntityFunction={() => navigateToPathname({})}
+            deleteEntityFunction={usedDeleteEntityFunction()}
+            updateEntityFunction={usedUpdateEntityFunction()}
           />
         );
       }
@@ -200,13 +188,8 @@ const useSelectEntityComponentShown: FC<EntityComponentSchemeProps> = ({
             isALink={true}
             size="medium"
             hasEntityMutationMenu={hasEntityMutationMenu}
-            deleteEntityFunction={getDeleteEntityFunction(
-              entityType,
-              dispatch,
-              entity?.id || entityId,
-              profile?.id as string
-            )}
-            updateEntityFunction={() => navigateToPathname({})}
+            deleteEntityFunction={usedDeleteEntityFunction()}
+            updateEntityFunction={usedUpdateEntityFunction()}
           />
         );
       } else if (selectedViewOption === "list") {
@@ -217,13 +200,8 @@ const useSelectEntityComponentShown: FC<EntityComponentSchemeProps> = ({
             entity={entity}
             isALink={isALink}
             hasEntityMutationMenu={hasEntityMutationMenu}
-            deleteEntityFunction={getDeleteEntityFunction(
-              entityType,
-              dispatch,
-              entity?.id || entityId,
-              profile?.id as string
-            )}
-            updateEntityFunction={() => navigateToPathname({})}
+            deleteEntityFunction={usedDeleteEntityFunction()}
+            updateEntityFunction={usedUpdateEntityFunction()}
           />
         );
       }
@@ -238,13 +216,8 @@ const useSelectEntityComponentShown: FC<EntityComponentSchemeProps> = ({
             isALink={true}
             size="medium"
             hasEntityMutationMenu={hasEntityMutationMenu}
-            deleteEntityFunction={getDeleteEntityFunction(
-              entityType,
-              dispatch,
-              entity?.id || entityId,
-              profile?.id as string
-            )}
-            updateEntityFunction={() => navigateToPathname({})}
+            deleteEntityFunction={usedDeleteEntityFunction()}
+            updateEntityFunction={usedUpdateEntityFunction()}
           />
         );
       } else if (selectedViewOption === "list") {
@@ -255,13 +228,8 @@ const useSelectEntityComponentShown: FC<EntityComponentSchemeProps> = ({
             entity={entity}
             isALink={isALink}
             hasEntityMutationMenu={hasEntityMutationMenu}
-            deleteEntityFunction={getDeleteEntityFunction(
-              entityType,
-              dispatch,
-              entity?.id || entityId,
-              profile?.id as string
-            )}
-            updateEntityFunction={() => navigateToPathname({})}
+            deleteEntityFunction={usedDeleteEntityFunction()}
+            updateEntityFunction={usedUpdateEntityFunction()}
           />
         );
       }
@@ -276,13 +244,8 @@ const useSelectEntityComponentShown: FC<EntityComponentSchemeProps> = ({
             isALink={true}
             size="medium"
             hasEntityMutationMenu={hasEntityMutationMenu}
-            deleteEntityFunction={getDeleteEntityFunction(
-              entityType,
-              dispatch,
-              entity?.id || entityId,
-              profile?.id as string
-            )}
-            updateEntityFunction={() => navigateToPathname({})}
+            deleteEntityFunction={usedDeleteEntityFunction()}
+            updateEntityFunction={usedUpdateEntityFunction()}
           />
         );
       } else if (selectedViewOption === "list") {
@@ -293,13 +256,8 @@ const useSelectEntityComponentShown: FC<EntityComponentSchemeProps> = ({
             entity={entity}
             isALink={isALink}
             hasEntityMutationMenu={hasEntityMutationMenu}
-            deleteEntityFunction={getDeleteEntityFunction(
-              entityType,
-              dispatch,
-              entity?.id || entityId,
-              profile?.id as string
-            )}
-            updateEntityFunction={() => navigateToPathname({})}
+            deleteEntityFunction={usedDeleteEntityFunction()}
+            updateEntityFunction={usedUpdateEntityFunction()}
           />
         );
       }
@@ -314,13 +272,8 @@ const useSelectEntityComponentShown: FC<EntityComponentSchemeProps> = ({
             isALink={true}
             size="medium"
             hasEntityMutationMenu={hasEntityMutationMenu}
-            deleteEntityFunction={getDeleteEntityFunction(
-              entityType,
-              dispatch,
-              entity?.id || entityId,
-              profile?.id as string
-            )}
-            updateEntityFunction={() => navigateToPathname({})}
+            deleteEntityFunction={usedDeleteEntityFunction()}
+            updateEntityFunction={usedUpdateEntityFunction()}
           />
         );
       } else if (selectedViewOption === "list") {
@@ -331,13 +284,8 @@ const useSelectEntityComponentShown: FC<EntityComponentSchemeProps> = ({
             entity={entity}
             isALink={isALink}
             hasEntityMutationMenu={hasEntityMutationMenu}
-            deleteEntityFunction={getDeleteEntityFunction(
-              entityType,
-              dispatch,
-              entity?.id || entityId,
-              profile?.id as string
-            )}
-            updateEntityFunction={() => navigateToPathname({})}
+            deleteEntityFunction={usedDeleteEntityFunction()}
+            updateEntityFunction={usedUpdateEntityFunction()}
           />
         );
       }

@@ -6,6 +6,7 @@ type UtensilsSliceInitialStateType = {
   templateUtensil: UtensilTemplate;
   loadingCreateUtensil: LoadingStateType;
   loadingDeleteUtensil: LoadingStateType;
+  loadingUpdateUtensil: LoadingStateType;
   utensilFormModalErrorMessage: string;
 
   loadingGetUserUtensils: LoadingStateType;

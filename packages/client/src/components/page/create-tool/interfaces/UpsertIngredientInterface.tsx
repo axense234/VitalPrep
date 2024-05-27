@@ -1,22 +1,32 @@
 // SCSS
-import createToolStyles from "../../../../scss/pages/CreateTool.module.scss";
+import createToolStyles from "@/scss/pages/CreateTool.module.scss";
 // Components
 import TextFormControl from "@/components/shared/form/TextFormControl";
 import PrimaryButton from "@/components/shared/PrimaryButton";
 import ImageFormControl from "@/components/shared/form/ImageFormControl";
-import CheckboxFormControl from "@/components/shared/form/CheckboxFormControl";
 import PopupModal from "@/components/shared/modals/PopupModal";
 import EntityPreview from "@/components/shared/entity/EntityPreview";
+// Translations
+import { useTranslations } from "next-intl";
+// React
+import React, { FC } from "react";
+// Next
+import { useParams } from "next/navigation";
 // Data
-import { defaultIngredientImageUrl } from "@/data";
+import { defaultIngredientImageUrl, defaultTemplateIngredient } from "@/data";
 // Redux
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import {
   createIngredient,
   selectIngredientFormModalErrorMessage,
   selectLoadingCreateIngredient,
+  selectLoadingGetUserIngredient,
+  selectLoadingUpdateIngredient,
   selectTemplateIngredient,
+  setTemplateIngredient,
+  updateIngredient,
   updateLoadingCreateIngredient,
+  updateLoadingUpdateIngredient,
   updateTemplateIngredient,
   updateTemplateIngredientMacros,
 } from "@/redux/slices/ingredientsSlice";
@@ -25,20 +35,27 @@ import {
   selectLoadingCloudinaryImage,
   selectProfile,
 } from "@/redux/slices/generalSlice";
-// Hooks
+// Hooks and Helpers
 import useShowCreatedEntity from "@/hooks/useShowCreatedEntity";
 import useUpdateEntityTemplateImageUrl from "@/hooks/useUpdateEntityTemplateImageUrl";
 import useSetDefaultEntityName from "@/hooks/useSetDefaultEntityName";
-// Translations
-import { useTranslations } from "next-intl";
+import useSetTemplateEntity from "@/hooks/useSetTemplateEntity";
+import useGetUpsertEntityInterfaceDetails from "@/hooks/useGetUpsertEntityInterfaceDetails";
+import handleOnUpsertEntitySubmit from "@/helpers/handleOnUpsertEntitySubmit";
 
-const CreateIngredientInterface = () => {
+const UpsertIngredientInterface: FC<{
+  interfaceType: "create" | "update";
+}> = ({ interfaceType }) => {
   const dispatch = useAppDispatch();
+  const { id } = useParams();
 
   const templateIngredient = useAppSelector(selectTemplateIngredient);
   const profile = useAppSelector(selectProfile);
 
   const loadingCreateIngredient = useAppSelector(selectLoadingCreateIngredient);
+  const loadingUpdateIngredient = useAppSelector(selectLoadingUpdateIngredient);
+  const loadingGetIngredient = useAppSelector(selectLoadingGetUserIngredient);
+
   const ingredientFormModalErrorMessage = useAppSelector(
     selectIngredientFormModalErrorMessage
   );
@@ -46,6 +63,50 @@ const CreateIngredientInterface = () => {
   const loadingCloudinaryImage = useAppSelector(selectLoadingCloudinaryImage);
 
   const translate = useTranslations("createTool.formLabels.ingredient");
+
+  const handleOnUpsertEntity = (e: React.SyntheticEvent) => {
+    handleOnUpsertEntitySubmit(
+      e,
+      interfaceType,
+      () =>
+        dispatch(
+          createIngredient({
+            templateIngredient,
+            userId: profile.id,
+          })
+        ),
+      () =>
+        dispatch(
+          updateIngredient({
+            templateIngredient,
+            userId: profile.id,
+          })
+        )
+    );
+  };
+
+  const {
+    loadingUpsertEntity,
+    updateLoadingUpsertEntity,
+    usedButtonLabel,
+    usedSectionTitle,
+  } = useGetUpsertEntityInterfaceDetails({
+    interfaceType: interfaceType,
+    loadingCreateEntity: loadingCreateIngredient,
+    loadingUpdateEntity: loadingUpdateIngredient,
+    translate: translate,
+    updateLoadingCreateEntity: updateLoadingCreateIngredient,
+    updateLoadingUpdateEntity: updateLoadingUpdateIngredient,
+  });
+
+  useSetTemplateEntity({
+    defaultTemplateEntity: defaultTemplateIngredient,
+    entityId: id as string,
+    entityType: "ingredient",
+    interfaceType: interfaceType,
+    loadingGetEntity: loadingGetIngredient,
+    setTemplateEntity: setTemplateIngredient,
+  });
 
   useSetDefaultEntityName(
     () =>
@@ -55,19 +116,21 @@ const CreateIngredientInterface = () => {
           value: translate("defaultNameValue"),
         })
       ),
-    templateIngredient
+    templateIngredient,
+    interfaceType === "create"
   );
 
   useShowCreatedEntity(
-    loadingCreateIngredient,
-    `Successfully created ingredient: ${templateIngredient.name}.`,
+    loadingUpsertEntity,
+    `Successfully ${interfaceType === "create" ? "created" : "updated"} ingredient: ${templateIngredient.name}.`,
     ingredientFormModalErrorMessage,
-    updateLoadingCreateIngredient
+    updateLoadingUpsertEntity
   );
   useUpdateEntityTemplateImageUrl(updateTemplateIngredient);
 
   return (
     <section className={createToolStyles.createInterface}>
+      <h2>{usedSectionTitle}</h2>
       <div className={createToolStyles.createInterfaceWrapper}>
         <div className={createToolStyles.createInterfaceFormContainer}>
           <PopupModal hasBorder={true} modalType="form" />
@@ -157,33 +220,16 @@ const CreateIngredientInterface = () => {
               }
               type="number"
             />
-            <CheckboxFormControl
-              labelContent={translate("enabled")}
-              entityProperty={String(templateIngredient.enabled)}
-              onEntityPropertyValueChange={(e) =>
-                dispatch(
-                  updateTemplateIngredient({
-                    key: "enabled",
-                    value: e.target.value === "true" ? false : true,
-                  })
-                )
-              }
-            />
             <PrimaryButton
-              content={translate("createButtonLabel")}
+              content={usedButtonLabel}
               type="functional"
               disabled={
                 loadingCreateIngredient === "PENDING" ||
+                loadingUpdateIngredient === "PENDING" ||
                 loadingCloudinaryImage === "PENDING"
               }
               onClickFunction={(e) => {
-                e.preventDefault();
-                dispatch(
-                  createIngredient({
-                    templateIngredient: templateIngredient,
-                    userId: profile.id,
-                  })
-                );
+                handleOnUpsertEntity(e);
               }}
             />
           </form>
@@ -198,4 +244,4 @@ const CreateIngredientInterface = () => {
   );
 };
 
-export default CreateIngredientInterface;
+export default UpsertIngredientInterface;

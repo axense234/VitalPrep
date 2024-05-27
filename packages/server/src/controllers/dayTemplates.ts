@@ -310,6 +310,7 @@ const createDayTemplate = async (req: Request, res: Response) => {
 const updateDayTemplate = async (req: Request, res: Response) => {
   const { dayTemplateId } = req.params;
   const dayTemplateBody = req.body;
+  const { userId, updateDayTemplateSingle } = req.query;
 
   if (!dayTemplateId) {
     return res
@@ -323,14 +324,34 @@ const updateDayTemplate = async (req: Request, res: Response) => {
       .json({ message: "Please enter a request body!", dayTemplate: {} });
   }
 
-  const recipes = dayTemplateBody.recipes as Recipe[];
+  if (dayTemplateBody.user || userId) {
+    dayTemplateBody.user = {
+      connect: { id: dayTemplateBody?.user?.id || userId },
+    };
+    delete dayTemplateBody?.userId;
+  }
+
+  if (dayTemplateBody.macros) {
+    dayTemplateBody.macros = { update: dayTemplateBody.macros };
+    delete dayTemplateBody?.macrosId;
+  }
+
+  if (updateDayTemplateSingle) {
+    delete dayTemplateBody?.ingredients;
+    delete dayTemplateBody?.utensils;
+    delete dayTemplateBody?.instanceTemplates;
+    delete dayTemplateBody?.mealPrepPlans;
+    delete dayTemplateBody?.mealPrepLogs;
+  }
+
+  const recipes = dayTemplateBody.recipes as string[];
 
   const updatedDayTemplate = await DayTemplateClient.update({
     where: { id: dayTemplateId },
     data: {
       ...dayTemplateBody,
       recipes: {
-        connect: recipes.map((recipe) => ({ id: recipe.id })),
+        connect: recipes.map((recipe) => ({ id: recipe })),
       },
     },
     include: {

@@ -18,6 +18,7 @@ import RecipeType from "@/core/types/entity/recipe/RecipeType";
 // Axios
 import { AxiosError } from "axios";
 import axiosInstance from "@/utils/axios";
+import RecipeTemplate from "@/core/types/entity/recipe/RecipeTemplate";
 
 export const recipesAdapter = createEntityAdapter<RecipeType>();
 
@@ -25,6 +26,7 @@ const initialState = recipesAdapter.getInitialState({
   templateRecipe: defaultTemplateRecipe,
   loadingCreateRecipe: "IDLE",
   loadingDeleteRecipe: "IDLE",
+  loadingUpdateRecipe: "IDLE",
   recipeFormModalErrorMessage: "Something went wrong, please refresh the page!",
   showVideoTutorialContent: false,
   showWrittenTutorialContent: false,
@@ -144,15 +146,65 @@ export const deleteRecipe = createAsyncThunk<
   }
 });
 
+export const updateRecipe = createAsyncThunk<
+  RecipeType | AxiosError,
+  RecipeCreateBodyType
+>(
+  "recipes/updateRecipe",
+  async ({
+    templateRecipe,
+    userId,
+    showVideoTutorialContent,
+    showWrittenTutorialContent,
+  }) => {
+    try {
+      if (!showWrittenTutorialContent) {
+        templateRecipe = {
+          ...templateRecipe,
+          recipeTutorial: {
+            ...templateRecipe.recipeTutorial,
+            writtenTutorial: "",
+          },
+        };
+      }
+
+      if (!showVideoTutorialContent) {
+        templateRecipe = {
+          ...templateRecipe,
+          recipeTutorial: {
+            ...templateRecipe.recipeTutorial,
+            videoTutorial: "",
+          },
+        };
+      }
+
+      const { data } = await axiosInstance.patch(
+        `/recipes/update/${templateRecipe.id}?userId=${userId}&updateRecipeSingle=true`,
+        templateRecipe
+      );
+      return data.recipe as RecipeType;
+    } catch (error) {
+      console.log(error);
+      return error as AxiosError;
+    }
+  }
+);
+
 const recipesSlice = createSlice({
   name: "recipes",
   initialState,
   reducers: {
+    setTemplateRecipe(state, action: PayloadAction<RecipeTemplate>) {
+      state.templateRecipe = action.payload;
+    },
     updateLoadingGetUserRecipes(
       state,
       action: PayloadAction<LoadingStateType>
     ) {
       state.loadingGetUserRecipes = action.payload;
+    },
+    updateLoadingUpdateRecipe(state, action: PayloadAction<LoadingStateType>) {
+      state.loadingUpdateRecipe = action.payload;
     },
     updateLoadingCreateRecipe(state, action: PayloadAction<LoadingStateType>) {
       state.loadingCreateRecipe = action.payload;
@@ -250,6 +302,27 @@ const recipesSlice = createSlice({
           }
           state.loadingDeleteRecipe = "FAILED";
         }
+      })
+      .addCase(updateRecipe.fulfilled, (state, action) => {
+        const recipe = action.payload as RecipeType;
+        const axiosError = action.payload as AxiosError;
+
+        if (axiosError !== undefined && !axiosError.response) {
+          recipesAdapter.updateOne(state, {
+            changes: { ...recipe },
+            id: recipe.id,
+          });
+          state.loadingUpdateRecipe = "SUCCEDED";
+        } else {
+          const error = axiosError.response?.data as {
+            message: string;
+            type: string;
+          };
+          if (error.type !== "jwt") {
+            state.recipeFormModalErrorMessage = error.message;
+          }
+          state.loadingUpdateRecipe = "FAILED";
+        }
       });
   },
 });
@@ -281,6 +354,12 @@ export const selectLoadingGetUserRecipes = (state: State) =>
 export const selectLoadingGetUserRecipe = (state: State) =>
   state.recipes.loadingGetUserRecipe;
 
+export const selectLoadingUpdateRecipe = (state: State) =>
+  state.recipes.loadingUpdateRecipe;
+
+export const selectLoadingDeleteRecipe = (state: State) =>
+  state.recipes.loadingDeleteRecipe;
+
 export const {
   updateTemplateRecipe,
   updateLoadingCreateRecipe,
@@ -288,6 +367,8 @@ export const {
   changeShowWrittenTutorialContent,
   updateLoadingGetUserRecipes,
   updateTemplateRecipeTutorial,
+  updateLoadingUpdateRecipe,
+  setTemplateRecipe,
 } = recipesSlice.actions;
 
 export default recipesSlice.reducer;

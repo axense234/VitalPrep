@@ -26,6 +26,7 @@ const initialState = dayTemplatesAdapter.getInitialState({
   templateDayTemplate: defaultTemplateDayTemplate,
   loadingCreateDayTemplate: "IDLE",
   loadingDeleteDayTemplate: "IDLE",
+  loadingUpdateDayTemplate: "IDLE",
   dayTemplateFormModalErrorMessage:
     "Something went wrong, please refresh the page!",
   numberOfMeals: 0,
@@ -126,6 +127,22 @@ export const deleteDayTemplate = createAsyncThunk<
   }
 });
 
+export const updateDayTemplate = createAsyncThunk<
+  DayTemplateType | AxiosError,
+  DayTemplateCreateBodyType
+>("dayTemplates/updateDayTemplate", async ({ templateDayTemplate, userId }) => {
+  try {
+    const { data } = await axiosInstance.patch(
+      `/dayTemplates/update/${templateDayTemplate.id}?userId=${userId}&updateDayTemplateSingle=true`,
+      templateDayTemplate
+    );
+    return data.dayTemplate as DayTemplateType;
+  } catch (error) {
+    console.log(error);
+    return error as AxiosError;
+  }
+});
+
 const dayTemplatesSlice = createSlice({
   name: "dayTemplates",
   initialState,
@@ -135,6 +152,12 @@ const dayTemplatesSlice = createSlice({
       action: PayloadAction<LoadingStateType>
     ) {
       state.loadingGetUserDayTemplates = action.payload;
+    },
+    updateLoadingUpdateDayTemplate(
+      state,
+      action: PayloadAction<LoadingStateType>
+    ) {
+      state.loadingUpdateDayTemplate = action.payload;
     },
     updateNumberOfMeals(state, action: PayloadAction<number>) {
       state.numberOfMeals = action.payload as number;
@@ -153,6 +176,9 @@ const dayTemplatesSlice = createSlice({
         ...state.templateDayTemplate,
         [action.payload.key]: action.payload.value,
       };
+    },
+    setTemplateDayTemplate(state, action: PayloadAction<DayTemplateTemplate>) {
+      state.templateDayTemplate = action.payload;
     },
   },
   extraReducers(builder) {
@@ -226,6 +252,27 @@ const dayTemplatesSlice = createSlice({
           }
           state.loadingDeleteDayTemplate = "FAILED";
         }
+      })
+      .addCase(updateDayTemplate.fulfilled, (state, action) => {
+        const dayTemplate = action.payload as DayTemplateType;
+        const axiosError = action.payload as AxiosError;
+
+        if (axiosError !== undefined && !axiosError.response) {
+          dayTemplatesAdapter.updateOne(state, {
+            changes: { ...dayTemplate },
+            id: dayTemplate.id,
+          });
+          state.loadingUpdateDayTemplate = "SUCCEDED";
+        } else {
+          const error = axiosError.response?.data as {
+            message: string;
+            type: string;
+          };
+          if (error.type !== "jwt") {
+            state.dayTemplateFormModalErrorMessage = error.message;
+          }
+          state.loadingUpdateDayTemplate = "FAILED";
+        }
       });
   },
 });
@@ -254,11 +301,19 @@ export const selectLoadingGetUserDayTemplates = (state: State) =>
 export const selectLoadingGetUserDayTemplate = (state: State) =>
   state.dayTemplates.loadingGetUserDayTemplate;
 
+export const selectLoadingUpdateDayTemplate = (state: State) =>
+  state.dayTemplates.loadingUpdateDayTemplate;
+
+export const selectLoadingDeleteDayTemplate = (state: State) =>
+  state.dayTemplates.loadingDeleteDayTemplate;
+
 export const {
   updateTemplateDayTemplate,
   updateLoadingCreateDayTemplate,
   updateNumberOfMeals,
   updateLoadingGetUserDayTemplates,
+  updateLoadingUpdateDayTemplate,
+  setTemplateDayTemplate,
 } = dayTemplatesSlice.actions;
 
 export default dayTemplatesSlice.reducer;

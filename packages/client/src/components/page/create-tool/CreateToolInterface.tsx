@@ -6,13 +6,13 @@ import { FC, ReactElement } from "react";
 import { useAppSelector } from "@/hooks/redux";
 import { selectSelectedEntityOption } from "@/redux/slices/generalSlice";
 // Components
-import CreateIngredientInterface from "./interfaces/CreateIngredientInterface";
-import CreateUtensilInterface from "./interfaces/CreateUtensilInterface";
-import CreateRecipeInterface from "./interfaces/CreateRecipeInterface";
-import CreateDayTemplateInterface from "./interfaces/CreateDayTemplateInterface";
-import CreateInstanceTemplateInterface from "./interfaces/CreateInstanceTemplateInterface";
-import CreateMealPrepPlanInterface from "./interfaces/CreateMealPrepPlanInterface";
-import CreateMealPrepLogInterface from "./interfaces/CreateMealPrepLogInterface";
+import UpsertIngredientInterface from "./interfaces/UpsertIngredientInterface";
+import UpsertUtensilInterface from "./interfaces/UpsertUtensilInterface";
+import UpsertRecipeInterface from "./interfaces/UpsertRecipeInterface";
+import UpsertDayTemplateInterface from "./interfaces/UpsertDayTemplateInterface";
+import UpsertInstanceTemplateInterface from "./interfaces/UpsertInstanceTemplateInterface";
+import UpsertMealPrepPlanInterface from "./interfaces/UpsertMealPrepPlanInterface";
+import UpsertMealPrepLogInterface from "./interfaces/UpsertMealPrepLogInterface";
 // Types
 import EntityType from "@/core/types/entity/users/EntityType";
 
@@ -31,28 +31,32 @@ const CreateToolInterface: FC<{ forcedSelectedEntityOption?: EntityType }> = ({
 };
 
 const useChooseCreateToolShownInterface = (usedOption: EntityType) => {
-  let shownInterface: ReactElement = <CreateIngredientInterface />;
+  let shownInterface: ReactElement = (
+    <UpsertIngredientInterface interfaceType="create" />
+  );
   switch (usedOption) {
     case "ingredient":
-      shownInterface = <CreateIngredientInterface />;
+      shownInterface = <UpsertIngredientInterface interfaceType="create" />;
       break;
     case "utensil":
-      shownInterface = <CreateUtensilInterface />;
+      shownInterface = <UpsertUtensilInterface interfaceType="create" />;
       break;
     case "recipe":
-      shownInterface = <CreateRecipeInterface />;
+      shownInterface = <UpsertRecipeInterface interfaceType="create" />;
       break;
     case "dayTemplate":
-      shownInterface = <CreateDayTemplateInterface />;
+      shownInterface = <UpsertDayTemplateInterface interfaceType="create" />;
       break;
     case "instanceTemplate":
-      shownInterface = <CreateInstanceTemplateInterface />;
+      shownInterface = (
+        <UpsertInstanceTemplateInterface interfaceType="create" />
+      );
       break;
     case "mealPrepPlan":
-      shownInterface = <CreateMealPrepPlanInterface />;
+      shownInterface = <UpsertMealPrepPlanInterface interfaceType="create" />;
       break;
     case "mealPrepLog":
-      shownInterface = <CreateMealPrepLogInterface />;
+      shownInterface = <UpsertMealPrepLogInterface interfaceType="create" />;
       break;
     default:
       throw new Error("What?");

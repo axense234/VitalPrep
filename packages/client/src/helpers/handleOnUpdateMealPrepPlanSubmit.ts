@@ -7,10 +7,10 @@ import {
   changeShowFormModal,
   setTemplateModalMessage,
 } from "@/redux/slices/generalSlice";
-import { createMealPrepPlan } from "@/redux/slices/mealPrepPlansSlice";
+import { updateMealPrepPlan } from "@/redux/slices/mealPrepPlansSlice";
 import { ThunkDispatch, UnknownAction } from "@reduxjs/toolkit";
 
-const handleOnCreateMealPrepPlanSubmit = ({
+const handleOnUpdateMealPrepPlanSubmit = ({
   e,
   templateMealPrepPlan,
   numberOfInstanceTemplates,
@@ -45,7 +45,7 @@ const handleOnCreateMealPrepPlanSubmit = ({
         };
       });
     dispatch(
-      createMealPrepPlan({
+      updateMealPrepPlan({
         templateMealPrepPlan: {
           ...templateMealPrepPlan,
           instanceTemplatesTimings: updatedInstanceTemplatesTimings,
@@ -56,4 +56,4 @@ const handleOnCreateMealPrepPlanSubmit = ({
   }
 };
 
-export default handleOnCreateMealPrepPlanSubmit;
+export default handleOnUpdateMealPrepPlanSubmit;

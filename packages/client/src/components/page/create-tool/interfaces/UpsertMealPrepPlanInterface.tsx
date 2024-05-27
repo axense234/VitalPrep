@@ -1,5 +1,5 @@
 // SCSS
-import createToolStyles from "../../../../scss/pages/CreateTool.module.scss";
+import createToolStyles from "@/scss/pages/CreateTool.module.scss";
 // Components
 import TextFormControl from "@/components/shared/form/TextFormControl";
 import PrimaryButton from "@/components/shared/PrimaryButton";
@@ -9,9 +9,12 @@ import SelectFormControl from "@/components/shared/form/SelectFormControl";
 import WeekdayFormControl from "@/components/shared/form/WeekdayFormControl";
 import EntityPreview from "@/components/shared/entity/EntityPreview";
 // React
-import React, { ChangeEvent, useEffect } from "react";
+import React, { ChangeEvent, FC, useEffect } from "react";
 // Data
-import { defaultMealPrepPlanImageUrl } from "@/data";
+import {
+  defaultMealPrepPlanImageUrl,
+  defaultTemplateMealPrepPlan,
+} from "@/data";
 // Redux
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import {
@@ -27,15 +30,19 @@ import {
 import {
   selectAllMealPrepPlans,
   selectLoadingCreateMealPrepPlan,
+  selectLoadingGetUserMealPrepPlan,
+  selectLoadingUpdateMealPrepPlan,
   selectMealPrepPlanFormModalErrorMessage,
   selectMealPrepPlanTemplate,
   selectNumberOfInstanceTemplates,
+  setTemplateMealPrepPlan,
   updateInstanceTemplatesTiming,
   updateLoadingCreateMealPrepPlan,
+  updateLoadingUpdateMealPrepPlan,
   updateNumberOfInstanceTemplates,
   updateTemplateMealPrepPlan,
 } from "@/redux/slices/mealPrepPlansSlice";
-// Hooks
+// Hooks and Helpers
 import useShowCreatedEntity from "@/hooks/useShowCreatedEntity";
 import useUpdateEntityTemplateImageUrl from "@/hooks/useUpdateEntityTemplateImageUrl";
 import useUpdateEntityMacrosBasedOnComponentEntities from "@/hooks/useUpdateEntityMacrosBasedOnComponentEntities";
@@ -45,11 +52,21 @@ import handleUpdateArrayEntities from "@/helpers/handleUpdateArrayEntities";
 import handleOnCreateMealPrepPlanSubmit from "@/helpers/handleOnCreateMealPrepPlanSubmit";
 import createArrayFromNumber from "@/helpers/createArrayFromNumber";
 import useSetDefaultEntityName from "@/hooks/useSetDefaultEntityName";
+import useGetUpsertEntityInterfaceDetails from "@/hooks/useGetUpsertEntityInterfaceDetails";
+import handleOnUpsertEntitySubmit from "@/helpers/handleOnUpsertEntitySubmit";
+import handleOnUpdateMealPrepPlanSubmit from "@/helpers/handleOnUpdateMealPrepPlanSubmit";
+import useSetTemplateEntity from "@/hooks/useSetTemplateEntity";
 // Translations
 import { useTranslations } from "next-intl";
+// Next
+import { useParams } from "next/navigation";
 
-const CreateMealPrepPlanInterface = () => {
+const UpsertMealPrepPlanInterface: FC<{
+  interfaceType: "create" | "update";
+}> = ({ interfaceType }) => {
   const dispatch = useAppDispatch();
+  const { id } = useParams();
+
   const profile = useAppSelector(selectProfile);
   const mealPrepPlanFormModalErrorMessage = useAppSelector(
     selectMealPrepPlanFormModalErrorMessage
@@ -62,19 +79,76 @@ const CreateMealPrepPlanInterface = () => {
   const templateMealPrepPlan = useAppSelector(selectMealPrepPlanTemplate);
   const instanceTemplatesIds = useAppSelector(selectAllInstanceTemplatesIds);
 
+  console.log(templateMealPrepPlan);
+
   const loadingCreateMealPrepPlan = useAppSelector(
     selectLoadingCreateMealPrepPlan
   );
+  const loadingUpdateMealPrepPlan = useAppSelector(
+    selectLoadingUpdateMealPrepPlan
+  );
+  const loadingGetMealPrepPlan = useAppSelector(
+    selectLoadingGetUserMealPrepPlan
+  );
+
   const loadingCloudinaryImage = useAppSelector(selectLoadingCloudinaryImage);
   const loadingGetUserInstanceTemplates = useAppSelector(
     selectLoadingGetUserInstanceTemplates
   );
 
+  const translate = useTranslations("createTool.formLabels.mealPrepPlan");
+
   const numberOfInstanceTemplatesIterable = createArrayFromNumber(
     numberOfInstanceTemplates
   );
+  console.log(templateMealPrepPlan.instanceTemplatesTimings);
 
-  const translate = useTranslations("createTool.formLabels.mealPrepPlan");
+  const handleOnUpsertEntity = (e: React.SyntheticEvent) => {
+    e.preventDefault();
+    handleOnUpsertEntitySubmit(
+      e,
+      interfaceType,
+      () =>
+        handleOnCreateMealPrepPlanSubmit({
+          e,
+          templateMealPrepPlan,
+          numberOfInstanceTemplates,
+          profileId: profile.id,
+          dispatch,
+        }),
+      () =>
+        handleOnUpdateMealPrepPlanSubmit({
+          e,
+          templateMealPrepPlan,
+          numberOfInstanceTemplates,
+          profileId: profile.id,
+          dispatch,
+        })
+    );
+  };
+
+  const {
+    loadingUpsertEntity,
+    updateLoadingUpsertEntity,
+    usedButtonLabel,
+    usedSectionTitle,
+  } = useGetUpsertEntityInterfaceDetails({
+    interfaceType: interfaceType,
+    loadingCreateEntity: loadingCreateMealPrepPlan,
+    loadingUpdateEntity: loadingUpdateMealPrepPlan,
+    translate: translate,
+    updateLoadingCreateEntity: updateLoadingCreateMealPrepPlan,
+    updateLoadingUpdateEntity: updateLoadingUpdateMealPrepPlan,
+  });
+
+  useSetTemplateEntity({
+    defaultTemplateEntity: defaultTemplateMealPrepPlan,
+    entityId: id as string,
+    entityType: "mealPrepPlan",
+    interfaceType: interfaceType,
+    loadingGetEntity: loadingGetMealPrepPlan,
+    setTemplateEntity: setTemplateMealPrepPlan,
+  });
 
   useSetDefaultEntityName(
     () =>
@@ -84,7 +158,8 @@ const CreateMealPrepPlanInterface = () => {
           value: translate("defaultNameValue"),
         })
       ),
-    templateMealPrepPlan
+    templateMealPrepPlan,
+    interfaceType === "create"
   );
 
   useUpdateEntityMacrosBasedOnComponentEntities(
@@ -98,10 +173,10 @@ const CreateMealPrepPlanInterface = () => {
     getAllUserInstanceTemplates
   );
   useShowCreatedEntity(
-    loadingCreateMealPrepPlan,
-    `Successfully created Meal Prep Plan: ${templateMealPrepPlan.name}.`,
+    loadingUpsertEntity,
+    `Successfully ${interfaceType === "create" ? "created" : "updated"} meal prep plan: ${templateMealPrepPlan.name}.`,
     mealPrepPlanFormModalErrorMessage,
-    updateLoadingCreateMealPrepPlan
+    updateLoadingUpsertEntity
   );
   useSliceEntityComponents(
     numberOfInstanceTemplates,
@@ -116,11 +191,11 @@ const CreateMealPrepPlanInterface = () => {
     templateMealPrepPlan?.instanceTemplatesTimings as []
   );
 
-  console.log(templateMealPrepPlan.instanceTemplatesTimings, "here");
-  console.log(templateMealPrepPlan?.instanceTemplates as string[]);
+  console.log(templateMealPrepPlan);
 
   return (
     <section className={createToolStyles.createInterface}>
+      <h2>{usedSectionTitle}</h2>
       <div className={createToolStyles.createInterfaceWrapper}>
         <div className={createToolStyles.createInterfaceFormContainer}>
           <PopupModal hasBorder={false} modalType="form" />
@@ -171,21 +246,16 @@ const CreateMealPrepPlanInterface = () => {
               type="number"
             />
             <PrimaryButton
-              content={translate("createButtonLabel")}
+              content={usedButtonLabel}
               type="functional"
               disabled={
                 loadingCreateMealPrepPlan === "PENDING" ||
+                loadingUpdateMealPrepPlan === "PENDING" ||
                 loadingCloudinaryImage === "PENDING"
               }
-              onClickFunction={(e) =>
-                handleOnCreateMealPrepPlanSubmit(
-                  e,
-                  templateMealPrepPlan,
-                  numberOfInstanceTemplates,
-                  profile.id,
-                  dispatch
-                )
-              }
+              onClickFunction={(e) => {
+                handleOnUpsertEntity(e);
+              }}
             />
           </form>
         </div>
@@ -304,4 +374,4 @@ const CreateMealPrepPlanInterface = () => {
   );
 };
 
-export default CreateMealPrepPlanInterface;
+export default UpsertMealPrepPlanInterface;

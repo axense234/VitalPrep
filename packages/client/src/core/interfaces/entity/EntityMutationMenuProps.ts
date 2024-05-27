@@ -6,6 +6,7 @@ interface EntityMutationMenuProps {
   parentRef?: MutableRefObject<HTMLDivElement | null>;
   handleEntityDeletion: any;
   handleEntityModification: any;
+  handleEntityViewing?: any;
   entityType?: EntityType;
   entityName?: string;
 }

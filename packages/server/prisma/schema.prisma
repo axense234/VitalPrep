@@ -166,10 +166,9 @@ model RecipeTutorial {
 }
 
 model Ingredient {
-  id       String  @id @default(uuid())
-  name     String  @default("Ingredient")
-  imageUrl String  @default("https://res.cloudinary.com/birthdayreminder/image/upload/v1708848204/VitalPrep/doodle-carrot-hand-drawn-black-white-outline-carrot-line-art-vegetable-stock-vector_502320-1096_oenebb.jpg")
-  enabled  Boolean @default(true)
+  id       String @id @default(uuid())
+  name     String @default("Ingredient")
+  imageUrl String @default("https://res.cloudinary.com/birthdayreminder/image/upload/v1708848204/VitalPrep/doodle-carrot-hand-drawn-black-white-outline-carrot-line-art-vegetable-stock-vector_502320-1096_oenebb.jpg")
 
   recipes           Recipe[]
   dayTemplates      DayTemplate[]
@@ -199,10 +198,9 @@ model Macros {
 }
 
 model Utensil {
-  id       String  @id @default(uuid())
-  name     String  @default("Utensil")
-  imageUrl String  @default("https://res.cloudinary.com/birthdayreminder/image/upload/v1708848218/VitalPrep/frying-pan-with-food-hand-drawn-doodle-vector-41700255_ni2nh1.jpg")
-  enabled  Boolean @default(true)
+  id       String @id @default(uuid())
+  name     String @default("Utensil")
+  imageUrl String @default("https://res.cloudinary.com/birthdayreminder/image/upload/v1708848218/VitalPrep/frying-pan-with-food-hand-drawn-doodle-vector-41700255_ni2nh1.jpg")
 
   recipes           Recipe[]
   dayTemplates      DayTemplate[]

@@ -4,9 +4,9 @@ import { Response, Request } from "express";
 import { StatusCodes } from "http-status-codes";
 // Prisma
 import { DayTemplateClient, InstanceTemplateClient } from "../db/postgres";
-import { DayTemplate, InstanceTemplate, Prisma } from "@prisma/client";
+import { DayTemplate, Prisma } from "@prisma/client";
 // Utils
-import { deleteCache, getOrSetCache, setCache } from "../utils/redis";
+import { deleteCache, setCache } from "../utils/redis";
 
 type GetAllInstanceTemplatesQueryObject = {
   userId?: string;
@@ -330,6 +330,7 @@ const createInstanceTemplate = async (req: Request, res: Response) => {
 const updateInstanceTemplate = async (req: Request, res: Response) => {
   const { instanceTemplateId } = req.params;
   const instanceTemplateBody = req.body;
+  const { userId, updateInstanceTemplateSingle } = req.query;
 
   if (!instanceTemplateId) {
     return res.status(StatusCodes.BAD_REQUEST).json({
@@ -344,14 +345,34 @@ const updateInstanceTemplate = async (req: Request, res: Response) => {
       .json({ message: "Please enter a request body!", instanceTemplate: {} });
   }
 
-  const dayTemplates = instanceTemplateBody.dayTemplates as DayTemplate[];
+  if (instanceTemplateBody.user || userId) {
+    instanceTemplateBody.user = {
+      connect: { id: instanceTemplateBody?.user?.id || userId },
+    };
+    delete instanceTemplateBody?.userId;
+  }
+
+  if (instanceTemplateBody.macros) {
+    instanceTemplateBody.macros = { update: instanceTemplateBody.macros };
+    delete instanceTemplateBody?.macrosId;
+  }
+
+  if (updateInstanceTemplateSingle) {
+    delete instanceTemplateBody?.ingredients;
+    delete instanceTemplateBody?.utensils;
+    delete instanceTemplateBody?.recipes;
+    delete instanceTemplateBody?.mealPrepPlans;
+    delete instanceTemplateBody?.mealPrepLogs;
+  }
+
+  const dayTemplates = instanceTemplateBody.dayTemplates as string[];
 
   const updatedInstanceTemplate = await InstanceTemplateClient.update({
     where: { id: instanceTemplateId },
     data: {
       ...instanceTemplateBody,
       dayTemplates: {
-        connect: dayTemplates.map((dayTemplate) => ({ id: dayTemplate.id })),
+        connect: dayTemplates.map((dayTemplate) => ({ id: dayTemplate })),
       },
     },
     include: {

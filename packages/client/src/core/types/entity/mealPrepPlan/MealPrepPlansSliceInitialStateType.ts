@@ -6,6 +6,7 @@ type MealPrepPlansSliceInitialStateType = {
   templateMealPrepPlan: MealPrepPlanTemplate;
   loadingCreateMealPrepPlan: LoadingStateType;
   loadingDeleteMealPrepPlan: LoadingStateType;
+  loadingUpdateMealPrepPlan: LoadingStateType;
   mealPrepPlanFormModalErrorMessage: string;
 
   numberOfInstanceTemplates: number;

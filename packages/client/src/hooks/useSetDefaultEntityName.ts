@@ -3,13 +3,15 @@ import { useEffect } from "react";
 
 const useSetDefaultEntityName = (
   updateFunction: any,
-  entity: EntityTemplateType
+  entity: EntityTemplateType,
+  run: boolean
 ) => {
+  console.log(entity);
   useEffect(() => {
-    if (!entity.name) {
+    if (!entity?.name && run) {
       updateFunction();
     }
-  }, []);
+  }, [run, entity?.name]);
 };
 
 export default useSetDefaultEntityName;

@@ -1,10 +1,11 @@
 // SCSS
-import entityInfoStyles from "../../../scss/components/page/EntityInfo.module.scss";
+import entityInfoStyles from "@/scss/components/page/EntityInfo.module.scss";
 // Components
 import PageTitle from "@/components/shared/PageTitle";
 import EntityInfoDetails from "./EntityInfoDetails";
 import EntityMutationMenu from "@/components/shared/entity/EntityMutationMenu";
 import EntityInfoAppearances from "./EntityInfoAppearances";
+import UpsertUtensilInterface from "../create-tool/interfaces/UpsertUtensilInterface";
 // React
 import { FC, useEffect } from "react";
 // Redux
@@ -20,12 +21,18 @@ import useGetHandleOnDeleteEntity from "@/hooks/useGetHandleOnDeleteEntity";
 import useNavigateToPathname from "@/hooks/useNavigateToPathname";
 // Translations
 import { useTranslations } from "next-intl";
+// Next
+import { useSearchParams } from "next/navigation";
 
 const UtensilInfo: FC<EntityInfoProps> = ({
   entityId,
   userId,
   hasEntityMutationMenu = true,
 }) => {
+  const searchParams = useSearchParams();
+  const editMode = searchParams.get("edit");
+  console.log(editMode);
+
   const dispatch = useAppDispatch();
   const loadingGetUserUtensil = useAppSelector(selectLoadingGetUserUtensil);
 
@@ -51,14 +58,25 @@ const UtensilInfo: FC<EntityInfoProps> = ({
         <EntityMutationMenu
           type="entityInfo"
           handleEntityDeletion={handleOnDeleteEntity}
-          handleEntityModification={() => navigateToPathname({})}
+          handleEntityModification={() =>
+            navigateToPathname({ forcedQueryParams: { edit: "true" } })
+          }
+          handleEntityViewing={() =>
+            navigateToPathname({ forcedQueryParams: {} })
+          }
           entityType="utensil"
           entityName={translate("utensil")}
         />
       )}
       <div className={entityInfoStyles.entityInfoContent}>
-        <EntityInfoDetails entityId={entityId} entityType="utensil" />
-        <EntityInfoAppearances entityId={entityId} entityType="utensil" />
+        {editMode === "true" ? (
+          <UpsertUtensilInterface interfaceType="update" />
+        ) : (
+          <>
+            <EntityInfoDetails entityId={entityId} entityType="utensil" />
+            <EntityInfoAppearances entityId={entityId} entityType="utensil" />
+          </>
+        )}
       </div>
     </div>
   );

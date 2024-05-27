@@ -167,38 +167,68 @@
       },
       "/ingredient": {
         "titleTextContent": "View Ingredient",
-        "subTitleTextContent": "the base of every recipe"
+        "subTitleTextContent": "the base of every recipe",
+        "editMode": {
+          "titleTextContent": "Edit Ingredient",
+          "subtitleTextContent": "modify your ingredient"
+        }
       },
       "/utensil": {
         "titleTextContent": "View Utensil",
-        "subTitleTextContent": "your cooking tool"
+        "subTitleTextContent": "your cooking tool",
+        "editMode": {
+          "titleTextContent": "Edit Utensil",
+          "subtitleTextContent": "update your utensil"
+        }
       },
       "/recipe": {
         "titleTextContent": "View Recipe",
-        "subTitleTextContent": "savor and enjoy"
+        "subTitleTextContent": "savor and enjoy",
+        "editMode": {
+          "titleTextContent": "Edit Recipe",
+          "subtitleTextContent": "spice things up"
+        }
       },
       "/dayTemplate": {
         "titleTextContent": "View Day Plan",
-        "subTitleTextContent": "your day plan"
+        "subTitleTextContent": "your day plan",
+        "editMode": {
+          "titleTextContent": "Edit Day Plan",
+          "subtitleTextContent": "modify your day plan"
+        }
       },
       "/instanceTemplate": {
         "titleTextContent": "View Session Template",
-        "subTitleTextContent": "your weekly session scheme"
+        "subTitleTextContent": "your weekly session scheme",
+        "editMode": {
+          "titleTextContent": "Edit Session Template",
+          "subtitleTextContent": "update your session template"
+        }
       },
       "/mealPrepPlan": {
         "titleTextContent": "View Meal Prep Plan",
-        "subTitleTextContent": "your plan to follow"
+        "subTitleTextContent": "your plan to follow",
+        "editMode": {
+          "titleTextContent": "Edit Meal Prep Plan",
+          "subtitleTextContent": "change things up"
+        }
       },
       "/mealPrepLog": {
         "titleTextContent": "View Session Log",
-        "subTitleTextContent": "your saved meal prep log"
+        "subTitleTextContent": "your saved meal prep log",
+        "editMode": {
+          "titleTextContent": "Edit Session Log",
+          "subtitleTextContent": "modify the past"
+        }
       }
     }
   },
   "createTool": {
     "formLabels": {
       "ingredient": {
-        "formTitle": "Create Ingredient",
+        "formTitle": "Ingredient",
+        "createSectionTitle": "Create Ingredient",
+        "updateSectionTitle": "Edit Ingredient",
         "name": "Name:",
         "defaultNameValue": "Carrot",
         "image": "Image:",
@@ -206,19 +236,23 @@
         "proteinAmount": "Protein(in grams):",
         "carbsAmount": "Carbs(in grams):",
         "fatsAmount": "Fats(in grams):",
-        "enabled": "Enabled?:",
-        "createButtonLabel": "Create Ingredient"
+        "createButtonLabel": "Create Ingredient",
+        "updateButtonLabel": "Edit Ingredient"
       },
       "utensil": {
-        "formTitle": "Create Utensil",
+        "formTitle": "Utensil",
+        "createSectionTitle": "Create Utensil",
+        "updateSectionTitle": "Edit Utensil",
         "name": "Name:",
         "defaultNameValue": "Fork",
         "image": "Image:",
-        "enabled": "Enabled?:",
-        "createButtonLabel": "Create Utensil"
+        "createButtonLabel": "Create Utensil",
+        "updateButtonLabel": "Edit Utensil"
       },
       "recipe": {
-        "formTitle": "Create Recipe",
+        "formTitle": "Recipe",
+        "createSectionTitle": "Create Recipe",
+        "updateSectionTitle": "Edit Recipe",
         "name": "Name:",
         "image": "Image:",
         "defaultNameValue": "Fried Egg",
@@ -229,42 +263,52 @@
           "writtenTutorialUrlPrompt": "Written Tutorial:"
         },
         "createButtonLabel": "Create Recipe",
+        "updateButtonLabel": "Edit Recipe",
         "selectFormControlsLabels": {
           "ingredients": "Ingredients Used:",
           "utensils": "Utensils Used"
         }
       },
       "dayTemplate": {
-        "formTitle": "Create Day Plan",
+        "formTitle": "Day Plan",
+        "createSectionTitle": "Create Day Plan",
+        "updateSectionTitle": "Edit Day Plan",
         "name": "Name:",
         "defaultNameValue": "Breakfast Day",
         "image": "Image:",
         "nbOfEntities": "Number of Meals:",
         "createButtonLabel": "Create Day Plan",
+        "updateButtonLabel": "Edit Day Plan",
         "selectFormControlsLabels": {
           "componentsLabel": "Recipes",
           "componentLabel": "Meal"
         }
       },
       "instanceTemplate": {
-        "formTitle": "Create Session Template",
+        "formTitle": "Session Template",
+        "createSectionTitle": "Create Session Template",
+        "updateSectionTitle": "Edit Session Template",
         "name": "Name:",
         "defaultNameValue": "Mushroom Session",
         "image": "Image:",
         "nbOfEntities": "Number of Days Covered:",
         "createButtonLabel": "Create Session Template",
+        "updateButtonLabel": "Edit Session Template",
         "selectFormControlsLabels": {
           "componentsLabel": "Individual Day Plans:",
           "componentLabel": "Day"
         }
       },
       "mealPrepPlan": {
-        "formTitle": "Create Meal Prep Plan",
+        "formTitle": "Meal Prep Plan",
+        "createSectionTitle": "Create Meal Prep Plan",
+        "updateSectionTitle": "Edit Meal Prep Plan",
         "name": "Name:",
         "image": "Image:",
         "defaultNameValue": "Potato Plan",
         "nbOfEntities": "Number of Templates Used:",
         "createButtonLabel": "Create Meal Prep Plan",
+        "updateButtonLabel": "Edit Meal Prep Plan",
         "selectFormControlsLabels": {
           "componentsLabel": "Individual Session Templates:",
           "componentLabel": "Number #{id} Template",
@@ -273,7 +317,9 @@
         }
       },
       "mealPrepLog": {
-        "formTitle": "Add Session Log",
+        "formTitle": "Session Log",
+        "createSectionTitle": "Add Session Log",
+        "updateSectionTitle": "Edit Session Log",
         "name": "Name:",
         "defaultNameValue": "Mushroom Log",
         "image": "Image:",
@@ -281,6 +327,7 @@
         "completed": "Completed?:",
         "cookingDuration": "Cooking Duration:",
         "createButtonLabel": "Add Session Log",
+        "updateButtonLabel": "Edit Session Log",
         "selectFormControlsLabels": {
           "instanceTemplate": "Session Template Used"
         }
@@ -326,7 +373,8 @@
       "openMenuTitle": "Open Entity Mutation Menu",
       "closeMenuTitle": "Close Entity Mutation Menu",
       "deleteEntityTitle": "Delete entity named",
-      "updateEntityTitle": "Update entity named"
+      "updateEntityTitle": "Update entity named",
+      "viewEntityTitle": "View entity named"
     }
   },
   "viewEntityOptions": {
@@ -350,12 +398,10 @@
       "sortingOptions": {
         "labels": {
           "ingredient": {
-            "enabled": "Availability of Ingredients",
             "name": "Ingredient Name",
             "numberOfRecipes": "Commonly used Ingredients"
           },
           "utensil": {
-            "enabled": "Availability of Utensils",
             "name": "Utensil Name",
             "numberOfRecipes": "Commonly used Utensils"
           },
@@ -485,14 +531,9 @@
           "protein": "{grams}g protein",
           "carbs": "{grams}g carbs",
           "fats": "{grams}g fats"
-        },
-        "enabled": "ENABLED ✔️",
-        "disabled": "DISABLED ❌"
+        }
       },
-      "utensil": {
-        "enabled": "ENABLED ✔️",
-        "disabled": "DISABLED ❌"
-      },
+      "utensil": {},
       "recipe": {
         "calories": "{numberOfCalories} calories",
         "macros": {

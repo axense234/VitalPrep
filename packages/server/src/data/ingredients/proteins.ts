@@ -132,7 +132,6 @@ export const defaultProteins = (locale: string) => [
     name: defaultProteinsTranslations.chickenBreast[locale],
     imageUrl:
       "https://res.cloudinary.com/birthdayreminder/image/upload/v1716491455/ingredientImages/f13e520a-fed6-4a6f-92ee-669f748b2fd4.png",
-    enabled: true,
     macros: {
       create: {
         calories: 158,
@@ -146,7 +145,6 @@ export const defaultProteins = (locale: string) => [
     name: defaultProteinsTranslations.chickenThighs[locale],
     imageUrl:
       "https://res.cloudinary.com/birthdayreminder/image/upload/v1716491487/ingredientImages/41e8b1fc-99e8-4ca8-a0d7-6c205449e552.png",
-    enabled: true,
     macros: {
       create: {
         calories: 208,
@@ -160,7 +158,6 @@ export const defaultProteins = (locale: string) => [
     name: defaultProteinsTranslations.chickenWings[locale],
     imageUrl:
       "https://res.cloudinary.com/birthdayreminder/image/upload/v1716491519/ingredientImages/b90b4285-e339-4730-8dad-dbf7cf998450.png",
-    enabled: true,
     macros: {
       create: {
         calories: 352,
@@ -174,7 +171,6 @@ export const defaultProteins = (locale: string) => [
     name: defaultProteinsTranslations.groundChicken[locale],
     imageUrl:
       "https://res.cloudinary.com/birthdayreminder/image/upload/v1716491563/ingredientImages/bcb1895a-e874-4b35-b993-bb6ecdb88378.png",
-    enabled: true,
     macros: {
       create: {
         calories: 193,
@@ -188,7 +184,6 @@ export const defaultProteins = (locale: string) => [
     name: defaultProteinsTranslations.beefSteak[locale],
     imageUrl:
       "https://res.cloudinary.com/birthdayreminder/image/upload/v1716491623/ingredientImages/da08d933-c8ed-4536-a864-27e04d905d74.png",
-    enabled: true,
     macros: {
       create: {
         calories: 276,
@@ -202,7 +197,6 @@ export const defaultProteins = (locale: string) => [
     name: defaultProteinsTranslations.groundBeef[locale],
     imageUrl:
       "https://res.cloudinary.com/birthdayreminder/image/upload/v1716491628/ingredientImages/b9f257ca-827d-400f-9fa8-3edc74915364.png",
-    enabled: true,
     macros: {
       create: {
         calories: 284,
@@ -216,7 +210,6 @@ export const defaultProteins = (locale: string) => [
     name: defaultProteinsTranslations.beefRoasts[locale],
     imageUrl:
       "https://res.cloudinary.com/birthdayreminder/image/upload/v1716491659/ingredientImages/a09c478c-06ea-4f08-a1c0-bc487658af63.png",
-    enabled: true,
     macros: {
       create: {
         calories: 299,
@@ -230,7 +223,6 @@ export const defaultProteins = (locale: string) => [
     name: defaultProteinsTranslations.salmon[locale],
     imageUrl:
       "https://res.cloudinary.com/birthdayreminder/image/upload/v1716491694/ingredientImages/576f4de3-8baf-4a44-a803-51b538953565.png",
-    enabled: true,
     macros: {
       create: {
         calories: 210,
@@ -244,7 +236,6 @@ export const defaultProteins = (locale: string) => [
     name: defaultProteinsTranslations.tuna[locale],
     imageUrl:
       "https://res.cloudinary.com/birthdayreminder/image/upload/v1716491716/ingredientImages/8dc77fda-903f-4fc5-9651-330de8bce1ed.png",
-    enabled: true,
     macros: {
       create: {
         calories: 129,
@@ -258,7 +249,6 @@ export const defaultProteins = (locale: string) => [
     name: defaultProteinsTranslations.cod[locale],
     imageUrl:
       "https://res.cloudinary.com/birthdayreminder/image/upload/v1716491797/ingredientImages/9a6330d6-f3ff-40c9-897f-e64dcd9fabfe.png",
-    enabled: true,
     macros: {
       create: {
         calories: 104,
@@ -272,7 +262,6 @@ export const defaultProteins = (locale: string) => [
     name: defaultProteinsTranslations.tilapia[locale],
     imageUrl:
       "https://res.cloudinary.com/birthdayreminder/image/upload/v1716491827/ingredientImages/96239537-45a0-47d3-a47a-77696d103300.png",
-    enabled: true,
     macros: {
       create: {
         calories: 130,
@@ -286,7 +275,6 @@ export const defaultProteins = (locale: string) => [
     name: defaultProteinsTranslations.porkChops[locale],
     imageUrl:
       "https://res.cloudinary.com/birthdayreminder/image/upload/v1716491865/ingredientImages/410869e4-c20c-4339-85b9-0a64a14679de.png",
-    enabled: true,
     macros: {
       create: {
         calories: 213,
@@ -300,7 +288,6 @@ export const defaultProteins = (locale: string) => [
     name: defaultProteinsTranslations.porkLoin[locale],
     imageUrl:
       "https://res.cloudinary.com/birthdayreminder/image/upload/v1716491902/ingredientImages/ad3676d9-8c6d-4d97-a3c5-360918e31c3c.png",
-    enabled: true,
     macros: {
       create: {
         calories: 190,
@@ -314,7 +301,6 @@ export const defaultProteins = (locale: string) => [
     name: defaultProteinsTranslations.groundPork[locale],
     imageUrl:
       "https://res.cloudinary.com/birthdayreminder/image/upload/v1716491938/ingredientImages/e6875e92-28f1-4a8b-9242-b4de28b9826f.png",
-    enabled: true,
     macros: {
       create: {
         calories: 294,
@@ -328,7 +314,6 @@ export const defaultProteins = (locale: string) => [
     name: defaultProteinsTranslations.bacon[locale],
     imageUrl:
       "https://res.cloudinary.com/birthdayreminder/image/upload/v1716491965/ingredientImages/1018333a-15c2-429d-be1e-a31198d44bcf.png",
-    enabled: true,
     macros: {
       create: {
         calories: 472,
@@ -342,7 +327,6 @@ export const defaultProteins = (locale: string) => [
     name: defaultProteinsTranslations.wholeEggs[locale],
     imageUrl:
       "https://res.cloudinary.com/birthdayreminder/image/upload/v1716492014/ingredientImages/157629d1-cd3f-47a9-89eb-1d13813a4473.png",
-    enabled: true,
     macros: {
       create: {
         calories: 144,
@@ -356,7 +340,6 @@ export const defaultProteins = (locale: string) => [
     name: defaultProteinsTranslations.eggWhites[locale],
     imageUrl:
       "https://res.cloudinary.com/birthdayreminder/image/upload/v1716492072/ingredientImages/8acf73d2-9cb0-4ee6-9f1f-c1f37031dbd1.png",
-    enabled: true,
     macros: {
       create: {
         calories: 51,
@@ -370,7 +353,6 @@ export const defaultProteins = (locale: string) => [
     name: defaultProteinsTranslations.tofu[locale],
     imageUrl:
       "https://res.cloudinary.com/birthdayreminder/image/upload/v1716492101/ingredientImages/b337fc36-94ad-487d-acf4-40dff43d972a.png",
-    enabled: true,
     macros: {
       create: {
         calories: 83.6,
@@ -384,7 +366,6 @@ export const defaultProteins = (locale: string) => [
     name: defaultProteinsTranslations.groundTurkey[locale],
     imageUrl:
       "https://res.cloudinary.com/birthdayreminder/image/upload/v1716492134/ingredientImages/9227c6a3-1d20-471f-8ed0-19e7bfb014f8.png",
-    enabled: true,
     macros: {
       create: {
         calories: 255,
@@ -398,7 +379,6 @@ export const defaultProteins = (locale: string) => [
     name: defaultProteinsTranslations.turkeyBreast[locale],
     imageUrl:
       "https://res.cloudinary.com/birthdayreminder/image/upload/v1716492196/ingredientImages/12a1bf10-ad22-4c90-adef-0efb2a70d186.png",
-    enabled: true,
     macros: {
       create: {
         calories: 145,
@@ -412,7 +392,6 @@ export const defaultProteins = (locale: string) => [
     name: defaultProteinsTranslations.wholeTurkey[locale],
     imageUrl:
       "https://res.cloudinary.com/birthdayreminder/image/upload/v1716492218/ingredientImages/40c02d77-5d90-4aba-a4ff-6061ee7d04bb.png",
-    enabled: true,
     macros: {
       create: {
         calories: 192,

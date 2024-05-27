@@ -3,6 +3,7 @@ import { usePathname, useRouter } from "@/navigation";
 import { useParams } from "next/navigation";
 // Translations
 import { useLocale } from "next-intl";
+import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
 
 const useNavigateToPathname = () => {
   const router = useRouter();
@@ -13,16 +14,19 @@ const useNavigateToPathname = () => {
   return ({
     forcedPathname,
     forcedLocale,
+    forcedQueryParams,
     forcedParams,
   }: {
     forcedPathname?: string;
     forcedLocale?: string;
-    forcedParams?: string;
+    forcedQueryParams?: Params;
+    forcedParams?: Params;
   }) =>
     router.replace(
       {
         pathname: forcedPathname || (pathname as any),
-        params: forcedParams || params,
+        params: { ...(forcedParams || params) },
+        query: { ...forcedQueryParams },
       },
       { locale: forcedLocale || locale }
     );

@@ -26,7 +26,8 @@ const SelectFormControl: FC<SelectFormControlProps> = ({
       )
     );
   };
-  console.log(entityPropertyOptions);
+
+  console.log(entityPropertyChosenOptions);
 
   const searchInOptionsForPropertyId = (id: string) => {
     return Boolean(entityPropertyChosenOptions === id);

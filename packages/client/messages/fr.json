@@ -167,38 +167,68 @@
       },
       "/ingredient": {
         "titleTextContent": "Voir l'ingrédient",
-        "subTitleTextContent": "la base de chaque recette"
+        "subTitleTextContent": "la base de chaque recette",
+        "editMode": {
+          "titleTextContent": "Modifier l'ingrédient",
+          "subtitleTextContent": "modifier les ingrédients"
+        }
       },
       "/utensil": {
         "titleTextContent": "Voir l'ustensile",
-        "subTitleTextContent": "votre outil de cuisine"
+        "subTitleTextContent": "votre outil de cuisine",
+        "editMode": {
+          "titleTextContent": "Modifier l'ustensile",
+          "subtitleTextContent": "mettez à jour votre ustensile"
+        }
       },
       "/recipe": {
         "titleTextContent": "Voir la recette",
-        "subTitleTextContent": "savourer et apprécier"
+        "subTitleTextContent": "savourer et apprécier",
+        "editMode": {
+          "titleTextContent": "Modifier la recette",
+          "subtitleTextContent": "pimenter les choses"
+        }
       },
       "/dayTemplate": {
         "titleTextContent": "Voir le plan journalier",
-        "subTitleTextContent": "votre programme de journée"
+        "subTitleTextContent": "votre programme de journée",
+        "editMode": {
+          "titleTextContent": "Modifier le plan journalier",
+          "subtitleTextContent": "modifier votre programme de journée"
+        }
       },
       "/instanceTemplate": {
         "titleTextContent": "Afficher le modèle de session",
-        "subTitleTextContent": "votre programme de séances hebdomadaires"
+        "subTitleTextContent": "votre programme de séances hebdomadaires",
+        "editMode": {
+          "titleTextContent": "Modifier le modèle de session",
+          "subtitleTextContent": "mettre à jour votre modèle de session"
+        }
       },
       "/mealPrepPlan": {
         "titleTextContent": "Voir le plan de préparation des repas",
-        "subTitleTextContent": "votre plan à suivre"
+        "subTitleTextContent": "votre plan à suivre",
+        "editMode": {
+          "titleTextContent": "Modifier le plan de préparation des repas",
+          "subtitleTextContent": "changer les choses"
+        }
       },
       "/mealPrepLog": {
         "titleTextContent": "Afficher le journal de session",
-        "subTitleTextContent": "votre journal de préparation de repas enregistré"
+        "subTitleTextContent": "votre journal de préparation de repas enregistré",
+        "editMode": {
+          "titleTextContent": "Modifier le journal de session",
+          "subtitleTextContent": "modifier le passé"
+        }
       }
     }
   },
   "createTool": {
     "formLabels": {
       "ingredient": {
-        "formTitle": "Créer un ingrédient",
+        "formTitle": "Ingrédient",
+        "createSectionTitle": "Créer un ingrédient",
+        "updateSectionTitle": "Modifier l'ingrédient",
         "name": "Nom:",
         "defaultNameValue": "Carotte",
         "image": "Image:",
@@ -206,19 +236,23 @@
         "proteinAmount": "Protéine(en grammes) :",
         "carbsAmount": "Glucides (en grammes) :",
         "fatsAmount": "Graisses (en grammes) :",
-        "enabled": "Activé?:",
-        "createButtonLabel": "Créer un ingrédient"
+        "createButtonLabel": "Créer un ingrédient",
+        "updateButtonLabel": "Modifier l'ingrédient"
       },
       "utensil": {
-        "formTitle": "Créer un ustensile",
+        "formTitle": "Ustensile",
+        "createSectionTitle": "Créer un ustensile",
+        "updateSectionTitle": "Modifier l'ustensile",
         "name": "Nom:",
         "defaultNameValue": "Fourchette",
         "image": "Image:",
-        "enabled": "Activé?:",
-        "createButtonLabel": "Créer un ustensile"
+        "createButtonLabel": "Créer un ustensile",
+        "updateButtonLabel": "Modifier l'ustensile"
       },
       "recipe": {
-        "formTitle": "Créer une recette",
+        "formTitle": "Recette",
+        "createSectionTitle": "Créer une recette",
+        "updateSectionTitle": "Modifier la recette",
         "name": "Nom:",
         "defaultNameValue": "Oeuf Frit",
         "image": "Image:",
@@ -229,42 +263,52 @@
           "writtenTutorialUrlPrompt": "Tutoriel écrit :"
         },
         "createButtonLabel": "Créer une recette",
+        "updateButtonLabel": "Modifier la recette",
         "selectFormControlsLabels": {
           "ingredients": "Ingrédients utilisés :",
           "utensils": "Ustensiles utilisés"
         }
       },
       "dayTemplate": {
-        "formTitle": "Créer un plan de journée",
+        "formTitle": "Plan de Journée",
+        "createSectionTitle": "Créer un plan de journée",
+        "updateSectionTitle": "Modifier le plan journalier",
         "name": "Nom:",
         "defaultNameValue": "Jour du Petit-Déjeuner",
         "image": "Image:",
         "nbOfEntities": "Nombre de repas :",
         "createButtonLabel": "Créer un plan de journée",
+        "updateButtonLabel": "Modifier le plan journalier",
         "selectFormControlsLabels": {
           "componentsLabel": "Recettes",
           "componentLabel": "Repas"
         }
       },
       "instanceTemplate": {
-        "formTitle": "Créer un modèle de session",
+        "formTitle": "Modèle de Session",
+        "createSectionTitle": "Créer un modèle de session",
+        "updateSectionTitle": "Modifier le modèle de session",
         "name": "Nom:",
         "defaultNameValue": "Séance de Champignons",
         "image": "Image:",
         "nbOfEntities": "Nombre de jours couverts :",
         "createButtonLabel": "Créer un modèle de session",
+        "updateButtonLabel": "Modifier le modèle de session",
         "selectFormControlsLabels": {
           "componentsLabel": "Plans de journée individuels :",
           "componentLabel": "Jour"
         }
       },
       "mealPrepPlan": {
-        "formTitle": "Créer un plan de préparation des repas",
+        "formTitle": "Plan de Préparation des Repas",
+        "createSectionTitle": "Créer un plan de préparation des repas",
+        "updateSectionTitle": "Modifier le plan \"Meal Prep\"",
         "name": "Nom:",
         "defaultNameValue": "Plan de Pommes de Terre",
         "image": "Image:",
         "nbOfEntities": "Nombre de modèles utilisés :",
         "createButtonLabel": "Créer un plan de préparation des repas",
+        "updateButtonLabel": "Modifier le plan \"Meal Prep\"",
         "selectFormControlsLabels": {
           "componentsLabel": "Modèles de séances individuelles :",
           "componentLabel": "Modèle de numéro #{id}",
@@ -273,7 +317,9 @@
         }
       },
       "mealPrepLog": {
-        "formTitle": "Ajouter un journal de session",
+        "formTitle": "Journal de Session",
+        "createSectionTitle": "Ajouter un journal de session",
+        "updateSectionTitle": "Modifier le journal de session",
         "name": "Nom:",
         "defaultNameValue": "Journal des Champignons",
         "image": "Image:",
@@ -281,6 +327,7 @@
         "completed": "Complété?:",
         "cookingDuration": "Durée de cuisson :",
         "createButtonLabel": "Ajouter un journal de session",
+        "updateButtonLabel": "Modifier le journal de session",
         "selectFormControlsLabels": {
           "instanceTemplate": "Modèle de session utilisé"
         }
@@ -326,7 +373,8 @@
       "openMenuTitle": "Ouvrir le menu de mutation d'entité",
       "closeMenuTitle": "Fermer le menu de mutation d'entité",
       "deleteEntityTitle": "Supprimer l'entité nommée",
-      "updateEntityTitle": "Mettre à jour l'entité nommée"
+      "updateEntityTitle": "Mettre à jour l'entité nommée",
+      "viewEntityTitle": "Vedeți entitatea"
     }
   },
   "viewEntityOptions": {
@@ -350,12 +398,10 @@
       "sortingOptions": {
         "labels": {
           "ingredient": {
-            "enabled": "Disponibilité des ingrédients",
             "name": "Nom de l'ingrédient",
             "numberOfRecipes": "Ingrédients couramment utilisés"
           },
           "utensil": {
-            "enabled": "Disponibilité des ustensiles",
             "name": "Nom de l'ustensile",
             "numberOfRecipes": "Ustensiles couramment utilisés"
           },
@@ -485,14 +531,9 @@
           "protein": "{grams}g protéines",
           "carbs": "{grams}g crabes",
           "fats": "{grams}g graisses"
-        },
-        "enabled": "ACTIVÉ ✔️",
-        "disabled": "DÉSACTIVÉ ❌"
+        }
       },
-      "utensil": {
-        "enabled": "ACTIVÉ ✔️",
-        "disabled": "DÉSACTIVÉ ❌"
-      },
+      "utensil": {},
       "recipe": {
         "calories": "{numberOfCalories} calories",
         "macros": {

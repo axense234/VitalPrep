@@ -1,9 +1,10 @@
 // SCSS
-import entityInfoStyles from "../../../scss/components/page/EntityInfo.module.scss";
+import entityInfoStyles from "@/scss/components/page/EntityInfo.module.scss";
 // Components
 import PageTitle from "@/components/shared/PageTitle";
 import EntityInfoDetails from "./EntityInfoDetails";
 import EntityInfoComponents from "./EntityInfoComponents";
+import UpsertMealPrepLogInterface from "../create-tool/interfaces/UpsertMealPrepLogInterface";
 import EntityInfoInstanceTemplate from "./EntityInfoInstanceTemplate";
 // React
 import { FC, useEffect } from "react";
@@ -22,12 +23,18 @@ import useGetHandleOnDeleteEntity from "@/hooks/useGetHandleOnDeleteEntity";
 import useNavigateToPathname from "@/hooks/useNavigateToPathname";
 // Translations
 import { useTranslations } from "next-intl";
+// Next
+import { useSearchParams } from "next/navigation";
 
 const MealPrepLogInfo: FC<EntityInfoProps> = ({
   entityId,
   userId,
   hasEntityMutationMenu = true,
 }) => {
+  const searchParams = useSearchParams();
+  const editMode = searchParams.get("edit");
+  console.log(editMode);
+
   const dispatch = useAppDispatch();
   const loadingGetUserMealPrepLog = useAppSelector(
     selectLoadingGetUserMealPrepLog
@@ -56,15 +63,29 @@ const MealPrepLogInfo: FC<EntityInfoProps> = ({
         <EntityMutationMenu
           type="entityInfo"
           handleEntityDeletion={handleOnDeleteEntity}
-          handleEntityModification={() => navigateToPathname({})}
+          handleEntityModification={() =>
+            navigateToPathname({ forcedQueryParams: { edit: "true" } })
+          }
+          handleEntityViewing={() =>
+            navigateToPathname({ forcedQueryParams: {} })
+          }
           entityType="mealPrepLog"
           entityName={translate("mealPrepLog")}
         />
       )}
       <div className={entityInfoStyles.entityInfoContent}>
-        <EntityInfoDetails entityId={entityId} entityType="mealPrepLog" />
-        <EntityInfoInstanceTemplate entityId={entityId} />
-        <EntityInfoComponents entityId={entityId} entityType="mealPrepLog" />
+        {editMode === "true" ? (
+          <UpsertMealPrepLogInterface interfaceType="update" />
+        ) : (
+          <>
+            <EntityInfoDetails entityId={entityId} entityType="mealPrepLog" />
+            <EntityInfoInstanceTemplate entityId={entityId} />
+            <EntityInfoComponents
+              entityId={entityId}
+              entityType="mealPrepLog"
+            />
+          </>
+        )}
       </div>
     </div>
   );

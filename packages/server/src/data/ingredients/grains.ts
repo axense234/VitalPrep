@@ -72,7 +72,6 @@ export const defaultGrains = (locale: string) => [
     name: defaultGrainsTranslations.wheat[locale],
     imageUrl:
       "https://res.cloudinary.com/birthdayreminder/image/upload/v1716491032/ingredientImages/065e321a-4f53-4f76-adfe-9d0754d8e74c.png",
-    enabled: true,
     macros: {
       create: {
         calories: 316,
@@ -86,7 +85,6 @@ export const defaultGrains = (locale: string) => [
     name: defaultGrainsTranslations.whiteRice[locale],
     imageUrl:
       "https://res.cloudinary.com/birthdayreminder/image/upload/v1716491053/ingredientImages/2261a648-0d8d-461b-aa09-d73609a72b8e.png",
-    enabled: true,
     macros: {
       create: {
         calories: 133,
@@ -100,7 +98,6 @@ export const defaultGrains = (locale: string) => [
     name: defaultGrainsTranslations.brownRice[locale],
     imageUrl:
       "https://res.cloudinary.com/birthdayreminder/image/upload/v1716491090/ingredientImages/fd321911-da4a-4c6b-9e08-009dba22f492.png",
-    enabled: true,
     macros: {
       create: {
         calories: 109,
@@ -114,7 +111,6 @@ export const defaultGrains = (locale: string) => [
     name: defaultGrainsTranslations.corn[locale],
     imageUrl:
       "https://res.cloudinary.com/birthdayreminder/image/upload/v1716491115/ingredientImages/4c827000-97e2-44bf-9bb3-4e506d4c74a3.png",
-    enabled: true,
     macros: {
       create: {
         calories: 99,
@@ -128,7 +124,6 @@ export const defaultGrains = (locale: string) => [
     name: defaultGrainsTranslations.oats[locale],
     imageUrl:
       "https://res.cloudinary.com/birthdayreminder/image/upload/v1716491148/ingredientImages/85380bb4-6d22-406f-b5cd-611493367c7c.png",
-    enabled: true,
     macros: {
       create: {
         calories: 367,
@@ -142,7 +137,6 @@ export const defaultGrains = (locale: string) => [
     name: defaultGrainsTranslations.barley[locale],
     imageUrl:
       "https://res.cloudinary.com/birthdayreminder/image/upload/v1716491169/ingredientImages/7f5fb707-3c9d-47fc-8582-513078917cf8.png",
-    enabled: true,
     macros: {
       create: {
         calories: 125.5,
@@ -156,7 +150,6 @@ export const defaultGrains = (locale: string) => [
     name: defaultGrainsTranslations.quinoa[locale],
     imageUrl:
       "https://res.cloudinary.com/birthdayreminder/image/upload/v1716491196/ingredientImages/1581a803-e486-41e8-9c04-c5ce336dfb6f.png",
-    enabled: true,
     macros: {
       create: {
         calories: 122,
@@ -170,7 +163,6 @@ export const defaultGrains = (locale: string) => [
     name: defaultGrainsTranslations.sorghum[locale],
     imageUrl:
       "https://res.cloudinary.com/birthdayreminder/image/upload/v1716491228/ingredientImages/b1cf998a-c23b-4e7e-b7f7-038a12b00cef.png",
-    enabled: true,
     macros: {
       create: {
         calories: 73,
@@ -184,7 +176,6 @@ export const defaultGrains = (locale: string) => [
     name: defaultGrainsTranslations.millet[locale],
     imageUrl:
       "https://res.cloudinary.com/birthdayreminder/image/upload/v1716491284/ingredientImages/e7a6b0df-9828-4fbd-881b-ac142a724fa9.png",
-    enabled: true,
     macros: {
       create: {
         calories: 124,
@@ -198,7 +189,6 @@ export const defaultGrains = (locale: string) => [
     name: defaultGrainsTranslations.rye[locale],
     imageUrl:
       "https://res.cloudinary.com/birthdayreminder/image/upload/v1716491308/ingredientImages/e5508d5a-31f3-4ea0-95b3-168d7ecdda15.png",
-    enabled: true,
     macros: {
       create: {
         calories: 257,
@@ -212,7 +202,6 @@ export const defaultGrains = (locale: string) => [
     name: defaultGrainsTranslations.triticale[locale],
     imageUrl:
       "https://res.cloudinary.com/birthdayreminder/image/upload/v1716491343/ingredientImages/d3645d50-6bd0-4aaa-9910-e9212621af17.png",
-    enabled: true,
     macros: {
       create: {
         calories: 341,

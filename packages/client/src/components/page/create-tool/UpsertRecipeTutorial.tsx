@@ -1,5 +1,5 @@
 // SCSS
-import createRecipeTutorialStyles from "../../../scss/components/page/create-tool/CreateRecipeTutorial.module.scss";
+import createRecipeTutorialStyles from "@/scss/components/page/create-tool/CreateRecipeTutorial.module.scss";
 // Components
 import CheckboxFormControl from "@/components/shared/form/CheckboxFormControl";
 import TextAreaFormControl from "@/components/shared/form/TextAreaFormControl";
@@ -17,7 +17,7 @@ import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 // Translations
 import { useTranslations } from "next-intl";
 
-const CreateRecipeTutorial = () => {
+const UpsertRecipeTutorial = () => {
   const dispatch = useAppDispatch();
   const showVideoTutorialContent = useAppSelector(
     selectShowVideoTutorialContent
@@ -100,4 +100,4 @@ const CreateRecipeTutorial = () => {
   );
 };
 
-export default CreateRecipeTutorial;
+export default UpsertRecipeTutorial;

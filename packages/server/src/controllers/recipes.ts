@@ -314,6 +314,7 @@ const createRecipe = async (req: Request, res: Response) => {
 const updateRecipe = async (req: Request, res: Response) => {
   const { recipeId } = req.params;
   const recipeBody = req.body;
+  const { userId, updateRecipeSingle } = req.query;
 
   if (!recipeId) {
     return res
@@ -327,8 +328,32 @@ const updateRecipe = async (req: Request, res: Response) => {
       .json({ message: "Please enter a request body!", recipe: {} });
   }
 
-  const ingredients = recipeBody.ingredients as Ingredient[];
-  const utensils = recipeBody.utensils as Utensil[];
+  if (recipeBody.user || userId) {
+    recipeBody.user = {
+      connect: { id: recipeBody?.user?.id || userId },
+    };
+    delete recipeBody?.userId;
+  }
+
+  if (recipeBody.macros) {
+    recipeBody.macros = { update: recipeBody.macros };
+    delete recipeBody?.macrosId;
+  }
+
+  if (recipeBody.recipeTutorial) {
+    recipeBody.recipeTutorial = { update: recipeBody.recipeTutorial };
+    delete recipeBody?.recipeTutorialId;
+  }
+
+  if (updateRecipeSingle) {
+    delete recipeBody?.dayTemplates;
+    delete recipeBody?.instanceTemplates;
+    delete recipeBody?.mealPrepPlans;
+    delete recipeBody?.mealPrepLogs;
+  }
+
+  const ingredients = recipeBody.ingredients as string[];
+  const utensils = recipeBody.utensils as string[];
 
   const updatedRecipe = await RecipeClient.update({
     where: { id: recipeId },
@@ -336,12 +361,12 @@ const updateRecipe = async (req: Request, res: Response) => {
       ...recipeBody,
       ingredients: {
         connect: ingredients.map((ingredient) => ({
-          id: ingredient.id,
+          id: ingredient,
         })),
       },
       utensils: {
         connect: utensils.map((utensil) => ({
-          id: utensil.id,
+          id: utensil,
         })),
       },
     },

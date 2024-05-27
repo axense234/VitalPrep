@@ -167,38 +167,68 @@
       },
       "/ingredient": {
         "titleTextContent": "Vedeți Ingredient",
-        "subTitleTextContent": "baza fiecărei rețete"
+        "subTitleTextContent": "baza fiecărei rețete",
+        "editMode": {
+          "titleTextContent": "Editați Ingredient",
+          "subtitleTextContent": "editați-vă ingredientul"
+        }
       },
       "/utensil": {
         "titleTextContent": "Vedeți Ustensilă",
-        "subTitleTextContent": "instrumentul dvs. de gătit"
+        "subTitleTextContent": "instrumentul dvs. de gătit",
+        "editMode": {
+          "titleTextContent": "Editați Ustensilă",
+          "subtitleTextContent": "modificați-vă ustensila"
+        }
       },
       "/recipe": {
         "titleTextContent": "Vedeți Rețetă",
-        "subTitleTextContent": "savurați și bucurați-vă"
+        "subTitleTextContent": "savurați și bucurați-vă",
+        "editMode": {
+          "titleTextContent": "Editați Rețetă",
+          "subtitleTextContent": "actualizați-vă rețeta"
+        }
       },
       "/dayTemplate": {
         "titleTextContent": "Vedeți Plan de Zi",
-        "subTitleTextContent": "planul tău de zi"
+        "subTitleTextContent": "planul tău de zi",
+        "editMode": {
+          "titleTextContent": "Editați Plan de Zi",
+          "subtitleTextContent": "editați-vă planul de zi"
+        }
       },
       "/instanceTemplate": {
         "titleTextContent": "Vedeți Model de Sesiune",
-        "subTitleTextContent": "schema dvs. de sesiune"
+        "subTitleTextContent": "schema dvs. de sesiune",
+        "editMode": {
+          "titleTextContent": "Editați Model de Sesiune",
+          "subtitleTextContent": "modificați-vă modelul de sesiune"
+        }
       },
       "/mealPrepPlan": {
         "titleTextContent": "Vedeți Plan \"Meal Prep\"",
-        "subTitleTextContent": "planul dvs. de urmat"
+        "subTitleTextContent": "planul dvs. de urmat",
+        "editMode": {
+          "titleTextContent": "Editați Plan \"Meal Prep\"",
+          "subtitleTextContent": "actualizați-vă planul"
+        }
       },
       "/mealPrepLog": {
         "titleTextContent": "Vedeți Jurnal de Sesiune",
-        "subTitleTextContent": "jurnalul dvs. de sesiune"
+        "subTitleTextContent": "jurnalul dvs. de sesiune",
+        "editMode": {
+          "titleTextContent": "Editați Jurnal de Sesiune",
+          "subtitleTextContent": "actualizați-vă jurnalul de sesiune"
+        }
       }
     }
   },
   "createTool": {
     "formLabels": {
       "ingredient": {
-        "formTitle": "Crează Ingredient",
+        "formTitle": "Ingredient",
+        "createSectionTitle": "Crează Ingredient",
+        "updateSectionTitle": "Editați Ingredient",
         "name": "Nume:",
         "defaultNameValue": "Morcov",
         "image": "Imagine:",
@@ -206,19 +236,23 @@
         "proteinAmount": "Proteine(in grams):",
         "carbsAmount": "Glucide(in grams):",
         "fatsAmount": "Grasimi(in grams):",
-        "enabled": "Activat?:",
-        "createButtonLabel": "Crează Ingredient"
+        "createButtonLabel": "Crează Ingredient",
+        "updateButtonLabel": "Editați Ingredient"
       },
       "utensil": {
-        "formTitle": "Crează Ustensilă",
+        "formTitle": "Ustensilă",
+        "createSectionTitle": "Crează Ustensilă",
+        "updateSectionTitle": "Editați Ustensilă",
         "name": "Nume:",
         "defaultNameValue": "Furculiţă",
         "image": "Imagine:",
-        "enabled": "Activat?:",
-        "createButtonLabel": "Crează Ustensilă"
+        "createButtonLabel": "Crează Ustensilă",
+        "updateButtonLabel": "Editați Ustensilă"
       },
       "recipe": {
-        "formTitle": "Crează Reţetă",
+        "formTitle": "Reţetă",
+        "createSectionTitle": "Crează Reţetă",
+        "updateSectionTitle": "Editați Reţetă",
         "name": "Nume:",
         "defaultNameValue": "Ou Prajit",
         "image": "Imagine:",
@@ -229,42 +263,52 @@
           "writtenTutorialUrlPrompt": "Tutorial scris:"
         },
         "createButtonLabel": "Crează Reţetă",
+        "updateButtonLabel": "Editați Reţetă",
         "selectFormControlsLabels": {
           "ingredients": "Ingrediente folosite:",
           "utensils": "Ustensile folosite:"
         }
       },
       "dayTemplate": {
-        "formTitle": "Crează Plan de Zi",
+        "formTitle": "Plan de Zi",
+        "createSectionTitle": "Crează Plan de Zi",
+        "updateSectionTitle": "Editați Plan de Zi",
         "name": "Nume:",
         "defaultNameValue": "Ziua Micului Dejun",
         "image": "Imagine:",
         "nbOfEntities": "Număr de mese:",
         "createButtonLabel": "Crează Plan de Zi",
+        "updateButtonLabel": "Editați Plan de Zi",
         "selectFormControlsLabels": {
           "componentsLabel": "Rețete",
           "componentLabel": "Masă"
         }
       },
       "instanceTemplate": {
-        "formTitle": "Crează Model de Sesiune",
+        "formTitle": "Model de Sesiune",
+        "createSectionTitle": "Crează Model de Sesiune",
+        "updateSectionTitle": "Editați Model de Sesiune",
         "name": "Nume:",
         "defaultNameValue": "Sesiune cu Ciuperci",
         "image": "Imagine:",
         "nbOfEntities": "Număr de zile acoperite:",
         "createButtonLabel": "Crează Model de Sesiune",
+        "updateButtonLabel": "Editați Model de Sesiune",
         "selectFormControlsLabels": {
           "componentsLabel": "Plan de Zi Individual:",
           "componentLabel": "Ziua"
         }
       },
       "mealPrepPlan": {
-        "formTitle": "Crează Plan \"Meal Prep\"",
+        "formTitle": "Plan \"Meal Prep\"",
+        "createSectionTitle": "Crează Plan \"Meal Prep\"",
+        "updateSectionTitle": "Editați Plan \"Meal Prep\"",
         "name": "Nume:",
         "defaultNameValue": "Plan cu Cartofi",
         "image": "Imagine:",
         "nbOfEntities": "Număr de modele utilizate:",
         "createButtonLabel": "Crează Plan \"Meal Prep\"",
+        "updateButtonLabel": "Editați Plan \"Meal Prep\"",
         "selectFormControlsLabels": {
           "componentsLabel": "Modele de Sesiune Individuale",
           "componentLabel": "Model #{id}",
@@ -273,7 +317,9 @@
         }
       },
       "mealPrepLog": {
-        "formTitle": "Adăugați Jurnal de Sesiune",
+        "formTitle": "Jurnal de Sesiune",
+        "createSectionTitle": "Adăugați Jurnal de Sesiune",
+        "updateSectionTitle": "Editați Jurnal de Sesiune",
         "name": "Nume:",
         "defaultNameValue": "Jurnal cu Ciuperci",
         "image": "Imagine:",
@@ -281,6 +327,7 @@
         "completed": "Sesiune Completată?:",
         "cookingDuration": "Durata de gătire:",
         "createButtonLabel": "Adăugați Jurnal de Sesiune",
+        "updateButtonLabel": "Editați Jurnal de Sesiune",
         "selectFormControlsLabels": {
           "instanceTemplate": "Model de Sesiune Folosit"
         }
@@ -326,7 +373,8 @@
       "openMenuTitle": "Deschideți Meniul \"Mutație Entitate\"",
       "closeMenuTitle": "Închideți Meniul \"Mutație Entitate\"",
       "deleteEntityTitle": "Ștergeți entitatea",
-      "updateEntityTitle": "Modificați entitatea"
+      "updateEntityTitle": "Modificați entitatea",
+      "viewEntityTitle": "Vedeți entitatea"
     }
   },
   "viewEntityOptions": {
@@ -350,12 +398,10 @@
       "sortingOptions": {
         "labels": {
           "ingredient": {
-            "enabled": "Disponibilitatea Ingredientelor",
             "name": "Nume Ingredient",
             "numberOfRecipes": "Ingrediente utilizate frecvent"
           },
           "utensil": {
-            "enabled": "Disponibilitatea Ustensilelor",
             "name": "Nume Ustensilă",
             "numberOfRecipes": "Ustensile utilizate frecvent"
           },
@@ -485,14 +531,9 @@
           "protein": "{grams}g proteine",
           "carbs": "{grams}g glucide",
           "fats": "{grams}g grăsimi"
-        },
-        "enabled": "ACTIVAT ✔️",
-        "disabled": "DEZACTIVAT ❌"
+        }
       },
-      "utensil": {
-        "enabled": "ACTIVAT ✔️",
-        "disabled": "DEZACTIVAT ❌"
-      },
+      "utensil": {},
       "recipe": {
         "calories": "{numberOfCalories} calorii",
         "macros": {

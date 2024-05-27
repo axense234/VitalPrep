@@ -167,38 +167,68 @@
       },
       "/ingredient": {
         "titleTextContent": "Zutat anzeigen",
-        "subTitleTextContent": "die Basis jedes Rezepts"
+        "subTitleTextContent": "die Basis jedes Rezepts",
+        "editMode": {
+          "titleTextContent": "Zutat bearbeiten",
+          "subtitleTextContent": "Ändern Sie Ihre Zutat"
+        }
       },
       "/utensil": {
         "titleTextContent": "Utensilien ansehen",
-        "subTitleTextContent": "Ihr Kochwerkzeug"
+        "subTitleTextContent": "Ihr Kochwerkzeug",
+        "editMode": {
+          "titleTextContent": "Utensil bearbeiten",
+          "subtitleTextContent": "Aktualisieren Sie Ihr Utensil"
+        }
       },
       "/recipe": {
         "titleTextContent": "Rezept ansehen",
-        "subTitleTextContent": "genießen und genießen"
+        "subTitleTextContent": "genießen und genießen",
+        "editMode": {
+          "titleTextContent": "Rezept bearbeiten",
+          "subtitleTextContent": "die Dinge aufpeppen"
+        }
       },
       "/dayTemplate": {
         "titleTextContent": "Tagesplan anzeigen",
-        "subTitleTextContent": "Ihr Tagesplan"
+        "subTitleTextContent": "Ihr Tagesplan",
+        "editMode": {
+          "titleTextContent": "Tagesplan bearbeiten",
+          "subtitleTextContent": "Ändern Sie Ihren Tagesplan"
+        }
       },
       "/instanceTemplate": {
         "titleTextContent": "Sitzungsvorlage anzeigen",
-        "subTitleTextContent": "Ihr wöchentlicher Sitzungsplan"
+        "subTitleTextContent": "Ihr wöchentlicher Sitzungsplan",
+        "editMode": {
+          "titleTextContent": "Sitzungsvorlage bearbeiten",
+          "subtitleTextContent": "Aktualisieren Sie Ihre Sitzungsvorlage"
+        }
       },
       "/mealPrepPlan": {
         "titleTextContent": "Sehen Sie sich den Essenszubereitungsplan an",
-        "subTitleTextContent": "Ihr Plan, dem Sie folgen möchten"
+        "subTitleTextContent": "Ihr Plan, dem Sie folgen möchten",
+        "editMode": {
+          "titleTextContent": "Bearbeiten Sie den Plan „Meal Prep“.",
+          "subtitleTextContent": "Dinge ändern"
+        }
       },
       "/mealPrepLog": {
         "titleTextContent": "Sitzungsprotokoll anzeigen",
-        "subTitleTextContent": "Ihr gespeichertes Protokoll zur Essenszubereitung"
+        "subTitleTextContent": "Ihr gespeichertes Protokoll zur Essenszubereitung",
+        "editMode": {
+          "titleTextContent": "Sitzungsprotokoll bearbeiten",
+          "subtitleTextContent": "die Vergangenheit verändern"
+        }
       }
     }
   },
   "createTool": {
     "formLabels": {
       "ingredient": {
-        "formTitle": "Zutat erstellen",
+        "formTitle": "Zutat",
+        "createSectionTitle": "Zutat erstellen",
+        "updateSectionTitle": "Zutat bearbeiten",
         "name": "Name:",
         "defaultNameValue": "Karotte",
         "image": "Bild:",
@@ -206,19 +236,23 @@
         "proteinAmount": "Protein (in Gramm):",
         "carbsAmount": "Kohlenhydrate (in Gramm):",
         "fatsAmount": "Fette (in Gramm):",
-        "enabled": "Ermöglicht?:",
-        "createButtonLabel": "Zutat erstellen"
+        "createButtonLabel": "Zutat erstellen",
+        "updateButtonLabel": "Zutat bearbeiten"
       },
       "utensil": {
-        "formTitle": "Utensil erstellen",
+        "formTitle": "Utensil",
+        "createSectionTitle": "Utensil erstellen",
+        "updateSectionTitle": "Utensil bearbeiten",
         "name": "Name:",
         "defaultNameValue": "Gabel",
         "image": "Bild:",
-        "enabled": "Ermöglicht?:",
-        "createButtonLabel": "Utensil erstellen"
+        "createButtonLabel": "Utensil erstellen",
+        "updateButtonLabel": "Utensil bearbeiten"
       },
       "recipe": {
-        "formTitle": "Rezept erstellen",
+        "formTitle": "Rezept",
+        "createSectionTitle": "Rezept erstellen",
+        "updateSectionTitle": "Rezept bearbeiten",
         "name": "Name:",
         "defaultNameValue": "Spiegelei",
         "image": "Bild:",
@@ -229,42 +263,52 @@
           "writtenTutorialUrlPrompt": "Schriftliches Tutorial:"
         },
         "createButtonLabel": "Rezept erstellen",
+        "updateButtonLabel": "Rezept bearbeiten",
         "selectFormControlsLabels": {
           "ingredients": "Verwendete Zutaten:",
           "utensils": "Verwendete Utensilien"
         }
       },
       "dayTemplate": {
-        "formTitle": "Tagesplan erstellen",
+        "formTitle": "Tagesplan",
+        "createSectionTitle": "Tagesplan erstellen",
+        "updateSectionTitle": "Tagesplan bearbeiten",
         "name": "Name:",
         "defaultNameValue": "Frühstückstag",
         "image": "Bild:",
         "nbOfEntities": "Anzahl der Mahlzeiten:",
         "createButtonLabel": "Tagesplan erstellen",
+        "updateButtonLabel": "Tagesplan bearbeiten",
         "selectFormControlsLabels": {
           "componentsLabel": "Rezepte",
           "componentLabel": "Mahlzeit"
         }
       },
       "instanceTemplate": {
-        "formTitle": "Sitzungsvorlage erstellen",
+        "formTitle": "Sitzungsvorlage",
+        "createSectionTitle": "Sitzungsvorlage erstellen",
+        "updateSectionTitle": "Instanzvorlage bearbeiten",
         "name": "Name:",
         "defaultNameValue": "Pilzsitzung",
         "image": "Bild:",
         "nbOfEntities": "Anzahl der abgedeckten Tage:",
         "createButtonLabel": "Sitzungsvorlage erstellen",
+        "updateButtonLabel": "Instanzvorlage bearbeiten",
         "selectFormControlsLabels": {
           "componentsLabel": "Individuelle Tagespläne:",
           "componentLabel": "Tag"
         }
       },
       "mealPrepPlan": {
-        "formTitle": "Erstellen Sie einen Essensvorbereitungsplan",
+        "formTitle": "Sie einen Essensvorbereitungsplan",
+        "createSectionTitle": "Erstellen Sie einen Essensvorbereitungsplan",
+        "updateSectionTitle": "Bearbeiten Sie den Plan „Meal Prep“.",
         "name": "Name:",
         "defaultNameValue": "Kartoffelplan",
         "image": "Bild:",
         "nbOfEntities": "Anzahl der verwendeten Vorlagen:",
         "createButtonLabel": "Erstellen Sie einen Essensvorbereitungsplan",
+        "updateButtonLabel": "Bearbeiten Sie den Plan „Meal Prep“.",
         "selectFormControlsLabels": {
           "componentsLabel": "Individuelle Sitzungsvorlagen:",
           "componentLabel": "Nummer #{id}-Vorlage",
@@ -273,7 +317,9 @@
         }
       },
       "mealPrepLog": {
-        "formTitle": "Sitzungsprotokoll hinzufügen",
+        "formTitle": "Sitzungsprotokoll",
+        "createSectionTitle": "Sitzungsprotokoll hinzufügen",
+        "updateSectionTitle": "Sitzungsprotokoll bearbeiten",
         "name": "Name:",
         "defaultNameValue": "Pilztagebuch",
         "image": "Bild:",
@@ -281,6 +327,7 @@
         "completed": "Vollendet?:",
         "cookingDuration": "Kochdauer:",
         "createButtonLabel": "Sitzungsprotokoll hinzufügen",
+        "updateButtonLabel": "Sitzungsprotokoll bearbeiten",
         "selectFormControlsLabels": {
           "instanceTemplate": "Verwendete Sitzungsvorlage"
         }
@@ -326,7 +373,8 @@
       "openMenuTitle": "Öffnen Sie das Entity-Mutationsmenü",
       "closeMenuTitle": "Entitätsmutationsmenü schließen",
       "deleteEntityTitle": "Entität namens löschen",
-      "updateEntityTitle": "Die benannte Entität aktualisieren"
+      "updateEntityTitle": "Die benannte Entität aktualisieren",
+      "viewEntityTitle": "Benannte Entität anzeigen"
     }
   },
   "viewEntityOptions": {
@@ -350,12 +398,10 @@
       "sortingOptions": {
         "labels": {
           "ingredient": {
-            "enabled": "Verfügbarkeit der Zutaten",
             "name": "Name der Zutat",
             "numberOfRecipes": "Häufig verwendete Zutaten"
           },
           "utensil": {
-            "enabled": "Verfügbarkeit von Utensilien",
             "name": "Utensilienname",
             "numberOfRecipes": "Häufig verwendete Utensilien"
           },
@@ -485,14 +531,9 @@
           "protein": "{grams}g Proteine",
           "carbs": "{grams}g Kohlenhydrate",
           "fats": "{grams}g Fette"
-        },
-        "enabled": "ERMÖGLICHT ✔️",
-        "disabled": "DEAKTIVIERT ❌"
+        }
       },
-      "utensil": {
-        "enabled": "ERMÖGLICHT ✔️",
-        "disabled": "DEAKTIVIERT ❌"
-      },
+      "utensil": {},
       "recipe": {
         "calories": "{numberOfCalories} Kalorien",
         "macros": {

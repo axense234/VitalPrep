@@ -376,6 +376,9 @@ const createMealPrepPlan = async (req: Request, res: Response) => {
 const updateMealPrepPlan = async (req: Request, res: Response) => {
   const { mealPrepPlanId } = req.params;
   const mealPrepPlanBody = req.body;
+  const { userId, updateMealPrepPlanSingle } = req.query;
+
+  console.log(mealPrepPlanBody, userId, mealPrepPlanBody?.user?.id);
 
   if (!mealPrepPlanId) {
     return res
@@ -389,16 +392,46 @@ const updateMealPrepPlan = async (req: Request, res: Response) => {
       .json({ message: "Please enter a request body!", mealPrepPlan: {} });
   }
 
-  const instanceTemplates =
-    mealPrepPlanBody.instanceTemplates as InstanceTemplate[];
+  if (mealPrepPlanBody.user || userId) {
+    mealPrepPlanBody.user = {
+      connect: { id: mealPrepPlanBody?.user?.id || userId },
+    };
+    delete mealPrepPlanBody?.userId;
+  }
+
+  if (mealPrepPlanBody.macros) {
+    mealPrepPlanBody.macros = { update: mealPrepPlanBody.macros };
+    delete mealPrepPlanBody?.macrosId;
+  }
+
+  if (updateMealPrepPlanSingle) {
+    delete mealPrepPlanBody?.ingredients;
+    delete mealPrepPlanBody?.utensils;
+    delete mealPrepPlanBody?.recipes;
+    delete mealPrepPlanBody?.dayTemplates;
+    delete mealPrepPlanBody?.mealPrepLogs;
+  }
+
+  if (mealPrepPlanBody.instanceTemplatesTimings) {
+    mealPrepPlanBody.instanceTemplatesTimings = {
+      updateMany: mealPrepPlanBody.instanceTemplatesTimings.map((instance) => {
+        return {
+          update: {
+            ...instance,
+          },
+        };
+      }),
+    };
+  }
+
+  const instanceTemplates = mealPrepPlanBody.instanceTemplates as string[];
 
   const updatedMealPrepPlan = await MealPrepPlanClient.update({
     where: { id: mealPrepPlanId },
     data: {
-      ...mealPrepPlanBody,
       instanceTemplates: {
         connect: instanceTemplates.map((instanceTemplate) => ({
-          id: instanceTemplate.id,
+          id: instanceTemplate,
         })),
       },
     },

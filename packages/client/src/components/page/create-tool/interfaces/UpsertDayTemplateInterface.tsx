@@ -1,5 +1,5 @@
 // SCSS
-import createToolStyles from "../../../../scss/pages/CreateTool.module.scss";
+import createToolStyles from "@/scss/pages/CreateTool.module.scss";
 // Components
 import TextFormControl from "@/components/shared/form/TextFormControl";
 import PrimaryButton from "@/components/shared/PrimaryButton";
@@ -11,9 +11,10 @@ import EntityPreview from "@/components/shared/entity/EntityPreview";
 import {
   defaultCreateDayTemplateImageUrls,
   defaultDayTemplateImageUrl,
+  defaultTemplateDayTemplate,
 } from "@/data";
 // React
-import { ChangeEvent } from "react";
+import { ChangeEvent, FC } from "react";
 // Redux
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import {
@@ -25,9 +26,14 @@ import {
   createDayTemplate,
   selectDayTemplateFormModalErrorMessage,
   selectLoadingCreateDayTemplate,
+  selectLoadingGetUserDayTemplate,
+  selectLoadingUpdateDayTemplate,
   selectNumberOfMeals,
   selectTemplateDayTemplate,
+  setTemplateDayTemplate,
+  updateDayTemplate,
   updateLoadingCreateDayTemplate,
+  updateLoadingUpdateDayTemplate,
   updateNumberOfMeals,
   updateTemplateDayTemplate,
 } from "@/redux/slices/dayTemplatesSlice";
@@ -46,11 +52,20 @@ import handleUpdateArrayEntities from "@/helpers/handleUpdateArrayEntities";
 import useSliceEntityComponents from "@/hooks/useSliceEntityComponents";
 import createArrayFromNumber from "@/helpers/createArrayFromNumber";
 import useSetDefaultEntityName from "@/hooks/useSetDefaultEntityName";
+import useSetTemplateEntity from "@/hooks/useSetTemplateEntity";
+import useGetUpsertEntityInterfaceDetails from "@/hooks/useGetUpsertEntityInterfaceDetails";
+import handleOnUpsertEntitySubmit from "@/helpers/handleOnUpsertEntitySubmit";
 // Translations
 import { useTranslations } from "next-intl";
+// Next
+import { useParams } from "next/navigation";
 
-const CreateDayTemplateInterface = () => {
+const UpsertDayTemplateInterface: FC<{
+  interfaceType: "create" | "update";
+}> = ({ interfaceType }) => {
   const dispatch = useAppDispatch();
+  const { id } = useParams();
+
   const profile = useAppSelector(selectProfile);
   const dayTemplateFormModalErrorMessage = useAppSelector(
     selectDayTemplateFormModalErrorMessage
@@ -65,10 +80,59 @@ const CreateDayTemplateInterface = () => {
   const loadingCreateDayTemplate = useAppSelector(
     selectLoadingCreateDayTemplate
   );
+  const loadingUpdateDayTemplate = useAppSelector(
+    selectLoadingUpdateDayTemplate
+  );
+  const loadingGetDayTemplate = useAppSelector(selectLoadingGetUserDayTemplate);
+
   const loadingCloudinaryImage = useAppSelector(selectLoadingCloudinaryImage);
   const loadingGetUserRecipes = useAppSelector(selectLoadingGetUserRecipes);
 
   const translate = useTranslations("createTool.formLabels.dayTemplate");
+
+  const handleOnUpsertEntity = (e: React.SyntheticEvent) => {
+    handleOnUpsertEntitySubmit(
+      e,
+      interfaceType,
+      () =>
+        dispatch(
+          createDayTemplate({
+            templateDayTemplate,
+            userId: profile.id,
+          })
+        ),
+      () =>
+        dispatch(
+          updateDayTemplate({
+            templateDayTemplate,
+            userId: profile.id,
+          })
+        )
+    );
+  };
+
+  const {
+    loadingUpsertEntity,
+    updateLoadingUpsertEntity,
+    usedButtonLabel,
+    usedSectionTitle,
+  } = useGetUpsertEntityInterfaceDetails({
+    interfaceType: interfaceType,
+    loadingCreateEntity: loadingCreateDayTemplate,
+    loadingUpdateEntity: loadingUpdateDayTemplate,
+    translate: translate,
+    updateLoadingCreateEntity: updateLoadingCreateDayTemplate,
+    updateLoadingUpdateEntity: updateLoadingUpdateDayTemplate,
+  });
+
+  useSetTemplateEntity({
+    defaultTemplateEntity: defaultTemplateDayTemplate,
+    entityId: id as string,
+    entityType: "dayTemplate",
+    interfaceType: interfaceType,
+    loadingGetEntity: loadingGetDayTemplate,
+    setTemplateEntity: setTemplateDayTemplate,
+  });
 
   useSetDefaultEntityName(
     () =>
@@ -78,7 +142,8 @@ const CreateDayTemplateInterface = () => {
           value: translate("defaultNameValue"),
         })
       ),
-    templateDayTemplate
+    templateDayTemplate,
+    interfaceType === "create"
   );
 
   useUpdateEntityMacrosBasedOnComponentEntities(
@@ -88,10 +153,10 @@ const CreateDayTemplateInterface = () => {
   );
   useGetEntityComponents(loadingGetUserRecipes, getAllUserRecipes);
   useShowCreatedEntity(
-    loadingCreateDayTemplate,
-    `Successfully created day plan: ${templateDayTemplate.name}.`,
+    loadingUpsertEntity,
+    `Successfully ${interfaceType === "create" ? "created" : "updated"} day plan: ${templateDayTemplate.name}.`,
     dayTemplateFormModalErrorMessage,
-    updateLoadingCreateDayTemplate
+    updateLoadingUpsertEntity
   );
   useUpdateEntityTemplateImageUrl(updateTemplateDayTemplate);
   useSliceEntityComponents(
@@ -105,6 +170,7 @@ const CreateDayTemplateInterface = () => {
 
   return (
     <section className={createToolStyles.createInterface}>
+      <h2>{usedSectionTitle}</h2>
       <div className={createToolStyles.createInterfaceWrapper}>
         <div className={createToolStyles.createInterfaceFormContainer}>
           <PopupModal hasBorder={false} modalType="form" />
@@ -162,21 +228,14 @@ const CreateDayTemplateInterface = () => {
               type="number"
             />
             <PrimaryButton
-              content={translate("createButtonLabel")}
+              content={usedButtonLabel}
               type="functional"
               disabled={
                 loadingCreateDayTemplate === "PENDING" ||
+                loadingUpdateDayTemplate === "PENDING" ||
                 loadingCloudinaryImage === "PENDING"
               }
-              onClickFunction={(e) => {
-                e.preventDefault();
-                dispatch(
-                  createDayTemplate({
-                    templateDayTemplate: templateDayTemplate,
-                    userId: profile.id,
-                  })
-                );
-              }}
+              onClickFunction={(e) => handleOnUpsertEntity(e)}
             />
           </form>
         </div>
@@ -236,4 +295,4 @@ const CreateDayTemplateInterface = () => {
   );
 };
 
-export default CreateDayTemplateInterface;
+export default UpsertDayTemplateInterface;

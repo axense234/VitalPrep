@@ -18,6 +18,7 @@ import {
 // Axios
 import { AxiosError } from "axios";
 import axiosInstance from "@/utils/axios";
+import IngredientTemplate from "@/core/types/entity/ingredient/IngredientTemplate";
 
 export const ingredientsAdapter = createEntityAdapter<IngredientType>();
 
@@ -25,6 +26,7 @@ const initialState = ingredientsAdapter.getInitialState({
   templateIngredient: defaultTemplateIngredient,
   loadingCreateIngredient: "IDLE",
   loadingDeleteIngredient: "IDLE",
+  loadingUpdateIngredient: "IDLE",
   ingredientFormModalErrorMessage:
     "Something went wrong, please refresh the page!",
   loadingGetUserIngredients: "IDLE",
@@ -116,6 +118,22 @@ export const deleteIngredient = createAsyncThunk<
   }
 });
 
+export const updateIngredient = createAsyncThunk<
+  IngredientType | AxiosError,
+  IngredientCreateBodyType
+>("ingredients/updateIngredient", async ({ templateIngredient, userId }) => {
+  try {
+    const { data } = await axiosInstance.patch(
+      `/ingredients/update/${templateIngredient.id}?userId=${userId}&updateIngredientSingle=true`,
+      templateIngredient
+    );
+    return data.ingredient as IngredientType;
+  } catch (error) {
+    console.log(error);
+    return error as AxiosError;
+  }
+});
+
 const ingredientsSlice = createSlice({
   name: "ingredients",
   initialState,
@@ -125,6 +143,12 @@ const ingredientsSlice = createSlice({
       action: PayloadAction<LoadingStateType>
     ) {
       state.loadingCreateIngredient = action.payload;
+    },
+    updateLoadingUpdateIngredient(
+      state,
+      action: PayloadAction<LoadingStateType>
+    ) {
+      state.loadingUpdateIngredient = action.payload;
     },
     updateLoadingGetUserIngredients(
       state,
@@ -146,6 +170,9 @@ const ingredientsSlice = createSlice({
         ...state.templateIngredient.macros,
         [action.payload.key]: action.payload.value,
       };
+    },
+    setTemplateIngredient(state, action: PayloadAction<IngredientTemplate>) {
+      state.templateIngredient = action.payload;
     },
   },
   extraReducers(builder) {
@@ -219,6 +246,27 @@ const ingredientsSlice = createSlice({
           }
           state.loadingDeleteIngredient = "FAILED";
         }
+      })
+      .addCase(updateIngredient.fulfilled, (state, action) => {
+        const ingredient = action.payload as IngredientType;
+        const axiosError = action.payload as AxiosError;
+
+        if (axiosError !== undefined && !axiosError.response) {
+          ingredientsAdapter.updateOne(state, {
+            changes: { ...ingredient },
+            id: ingredient.id,
+          });
+          state.loadingUpdateIngredient = "SUCCEDED";
+        } else {
+          const error = axiosError.response?.data as {
+            message: string;
+            type: string;
+          };
+          if (error.type !== "jwt") {
+            state.ingredientFormModalErrorMessage = error.message;
+          }
+          state.loadingUpdateIngredient = "FAILED";
+        }
       });
   },
 });
@@ -244,11 +292,19 @@ export const selectLoadingGetUserIngredients = (state: State) =>
 export const selectLoadingGetUserIngredient = (state: State) =>
   state.ingredients.loadingGetUserIngredient;
 
+export const selectLoadingUpdateIngredient = (state: State) =>
+  state.ingredients.loadingUpdateIngredient;
+
+export const selectLoadingDeleteIngredient = (state: State) =>
+  state.ingredients.loadingDeleteIngredient;
+
 export const {
   updateTemplateIngredient,
   updateLoadingCreateIngredient,
   updateLoadingGetUserIngredients,
   updateTemplateIngredientMacros,
+  updateLoadingUpdateIngredient,
+  setTemplateIngredient,
 } = ingredientsSlice.actions;
 
 export default ingredientsSlice.reducer;

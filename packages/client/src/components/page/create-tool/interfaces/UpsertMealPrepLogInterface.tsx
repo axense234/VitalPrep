@@ -1,5 +1,5 @@
 // SCSS
-import createToolStyles from "../../../../scss/pages/CreateTool.module.scss";
+import createToolStyles from "@/scss/pages/CreateTool.module.scss";
 // Components
 import TextFormControl from "@/components/shared/form/TextFormControl";
 import PrimaryButton from "@/components/shared/PrimaryButton";
@@ -11,9 +11,9 @@ import EntityPreview from "@/components/shared/entity/EntityPreview";
 // Types
 import InstanceTemplateTemplate from "@/core/types/entity/instanceTemplate/InstanceTemplateTemplate";
 // React
-import React, { ChangeEvent } from "react";
+import React, { ChangeEvent, FC } from "react";
 // Data
-import { defaultMealPrepLogImageUrl } from "@/data";
+import { defaultMealPrepLogImageUrl, defaultTemplateMealPrepLog } from "@/data";
 // Redux
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import {
@@ -28,9 +28,13 @@ import {
 } from "@/redux/slices/instanceTemplatesSlice";
 import {
   selectLoadingCreateMealPrepLog,
+  selectLoadingGetUserMealPrepLog,
+  selectLoadingUpdateMealPrepLog,
   selectMealPrepLogFormModalErrorMessage,
   selectTemplateMealPrepLog,
+  setTemplateMealPrepLog,
   updateLoadingCreateMealPrepLog,
+  updateLoadingUpdateMealPrepLog,
   updateTemplateMealPrepLog,
 } from "@/redux/slices/mealPrepLogsSlice";
 import { State } from "@/redux/api/store";
@@ -43,11 +47,21 @@ import handleToggleEntityProperty from "@/helpers/handleToggleEntityProperty";
 import useUpdateEntityMacrosBasedOnComponent from "@/hooks/useUpdateEntityMacrosBasedOnComponent";
 import handleOnCreateMealPrepLogSubmit from "@/helpers/handleOnCreateMealPrepLogSubmit";
 import useSetDefaultEntityName from "@/hooks/useSetDefaultEntityName";
+import useSetTemplateEntity from "@/hooks/useSetTemplateEntity";
+import useGetUpsertEntityInterfaceDetails from "@/hooks/useGetUpsertEntityInterfaceDetails";
+import handleOnUpsertEntitySubmit from "@/helpers/handleOnUpsertEntitySubmit";
+import handleOnUpdateMealPrepLogSubmit from "@/helpers/handleOnUpdateMealPrepLogSubmit";
 // Translations
 import { useTranslations } from "next-intl";
+// Next
+import { useParams } from "next/navigation";
 
-const CreateMealPrepLogInterface = () => {
+const UpsertMealPrepLogInterface: FC<{
+  interfaceType: "create" | "update";
+}> = ({ interfaceType }) => {
   const dispatch = useAppDispatch();
+  const { id } = useParams();
+
   const profile = useAppSelector(selectProfile);
   const mealPrepLogFormModalErrorMessage = useAppSelector(
     selectMealPrepLogFormModalErrorMessage
@@ -68,12 +82,61 @@ const CreateMealPrepLogInterface = () => {
   const loadingCreateMealPrepLog = useAppSelector(
     selectLoadingCreateMealPrepLog
   );
+  const loadingUpdateMealPrepLog = useAppSelector(
+    selectLoadingUpdateMealPrepLog
+  );
+  const loadingGetMealPrepLog = useAppSelector(selectLoadingGetUserMealPrepLog);
+
   const loadingGetUserInstanceTemplates = useAppSelector(
     selectLoadingGetUserInstanceTemplates
   );
   const loadingCloudinaryImage = useAppSelector(selectLoadingCloudinaryImage);
 
   const translate = useTranslations("createTool.formLabels.mealPrepLog");
+
+  const handleOnUpsertEntity = (e: React.SyntheticEvent) => {
+    handleOnUpsertEntitySubmit(
+      e,
+      interfaceType,
+      () =>
+        handleOnCreateMealPrepLogSubmit(
+          e,
+          templateMealPrepLog,
+          profile.id,
+          dispatch
+        ),
+      () =>
+        handleOnUpdateMealPrepLogSubmit(
+          e,
+          templateMealPrepLog,
+          profile.id,
+          dispatch
+        )
+    );
+  };
+
+  const {
+    loadingUpsertEntity,
+    updateLoadingUpsertEntity,
+    usedButtonLabel,
+    usedSectionTitle,
+  } = useGetUpsertEntityInterfaceDetails({
+    interfaceType: interfaceType,
+    loadingCreateEntity: loadingCreateMealPrepLog,
+    loadingUpdateEntity: loadingUpdateMealPrepLog,
+    translate: translate,
+    updateLoadingCreateEntity: updateLoadingCreateMealPrepLog,
+    updateLoadingUpdateEntity: updateLoadingUpdateMealPrepLog,
+  });
+
+  useSetTemplateEntity({
+    defaultTemplateEntity: defaultTemplateMealPrepLog,
+    entityId: id as string,
+    entityType: "mealPrepLog",
+    interfaceType: interfaceType,
+    loadingGetEntity: loadingGetMealPrepLog,
+    setTemplateEntity: setTemplateMealPrepLog,
+  });
 
   useSetDefaultEntityName(
     () =>
@@ -83,7 +146,8 @@ const CreateMealPrepLogInterface = () => {
           value: translate("defaultNameValue"),
         })
       ),
-    templateMealPrepLog
+    templateMealPrepLog,
+    interfaceType === "create"
   );
 
   useUpdateEntityMacrosBasedOnComponent(
@@ -95,10 +159,10 @@ const CreateMealPrepLogInterface = () => {
     getAllUserInstanceTemplates
   );
   useShowCreatedEntity(
-    loadingCreateMealPrepLog,
-    `Successfully added Meal Prep Log: ${templateMealPrepLog.name}.`,
+    loadingUpsertEntity,
+    `Successfully ${interfaceType === "create" ? "added" : "updated"} session log: ${templateMealPrepLog.name}.`,
     mealPrepLogFormModalErrorMessage,
-    updateLoadingCreateMealPrepLog
+    updateLoadingUpsertEntity
   );
   useUpdateEntityTemplateImageUrl(updateTemplateMealPrepLog);
 
@@ -106,6 +170,7 @@ const CreateMealPrepLogInterface = () => {
 
   return (
     <section className={createToolStyles.createInterface}>
+      <h2>{usedSectionTitle}</h2>
       <div className={createToolStyles.createInterfaceWrapper}>
         <div className={createToolStyles.createInterfaceFormContainer}>
           <PopupModal hasBorder={false} modalType="form" />
@@ -184,20 +249,14 @@ const CreateMealPrepLogInterface = () => {
               type="number"
             />
             <PrimaryButton
-              content={translate("createButtonLabel")}
+              content={usedButtonLabel}
               type="functional"
               disabled={
                 loadingCreateMealPrepLog === "PENDING" ||
+                loadingUpdateMealPrepLog === "PENDING" ||
                 loadingCloudinaryImage === "PENDING"
               }
-              onClickFunction={(e) =>
-                handleOnCreateMealPrepLogSubmit(
-                  e,
-                  templateMealPrepLog,
-                  profile.id,
-                  dispatch
-                )
-              }
+              onClickFunction={(e) => handleOnUpsertEntity(e)}
             />
           </form>
         </div>
@@ -232,4 +291,4 @@ const CreateMealPrepLogInterface = () => {
   );
 };
 
-export default CreateMealPrepLogInterface;
+export default UpsertMealPrepLogInterface;

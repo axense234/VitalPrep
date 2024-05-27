@@ -330,6 +330,7 @@ const createMealPrepLog = async (req: Request, res: Response) => {
 const updateMealPrepLog = async (req: Request, res: Response) => {
   const { mealPrepLogId } = req.params;
   const mealPrepLogBody = req.body;
+  const { userId, updateMealPrepLogSingle } = req.query;
 
   if (!mealPrepLogId) {
     return res
@@ -343,15 +344,38 @@ const updateMealPrepLog = async (req: Request, res: Response) => {
       .json({ message: "Please enter a request body!", mealPrepLog: {} });
   }
 
-  const instanceTemplate = mealPrepLogBody.instanceTemplate as InstanceTemplate;
+  if (mealPrepLogBody.user || userId) {
+    mealPrepLogBody.user = {
+      connect: { id: mealPrepLogBody?.user?.id || userId },
+    };
+    delete mealPrepLogBody?.userId;
+  }
+
+  if (mealPrepLogBody.macros) {
+    delete mealPrepLogBody?.macrosId;
+    delete mealPrepLogBody?.macros;
+  }
+
+  if (updateMealPrepLogSingle) {
+    delete mealPrepLogBody?.ingredients;
+    delete mealPrepLogBody?.utensils;
+    delete mealPrepLogBody?.recipes;
+    delete mealPrepLogBody?.dayTemplates;
+    delete mealPrepLogBody?.instanceTemplates;
+    delete mealPrepLogBody?.mealPrepPlans;
+  }
+
+  if (mealPrepLogBody.instanceTemplate) {
+    mealPrepLogBody.instanceTemplate = {
+      connect: { id: mealPrepLogBody.instanceTemplate.id },
+    };
+    delete mealPrepLogBody?.instanceTemplateId;
+  }
 
   const updatedMealPrepLog = await MealPrepLogClient.update({
     where: { id: mealPrepLogId },
     data: {
       ...mealPrepLogBody,
-      instanceTemplate: {
-        connect: { id: instanceTemplate.id },
-      },
     },
     include: {
       instanceTemplate: true,

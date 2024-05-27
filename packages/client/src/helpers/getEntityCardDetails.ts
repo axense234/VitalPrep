@@ -42,10 +42,7 @@ const getEntityCardDetails = (
       break;
     case "utensil":
       defaultImageUrlShownBasedOnEntityType = defaultUtensilImageUrl;
-      entityDetails =
-        (entityUsed as UtensilTemplate)?.enabled === true
-          ? translate("utensil.enabled")
-          : translate("utensil.disabled");
+      entityDetails = "";
       break;
     case "recipe":
       defaultImageUrlShownBasedOnEntityType = defaultRecipeImageUrl;

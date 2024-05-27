@@ -1,5 +1,5 @@
 // SCSS
-import createToolStyles from "../../../../scss/pages/CreateTool.module.scss";
+import createToolStyles from "@/scss/pages/CreateTool.module.scss";
 // Components
 import TextFormControl from "@/components/shared/form/TextFormControl";
 import PrimaryButton from "@/components/shared/PrimaryButton";
@@ -7,9 +7,15 @@ import ImageFormControl from "@/components/shared/form/ImageFormControl";
 import PopupModal from "@/components/shared/modals/PopupModal";
 import SelectFormControl from "@/components/shared/form/SelectFormControl";
 import EntityPreview from "@/components/shared/entity/EntityPreview";
-import CreateRecipeTutorial from "../CreateRecipeTutorial";
+import UpsertRecipeTutorial from "../UpsertRecipeTutorial";
 // Data
-import { defaultRecipeImageUrl } from "@/data";
+import { defaultRecipeImageUrl, defaultTemplateRecipe } from "@/data";
+// Translations
+import { useTranslations } from "next-intl";
+// React
+import { FC } from "react";
+// Next
+import { useParams } from "next/navigation";
 // Redux
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import {
@@ -25,11 +31,16 @@ import {
 import {
   createRecipe,
   selectLoadingCreateRecipe,
+  selectLoadingGetUserRecipe,
+  selectLoadingUpdateRecipe,
   selectRecipeFormModalErrorMessage,
   selectShowVideoTutorialContent,
   selectShowWrittenTutorialContent,
   selectTemplateRecipe,
+  setTemplateRecipe,
   updateLoadingCreateRecipe,
+  updateLoadingUpdateRecipe,
+  updateRecipe,
   updateTemplateRecipe,
 } from "@/redux/slices/recipesSlice";
 import {
@@ -45,11 +56,16 @@ import useUpdateEntityMacrosBasedOnComponentEntities from "@/hooks/useUpdateEnti
 import useGetEntityComponents from "@/hooks/useGetEntityComponents";
 import handleUpdateMultipleArrayEntities from "@/helpers/handleUpdateMultipleArrayEntities";
 import useSetDefaultEntityName from "@/hooks/useSetDefaultEntityName";
-// Translations
-import { useTranslations } from "next-intl";
+import useGetUpsertEntityInterfaceDetails from "@/hooks/useGetUpsertEntityInterfaceDetails";
+import handleOnUpsertEntitySubmit from "@/helpers/handleOnUpsertEntitySubmit";
+import useSetTemplateEntity from "@/hooks/useSetTemplateEntity";
 
-const CreateRecipeInterface = () => {
+const UpsertRecipeInterface: FC<{ interfaceType: "create" | "update" }> = ({
+  interfaceType,
+}) => {
   const dispatch = useAppDispatch();
+  const { id } = useParams();
+
   const profile = useAppSelector(selectProfile);
 
   const showVideoTutorialContent = useAppSelector(
@@ -68,6 +84,9 @@ const CreateRecipeInterface = () => {
   const utensilsIds = useAppSelector(selectAllUtensilsIds);
 
   const loadingCreateRecipe = useAppSelector(selectLoadingCreateRecipe);
+  const loadingUpdateRecipe = useAppSelector(selectLoadingUpdateRecipe);
+  const loadingGetRecipe = useAppSelector(selectLoadingGetUserRecipe);
+
   const loadingCloudinaryImage = useAppSelector(selectLoadingCloudinaryImage);
   const loadingGetUserUtensils = useAppSelector(selectLoadingGetUserUtensils);
   const loadingGetUserIngredients = useAppSelector(
@@ -75,6 +94,45 @@ const CreateRecipeInterface = () => {
   );
 
   const translate = useTranslations("createTool.formLabels.recipe");
+
+  const handleOnUpsertEntity = (e: React.SyntheticEvent) => {
+    handleOnUpsertEntitySubmit(
+      e,
+      interfaceType,
+      () =>
+        dispatch(
+          createRecipe({
+            templateRecipe,
+            userId: profile.id,
+            showVideoTutorialContent: showVideoTutorialContent,
+            showWrittenTutorialContent: showWrittenTutorialContent,
+          })
+        ),
+      () =>
+        dispatch(
+          updateRecipe({
+            templateRecipe,
+            userId: profile.id,
+            showVideoTutorialContent: showVideoTutorialContent,
+            showWrittenTutorialContent: showWrittenTutorialContent,
+          })
+        )
+    );
+  };
+
+  const {
+    loadingUpsertEntity,
+    updateLoadingUpsertEntity,
+    usedButtonLabel,
+    usedSectionTitle,
+  } = useGetUpsertEntityInterfaceDetails({
+    interfaceType: interfaceType,
+    loadingCreateEntity: loadingCreateRecipe,
+    loadingUpdateEntity: loadingUpdateRecipe,
+    translate: translate,
+    updateLoadingCreateEntity: updateLoadingCreateRecipe,
+    updateLoadingUpdateEntity: updateLoadingUpdateRecipe,
+  });
 
   useSetDefaultEntityName(
     () =>
@@ -84,8 +142,18 @@ const CreateRecipeInterface = () => {
           value: translate("defaultNameValue"),
         })
       ),
-    templateRecipe
+    templateRecipe,
+    interfaceType === "create"
   );
+
+  useSetTemplateEntity({
+    defaultTemplateEntity: defaultTemplateRecipe,
+    entityId: id as string,
+    entityType: "recipe",
+    interfaceType: interfaceType,
+    loadingGetEntity: loadingGetRecipe,
+    setTemplateEntity: setTemplateRecipe,
+  });
 
   useGetEntityComponents(loadingGetUserIngredients, getAllUserIngredients);
   useGetEntityComponents(loadingGetUserUtensils, getAllUserUtensils);
@@ -95,15 +163,16 @@ const CreateRecipeInterface = () => {
     updateTemplateRecipe
   );
   useShowCreatedEntity(
-    loadingCreateRecipe,
-    `Successfully created recipe: ${templateRecipe.name}.`,
+    loadingUpsertEntity,
+    `Successfully ${interfaceType === "create" ? "created" : "updated"} recipe: ${templateRecipe.name}.`,
     recipeFormModalErrorMessage,
-    updateLoadingCreateRecipe
+    updateLoadingUpsertEntity
   );
   useUpdateEntityTemplateImageUrl(updateTemplateRecipe);
 
   return (
     <section className={createToolStyles.createInterface}>
+      <h2>{usedSectionTitle}</h2>
       <div className={createToolStyles.createInterfaceWrapper}>
         <div className={createToolStyles.createInterfaceFormContainer}>
           <PopupModal hasBorder={false} modalType="form" />
@@ -138,25 +207,16 @@ const CreateRecipeInterface = () => {
               }}
               labelFontSize={28}
             />
-            <CreateRecipeTutorial />
+            <UpsertRecipeTutorial />
             <PrimaryButton
-              content={translate("createButtonLabel")}
+              content={usedButtonLabel}
               type="functional"
               disabled={
                 loadingCreateRecipe === "PENDING" ||
+                loadingUpdateRecipe === "PENDING" ||
                 loadingCloudinaryImage === "PENDING"
               }
-              onClickFunction={(e) => {
-                e.preventDefault();
-                dispatch(
-                  createRecipe({
-                    templateRecipe: templateRecipe,
-                    userId: profile.id,
-                    showVideoTutorialContent: showVideoTutorialContent,
-                    showWrittenTutorialContent: showWrittenTutorialContent,
-                  })
-                );
-              }}
+              onClickFunction={(e) => handleOnUpsertEntity(e)}
             />
           </form>
         </div>
@@ -170,9 +230,7 @@ const CreateRecipeInterface = () => {
         <SelectFormControl
           labelContent={translate("selectFormControlsLabels.ingredients")}
           entityPropertyOptions={ingredientsIds}
-          entityPropertyChosenOptions={
-            (templateRecipe.ingredients as string[]) || []
-          }
+          entityPropertyChosenOptions={templateRecipe.ingredients as string[]}
           entityTypeUsed="ingredient"
           onEntityPropertyValueChange={(id) =>
             handleUpdateMultipleArrayEntities(
@@ -183,14 +241,16 @@ const CreateRecipeInterface = () => {
               dispatch
             )
           }
-          areOptionsLoading={loadingGetUserIngredients === "PENDING"}
+          areOptionsLoading={
+            interfaceType === "create"
+              ? loadingGetUserIngredients === "PENDING"
+              : loadingGetRecipe === "PENDING"
+          }
         />
         <SelectFormControl
           labelContent={translate("selectFormControlsLabels.utensils")}
           entityPropertyOptions={utensilsIds}
-          entityPropertyChosenOptions={
-            (templateRecipe.utensils as string[]) || []
-          }
+          entityPropertyChosenOptions={templateRecipe.utensils as string[]}
           entityTypeUsed="utensil"
           onEntityPropertyValueChange={(id) =>
             handleUpdateMultipleArrayEntities(
@@ -201,11 +261,15 @@ const CreateRecipeInterface = () => {
               dispatch
             )
           }
-          areOptionsLoading={loadingGetUserUtensils === "PENDING"}
+          areOptionsLoading={
+            interfaceType === "create"
+              ? loadingGetUserUtensils === "PENDING"
+              : loadingGetRecipe === "PENDING"
+          }
         />
       </div>
     </section>
   );
 };
 
-export default CreateRecipeInterface;
+export default UpsertRecipeInterface;

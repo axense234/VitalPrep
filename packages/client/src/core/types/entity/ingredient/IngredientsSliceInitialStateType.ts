@@ -6,6 +6,7 @@ type IngredientsSliceInitialStateType = {
   templateIngredient: IngredientTemplate;
   loadingCreateIngredient: LoadingStateType;
   loadingDeleteIngredient: LoadingStateType;
+  loadingUpdateIngredient: LoadingStateType;
   ingredientFormModalErrorMessage: string;
 
   loadingGetUserIngredients: LoadingStateType;

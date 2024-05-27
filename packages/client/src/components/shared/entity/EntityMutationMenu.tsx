@@ -11,6 +11,7 @@ const EntityMutationMenu: FC<EntityMutationMenuProps> = ({
   parentRef,
   handleEntityDeletion,
   handleEntityModification,
+  handleEntityViewing,
   entityName,
   entityType,
 }) => {
@@ -33,6 +34,7 @@ const EntityMutationMenu: FC<EntityMutationMenuProps> = ({
         handleEntityModification={handleEntityModification}
         entityName={entityName}
         entityType={entityType}
+        handleEntityViewing={handleEntityViewing}
       />
     );
   }

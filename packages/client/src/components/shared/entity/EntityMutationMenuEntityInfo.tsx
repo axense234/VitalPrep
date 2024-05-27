@@ -6,6 +6,7 @@ import { FC, useEffect, useRef, useState } from "react";
 import { AiFillCloseSquare } from "react-icons/ai";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { MdDelete, MdEdit } from "react-icons/md";
+import { FaEye } from "react-icons/fa";
 // Translations
 import { useTranslations } from "next-intl";
 // Redux
@@ -17,11 +18,13 @@ import EntityType from "@/core/types/entity/users/EntityType";
 const EntityMutationMenuEntityInfo: FC<{
   handleEntityDeletion: any;
   handleEntityModification: any;
+  handleEntityViewing: any;
   entityType?: EntityType;
   entityName?: string;
 }> = ({
   handleEntityDeletion,
   handleEntityModification,
+  handleEntityViewing,
   entityName,
   entityType,
 }) => {
@@ -90,6 +93,11 @@ const EntityMutationMenuEntityInfo: FC<{
             title={translateMenu("updateEntityTitle")}
             aria-label={translateMenu("updateEntityTitle")}
             onClick={handleEntityModification}
+          />
+          <FaEye
+            title={translateMenu("viewEntityTitle")}
+            aria-label={translateMenu("viewEntityTitle")}
+            onClick={handleEntityViewing}
           />
         </div>
       </div>

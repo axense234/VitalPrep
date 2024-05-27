@@ -6,6 +6,7 @@ type RecipesSliceInititalStateType = {
   templateRecipe: RecipeTemplate;
   loadingCreateRecipe: LoadingStateType;
   loadingDeleteRecipe: LoadingStateType;
+  loadingUpdateRecipe: LoadingStateType;
   recipeFormModalErrorMessage: string;
   showVideoTutorialContent: boolean;
   showWrittenTutorialContent: boolean;

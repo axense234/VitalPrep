@@ -66,7 +66,6 @@ export const defaultDairy = (locale: string) => [
     name: defaultDairyTranslations.milk[locale],
     imageUrl:
       "https://res.cloudinary.com/birthdayreminder/image/upload/v1716489578/ingredientImages/bf3282f5-69a9-4093-9cb3-9b572a2b4115.png",
-    enabled: true,
     macros: {
       create: {
         calories: 50,
@@ -80,7 +79,6 @@ export const defaultDairy = (locale: string) => [
     name: defaultDairyTranslations.cheddar[locale],
     imageUrl:
       "https://res.cloudinary.com/birthdayreminder/image/upload/v1716489845/ingredientImages/150b9b4c-d4a5-4f80-8fac-d6657745d739.png",
-    enabled: true,
     macros: {
       create: {
         calories: 404,
@@ -94,7 +92,6 @@ export const defaultDairy = (locale: string) => [
     name: defaultDairyTranslations.yogurt[locale],
     imageUrl:
       "https://res.cloudinary.com/birthdayreminder/image/upload/v1716489878/ingredientImages/05ded6b9-9f47-42f2-a411-6cc532064ca0.png",
-    enabled: true,
     macros: {
       create: {
         calories: 64,
@@ -108,7 +105,6 @@ export const defaultDairy = (locale: string) => [
     name: defaultDairyTranslations.butter[locale],
     imageUrl:
       "https://res.cloudinary.com/birthdayreminder/image/upload/v1716489902/ingredientImages/618acb09-cbe9-404c-840e-2e00298c8e4b.png",
-    enabled: true,
     macros: {
       create: {
         calories: 724,
@@ -122,7 +118,6 @@ export const defaultDairy = (locale: string) => [
     name: defaultDairyTranslations.cream[locale],
     imageUrl:
       "https://res.cloudinary.com/birthdayreminder/image/upload/v1716490248/ingredientImages/c0578287-1d99-4867-813e-e7d051eb318a.png",
-    enabled: true,
     macros: {
       create: {
         calories: 333,
@@ -136,7 +131,6 @@ export const defaultDairy = (locale: string) => [
     name: defaultDairyTranslations.ghee[locale],
     imageUrl:
       "https://res.cloudinary.com/birthdayreminder/image/upload/v1716490085/ingredientImages/185a6647-60d5-4bd5-8328-ecd71681fec1.png",
-    enabled: true,
     macros: {
       create: {
         calories: 896,
@@ -150,7 +144,6 @@ export const defaultDairy = (locale: string) => [
     name: defaultDairyTranslations.creamCheese[locale],
     imageUrl:
       "https://res.cloudinary.com/birthdayreminder/image/upload/v1716490136/ingredientImages/399bd4a5-2a27-4caa-8088-a24d88f83818.png",
-    enabled: true,
     macros: {
       create: {
         calories: 357,
@@ -164,7 +157,6 @@ export const defaultDairy = (locale: string) => [
     name: defaultDairyTranslations.cottageCheese[locale],
     imageUrl:
       "https://res.cloudinary.com/birthdayreminder/image/upload/v1716490217/ingredientImages/b224ed68-8a89-4781-b9f2-27e6106b4a17.png",
-    enabled: true,
     macros: {
       create: {
         calories: 107,
@@ -178,7 +170,6 @@ export const defaultDairy = (locale: string) => [
     name: defaultDairyTranslations.sourCream[locale],
     imageUrl:
       "https://res.cloudinary.com/birthdayreminder/image/upload/v1716490248/ingredientImages/c0578287-1d99-4867-813e-e7d051eb318a.png",
-    enabled: true,
     macros: {
       create: {
         calories: 201,
@@ -192,7 +183,6 @@ export const defaultDairy = (locale: string) => [
     name: defaultDairyTranslations.iceCream[locale],
     imageUrl:
       "https://res.cloudinary.com/birthdayreminder/image/upload/v1716490277/ingredientImages/f8cddb15-5002-46bd-b5b3-1f9732a3fef9.png",
-    enabled: true,
     macros: {
       create: {
         calories: 218,

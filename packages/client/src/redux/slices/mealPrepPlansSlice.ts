@@ -15,6 +15,7 @@ import MealPrepPlanType from "@/core/types/entity/mealPrepPlan/MealPrepPlanType"
 import MealPrepPlanCreateBodyType from "@/core/types/entity/mealPrepPlan/MealPrepPlanCreateBodyType";
 import LoadingStateType from "@/core/types/LoadingStateType";
 import ObjectKeyValueType from "@/core/types/ObjectKeyValueType";
+import MealPrepPlanTemplate from "@/core/types/entity/mealPrepPlan/MealPrepPlanTemplate";
 // Axios
 import { AxiosError } from "axios";
 import axiosInstance from "@/utils/axios";
@@ -25,6 +26,7 @@ const initialState = mealPrepPlansAdapter.getInitialState({
   templateMealPrepPlan: defaultTemplateMealPrepPlan,
   loadingCreateMealPrepPlan: "IDLE",
   loadingDeleteMealPrepPlan: "IDLE",
+  loadingUpdateMealPrepPlan: "IDLE",
   mealPrepPlanFormModalErrorMessage:
     "Something went wrong, please refresh the page!",
   numberOfInstanceTemplates: 0,
@@ -104,6 +106,7 @@ export const getUserMealPrepPlan = createAsyncThunk<
           includeDayTemplatesMacros: true,
           includeInstanceTemplates: true,
           includeInstanceTemplatesMacros: true,
+          includeInstanceTemplatesTimings: true,
         },
       }
     );
@@ -129,10 +132,35 @@ export const deleteMealPrepPlan = createAsyncThunk<
   }
 });
 
+export const updateMealPrepPlan = createAsyncThunk<
+  MealPrepPlanType | AxiosError,
+  MealPrepPlanCreateBodyType
+>(
+  "mealPrepPlans/updateMealPrepPlan",
+  async ({ templateMealPrepPlan, userId }) => {
+    try {
+      const { data } = await axiosInstance.patch(
+        `/mealPrepPlans/update/${templateMealPrepPlan.id}?userId=${userId}&updateMealPrepPlanSingle=true`,
+        templateMealPrepPlan
+      );
+      return data.mealPrepPlan as MealPrepPlanType;
+    } catch (error) {
+      console.log(error);
+      return error as AxiosError;
+    }
+  }
+);
+
 const mealPrepPlansSlice = createSlice({
   name: "mealPrepPlans",
   initialState,
   reducers: {
+    setTemplateMealPrepPlan(
+      state,
+      action: PayloadAction<MealPrepPlanTemplate>
+    ) {
+      state.templateMealPrepPlan = action.payload;
+    },
     updateInstanceTemplatesTiming(
       state,
       action: PayloadAction<{ load: ObjectKeyValueType; index: number }>
@@ -151,6 +179,12 @@ const mealPrepPlansSlice = createSlice({
       action: PayloadAction<LoadingStateType>
     ) {
       state.loadingGetUserMealPrepPlans = action.payload;
+    },
+    updateLoadingUpdateMealPrepPlan(
+      state,
+      action: PayloadAction<LoadingStateType>
+    ) {
+      state.loadingUpdateMealPrepPlan = action.payload;
     },
     updateNumberOfInstanceTemplates(state, action: PayloadAction<number>) {
       state.numberOfInstanceTemplates = action.payload as number;
@@ -245,6 +279,27 @@ const mealPrepPlansSlice = createSlice({
           }
           state.loadingDeleteMealPrepPlan = "FAILED";
         }
+      })
+      .addCase(updateMealPrepPlan.fulfilled, (state, action) => {
+        const mealPrepPlan = action.payload as MealPrepPlanType;
+        const axiosError = action.payload as AxiosError;
+
+        if (axiosError !== undefined && !axiosError.response) {
+          mealPrepPlansAdapter.updateOne(state, {
+            changes: { ...mealPrepPlan },
+            id: mealPrepPlan.id,
+          });
+          state.loadingUpdateMealPrepPlan = "SUCCEDED";
+        } else {
+          const error = axiosError.response?.data as {
+            message: string;
+            type: string;
+          };
+          if (error.type !== "jwt") {
+            state.mealPrepPlanFormModalErrorMessage = error.message;
+          }
+          state.loadingUpdateMealPrepPlan = "FAILED";
+        }
       });
   },
 });
@@ -273,12 +328,20 @@ export const selectLoadingGetUserMealPrepPlans = (state: State) =>
 export const selectLoadingGetUserMealPrepPlan = (state: State) =>
   state.mealPrepPlans.loadingGetUserMealPrepPlan;
 
+export const selectLoadingUpdateMealPrepPlan = (state: State) =>
+  state.mealPrepPlans.loadingUpdateMealPrepPlan;
+
+export const selectLoadingDeleteMealPrepPlan = (state: State) =>
+  state.mealPrepPlans.loadingDeleteMealPrepPlan;
+
 export const {
   updateTemplateMealPrepPlan,
   updateLoadingCreateMealPrepPlan,
   updateNumberOfInstanceTemplates,
   updateLoadingGetUserMealPrepPlans,
   updateInstanceTemplatesTiming,
+  updateLoadingUpdateMealPrepPlan,
+  setTemplateMealPrepPlan,
 } = mealPrepPlansSlice.actions;
 
 export default mealPrepPlansSlice.reducer;

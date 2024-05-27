@@ -795,10 +795,6 @@ export const entitySearchByOptions: EntitySortingOptions = {
 export const entitySortingOptions: EntitySortingOptions = {
   ingredient: [
     {
-      label: "Availability of Ingredients",
-      value: "enabled",
-    },
-    {
       label: "Ingredient Name",
       value: "name",
     },
@@ -808,10 +804,6 @@ export const entitySortingOptions: EntitySortingOptions = {
     },
   ],
   utensil: [
-    {
-      label: "Availability of Utensils",
-      value: "enabled",
-    },
     {
       label: "Name of Utensils",
       value: "name",
@@ -1031,7 +1023,6 @@ export const defaultTemplateProfile = {
 export const defaultTemplateIngredient: IngredientTemplate = {
   name: "",
   imageUrl: defaultIngredientImageUrl,
-  enabled: false,
   macros: {
     id: "placeholder",
     calories: 200,
@@ -1043,7 +1034,6 @@ export const defaultTemplateIngredient: IngredientTemplate = {
 
 export const defaultTemplateUtensil: UtensilTemplate = {
   name: "",
-  enabled: false,
   imageUrl: defaultUtensilImageUrl,
 };
 
@@ -1058,6 +1048,11 @@ export const defaultTemplateRecipe: RecipeTemplate = {
     carbsAmount: 20,
     proteinAmount: 20,
     fatsAmount: 2,
+  },
+  recipeTutorial: {
+    videoTutorial: "",
+    writtenTutorial: "",
+    id: "placeholder",
   },
 };
 

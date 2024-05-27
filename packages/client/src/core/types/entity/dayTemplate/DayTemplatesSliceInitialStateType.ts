@@ -6,6 +6,7 @@ type DayTemplatesSliceInitialStateType = {
   templateDayTemplate: DayTemplateTemplate;
   loadingCreateDayTemplate: LoadingStateType;
   loadingDeleteDayTemplate: LoadingStateType;
+  loadingUpdateDayTemplate: LoadingStateType;
   dayTemplateFormModalErrorMessage: string;
   numberOfMeals: number;
 

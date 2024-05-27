@@ -27,6 +27,7 @@ const initialState = instanceTemplatesAdapter.getInitialState({
   templateInstanceTemplate: defaultTemplateInstanceTemplate,
   loadingCreateInstanceTemplate: "IDLE",
   loadingDeleteInstanceTemplate: "IDLE",
+  loadingUpdateInstanceTemplate: "IDLE",
   instanceTemplateFormModalErrorMessage:
     "Something went wrong, please refresh the page!",
   loadingGetUserInstanceTemplates: "IDLE",
@@ -135,10 +136,35 @@ export const deleteInstanceTemplate = createAsyncThunk<
   }
 );
 
+export const updateInstanceTemplate = createAsyncThunk<
+  InstanceTemplateType | AxiosError,
+  InstanceTemplateCreateBodyType
+>(
+  "instanceTemplates/updateInstanceTemplate",
+  async ({ templateInstanceTemplate, userId }) => {
+    try {
+      const { data } = await axiosInstance.patch(
+        `/instanceTemplates/update/${templateInstanceTemplate.id}?userId=${userId}&updateInstanceTemplateSingle=true`,
+        templateInstanceTemplate
+      );
+      return data.instanceTemplate as InstanceTemplateType;
+    } catch (error) {
+      console.log(error);
+      return error as AxiosError;
+    }
+  }
+);
+
 const instanceTemplatesSlice = createSlice({
   name: "instanceTemplates",
   initialState,
   reducers: {
+    setTemplateInstanceTemplate(
+      state,
+      action: PayloadAction<InstanceTemplateTemplate>
+    ) {
+      state.templateInstanceTemplate = action.payload;
+    },
     updateLoadingGetUserInstanceTemplates(
       state,
       action: PayloadAction<LoadingStateType>
@@ -150,6 +176,12 @@ const instanceTemplatesSlice = createSlice({
       action: PayloadAction<LoadingStateType>
     ) {
       state.loadingCreateInstanceTemplate = action.payload;
+    },
+    updateLoadingUpdateInstanceTemplate(
+      state,
+      action: PayloadAction<LoadingStateType>
+    ) {
+      state.loadingUpdateInstanceTemplate = action.payload;
     },
     updateTemplateInstanceTemplate(
       state,
@@ -235,6 +267,27 @@ const instanceTemplatesSlice = createSlice({
           }
           state.loadingDeleteInstanceTemplate = "FAILED";
         }
+      })
+      .addCase(updateInstanceTemplate.fulfilled, (state, action) => {
+        const instanceTemplate = action.payload as InstanceTemplateType;
+        const axiosError = action.payload as AxiosError;
+
+        if (axiosError !== undefined && !axiosError.response) {
+          instanceTemplatesAdapter.updateOne(state, {
+            changes: { ...instanceTemplate },
+            id: instanceTemplate.id,
+          });
+          state.loadingUpdateInstanceTemplate = "SUCCEDED";
+        } else {
+          const error = axiosError.response?.data as {
+            message: string;
+            type: string;
+          };
+          if (error.type !== "jwt") {
+            state.instanceTemplateFormModalErrorMessage = error.message;
+          }
+          state.loadingUpdateInstanceTemplate = "FAILED";
+        }
       });
   },
 });
@@ -262,10 +315,18 @@ export const selectLoadingGetUserInstanceTemplates = (state: State) =>
 export const selectLoadingGetUserInstanceTemplate = (state: State) =>
   state.instanceTemplates.loadingGetUserInstanceTemplate;
 
+export const selectLoadingUpdateInstanceTemplate = (state: State) =>
+  state.instanceTemplates.loadingUpdateInstanceTemplate;
+
+export const selectLoadingDeleteInstanceTemplate = (state: State) =>
+  state.instanceTemplates.loadingDeleteInstanceTemplate;
+
 export const {
   updateTemplateInstanceTemplate,
   updateLoadingCreateInstanceTemplate,
   updateLoadingGetUserInstanceTemplates,
+  updateLoadingUpdateInstanceTemplate,
+  setTemplateInstanceTemplate,
 } = instanceTemplatesSlice.actions;
 
 export default instanceTemplatesSlice.reducer;

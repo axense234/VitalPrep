@@ -1,17 +1,29 @@
 // SCSS
-import createToolStyles from "../../../../scss/pages/CreateTool.module.scss";
+import createToolStyles from "@/scss/pages/CreateTool.module.scss";
 // Components
 import TextFormControl from "@/components/shared/form/TextFormControl";
 import PrimaryButton from "@/components/shared/PrimaryButton";
 import ImageFormControl from "@/components/shared/form/ImageFormControl";
-import CheckboxFormControl from "@/components/shared/form/CheckboxFormControl";
 import PopupModal from "@/components/shared/modals/PopupModal";
 import EntityPreview from "@/components/shared/entity/EntityPreview";
+// Translations
+import { useTranslations } from "next-intl";
+// React
+import { FC } from "react";
+// Next
+import { useParams } from "next/navigation";
 // Data
-import { defaultUtensilImageUrl } from "@/data";
+import { defaultTemplateUtensil, defaultUtensilImageUrl } from "@/data";
 // Redux
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
-import { selectLoadingCreateUtensil } from "@/redux/slices/utensilsSlice";
+import {
+  selectLoadingCreateUtensil,
+  selectLoadingGetUserUtensil,
+  selectLoadingUpdateUtensil,
+  setTemplateUtensil,
+  updateLoadingUpdateUtensil,
+  updateUtensil,
+} from "@/redux/slices/utensilsSlice";
 import {
   createUtensil,
   selectTemplateUtensil,
@@ -24,19 +36,27 @@ import {
   selectLoadingCloudinaryImage,
   selectProfile,
 } from "@/redux/slices/generalSlice";
-// Hooks
+// Hooks and Helpers
 import useShowCreatedEntity from "@/hooks/useShowCreatedEntity";
 import useUpdateEntityTemplateImageUrl from "@/hooks/useUpdateEntityTemplateImageUrl";
 import useSetDefaultEntityName from "@/hooks/useSetDefaultEntityName";
-// Translations
-import { useTranslations } from "next-intl";
+import useSetTemplateEntity from "@/hooks/useSetTemplateEntity";
+import useGetUpsertEntityInterfaceDetails from "@/hooks/useGetUpsertEntityInterfaceDetails";
+import handleOnUpsertEntitySubmit from "@/helpers/handleOnUpsertEntitySubmit";
 
-const CreateUtensilInterface = () => {
+const UpsertUtensilInterface: FC<{ interfaceType: "create" | "update" }> = ({
+  interfaceType,
+}) => {
   const dispatch = useAppDispatch();
+  const { id } = useParams();
+
   const templateUtensil = useAppSelector(selectTemplateUtensil);
   const profile = useAppSelector(selectProfile);
 
   const loadingCreateUtensil = useAppSelector(selectLoadingCreateUtensil);
+  const loadingUpdateUtensil = useAppSelector(selectLoadingUpdateUtensil);
+  const loadingGetUtensil = useAppSelector(selectLoadingGetUserUtensil);
+
   const utensilFormModalErrorMessage = useAppSelector(
     selectUtensilFormModalErrorMessage
   );
@@ -44,6 +64,50 @@ const CreateUtensilInterface = () => {
   const loadingCloudinaryImage = useAppSelector(selectLoadingCloudinaryImage);
 
   const translate = useTranslations("createTool.formLabels.utensil");
+
+  const handleOnUpsertEntity = (e: React.SyntheticEvent) => {
+    handleOnUpsertEntitySubmit(
+      e,
+      interfaceType,
+      () =>
+        dispatch(
+          createUtensil({
+            templateUtensil,
+            userId: profile.id,
+          })
+        ),
+      () =>
+        dispatch(
+          updateUtensil({
+            templateUtensil,
+            userId: profile.id,
+          })
+        )
+    );
+  };
+
+  const {
+    loadingUpsertEntity,
+    updateLoadingUpsertEntity,
+    usedButtonLabel,
+    usedSectionTitle,
+  } = useGetUpsertEntityInterfaceDetails({
+    interfaceType: interfaceType,
+    loadingCreateEntity: loadingCreateUtensil,
+    loadingUpdateEntity: loadingUpdateUtensil,
+    translate: translate,
+    updateLoadingCreateEntity: updateLoadingCreateUtensil,
+    updateLoadingUpdateEntity: updateLoadingUpdateUtensil,
+  });
+
+  useSetTemplateEntity({
+    defaultTemplateEntity: defaultTemplateUtensil,
+    entityId: id as string,
+    entityType: "utensil",
+    interfaceType: interfaceType,
+    loadingGetEntity: loadingGetUtensil,
+    setTemplateEntity: setTemplateUtensil,
+  });
 
   useSetDefaultEntityName(
     () =>
@@ -53,19 +117,21 @@ const CreateUtensilInterface = () => {
           value: translate("defaultNameValue"),
         })
       ),
-    templateUtensil
+    templateUtensil,
+    interfaceType === "create"
   );
 
   useShowCreatedEntity(
-    loadingCreateUtensil,
-    `Successfully created utensil: ${templateUtensil.name}.`,
+    loadingUpsertEntity,
+    `Successfully ${interfaceType === "create" ? "created" : "updated"} utensil: ${templateUtensil.name}.`,
     utensilFormModalErrorMessage,
-    updateLoadingCreateUtensil
+    updateLoadingUpsertEntity
   );
   useUpdateEntityTemplateImageUrl(updateTemplateUtensil);
 
   return (
     <section className={createToolStyles.createInterface}>
+      <h2>{usedSectionTitle}</h2>
       <div className={createToolStyles.createInterfaceWrapper}>
         <div className={createToolStyles.createInterfaceFormContainer}>
           <PopupModal hasBorder={false} modalType="form" />
@@ -99,35 +165,16 @@ const CreateUtensilInterface = () => {
                 }
               }}
             />
-            <CheckboxFormControl
-              labelContent={translate("enabled")}
-              entityProperty={String(templateUtensil.enabled)}
-              onEntityPropertyValueChange={(e) => {
-                console.log(e.target.value);
-                dispatch(
-                  updateTemplateUtensil({
-                    key: "enabled",
-                    value: e.target.value === "true" ? false : true,
-                  })
-                );
-              }}
-            />
+
             <PrimaryButton
-              content={translate("createButtonLabel")}
+              content={usedButtonLabel}
               type="functional"
               disabled={
                 loadingCreateUtensil === "PENDING" ||
+                loadingUpdateUtensil === "PENDING" ||
                 loadingCloudinaryImage === "PENDING"
               }
-              onClickFunction={(e) => {
-                e.preventDefault();
-                dispatch(
-                  createUtensil({
-                    templateUtensil: templateUtensil,
-                    userId: profile.id,
-                  })
-                );
-              }}
+              onClickFunction={(e) => handleOnUpsertEntity(e)}
             />
           </form>
         </div>
@@ -141,4 +188,4 @@ const CreateUtensilInterface = () => {
   );
 };
 
-export default CreateUtensilInterface;
+export default UpsertUtensilInterface;

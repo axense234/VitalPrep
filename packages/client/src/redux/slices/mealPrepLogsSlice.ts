@@ -19,6 +19,7 @@ import MealPrepLogType from "@/core/types/entity/mealPrepLog/MealPrepLogType";
 // Axios
 import { AxiosError } from "axios";
 import axiosInstance from "@/utils/axios";
+import MealPrepLogTemplate from "@/core/types/entity/mealPrepLog/MealPrepLogTemplate";
 
 export const mealPrepLogsAdapter = createEntityAdapter<MealPrepLogType>();
 
@@ -26,6 +27,7 @@ const initialState = mealPrepLogsAdapter.getInitialState({
   templateMealPrepLog: defaultTemplateMealPrepLog,
   loadingCreateMealPrepLog: "IDLE",
   loadingDeleteMealPrepLog: "IDLE",
+  loadingUpdateMealPrepLog: "IDLE",
   mealPrepLogFormModalErrorMessage:
     "Something went wrong, please refresh the page!",
   loadingGetUserMealPrepLogs: "IDLE",
@@ -130,10 +132,29 @@ export const deleteMealPrepLog = createAsyncThunk<
   }
 });
 
+export const updateMealPrepLog = createAsyncThunk<
+  MealPrepLogType | AxiosError,
+  MealPrepLogCreateBodyType
+>("mealPrepLogs/updateMealPrepLog", async ({ templateMealPrepLog, userId }) => {
+  try {
+    const { data } = await axiosInstance.patch(
+      `/mealPrepLogs/update/${templateMealPrepLog.id}?userId=${userId}&updateMealPrepLogSingle=true`,
+      templateMealPrepLog
+    );
+    return data.mealPrepLog as MealPrepLogType;
+  } catch (error) {
+    console.log(error);
+    return error as AxiosError;
+  }
+});
+
 const mealPrepLogsSlice = createSlice({
   name: "mealPrepLogs",
   initialState,
   reducers: {
+    setTemplateMealPrepLog(state, action: PayloadAction<MealPrepLogTemplate>) {
+      state.templateMealPrepLog = action.payload;
+    },
     updateLoadingGetUserMealPrepLogs(
       state,
       action: PayloadAction<LoadingStateType>
@@ -145,6 +166,12 @@ const mealPrepLogsSlice = createSlice({
       action: PayloadAction<LoadingStateType>
     ) {
       state.loadingCreateMealPrepLog = action.payload;
+    },
+    updateLoadingUpdateMealPrepLog(
+      state,
+      action: PayloadAction<LoadingStateType>
+    ) {
+      state.loadingUpdateMealPrepLog = action.payload;
     },
     updateTemplateMealPrepLog(
       state,
@@ -227,6 +254,27 @@ const mealPrepLogsSlice = createSlice({
           }
           state.loadingDeleteMealPrepLog = "FAILED";
         }
+      })
+      .addCase(updateMealPrepLog.fulfilled, (state, action) => {
+        const mealPrepLog = action.payload as MealPrepLogType;
+        const axiosError = action.payload as AxiosError;
+
+        if (axiosError !== undefined && !axiosError.response) {
+          mealPrepLogsAdapter.updateOne(state, {
+            changes: { ...mealPrepLog },
+            id: mealPrepLog.id,
+          });
+          state.loadingUpdateMealPrepLog = "SUCCEDED";
+        } else {
+          const error = axiosError.response?.data as {
+            message: string;
+            type: string;
+          };
+          if (error.type !== "jwt") {
+            state.mealPrepLogFormModalErrorMessage = error.message;
+          }
+          state.loadingUpdateMealPrepLog = "FAILED";
+        }
       });
   },
 });
@@ -252,10 +300,18 @@ export const selectLoadingGetUserMealPrepLogs = (state: State) =>
 export const selectLoadingGetUserMealPrepLog = (state: State) =>
   state.mealPrepLogs.loadingGetUserMealPrepLog;
 
+export const selectLoadingUpdateMealPrepLog = (state: State) =>
+  state.mealPrepLogs.loadingUpdateMealPrepLog;
+
+export const selectLoadingDeleteMealPrepLog = (state: State) =>
+  state.mealPrepLogs.loadingDeleteMealPrepLog;
+
 export const {
   updateTemplateMealPrepLog,
   updateLoadingCreateMealPrepLog,
   updateLoadingGetUserMealPrepLogs,
+  updateLoadingUpdateMealPrepLog,
+  setTemplateMealPrepLog,
 } = mealPrepLogsSlice.actions;
 
 export default mealPrepLogsSlice.reducer;

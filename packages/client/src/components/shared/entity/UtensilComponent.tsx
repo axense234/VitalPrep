@@ -42,9 +42,8 @@ const UtensilComponent: FC<EntityComponentProps> = ({
     "createTool.formLabels.utensil"
   );
 
-  const { name, imageUrl, enabled } = utensilEntityShown;
+  const { name, imageUrl } = utensilEntityShown;
   let windowWidth = useGetWindowWidth();
-  let phoneRedesign = windowWidth && windowWidth <= 600;
 
   if (isALink) {
     return (
@@ -90,15 +89,7 @@ const UtensilComponent: FC<EntityComponentProps> = ({
             <div
               className={entityComponentStyles.entityComponentDetails}
               style={{ alignItems: "center" }}
-            >
-              {phoneRedesign ? null : (
-                <p>
-                  {enabled
-                    ? translateUtensil("enabled")
-                    : translateUtensil("disabled")}
-                </p>
-              )}
-            </div>
+            ></div>
           </div>
         </Link>
       </div>
@@ -135,15 +126,7 @@ const UtensilComponent: FC<EntityComponentProps> = ({
       <div
         className={entityComponentStyles.entityComponentDetails}
         style={{ alignItems: "center" }}
-      >
-        {phoneRedesign ? null : (
-          <p>
-            {enabled
-              ? translateUtensil("enabled")
-              : translateUtensil("disabled")}
-          </p>
-        )}
-      </div>
+      ></div>
     </div>
   );
 };

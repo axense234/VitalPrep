@@ -9,27 +9,36 @@ import {
   updateRecipe,
 } from "../controllers/recipes";
 import authenticationMiddleware from "../middleware/authentication";
+import allowRouteUse from "../middleware/adminUse";
 
 const router = express.Router();
 
-router.get("/recipes", authenticationMiddleware, getAllRecipes);
+router.get("/recipes", allowRouteUse, authenticationMiddleware, getAllRecipes);
 
 router.get(
   "/:userId/recipes/:recipeId",
+  allowRouteUse,
   authenticationMiddleware,
   getRecipeById
 );
 
-router.post("/recipes/create", authenticationMiddleware, createRecipe);
+router.post(
+  "/recipes/create",
+  allowRouteUse,
+  authenticationMiddleware,
+  createRecipe
+);
 
 router.patch(
   "/recipes/update/:recipeId",
+  allowRouteUse,
   authenticationMiddleware,
   updateRecipe
 );
 
 router.delete(
   "/recipes/delete/:recipeId",
+  allowRouteUse,
   authenticationMiddleware,
   deleteRecipe
 );

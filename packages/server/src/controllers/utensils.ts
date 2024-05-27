@@ -15,7 +15,6 @@ type GetAllUtensilsQueryObject = {
 type UtensilsOrderByObject =
   | ({
       name?: "asc" | "desc";
-      enabled?: "asc" | "desc";
       recipes?: { _count: string | undefined };
     } & Prisma.UtensilOrderByWithRelationInput)
   | Prisma.UtensilOrderByWithRelationInput[]
@@ -233,6 +232,7 @@ const createUtensil = async (req: Request, res: Response) => {
 const updateUtensil = async (req: Request, res: Response) => {
   const { utensilId } = req.params;
   const utensilBody = req.body;
+  const { userId, updateUtensilSingle } = req.query;
 
   if (!utensilId) {
     return res
@@ -244,6 +244,21 @@ const updateUtensil = async (req: Request, res: Response) => {
     return res
       .status(StatusCodes.BAD_REQUEST)
       .json({ message: "Please enter a request body!", utensil: {} });
+  }
+
+  if (utensilBody.user || userId) {
+    utensilBody.user = {
+      connect: { id: utensilBody?.user?.id || userId },
+    };
+    delete utensilBody?.userId;
+  }
+
+  if (updateUtensilSingle) {
+    delete utensilBody?.recipes;
+    delete utensilBody?.dayTemplates;
+    delete utensilBody?.instanceTemplates;
+    delete utensilBody?.mealPrepPlans;
+    delete utensilBody?.mealPrepLogs;
   }
 
   const updatedUtensil = await UtensilClient.update({

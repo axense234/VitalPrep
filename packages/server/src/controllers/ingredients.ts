@@ -21,7 +21,6 @@ type GetIngredientByIdQueryObject = {
 type IngredientsOrderByObject =
   | ({
       name?: "asc" | "desc";
-      enabled?: "asc" | "desc";
       recipes?: { _count: string | undefined };
     } & Prisma.IngredientOrderByWithRelationInput)
   | Prisma.IngredientOrderByWithRelationInput[]
@@ -253,6 +252,8 @@ const updateIngredient = async (req: Request, res: Response) => {
   const { ingredientId } = req.params;
   const ingredientBody = req.body;
 
+  const { userId, updateIngredientSingle } = req.query;
+
   if (!ingredientId) {
     return res
       .status(StatusCodes.BAD_REQUEST)
@@ -263,6 +264,26 @@ const updateIngredient = async (req: Request, res: Response) => {
     return res
       .status(StatusCodes.BAD_REQUEST)
       .json({ message: "Please enter a request body!", ingredient: {} });
+  }
+
+  if (ingredientBody.user || userId) {
+    ingredientBody.user = {
+      connect: { id: ingredientBody?.user?.id || userId },
+    };
+    delete ingredientBody?.userId;
+  }
+
+  if (ingredientBody.macros) {
+    ingredientBody.macros = { update: ingredientBody.macros };
+    delete ingredientBody?.macrosId;
+  }
+
+  if (updateIngredientSingle) {
+    delete ingredientBody?.recipes;
+    delete ingredientBody?.dayTemplates;
+    delete ingredientBody?.instanceTemplates;
+    delete ingredientBody?.mealPrepPlans;
+    delete ingredientBody?.mealPrepLogs;
   }
 
   const updatedIngredient = await IngredientClient.update({

@@ -37,7 +37,7 @@ const IngredientComponent: FC<EntityComponentProps> = ({
   const ingredientEntityShown = ingredientEntity || entity;
   const ingredientContainerRef = useRef<HTMLDivElement | null>(null);
 
-  const { name, imageUrl, macros, enabled } = ingredientEntityShown;
+  const { name, imageUrl, macros } = ingredientEntityShown;
 
   const translateIngredient = useTranslations(
     "entityComponents.details.ingredient"
@@ -122,11 +122,6 @@ const IngredientComponent: FC<EntityComponentProps> = ({
                       grams: macros?.fatsAmount,
                     })}
                   </p>
-                  <p>
-                    {enabled
-                      ? translateIngredient("enabled")
-                      : translateIngredient("disabled")}
-                  </p>
                 </>
               )}
             </div>
@@ -190,11 +185,6 @@ const IngredientComponent: FC<EntityComponentProps> = ({
               {translateIngredient("macros.fats", {
                 grams: macros?.fatsAmount,
               })}
-            </p>
-            <p>
-              {enabled
-                ? translateIngredient("enabled")
-                : translateIngredient("disabled")}
             </p>
           </>
         )}
