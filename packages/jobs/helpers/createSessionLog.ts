@@ -1,4 +1,5 @@
-import axios from "axios";
+// Axios Instance
+import axiosInstance from "../utils/axios";
 
 const createSessionLog = async (
   userId: string,
@@ -6,8 +7,8 @@ const createSessionLog = async (
   instanceTemplateId: string
 ) => {
   try {
-    const { data } = await axios.post(
-      `${process.env.SERVER_SITE_URL}/mealPrepLogs/create?userId=${userId}`,
+    const { data } = await axiosInstance.post(
+      `/mealPrepLogs/create`,
       {
         name: "Session Log",
         cookingDuration,
@@ -15,7 +16,9 @@ const createSessionLog = async (
         date: new Date(),
       },
       {
-        withCredentials: true,
+        params: {
+          userId: userId,
+        },
       }
     );
     return data.mealPrepLog;

@@ -1,11 +1,15 @@
-import axios from "axios";
+// Axios Instance
+import axiosInstance from "../utils/axios";
 
 const getUserMealPrepPlan = async (userId: string, mealPrepPlanId: string) => {
   try {
-    const { data } = await axios.get(
-      `${process.env.SERVER_SITE_URL}/${userId}/mealPrepPlans/${mealPrepPlanId}?uniqueIdentifier=${process.env.ADMIN_USE_UNIQUE_IDENTIFIER}&includeInstanceTemplatesTimings=true&includeInstanceTemplates=true`,
+    const { data } = await axiosInstance.get(
+      `/${userId}/mealPrepPlans/${mealPrepPlanId}`,
       {
-        withCredentials: true,
+        params: {
+          includeInstanceTemplatesTimings: true,
+          includeInstanceTemplates: true,
+        },
       }
     );
     return data.mealPrepPlan;
