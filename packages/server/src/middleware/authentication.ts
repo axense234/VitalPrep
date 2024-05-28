@@ -25,7 +25,7 @@ const authenticationMiddleware = async (
   // Skip Authentication from Admin Sources
   if (adminPrivilegesSecret === process.env.ADMIN_PRIVILEGES_SECRET) {
     console.log(`ADMIN USE AT:${new Date().toUTCString()}`);
-    next();
+    return next();
   }
 
   // OAuth Flow
