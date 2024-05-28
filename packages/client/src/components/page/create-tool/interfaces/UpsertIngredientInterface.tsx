@@ -17,24 +17,28 @@ import { defaultIngredientImageUrl, defaultTemplateIngredient } from "@/data";
 // Redux
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import {
-  createIngredient,
-  selectIngredientFormModalErrorMessage,
-  selectLoadingCreateIngredient,
-  selectLoadingGetUserIngredient,
-  selectLoadingUpdateIngredient,
+  selectProfile,
+  selectLoadingCloudinaryImage,
+} from "@/redux/slices/general/selectors";
+import { createCloudinaryImage } from "@/redux/slices/general/thunks";
+import {
   selectTemplateIngredient,
-  setTemplateIngredient,
-  updateIngredient,
+  selectLoadingCreateIngredient,
+  selectLoadingUpdateIngredient,
+  selectLoadingGetUserIngredient,
+  selectIngredientFormModalErrorMessage,
+} from "@/redux/slices/ingredients/selectors";
+import {
   updateLoadingCreateIngredient,
   updateLoadingUpdateIngredient,
+  setTemplateIngredient,
   updateTemplateIngredient,
   updateTemplateIngredientMacros,
-} from "@/redux/slices/ingredientsSlice";
+} from "@/redux/slices/ingredients/slice";
 import {
-  createCloudinaryImage,
-  selectLoadingCloudinaryImage,
-  selectProfile,
-} from "@/redux/slices/generalSlice";
+  createIngredient,
+  updateIngredient,
+} from "@/redux/slices/ingredients/thunks";
 // Hooks and Helpers
 import useShowCreatedEntity from "@/hooks/useShowCreatedEntity";
 import useUpdateEntityTemplateImageUrl from "@/hooks/useUpdateEntityTemplateImageUrl";

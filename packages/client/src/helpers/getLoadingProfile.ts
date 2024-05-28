@@ -3,7 +3,7 @@ import { useAppSelector } from "@/hooks/redux";
 import {
   selectLoadingGetProfile,
   selectLoadingGetOAuthProfile,
-} from "@/redux/slices/generalSlice";
+} from "@/redux/slices/general/selectors";
 
 const getLoadingProfile = () => {
   const loadingGetProfile = useAppSelector(selectLoadingGetProfile);

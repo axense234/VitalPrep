@@ -11,14 +11,14 @@ import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import {
   selectProfile,
   selectSelectedEntityOption,
-  setTypeOfUpdateAccountQuery,
-  updateUser,
-} from "@/redux/slices/generalSlice";
+} from "@/redux/slices/general/selectors";
+import { setTypeOfUpdateAccountQuery } from "@/redux/slices/general/slice";
+import { updateUser } from "@/redux/slices/general/thunks";
 import {
-  getAllUserMealPrepPlans,
-  selectAllMealPrepPlans,
   selectLoadingGetUserMealPrepPlans,
-} from "@/redux/slices/mealPrepPlansSlice";
+  selectAllMealPrepPlans,
+} from "@/redux/slices/mealPrepPlans/selectors";
+import { getAllUserMealPrepPlans } from "@/redux/slices/mealPrepPlans/thunks";
 // Helpers and Hooks
 import useGetWindowWidth from "@/hooks/useGetWindowWidth";
 import getLoadingProfile from "@/helpers/getLoadingProfile";

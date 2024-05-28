@@ -18,30 +18,32 @@ import {
 // Redux
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import {
-  createCloudinaryImage,
-  selectLoadingCloudinaryImage,
   selectProfile,
-} from "@/redux/slices/generalSlice";
+  selectLoadingCloudinaryImage,
+} from "@/redux/slices/general/selectors";
+import { createCloudinaryImage } from "@/redux/slices/general/thunks";
 import {
-  getAllUserInstanceTemplates,
   selectAllInstanceTemplatesIds,
   selectLoadingGetUserInstanceTemplates,
-} from "@/redux/slices/instanceTemplatesSlice";
+} from "@/redux/slices/instanceTemplates/selectors";
+import { getAllUserInstanceTemplates } from "@/redux/slices/instanceTemplates/thunks";
 import {
-  selectAllMealPrepPlans,
-  selectLoadingCreateMealPrepPlan,
-  selectLoadingGetUserMealPrepPlan,
-  selectLoadingUpdateMealPrepPlan,
   selectMealPrepPlanFormModalErrorMessage,
-  selectMealPrepPlanTemplate,
   selectNumberOfInstanceTemplates,
-  setTemplateMealPrepPlan,
-  updateInstanceTemplatesTiming,
+  selectMealPrepPlanTemplate,
+  selectLoadingCreateMealPrepPlan,
+  selectLoadingUpdateMealPrepPlan,
+  selectLoadingGetUserMealPrepPlan,
+  selectAllMealPrepPlans,
+} from "@/redux/slices/mealPrepPlans/selectors";
+import {
   updateLoadingCreateMealPrepPlan,
   updateLoadingUpdateMealPrepPlan,
-  updateNumberOfInstanceTemplates,
+  setTemplateMealPrepPlan,
   updateTemplateMealPrepPlan,
-} from "@/redux/slices/mealPrepPlansSlice";
+  updateNumberOfInstanceTemplates,
+  updateInstanceTemplatesTiming,
+} from "@/redux/slices/mealPrepPlans/slice";
 // Hooks and Helpers
 import useShowCreatedEntity from "@/hooks/useShowCreatedEntity";
 import useUpdateEntityTemplateImageUrl from "@/hooks/useUpdateEntityTemplateImageUrl";

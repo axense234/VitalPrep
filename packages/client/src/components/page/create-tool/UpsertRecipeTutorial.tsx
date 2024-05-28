@@ -6,13 +6,15 @@ import TextAreaFormControl from "@/components/shared/form/TextAreaFormControl";
 import VideoFormControl from "@/components/shared/form/VideoFormControl";
 // Redux
 import {
-  changeShowVideoTutorialContent,
-  changeShowWrittenTutorialContent,
   selectShowVideoTutorialContent,
   selectShowWrittenTutorialContent,
   selectTemplateRecipe,
+} from "@/redux/slices/recipes/selectors";
+import {
+  changeShowVideoTutorialContent,
   updateTemplateRecipeTutorial,
-} from "@/redux/slices/recipesSlice";
+  changeShowWrittenTutorialContent,
+} from "@/redux/slices/recipes/slice";
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 // Translations
 import { useTranslations } from "next-intl";

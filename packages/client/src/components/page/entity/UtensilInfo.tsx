@@ -10,10 +10,8 @@ import UpsertUtensilInterface from "../create-tool/interfaces/UpsertUtensilInter
 import { FC, useEffect } from "react";
 // Redux
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
-import {
-  getUserUtensil,
-  selectLoadingGetUserUtensil,
-} from "@/redux/slices/utensilsSlice";
+import { getUserUtensil } from "@/redux/slices/utensils/thunks";
+import { selectLoadingGetUserUtensil } from "@/redux/slices/utensils/selectors";
 // Types
 import EntityInfoProps from "@/core/interfaces/entity/EntityInfoProps";
 // Hooks

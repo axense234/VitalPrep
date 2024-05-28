@@ -1,7 +1,7 @@
 // SCSS
 import gettingStartedContentStyles from "../../../scss/pages/GettingStarted.module.scss";
 // Reduxx
-import { selectCurrentGuideSection } from "@/redux/slices/generalSlice";
+import { selectCurrentGuideSection } from "@/redux/slices/general/selectors";
 import { useAppSelector } from "@/hooks/redux";
 // Components
 import GettingStartedContentBasics from "./sections/GettingStartedContentBasics";

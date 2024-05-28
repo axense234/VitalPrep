@@ -4,7 +4,7 @@ import createToolStyles from "../../../scss/pages/CreateTool.module.scss";
 import { FC, ReactElement } from "react";
 // Redux
 import { useAppSelector } from "@/hooks/redux";
-import { selectSelectedEntityOption } from "@/redux/slices/generalSlice";
+import { selectSelectedEntityOption } from "@/redux/slices/general/selectors";
 // Components
 import UpsertIngredientInterface from "./interfaces/UpsertIngredientInterface";
 import UpsertUtensilInterface from "./interfaces/UpsertUtensilInterface";

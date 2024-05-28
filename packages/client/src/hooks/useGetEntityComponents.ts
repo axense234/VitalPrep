@@ -4,7 +4,7 @@ import { defaultEntityQueryValues } from "@/data";
 import { useEffect } from "react";
 // Redux
 import { useAppDispatch, useAppSelector } from "./redux";
-import { selectProfile } from "@/redux/slices/generalSlice";
+import { selectProfile } from "@/redux/slices/general/selectors";
 import { UnknownAction } from "@reduxjs/toolkit";
 // Types
 import LoadingStateType from "@/core/types/LoadingStateType";

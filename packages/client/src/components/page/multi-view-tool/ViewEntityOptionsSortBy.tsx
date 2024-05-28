@@ -4,7 +4,7 @@ import EntitySortingOption from "@/core/types/entity/EntitySortingOption";
 import EntityType from "@/core/types/entity/users/EntityType";
 // Redux
 import { useAppDispatch } from "@/hooks/redux";
-import { updateEntityQueryValues } from "@/redux/slices/generalSlice";
+import { updateEntityQueryValues } from "@/redux/slices/general/slice";
 // React
 import { FC } from "react";
 // SCSS

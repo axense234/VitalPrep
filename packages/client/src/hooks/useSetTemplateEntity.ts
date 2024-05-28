@@ -3,7 +3,7 @@ import { useEffect } from "react";
 // Redux
 import { useAppDispatch, useAppSelector } from "./redux";
 import { State } from "@/redux/api/store";
-import { updateNumberOfInstanceTemplates } from "@/redux/slices/mealPrepPlansSlice";
+import { updateNumberOfInstanceTemplates } from "@/redux/slices/mealPrepPlans/slice";
 // Types
 import EntityType from "@/core/types/entity/users/EntityType";
 import LoadingStateType from "@/core/types/LoadingStateType";

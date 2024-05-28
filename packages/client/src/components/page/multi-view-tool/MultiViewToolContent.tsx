@@ -8,7 +8,7 @@ import { FC } from "react";
 import EntityType from "@/core/types/entity/users/EntityType";
 // Redux
 import { useAppSelector } from "@/hooks/redux";
-import { selectSelectedViewOption } from "@/redux/slices/generalSlice";
+import { selectSelectedViewOption } from "@/redux/slices/general/selectors";
 // Hooks
 import useGetWindowWidth from "@/hooks/useGetWindowWidth";
 // Translations

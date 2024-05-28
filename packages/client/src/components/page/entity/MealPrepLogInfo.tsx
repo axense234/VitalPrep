@@ -10,10 +10,8 @@ import EntityInfoInstanceTemplate from "./EntityInfoInstanceTemplate";
 import { FC, useEffect } from "react";
 // Redux
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
-import {
-  getUserMealPrepLog,
-  selectLoadingGetUserMealPrepLog,
-} from "@/redux/slices/mealPrepLogsSlice";
+import { selectLoadingGetUserMealPrepLog } from "@/redux/slices/mealPrepLogs/selectors";
+import { getUserMealPrepLog } from "@/redux/slices/mealPrepLogs/thunks";
 // Types
 import EntityInfoProps from "@/core/interfaces/entity/EntityInfoProps";
 // Components

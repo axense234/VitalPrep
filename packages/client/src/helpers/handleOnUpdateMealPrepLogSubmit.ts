@@ -2,7 +2,7 @@
 import MealPrepLogTemplate from "@/core/types/entity/mealPrepLog/MealPrepLogTemplate";
 // Redux
 import { State } from "@/redux/api/store";
-import { updateMealPrepLog } from "@/redux/slices/mealPrepLogsSlice";
+import { updateMealPrepLog } from "@/redux/slices/mealPrepLogs/thunks";
 import { ThunkDispatch, UnknownAction } from "@reduxjs/toolkit";
 
 const handleOnUpdateMealPrepLogSubmit = (

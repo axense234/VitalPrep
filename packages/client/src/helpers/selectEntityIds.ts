@@ -1,10 +1,11 @@
+// Redux
 import { useAppSelector } from "@/hooks/redux";
-import { selectAllDayTemplatesIds } from "@/redux/slices/dayTemplatesSlice";
-import { selectAllIngredientsIds } from "@/redux/slices/ingredientsSlice";
-import { selectAllInstanceTemplatesIds } from "@/redux/slices/instanceTemplatesSlice";
-import { selectAllMealPrepPlansIds } from "@/redux/slices/mealPrepPlansSlice";
-import { selectAllRecipesIds } from "@/redux/slices/recipesSlice";
-import { selectAllUtensilsIds } from "@/redux/slices/utensilsSlice";
+import { selectAllDayTemplatesIds } from "@/redux/slices/dayTemplates/selectors";
+import { selectAllIngredientsIds } from "@/redux/slices/ingredients/selectors";
+import { selectAllInstanceTemplatesIds } from "@/redux/slices/instanceTemplates/selectors";
+import { selectAllMealPrepPlansIds } from "@/redux/slices/mealPrepPlans/selectors";
+import { selectAllRecipesIds } from "@/redux/slices/recipes/selectors";
+import { selectAllUtensilsIds } from "@/redux/slices/utensils/selectors";
 
 const selectEntityIds = (entityType: string) => {
   switch (entityType) {

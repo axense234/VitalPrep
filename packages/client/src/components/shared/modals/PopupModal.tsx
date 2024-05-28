@@ -14,13 +14,15 @@ import { BeatLoader } from "react-spinners";
 // Redux
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import {
-  changeShowFormModal,
-  changeShowGeneralModal,
-  selectIsModalUsedWhenLoading,
-  selectShowFormModal,
   selectShowGeneralModal,
+  selectShowFormModal,
   selectTemplateModalMessage,
-} from "@/redux/slices/generalSlice";
+  selectIsModalUsedWhenLoading,
+} from "@/redux/slices/general/selectors";
+import {
+  changeShowGeneralModal,
+  changeShowFormModal,
+} from "@/redux/slices/general/slice";
 // Helpers and Hooks
 import closePopupModal from "@/helpers/closePopupModal";
 import useClosePopupModal from "@/hooks/useClosePopupModal";

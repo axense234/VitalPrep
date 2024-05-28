@@ -9,13 +9,13 @@ import MultiViewToolContent from "@/components/page/multi-view-tool/MultiViewToo
 import ViewEntityOptions from "@/components/page/multi-view-tool/ViewEntityOptions";
 // Redux
 import { useAppSelector } from "@/hooks/redux";
-import { selectEntityQueryValues } from "@/redux/slices/generalSlice";
+import { selectEntityQueryValues } from "@/redux/slices/general/selectors";
 import {
-  getAllUserMealPrepLogs,
-  selectAllMealPrepLogsIds,
   selectLoadingGetUserMealPrepLogs,
-  updateLoadingGetUserMealPrepLogs,
-} from "@/redux/slices/mealPrepLogsSlice";
+  selectAllMealPrepLogsIds,
+} from "@/redux/slices/mealPrepLogs/selectors";
+import { updateLoadingGetUserMealPrepLogs } from "@/redux/slices/mealPrepLogs/slice";
+import { getAllUserMealPrepLogs } from "@/redux/slices/mealPrepLogs/thunks";
 // Hooks
 import useGetEntityComponents from "@/hooks/useGetEntityComponents";
 

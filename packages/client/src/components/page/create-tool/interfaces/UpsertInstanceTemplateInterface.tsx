@@ -21,29 +21,33 @@ import { useParams } from "next/navigation";
 // Redux
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import {
-  getAllUserDayTemplates,
-  selectAllDayTemplates,
   selectAllDayTemplatesIds,
   selectLoadingGetUserDayTemplates,
-} from "@/redux/slices/dayTemplatesSlice";
+  selectAllDayTemplates,
+} from "@/redux/slices/dayTemplates/selectors";
+import { getAllUserDayTemplates } from "@/redux/slices/dayTemplates/thunks";
 import {
-  createInstanceTemplate,
+  selectProfile,
+  selectLoadingCloudinaryImage,
+} from "@/redux/slices/general/selectors";
+import { createCloudinaryImage } from "@/redux/slices/general/thunks";
+import {
   selectInstanceTemplateFormModalErrorMessage,
-  selectLoadingCreateInstanceTemplate,
-  selectLoadingGetUserInstanceTemplate,
-  selectLoadingUpdateInstanceTemplate,
   selectTemplateInstanceTemplate,
-  setTemplateInstanceTemplate,
-  updateInstanceTemplate,
+  selectLoadingCreateInstanceTemplate,
+  selectLoadingUpdateInstanceTemplate,
+  selectLoadingGetUserInstanceTemplate,
+} from "@/redux/slices/instanceTemplates/selectors";
+import {
   updateLoadingCreateInstanceTemplate,
   updateLoadingUpdateInstanceTemplate,
+  setTemplateInstanceTemplate,
   updateTemplateInstanceTemplate,
-} from "@/redux/slices/instanceTemplatesSlice";
+} from "@/redux/slices/instanceTemplates/slice";
 import {
-  createCloudinaryImage,
-  selectLoadingCloudinaryImage,
-  selectProfile,
-} from "@/redux/slices/generalSlice";
+  createInstanceTemplate,
+  updateInstanceTemplate,
+} from "@/redux/slices/instanceTemplates/thunks";
 // Hooks and Helpers
 import useShowCreatedEntity from "@/hooks/useShowCreatedEntity";
 import useUpdateEntityTemplateImageUrl from "@/hooks/useUpdateEntityTemplateImageUrl";

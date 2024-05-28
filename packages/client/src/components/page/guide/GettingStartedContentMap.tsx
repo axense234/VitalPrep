@@ -4,10 +4,8 @@ import gettingStartedContentMapStyles from "../../../scss/pages/GettingStarted.m
 import { gettingStartedGuideContentMapContent } from "@/data";
 // Redux
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
-import {
-  changeCurrentGuideSection,
-  selectCurrentGuideSection,
-} from "@/redux/slices/generalSlice";
+import { selectCurrentGuideSection } from "@/redux/slices/general/selectors";
+import { changeCurrentGuideSection } from "@/redux/slices/general/slice";
 // Translations
 import { useTranslations } from "next-intl";
 

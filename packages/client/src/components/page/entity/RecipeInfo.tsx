@@ -12,10 +12,8 @@ import UpsertRecipeInterface from "../create-tool/interfaces/UpsertRecipeInterfa
 import { FC, useEffect } from "react";
 // Redux
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
-import {
-  getUserRecipe,
-  selectLoadingGetUserRecipe,
-} from "@/redux/slices/recipesSlice";
+import { selectLoadingGetUserRecipe } from "@/redux/slices/recipes/selectors";
+import { getUserRecipe } from "@/redux/slices/recipes/thunks";
 // Types
 import EntityInfoProps from "@/core/interfaces/entity/EntityInfoProps";
 // Hooks

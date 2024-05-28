@@ -2,7 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 // SCSS
-import socialMediaIconsStyles from "../../scss/components/shared/SocialMediaIcons.module.scss";
+import socialMediaIconsStyles from "@/scss/components/shared/SocialMediaIcons.module.scss";
 // Types
 import SocialMediaIconProps from "@/core/interfaces/SocialMediaIconProps";
 // React

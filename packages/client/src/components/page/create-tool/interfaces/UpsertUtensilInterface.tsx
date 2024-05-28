@@ -17,25 +17,24 @@ import { defaultTemplateUtensil, defaultUtensilImageUrl } from "@/data";
 // Redux
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import {
-  selectLoadingCreateUtensil,
-  selectLoadingGetUserUtensil,
-  selectLoadingUpdateUtensil,
-  setTemplateUtensil,
-  updateLoadingUpdateUtensil,
-  updateUtensil,
-} from "@/redux/slices/utensilsSlice";
-import {
-  createUtensil,
-  selectTemplateUtensil,
-  selectUtensilFormModalErrorMessage,
-  updateLoadingCreateUtensil,
-  updateTemplateUtensil,
-} from "@/redux/slices/utensilsSlice";
-import {
-  createCloudinaryImage,
-  selectLoadingCloudinaryImage,
   selectProfile,
-} from "@/redux/slices/generalSlice";
+  selectLoadingCloudinaryImage,
+} from "@/redux/slices/general/selectors";
+import { createCloudinaryImage } from "@/redux/slices/general/thunks";
+import {
+  selectTemplateUtensil,
+  selectLoadingCreateUtensil,
+  selectLoadingUpdateUtensil,
+  selectLoadingGetUserUtensil,
+  selectUtensilFormModalErrorMessage,
+} from "@/redux/slices/utensils/selectors";
+import {
+  updateLoadingCreateUtensil,
+  updateLoadingUpdateUtensil,
+  setTemplateUtensil,
+  updateTemplateUtensil,
+} from "@/redux/slices/utensils/slice";
+import { createUtensil, updateUtensil } from "@/redux/slices/utensils/thunks";
 // Hooks and Helpers
 import useShowCreatedEntity from "@/hooks/useShowCreatedEntity";
 import useUpdateEntityTemplateImageUrl from "@/hooks/useUpdateEntityTemplateImageUrl";

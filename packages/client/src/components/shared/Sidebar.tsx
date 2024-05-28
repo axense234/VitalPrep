@@ -15,16 +15,15 @@ import { AiFillCloseSquare } from "react-icons/ai";
 // Components
 import Logo from "./Logo";
 import SocialMediaIcons from "./SocialMediaIcons";
-import {
-  changeIsSidebarOpened,
-  logoutUser,
-  selectIsSidebarOpened,
-} from "@/redux/slices/generalSlice";
 // Hooks
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 // Translations
 import { useTranslations } from "next-intl";
 import { Link } from "@/navigation";
+// Redux
+import { selectIsSidebarOpened } from "@/redux/slices/general/selectors";
+import { changeIsSidebarOpened } from "@/redux/slices/general/slice";
+import { logoutUser } from "@/redux/slices/general/thunks";
 
 const Sidebar = () => {
   const dispatch = useAppDispatch();

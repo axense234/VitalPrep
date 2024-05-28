@@ -1,10 +1,8 @@
 // SCSS
 import warningOverlayStyles from "@/scss/components/shared/WarningOverlay.module.scss";
 // Redux
-import {
-  selectWarningOverlay,
-  updateWarningOverlay,
-} from "@/redux/slices/generalSlice";
+import { selectWarningOverlay } from "@/redux/slices/general/selectors";
+import { updateWarningOverlay } from "@/redux/slices/general/slice";
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 // Hooks
 import useOverlayTransition from "@/hooks/useOverlayTransition";

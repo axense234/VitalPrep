@@ -18,31 +18,35 @@ import { ChangeEvent, FC } from "react";
 // Redux
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import {
-  createCloudinaryImage,
-  selectLoadingCloudinaryImage,
-  selectProfile,
-} from "@/redux/slices/generalSlice";
-import {
-  createDayTemplate,
   selectDayTemplateFormModalErrorMessage,
-  selectLoadingCreateDayTemplate,
-  selectLoadingGetUserDayTemplate,
-  selectLoadingUpdateDayTemplate,
-  selectNumberOfMeals,
   selectTemplateDayTemplate,
-  setTemplateDayTemplate,
-  updateDayTemplate,
+  selectNumberOfMeals,
+  selectLoadingCreateDayTemplate,
+  selectLoadingUpdateDayTemplate,
+  selectLoadingGetUserDayTemplate,
+} from "@/redux/slices/dayTemplates/selectors";
+import {
   updateLoadingCreateDayTemplate,
   updateLoadingUpdateDayTemplate,
-  updateNumberOfMeals,
+  setTemplateDayTemplate,
   updateTemplateDayTemplate,
-} from "@/redux/slices/dayTemplatesSlice";
+  updateNumberOfMeals,
+} from "@/redux/slices/dayTemplates/slice";
 import {
-  getAllUserRecipes,
-  selectAllRecipes,
+  createDayTemplate,
+  updateDayTemplate,
+} from "@/redux/slices/dayTemplates/thunks";
+import {
+  selectProfile,
+  selectLoadingCloudinaryImage,
+} from "@/redux/slices/general/selectors";
+import { createCloudinaryImage } from "@/redux/slices/general/thunks";
+import {
   selectAllRecipesIds,
   selectLoadingGetUserRecipes,
-} from "@/redux/slices/recipesSlice";
+  selectAllRecipes,
+} from "@/redux/slices/recipes/selectors";
+import { getAllUserRecipes } from "@/redux/slices/recipes/thunks";
 // Helpers and Hooks
 import useShowCreatedEntity from "@/hooks/useShowCreatedEntity";
 import useUpdateEntityTemplateImageUrl from "@/hooks/useUpdateEntityTemplateImageUrl";

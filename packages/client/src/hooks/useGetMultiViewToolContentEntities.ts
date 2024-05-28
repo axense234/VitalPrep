@@ -1,38 +1,26 @@
 // Redux
+import { selectLoadingGetUserDayTemplates } from "@/redux/slices/dayTemplates/selectors";
+import { updateLoadingGetUserDayTemplates } from "@/redux/slices/dayTemplates/slice";
+import { getAllUserDayTemplates } from "@/redux/slices/dayTemplates/thunks";
 import {
-  selectLoadingGetUserDayTemplates,
-  getAllUserDayTemplates,
-  updateLoadingGetUserDayTemplates,
-} from "@/redux/slices/dayTemplatesSlice";
-import {
-  selectEntityQueryValues,
   selectSelectedEntityOption,
-} from "@/redux/slices/generalSlice";
-import {
-  selectLoadingGetUserIngredients,
-  getAllUserIngredients,
-  updateLoadingGetUserIngredients,
-} from "@/redux/slices/ingredientsSlice";
-import {
-  selectLoadingGetUserInstanceTemplates,
-  getAllUserInstanceTemplates,
-  updateLoadingGetUserInstanceTemplates,
-} from "@/redux/slices/instanceTemplatesSlice";
-import {
-  selectLoadingGetUserMealPrepPlans,
-  getAllUserMealPrepPlans,
-  updateLoadingGetUserMealPrepPlans,
-} from "@/redux/slices/mealPrepPlansSlice";
-import {
-  selectLoadingGetUserRecipes,
-  getAllUserRecipes,
-  updateLoadingGetUserRecipes,
-} from "@/redux/slices/recipesSlice";
-import {
-  selectLoadingGetUserUtensils,
-  getAllUserUtensils,
-  updateLoadingGetUserUtensils,
-} from "@/redux/slices/utensilsSlice";
+  selectEntityQueryValues,
+} from "@/redux/slices/general/selectors";
+import { selectLoadingGetUserIngredients } from "@/redux/slices/ingredients/selectors";
+import { updateLoadingGetUserIngredients } from "@/redux/slices/ingredients/slice";
+import { getAllUserIngredients } from "@/redux/slices/ingredients/thunks";
+import { selectLoadingGetUserInstanceTemplates } from "@/redux/slices/instanceTemplates/selectors";
+import { updateLoadingGetUserInstanceTemplates } from "@/redux/slices/instanceTemplates/slice";
+import { getAllUserInstanceTemplates } from "@/redux/slices/instanceTemplates/thunks";
+import { selectLoadingGetUserMealPrepPlans } from "@/redux/slices/mealPrepPlans/selectors";
+import { updateLoadingGetUserMealPrepPlans } from "@/redux/slices/mealPrepPlans/slice";
+import { getAllUserMealPrepPlans } from "@/redux/slices/mealPrepPlans/thunks";
+import { selectLoadingGetUserRecipes } from "@/redux/slices/recipes/selectors";
+import { updateLoadingGetUserRecipes } from "@/redux/slices/recipes/slice";
+import { getAllUserRecipes } from "@/redux/slices/recipes/thunks";
+import { selectLoadingGetUserUtensils } from "@/redux/slices/utensils/selectors";
+import { updateLoadingGetUserUtensils } from "@/redux/slices/utensils/slice";
+import { getAllUserUtensils } from "@/redux/slices/utensils/thunks";
 import { useAppSelector } from "./redux";
 // Hooks
 import useGetEntityComponents from "./useGetEntityComponents";

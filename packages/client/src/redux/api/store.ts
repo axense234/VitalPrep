@@ -1,14 +1,14 @@
 // Redux Toolkit
 import { configureStore } from "@reduxjs/toolkit";
 // Slices
-import generalSliceReducer from "../slices/generalSlice";
-import ingredientsSliceReducer from "../slices/ingredientsSlice";
-import utensilsSliceReducer from "../slices/utensilsSlice";
-import recipesSliceReducer from "../slices/recipesSlice";
-import dayTemplatesSliceReducer from "../slices/dayTemplatesSlice";
-import instanceTemplatesSliceReducer from "../slices/instanceTemplatesSlice";
-import mealPrepPlansSliceReducer from "../slices/mealPrepPlansSlice";
-import mealPrepLogsSliceReducer from "../slices/mealPrepLogsSlice";
+import generalSliceReducer from "../slices/general/slice";
+import ingredientsSliceReducer from "../slices/ingredients/slice";
+import utensilsSliceReducer from "../slices/utensils/slice";
+import recipesSliceReducer from "../slices/recipes/slice";
+import dayTemplatesSliceReducer from "../slices/dayTemplates/slice";
+import instanceTemplatesSliceReducer from "../slices/instanceTemplates/slice";
+import mealPrepPlansSliceReducer from "../slices/mealPrepPlans/slice";
+import mealPrepLogsSliceReducer from "../slices/mealPrepLogs/slice";
 
 const store = configureStore({
   reducer: {

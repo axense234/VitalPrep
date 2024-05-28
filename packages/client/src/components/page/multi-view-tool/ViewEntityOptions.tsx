@@ -4,10 +4,11 @@ import { FC } from "react";
 import viewEntityOptionsStyles from "../../../scss/components/shared/ViewEntityOptions.module.scss";
 // Redux
 import { useAppSelector } from "@/hooks/redux";
+// Redux
 import {
-  selectEntityQueryValues,
   selectSelectedEntityOption,
-} from "@/redux/slices/generalSlice";
+  selectEntityQueryValues,
+} from "@/redux/slices/general/selectors";
 // Data
 import { createToolOptions, entitySortingOptions } from "@/data";
 // Types

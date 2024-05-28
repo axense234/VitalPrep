@@ -7,18 +7,6 @@ import Sidebar from "@/components/shared/Sidebar";
 import PopupModal from "@/components/shared/modals/PopupModal";
 import ActiveMealPrepPlan from "@/components/shared/ActiveMealPrepPlan";
 import WarningOverlay from "@/components/shared/overlays/WarningOverlay";
-// Redux
-import {
-  logoutUser,
-  resetTemplateImageUrl,
-  selectInvalidJWT,
-  selectLoadingGetOAuthProfile,
-  selectLoadingGetProfile,
-  selectProfile,
-  selectSelectedEntityOption,
-  signupUserOAuth,
-} from "@/redux/slices/generalSlice";
-import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 // React
 import { useEffect, useRef } from "react";
 // ChartTS
@@ -34,6 +22,17 @@ import Script from "next/script";
 // Translations
 import { usePathname } from "@/navigation";
 import { useLocale } from "next-intl";
+// Redux
+import {
+  selectInvalidJWT,
+  selectProfile,
+  selectLoadingGetProfile,
+  selectLoadingGetOAuthProfile,
+  selectSelectedEntityOption,
+} from "@/redux/slices/general/selectors";
+import { resetTemplateImageUrl } from "@/redux/slices/general/slice";
+import { logoutUser, signupUserOAuth } from "@/redux/slices/general/thunks";
+import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 
 const SpecialLayout = ({ children }: { children: React.ReactNode }) => {
   const dispatch = useAppDispatch();

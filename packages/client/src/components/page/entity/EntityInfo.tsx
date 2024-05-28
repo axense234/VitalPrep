@@ -15,7 +15,7 @@ import MealPrepLogInfo from "./MealPrepLogInfo";
 import PageTitle from "@/components/shared/PageTitle";
 // Redux
 import { useAppSelector } from "@/hooks/redux";
-import { selectProfile } from "@/redux/slices/generalSlice";
+import { selectProfile } from "@/redux/slices/general/selectors";
 // Translations
 import { usePathname } from "@/navigation";
 

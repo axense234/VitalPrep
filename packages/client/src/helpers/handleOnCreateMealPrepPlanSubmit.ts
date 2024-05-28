@@ -6,8 +6,8 @@ import {
   changeShowGeneralModal,
   changeShowFormModal,
   setTemplateModalMessage,
-} from "@/redux/slices/generalSlice";
-import { createMealPrepPlan } from "@/redux/slices/mealPrepPlansSlice";
+} from "@/redux/slices/general/slice";
+import { createMealPrepPlan } from "@/redux/slices/mealPrepPlans/thunks";
 import { ThunkDispatch, UnknownAction } from "@reduxjs/toolkit";
 
 const handleOnCreateMealPrepPlanSubmit = ({

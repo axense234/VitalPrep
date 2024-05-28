@@ -11,10 +11,8 @@ import UpsertInstanceTemplateInterface from "../create-tool/interfaces/UpsertIns
 import { FC, useEffect } from "react";
 // Redux
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
-import {
-  getUserInstanceTemplate,
-  selectLoadingGetUserInstanceTemplate,
-} from "@/redux/slices/instanceTemplatesSlice";
+import { selectLoadingGetUserInstanceTemplate } from "@/redux/slices/instanceTemplates/selectors";
+import { getUserInstanceTemplate } from "@/redux/slices/instanceTemplates/thunks";
 // Types
 import EntityInfoProps from "@/core/interfaces/entity/EntityInfoProps";
 // Hooks

@@ -1,7 +1,7 @@
 // React
 import { FC } from "react";
 // SCSS
-import entityPreviewStyles from "../../../scss/components/shared/EntityPreview.module.scss";
+import entityPreviewStyles from "@/scss/components/shared/EntityPreview.module.scss";
 // Types
 import IngredientTemplate from "@/core/types/entity/ingredient/IngredientTemplate";
 import EntityPreviewProps from "@/core/interfaces/entity/EntityPreviewProps";

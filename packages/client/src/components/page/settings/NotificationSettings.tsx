@@ -10,16 +10,20 @@ import TextFormControl from "@/components/shared/form/TextFormControl";
 import { defaultProfileImageUrl, notificationMessageStyles } from "@/data";
 // Redux
 import {
-  createCloudinaryImage,
-  selectLoadingCloudinaryImage,
-  selectLoadingUpdateProfile,
-  selectTemplateNotificationsImageUrl,
   selectTemplateProfile,
-  setTypeOfUpdateAccountQuery,
+  selectLoadingCloudinaryImage,
+  selectTemplateNotificationsImageUrl,
+  selectLoadingUpdateProfile,
+} from "@/redux/slices/general/selectors";
+import {
   updateTemplateProfileNotificationSettings,
-  updateUser,
   updateWarningOverlay,
-} from "@/redux/slices/generalSlice";
+  setTypeOfUpdateAccountQuery,
+} from "@/redux/slices/general/slice";
+import {
+  createCloudinaryImage,
+  updateUser,
+} from "@/redux/slices/general/thunks";
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 // Types
 import UserType from "@/core/types/entity/users/UserType";

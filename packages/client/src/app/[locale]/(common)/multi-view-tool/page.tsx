@@ -10,7 +10,7 @@ import MultiViewToolContent from "@/components/page/multi-view-tool/MultiViewToo
 import ViewEntityOptions from "@/components/page/multi-view-tool/ViewEntityOptions";
 // Redux
 import { useAppSelector } from "@/hooks/redux";
-import { selectSelectedEntityOption } from "@/redux/slices/generalSlice";
+import { selectSelectedEntityOption } from "@/redux/slices/general/selectors";
 // Hooks
 import useGetMultiViewToolContentEntities from "@/hooks/useGetMultiViewToolContentEntities";
 // Helpers

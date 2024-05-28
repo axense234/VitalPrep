@@ -1,5 +1,5 @@
 // SCSS
-import gettingStartedContentStyles from "../../../../scss/pages/GettingStarted.module.scss";
+import gettingStartedContentStyles from "@/scss/pages/GettingStarted.module.scss";
 // Next
 import Image from "next/image";
 // Translations

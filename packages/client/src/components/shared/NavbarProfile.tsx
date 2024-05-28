@@ -4,7 +4,7 @@ import Image from "next/image";
 import navbarProfileStyles from "../../scss/components/shared/Navbar.module.scss";
 // Redux
 import { useAppSelector } from "@/hooks/redux";
-import { selectProfile } from "@/redux/slices/generalSlice";
+import { selectProfile } from "@/redux/slices/general/selectors";
 // Data
 import { defaultProfileImageUrl } from "@/data";
 // Translations

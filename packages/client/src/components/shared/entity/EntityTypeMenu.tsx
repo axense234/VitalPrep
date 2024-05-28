@@ -7,10 +7,8 @@ import { IoOptions } from "react-icons/io5";
 import { createToolOptions } from "@/data";
 // Redux
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
-import {
-  selectSelectedEntityOption,
-  setSelectedEntityOption,
-} from "@/redux/slices/generalSlice";
+import { selectSelectedEntityOption } from "@/redux/slices/general/selectors";
+import { setSelectedEntityOption } from "@/redux/slices/general/slice";
 // React
 import { useEffect, useRef, useState } from "react";
 // Translations

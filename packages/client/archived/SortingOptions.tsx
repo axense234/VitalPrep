@@ -6,8 +6,8 @@ import { FaArrowUp } from "react-icons/fa";
 import {
   selectEntityQueryValues,
   selectSelectedEntityOption,
-  updateEntityQueryValues,
-} from "@/redux/slices/generalSlice";
+} from "@/redux/slices/general/selectors";
+import { updateEntityQueryValues } from "@/redux/slices/general/slice";
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 // Data
 import { entitySearchByOptions, entitySortingOptions } from "@/data";

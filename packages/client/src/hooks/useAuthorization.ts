@@ -2,13 +2,12 @@
 import { useEffect, useState } from "react";
 // Redux
 import {
-  getProfileJWT,
-  getProfileOAuth,
-  selectLoadingGetOAuthProfile,
   selectLoadingGetProfile,
+  selectLoadingGetOAuthProfile,
   selectLoadingSigninProfile,
   selectProfile,
-} from "@/redux/slices/generalSlice";
+} from "@/redux/slices/general/selectors";
+import { getProfileJWT, getProfileOAuth } from "@/redux/slices/general/thunks";
 import { useAppDispatch, useAppSelector } from "./redux";
 // Translations
 import { usePathname, useRouter } from "@/navigation";

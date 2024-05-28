@@ -3,9 +3,9 @@
 import ReCAPTCHA from "react-google-recaptcha";
 // Redux
 import { useAppDispatch } from "@/hooks/redux";
-import { changeIsUserABot } from "@/redux/slices/generalSlice";
+import { changeIsUserABot } from "@/redux/slices/general/slice";
 // SCSS
-import formControlStyles from "../../../scss/components/others/FormControls.module.scss";
+import formControlStyles from "@/scss/components/others/FormControls.module.scss";
 
 const ReCAPTCHAControl = () => {
   const dispatch = useAppDispatch();

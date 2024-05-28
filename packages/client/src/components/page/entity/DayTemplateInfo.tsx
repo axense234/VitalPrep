@@ -11,11 +11,8 @@ import UpsertDayTemplateInterface from "../create-tool/interfaces/UpsertDayTempl
 import { FC, useEffect } from "react";
 // Redux
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
-import {} from "@/redux/slices/recipesSlice";
-import {
-  getUserDayTemplate,
-  selectLoadingGetUserDayTemplate,
-} from "@/redux/slices/dayTemplatesSlice";
+import { selectLoadingGetUserDayTemplate } from "@/redux/slices/dayTemplates/selectors";
+import { getUserDayTemplate } from "@/redux/slices/dayTemplates/thunks";
 // Types
 import EntityInfoProps from "@/core/interfaces/entity/EntityInfoProps";
 // Hooks

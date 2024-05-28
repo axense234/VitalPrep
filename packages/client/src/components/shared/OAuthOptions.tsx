@@ -12,7 +12,7 @@ import OAuthOptionsStyles from "../../scss/components/shared/OAuthOptions.module
 // Next Auth
 import { useAppDispatch } from "@/hooks/redux";
 // Redux
-import { signinUserThroughOAuth } from "@/redux/slices/generalSlice";
+import { signinUserThroughOAuth } from "@/redux/slices/general/thunks";
 // Translations
 import { useLocale, useTranslations } from "next-intl";
 

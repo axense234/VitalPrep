@@ -3,7 +3,7 @@ import SelectFormControlProps from "@/core/interfaces/form/SelectFormControlProp
 // React
 import { FC } from "react";
 // SCSS
-import formControlsStyles from "../../../scss/components/others/FormControls.module.scss";
+import formControlsStyles from "@/scss/components/others/FormControls.module.scss";
 // Components
 import EntityComponent from "../entity/EntityComponent";
 // React Spinners

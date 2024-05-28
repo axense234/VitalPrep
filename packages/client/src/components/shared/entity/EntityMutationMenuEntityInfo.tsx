@@ -11,7 +11,7 @@ import { FaEye } from "react-icons/fa";
 import { useTranslations } from "next-intl";
 // Redux
 import { useAppDispatch } from "@/hooks/redux";
-import { updateWarningOverlay } from "@/redux/slices/generalSlice";
+import { updateWarningOverlay } from "@/redux/slices/general/slice";
 // Types
 import EntityType from "@/core/types/entity/users/EntityType";
 

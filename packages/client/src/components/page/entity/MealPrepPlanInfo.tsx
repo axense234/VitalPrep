@@ -10,10 +10,8 @@ import UpsertMealPrepPlanInterface from "../create-tool/interfaces/UpsertMealPre
 import { FC, useEffect } from "react";
 // Redux
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
-import {
-  getUserMealPrepPlan,
-  selectLoadingGetUserMealPrepPlan,
-} from "@/redux/slices/mealPrepPlansSlice";
+import { selectLoadingGetUserMealPrepPlan } from "@/redux/slices/mealPrepPlans/selectors";
+import { getUserMealPrepPlan } from "@/redux/slices/mealPrepPlans/thunks";
 // Types
 import EntityInfoProps from "@/core/interfaces/entity/EntityInfoProps";
 // Hooks

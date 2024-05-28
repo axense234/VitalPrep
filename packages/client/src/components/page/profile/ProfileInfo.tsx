@@ -11,8 +11,8 @@ import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import {
   selectProfile,
   selectShowProfileEmail,
-  changeShowProfileEmail,
-} from "@/redux/slices/generalSlice";
+} from "@/redux/slices/general/selectors";
+import { changeShowProfileEmail } from "@/redux/slices/general/slice";
 // Translations
 import { useTranslations } from "next-intl";
 

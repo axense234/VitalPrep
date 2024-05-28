@@ -23,7 +23,7 @@ import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import {
   selectProfile,
   selectSelectedViewOption,
-} from "@/redux/slices/generalSlice";
+} from "@/redux/slices/general/selectors";
 // Helpers
 import getDeleteEntityFunction from "@/helpers/getDeleteEntityFunction";
 // Hooks

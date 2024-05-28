@@ -19,12 +19,14 @@ import {
   selectVerifiedPassword,
   selectLoadingCloudinaryImage,
   selectLoadingUpdateProfile,
-  setTemplateProfile,
+} from "@/redux/slices/general/selectors";
+import {
   updateTemplateProfile,
   changeVerifiedPassword,
-  createCloudinaryImage,
   updateWarningOverlay,
-} from "@/redux/slices/generalSlice";
+  setTemplateProfile,
+} from "@/redux/slices/general/slice";
+import { createCloudinaryImage } from "@/redux/slices/general/thunks";
 // Hooks and Helpers
 import useUpdateEntityTemplateImageUrl from "@/hooks/useUpdateEntityTemplateImageUrl";
 import handleOnUpdateAccountSettingsSubmit from "@/helpers/handleOnUpdateAccountSettingsSubmit";

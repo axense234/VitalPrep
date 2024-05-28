@@ -2,7 +2,7 @@
 import EntityQueryValues from "@/core/types/entity/EntityQueryValues";
 // Redux
 import { useAppDispatch } from "@/hooks/redux";
-import { updateEntityQueryValues } from "@/redux/slices/generalSlice";
+import { updateEntityQueryValues } from "@/redux/slices/general/slice";
 // React
 import { FC } from "react";
 // React Icons

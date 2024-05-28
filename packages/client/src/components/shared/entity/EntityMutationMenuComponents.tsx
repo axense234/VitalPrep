@@ -9,7 +9,7 @@ import { MdDelete, MdEdit } from "react-icons/md";
 import { VscTriangleDown } from "react-icons/vsc";
 // Redux
 import { useAppDispatch } from "@/hooks/redux";
-import { updateWarningOverlay } from "@/redux/slices/generalSlice";
+import { updateWarningOverlay } from "@/redux/slices/general/slice";
 // Translations
 import { useTranslations } from "next-intl";
 // Types

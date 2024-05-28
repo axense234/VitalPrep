@@ -4,8 +4,8 @@ import viewEntityOptionsStyles from "../../../scss/components/shared/ViewEntityO
 import EntityType from "@/core/types/entity/users/EntityType";
 import CreateToolOption from "@/core/types/CreateToolOption";
 // Redux
-import { setSelectedEntityOption } from "@/redux/slices/generalSlice";
 import { useAppDispatch } from "@/hooks/redux";
+import { setSelectedEntityOption } from "@/redux/slices/general/slice";
 // React
 import { FC } from "react";
 // Translations

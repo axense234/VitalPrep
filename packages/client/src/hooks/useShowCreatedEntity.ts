@@ -9,7 +9,7 @@ import {
   changeShowGeneralModal,
   setTemplateModalMessage,
   changeShowFormModal,
-} from "@/redux/slices/generalSlice";
+} from "@/redux/slices/general/slice";
 
 const useShowCreatedEntity = (
   loadingCreateEntity: LoadingStateType,

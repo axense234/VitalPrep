@@ -12,16 +12,18 @@ import ReCAPTCHAControl from "./form/ReCAPTCHAControl";
 // Redux
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import {
-  createCloudinaryImage,
-  loginUser,
+  selectTemplateProfile,
   selectIsUserABot,
-  selectLoadingCloudinaryImage,
   selectLoadingCreateProfile,
   selectLoadingLoginProfile,
-  selectTemplateProfile,
+  selectLoadingCloudinaryImage,
+} from "@/redux/slices/general/selectors";
+import { updateTemplateProfile } from "@/redux/slices/general/slice";
+import {
+  createCloudinaryImage,
   signupUser,
-  updateTemplateProfile,
-} from "@/redux/slices/generalSlice";
+  loginUser,
+} from "@/redux/slices/general/thunks";
 // Data
 import { defaultProfileImageUrl } from "@/data";
 // Hooks

@@ -3,7 +3,7 @@ import CheckboxFormControlProps from "@/core/interfaces/form/CheckboxFormControl
 // React
 import { FC } from "react";
 // SCSS
-import formControlsStyles from "../../../scss/components/others/FormControls.module.scss";
+import formControlsStyles from "@/scss/components/others/FormControls.module.scss";
 
 const CheckboxFormControl: FC<CheckboxFormControlProps> = ({
   labelContent,

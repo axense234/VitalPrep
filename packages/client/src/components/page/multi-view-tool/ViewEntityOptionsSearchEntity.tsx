@@ -6,7 +6,7 @@ import viewEntityOptionsStyles from "../../../scss/components/shared/ViewEntityO
 import EntityQueryValues from "@/core/types/entity/EntityQueryValues";
 // Redux
 import { useAppDispatch } from "@/hooks/redux";
-import { updateEntityQueryValues } from "@/redux/slices/generalSlice";
+import { updateEntityQueryValues } from "@/redux/slices/general/slice";
 // React Icons and Components
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import ViewEntityOptionsViewType from "./ViewEntityOptionsViewType";

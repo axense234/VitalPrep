@@ -19,36 +19,37 @@ import { useParams } from "next/navigation";
 // Redux
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import {
-  getAllUserUtensils,
-  selectAllUtensilsIds,
-  selectLoadingGetUserUtensils,
-} from "@/redux/slices/utensilsSlice";
-import {
-  createCloudinaryImage,
-  selectLoadingCloudinaryImage,
   selectProfile,
-} from "@/redux/slices/generalSlice";
+  selectLoadingCloudinaryImage,
+} from "@/redux/slices/general/selectors";
+import { createCloudinaryImage } from "@/redux/slices/general/thunks";
 import {
-  createRecipe,
-  selectLoadingCreateRecipe,
-  selectLoadingGetUserRecipe,
-  selectLoadingUpdateRecipe,
-  selectRecipeFormModalErrorMessage,
-  selectShowVideoTutorialContent,
-  selectShowWrittenTutorialContent,
-  selectTemplateRecipe,
-  setTemplateRecipe,
-  updateLoadingCreateRecipe,
-  updateLoadingUpdateRecipe,
-  updateRecipe,
-  updateTemplateRecipe,
-} from "@/redux/slices/recipesSlice";
-import {
-  getAllUserIngredients,
-  selectAllIngredients,
   selectAllIngredientsIds,
   selectLoadingGetUserIngredients,
-} from "@/redux/slices/ingredientsSlice";
+  selectAllIngredients,
+} from "@/redux/slices/ingredients/selectors";
+import { getAllUserIngredients } from "@/redux/slices/ingredients/thunks";
+import {
+  selectShowVideoTutorialContent,
+  selectShowWrittenTutorialContent,
+  selectRecipeFormModalErrorMessage,
+  selectTemplateRecipe,
+  selectLoadingCreateRecipe,
+  selectLoadingUpdateRecipe,
+  selectLoadingGetUserRecipe,
+} from "@/redux/slices/recipes/selectors";
+import {
+  updateLoadingCreateRecipe,
+  updateLoadingUpdateRecipe,
+  updateTemplateRecipe,
+  setTemplateRecipe,
+} from "@/redux/slices/recipes/slice";
+import { createRecipe, updateRecipe } from "@/redux/slices/recipes/thunks";
+import {
+  selectAllUtensilsIds,
+  selectLoadingGetUserUtensils,
+} from "@/redux/slices/utensils/selectors";
+import { getAllUserUtensils } from "@/redux/slices/utensils/thunks";
 // Helpers and Hooks
 import useShowCreatedEntity from "@/hooks/useShowCreatedEntity";
 import useUpdateEntityTemplateImageUrl from "@/hooks/useUpdateEntityTemplateImageUrl";

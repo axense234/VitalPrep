@@ -9,7 +9,7 @@ import EntityInfoAppearances from "@/components/page/entity/EntityInfoAppearance
 import useAuthorization from "@/hooks/useAuthorization";
 // Redux
 import { useAppSelector } from "@/hooks/redux";
-import { selectProfile } from "@/redux/slices/generalSlice";
+import { selectProfile } from "@/redux/slices/general/selectors";
 // Helpers
 import getLoadingProfile from "@/helpers/getLoadingProfile";
 

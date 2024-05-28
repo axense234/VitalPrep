@@ -13,7 +13,7 @@ import PageLink from "@/core/types/PageLink";
 import { FC } from "react";
 // Redux
 import { useAppDispatch } from "@/hooks/redux";
-import { logoutUser } from "@/redux/slices/generalSlice";
+import { logoutUser } from "@/redux/slices/general/thunks";
 // Hooks
 import useGetWindowWidth from "@/hooks/useGetWindowWidth";
 // Translations

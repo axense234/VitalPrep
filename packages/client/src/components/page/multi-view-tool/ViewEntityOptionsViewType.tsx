@@ -2,7 +2,7 @@
 import viewEntityOptionsStyles from "../../../scss/components/shared/ViewEntityOptions.module.scss";
 // Redux
 import { useAppDispatch } from "@/hooks/redux";
-import { changeSelectedViewOption } from "@/redux/slices/generalSlice";
+import { changeSelectedViewOption } from "@/redux/slices/general/slice";
 // React Icons
 import { MdGridView } from "react-icons/md";
 import { TfiViewListAlt } from "react-icons/tfi";

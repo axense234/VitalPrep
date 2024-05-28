@@ -2,13 +2,13 @@
 import EntityType from "@/core/types/entity/users/EntityType";
 // Redux
 import { State } from "@/redux/api/store";
-import { selectDayTemplateById } from "@/redux/slices/dayTemplatesSlice";
-import { selectIngredientById } from "@/redux/slices/ingredientsSlice";
-import { selectInstanceTemplateById } from "@/redux/slices/instanceTemplatesSlice";
-import { selectMealPrepLogById } from "@/redux/slices/mealPrepLogsSlice";
-import { selectMealPrepPlanById } from "@/redux/slices/mealPrepPlansSlice";
-import { selectRecipeById } from "@/redux/slices/recipesSlice";
-import { selectUtensilById } from "@/redux/slices/utensilsSlice";
+import { selectDayTemplateById } from "@/redux/slices/dayTemplates/selectors";
+import { selectIngredientById } from "@/redux/slices/ingredients/selectors";
+import { selectInstanceTemplateById } from "@/redux/slices/instanceTemplates/selectors";
+import { selectMealPrepLogById } from "@/redux/slices/mealPrepLogs/selectors";
+import { selectMealPrepPlanById } from "@/redux/slices/mealPrepPlans/selectors";
+import { selectRecipeById } from "@/redux/slices/recipes/selectors";
+import { selectUtensilById } from "@/redux/slices/utensils/selectors";
 
 const selectEntityById = (
   state: State,

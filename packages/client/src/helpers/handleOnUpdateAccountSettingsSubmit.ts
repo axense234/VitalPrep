@@ -7,8 +7,8 @@ import {
   changeShowFormModal,
   setTemplateModalMessage,
   setTypeOfUpdateAccountQuery,
-  updateUser,
-} from "@/redux/slices/generalSlice";
+} from "@/redux/slices/general/slice";
+import { updateUser } from "@/redux/slices/general/thunks";
 import { ThunkDispatch, UnknownAction } from "@reduxjs/toolkit";
 
 const handleOnUpdateAccountSettingsSubmit = (

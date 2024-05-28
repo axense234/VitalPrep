@@ -17,26 +17,28 @@ import { defaultMealPrepLogImageUrl, defaultTemplateMealPrepLog } from "@/data";
 // Redux
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import {
-  createCloudinaryImage,
-  selectLoadingCloudinaryImage,
   selectProfile,
-} from "@/redux/slices/generalSlice";
+  selectLoadingCloudinaryImage,
+} from "@/redux/slices/general/selectors";
+import { createCloudinaryImage } from "@/redux/slices/general/thunks";
 import {
-  getAllUserInstanceTemplates,
   selectAllInstanceTemplatesIds,
   selectLoadingGetUserInstanceTemplates,
-} from "@/redux/slices/instanceTemplatesSlice";
+} from "@/redux/slices/instanceTemplates/selectors";
+import { getAllUserInstanceTemplates } from "@/redux/slices/instanceTemplates/thunks";
 import {
-  selectLoadingCreateMealPrepLog,
-  selectLoadingGetUserMealPrepLog,
-  selectLoadingUpdateMealPrepLog,
   selectMealPrepLogFormModalErrorMessage,
   selectTemplateMealPrepLog,
-  setTemplateMealPrepLog,
+  selectLoadingCreateMealPrepLog,
+  selectLoadingUpdateMealPrepLog,
+  selectLoadingGetUserMealPrepLog,
+} from "@/redux/slices/mealPrepLogs/selectors";
+import {
   updateLoadingCreateMealPrepLog,
   updateLoadingUpdateMealPrepLog,
+  setTemplateMealPrepLog,
   updateTemplateMealPrepLog,
-} from "@/redux/slices/mealPrepLogsSlice";
+} from "@/redux/slices/mealPrepLogs/slice";
 import { State } from "@/redux/api/store";
 // Hooks and helpers
 import selectEntityById from "@/helpers/selectEntityById";

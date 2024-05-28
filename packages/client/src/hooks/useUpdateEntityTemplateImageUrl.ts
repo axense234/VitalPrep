@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from "./redux";
 import {
   selectLoadingCloudinaryImage,
   selectTemplateImageUrl,
-} from "@/redux/slices/generalSlice";
+} from "@/redux/slices/general/selectors";
 import { UnknownAction } from "@reduxjs/toolkit";
 
 type updateTemplateEntityReducerType = (payload: {

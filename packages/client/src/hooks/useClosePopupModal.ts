@@ -3,7 +3,7 @@ import { State } from "@/redux/api/store";
 import {
   changeShowGeneralModal,
   changeShowFormModal,
-} from "@/redux/slices/generalSlice";
+} from "@/redux/slices/general/slice";
 import { ThunkDispatch, UnknownAction } from "@reduxjs/toolkit";
 // Helpers
 import closePopupModal from "@/helpers/closePopupModal";

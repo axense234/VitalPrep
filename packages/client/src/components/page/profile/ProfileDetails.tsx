@@ -4,7 +4,7 @@ import profileDetailsStyles from "../../../scss/pages/Profile.module.scss";
 import EntityStatistics from "../entity/EntityStatistics";
 import ProfileInfo from "./ProfileInfo";
 // Redux
-import { selectProfile } from "@/redux/slices/generalSlice";
+import { selectProfile } from "@/redux/slices/general/selectors";
 import { useAppSelector } from "@/hooks/redux";
 
 const ProfileDetails = () => {
