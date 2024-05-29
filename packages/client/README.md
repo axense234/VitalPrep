@@ -1,36 +1,60 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# VitalPrep - Frontend
 
-## Getting Started
+The frontend for the [VitalPrep - Meal Prep Helper](https://github.com/axense234/VitalPrep) project.
 
-First, run the development server:
+# Website:
 
-```bash
+https://vitalprep-helper.com
+
+## Dependencies
+
+- Check package.json for details.
+- NodeJS installed(we recommend the latest stable version)
+- Rename _.env.local.sample_ to _.env.local_ and put appropiate **env variables**:
+  - **GITHUB_CLIENT_ID** = your github oauth client id
+  - **GITHUB_CLIENT_SECRET** = your github oauth client secret
+  - **GOOGLE_CLIENT_ID** = your google oauth client id
+  - **GOOGLE_CLIENT_SECRET** = your google client secret
+  - **NEXTAUTH_SECRET** = your next-auth secret
+  - **NEXTAUTH_URL** = your next-auth base url
+  - **NEXT_PUBLIC_ADMIN_USE_UNIQUE_IDENTIFIER** = the unique identifier that signals to the server that requests are allowed from this specific frontend
+  - **NEXT_PUBLIC_ONE_SIGNAL_APP_ID** = your one signal app id
+  - **NEXT_PUBLIC_REST_API_KEY** = your one signal rest api key
+  - **NEXT_PUBLIC_RECAPTCHA_SITE_KEY** = your recaptcha site key
+  - **NEXT_PUBLIC_TESTING_CLIENT_SITE_URL** = your testing client site url
+  - **NEXT_PUBLIC_PRODUCTION_CLIENT_SITE_URL** = your production client site url
+  - **NEXT_PUBLIC_TESTING_SERVER_SITE_URL** = your testing server site url
+  - **NEXT_PUBLIC_PRODUCTION_SERVER_SITE_URL** = your production server site url
+  - **NEXT\_\*PUBLIC_CLOUDINARY_UPLOAD_IMAGE_URL** = your cloudinary upload image url
+
+### Executing program
+
+- Test using next's dev command
+
+```
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Test through docker-compose
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+docker build -t vitalprep-frontend .
+docker compose up
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## **Authors**
 
-## Learn More
+- **axense234(Comanescu Andrei)**
 
-To learn more about Next.js, take a look at the following resources:
+## **Version History**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- 1.0.0
+  - Initial Release(with the dev environment setup, on 29.05.2024)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## **License**
 
-## Deploy on Vercel
+This project is licensed under the GNU License - see the LICENSE.md file for details
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## **Acknowledgments**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Inspired by the activity of Meal Prepping itself, search it up, i believe it's a very nice activity to partake in
