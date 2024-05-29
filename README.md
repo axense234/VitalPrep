@@ -54,34 +54,21 @@ With those entities the user can create Meal Prep Plans, activate them and recei
 
 - Check package.json for details.
 - NodeJS installed(we recommend the latest stable version)
+- PostgreSQL installed (if you are using a local PostgreSQL instance)
 - Redis installed (if you are using a local Redis instance)
 - Also if you are on Windows, you will need to install Linux since you will need to use Redis, you can install Linux on Windows by installing the Windows Subsystem for Linux(WSL) by following this [**_guide_**](https://learn.microsoft.com/en-us/windows/wsl/install).
 - In each individual **package** in the **packages** directory rename the _.env.sample_, _.env.local.sample_ files to _.env_ and _.env.local_ respectively.
 
 ### Installing
 
+NOTE: have your databases ready and **.env** files prepared in all **packages**
+NOTE: follow the installation guides on the packages first
+
 ```
-git clone https://github.com/axense234/VitalPrep
-cd VitalPrep
 npm install
-npm run migration;npm run generation
 ```
 
 ### Executing program
-
-- follow these steps **after completing the variables in .env**!!!
-- if you are using an **internal Redis instance**:
-
-```
-redis-server -> in a WSL terminal if on Windows !!!
-npm run dev
-```
-
-- if you are using an **external Redis instance**:
-
-```
-npm run dev
-```
 
 ## **Authors**
 

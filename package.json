@@ -10,8 +10,8 @@
   "scripts": {
     "build": "lerna run build",
     "clean": "lerna clean",
-    "migration": "npx prisma migrate dev --schema=./packages/server/prisma/schema.prisma",
-    "generation": "npx prisma generate --schema=./packages/server/prisma/schema.prisma"
+    "migration": "cd ./packages/server && npx prisma migrate dev",
+    "generation": "cd ./packages/server && npx prisma generate"
   },
   "devDependencies": {
     "eslint": "^8.57.0",
