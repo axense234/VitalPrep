@@ -1,0 +1,7 @@
+**/.git
+**/.gitignore
+**/Dockerfile
+**/.dockerignore
+.env.local
+.env.local.sample
+node_modules

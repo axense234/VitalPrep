@@ -300,14 +300,14 @@
         }
       },
       "mealPrepPlan": {
-        "formTitle": "Sie einen Essensvorbereitungsplan",
-        "createSectionTitle": "Erstellen Sie einen Essensvorbereitungsplan",
+        "formTitle": "Sie einen \"Meal Prep\"-Plan",
+        "createSectionTitle": "Erstellen Sie einen \"Meal Prep\"-Plan",
         "updateSectionTitle": "Bearbeiten Sie den Plan „Meal Prep“.",
         "name": "Name:",
         "defaultNameValue": "Kartoffelplan",
         "image": "Bild:",
         "nbOfEntities": "Anzahl der verwendeten Vorlagen:",
-        "createButtonLabel": "Erstellen Sie einen Essensvorbereitungsplan",
+        "createButtonLabel": "Erstellen Sie einen \"Meal Prep\"-Plan",
         "updateButtonLabel": "Bearbeiten Sie den Plan „Meal Prep“.",
         "selectFormControlsLabels": {
           "componentsLabel": "Individuelle Sitzungsvorlagen:",
@@ -340,7 +340,7 @@
         "recipe": "Rezept",
         "dayTemplate": "Tagesplan",
         "instanceTemplate": "Sitzungsvorlage",
-        "mealPrepPlan": "Essensvorbereitungsplan",
+        "mealPrepPlan": "\"Meal Prep\"-Plan",
         "mealPrepLog": "Sitzungsprotokoll"
       }
     }
@@ -354,7 +354,7 @@
         "recipe": "Rezept",
         "dayTemplate": "Tagesplan",
         "instanceTemplate": "Sitzungsvorlage",
-        "mealPrepPlan": "Essensvorbereitungsplan",
+        "mealPrepPlan": "\"Meal Prep\"-Plan",
         "mealPrepLog": "Sitzungsprotokoll"
       }
     },
@@ -696,22 +696,22 @@
             "title": "Ziel des Führers",
             "descriptions": {
               "1": "<span>NOTIZ:</span> Für das folgende Tutorial sind Vorkenntnisse in der Essenszubereitung erforderlich.  <faq>FAQ-Seite</faq>.",
-              "2": "Dieser Leitfaden <span>Ziel</span> ist es, Ihnen beizubringen, wie man ein erstellt <span>Essensvorbereitungsplan</span> Um es auf praktische Weise zu nutzen, indem Sie es aktivieren, damit Sie benachrichtigt werden, wann immer Sie Ihre Mahlzeiten zubereiten müssen."
+              "2": "Dieser Leitfaden <span>Ziel</span> ist es, Ihnen beizubringen, wie man ein erstellt <span>\"Meal Prep\"-Plan</span> Um es auf praktische Weise zu nutzen, indem Sie es aktivieren, damit Sie benachrichtigt werden, wann immer Sie Ihre Mahlzeiten zubereiten müssen."
             },
             "imageAlt": "Leitzielbild",
             "images": {
-              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715177907/VitalPrep/Screenshot_33_o5fzdm.png"
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1716973722/VitalPrep/guideImages/Screenshot_from_2024-05-29_12-03-05_gyoues.png"
             }
           },
           "2": {
             "title": "Werkzeugseite erstellen",
             "descriptions": {
-              "1": "Um eine zu erstellen <span>Essensvorbereitungsplan</span>, müssen Sie zunächst einige erstellen <span>Entitäten</span>.  <span>Entitäten</span>, müssen Sie das verwenden <createTool>Werkzeugseite erstellen</createTool>. ",
+              "1": "Um eine zu erstellen <span>\"Meal Prep\"-Plan</span>, müssen Sie zunächst einige erstellen <span>Entitäten</span>.  <span>Entitäten</span>, müssen Sie das verwenden <createTool>Werkzeugseite erstellen</createTool>. ",
               "2": "Um die Benutzeroberfläche des Erstellungstools zu ändern, verwenden Sie das Menü auf der linken Seite Ihres Bildschirms, das bei Bedarf ausgeblendet/angezeigt werden kann."
             },
             "imageAlt": "Erstellen Sie ein Werkzeugseitenbild",
             "images": {
-              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715179083/VitalPrep/Screenshot_35_sh7nyg.png"
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1716974349/VitalPrep/guideImages/Screenshot_from_2024-05-29_12-18-51_csrvp6.png"
             }
           },
           "3": {
@@ -722,7 +722,7 @@
             },
             "imageAlt": "Bild der Multi-View-Tool-Seite",
             "images": {
-              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715178126/VitalPrep/Screenshot_34_vb9vwf.png"
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1716974698/VitalPrep/guideImages/Screenshot_from_2024-05-29_12-24-35_alfopq.png"
             }
           },
           "4": {
@@ -734,8 +734,8 @@
             },
             "imageAlt": "Bild der Werkzeugseite anzeigen",
             "images": {
-              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715179643/VitalPrep/Screenshot_37_lo4qpe.png",
-              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715179504/VitalPrep/Screenshot_36_yaa7zm.png"
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1716974906/VitalPrep/guideImages/Screenshot_from_2024-05-29_12-27-56_nuk3q9.png",
+              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1716975066/VitalPrep/guideImages/Screenshot_from_2024-05-29_12-30-37_fkypdr.png"
             }
           }
         }
@@ -753,8 +753,8 @@
             },
             "imageAlt": "Bild der Zutatentität",
             "images": {
-              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715181329/VitalPrep/Screenshot_38_tdcdyr.png",
-              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715181484/VitalPrep/Screenshot_39_moj2tx.png"
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1716975372/VitalPrep/guideImages/Screenshot_from_2024-05-29_12-35-49_lvby01.png",
+              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1716975669/VitalPrep/guideImages/Screenshot_from_2024-05-29_12-38-29_hjqwp0.png"
             }
           },
           "2": {
@@ -766,8 +766,8 @@
             },
             "imageAlt": "Utensilienbild",
             "images": {
-              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715181630/VitalPrep/Screenshot_40_rvtkbe.png",
-              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715181718/VitalPrep/Screenshot_41_sl4fdr.png"
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1716975934/VitalPrep/guideImages/Screenshot_from_2024-05-29_12-43-15_kq0jwm.png",
+              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1716975935/VitalPrep/guideImages/Screenshot_from_2024-05-29_12-44-36_kplbbw.png"
             }
           },
           "3": {
@@ -780,9 +780,9 @@
             },
             "imageAlt": "Rezept-Entitätsbild",
             "images": {
-              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715181911/VitalPrep/Screenshot_42_gw8stk.png",
-              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715182012/VitalPrep/Screenshot_43_ijmjfh.png",
-              "3": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715182089/VitalPrep/Screenshot_45_erigz6.png"
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1716977666/VitalPrep/guideImages/Screenshot_from_2024-05-29_13-14-02_jg7sm9.png",
+              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1716977826/VitalPrep/guideImages/Screenshot_from_2024-05-29_13-16-47_dd5lze.png",
+              "3": "https://res.cloudinary.com/birthdayreminder/image/upload/v1716976417/VitalPrep/guideImages/Screenshot_from_2024-05-29_12-52-01_boj1te.png"
             }
           },
           "4": {
@@ -795,15 +795,15 @@
             },
             "imageAlt": "Tagesplan-Entitätsbild",
             "images": {
-              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715183076/VitalPrep/Screenshot_46_qw9rgz.png",
-              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715183623/VitalPrep/Screenshot_47_qzv7b4.png",
-              "3": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715183690/VitalPrep/Screenshot_48_mompqr.png"
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1716978203/VitalPrep/guideImages/Screenshot_from_2024-05-29_13-23-08_tccwqj.png",
+              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1716978289/VitalPrep/guideImages/Screenshot_from_2024-05-29_13-24-26_ykm1ag.png",
+              "3": "https://res.cloudinary.com/birthdayreminder/image/upload/v1716977013/VitalPrep/guideImages/Screenshot_from_2024-05-29_13-00-26_dejmme.png"
             }
           },
           "5": {
             "title": "Sitzungsvorlagen",
             "descriptions": {
-              "1": "<span>Sitzungsvorlagen</span> sind die Hauptbestandteile von a <span>Essensvorbereitungsplan</span>.  <span>Essenszubereitungspläne</span>.  <span>Essensvorbereitungsplan</span>.",
+              "1": "<span>Sitzungsvorlagen</span> sind die Hauptbestandteile von a <span>\"Meal Prep\"-Plan</span>.  <span>Essenszubereitungspläne</span>.  <span>\"Meal Prep\"-Plan</span>.",
               "2": "<span>Sitzungsvorlagen</span> werden auch von verwendet <span>Sitzungsprotokolle</span>.",
               "3": "Benutzen Sie die <createTool> Werkzeugseite erstellen</createTool> eine erstellen <span>Sitzungsvorlage</span>. ",
               "4": "Wählen Sie anschließend a aus <span>spezifischer Tagesplan</span> für jeden einzelnen abgedeckten Tag.",
@@ -811,24 +811,24 @@
             },
             "imageAlt": "Sitzungsvorlagen-Entitätsbild",
             "images": {
-              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715183829/VitalPrep/Screenshot_49_cnpacm.png",
-              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715183890/VitalPrep/Screenshot_50_p8l6wt.png",
-              "3": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715184001/VitalPrep/Screenshot_52_ctxjaz.png"
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1716978558/VitalPrep/guideImages/Screenshot_from_2024-05-29_13-28-58_eb2tcf.png?",
+              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1716978741/VitalPrep/guideImages/Screenshot_from_2024-05-29_13-32-00_m6fvxh.png",
+              "3": "https://res.cloudinary.com/birthdayreminder/image/upload/v1716979005/VitalPrep/guideImages/Screenshot_from_2024-05-29_13-36-05_lowcud.png"
             }
           },
           "6": {
             "title": "Essenszubereitungspläne",
             "descriptions": {
-              "1": "<span>Essenszubereitungspläne</span> Stellen Sie die tatsächlichen Pläne dar, denen Sie folgen werden.  <span>Benachrichtigungen</span> für dein <span>Essensvorbereitungsplan-Sitzungen</span>, du wirst brauchen <span>aktivieren Sie</span> sagte Meal Prep Plan und auch <span>Abonnieren Sie unsere Benachrichtigungen</span>.",
+              "1": "<span>Essenszubereitungspläne</span> Stellen Sie die tatsächlichen Pläne dar, denen Sie folgen werden.  <span>Benachrichtigungen</span> für dein <span>\"Meal Prep\"-Plan-Sitzungen</span>, du wirst brauchen <span>aktivieren Sie</span> sagte Meal Prep Plan und auch <span>Abonnieren Sie unsere Benachrichtigungen</span>.",
               "2": "Benutzen Sie die <createTool> Werkzeugseite erstellen</createTool> eine erstellen <span>Sitzungsvorlage</span>. ",
               "3": "Wählen Sie anschließend a aus <span>spezifische Sitzungsvorlage</span> für jede spezifische Sitzung die <span>Wochentag</span> Und <span>Stunde</span> Sie beginnen mit der Essenszubereitung.",
-              "4": "Zu <span>Sicht</span> all dein <span>erstellte Einheiten</span>, verwenden Sie die <multiViewTool>Multi-View-Tool-Seite</multiViewTool>.  <span>Einzelwesen</span> Klicken Sie im Detail auf eine beliebige <span>Essensvorbereitungsplan</span> Komponente auf der <multiViewTool> Multi-View-Tool-Seite</multiViewTool>."
+              "4": "Zu <span>Sicht</span> all dein <span>erstellte Einheiten</span>, verwenden Sie die <multiViewTool>Multi-View-Tool-Seite</multiViewTool>.  <span>Einzelwesen</span> Klicken Sie im Detail auf eine beliebige <span>\"Meal Prep\"-Plan</span> Komponente auf der <multiViewTool> Multi-View-Tool-Seite</multiViewTool>."
             },
             "imageAlt": "Bild des Essenszubereitungsplans",
             "images": {
-              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715184134/VitalPrep/Screenshot_53_bgbocc.png",
-              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715184377/VitalPrep/Screenshot_54_qsapvp.png",
-              "3": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715184475/VitalPrep/Screenshot_55_ukdzrs.png"
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1716979497/VitalPrep/guideImages/Screenshot_from_2024-05-29_13-44-42_ma6ozg.png",
+              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1716979640/VitalPrep/guideImages/Screenshot_from_2024-05-29_13-47-07_y5b1q0.png ",
+              "3": "https://res.cloudinary.com/birthdayreminder/image/upload/v1716979783/VitalPrep/guideImages/Screenshot_from_2024-05-29_13-49-23_ucu5yu.png"
             }
           }
         }
@@ -839,11 +839,11 @@
           "1": {
             "title": "Was sind Sitzungsprotokolle?",
             "descriptions": {
-              "1": "<span>Sitzungsprotokolle</span> repräsentieren die Protokolle Ihrer <span>aktive Essensvorbereitungsplan-Sitzungen</span>.  <span>Sitzung zum Essensvorbereitungsplan</span>.  <span>Verfolgung von Essensvorbereitungsplan-Sitzungen</span>."
+              "1": "<span>Sitzungsprotokolle</span> repräsentieren die Protokolle Ihrer <span>aktive \"Meal Prep\"-Plan-Sitzungen</span>.  <span>Sitzung zum \"Meal Prep\"-Plan</span>.  <span>Verfolgung von \"Meal Prep\"-Plan-Sitzungen</span>."
             },
             "imageAlt": "Bild eines aktiven Essenszubereitungsplans",
             "images": {
-              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715177907/VitalPrep/Screenshot_33_o5fzdm.png"
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1716979783/VitalPrep/guideImages/Screenshot_from_2024-05-29_13-49-23_ucu5yu.png"
             }
           },
           "2": {
@@ -854,8 +854,8 @@
             },
             "imageAlt": "Sitzungsprotokollbild hinzufügen",
             "images": {
-              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715185596/VitalPrep/Screenshot_56_dvrgak.png",
-              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715185699/VitalPrep/Screenshot_57_mjxlki.png"
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1716980534/VitalPrep/guideImages/Screenshot_from_2024-05-29_13-59-30_xjwnrc.png",
+              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1716980716/VitalPrep/guideImages/Screenshot_from_2024-05-29_14-05-05_tzszah.png"
             }
           },
           "3": {
@@ -865,8 +865,8 @@
             },
             "imageAlt": "Sitzungsprotokollbild anzeigen",
             "images": {
-              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715185923/VitalPrep/Screenshot_59_bdjdnw.png",
-              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715185889/VitalPrep/Screenshot_58_aljwha.png"
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1716981224/VitalPrep/guideImages/Screenshot_from_2024-05-29_14-12-35_ka1j3k.png",
+              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1716981122/VitalPrep/guideImages/Screenshot_from_2024-05-29_14-11-28_fm8w4w.png"
             }
           }
         }
@@ -882,10 +882,10 @@
             },
             "imageAlt": "Profilabschnittsbild",
             "images": {
-              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715187350/VitalPrep/Screenshot_60_cch6wk.png",
-              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715187384/VitalPrep/Screenshot_61_frtxb0.png",
-              "3": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715187473/VitalPrep/Screenshot_62_u2tbk6.png",
-              "4": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715187500/VitalPrep/Screenshot_63_ovkvtp.png"
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1716981595/VitalPrep/guideImages/Screenshot_from_2024-05-29_14-19-12_wzrfr0.png",
+              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1716981601/VitalPrep/guideImages/Screenshot_from_2024-05-29_14-19-37_kh2dwr.png",
+              "3": "https://res.cloudinary.com/birthdayreminder/image/upload/v1716981794/VitalPrep/guideImages/Screenshot_from_2024-05-29_14-22-51_xpzpw3.png",
+              "4": "https://res.cloudinary.com/birthdayreminder/image/upload/v1716981794/VitalPrep/guideImages/Screenshot_from_2024-05-29_14-22-53_xldwx7.png"
             }
           },
           "2": {
@@ -896,8 +896,8 @@
             },
             "imageAlt": "Bild des Abschnitts „Einstellungen“.",
             "images": {
-              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715185596/VitalPrep/Screenshot_56_dvrgak.png",
-              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715187685/VitalPrep/Screenshot_64_vxekot.png"
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1716980534/VitalPrep/guideImages/Screenshot_from_2024-05-29_13-59-30_xjwnrc.png",
+              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1716981994/VitalPrep/guideImages/Screenshot_from_2024-05-29_14-26-21_xy14dy.png"
             }
           },
           "3": {
@@ -907,18 +907,18 @@
             },
             "imageAlt": "Bild des Feedback-Abschnitts",
             "images": {
-              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715187774/VitalPrep/Screenshot_65_gkix9r.png"
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1716982414/VitalPrep/guideImages/Screenshot_from_2024-05-29_14-33-16_l31zpi.png"
             }
           },
           "4": {
             "title": "Benachrichtigungen",
             "descriptions": {
-              "1": "Bekommen <span>Benachrichtigungen vom Typ Erinnerung</span> während ich ein <span>Essensvorbereitungsplan aktiv</span> du musst <span>Abonnieren Sie unseren Benachrichtigungsdienst</span> entweder durch die <span>Glocke</span> in der unteren rechten Ecke des Bildschirms oder durch unsere fixiert <span>modal</span>.",
+              "1": "Bekommen <span>Benachrichtigungen vom Typ Erinnerung</span> während ich ein <span>\"Meal Prep\"-Plan aktiv</span> du musst <span>Abonnieren Sie unseren Benachrichtigungsdienst</span> entweder durch die <span>Glocke</span> in der unteren rechten Ecke des Bildschirms oder durch unsere fixiert <span>modal</span>.",
               "2": "Du kannst <span>abbestellen</span> wann immer Sie möchten, indem Sie auf die Glocke klicken und dann Abmelden."
             },
             "imageAlt": "Bild des Abschnitts „Benachrichtigungen“.",
             "images": {
-              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715188301/VitalPrep/Screenshot_66_ryl1fc.png"
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1716982749/VitalPrep/guideImages/Screenshot_from_2024-05-29_14-38-17_ejaksn.png"
             }
           },
           "5": {
@@ -1105,7 +1105,7 @@
       "title": "Kontaktiere uns",
       "info": {
         "phoneNumber": "Telefonnummer: {phoneNumber}",
-        "email": "Email Email}"
+        "email": "Email: {email}"
       }
     }
   },

@@ -700,7 +700,7 @@
             },
             "imageAlt": "Guide Goal Image",
             "images": {
-              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715177907/VitalPrep/Screenshot_33_o5fzdm.png"
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1716973717/VitalPrep/guideImages/Screenshot_from_2024-05-29_12-02-29_jvaizw.png"
             }
           },
           "2": {
@@ -722,7 +722,7 @@
             },
             "imageAlt": "Multi-View Tool Page Image",
             "images": {
-              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715178126/VitalPrep/Screenshot_34_vb9vwf.png"
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1716974698/VitalPrep/guideImages/Screenshot_from_2024-05-29_12-23-54_kruajj.png"
             }
           },
           "4": {
@@ -734,8 +734,8 @@
             },
             "imageAlt": "View Tool Page Image",
             "images": {
-              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715179643/VitalPrep/Screenshot_37_lo4qpe.png",
-              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715179504/VitalPrep/Screenshot_36_yaa7zm.png"
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1716974906/VitalPrep/guideImages/Screenshot_from_2024-05-29_12-27-56_nuk3q9.png",
+              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1716975065/VitalPrep/guideImages/Screenshot_from_2024-05-29_12-29-58_j6pxpw.png"
             }
           }
         }
@@ -753,8 +753,8 @@
             },
             "imageAlt": "Ingredient Entity Image",
             "images": {
-              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715181329/VitalPrep/Screenshot_38_tdcdyr.png",
-              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715181484/VitalPrep/Screenshot_39_moj2tx.png"
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1716975370/VitalPrep/guideImages/Screenshot_from_2024-05-29_12-35-27_ixficw.png",
+              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1716975656/VitalPrep/guideImages/Screenshot_from_2024-05-29_12-38-10_kjz1rp.png"
             }
           },
           "2": {
@@ -766,8 +766,8 @@
             },
             "imageAlt": "Utensil Entity Image",
             "images": {
-              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715181630/VitalPrep/Screenshot_40_rvtkbe.png",
-              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715181718/VitalPrep/Screenshot_41_sl4fdr.png"
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1716975933/VitalPrep/guideImages/Screenshot_from_2024-05-29_12-42-53_b1dnut.png",
+              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1716975935/VitalPrep/guideImages/Screenshot_from_2024-05-29_12-43-54_vbrzte.png"
             }
           },
           "3": {
@@ -780,9 +780,9 @@
             },
             "imageAlt": "Recipe Entity Image",
             "images": {
-              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715181911/VitalPrep/Screenshot_42_gw8stk.png",
-              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715182012/VitalPrep/Screenshot_43_ijmjfh.png",
-              "3": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715182089/VitalPrep/Screenshot_45_erigz6.png"
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1716977663/VitalPrep/guideImages/Screenshot_from_2024-05-29_13-11-03_k9whke.png",
+              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1716977822/VitalPrep/guideImages/Screenshot_from_2024-05-29_13-16-12_nchs02.png",
+              "3": "https://res.cloudinary.com/birthdayreminder/image/upload/v1716976415/VitalPrep/guideImages/Screenshot_from_2024-05-29_12-51-37_qhjj2d.png"
             }
           },
           "4": {
@@ -795,9 +795,9 @@
             },
             "imageAlt": "Day Plan Entity Image",
             "images": {
-              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715183076/VitalPrep/Screenshot_46_qw9rgz.png",
-              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715183623/VitalPrep/Screenshot_47_qzv7b4.png",
-              "3": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715183690/VitalPrep/Screenshot_48_mompqr.png"
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1716978096/VitalPrep/guideImages/Screenshot_from_2024-05-29_13-20-01_ldjvet.png",
+              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1716978284/VitalPrep/guideImages/Screenshot_from_2024-05-29_13-23-58_pnacz7.png",
+              "3": "https://res.cloudinary.com/birthdayreminder/image/upload/v1716977015/VitalPrep/guideImages/Screenshot_from_2024-05-29_13-00-01_l4mwzn.png"
             }
           },
           "5": {
@@ -811,9 +811,9 @@
             },
             "imageAlt": "Session Template Entity Image",
             "images": {
-              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715183829/VitalPrep/Screenshot_49_cnpacm.png",
-              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715183890/VitalPrep/Screenshot_50_p8l6wt.png",
-              "3": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715184001/VitalPrep/Screenshot_52_ctxjaz.png"
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1716978556/VitalPrep/guideImages/Screenshot_from_2024-05-29_13-28-03_hjsijq.png",
+              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1716978740/VitalPrep/guideImages/Screenshot_from_2024-05-29_13-31-09_qiqokv.png",
+              "3": "https://res.cloudinary.com/birthdayreminder/image/upload/v1716979005/VitalPrep/guideImages/Screenshot_from_2024-05-29_13-35-40_zc29k3.pngs"
             }
           },
           "6": {
@@ -826,9 +826,9 @@
             },
             "imageAlt": "Meal Prep Plan Image",
             "images": {
-              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715184134/VitalPrep/Screenshot_53_bgbocc.png",
-              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715184377/VitalPrep/Screenshot_54_qsapvp.png",
-              "3": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715184475/VitalPrep/Screenshot_55_ukdzrs.png"
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1716979497/VitalPrep/guideImages/Screenshot_from_2024-05-29_13-41-33_unwtbr.png",
+              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1716979640/VitalPrep/guideImages/Screenshot_from_2024-05-29_13-46-19_mrzsja.png",
+              "3": "https://res.cloudinary.com/birthdayreminder/image/upload/v1716979780/VitalPrep/guideImages/Screenshot_from_2024-05-29_13-49-07_utx48q.png"
             }
           }
         }
@@ -843,7 +843,7 @@
             },
             "imageAlt": "Active Meal Prep Plan Image",
             "images": {
-              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715177907/VitalPrep/Screenshot_33_o5fzdm.png"
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1716979780/VitalPrep/guideImages/Screenshot_from_2024-05-29_13-49-07_utx48q.png"
             }
           },
           "2": {
@@ -854,8 +854,8 @@
             },
             "imageAlt": "Add Session Log Image",
             "images": {
-              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715185596/VitalPrep/Screenshot_56_dvrgak.png",
-              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715185699/VitalPrep/Screenshot_57_mjxlki.png"
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1716980553/VitalPrep/guideImages/Screenshot_from_2024-05-29_13-59-01_wz586a.png",
+              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1716980715/VitalPrep/guideImages/Screenshot_from_2024-05-29_14-04-48_jzd4ys.png"
             }
           },
           "3": {
@@ -865,8 +865,8 @@
             },
             "imageAlt": "View Session Log Image",
             "images": {
-              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715185923/VitalPrep/Screenshot_59_bdjdnw.png",
-              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715185889/VitalPrep/Screenshot_58_aljwha.png"
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1716981222/VitalPrep/guideImages/Screenshot_from_2024-05-29_14-12-23_jgudim.png ",
+              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1716981117/VitalPrep/guideImages/Screenshot_from_2024-05-29_14-10-57_w2hyhc.png"
             }
           }
         }
@@ -882,10 +882,10 @@
             },
             "imageAlt": "Profile Section Image",
             "images": {
-              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715187350/VitalPrep/Screenshot_60_cch6wk.png",
-              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715187384/VitalPrep/Screenshot_61_frtxb0.png",
-              "3": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715187473/VitalPrep/Screenshot_62_u2tbk6.png",
-              "4": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715187500/VitalPrep/Screenshot_63_ovkvtp.png"
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1716981590/VitalPrep/guideImages/Screenshot_from_2024-05-29_14-18-51_q84gfq.png",
+              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1716981601/VitalPrep/guideImages/Screenshot_from_2024-05-29_14-19-26_q5kmi1.png",
+              "3": "https://res.cloudinary.com/birthdayreminder/image/upload/v1716981792/VitalPrep/guideImages/Screenshot_from_2024-05-29_14-22-21_qjicx6.png",
+              "4": "https://res.cloudinary.com/birthdayreminder/image/upload/v1716981793/VitalPrep/guideImages/Screenshot_from_2024-05-29_14-22-27_rplgcs.png"
             }
           },
           "2": {
@@ -896,8 +896,8 @@
             },
             "imageAlt": "Settings Section Image",
             "images": {
-              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715185596/VitalPrep/Screenshot_56_dvrgak.png",
-              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715187685/VitalPrep/Screenshot_64_vxekot.png"
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1716980553/VitalPrep/guideImages/Screenshot_from_2024-05-29_13-59-01_wz586a.png",
+              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1716981993/VitalPrep/guideImages/Screenshot_from_2024-05-29_14-25-43_vqjrk2.png"
             }
           },
           "3": {
@@ -907,7 +907,7 @@
             },
             "imageAlt": "Feedback Section Image",
             "images": {
-              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715187774/VitalPrep/Screenshot_65_gkix9r.png"
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1716982413/VitalPrep/guideImages/Screenshot_from_2024-05-29_14-30-55_v9gwfq.png"
             }
           },
           "4": {
@@ -918,7 +918,7 @@
             },
             "imageAlt": "Notifications Section Image",
             "images": {
-              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1715188301/VitalPrep/Screenshot_66_ryl1fc.png"
+              "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1716982735/VitalPrep/guideImages/Screenshot_from_2024-05-29_14-35-34_dp2ffg.png"
             }
           },
           "5": {

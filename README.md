@@ -59,14 +59,26 @@ With those entities the user can create Meal Prep Plans, activate them and recei
 - Also if you are on Windows, you will need to install Linux since you will need to use Redis, you can install Linux on Windows by installing the Windows Subsystem for Linux(WSL) by following this [**_guide_**](https://learn.microsoft.com/en-us/windows/wsl/install).
 - In each individual **package** in the **packages** directory rename the _.env.sample_, _.env.local.sample_ files to _.env_ and _.env.local_ respectively.
 
-### Installing
+### Installing and Execution
 
-NOTE: have your databases ready and **.env** files prepared in all **packages**
-NOTE: follow the installation guides on the packages first
+**NOTE**: have your databases ready and **.env** files prepared in all **packages** <br>
+**NOTE**: follow the installation guides on the packages
+
+### Quick Setup with Docker
+
+**NOTE**: rename the _.env.sample_ file to _.env_ and put the respective environment variables for this quick setup to work
 
 ```
-npm install
+docker build -f ./packages/server/Dockerfile -t vitalprep-server ./packages/server
+docker build -f ./packages/client/Dockerfile -t vitalprep-client ./packages/client
+docker compose up
 ```
+
+### Packages
+
+- [Frontend](https://github.com/axense234/VitalPrep/tree/master/packages/client)
+- [Backend](https://github.com/axense234/VitalPrep/tree/master/packages/server)
+- [Jobs](https://github.com/axense234/VitalPrep/tree/master/packages/jobs)
 
 ### Executing program
 

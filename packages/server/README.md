@@ -53,3 +53,31 @@ https://vitalprep-helper.com
 
 - **DATABASE_URL** = the url of your postgresql db instance, can be left on the default value since it is composed of other respective env variables or can be changed for a quick setup
 - **REDIS_INSTANCE_URL** = the same as **DATABASE_URl** but for redis
+
+### Installation and Execution
+
+- Normal setup
+
+```
+npm install
+npx prisma migrate dev
+npx prisma generate
+npm run dev
+```
+
+## **Authors**
+
+- **axense234(Comanescu Andrei)**
+
+## **Version History**
+
+- 1.0.0
+  - Initial Release(with the dev environment setup, on 29.05.2024)
+
+## **License**
+
+This project is licensed under the GNU License - see the LICENSE.md file for details
+
+## **Acknowledgments**
+
+- Inspired by the activity of Meal Prepping itself, search it up, i believe it's a very nice activity to partake in

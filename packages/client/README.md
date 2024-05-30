@@ -27,19 +27,13 @@ https://vitalprep-helper.com
   - **NEXT_PUBLIC_PRODUCTION_SERVER_SITE_URL** = your production server site url
   - **NEXT\_\*PUBLIC_CLOUDINARY_UPLOAD_IMAGE_URL** = your cloudinary upload image url
 
-### Executing program
+### Installation and Execution
 
-- Test using next's dev command
+- Normal setup
 
 ```
+npm install
 npm run dev
-```
-
-- Test through docker-compose
-
-```
-docker build -t vitalprep-frontend .
-docker compose up
 ```
 
 ## **Authors**
