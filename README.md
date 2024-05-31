@@ -6,6 +6,10 @@ VitalPrep - Meal Prep helper is a fullstack web application that gives users a w
 
 https://vitalprep-helper.com
 
+# Design(created in figma)
+
+https://www.figma.com/design/HxIgMFqlXjNLuVpPhVsmrT/VitalPrep-Design?node-id=1-3&t=Sa6cZZAqrh9moD6y-0
+
 ## Description
 
 VitalPrep - Meal Prep helper is a fullstack web application that gives users a way to create Meal Prep Plans that they can follow and be notified of. The app is based around entities, which are components of a Meal Prep Plan.<br>
