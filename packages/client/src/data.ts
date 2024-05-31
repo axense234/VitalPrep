@@ -1294,7 +1294,7 @@ export const socialMediaIcons: SocialMediaIconProps[] = [
     id: 4,
     linkIconUrl:
       "https://res.cloudinary.com/birthdayreminder/image/upload/v1709127466/VitalPrep/github_1_alafgo.png",
-    linkDest: "https://github.com",
+    linkDest: "https://github.com/axense234/VitalPrep",
     linkTitle: "Github",
   },
 ];
