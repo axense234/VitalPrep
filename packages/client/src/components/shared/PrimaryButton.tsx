@@ -14,6 +14,8 @@ const PrimaryButton: FC<PrimaryButtonProps> = ({
   disabled,
   onHoverContent,
   onClickFunction,
+  forcedRef,
+  forcedClassName,
 }) => {
   if (type === "link")
     return (
@@ -24,9 +26,10 @@ const PrimaryButton: FC<PrimaryButtonProps> = ({
         className={primaryButtonStyles.primaryButtonLink}
       >
         <button
-          className={primaryButtonStyles.primaryButton}
+          className={`${primaryButtonStyles.primaryButton} ${forcedClassName}`}
           disabled={disabled}
           style={{ filter: disabled ? "brightness(0.5)" : "brightness(1)" }}
+          ref={forcedRef}
         >
           {content}
         </button>
@@ -36,13 +39,14 @@ const PrimaryButton: FC<PrimaryButtonProps> = ({
   if (type === "functional") {
     return (
       <button
-        className={primaryButtonStyles.primaryButton}
+        className={`${primaryButtonStyles.primaryButton} ${forcedClassName}`}
         style={{ filter: disabled ? "brightness(0.5)" : "brightness(1)" }}
         title={onHoverContent || content}
         aria-label={onHoverContent || content}
         type="submit"
         disabled={disabled}
         onClick={onClickFunction}
+        ref={forcedRef}
       >
         {content}
       </button>

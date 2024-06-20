@@ -1,5 +1,5 @@
 // SCSS
-import multiViewToolStyles from "../../../scss/pages/MultiViewTool.module.scss";
+import multiViewToolStyles from "@/scss/pages/MultiViewTool.module.scss";
 // Components
 import EntityComponent from "@/components/shared/entity/EntityComponent";
 // React

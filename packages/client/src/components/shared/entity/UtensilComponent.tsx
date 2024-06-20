@@ -1,5 +1,5 @@
 // SCSS
-import entityComponentStyles from "../../../scss/components/shared/EntityComponents.module.scss";
+import entityComponentStyles from "@/scss/components/shared/EntityComponents.module.scss";
 // React
 import { FC, useRef } from "react";
 // Types
@@ -14,13 +14,14 @@ import { useAppSelector } from "@/hooks/redux";
 import { State } from "@/redux/api/store";
 // Next
 import Image from "next/image";
-// Hooks
-import useGetWindowWidth from "@/hooks/useGetWindowWidth";
 // Components
 import EntityMutationMenu from "./EntityMutationMenu";
 // Translations
 import { Link } from "@/navigation";
 import { useTranslations } from "next-intl";
+// Pop-in Transitions
+import usePopInAnimation from "@/hooks/usePopInTransition";
+import { useInView } from "react-intersection-observer";
 
 const UtensilComponent: FC<EntityComponentProps> = ({
   clicked,
@@ -37,13 +38,18 @@ const UtensilComponent: FC<EntityComponentProps> = ({
   const utensilEntityShown = utensilEntity || entity;
   const utensilContainerRef = useRef<HTMLDivElement | null>(null);
 
-  const translateUtensil = useTranslations("entityComponents.details.utensil");
   const translateUtensilDefaultName = useTranslations(
     "createTool.formLabels.utensil"
   );
 
   const { name, imageUrl } = utensilEntityShown;
-  let windowWidth = useGetWindowWidth();
+
+  const {
+    ref: componentRef,
+    inView: componentInView,
+    entry: componentEntry,
+  } = useInView();
+  usePopInAnimation("showLTR", componentInView, componentEntry);
 
   if (isALink) {
     return (
@@ -69,9 +75,9 @@ const UtensilComponent: FC<EntityComponentProps> = ({
           className={entityComponentStyles.entityComponentLinkWrapper}
         >
           <div
-            className={entityComponentStyles.entityComponent}
+            className={`${entityComponentStyles.entityComponent} hiddenLTR`}
             style={{ filter: clicked ? "brightness(1)" : "brightness(0.5)" }}
-            ref={utensilContainerRef}
+            ref={componentRef}
           >
             <header className={entityComponentStyles.entityComponentHeader}>
               <Image
@@ -102,31 +108,33 @@ const UtensilComponent: FC<EntityComponentProps> = ({
       style={{ filter: clicked ? "brightness(1)" : "brightness(0.5)" }}
       ref={utensilContainerRef}
     >
-      {hasEntityMutationMenu && (
-        <EntityMutationMenu
-          type="entityComponent"
-          parentRef={utensilContainerRef}
-          handleEntityDeletion={deleteEntityFunction}
-          handleEntityModification={updateEntityFunction}
-          entityName={utensilEntityShown.name}
-          entityType="utensil"
+      <div className="hiddenLTR" ref={componentRef}>
+        {hasEntityMutationMenu && (
+          <EntityMutationMenu
+            type="entityComponent"
+            parentRef={utensilContainerRef}
+            handleEntityDeletion={deleteEntityFunction}
+            handleEntityModification={updateEntityFunction}
+            entityName={utensilEntityShown.name}
+            entityType="utensil"
+          />
+        )}
+        <header className={entityComponentStyles.entityComponentHeader}>
+          <Image
+            alt={name || translateUtensilDefaultName("defaultNameValue")}
+            src={imageUrl || defaultUtensilImageUrl}
+            title={name || translateUtensilDefaultName("defaultNameValue")}
+            aria-label={name || translateUtensilDefaultName("defaultNameValue")}
+            width={80}
+            height={80}
+          />
+          <h6>{name || translateUtensilDefaultName("defaultNameValue")}</h6>
+        </header>
+        <div
+          className={entityComponentStyles.entityComponentDetails}
+          style={{ alignItems: "center" }}
         />
-      )}
-      <header className={entityComponentStyles.entityComponentHeader}>
-        <Image
-          alt={name || translateUtensilDefaultName("defaultNameValue")}
-          src={imageUrl || defaultUtensilImageUrl}
-          title={name || translateUtensilDefaultName("defaultNameValue")}
-          aria-label={name || translateUtensilDefaultName("defaultNameValue")}
-          width={80}
-          height={80}
-        />
-        <h6>{name || translateUtensilDefaultName("defaultNameValue")}</h6>
-      </header>
-      <div
-        className={entityComponentStyles.entityComponentDetails}
-        style={{ alignItems: "center" }}
-      ></div>
+      </div>
     </div>
   );
 };

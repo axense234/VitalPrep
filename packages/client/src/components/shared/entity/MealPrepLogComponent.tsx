@@ -21,6 +21,9 @@ import EntityMutationMenu from "./EntityMutationMenu";
 // Translations
 import { Link } from "@/navigation";
 import { useTranslations } from "next-intl";
+// Pop-in Transitions
+import usePopInAnimation from "@/hooks/usePopInTransition";
+import { useInView } from "react-intersection-observer";
 
 const MealPrepLogComponent: FC<EntityComponentProps> = ({
   clicked,
@@ -51,6 +54,13 @@ const MealPrepLogComponent: FC<EntityComponentProps> = ({
   let tabletOrPhoneRedesign = windowWidth && windowWidth <= 1100;
   let phoneRedesign = windowWidth && windowWidth <= 500;
 
+  const {
+    ref: componentRef,
+    inView: componentInView,
+    entry: componentEntry,
+  } = useInView();
+  usePopInAnimation("showLTR", componentInView, componentEntry);
+
   if (isALink) {
     return (
       <div
@@ -75,9 +85,9 @@ const MealPrepLogComponent: FC<EntityComponentProps> = ({
           className={entityComponentStyles.entityComponentLinkWrapper}
         >
           <div
-            className={entityComponentStyles.entityComponent}
+            className={`${entityComponentStyles.entityComponent} hiddenLTR`}
             style={{ filter: clicked ? "brightness(1)" : "brightness(0.5)" }}
-            ref={mealPrepLogContainerRef}
+            ref={componentRef}
           >
             <header className={entityComponentStyles.entityComponentHeader}>
               <Image
@@ -132,50 +142,52 @@ const MealPrepLogComponent: FC<EntityComponentProps> = ({
       style={{ filter: clicked ? "brightness(1)" : "brightness(0.5)" }}
       ref={mealPrepLogContainerRef}
     >
-      {hasEntityMutationMenu && (
-        <EntityMutationMenu
-          type="entityComponent"
-          parentRef={mealPrepLogContainerRef}
-          handleEntityDeletion={deleteEntityFunction}
-          handleEntityModification={updateEntityFunction}
-          entityName={mealPrepLogEntityShown.name}
-          entityType="mealPrepLog"
-        />
-      )}
-      <header className={entityComponentStyles.entityComponentHeader}>
-        <Image
-          alt={name || translateMealPrepLogDefaultName("defaultNameValue")}
-          src={imageUrl || defaultInstanceTemplateImageUrl}
-          title={name || translateMealPrepLogDefaultName("defaultNameValue")}
-          aria-label={
-            name || translateMealPrepLogDefaultName("defaultNameValue")
-          }
-          width={80}
-          height={80}
-        />
-        <h6>{name || translateMealPrepLogDefaultName("defaultNameValue")}</h6>
-      </header>
-      <div
-        className={entityComponentStyles.entityComponentDetails}
-        style={{ alignItems: "center" }}
-      >
-        {phoneRedesign ? null : (
-          <p>{new Date(date || "")?.toLocaleDateString() || "???"}</p>
+      <div className="hiddenLTR" ref={componentRef}>
+        {hasEntityMutationMenu && (
+          <EntityMutationMenu
+            type="entityComponent"
+            parentRef={mealPrepLogContainerRef}
+            handleEntityDeletion={deleteEntityFunction}
+            handleEntityModification={updateEntityFunction}
+            entityName={mealPrepLogEntityShown.name}
+            entityType="mealPrepLog"
+          />
         )}
-        {tabletOrPhoneRedesign ? null : (
-          <>
-            <p>
-              {translateMealPrepLog("cookingDuration", {
-                cookingDuration: cookingDuration || "???",
-              })}
-            </p>
-            <p>
-              {completed
-                ? translateMealPrepLog("completed")
-                : translateMealPrepLog("abandoned")}
-            </p>
-          </>
-        )}
+        <header className={entityComponentStyles.entityComponentHeader}>
+          <Image
+            alt={name || translateMealPrepLogDefaultName("defaultNameValue")}
+            src={imageUrl || defaultInstanceTemplateImageUrl}
+            title={name || translateMealPrepLogDefaultName("defaultNameValue")}
+            aria-label={
+              name || translateMealPrepLogDefaultName("defaultNameValue")
+            }
+            width={80}
+            height={80}
+          />
+          <h6>{name || translateMealPrepLogDefaultName("defaultNameValue")}</h6>
+        </header>
+        <div
+          className={entityComponentStyles.entityComponentDetails}
+          style={{ alignItems: "center" }}
+        >
+          {phoneRedesign ? null : (
+            <p>{new Date(date || "")?.toLocaleDateString() || "???"}</p>
+          )}
+          {tabletOrPhoneRedesign ? null : (
+            <>
+              <p>
+                {translateMealPrepLog("cookingDuration", {
+                  cookingDuration: cookingDuration || "???",
+                })}
+              </p>
+              <p>
+                {completed
+                  ? translateMealPrepLog("completed")
+                  : translateMealPrepLog("abandoned")}
+              </p>
+            </>
+          )}
+        </div>
       </div>
     </div>
   );

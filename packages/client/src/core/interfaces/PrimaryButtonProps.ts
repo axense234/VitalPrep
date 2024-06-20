@@ -7,4 +7,6 @@ export default interface PrimaryButtonProps {
   onClickFunction?: MouseEventHandler<HTMLButtonElement> | undefined;
   linkDest?: string;
   disabled: boolean;
+  forcedRef?: (node?: Element | null | undefined) => void;
+  forcedClassName?: string;
 }

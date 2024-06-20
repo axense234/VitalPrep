@@ -1,5 +1,5 @@
 // SCSS
-import homeSectionsStyles from "../../../../scss/pages/Home.module.scss";
+import homeSectionsStyles from "@/scss/pages/Home.module.scss";
 // React
 import { FC } from "react";
 // Next
@@ -9,6 +9,9 @@ import HomeSectionContentProps from "@/core/interfaces/HomeSectionContentProps";
 // Translations
 import { Link } from "@/navigation";
 import { useTranslations } from "next-intl";
+// Pop-in Transitions
+import usePopInAnimation from "@/hooks/usePopInTransition";
+import { useInView } from "react-intersection-observer";
 
 const HomeSectionDescriptionBased: FC<HomeSectionContentProps> = ({
   backgroundImageSrc,
@@ -19,6 +22,8 @@ const HomeSectionDescriptionBased: FC<HomeSectionContentProps> = ({
   id,
 }) => {
   const translate = useTranslations(`home.sections.section-${id}`);
+  const [firstItemRef, secondItemRef] = useGetTransitionRefs();
+
   return (
     <section
       className={homeSectionsStyles.homeSectionContainer}
@@ -56,11 +61,11 @@ const HomeSectionDescriptionBased: FC<HomeSectionContentProps> = ({
               <h4>{translate("sectionSubTitle")}</h4>
             </header>
             <div className={homeSectionsStyles.homeSectionContentDescriptions}>
-              <p>
+              <p className="hiddenLTR" ref={firstItemRef}>
                 {translate("appHelpDescription")}
                 <Link href="/guide">{translate("appHelpLinkLabel")}.</Link>
               </p>
-              <p>
+              <p className="hiddenLTR" ref={secondItemRef}>
                 {translate("mealPrepHelpDescription")}
                 <Link href="/faq">{translate("mealPrepHelpLinkLabel")}.</Link>
               </p>
@@ -70,6 +75,22 @@ const HomeSectionDescriptionBased: FC<HomeSectionContentProps> = ({
       </div>
     </section>
   );
+};
+
+const useGetTransitionRefs = () => {
+  const {
+    ref: firstItemRef,
+    inView: firstItemInView,
+    entry: firstItemEntry,
+  } = useInView();
+  const {
+    ref: secondItemRef,
+    inView: secondItemInView,
+    entry: secondItemEntry,
+  } = useInView();
+  usePopInAnimation("showLTR", firstItemInView, firstItemEntry);
+  usePopInAnimation("showLTR", secondItemInView, secondItemEntry);
+  return [firstItemRef, secondItemRef];
 };
 
 export default HomeSectionDescriptionBased;

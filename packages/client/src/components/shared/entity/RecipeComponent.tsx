@@ -21,6 +21,9 @@ import EntityMutationMenu from "./EntityMutationMenu";
 // Translations
 import { Link } from "@/navigation";
 import { useTranslations } from "next-intl";
+// Pop-in Transitions
+import usePopInAnimation from "@/hooks/usePopInTransition";
+import { useInView } from "react-intersection-observer";
 
 const RecipeComponent: FC<EntityComponentProps> = ({
   clicked,
@@ -48,6 +51,13 @@ const RecipeComponent: FC<EntityComponentProps> = ({
   let tabletOrPhoneRedesign = windowWidth && windowWidth <= 1000;
   let phoneRedesign = windowWidth && windowWidth <= 600;
 
+  const {
+    ref: componentRef,
+    inView: componentInView,
+    entry: componentEntry,
+  } = useInView();
+  usePopInAnimation("showLTR", componentInView, componentEntry);
+
   if (isALink) {
     return (
       <div
@@ -72,9 +82,9 @@ const RecipeComponent: FC<EntityComponentProps> = ({
           className={entityComponentStyles.entityComponentLinkWrapper}
         >
           <div
-            className={entityComponentStyles.entityComponent}
+            className={`${entityComponentStyles.entityComponent} hiddenLTR`}
             style={{ filter: clicked ? "brightness(1)" : "brightness(0.5)" }}
-            ref={recipeContainerRef}
+            ref={componentRef}
           >
             <header className={entityComponentStyles.entityComponentHeader}>
               <Image
@@ -132,57 +142,59 @@ const RecipeComponent: FC<EntityComponentProps> = ({
       style={{ filter: clicked ? "brightness(1)" : "brightness(0.5)" }}
       ref={recipeContainerRef}
     >
-      {hasEntityMutationMenu && (
-        <EntityMutationMenu
-          type="entityComponent"
-          parentRef={recipeContainerRef}
-          handleEntityDeletion={deleteEntityFunction}
-          handleEntityModification={updateEntityFunction}
-          entityName={recipeEntityShown.name}
-          entityType="recipe"
-        />
-      )}
-      <header className={entityComponentStyles.entityComponentHeader}>
-        <Image
-          alt={name || translateRecipeDefaultName("defaultNameValue")}
-          src={imageUrl || defaultRecipeImageUrl}
-          title={name || translateRecipeDefaultName("defaultNameValue")}
-          aria-label={name || translateRecipeDefaultName("defaultNameValue")}
-          width={80}
-          height={80}
-        />
-        <h6>{name || translateRecipeDefaultName("defaultNameValue")}</h6>
-      </header>
-      <div
-        className={entityComponentStyles.entityComponentDetails}
-        style={{ alignItems: "center" }}
-      >
-        {phoneRedesign ? null : (
-          <p>
-            {translateRecipe("calories", {
-              numberOfCalories: macros?.calories,
-            })}
-          </p>
+      <div className="hiddenLTR" ref={componentRef}>
+        {hasEntityMutationMenu && (
+          <EntityMutationMenu
+            type="entityComponent"
+            parentRef={recipeContainerRef}
+            handleEntityDeletion={deleteEntityFunction}
+            handleEntityModification={updateEntityFunction}
+            entityName={recipeEntityShown.name}
+            entityType="recipe"
+          />
         )}
-        {tabletOrPhoneRedesign ? null : (
-          <>
+        <header className={entityComponentStyles.entityComponentHeader}>
+          <Image
+            alt={name || translateRecipeDefaultName("defaultNameValue")}
+            src={imageUrl || defaultRecipeImageUrl}
+            title={name || translateRecipeDefaultName("defaultNameValue")}
+            aria-label={name || translateRecipeDefaultName("defaultNameValue")}
+            width={80}
+            height={80}
+          />
+          <h6>{name || translateRecipeDefaultName("defaultNameValue")}</h6>
+        </header>
+        <div
+          className={entityComponentStyles.entityComponentDetails}
+          style={{ alignItems: "center" }}
+        >
+          {phoneRedesign ? null : (
             <p>
-              {translateRecipe("macros.protein", {
-                grams: macros?.proteinAmount,
+              {translateRecipe("calories", {
+                numberOfCalories: macros?.calories,
               })}
             </p>
-            <p>
-              {translateRecipe("macros.carbs", {
-                grams: macros?.carbsAmount,
-              })}
-            </p>
-            <p>
-              {translateRecipe("macros.fats", {
-                grams: macros?.fatsAmount,
-              })}
-            </p>
-          </>
-        )}
+          )}
+          {tabletOrPhoneRedesign ? null : (
+            <>
+              <p>
+                {translateRecipe("macros.protein", {
+                  grams: macros?.proteinAmount,
+                })}
+              </p>
+              <p>
+                {translateRecipe("macros.carbs", {
+                  grams: macros?.carbsAmount,
+                })}
+              </p>
+              <p>
+                {translateRecipe("macros.fats", {
+                  grams: macros?.fatsAmount,
+                })}
+              </p>
+            </>
+          )}
+        </div>
       </div>
     </div>
   );

@@ -10,6 +10,9 @@ import { FC, useState } from "react";
 import Image from "next/image";
 // Components
 import HomeSectionImageOverlay from "@/components/shared/overlays/HomeSectionImageOverlay";
+// Pop-in Transitions
+import { useInView } from "react-intersection-observer";
+import usePopInAnimation from "@/hooks/usePopInTransition";
 
 const HomeSectionImageBased: FC<HomeSectionContentProps> = ({
   id,
@@ -17,6 +20,8 @@ const HomeSectionImageBased: FC<HomeSectionContentProps> = ({
 }) => {
   const translate = useTranslations(`home.sections.section-${id}`);
   const [isImageFullscreen, setIsImageFullscreen] = useState<boolean>(false);
+
+  const [paragraphsRef, imageRef] = useGetTransitionRefs();
 
   return (
     <section
@@ -46,7 +51,8 @@ const HomeSectionImageBased: FC<HomeSectionContentProps> = ({
           </header>
           <div className={homeSectionsStyles.homeSectionImageBasedContent}>
             <ul
-              className={homeSectionsStyles.homeSectionImageBasedDescriptions}
+              className={`${homeSectionsStyles.homeSectionImageBasedDescriptions} hiddenLTR`}
+              ref={paragraphsRef}
             >
               {sectionDescriptions?.map((description) => {
                 return (
@@ -64,12 +70,26 @@ const HomeSectionImageBased: FC<HomeSectionContentProps> = ({
               width={720}
               height={509}
               onClick={() => setIsImageFullscreen(true)}
+              className="hiddenRTL"
+              ref={imageRef}
             />
           </div>
         </div>
       </div>
     </section>
   );
+};
+
+const useGetTransitionRefs = () => {
+  const {
+    ref: paragraphsRef,
+    inView: paragraphsInView,
+    entry: paragraphsEntry,
+  } = useInView();
+  const { ref: imageRef, inView: imageInView, entry: imageEntry } = useInView();
+  usePopInAnimation("showLTR", paragraphsInView, paragraphsEntry);
+  usePopInAnimation("showRTL", imageInView, imageEntry);
+  return [paragraphsRef, imageRef];
 };
 
 export default HomeSectionImageBased;

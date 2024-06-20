@@ -21,6 +21,9 @@ import EntityMutationMenu from "./EntityMutationMenu";
 // Translations
 import { Link } from "@/navigation";
 import { useTranslations } from "next-intl";
+// Pop-in Transitions
+import usePopInAnimation from "@/hooks/usePopInTransition";
+import { useInView } from "react-intersection-observer";
 
 const InstanceTemplateComponent: FC<EntityComponentProps> = ({
   clicked,
@@ -49,6 +52,13 @@ const InstanceTemplateComponent: FC<EntityComponentProps> = ({
   let windowWidth = useGetWindowWidth();
   let tabletOrPhoneRedesign = windowWidth && windowWidth <= 1000;
 
+  const {
+    ref: componentRef,
+    inView: componentInView,
+    entry: componentEntry,
+  } = useInView();
+  usePopInAnimation("showLTR", componentInView, componentEntry);
+
   if (isALink) {
     return (
       <div
@@ -73,9 +83,9 @@ const InstanceTemplateComponent: FC<EntityComponentProps> = ({
           className={entityComponentStyles.entityComponentLinkWrapper}
         >
           <div
-            className={entityComponentStyles.entityComponent}
+            className={`${entityComponentStyles.entityComponent} hiddenLTR`}
             style={{ filter: clicked ? "brightness(1)" : "brightness(0.5)" }}
-            ref={instanceTemplateContainerRef}
+            ref={componentRef}
           >
             <header className={entityComponentStyles.entityComponentHeader}>
               <Image
@@ -131,51 +141,55 @@ const InstanceTemplateComponent: FC<EntityComponentProps> = ({
       style={{ filter: clicked ? "brightness(1)" : "brightness(0.5)" }}
       ref={instanceTemplateContainerRef}
     >
-      {hasEntityMutationMenu && (
-        <EntityMutationMenu
-          type="entityComponent"
-          parentRef={instanceTemplateContainerRef}
-          handleEntityDeletion={deleteEntityFunction}
-          handleEntityModification={updateEntityFunction}
-          entityName={instanceTemplateShown.name}
-          entityType="instanceTemplate"
-        />
-      )}
-      <header className={entityComponentStyles.entityComponentHeader}>
-        <Image
-          alt={name || translateInstanceTemplateDefaultName("defaultNameValue")}
-          src={imageUrl || defaultInstanceTemplateImageUrl}
-          title={
-            name || translateInstanceTemplateDefaultName("defaultNameValue")
-          }
-          aria-label={
-            name || translateInstanceTemplateDefaultName("defaultNameValue")
-          }
-          width={80}
-          height={80}
-        />
-        <h6>
-          {name || translateInstanceTemplateDefaultName("defaultNameValue")}
-        </h6>
-      </header>
-      <div
-        className={entityComponentStyles.entityComponentDetails}
-        style={{ alignItems: "center" }}
-      >
-        {tabletOrPhoneRedesign ? null : (
-          <>
-            <p>
-              {translateInstanceTemplate("coverage", {
-                numberOfDaysCovered: coverage,
-              })}
-            </p>
-            <p>
-              {translateInstanceTemplate("dayTemplates", {
-                numberOfDayTemplates: dayTemplates?.length,
-              })}
-            </p>
-          </>
+      <div className="hiddenLTR" ref={componentRef}>
+        {hasEntityMutationMenu && (
+          <EntityMutationMenu
+            type="entityComponent"
+            parentRef={instanceTemplateContainerRef}
+            handleEntityDeletion={deleteEntityFunction}
+            handleEntityModification={updateEntityFunction}
+            entityName={instanceTemplateShown.name}
+            entityType="instanceTemplate"
+          />
         )}
+        <header className={entityComponentStyles.entityComponentHeader}>
+          <Image
+            alt={
+              name || translateInstanceTemplateDefaultName("defaultNameValue")
+            }
+            src={imageUrl || defaultInstanceTemplateImageUrl}
+            title={
+              name || translateInstanceTemplateDefaultName("defaultNameValue")
+            }
+            aria-label={
+              name || translateInstanceTemplateDefaultName("defaultNameValue")
+            }
+            width={80}
+            height={80}
+          />
+          <h6>
+            {name || translateInstanceTemplateDefaultName("defaultNameValue")}
+          </h6>
+        </header>
+        <div
+          className={entityComponentStyles.entityComponentDetails}
+          style={{ alignItems: "center" }}
+        >
+          {tabletOrPhoneRedesign ? null : (
+            <>
+              <p>
+                {translateInstanceTemplate("coverage", {
+                  numberOfDaysCovered: coverage,
+                })}
+              </p>
+              <p>
+                {translateInstanceTemplate("dayTemplates", {
+                  numberOfDayTemplates: dayTemplates?.length,
+                })}
+              </p>
+            </>
+          )}
+        </div>
       </div>
     </div>
   );

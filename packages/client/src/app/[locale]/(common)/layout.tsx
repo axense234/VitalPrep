@@ -64,7 +64,7 @@ const SpecialLayout = ({ children }: { children: React.ReactNode }) => {
     };
 
     initialize();
-  }, []);
+  }, [profile.id, loadingGetProfile, loadingGetOAuthProfile]);
 
   useEffect(() => {
     if (profile.id) {
@@ -102,7 +102,7 @@ const SpecialLayout = ({ children }: { children: React.ReactNode }) => {
       />
       {children}
       <Footer />
-      <Script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" defer />
+      <Script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async />
     </>
   );
 };

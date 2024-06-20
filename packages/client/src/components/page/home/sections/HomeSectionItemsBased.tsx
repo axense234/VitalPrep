@@ -1,13 +1,19 @@
 // Types
 import HomeSectionContentProps from "@/core/interfaces/HomeSectionContentProps";
 // SCSS
-import homeSectionsStyles from "../../../../scss/pages/Home.module.scss";
+import homeSectionsStyles from "@/scss/pages/Home.module.scss";
 // React
 import { FC } from "react";
 // Next
 import Image from "next/image";
 // Translations
 import { useTranslations } from "next-intl";
+// Hooks
+import usePopInAnimation from "@/hooks/usePopInTransition";
+// Pop-in Transitions
+import { useInView } from "react-intersection-observer";
+// Helpers
+import selectRefBasedOnNumber from "@/helpers/selectRefBasedOnNumber";
 
 const HomeSectionItemsBased: FC<HomeSectionContentProps> = ({
   sectionItems,
@@ -15,6 +21,9 @@ const HomeSectionItemsBased: FC<HomeSectionContentProps> = ({
   id,
 }) => {
   const translate = useTranslations(`home.sections.section-${id}`);
+
+  const [firstItemRef, secondItemRef, thirdItemRef] = useGetTransitionRefs();
+
   return (
     <section
       className={homeSectionsStyles.homeSectionContainer}
@@ -37,11 +46,16 @@ const HomeSectionItemsBased: FC<HomeSectionContentProps> = ({
             </h4>
           </header>
           <ul className={homeSectionsStyles.homeSectionContentItems}>
-            {sectionItems?.map((sectionItem) => {
+            {sectionItems?.map((sectionItem, index) => {
+              const selectedRef = selectRefBasedOnNumber(
+                [firstItemRef, secondItemRef, thirdItemRef],
+                index
+              );
               return (
                 <li
                   key={sectionItem.id}
-                  className={homeSectionsStyles.homeSectionContentItem}
+                  className={`${homeSectionsStyles.homeSectionContentItem} hiddenLTR`}
+                  ref={selectedRef}
                 >
                   <Image
                     alt={translate(`items.item-${sectionItem.id}.itemTitle`)}
@@ -69,6 +83,28 @@ const HomeSectionItemsBased: FC<HomeSectionContentProps> = ({
       </div>
     </section>
   );
+};
+
+const useGetTransitionRefs = () => {
+  const {
+    ref: firstItemRef,
+    inView: firstItemInView,
+    entry: firstItemEntry,
+  } = useInView();
+  const {
+    ref: secondItemRef,
+    inView: secondItemInView,
+    entry: secondItemEntry,
+  } = useInView();
+  const {
+    ref: thirdItemRef,
+    inView: thirdItemInView,
+    entry: thirdItemEntry,
+  } = useInView();
+  usePopInAnimation("showLTR", firstItemInView, firstItemEntry);
+  usePopInAnimation("showLTR", secondItemInView, secondItemEntry);
+  usePopInAnimation("showLTR", thirdItemInView, thirdItemEntry);
+  return [firstItemRef, secondItemRef, thirdItemRef];
 };
 
 export default HomeSectionItemsBased;

@@ -14,10 +14,9 @@
     padding: 0.5rem 1.5rem;
   }
 
-  transition: $crispyTransformTransition;
-
   &:hover {
     transform: scale(1.05);
+    transition: $crispyTransformTransition;
   }
 }
 

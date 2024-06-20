@@ -9,9 +9,8 @@
   min-width: 16rem;
   height: auto;
 
-  transition: $crispyTransformTransition;
-
   &:hover {
+    transition: $crispyTransformTransition;
     transform: scale(1.025);
   }
 

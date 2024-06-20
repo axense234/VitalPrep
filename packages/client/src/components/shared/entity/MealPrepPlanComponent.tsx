@@ -21,6 +21,9 @@ import EntityMutationMenu from "./EntityMutationMenu";
 // Translations
 import { Link } from "@/navigation";
 import { useTranslations } from "next-intl";
+// Pop-in Transitions
+import usePopInAnimation from "@/hooks/usePopInTransition";
+import { useInView } from "react-intersection-observer";
 
 const MealPrepPlanComponent: FC<EntityComponentProps> = ({
   clicked,
@@ -49,6 +52,13 @@ const MealPrepPlanComponent: FC<EntityComponentProps> = ({
   let windowWidth = useGetWindowWidth();
   let phoneRedesign = windowWidth && windowWidth <= 700;
 
+  const {
+    ref: componentRef,
+    inView: componentInView,
+    entry: componentEntry,
+  } = useInView();
+  usePopInAnimation("showLTR", componentInView, componentEntry);
+
   if (isALink) {
     return (
       <div
@@ -73,9 +83,9 @@ const MealPrepPlanComponent: FC<EntityComponentProps> = ({
           className={entityComponentStyles.entityComponentLinkWrapper}
         >
           <div
-            className={entityComponentStyles.entityComponent}
+            className={`${entityComponentStyles.entityComponent} hiddenLTR`}
             style={{ filter: clicked ? "brightness(1)" : "brightness(0.5)" }}
-            ref={mealPrepPlanContainerRef}
+            ref={componentRef}
           >
             <header className={entityComponentStyles.entityComponentHeader}>
               <Image
@@ -123,43 +133,47 @@ const MealPrepPlanComponent: FC<EntityComponentProps> = ({
       style={{ filter: clicked ? "brightness(1)" : "brightness(0.5)" }}
       ref={mealPrepPlanContainerRef}
     >
-      {hasEntityMutationMenu && (
-        <EntityMutationMenu
-          type="entityComponent"
-          parentRef={mealPrepPlanContainerRef}
-          handleEntityDeletion={deleteEntityFunction}
-          handleEntityModification={updateEntityFunction}
-          entityName={mealPrepPlanEntityShown.name}
-          entityType="mealPrepPlan"
-        />
-      )}
-      <header className={entityComponentStyles.entityComponentHeader}>
-        <Image
-          alt={name || translateMealPrepPlanDefaultName("defaultNameValue")}
-          src={imageUrl || defaultMealPrepPlanImageUrl}
-          title={name || translateMealPrepPlanDefaultName("defaultNameValue")}
-          aria-label={
-            name || translateMealPrepPlanDefaultName("defaultNameValue")
-          }
-          width={80}
-          height={80}
-        />
-        <h6>{name || translateMealPrepPlanDefaultName("defaultNameValue")}</h6>
-      </header>
-      <div
-        className={entityComponentStyles.entityComponentDetails}
-        style={{ alignItems: "center" }}
-      >
-        {phoneRedesign ? null : (
-          <p>
-            {translateMealPrepPlan("instances", {
-              numberOfInstanceTemplatesUsed:
-                instanceTemplates?.length && instanceTemplates?.length > 0
-                  ? instanceTemplates?.length
-                  : "???",
-            })}
-          </p>
+      <div className="hiddenLTR" ref={componentRef}>
+        {hasEntityMutationMenu && (
+          <EntityMutationMenu
+            type="entityComponent"
+            parentRef={mealPrepPlanContainerRef}
+            handleEntityDeletion={deleteEntityFunction}
+            handleEntityModification={updateEntityFunction}
+            entityName={mealPrepPlanEntityShown.name}
+            entityType="mealPrepPlan"
+          />
         )}
+        <header className={entityComponentStyles.entityComponentHeader}>
+          <Image
+            alt={name || translateMealPrepPlanDefaultName("defaultNameValue")}
+            src={imageUrl || defaultMealPrepPlanImageUrl}
+            title={name || translateMealPrepPlanDefaultName("defaultNameValue")}
+            aria-label={
+              name || translateMealPrepPlanDefaultName("defaultNameValue")
+            }
+            width={80}
+            height={80}
+          />
+          <h6>
+            {name || translateMealPrepPlanDefaultName("defaultNameValue")}
+          </h6>
+        </header>
+        <div
+          className={entityComponentStyles.entityComponentDetails}
+          style={{ alignItems: "center" }}
+        >
+          {phoneRedesign ? null : (
+            <p>
+              {translateMealPrepPlan("instances", {
+                numberOfInstanceTemplatesUsed:
+                  instanceTemplates?.length && instanceTemplates?.length > 0
+                    ? instanceTemplates?.length
+                    : "???",
+              })}
+            </p>
+          )}
+        </div>
       </div>
     </div>
   );

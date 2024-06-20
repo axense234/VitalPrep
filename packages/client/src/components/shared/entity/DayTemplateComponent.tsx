@@ -21,6 +21,9 @@ import EntityMutationMenu from "./EntityMutationMenu";
 // Translations
 import { Link } from "@/navigation";
 import { useTranslations } from "next-intl";
+// Pop-in Transitions
+import usePopInAnimation from "@/hooks/usePopInTransition";
+import { useInView } from "react-intersection-observer";
 
 const DayTemplateComponent: FC<EntityComponentProps> = ({
   clicked,
@@ -49,6 +52,13 @@ const DayTemplateComponent: FC<EntityComponentProps> = ({
   let windowWidth = useGetWindowWidth();
   let phoneRedesign = windowWidth && windowWidth <= 800;
 
+  const {
+    ref: componentRef,
+    inView: componentInView,
+    entry: componentEntry,
+  } = useInView();
+  usePopInAnimation("showLTR", componentInView, componentEntry);
+
   if (isALink) {
     return (
       <div
@@ -73,9 +83,9 @@ const DayTemplateComponent: FC<EntityComponentProps> = ({
           className={entityComponentStyles.entityComponentLinkWrapper}
         >
           <div
-            className={entityComponentStyles.entityComponent}
+            className={`${entityComponentStyles.entityComponent} hiddenLTR`}
             style={{ filter: clicked ? "brightness(1)" : "brightness(0.5)" }}
-            ref={dayTemplateContainerRef}
+            ref={componentRef}
           >
             <header className={entityComponentStyles.entityComponentHeader}>
               <Image
@@ -127,47 +137,49 @@ const DayTemplateComponent: FC<EntityComponentProps> = ({
       style={{ filter: clicked ? "brightness(1)" : "brightness(0.5)" }}
       ref={dayTemplateContainerRef}
     >
-      {hasEntityMutationMenu && (
-        <EntityMutationMenu
-          type="entityComponent"
-          parentRef={dayTemplateContainerRef}
-          handleEntityDeletion={deleteEntityFunction}
-          handleEntityModification={updateEntityFunction}
-          entityName={dayTemplateEntityUsed.name}
-          entityType="dayTemplate"
-        />
-      )}
-      <header className={entityComponentStyles.entityComponentHeader}>
-        <Image
-          alt={name || translateDayTemplateDefaultName("defaultNameValue")}
-          src={imageUrl || defaultDayTemplateImageUrl}
-          title={name || translateDayTemplateDefaultName("defaultNameValue")}
-          aria-label={
-            name || translateDayTemplateDefaultName("defaultNameValue")
-          }
-          width={80}
-          height={80}
-        />
-        <h6>{name || translateDayTemplateDefaultName("defaultNameValue")}</h6>
-      </header>
-      <div
-        className={entityComponentStyles.entityComponentDetails}
-        style={{ alignItems: "center" }}
-      >
-        {phoneRedesign ? null : (
-          <>
-            <p>
-              {translateDayTemplate("meals", {
-                numberOfMeals: recipes?.length,
-              })}
-            </p>
-            <p>
-              {translateDayTemplate("calories", {
-                numberOfCalories: macros?.calories,
-              })}
-            </p>
-          </>
+      <div className="hiddenLTR" ref={componentRef}>
+        {hasEntityMutationMenu && (
+          <EntityMutationMenu
+            type="entityComponent"
+            parentRef={dayTemplateContainerRef}
+            handleEntityDeletion={deleteEntityFunction}
+            handleEntityModification={updateEntityFunction}
+            entityName={dayTemplateEntityUsed.name}
+            entityType="dayTemplate"
+          />
         )}
+        <header className={entityComponentStyles.entityComponentHeader}>
+          <Image
+            alt={name || translateDayTemplateDefaultName("defaultNameValue")}
+            src={imageUrl || defaultDayTemplateImageUrl}
+            title={name || translateDayTemplateDefaultName("defaultNameValue")}
+            aria-label={
+              name || translateDayTemplateDefaultName("defaultNameValue")
+            }
+            width={80}
+            height={80}
+          />
+          <h6>{name || translateDayTemplateDefaultName("defaultNameValue")}</h6>
+        </header>
+        <div
+          className={entityComponentStyles.entityComponentDetails}
+          style={{ alignItems: "center" }}
+        >
+          {phoneRedesign ? null : (
+            <>
+              <p>
+                {translateDayTemplate("meals", {
+                  numberOfMeals: recipes?.length,
+                })}
+              </p>
+              <p>
+                {translateDayTemplate("calories", {
+                  numberOfCalories: macros?.calories,
+                })}
+              </p>
+            </>
+          )}
+        </div>
       </div>
     </div>
   );

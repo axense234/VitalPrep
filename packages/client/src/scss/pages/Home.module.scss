@@ -15,6 +15,7 @@
   height: 55rem;
   background-position: right;
   background-color: getColor("primary-3");
+  overflow: hidden;
 
   @media screen and (max-width: 1200px) {
     height: 65rem;
@@ -290,7 +291,7 @@
   width: 100%;
   gap: 4rem;
   justify-content: space-between;
-
+  overflow: hidden;
   @media screen and (max-width: 1500px) {
     @include flexCenter(column);
   }
@@ -307,7 +308,9 @@
   > img {
     width: 45rem;
     height: auto;
-    transition: filter 0.135s ease-in;
+    transition:
+      filter 0.135s ease-in,
+      transform 0.75s;
     filter: brightness(1);
     border-radius: 10px;
 

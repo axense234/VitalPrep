@@ -18,6 +18,9 @@ import EntityMutationMenu from "./EntityMutationMenu";
 // Translations
 import { Link } from "@/navigation";
 import { useTranslations } from "next-intl";
+// Pop-in Transitions
+import { useInView } from "react-intersection-observer";
+import usePopInAnimation from "@/hooks/usePopInTransition";
 
 const EntityCard: FC<EntityCardProps> = ({
   entityType,
@@ -53,10 +56,13 @@ const EntityCard: FC<EntityCardProps> = ({
     entitySubDetails,
   } = getEntityCardDetails(entityType, entityUsed, translateEntityCardDetails);
 
+  const { ref: cardRef, inView: cardInView, entry: cardEntry } = useInView();
+  usePopInAnimation("showLTR", cardInView, cardEntry);
+
   if (isALink) {
     return (
       <div
-        className={entityCardStyles.entityComponentWrapper}
+        className={`${entityCardStyles.entityComponentWrapper}`}
         ref={entityCardRef}
       >
         {hasEntityMutationMenu && (
@@ -77,7 +83,8 @@ const EntityCard: FC<EntityCardProps> = ({
           className={entityCardStyles.entityCardLinkWrapper}
         >
           <div
-            className={entityCardStyles.entityCardContainer}
+            className={`${entityCardStyles.entityCardContainer} hiddenLTR`}
+            ref={cardRef}
             style={{
               maxWidth:
                 size === "large" && !tabletAndPhoneRedesign ? "24rem" : "16rem",
@@ -140,7 +147,7 @@ const EntityCard: FC<EntityCardProps> = ({
 
   return (
     <div
-      className={entityCardStyles.entityCardContainer}
+      className={`${entityCardStyles.entityCardContainer} hiddenLTR`}
       style={{
         maxWidth:
           size === "large" && !tabletAndPhoneRedesign ? "24rem" : "16rem",

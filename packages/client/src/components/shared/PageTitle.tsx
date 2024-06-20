@@ -11,6 +11,8 @@ import { usePathname } from "@/navigation";
 import { useTranslations } from "next-intl";
 // Next
 import { useSearchParams } from "next/navigation";
+import { useInView } from "react-intersection-observer";
+import usePopInAnimation from "@/hooks/usePopInTransition";
 
 const PageTitle: FC<PageTitleProps> = ({
   titleContent,
@@ -39,12 +41,22 @@ const PageTitle: FC<PageTitleProps> = ({
     ? translate(`${curatedPathname}.editMode.subtitleTextContent`)
     : translate(`${curatedPathname}.subTitleTextContent`);
 
+  const {
+    ref: containerRef,
+    inView: containerInView,
+    entry: containerEntry,
+  } = useInView();
+  usePopInAnimation("showBTT", containerInView, containerEntry);
+
   return (
     <section
       className={pageTitleStyles.pageTitleContainer}
       style={{ backgroundImage: `url(${backgroundImageSrc || imageSrc})` }}
     >
-      <div className={pageTitleStyles.pageTitleContainer__header}>
+      <div
+        className={`${pageTitleStyles.pageTitleContainer__header} hiddenBTT`}
+        ref={containerRef}
+      >
         <h1>{titleContent || titleTextContent}</h1>
         <h3>{subtitleContent || subTitleTextContent}</h3>
       </div>

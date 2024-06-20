@@ -7,9 +7,9 @@
   height: 5rem;
   background-color: getColor("primary-1");
   border-radius: 20px;
-  transition: $crispyTransformTransition;
 
   &:hover {
+    transition: $crispyTransformTransition;
     transform: scale(1.01);
   }
 }

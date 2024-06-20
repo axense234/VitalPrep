@@ -1,5 +1,5 @@
 // SCSS
-import homeSectionsStyles from "../../../../scss/pages/Home.module.scss";
+import homeSectionsStyles from "@/scss/pages/Home.module.scss";
 // Components
 import PrimaryButton from "@/components/shared/PrimaryButton";
 // Types
@@ -10,6 +10,9 @@ import { useTranslations } from "next-intl";
 import Image from "next/image";
 // React
 import { FC } from "react";
+// Pop-in Transitions
+import usePopInAnimation from "@/hooks/usePopInTransition";
+import { useInView } from "react-intersection-observer";
 
 const HomeSectionPositionBased: FC<HomeSectionContentProps> = ({
   backgroundImageSrc,
@@ -21,6 +24,9 @@ const HomeSectionPositionBased: FC<HomeSectionContentProps> = ({
   ctaButtonLinkDest,
 }) => {
   const translate = useTranslations(`home.sections.section-${id}`);
+
+  const [descriptionRef, buttonRef] = useGetTransitionRefs(position);
+
   return (
     <section
       className={homeSectionsStyles.homeSectionContainer}
@@ -57,18 +63,49 @@ const HomeSectionPositionBased: FC<HomeSectionContentProps> = ({
               <h1>{translate("sectionTitle")}</h1>
               <h4>{translate("sectionSubTitle")}</h4>
             </header>
-            <p>{translate("sectionDescription")}</p>
+            <p
+              className={position === "left" ? "hiddenLTR" : "hiddenRTL"}
+              ref={descriptionRef}
+            >
+              {translate("sectionDescription")}
+            </p>
           </div>
           <PrimaryButton
             content={translate("ctaButtonContent")}
             disabled={false}
             type="link"
             linkDest={ctaButtonLinkDest}
+            forcedRef={buttonRef}
+            forcedClassName={position === "left" ? "hiddenLTR" : "hiddenRTL"}
           />
         </div>
       </div>
     </section>
   );
+};
+
+const useGetTransitionRefs = (position: "left" | "right") => {
+  const {
+    ref: firstItemRef,
+    inView: firstItemInView,
+    entry: firstItemEntry,
+  } = useInView();
+  const {
+    ref: secondItemRef,
+    inView: secondItemInView,
+    entry: secondItemEntry,
+  } = useInView();
+  usePopInAnimation(
+    position === "left" ? "showLTR" : "showRTL",
+    firstItemInView,
+    firstItemEntry
+  );
+  usePopInAnimation(
+    position === "left" ? "showLTR" : "showRTL",
+    secondItemInView,
+    secondItemEntry
+  );
+  return [firstItemRef, secondItemRef];
 };
 
 export default HomeSectionPositionBased;
