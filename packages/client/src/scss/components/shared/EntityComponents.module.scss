@@ -8,6 +8,14 @@
   background-color: getColor("primary-1");
   border-radius: 20px;
 
+  > div {
+    @include flexCenter(row);
+    justify-content: flex-end;
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+  }
+
   &:hover {
     transition: $crispyTransformTransition;
     transform: scale(1.01);

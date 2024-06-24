@@ -1,5 +1,5 @@
 // SCSS
-import entityCardStyles from "../../../scss/components/shared/EntityCard.module.scss";
+import entityCardStyles from "@/scss/components/shared/EntityCard.module.scss";
 // Types
 import EntityCardProps from "@/core/interfaces/entity/EntityCardProps";
 // Next
@@ -152,7 +152,7 @@ const EntityCard: FC<EntityCardProps> = ({
         maxWidth:
           size === "large" && !tabletAndPhoneRedesign ? "24rem" : "16rem",
       }}
-      ref={entityCardRef}
+      ref={cardRef}
     >
       {hasEntityMutationMenu && (
         <EntityMutationMenu
