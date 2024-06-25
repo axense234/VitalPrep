@@ -18,8 +18,8 @@ import {
 } from "@/data";
 
 export const metadata: Metadata = {
-  // icons: APP_ICON,
-  // keywords: APP_KEYWORDS,
+  icons: APP_ICON,
+  keywords: APP_KEYWORDS,
   applicationName: APP_NAME,
   title: {
     default: APP_DEFAULT_TITLE,
