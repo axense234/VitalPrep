@@ -1,6 +1,8 @@
 /** @type {import('next').NextConfig} */
 const createNextIntlPlugin = require("next-intl/plugin");
+
 const withNextIntl = createNextIntlPlugin();
+
 const nextConfig = {
   reactStrictMode: false,
   distDir: "build",
@@ -28,5 +30,7 @@ const withPWA = require("next-pwa")({
   register: true,
 });
 
+const nextConfigWithPWA = withPWA(nextConfig);
+
 // Wrapper Hell
-module.exports = withPWA(withNextIntl(nextConfig));
+module.exports = withNextIntl(nextConfigWithPWA);
