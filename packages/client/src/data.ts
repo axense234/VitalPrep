@@ -1316,9 +1316,12 @@ export const logoImageUrls: ImageUrl[] = [
   },
 ];
 
-export const metaDefaultProps: MetaProps = {
-  title: "VitalPrep - Meal Prep Helper",
-  desc: "VitalPrep is a complex meal prep helper app that helps people create meal prep plans and to follow those respective plans.",
-  keywords:
-    "monorepo, html, css, typescript, next, react, express, node, meal prep, planner, helper, simple",
-};
+export const APP_NAME = "VitalPrep";
+export const APP_DEFAULT_TITLE = "VitalPrep - Meal Prep Helper";
+export const APP_TITLE_TEMPLATE = "%s - PWA App";
+export const APP_DESCRIPTION =
+  "VitalPrep is a complex meal prep helper app that helps people create meal prep plans and to follow those respective plans.";
+export const APP_KEYWORDS =
+  "monorepo, html, css, typescript, next, react, express, node, meal prep, planner, helper, simple";
+export const APP_ICON =
+  "https://res.cloudinary.com/birthdayreminder/image/upload/v1719327525/VitalPrep/brandmark-design-16x16_btxkmi.png";

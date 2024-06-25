@@ -7,13 +7,19 @@ import ReduxProvider from "@/components/others/ReduxProvider";
 // Next Intl stuff
 import { getMessages } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
-
-const APP_NAME = "PWA App";
-const APP_DEFAULT_TITLE = "My Awesome PWA App";
-const APP_TITLE_TEMPLATE = "%s - PWA App";
-const APP_DESCRIPTION = "Best PWA app in the world!";
+// Data
+import {
+  APP_ICON,
+  APP_KEYWORDS,
+  APP_NAME,
+  APP_DEFAULT_TITLE,
+  APP_TITLE_TEMPLATE,
+  APP_DESCRIPTION,
+} from "@/data";
 
 export const metadata: Metadata = {
+  // icons: APP_ICON,
+  // keywords: APP_KEYWORDS,
   applicationName: APP_NAME,
   title: {
     default: APP_DEFAULT_TITLE,
