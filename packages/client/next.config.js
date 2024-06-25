@@ -22,4 +22,11 @@ const nextConfig = {
   },
 };
 
-module.exports = withNextIntl(nextConfig);
+const withPWA = require("next-pwa")({
+  dest: "public",
+  cleanupOutdatedCaches: true,
+  register: true,
+});
+
+// Wrapper Hell
+module.exports = withPWA(withNextIntl(nextConfig));

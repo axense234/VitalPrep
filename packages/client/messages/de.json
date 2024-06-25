@@ -1143,5 +1143,8 @@
       "saveAccountSettingsMessage": "Sind Sie sicher, dass Sie Ihre Kontoeinstellungen speichern möchten?",
       "saveNotificationSettingsMessage": "Sind Sie sicher, dass Sie Ihre Benachrichtigungseinstellungen speichern möchten?"
     }
+  },
+  "sttButton": {
+    "title": "Nach oben scrollen"
   }
 }

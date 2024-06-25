@@ -1143,5 +1143,8 @@
       "saveAccountSettingsMessage": "Ești sigur că vrei să-ți salvezi setările contului?",
       "saveNotificationSettingsMessage": "Sigur doriți să vă salvați setările de notificare?"
     }
+  },
+  "sttButton": {
+    "title": "Derulați până sus"
   }
 }

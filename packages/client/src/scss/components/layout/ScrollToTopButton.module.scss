@@ -1,0 +1,30 @@
+@use "../../abstracts" as *;
+
+.sttButtonContainer {
+  @include flexCenter(row);
+  width: 4.5rem;
+  height: 4.5rem;
+  border-radius: 50%;
+  border: 1.5px solid getColor("black-75-1");
+  position: fixed;
+  left: 1.5rem;
+  bottom: 1.5rem;
+  background-color: getColor("secondary-color-1.1");
+  color: white;
+  font-size: 2.5rem;
+  z-index: 99;
+
+  &:hover {
+    transition: transform 0.135s ease-in;
+    transform: scale(1.1);
+  }
+
+  @media screen and (max-width: 425px) {
+    width: 3.5rem;
+    height: 3.5rem;
+    border-width: 1px;
+    left: 1rem;
+    bottom: 1rem;
+    font-size: 2rem;
+  }
+}

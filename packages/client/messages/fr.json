@@ -1143,5 +1143,8 @@
       "saveAccountSettingsMessage": "Êtes-vous sûr de vouloir enregistrer les paramètres de votre compte ?",
       "saveNotificationSettingsMessage": "Êtes-vous sûr de vouloir enregistrer vos paramètres de notification ?"
     }
+  },
+  "sttButton": {
+    "title": "Faire défiler vers le haut"
   }
 }

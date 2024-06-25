@@ -1,5 +1,5 @@
 // SCSS
-import activeMealPrepPlanStyles from "../../scss/components/shared/ActiveMealPrepPlan.module.scss";
+import activeMealPrepPlanStyles from "@/scss/components/layout/ActiveMealPrepPlan.module.scss";
 // Next
 import Image from "next/image";
 // React

@@ -4,8 +4,9 @@
 import Navbar from "@/components/shared/Navbar";
 import Footer from "@/components/shared/Footer";
 import Sidebar from "@/components/shared/Sidebar";
+import ActiveMealPrepPlan from "@/components/layout/ActiveMealPrepPlan";
 import PopupModal from "@/components/shared/modals/PopupModal";
-import ActiveMealPrepPlan from "@/components/shared/ActiveMealPrepPlan";
+import ScrollToTopButton from "@/components/layout/ScrollToTopButton";
 import WarningOverlay from "@/components/shared/overlays/WarningOverlay";
 // React
 import { useEffect, useRef } from "react";
@@ -92,6 +93,7 @@ const SpecialLayout = ({ children }: { children: React.ReactNode }) => {
     <>
       <Navbar />
       <ActiveMealPrepPlan />
+      <ScrollToTopButton />
       <Sidebar />
       <WarningOverlay />
       <PopupModal
