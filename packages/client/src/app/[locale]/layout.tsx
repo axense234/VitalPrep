@@ -12,7 +12,12 @@ import { getMessages } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
 
 export async function generateMetadata(): Promise<Metadata> {
-  return metaDefaultProps;
+  return {
+    ...metaDefaultProps,
+    manifest: "./public/manifest.json",
+    icons:
+      "https://res.cloudinary.com/birthdayreminder/image/upload/v1719327525/VitalPrep/brandmark-design-16x16_btxkmi.png",
+  };
 }
 
 const RootLayout = async ({
