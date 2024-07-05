@@ -137,9 +137,7 @@ const UpsertUtensilInterface: FC<{ interfaceType: "create" | "update" }> = ({
           <h4>{translate("formTitle")}</h4>
           <form className={createToolStyles.createInterfaceForm}>
             <TextFormControl
-              entityProperty={
-                templateUtensil.name || translate("defaultNameValue")
-              }
+              entityProperty={templateUtensil.name || ""}
               labelContent={translate("name")}
               onEntityPropertyValueChange={(e) =>
                 dispatch(

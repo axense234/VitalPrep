@@ -185,9 +185,7 @@ const UpsertInstanceTemplateInterface: FC<{
           <h4>{translate("formTitle")}</h4>
           <form className={createToolStyles.createInterfaceForm}>
             <TextFormControl
-              entityProperty={
-                templateInstanceTemplate.name || translate("defaultNameValue")
-              }
+              entityProperty={templateInstanceTemplate.name || ""}
               labelContent={translate("name")}
               onEntityPropertyValueChange={(e) =>
                 dispatch(

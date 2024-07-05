@@ -181,9 +181,7 @@ const UpsertDayTemplateInterface: FC<{
           <h4>{translate("formTitle")}</h4>
           <form className={createToolStyles.createInterfaceForm}>
             <TextFormControl
-              entityProperty={
-                templateDayTemplate.name || translate("defaultNameValue")
-              }
+              entityProperty={templateDayTemplate.name || ""}
               labelContent={translate("name")}
               onEntityPropertyValueChange={(e) =>
                 dispatch(

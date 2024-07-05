@@ -11,7 +11,7 @@ const useSetDefaultEntityName = (
     if (!entity?.name && run) {
       updateFunction();
     }
-  }, [run, entity?.name]);
+  }, [run]);
 };
 
 export default useSetDefaultEntityName;

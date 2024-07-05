@@ -52,7 +52,7 @@ const WarningOverlay = () => {
               );
               warningOverlay.onConfirmFunction();
             }}
-            disabled={countdown > 0}
+            disabled={countdown > 0 || false}
             style={{
               filter: countdown > 0 ? "brigthness(0.1)" : "brightness(1)",
             }}

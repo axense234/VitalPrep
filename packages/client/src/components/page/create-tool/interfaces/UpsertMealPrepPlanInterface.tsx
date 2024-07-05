@@ -9,7 +9,7 @@ import SelectFormControl from "@/components/shared/form/SelectFormControl";
 import WeekdayFormControl from "@/components/shared/form/WeekdayFormControl";
 import EntityPreview from "@/components/shared/entity/EntityPreview";
 // React
-import React, { ChangeEvent, FC, useEffect } from "react";
+import React, { ChangeEvent, FC } from "react";
 // Data
 import {
   defaultMealPrepPlanImageUrl,
@@ -204,9 +204,7 @@ const UpsertMealPrepPlanInterface: FC<{
           <h4>{translate("formTitle")}</h4>
           <form className={createToolStyles.createInterfaceForm}>
             <TextFormControl
-              entityProperty={
-                templateMealPrepPlan.name || translate("defaultNameValue")
-              }
+              entityProperty={templateMealPrepPlan.name || ""}
               labelContent={translate("name")}
               onEntityPropertyValueChange={(e) =>
                 dispatch(

@@ -180,9 +180,7 @@ const UpsertRecipeInterface: FC<{ interfaceType: "create" | "update" }> = ({
           <h4>{translate("formTitle")}</h4>
           <form className={createToolStyles.createInterfaceForm}>
             <TextFormControl
-              entityProperty={
-                templateRecipe.name || translate("defaultNameValue")
-              }
+              entityProperty={templateRecipe.name || ""}
               labelContent={translate("name")}
               onEntityPropertyValueChange={(e) =>
                 dispatch(

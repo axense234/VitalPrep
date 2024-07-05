@@ -179,9 +179,7 @@ const UpsertMealPrepLogInterface: FC<{
           <h4>{translate("formTitle")}</h4>
           <form className={createToolStyles.createInterfaceForm}>
             <TextFormControl
-              entityProperty={
-                templateMealPrepLog.name || translate("defaultNameValue")
-              }
+              entityProperty={templateMealPrepLog.name || ""}
               labelContent={translate("name")}
               onEntityPropertyValueChange={(e) =>
                 dispatch(

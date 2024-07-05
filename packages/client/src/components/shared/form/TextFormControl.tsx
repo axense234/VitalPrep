@@ -3,7 +3,7 @@ import TextFormControlProps from "@/core/interfaces/form/TextFormControlProps";
 // React
 import { FC } from "react";
 // SCSS
-import formControlsStyles from "../../../scss/components/others/FormControls.module.scss";
+import formControlsStyles from "@/scss/components/others/FormControls.module.scss";
 
 const TextFormControl: FC<TextFormControlProps> = ({
   labelContent,

@@ -1,5 +1,4 @@
 "use client";
-
 // Components
 import Navbar from "@/components/shared/Navbar";
 import Footer from "@/components/shared/Footer";
@@ -65,13 +64,19 @@ const SpecialLayout = ({ children }: { children: React.ReactNode }) => {
     };
 
     initialize();
-  }, [profile.id, loadingGetProfile, loadingGetOAuthProfile]);
+  }, [
+    profile.id,
+    loadingGetProfile,
+    loadingGetOAuthProfile,
+    pathname,
+    initializeOneSignal,
+  ]);
 
   useEffect(() => {
     if (profile.id) {
       loginOneSignal(profile.id);
     }
-  }, [profile.id, loadingGetProfile, loadingGetOAuthProfile]);
+  });
 
   useEffect(() => {
     if (isJWTInvalid) {
@@ -104,7 +109,7 @@ const SpecialLayout = ({ children }: { children: React.ReactNode }) => {
       />
       {children}
       <Footer />
-      <Script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async />
+      <Script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" defer />
     </>
   );
 };

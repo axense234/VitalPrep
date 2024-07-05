@@ -52,7 +52,7 @@ const sendNotification = async (
   notificationContents.fr = generateMessage("fr");
   notificationContents.de = generateMessage("de");
 
-  console.log(userId, username);
+  console.log(userId, username, notificationContents);
 
   await oneSignalClient.createNotification({
     contents: notificationContents,
