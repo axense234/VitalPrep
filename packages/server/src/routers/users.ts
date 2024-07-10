@@ -1,33 +1,20 @@
+// Express
 import express from "express";
-
-// Controllers and Middlware
-import {
-  deleteUserById,
-  getAllUsers,
-  getUserById,
-  updateUserById,
-} from "../controllers/users";
 // Middleware
-import authenticationMiddleware from "../middleware/authentication";
 import allowRouteUse from "../middleware/adminUse";
+// Controllerss
+import deleteUserById from "../controllers/users/deleteUserById";
+import getAllUsers from "../controllers/users/getAllUsers";
+import getUserById from "../controllers/users/getUserById";
+import updateUserById from "../controllers/users/updateUserById";
 
 const router = express.Router();
 
 router.get("/users", allowRouteUse, getAllUsers);
 
-router.get(
-  "/users/:userId",
-  allowRouteUse,
-  authenticationMiddleware,
-  getUserById
-);
+router.get("/users/:userId", allowRouteUse, getUserById);
 
-router.patch(
-  "/users/update/:userId",
-  allowRouteUse,
-  authenticationMiddleware,
-  updateUserById
-);
+router.patch("/users/update/:userId", allowRouteUse, updateUserById);
 
 router.delete("/users/delete/:userId", allowRouteUse, deleteUserById);
 

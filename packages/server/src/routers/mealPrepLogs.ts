@@ -1,15 +1,14 @@
+// Express
 import express from "express";
-
-// Controllers and Middleware
-import {
-  createMealPrepLog,
-  deleteMealPrepLog,
-  getAllMealPrepLogs,
-  getMealPrepLogById,
-  updateMealPrepLog,
-} from "../controllers/mealPrepLogs";
+// Middleware
 import authenticationMiddleware from "../middleware/authentication";
 import allowRouteUse from "../middleware/adminUse";
+// Controllers
+import createMealPrepLog from "../controllers/mealPrepLogs/createMealPrepLog";
+import deleteMealPrepLog from "../controllers/mealPrepLogs/deleteMealPrepLog";
+import getAllMealPrepLogs from "../controllers/mealPrepLogs/getAllMealPrepLogs";
+import getMealPrepLogById from "../controllers/mealPrepLogs/getMealPrepLogById";
+import updateMealPrepLog from "../controllers/mealPrepLogs/updateMealPrepLog";
 
 const router = express.Router();
 

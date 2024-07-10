@@ -1,15 +1,14 @@
+// Express
 import express from "express";
-
-// Controllers and Middleware
-import {
-  createIngredient,
-  deleteIngredient,
-  getAllIngredients,
-  getIngredientById,
-  updateIngredient,
-} from "../controllers/ingredients";
+// Middleware
 import authenticationMiddleware from "../middleware/authentication";
 import allowRouteUse from "../middleware/adminUse";
+// Controllers
+import createIngredient from "../controllers/ingredients/createIngredient";
+import deleteIngredient from "../controllers/ingredients/deleteIngredient";
+import getAllIngredients from "../controllers/ingredients/getAllIngredients";
+import getIngredientById from "../controllers/ingredients/getIngredientById";
+import updateIngredient from "../controllers/ingredients/upgradeIngredient";
 
 const router = express.Router();
 
@@ -27,7 +26,12 @@ router.get(
   getIngredientById
 );
 
-router.post("/ingredients/create", authenticationMiddleware, createIngredient);
+router.post(
+  "/ingredients/create",
+  allowRouteUse,
+  authenticationMiddleware,
+  createIngredient
+);
 
 router.patch(
   "/ingredients/update/:ingredientId",

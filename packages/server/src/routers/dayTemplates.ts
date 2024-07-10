@@ -1,15 +1,14 @@
+// Express
 import express from "express";
-
-// Controllers and Middleware
-import {
-  createDayTemplate,
-  deleteDayTemplate,
-  getAllDayTemplates,
-  getDayTemplateById,
-  updateDayTemplate,
-} from "../controllers/dayTemplates";
+// Middleware
 import authenticationMiddleware from "../middleware/authentication";
 import allowRouteUse from "../middleware/adminUse";
+// Controllers
+import createDayTemplate from "../controllers/dayTemplates/createDayTemplate";
+import deleteDayTemplate from "../controllers/dayTemplates/deleteDayTemplate";
+import getAllDayTemplates from "../controllers/dayTemplates/getAllDayTemplates";
+import getDayTemplateById from "../controllers/dayTemplates/getDayTemplateById";
+import updateDayTemplate from "../controllers/dayTemplates/updateDayTemplate";
 
 const router = express.Router();
 

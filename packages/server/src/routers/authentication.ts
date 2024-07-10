@@ -1,12 +1,11 @@
+// Express
 import express from "express";
-
-// Controllers and Middleware
-import {
-  signupUser,
-  loginUser,
-  signoutUser,
-} from "../controllers/authentication";
+// Middleware
 import allowRouteUse from "../middleware/adminUse";
+// Controllers
+import signupUser from "../controllers/authentication/signupUser";
+import loginUser from "../controllers/authentication/loginUser";
+import signoutUser from "../controllers/authentication/signoutUser";
 
 const router = express.Router();
 

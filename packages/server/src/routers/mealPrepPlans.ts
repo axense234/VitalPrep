@@ -1,15 +1,14 @@
+// Express
 import express from "express";
-
-// Controllers and Middleware
-import {
-  createMealPrepPlan,
-  deleteMealPrepPlan,
-  getAllMealPrepPlans,
-  getMealPrepPlanById,
-  updateMealPrepPlan,
-} from "../controllers/mealPrepPlans";
+// Middleware
 import authenticationMiddleware from "../middleware/authentication";
 import allowRouteUse from "../middleware/adminUse";
+// Controllers
+import createMealPrepPlan from "../controllers/mealPrepPlans/createMealPrepPlan";
+import deleteMealPrepPlan from "../controllers/mealPrepPlans/deleteMealPrepPlan";
+import getAllMealPrepPlans from "../controllers/mealPrepPlans/getAllMealPrepPlans";
+import getMealPrepPlanById from "../controllers/mealPrepPlans/getMealPrepPlanById";
+import updateMealPrepPlan from "../controllers/mealPrepPlans/updateMealPrepPlan";
 
 const router = express.Router();
 

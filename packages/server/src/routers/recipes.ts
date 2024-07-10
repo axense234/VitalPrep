@@ -1,15 +1,14 @@
+// Express
 import express from "express";
-
-// Controllers and Middleware
-import {
-  createRecipe,
-  deleteRecipe,
-  getAllRecipes,
-  getRecipeById,
-  updateRecipe,
-} from "../controllers/recipes";
+// Middleware
 import authenticationMiddleware from "../middleware/authentication";
 import allowRouteUse from "../middleware/adminUse";
+// Controllers
+import createRecipe from "../controllers/recipes/createRecipe";
+import deleteRecipe from "../controllers/recipes/deleteRecipe";
+import getAllRecipes from "../controllers/recipes/getAllRecipes";
+import getRecipeById from "../controllers/recipes/getRecipeById";
+import updateRecipe from "../controllers/recipes/updateRecipe";
 
 const router = express.Router();
 

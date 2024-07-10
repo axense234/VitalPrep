@@ -3,7 +3,7 @@ import { Response, Request } from "express";
 // Status Codes
 import { StatusCodes } from "http-status-codes";
 // Client
-import { prismaClient } from "../db/postgres";
+import { prismaClient } from "../../db/postgres";
 
 const deleteAllEntities = async (req: Request, res: Response) => {
   if (process.env.NODE_ENV !== "production") {
@@ -28,4 +28,4 @@ const deleteAllEntities = async (req: Request, res: Response) => {
   }
 };
 
-export { deleteAllEntities };
+export default deleteAllEntities;

@@ -1,15 +1,14 @@
+// Express
 import express from "express";
-
-// Controllers and Middleware
-import {
-  createInstanceTemplate,
-  deleteInstanceTemplate,
-  getAllInstanceTemplates,
-  getInstanceTemplateById,
-  updateInstanceTemplate,
-} from "../controllers/instanceTemplates";
+// Middleware
 import authenticationMiddleware from "../middleware/authentication";
 import allowRouteUse from "../middleware/adminUse";
+// Controllers
+import createInstanceTemplate from "../controllers/instanceTemplates/createInstanceTemplate";
+import deleteInstanceTemplate from "../controllers/instanceTemplates/deleteInstanceTemplate";
+import getAllInstanceTemplates from "../controllers/instanceTemplates/getAllInstanceTemplates";
+import getInstanceTemplateById from "../controllers/instanceTemplates/getInstanceTemplateById";
+import updateInstanceTemplate from "../controllers/instanceTemplates/updateInstanceTemplate";
 
 const router = express.Router();
 
