@@ -30,7 +30,6 @@ const getUserById = async (req: Request, res: Response) => {
 
   const userId = userIdCache || userIdParams;
   const includeObject: UsersIncludeObject = {};
-  console.log(req.url);
 
   if (!userId || userId === "null" || userId === "undefined") {
     return res

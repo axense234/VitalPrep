@@ -95,7 +95,6 @@ const signupUser = async (req: Request, res: Response) => {
   const token = createJWT(createdUser.id, createdUser.username);
 
   await setCache(`${createdUser.id}:jwt-vitalprep`, token);
-  await handleCacheMutation("users", createdUser.id);
 
   return res.status(StatusCodes.CREATED).json({
     message: `Successfully created user with id:${createdUser.id}.`,

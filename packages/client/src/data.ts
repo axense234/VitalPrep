@@ -8,7 +8,6 @@ import { TbManualGearbox } from "react-icons/tb";
 import { GrContact } from "react-icons/gr";
 import { FcGoogle } from "react-icons/fc";
 // Types
-import MetaProps from "./core/interfaces/MetaProps";
 import PageLink from "./core/types/PageLink";
 import SocialMediaIconProps from "./core/interfaces/SocialMediaIconProps";
 import HomeCardContent from "./core/types/HomeCardContent";

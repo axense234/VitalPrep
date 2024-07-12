@@ -1,5 +1,5 @@
 // SCSS
-import createToolStyles from "../../../scss/pages/CreateTool.module.scss";
+import createToolStyles from "@/scss/pages/CreateTool.module.scss";
 // React
 import { FC, ReactElement } from "react";
 // Redux

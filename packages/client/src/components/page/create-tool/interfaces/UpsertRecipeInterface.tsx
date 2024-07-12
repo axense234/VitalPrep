@@ -135,6 +135,15 @@ const UpsertRecipeInterface: FC<{ interfaceType: "create" | "update" }> = ({
     updateLoadingUpdateEntity: updateLoadingUpdateRecipe,
   });
 
+  useSetTemplateEntity({
+    defaultTemplateEntity: defaultTemplateRecipe,
+    entityId: id as string,
+    entityType: "recipe",
+    interfaceType: interfaceType,
+    loadingGetEntity: loadingGetRecipe,
+    setTemplateEntity: setTemplateRecipe,
+  });
+
   useSetDefaultEntityName(
     () =>
       dispatch(
@@ -146,15 +155,6 @@ const UpsertRecipeInterface: FC<{ interfaceType: "create" | "update" }> = ({
     templateRecipe,
     interfaceType === "create"
   );
-
-  useSetTemplateEntity({
-    defaultTemplateEntity: defaultTemplateRecipe,
-    entityId: id as string,
-    entityType: "recipe",
-    interfaceType: interfaceType,
-    loadingGetEntity: loadingGetRecipe,
-    setTemplateEntity: setTemplateRecipe,
-  });
 
   useGetEntityComponents(loadingGetUserIngredients, getAllUserIngredients);
   useGetEntityComponents(loadingGetUserUtensils, getAllUserUtensils);

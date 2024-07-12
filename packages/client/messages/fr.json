@@ -572,9 +572,9 @@
       "formLabels": {
         "name": "Nouveau nom d'utilisateur:",
         "email": "Nouveau courriel:",
-        "password": "nouveau mot de passe",
-        "verifyPassword": "vérifier le mot de passe",
-        "image": "Image du nouveau compte",
+        "password": "Nouveau mot de passe:",
+        "verifyPassword": "Vérifier le mot de passe:",
+        "image": "Image du nouveau compte:",
         "submitButtonContent": "Mettre à jour les paramètres du compte"
       }
     },
@@ -812,7 +812,7 @@
             "imageAlt": "Image de l'entité du modèle de session",
             "images": {
               "1": "https://res.cloudinary.com/birthdayreminder/image/upload/v1716978558/VitalPrep/guideImages/Screenshot_from_2024-05-29_13-28-23_lewz5y.png",
-              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1716978741/VitalPrep/guideImages/Screenshot_from_2024-05-29_13-31-41_gf39ja.png ",
+              "2": "https://res.cloudinary.com/birthdayreminder/image/upload/v1716978741/VitalPrep/guideImages/Screenshot_from_2024-05-29_13-31-41_gf39ja.png",
               "3": "https://res.cloudinary.com/birthdayreminder/image/upload/v1716979005/VitalPrep/guideImages/Screenshot_from_2024-05-29_13-35-57_anho06.png"
             }
           },
@@ -837,9 +837,9 @@
         "title": "Journaux de session",
         "articles": {
           "1": {
-            "title": "Que sont les journaux de session ?",
+            "title": "Que sont les journaux de session?",
             "descriptions": {
-              "1": "<span>Journaux de session</span> représentent les journaux de votre <span>Séances actives de plan de préparation de repas</span>.  <span>Séance de préparation des repas</span>.  <span>suivi des sessions du plan \" Meal Prep\"</span>."
+              "1": "<span>Journaux de session</span> représentent les journaux de votre. <span>Séances actives de plan de préparation de repas</span>.  <span>Séance de préparation des repas</span>.  <span>suivi des sessions du plan \"Meal Prep\"</span>."
             },
             "imageAlt": "Image du plan de préparation de repas actif",
             "images": {
@@ -849,7 +849,7 @@
           "2": {
             "title": "Comment créer un journal de session ?",
             "descriptions": {
-              "1": "<span>Journaux de session</span> par défaut sont <span>automatiquement</span> créé 3 heures <span>après votre séance active de plan de préparation de repas</span>.  <span>comportement</span> peut être modifié sur le <settings>Page Paramètres</settings> soit ne pas créer de journaux automatiquement, soit créer des journaux après un nombre d'heures donné au lieu de 3, ou les deux.",
+              "1": "<span>Journaux de session</span> par défaut sont <span>automatiquement</span> créé 3 heures <span>après votre séance active de plan de préparation de repas</span>. <span>Comportement</span> peut être modifié sur le <settings>Page Paramètres</settings> soit ne pas créer de journaux automatiquement, soit créer des journaux après un nombre d'heures donné au lieu de 3, ou les deux.",
               "2": "<span>Journaux de session</span> peut également être créé <span>manuellement</span> sur le <addLog>Ajouter une page de journal</addLog>."
             },
             "imageAlt": "Ajouter une image du journal de session",
@@ -892,7 +892,7 @@
             "title": "Paramètres",
             "descriptions": {
               "1": "Ton <span>Détails du profil</span> ou <span>paramètres de notification</span> peut être modifié sur le <settings>Page Paramètres</settings>.",
-              "2": "Le disponible <span>Paramètres de profil</span> sont : nom d’utilisateur, email, mot de passe, image de profil."
+              "2": "Le disponible <span>Paramètres de profil</span> sont :nom d’utilisateur, email, mot de passe, image de profil."
             },
             "imageAlt": "Image de la section Paramètres",
             "images": {
@@ -913,8 +913,8 @@
           "4": {
             "title": "Notifications",
             "descriptions": {
-              "1": "Recevoir <span>notifications de type rappel</span> tout en ayant un <span>Plan de préparation de repas actif</span> vous devez <span>abonnez-vous à notre service de notifications</span> soit par l'intermédiaire du <span>cloche</span> fixé dans le coin inférieur droit de l'écran ou via notre <span>modal</span>.",
-              "2": "Tu peux <span>Se désabonner</span> quand vous le souhaitez en cliquant sur la cloche puis Désabonnez-vous."
+              "1": "Recevoir <span>notifications de type rappel</span> tout en ayant un. <span>Plan de préparation de repas actif</span> vous devez <span>abonnez-vous à notre service de notifications</span> soit par l'intermédiaire du <span>cloche</span> fixé dans le coin inférieur droit de l'écran ou via notre <span>modal</span>.",
+              "2": "Tu peux <span>se désabonner</span> quand vous le souhaitez en cliquant sur la cloche puis Désabonnez-vous."
             },
             "imageAlt": "Image de la section Notifications",
             "images": {
@@ -944,19 +944,19 @@
         "sectionDescription": "Voici quelques questions fréquemment posées par les personnes qui débutent dans la préparation des repas et qui ne savent pas par où ni comment commencer.",
         "sectionAccordions": {
           "1": {
-            "accordionTitle": "Qu’est-ce que la préparation des repas ?",
+            "accordionTitle": "Qu’est-ce que la préparation des repas?",
             "accordionContent": "La préparation des repas consiste à préparer et à répartir les repas à l'avance, généralement sur plusieurs jours à la fois. "
           },
           "2": {
-            "accordionTitle": "Comment Meal Prepping fait-il gagner du temps ?",
+            "accordionTitle": "Comment Meal Prepping fait-il gagner du temps?",
             "accordionContent": "La préparation des repas vous fait gagner du temps en vous permettant de préparer plusieurs repas à la fois, généralement un jour désigné comme un week-end. "
           },
           "3": {
-            "accordionTitle": "Quels sont les avantages de la préparation des repas ?",
+            "accordionTitle": "Quels sont les avantages de la préparation des repas?",
             "accordionContent": "La préparation des repas offre plusieurs avantages, notamment un gain de temps, une alimentation plus saine, le contrôle des portions, la rentabilité, la réduction du gaspillage alimentaire et la cohérence."
           },
           "4": {
-            "accordionTitle": "Comment puis-je commencer à préparer des repas si je suis débutant ?",
+            "accordionTitle": "Comment puis-je commencer à préparer des repas si je suis débutant?",
             "accordionContent": "Pour commencer à préparer vos repas en tant que débutant, commencez par planifier vos repas, dresser une liste d'épicerie, réserver du temps dédié, investir dans des contenants de stockage, cuisiner par lots, répartir les repas, les conserver correctement et les réchauffer au moment de manger."
           }
         }

@@ -22,15 +22,6 @@ const authenticationMiddleware = async (
   const userEmail = req.query.userEmail;
   const adminPrivilegesSecret = req.query.adminPrivilegesSecret;
 
-  // Skip Authentication from Admin Sources
-  if (
-    adminPrivilegesSecret === process.env.ADMIN_PRIVILEGES_SECRET ||
-    process.env.NODE_ENV !== "production"
-  ) {
-    console.log(`ADMIN USE AT:${new Date().toUTCString()}`);
-    return next();
-  }
-
   // OAuth Flow
   if (userEmail && userEmail !== "undefined" && userEmail !== "null") {
     const foundUser = await UserClient.findUnique({
@@ -44,6 +35,15 @@ const authenticationMiddleware = async (
       next();
       return;
     }
+  }
+
+  // Skip Authentication from Admin Sources
+  if (
+    adminPrivilegesSecret === process.env.ADMIN_PRIVILEGES_SECRET ||
+    process.env.NODE_ENV !== "production"
+  ) {
+    console.log(`ADMIN USE AT:${new Date().toUTCString()}`);
+    return next();
   }
 
   // Normal Flow

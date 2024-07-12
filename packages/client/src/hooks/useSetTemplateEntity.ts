@@ -34,26 +34,17 @@ const useSetTemplateEntity = ({
     selectEntityById(state, entityId, entityType)
   );
 
-  console.log(
-    entityFoundById,
-    interfaceType,
-    entityFoundById,
-    loadingGetEntity
-  );
-
   useEffect(() => {
     if (
       interfaceType === "update" &&
       entityFoundById &&
       loadingGetEntity === "SUCCEDED"
     ) {
-      console.log("yes");
       if (entityType !== "ingredient" && entityType !== "utensil") {
         const updatedEntity = transformEntitiesIntoIds(
           entityFoundById,
           entityType
         );
-        console.log("nhgawd");
         dispatch(setTemplateEntity(updatedEntity));
         if (entityType === "mealPrepPlan") {
           console.log(
@@ -67,7 +58,6 @@ const useSetTemplateEntity = ({
           );
         }
       } else {
-        console.log("lawod");
         dispatch(setTemplateEntity(entityFoundById));
       }
     }
