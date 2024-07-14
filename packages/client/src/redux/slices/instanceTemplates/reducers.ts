@@ -19,6 +19,12 @@ const instanceTemplatesSliceReducers = {
   ) {
     state.loadingGetUserInstanceTemplates = action.payload;
   },
+  updateLoadingGetUserInstanceTemplate(
+    state: InstanceTemplatesSliceStateType,
+    action: PayloadAction<LoadingStateType>
+  ) {
+    state.loadingGetUserInstanceTemplate = action.payload;
+  },
   updateLoadingCreateInstanceTemplate(
     state: InstanceTemplatesSliceStateType,
     action: PayloadAction<LoadingStateType>

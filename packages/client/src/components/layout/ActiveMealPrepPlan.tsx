@@ -23,12 +23,18 @@ import { getAllUserMealPrepPlans } from "@/redux/slices/mealPrepPlans/thunks";
 import useGetWindowWidth from "@/hooks/useGetWindowWidth";
 import getLoadingProfile from "@/helpers/getLoadingProfile";
 import useGetEntityComponents from "@/hooks/useGetEntityComponents";
+import useSetInitialActiveMealPrepPlan from "@/hooks/useSetInitialActiveMealPrepPlan";
+import useActiveMealPrepPlanTransition from "@/hooks/useActiveMealPrepPlanTransition";
+// Translations
+import { useTranslations } from "next-intl";
 
 const ActiveMealPrepPlan = () => {
   const dispatch = useAppDispatch();
   const [showActiveMealPrepPlan, setShowActiveMealPrepPlan] =
     useState<boolean>(false);
   const activeMealPrepPlanRef = useRef<HTMLDivElement | null>(null);
+
+  const translate = useTranslations("activeMealPrepPlan");
 
   const profile = useAppSelector(selectProfile);
 
@@ -48,26 +54,12 @@ const ActiveMealPrepPlan = () => {
     (mpp) => mpp.id === profile.mealPrepPlanInUseId
   );
 
-  useEffect(() => {
-    if (
-      loadingProfile === "SUCCEDED" &&
-      profile.mealPrepPlanInUseId === "" &&
-      mealPrepPlans.length === 1
-    ) {
-      {
-        dispatch(setTypeOfUpdateAccountQuery("mealPrepPlanUsed"));
-        dispatch(
-          updateUser({
-            typeOfUpdate: "mealPrepPlanUsed",
-            userTemplate: {
-              ...profile,
-              mealPrepPlanInUseId: mealPrepPlans[0].id,
-            },
-          })
-        );
-      }
-    }
-  }, [loadingProfile, profile.mealPrepPlanInUseId, mealPrepPlans, dispatch]);
+  useSetInitialActiveMealPrepPlan(
+    loadingProfile,
+    profile,
+    mealPrepPlans,
+    dispatch
+  );
 
   useGetEntityComponents(
     loadingGetUserMealPrepPlans,
@@ -75,21 +67,12 @@ const ActiveMealPrepPlan = () => {
     selectedEntityOption !== "mealPrepPlan"
   );
 
-  useEffect(() => {
-    if (mealPrepPlans.length >= 1) {
-      const activeMealPrepPlanContainer =
-        activeMealPrepPlanRef.current as HTMLDivElement;
-      if (showActiveMealPrepPlan) {
-        activeMealPrepPlanContainer.style.transform = "translateX(0%)";
-      } else if (!showActiveMealPrepPlan) {
-        if (tabletOrPhoneRedesign) {
-          activeMealPrepPlanContainer.style.transform = "translateX(-70%)";
-        } else {
-          activeMealPrepPlanContainer.style.transform = "translateX(-80%)";
-        }
-      }
-    }
-  }, [showActiveMealPrepPlan, setShowActiveMealPrepPlan]);
+  useActiveMealPrepPlanTransition(
+    mealPrepPlans,
+    activeMealPrepPlanRef,
+    showActiveMealPrepPlan,
+    tabletOrPhoneRedesign as boolean
+  );
 
   if (mealPrepPlans.length < 1) {
     return null;
@@ -101,7 +84,9 @@ const ActiveMealPrepPlan = () => {
       ref={activeMealPrepPlanRef}
     >
       <div className={activeMealPrepPlanStyles.activeMealPrepPlanSettings}>
-        <label htmlFor="activeMealPrepPlan">Select MPP</label>
+        <label htmlFor="activeMealPrepPlan">
+          {translate("selectMealPrepPlanTitle")}
+        </label>
         <select
           name="activeMealPrepPlan"
           id="activeMealPrepPlan"
@@ -136,6 +121,16 @@ const ActiveMealPrepPlan = () => {
           alt={activeMealPrepPlan?.name || "Meal Prep Plan Image"}
           src={activeMealPrepPlan?.imageUrl || defaultMealPrepPlanImageUrl}
           onClick={() => setShowActiveMealPrepPlan(!showActiveMealPrepPlan)}
+          title={translate(
+            showActiveMealPrepPlan
+              ? "hideMealPrepPlanTitle"
+              : "showMealPrepPlanTitle"
+          )}
+          aria-label={translate(
+            showActiveMealPrepPlan
+              ? "hideMealPrepPlanTitle"
+              : "showMealPrepPlanTitle"
+          )}
         />
       </div>
     </div>

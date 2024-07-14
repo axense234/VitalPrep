@@ -25,6 +25,12 @@ const ingredientsSliceReducers = {
   ) {
     state.loadingGetUserIngredients = action.payload;
   },
+  updateLoadingGetUserIngredient(
+    state: IngredientsSliceStateType,
+    action: PayloadAction<LoadingStateType>
+  ) {
+    state.loadingGetUserIngredient = action.payload;
+  },
   updateTemplateIngredient(
     state: IngredientsSliceStateType,
     action: PayloadAction<ObjectKeyValueType>

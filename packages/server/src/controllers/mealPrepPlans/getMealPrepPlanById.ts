@@ -22,6 +22,7 @@ const getMealPrepPlanById = async (req: Request, res: Response) => {
     includeRecipesMacros,
     includeDayTemplates,
     includeDayTemplatesMacros,
+    includeDayTemplatesRecipes,
     includeInstanceTemplates,
     includeInstanceTemplatesMacros,
     includeInstanceTemplatesTimings,
@@ -63,7 +64,34 @@ const getMealPrepPlanById = async (req: Request, res: Response) => {
     includeObject.dayTemplates = true;
   }
   if (includeDayTemplatesMacros && includeDayTemplates) {
-    includeObject.dayTemplates = { include: { macros: true } };
+    includeObject.dayTemplates = {
+      include: {
+        ...(
+          includeObject.dayTemplates as {
+            include: {
+              macros?: boolean | undefined;
+              recipes?: boolean | undefined;
+            };
+          }
+        ).include,
+        macros: true,
+      },
+    };
+  }
+  if (includeDayTemplatesRecipes && includeDayTemplates) {
+    includeObject.dayTemplates = {
+      include: {
+        ...(
+          includeObject.dayTemplates as {
+            include: {
+              macros?: boolean | undefined;
+              recipes?: boolean | undefined;
+            };
+          }
+        ).include,
+        recipes: true,
+      },
+    };
   }
   if (includeInstanceTemplates) {
     includeObject.instanceTemplates = true;

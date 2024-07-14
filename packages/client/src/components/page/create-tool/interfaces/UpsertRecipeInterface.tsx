@@ -60,8 +60,10 @@ import useSetDefaultEntityName from "@/hooks/useSetDefaultEntityName";
 import useGetUpsertEntityInterfaceDetails from "@/hooks/useGetUpsertEntityInterfaceDetails";
 import handleOnUpsertEntitySubmit from "@/helpers/handleOnUpsertEntitySubmit";
 import useSetTemplateEntity from "@/hooks/useSetTemplateEntity";
+// Types
+import UpsertEntityInterfaceProps from "@/core/interfaces/entity/UpsertEntityInterfaceProps";
 
-const UpsertRecipeInterface: FC<{ interfaceType: "create" | "update" }> = ({
+const UpsertRecipeInterface: FC<UpsertEntityInterfaceProps> = ({
   interfaceType,
 }) => {
   const dispatch = useAppDispatch();

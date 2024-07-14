@@ -4,7 +4,7 @@ type MealPrepLogsIncludeObject = {
   ingredients?: boolean | { include: { macros: boolean } };
   utensils?: boolean;
   recipes?: boolean | { include: { macros: boolean } };
-  dayTemplates?: boolean | { include: { macros: boolean } };
+  dayTemplates?: boolean | { include: { macros?: boolean; recipes?: boolean } };
   instanceTemplate?: boolean | { include: { macros: boolean } };
 };
 export default MealPrepLogsIncludeObject;

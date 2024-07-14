@@ -12,6 +12,7 @@ import { FC, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import { selectLoadingGetUserMealPrepLog } from "@/redux/slices/mealPrepLogs/selectors";
 import { getUserMealPrepLog } from "@/redux/slices/mealPrepLogs/thunks";
+import { updateLoadingGetUserMealPrepLog } from "@/redux/slices/mealPrepLogs/slice";
 // Types
 import EntityInfoProps from "@/core/interfaces/entity/EntityInfoProps";
 // Components
@@ -19,10 +20,11 @@ import EntityMutationMenu from "@/components/shared/entity/EntityMutationMenu";
 // Hooks
 import useGetHandleOnDeleteEntity from "@/hooks/useGetHandleOnDeleteEntity";
 import useNavigateToPathname from "@/hooks/useNavigateToPathname";
+import useDelayFunction from "@/hooks/useDelayFunction";
 // Translations
 import { useTranslations } from "next-intl";
 // Next
-import { useSearchParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 
 const MealPrepLogInfo: FC<EntityInfoProps> = ({
   entityId,
@@ -31,7 +33,7 @@ const MealPrepLogInfo: FC<EntityInfoProps> = ({
 }) => {
   const searchParams = useSearchParams();
   const editMode = searchParams.get("edit");
-  console.log(editMode);
+  const { id: mealPrepLogId } = useParams();
 
   const dispatch = useAppDispatch();
   const loadingGetUserMealPrepLog = useAppSelector(
@@ -47,8 +49,13 @@ const MealPrepLogInfo: FC<EntityInfoProps> = ({
 
   const translate = useTranslations("warningOverlay.pageInfo");
 
+  useDelayFunction(
+    () => dispatch(updateLoadingGetUserMealPrepLog("IDLE")),
+    [mealPrepLogId],
+    10
+  );
+
   useEffect(() => {
-    console.log(loadingGetUserMealPrepLog, userId, entityId);
     if (loadingGetUserMealPrepLog === "IDLE" && userId && entityId) {
       dispatch(getUserMealPrepLog({ userId, mealPrepLogId: entityId }));
     }

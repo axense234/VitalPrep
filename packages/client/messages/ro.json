@@ -99,7 +99,13 @@
   "navbar": {
     "navbarTitleTextContent": "Accesați pagina Profil",
     "navbarImageAltTextContent": "Imaginea de Profil",
-    "navbarUsernameDefaultValue": "Utilizator"
+    "navbarUsernameDefaultValue": "Utilizator",
+    "navbarMenu": {
+      "title": "Deschideți Bara de Navigare Laterală"
+    }
+  },
+  "sidebar": {
+    "closeSidebarButtonTitle": "Inchideți Bara de Navigare Laterală"
   },
   "pageLinks": {
     "labels": {
@@ -465,7 +471,9 @@
       "defaultProfileUsername": "Utilizator",
       "defaultProfileEmail": "profileemail@gmail.com",
       "defaultProfileAge": "Vârstă Necunoscută",
-      "profileAge": "{age} ani"
+      "profileAge": "{age} ani",
+      "showProfileEmailTitle": "Arătați Email",
+      "hideProfileEmailTitle": "Ascundeți Email"
     }
   },
   "entityStatistics": {
@@ -933,6 +941,12 @@
           }
         }
       }
+    },
+    "navigationButtons": {
+      "titles": {
+        "prevButton": "Secțiunea anterioară",
+        "nextButton": "Secțiunea următoare"
+      }
     }
   },
   "faq": {
@@ -1146,5 +1160,21 @@
   },
   "sttButton": {
     "title": "Derulați până sus"
+  },
+  "activeMealPrepPlan": {
+    "showMealPrepPlanTitle": "Arată mai mult",
+    "hideMealPrepPlanTitle": "Arată mai puțin",
+    "selectMealPrepPlanTitle": "Selectați MPP"
+  },
+  "weekdayFormControl": {
+    "imageTitles": {
+      "Monday": "Luni",
+      "Tuesday": "Marți",
+      "Wednesday": "Miercuri",
+      "Thursday": "Joi",
+      "Friday": "Vineri",
+      "Saturday": "Sâmbătă",
+      "Sunday": "Duminică"
+    }
   }
 }

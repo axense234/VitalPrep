@@ -6,13 +6,20 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 // Helpers
 import translateWithRichText from "@/helpers/translateWithRichText";
+// React
+import { FC } from "react";
+// Types
+import GettingStartedContentSectionProps from "@/core/interfaces/GettingStartedContentSectionProps";
 
-const GettingStartedContentEntities = () => {
+const GettingStartedContentEntities: FC<GettingStartedContentSectionProps> = ({
+  currentGuideSectionRef,
+}) => {
   const translateEntities = useTranslations("gettingStarted.content.entities");
 
   return (
     <section
       className={gettingStartedContentStyles.gettingStartedContentSection}
+      ref={currentGuideSectionRef}
     >
       <h4>{translateEntities("title")}</h4>
       <div

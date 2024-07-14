@@ -21,6 +21,7 @@ export const {
   updateTemplateIngredientMacros,
   updateLoadingUpdateIngredient,
   setTemplateIngredient,
+  updateLoadingGetUserIngredient,
 } = ingredientsSlice.actions;
 
 export default ingredientsSlice.reducer;

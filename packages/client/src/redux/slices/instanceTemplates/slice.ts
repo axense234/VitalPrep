@@ -20,6 +20,7 @@ export const {
   updateLoadingGetUserInstanceTemplates,
   updateLoadingUpdateInstanceTemplate,
   setTemplateInstanceTemplate,
+  updateLoadingGetUserInstanceTemplate,
 } = instanceTemplatesSlice.actions;
 
 export default instanceTemplatesSlice.reducer;

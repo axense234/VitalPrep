@@ -26,6 +26,14 @@ const LangSwitcherSelect: FC<{
         }
         width={64}
         height={48}
+        title={
+          langFlagsImages.find((flagImage) => flagImage.value === locale)
+            ?.imageLabel || langFlagsImages[0].imageLabel
+        }
+        aria-label={
+          langFlagsImages.find((flagImage) => flagImage.value === locale)
+            ?.imageLabel || langFlagsImages[0].imageLabel
+        }
       />
       <div className={langSwitcherStyles.langSwitcherSelect}>
         <select

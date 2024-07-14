@@ -78,6 +78,7 @@ export const getUserMealPrepLog = createAsyncThunk<
           includeRecipesMacros: true,
           includeDayTemplates: true,
           includeDayTemplatesMacros: true,
+          includeDayTemplatesRecipes: true,
           includeMealPrepPlans: true,
           includeInstanceTemplate: true,
           includeInstanceTemplateMacros: true,

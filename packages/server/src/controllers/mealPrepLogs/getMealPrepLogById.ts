@@ -21,6 +21,7 @@ const getMealPrepLogById = async (req: Request, res: Response) => {
     includeRecipesMacros,
     includeDayTemplates,
     includeDayTemplatesMacros,
+    includeDayTemplatesRecipes,
     includeInstanceTemplate,
     includeInstanceTemplateMacros,
   } = req.query;
@@ -58,7 +59,34 @@ const getMealPrepLogById = async (req: Request, res: Response) => {
     includeObject.dayTemplates = true;
   }
   if (includeDayTemplates && includeDayTemplatesMacros) {
-    includeObject.dayTemplates = { include: { macros: true } };
+    includeObject.dayTemplates = {
+      include: {
+        ...(
+          includeObject.dayTemplates as {
+            include: {
+              macros?: boolean | undefined;
+              recipes?: boolean | undefined;
+            };
+          }
+        ).include,
+        macros: true,
+      },
+    };
+  }
+  if (includeDayTemplates && includeDayTemplatesRecipes) {
+    includeObject.dayTemplates = {
+      include: {
+        ...(
+          includeObject.dayTemplates as {
+            include: {
+              macros?: boolean | undefined;
+              recipes?: boolean | undefined;
+            };
+          }
+        ).include,
+        recipes: true,
+      },
+    };
   }
   if (includeInstanceTemplate) {
     includeObject.instanceTemplate = true;

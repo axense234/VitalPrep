@@ -63,10 +63,12 @@ import handleOnUpsertEntitySubmit from "@/helpers/handleOnUpsertEntitySubmit";
 import { useTranslations } from "next-intl";
 // Next
 import { useParams } from "next/navigation";
+// Types
+import UpsertEntityInterfaceProps from "@/core/interfaces/entity/UpsertEntityInterfaceProps";
 
-const UpsertDayTemplateInterface: FC<{
-  interfaceType: "create" | "update";
-}> = ({ interfaceType }) => {
+const UpsertDayTemplateInterface: FC<UpsertEntityInterfaceProps> = ({
+  interfaceType,
+}) => {
   const dispatch = useAppDispatch();
   const { id } = useParams();
 

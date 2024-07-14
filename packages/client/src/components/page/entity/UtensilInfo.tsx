@@ -12,15 +12,17 @@ import { FC, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import { getUserUtensil } from "@/redux/slices/utensils/thunks";
 import { selectLoadingGetUserUtensil } from "@/redux/slices/utensils/selectors";
+import { updateLoadingGetUserUtensil } from "@/redux/slices/utensils/slice";
 // Types
 import EntityInfoProps from "@/core/interfaces/entity/EntityInfoProps";
 // Hooks
 import useGetHandleOnDeleteEntity from "@/hooks/useGetHandleOnDeleteEntity";
 import useNavigateToPathname from "@/hooks/useNavigateToPathname";
+import useDelayFunction from "@/hooks/useDelayFunction";
 // Translations
 import { useTranslations } from "next-intl";
 // Next
-import { useSearchParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 
 const UtensilInfo: FC<EntityInfoProps> = ({
   entityId,
@@ -29,7 +31,7 @@ const UtensilInfo: FC<EntityInfoProps> = ({
 }) => {
   const searchParams = useSearchParams();
   const editMode = searchParams.get("edit");
-  console.log(editMode);
+  const { id: utensilId } = useParams();
 
   const dispatch = useAppDispatch();
   const loadingGetUserUtensil = useAppSelector(selectLoadingGetUserUtensil);
@@ -42,6 +44,12 @@ const UtensilInfo: FC<EntityInfoProps> = ({
   );
 
   const translate = useTranslations("warningOverlay.pageInfo");
+
+  useDelayFunction(
+    () => dispatch(updateLoadingGetUserUtensil("IDLE")),
+    [utensilId],
+    10
+  );
 
   useEffect(() => {
     if (loadingGetUserUtensil === "IDLE" && userId && entityId) {

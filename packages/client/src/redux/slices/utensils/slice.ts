@@ -20,6 +20,7 @@ export const {
   updateLoadingGetUserUtensils,
   updateLoadingUpdateUtensil,
   setTemplateUtensil,
+  updateLoadingGetUserUtensil,
 } = utensilsSlice.actions;
 
 export default utensilsSlice.reducer;

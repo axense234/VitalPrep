@@ -94,8 +94,12 @@ export const getUserRecipe = createAsyncThunk<
         includeIngredientsMacros: true,
         includeUtensils: true,
         includeDayTemplates: true,
+        includeDayTemplatesRecipes: true,
+        includeDayTemplatesMacros: true,
         includeInstanceTemplates: true,
+        includeInstanceTemplatesDayTemplates: true,
         includeMealPrepPlans: true,
+        includeMealPrepPlansInstanceTemplates: true,
       },
     });
     return data.recipe as RecipeType;

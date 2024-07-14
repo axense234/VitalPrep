@@ -16,9 +16,16 @@ const getIngredientById = async (req: Request, res: Response) => {
     includeMacros,
     includeUser,
     includeRecipes,
+    includeRecipesMacros,
     includeDayTemplates,
+    includeDayTemplatesMacros,
+    includeDayTemplatesRecipes,
     includeInstanceTemplates,
+    includeInstanceTemplatesMacros,
+    includeInstanceTemplatesDayTemplates,
     includeMealPrepPlans,
+    includeMealPrepPlansMacros,
+    includeMealPrepPlansInstanceTemplates,
   } = req.query;
 
   const includeObject: IngredientsIncludeObject = {};
@@ -41,14 +48,107 @@ const getIngredientById = async (req: Request, res: Response) => {
   if (includeRecipes) {
     includeObject.recipes = true;
   }
+  if (includeRecipesMacros) {
+    includeObject.recipes = { include: { macros: true } };
+  }
   if (includeDayTemplates) {
     includeObject.dayTemplates = true;
+  }
+  if (includeDayTemplatesMacros && includeDayTemplates) {
+    includeObject.dayTemplates = {
+      include: {
+        ...(
+          includeObject.dayTemplates as {
+            include: {
+              macros?: boolean | undefined;
+              recipes?: boolean | undefined;
+            };
+          }
+        ).include,
+        macros: true,
+      },
+    };
+  }
+  if (includeDayTemplates && includeDayTemplatesRecipes) {
+    includeObject.dayTemplates = {
+      include: {
+        ...(
+          includeObject.dayTemplates as {
+            include: {
+              macros?: boolean | undefined;
+              recipes?: boolean | undefined;
+            };
+          }
+        ).include,
+        recipes: true,
+      },
+    };
   }
   if (includeInstanceTemplates) {
     includeObject.instanceTemplates = true;
   }
+  if (includeInstanceTemplates && includeInstanceTemplatesDayTemplates) {
+    includeObject.instanceTemplates = {
+      include: {
+        ...(
+          includeObject.instanceTemplates as {
+            include: {
+              macros?: boolean | undefined;
+              dayTemplates?: boolean | undefined;
+            };
+          }
+        ).include,
+        dayTemplates: true,
+      },
+    };
+  }
+  if (includeInstanceTemplatesMacros && includeInstanceTemplates) {
+    includeObject.instanceTemplates = {
+      include: {
+        ...(
+          includeObject.instanceTemplates as {
+            include: {
+              macros?: boolean | undefined;
+              dayTemplates?: boolean | undefined;
+            };
+          }
+        ).include,
+        macros: true,
+      },
+    };
+  }
   if (includeMealPrepPlans) {
     includeObject.mealPrepPlans = true;
+  }
+  if (includeMealPrepPlansMacros && includeMealPrepPlansMacros) {
+    includeObject.mealPrepPlans = {
+      include: {
+        ...(
+          includeObject.mealPrepPlans as {
+            include: {
+              macros?: boolean | undefined;
+              instanceTemplates?: boolean | undefined;
+            };
+          }
+        ).include,
+        macros: true,
+      },
+    };
+  }
+  if (includeMealPrepPlans && includeMealPrepPlansInstanceTemplates) {
+    includeObject.mealPrepPlans = {
+      include: {
+        ...(
+          includeObject.mealPrepPlans as {
+            include: {
+              macros?: boolean | undefined;
+              instanceTemplates?: boolean | undefined;
+            };
+          }
+        ).include,
+        instanceTemplates: true,
+      },
+    };
   }
 
   const foundIngredient = await getOrSetCache(req.url, async () => {

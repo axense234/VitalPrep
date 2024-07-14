@@ -1,5 +1,4 @@
 "use client";
-
 // SCSS
 import sidebarStyles from "../../scss/components/shared/Sidebar.module.scss";
 // Types
@@ -56,10 +55,15 @@ const Sidebar = () => {
 
 const SidebarHeader = () => {
   const dispatch = useAppDispatch();
+  const translate = useTranslations("sidebar");
 
   return (
     <header className={sidebarStyles.sidebarHeader}>
-      <button onClick={() => dispatch(changeIsSidebarOpened(false))}>
+      <button
+        onClick={() => dispatch(changeIsSidebarOpened(false))}
+        title={translate("closeSidebarButtonTitle")}
+        aria-label={translate("closeSidebarButtonTitle")}
+      >
         <AiFillCloseSquare />
       </button>
       <h3>Vital Prep</h3>

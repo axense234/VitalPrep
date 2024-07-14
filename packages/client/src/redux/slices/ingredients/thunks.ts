@@ -65,9 +65,16 @@ export const getUserIngredient = createAsyncThunk<
           includeMacros: true,
           includeUser: true,
           includeRecipes: true,
+          includeRecipesMacros: true,
           includeDayTemplates: true,
+          includeDayTemplatesMacros: true,
+          includeDayTemplatesRecipes: true,
           includeInstanceTemplates: true,
+          includeInstanceTemplatesMacros: true,
+          includeInstanceTemplatesDayTemplates: true,
           includeMealPrepPlans: true,
+          includeMealPrepPlansMacros: true,
+          includeMealPrepPlansInstanceTemplates: true,
         },
       }
     );

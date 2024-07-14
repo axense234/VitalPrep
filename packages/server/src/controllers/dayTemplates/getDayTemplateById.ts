@@ -21,7 +21,9 @@ const getDayTemplateById = async (req: Request, res: Response) => {
     includeRecipes,
     includeRecipesMacros,
     includeInstanceTemplates,
+    includeInstanceTemplatesDayTemplates,
     includeMealPrepPlans,
+    includeMealPrepPlansInstanceTemplates,
   } = req.query;
 
   const includeObject: DayTemplatesIncludeObject = {};
@@ -59,8 +61,38 @@ const getDayTemplateById = async (req: Request, res: Response) => {
   if (includeInstanceTemplates) {
     includeObject.instanceTemplates = true;
   }
+  if (includeInstanceTemplates && includeInstanceTemplatesDayTemplates) {
+    includeObject.instanceTemplates = {
+      include: {
+        ...(
+          includeObject.instanceTemplates as {
+            include: {
+              macros?: boolean | undefined;
+              dayTemplates?: boolean | undefined;
+            };
+          }
+        ).include,
+        dayTemplates: true,
+      },
+    };
+  }
   if (includeMealPrepPlans) {
     includeObject.mealPrepPlans = true;
+  }
+  if (includeMealPrepPlans && includeMealPrepPlansInstanceTemplates) {
+    includeObject.mealPrepPlans = {
+      include: {
+        ...(
+          includeObject.mealPrepPlans as {
+            include: {
+              macros?: boolean | undefined;
+              dayTemplates?: boolean | undefined;
+            };
+          }
+        ).include,
+        instanceTemplates: true,
+      },
+    };
   }
 
   const foundDayTemplate = await getOrSetCache(req.url, async () => {

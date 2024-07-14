@@ -1,5 +1,5 @@
 // SCSS
-import entityInfoStyles from "../../../scss/components/page/EntityInfo.module.scss";
+import entityInfoStyles from "@/scss/components/page/EntityInfo.module.scss";
 // Components
 import PageTitle from "@/components/shared/PageTitle";
 import EntityInfoDetails from "./EntityInfoDetails";
@@ -13,15 +13,17 @@ import { FC, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import { selectLoadingGetUserDayTemplate } from "@/redux/slices/dayTemplates/selectors";
 import { getUserDayTemplate } from "@/redux/slices/dayTemplates/thunks";
+import { updateLoadingGetUserDayTemplate } from "@/redux/slices/dayTemplates/slice";
 // Types
 import EntityInfoProps from "@/core/interfaces/entity/EntityInfoProps";
 // Hooks
 import useGetHandleOnDeleteEntity from "@/hooks/useGetHandleOnDeleteEntity";
 import useNavigateToPathname from "@/hooks/useNavigateToPathname";
+import useDelayFunction from "@/hooks/useDelayFunction";
 // Translations
 import { useTranslations } from "next-intl";
 // Next
-import { useSearchParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 
 const DayTemplateInfo: FC<EntityInfoProps> = ({
   entityId,
@@ -30,7 +32,7 @@ const DayTemplateInfo: FC<EntityInfoProps> = ({
 }) => {
   const searchParams = useSearchParams();
   const editMode = searchParams.get("edit");
-  console.log(editMode);
+  const { id: dayTemplateId } = useParams();
 
   const dispatch = useAppDispatch();
   const loadingGetUserDayTemplate = useAppSelector(
@@ -45,6 +47,12 @@ const DayTemplateInfo: FC<EntityInfoProps> = ({
   );
 
   const translate = useTranslations("warningOverlay.pageInfo");
+
+  useDelayFunction(
+    () => dispatch(updateLoadingGetUserDayTemplate("IDLE")),
+    [dayTemplateId],
+    10
+  );
 
   useEffect(() => {
     console.log(loadingGetUserDayTemplate, userId, entityId);

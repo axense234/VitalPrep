@@ -1,5 +1,5 @@
 // SCSS
-import gettingStartedContentMapStyles from "../../../scss/pages/GettingStarted.module.scss";
+import gettingStartedContentMapStyles from "@/scss/pages/GettingStarted.module.scss";
 // Data
 import { gettingStartedGuideContentMapContent } from "@/data";
 // Redux

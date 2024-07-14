@@ -21,6 +21,7 @@ export const {
   updateLoadingGetUserDayTemplates,
   updateLoadingUpdateDayTemplate,
   setTemplateDayTemplate,
+  updateLoadingGetUserDayTemplate,
 } = dayTemplatesSlice.actions;
 
 export default dayTemplatesSlice.reducer;

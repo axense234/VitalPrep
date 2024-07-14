@@ -12,15 +12,17 @@ import { FC, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import { selectLoadingGetUserMealPrepPlan } from "@/redux/slices/mealPrepPlans/selectors";
 import { getUserMealPrepPlan } from "@/redux/slices/mealPrepPlans/thunks";
+import { updateLoadingGetUserMealPrepPlan } from "@/redux/slices/mealPrepPlans/slice";
 // Types
 import EntityInfoProps from "@/core/interfaces/entity/EntityInfoProps";
 // Hooks
 import useNavigateToPathname from "@/hooks/useNavigateToPathname";
 import useGetHandleOnDeleteEntity from "@/hooks/useGetHandleOnDeleteEntity";
+import useDelayFunction from "@/hooks/useDelayFunction";
 // Translations
 import { useTranslations } from "next-intl";
 // Next
-import { useSearchParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 
 const MealPrepPlanInfo: FC<EntityInfoProps> = ({
   entityId,
@@ -29,7 +31,7 @@ const MealPrepPlanInfo: FC<EntityInfoProps> = ({
 }) => {
   const searchParams = useSearchParams();
   const editMode = searchParams.get("edit");
-  console.log(editMode);
+  const { id: mealPrepPlanId } = useParams();
 
   const dispatch = useAppDispatch();
   const loadingGetUserMealPrepPlan = useAppSelector(
@@ -45,8 +47,13 @@ const MealPrepPlanInfo: FC<EntityInfoProps> = ({
 
   const translate = useTranslations("warningOverlay.pageInfo");
 
+  useDelayFunction(
+    () => dispatch(updateLoadingGetUserMealPrepPlan("IDLE")),
+    [mealPrepPlanId],
+    10
+  );
+
   useEffect(() => {
-    console.log(loadingGetUserMealPrepPlan, userId, entityId);
     if (loadingGetUserMealPrepPlan === "IDLE" && userId && entityId) {
       dispatch(getUserMealPrepPlan({ userId, mealPrepPlanId: entityId }));
     }

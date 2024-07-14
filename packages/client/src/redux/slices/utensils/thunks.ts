@@ -61,9 +61,14 @@ export const getUserUtensil = createAsyncThunk<
         params: {
           includeUser: true,
           includeRecipes: true,
+          includeRecipesMacros: true,
           includeDayTemplates: true,
+          includeDayTemplatesMacros: true,
+          includeDayTemplatesRecipes: true,
           includeInstanceTemplates: true,
+          includeInstanceTemplatesDayTemplates: true,
           includeMealPrepPlans: true,
+          includeMealPrepPlansInstanceTemplates: true,
         },
       }
     );

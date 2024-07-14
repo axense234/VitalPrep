@@ -99,7 +99,13 @@
   "navbar": {
     "navbarTitleTextContent": "Aller au profil",
     "navbarImageAltTextContent": "Image de profil",
-    "navbarUsernameDefaultValue": "Nom d'utilisateur"
+    "navbarUsernameDefaultValue": "Nom d'utilisateur",
+    "navbarMenu": {
+      "title": "Ouvrez la barre de navigation latérale"
+    }
+  },
+  "sidebar": {
+    "closeSidebarButtonTitle": "Fermez la barre de navigation latérale"
   },
   "pageLinks": {
     "labels": {
@@ -465,7 +471,9 @@
       "defaultProfileUsername": "Nom d'utilisateur",
       "defaultProfileEmail": "profilemail@gmail.com",
       "defaultProfileAge": "Âge inconnu",
-      "profileAge": "{age} ans"
+      "profileAge": "{age} ans",
+      "showProfileEmailTitle": "Afficher l'e-mail",
+      "hideProfileEmailTitle": "Cacher l'adresse électronique"
     }
   },
   "entityStatistics": {
@@ -933,6 +941,12 @@
           }
         }
       }
+    },
+    "navigationButtons": {
+      "titles": {
+        "prevButton": "Section précédente",
+        "nextButton": "Section suivante"
+      }
     }
   },
   "faq": {
@@ -1146,5 +1160,21 @@
   },
   "sttButton": {
     "title": "Faire défiler vers le haut"
+  },
+  "activeMealPrepPlan": {
+    "showMealPrepPlanTitle": "Montre plus",
+    "hideMealPrepPlanTitle": "Montrer moins",
+    "selectMealPrepPlanTitle": "Sélectionnez MPP"
+  },
+  "weekdayFormControl": {
+    "imageTitles": {
+      "Monday": "Lundi",
+      "Tuesday": "Mardi",
+      "Wednesday": "Mercredi",
+      "Thursday": "Jeudi",
+      "Friday": "Vendredi",
+      "Saturday": "Samedi",
+      "Sunday": "Dimanche"
+    }
   }
 }

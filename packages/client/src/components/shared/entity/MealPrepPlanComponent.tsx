@@ -1,5 +1,5 @@
 // SCSS
-import entityComponentStyles from "../../../scss/components/shared/EntityComponents.module.scss";
+import entityComponentStyles from "@/scss/components/shared/EntityComponents.module.scss";
 // React
 import { FC, useRef } from "react";
 // Types

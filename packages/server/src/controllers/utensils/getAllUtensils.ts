@@ -19,7 +19,6 @@ const getAllUtensils = async (req: Request, res: Response) => {
     searchByValue,
     sortByKey,
     sortByOrder,
-    includeMacros,
     includeUser,
     includeRecipes,
     includeDayTemplates,
@@ -59,9 +58,6 @@ const getAllUtensils = async (req: Request, res: Response) => {
   });
 
   // INCLUDE
-  if (includeMacros) {
-    includeObject.macros = true;
-  }
   if (includeUser) {
     includeObject.user = true;
   }

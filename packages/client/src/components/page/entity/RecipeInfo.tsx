@@ -14,15 +14,17 @@ import { FC, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import { selectLoadingGetUserRecipe } from "@/redux/slices/recipes/selectors";
 import { getUserRecipe } from "@/redux/slices/recipes/thunks";
+import { updateLoadingGetUserRecipe } from "@/redux/slices/recipes/slice";
 // Types
 import EntityInfoProps from "@/core/interfaces/entity/EntityInfoProps";
 // Hooks
 import useGetHandleOnDeleteEntity from "@/hooks/useGetHandleOnDeleteEntity";
+import useDelayFunction from "@/hooks/useDelayFunction";
 import useNavigateToPathname from "@/hooks/useNavigateToPathname";
 // Translations
 import { useTranslations } from "next-intl";
 // Next
-import { useSearchParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 
 const RecipeInfo: FC<EntityInfoProps> = ({
   entityId,
@@ -31,7 +33,7 @@ const RecipeInfo: FC<EntityInfoProps> = ({
 }) => {
   const searchParams = useSearchParams();
   const editMode = searchParams.get("edit");
-  console.log(editMode);
+  const { id: recipeId } = useParams();
 
   const dispatch = useAppDispatch();
   const loadingGetUserRecipe = useAppSelector(selectLoadingGetUserRecipe);
@@ -44,6 +46,12 @@ const RecipeInfo: FC<EntityInfoProps> = ({
   );
 
   const translate = useTranslations("warningOverlay.pageInfo");
+
+  useDelayFunction(
+    () => dispatch(updateLoadingGetUserRecipe("IDLE")),
+    [recipeId],
+    10
+  );
 
   useEffect(() => {
     console.log(loadingGetUserRecipe, userId, entityId);

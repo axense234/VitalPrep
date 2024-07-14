@@ -135,6 +135,7 @@
   border-bottom-left-radius: 25px;
   max-height: 50rem;
   overflow-y: scroll;
+  background-color: getColor("secondary-color-3.3");
 }
 
 .gettingStartedContentSection {
@@ -144,7 +145,6 @@
   padding: 4rem;
   padding-bottom: 13.5rem;
   gap: 2rem;
-  background-color: getColor("secondary-color-3.3");
 
   @media screen and (max-width: 600px) {
     padding: 4rem 2rem;
@@ -195,6 +195,7 @@
   img {
     height: 30rem;
     width: auto;
+    user-select: none;
     border-radius: 10px;
     border: 1px solid getColor("black-75-1");
 
@@ -225,5 +226,36 @@
 
   p {
     @include paragraph("laptop", "black");
+  }
+}
+
+.gettingStartedNavigationButtonsContainer {
+  @include flexCenter(row);
+  justify-content: space-between;
+  width: 100%;
+  padding: 1.5rem;
+
+  @media screen and (max-width: 425px) {
+    padding: 1rem;
+  }
+
+  svg {
+    transition: transform 0.135s linear;
+    width: 4.5rem;
+    height: 4.5rem;
+    border-radius: 50%;
+    border: 1.5px solid getColor("black-75-1");
+    font-size: 2.5rem;
+
+    &:hover {
+      transform: scale(1.2);
+    }
+
+    @media screen and (max-width: 425px) {
+      width: 3.5rem;
+      height: 3.5rem;
+      border-width: 1px;
+      font-size: 2rem;
+    }
   }
 }

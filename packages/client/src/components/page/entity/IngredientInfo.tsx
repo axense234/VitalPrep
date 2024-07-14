@@ -12,15 +12,17 @@ import { FC, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import { selectLoadingGetUserIngredient } from "@/redux/slices/ingredients/selectors";
 import { getUserIngredient } from "@/redux/slices/ingredients/thunks";
+import { updateLoadingGetUserIngredient } from "@/redux/slices/ingredients/slice";
 // Types
 import EntityInfoProps from "@/core/interfaces/entity/EntityInfoProps";
 // Hooks
 import useNavigateToPathname from "@/hooks/useNavigateToPathname";
 import useGetHandleOnDeleteEntity from "@/hooks/useGetHandleOnDeleteEntity";
+import useDelayFunction from "@/hooks/useDelayFunction";
 // Translations
 import { useTranslations } from "next-intl";
 // Next
-import { useSearchParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 
 const IngredientInfo: FC<EntityInfoProps> = ({
   entityId,
@@ -29,7 +31,7 @@ const IngredientInfo: FC<EntityInfoProps> = ({
 }) => {
   const searchParams = useSearchParams();
   const editMode = searchParams.get("edit");
-  console.log(editMode);
+  const { id: ingredientId } = useParams();
 
   const dispatch = useAppDispatch();
   const loadingGetUserIngredient = useAppSelector(
@@ -44,6 +46,12 @@ const IngredientInfo: FC<EntityInfoProps> = ({
   );
 
   const translate = useTranslations("warningOverlay.pageInfo");
+
+  useDelayFunction(
+    () => dispatch(updateLoadingGetUserIngredient("IDLE")),
+    [ingredientId],
+    10
+  );
 
   useEffect(() => {
     if (loadingGetUserIngredient === "IDLE" && userId && entityId) {

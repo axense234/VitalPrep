@@ -19,6 +19,12 @@ const mealPrepLogsSliceReducers = {
   ) {
     state.loadingGetUserMealPrepLogs = action.payload;
   },
+  updateLoadingGetUserMealPrepLog(
+    state: MealPrepLogsSliceStateType,
+    action: PayloadAction<LoadingStateType>
+  ) {
+    state.loadingGetUserMealPrepLog = action.payload;
+  },
   updateLoadingCreateMealPrepLog(
     state: MealPrepLogsSliceStateType,
     action: PayloadAction<LoadingStateType>

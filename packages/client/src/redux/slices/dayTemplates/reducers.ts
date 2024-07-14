@@ -13,6 +13,12 @@ const dayTemplatesSliceReducers = {
   ) {
     state.loadingGetUserDayTemplates = action.payload;
   },
+  updateLoadingGetUserDayTemplate(
+    state: DayTemplatesSliceStateType,
+    action: PayloadAction<LoadingStateType>
+  ) {
+    state.loadingGetUserDayTemplate = action.payload;
+  },
   updateLoadingUpdateDayTemplate(
     state: DayTemplatesSliceStateType,
     action: PayloadAction<LoadingStateType>

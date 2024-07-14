@@ -25,6 +25,12 @@ const utensilsSliceReducers = {
   ) {
     state.loadingGetUserUtensils = action.payload;
   },
+  updateLoadingGetUserUtensil(
+    state: UtensilsSliceStateType,
+    action: PayloadAction<LoadingStateType>
+  ) {
+    state.loadingGetUserUtensil = action.payload;
+  },
   updateTemplateUtensil(
     state: UtensilsSliceStateType,
     action: PayloadAction<ObjectKeyValueType>

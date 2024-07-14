@@ -62,10 +62,12 @@ import useSetTemplateEntity from "@/hooks/useSetTemplateEntity";
 import { useTranslations } from "next-intl";
 // Next
 import { useParams } from "next/navigation";
+// Types
+import UpsertEntityInterfaceProps from "@/core/interfaces/entity/UpsertEntityInterfaceProps";
 
-const UpsertMealPrepPlanInterface: FC<{
-  interfaceType: "create" | "update";
-}> = ({ interfaceType }) => {
+const UpsertMealPrepPlanInterface: FC<UpsertEntityInterfaceProps> = ({
+  interfaceType,
+}) => {
   const dispatch = useAppDispatch();
   const { id } = useParams();
 
@@ -80,8 +82,6 @@ const UpsertMealPrepPlanInterface: FC<{
 
   const templateMealPrepPlan = useAppSelector(selectMealPrepPlanTemplate);
   const instanceTemplatesIds = useAppSelector(selectAllInstanceTemplatesIds);
-
-  console.log(templateMealPrepPlan);
 
   const loadingCreateMealPrepPlan = useAppSelector(
     selectLoadingCreateMealPrepPlan
@@ -103,7 +103,6 @@ const UpsertMealPrepPlanInterface: FC<{
   const numberOfInstanceTemplatesIterable = createArrayFromNumber(
     numberOfInstanceTemplates
   );
-  console.log(templateMealPrepPlan.instanceTemplatesTimings);
 
   const handleOnUpsertEntity = (e: React.SyntheticEvent) => {
     e.preventDefault();
@@ -192,8 +191,6 @@ const UpsertMealPrepPlanInterface: FC<{
     updateTemplateMealPrepPlan,
     templateMealPrepPlan?.instanceTemplatesTimings as []
   );
-
-  console.log(templateMealPrepPlan);
 
   return (
     <section className={createToolStyles.createInterface}>

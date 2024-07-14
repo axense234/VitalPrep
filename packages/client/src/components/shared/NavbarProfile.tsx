@@ -34,7 +34,9 @@ const NavbarProfile = () => {
           height={64}
         />
       </Link>
-      <h6>{profile.username || translate("navbarUsernameDefaultValue")}</h6>
+      <h6 aria-label={profile.username} title={profile.username}>
+        {profile.username || translate("navbarUsernameDefaultValue")}
+      </h6>
     </div>
   );
 };

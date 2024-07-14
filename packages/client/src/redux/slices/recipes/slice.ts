@@ -23,6 +23,7 @@ export const {
   updateTemplateRecipeTutorial,
   updateLoadingUpdateRecipe,
   setTemplateRecipe,
+  updateLoadingGetUserRecipe,
 } = recipesSlice.actions;
 
 export default recipesSlice.reducer;

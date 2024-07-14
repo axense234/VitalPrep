@@ -74,7 +74,9 @@ export const getUserDayTemplate = createAsyncThunk<
           includeRecipes: true,
           includeRecipesMacros: true,
           includeInstanceTemplates: true,
+          includeInstanceTemplatesDayTemplates: true,
           includeMealPrepPlans: true,
+          includeMealPrepPlansInstanceTemplates: true,
         },
       }
     );

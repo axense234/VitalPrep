@@ -20,6 +20,7 @@ export const {
   updateLoadingGetUserMealPrepLogs,
   updateLoadingUpdateMealPrepLog,
   setTemplateMealPrepLog,
+  updateLoadingGetUserMealPrepLog,
 } = mealPrepLogsSlice.actions;
 
 export default mealPrepLogsSlice.reducer;

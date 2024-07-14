@@ -1,5 +1,5 @@
 // SCSS
-import entityTypeMenuStyles from "../../../scss/components/shared/EntityTypeMenu.module.scss";
+import entityTypeMenuStyles from "@/scss/components/shared/EntityTypeMenu.module.scss";
 // React Icons
 import { AiFillCloseSquare } from "react-icons/ai";
 import { IoOptions } from "react-icons/io5";
@@ -61,9 +61,10 @@ const EntityTypeMenu = () => {
                 key={entityType.id}
                 title={`${translateEntityMenu("selectLabel")} ${translateEntityLabels(entityType.optionValue)}`}
                 aria-label={`${translateEntityMenu("selectLabel")} ${translateEntityLabels(entityType.optionValue)}`}
-                onClick={() =>
-                  dispatch(setSelectedEntityOption(entityType.optionValue))
-                }
+                onClick={() => {
+                  dispatch(setSelectedEntityOption(entityType.optionValue));
+                  scrollTo({ top: 0, behavior: "smooth" });
+                }}
                 style={{
                   backgroundColor:
                     selectedEntityType === entityType.optionValue

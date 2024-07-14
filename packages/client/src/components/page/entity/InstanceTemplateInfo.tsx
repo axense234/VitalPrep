@@ -13,15 +13,17 @@ import { FC, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import { selectLoadingGetUserInstanceTemplate } from "@/redux/slices/instanceTemplates/selectors";
 import { getUserInstanceTemplate } from "@/redux/slices/instanceTemplates/thunks";
+import { updateLoadingGetUserInstanceTemplate } from "@/redux/slices/instanceTemplates/slice";
 // Types
 import EntityInfoProps from "@/core/interfaces/entity/EntityInfoProps";
 // Hooks
 import useGetHandleOnDeleteEntity from "@/hooks/useGetHandleOnDeleteEntity";
 import useNavigateToPathname from "@/hooks/useNavigateToPathname";
+import useDelayFunction from "@/hooks/useDelayFunction";
 // Translations
 import { useTranslations } from "next-intl";
 // Next
-import { useSearchParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 
 const InstanceTemplateInfo: FC<EntityInfoProps> = ({
   entityId,
@@ -30,7 +32,7 @@ const InstanceTemplateInfo: FC<EntityInfoProps> = ({
 }) => {
   const searchParams = useSearchParams();
   const editMode = searchParams.get("edit");
-  console.log(editMode);
+  const { id: instanceTemplateId } = useParams();
 
   const dispatch = useAppDispatch();
   const loadingGetUserInstanceTemplate = useAppSelector(
@@ -46,8 +48,13 @@ const InstanceTemplateInfo: FC<EntityInfoProps> = ({
 
   const translate = useTranslations("warningOverlay.pageInfo");
 
+  useDelayFunction(
+    () => dispatch(updateLoadingGetUserInstanceTemplate("IDLE")),
+    [instanceTemplateId],
+    10
+  );
+
   useEffect(() => {
-    console.log(loadingGetUserInstanceTemplate, userId, entityId);
     if (loadingGetUserInstanceTemplate === "IDLE" && userId && entityId) {
       dispatch(
         getUserInstanceTemplate({ userId, instanceTemplateId: entityId })

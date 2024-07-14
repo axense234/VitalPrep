@@ -57,10 +57,12 @@ import handleOnUpdateMealPrepLogSubmit from "@/helpers/handleOnUpdateMealPrepLog
 import { useTranslations } from "next-intl";
 // Next
 import { useParams } from "next/navigation";
+// Types
+import UpsertEntityInterfaceProps from "@/core/interfaces/entity/UpsertEntityInterfaceProps";
 
-const UpsertMealPrepLogInterface: FC<{
-  interfaceType: "create" | "update";
-}> = ({ interfaceType }) => {
+const UpsertMealPrepLogInterface: FC<UpsertEntityInterfaceProps> = ({
+  interfaceType,
+}) => {
   const dispatch = useAppDispatch();
   const { id } = useParams();
 

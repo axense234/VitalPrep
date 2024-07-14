@@ -32,6 +32,8 @@ const ProfileInfo = () => {
         src={profile.imageUrl || defaultProfileImageUrl}
         width={240}
         height={240}
+        title={translate("profileImageAlt")}
+        aria-label={translate("profileImageAlt")}
       />
       <h4>{profile.username || translate("defaultProfileUsername")}</h4>
       <div className={profileStyles.profileInfoEmail}>
@@ -42,9 +44,17 @@ const ProfileInfo = () => {
         )}
 
         {showProfileEmail ? (
-          <FaEye onClick={() => dispatch(changeShowProfileEmail(false))} />
+          <FaEye
+            onClick={() => dispatch(changeShowProfileEmail(false))}
+            title={translate("hideProfileEmailTitle")}
+            aria-label={translate("hideProfileEmailTitle")}
+          />
         ) : (
-          <FaEyeSlash onClick={() => dispatch(changeShowProfileEmail(true))} />
+          <FaEyeSlash
+            onClick={() => dispatch(changeShowProfileEmail(true))}
+            title={translate("showProfileEmailTitle")}
+            aria-label={translate("showProfileEmailTitle")}
+          />
         )}
       </div>
       <h3>

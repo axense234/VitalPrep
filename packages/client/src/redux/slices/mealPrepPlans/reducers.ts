@@ -31,6 +31,12 @@ const mealPrepPlansSliceReducers = {
   ) {
     state.loadingGetUserMealPrepPlans = action.payload;
   },
+  updateLoadingGetUserMealPrepPlan(
+    state: MealPrepPlansSliceStateType,
+    action: PayloadAction<LoadingStateType>
+  ) {
+    state.loadingGetUserMealPrepPlan = action.payload;
+  },
   updateLoadingUpdateMealPrepPlan(
     state: MealPrepPlansSliceStateType,
     action: PayloadAction<LoadingStateType>

@@ -22,6 +22,7 @@ export const {
   updateInstanceTemplatesTiming,
   updateLoadingUpdateMealPrepPlan,
   setTemplateMealPrepPlan,
+  updateLoadingGetUserMealPrepPlan,
 } = mealPrepPlansSlice.actions;
 
 export default mealPrepPlansSlice.reducer;

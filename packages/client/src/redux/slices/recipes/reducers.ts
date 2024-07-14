@@ -19,6 +19,12 @@ const recipesSliceReducers = {
   ) {
     state.loadingGetUserRecipes = action.payload;
   },
+  updateLoadingGetUserRecipe(
+    state: RecipesSliceStateType,
+    action: PayloadAction<LoadingStateType>
+  ) {
+    state.loadingGetUserRecipe = action.payload;
+  },
   updateLoadingUpdateRecipe(
     state: RecipesSliceStateType,
     action: PayloadAction<LoadingStateType>

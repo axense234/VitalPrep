@@ -22,7 +22,9 @@ const getInstanceTemplateById = async (req: Request, res: Response) => {
     includeRecipesMacros,
     includeDayTemplates,
     includeDayTemplatesMacros,
+    includeDayTemplatesRecipes,
     includeMealPrepPlans,
+    includeMealPrepPlansInstanceTemplates,
   } = req.query;
 
   const includeObject: InstanceTemplatesIncludeObject = {};
@@ -62,10 +64,52 @@ const getInstanceTemplateById = async (req: Request, res: Response) => {
     includeObject.dayTemplates = true;
   }
   if (includeDayTemplatesMacros && includeDayTemplates) {
-    includeObject.dayTemplates = { include: { macros: true } };
+    includeObject.dayTemplates = {
+      include: {
+        ...(
+          includeObject.dayTemplates as {
+            include: {
+              macros?: boolean | undefined;
+              recipes?: boolean | undefined;
+            };
+          }
+        ).include,
+        macros: true,
+      },
+    };
+  }
+  if (includeDayTemplatesRecipes && includeDayTemplates) {
+    includeObject.dayTemplates = {
+      include: {
+        ...(
+          includeObject.dayTemplates as {
+            include: {
+              macros?: boolean | undefined;
+              recipes?: boolean | undefined;
+            };
+          }
+        ).include,
+        recipes: true,
+      },
+    };
   }
   if (includeMealPrepPlans) {
     includeObject.mealPrepPlans = true;
+  }
+  if (includeMealPrepPlans && includeMealPrepPlansInstanceTemplates) {
+    includeObject.mealPrepPlans = {
+      include: {
+        ...(
+          includeObject.mealPrepPlans as {
+            include: {
+              macros?: boolean | undefined;
+              instanceTemplates?: boolean | undefined;
+            };
+          }
+        ).include,
+        instanceTemplates: true,
+      },
+    };
   }
 
   const foundInstanceTemplate = await getOrSetCache(req.url, async () => {

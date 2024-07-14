@@ -1,5 +1,4 @@
 "use client";
-
 // Types
 import EntityType from "@/core/types/entity/users/EntityType";
 // Next

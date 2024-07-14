@@ -71,7 +71,7 @@ const EntityInfoComponents: FC<{
             entityName={entity?.name}
           />
           <EntityInfoComponentsSection
-            entityType="utensil"
+            entityType="recipe"
             entityComponents={
               (entity as DayTemplateTemplate)?.recipes as RecipeTemplate[]
             }
@@ -100,14 +100,14 @@ const EntityInfoComponents: FC<{
             entityName={entity?.name}
           />
           <EntityInfoComponentsSection
-            entityType="utensil"
+            entityType="recipe"
             entityComponents={
               (entity as InstanceTemplateTemplate)?.recipes as RecipeTemplate[]
             }
             entityName={entity?.name}
           />
           <EntityInfoComponentsSection
-            entityType="utensil"
+            entityType="dayTemplate"
             entityComponents={
               (entity as InstanceTemplateTemplate)
                 ?.dayTemplates as DayTemplateTemplate[]
@@ -180,14 +180,14 @@ const EntityInfoComponents: FC<{
             entityName={entity?.name}
           />
           <EntityInfoComponentsSection
-            entityType="utensil"
+            entityType="recipe"
             entityComponents={
               (entity as MealPrepPlanTemplate)?.recipes as RecipeTemplate[]
             }
             entityName={entity?.name}
           />
           <EntityInfoComponentsSection
-            entityType="utensil"
+            entityType="dayTemplate"
             entityComponents={
               (entity as MealPrepPlanTemplate)
                 ?.dayTemplates as DayTemplateTemplate[]

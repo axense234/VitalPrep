@@ -20,10 +20,12 @@ const getUserById = async (req: Request, res: Response) => {
     includeRecipesMacros,
     includeDayTemplates,
     includeDayTemplatesMacros,
+    includeDayTemplatesRecipes,
     includeInstanceTemplates,
     includeInstanceTemplatesMacros,
     includeMealPrepPlans,
     includeMealPrepPlansMacros,
+    includeMealPrepPlansInstanceTemplates,
     includeMealPrepLogs,
     includeNotificationSettings,
   } = req.query;
@@ -57,7 +59,34 @@ const getUserById = async (req: Request, res: Response) => {
     includeObject.dayTemplates = true;
   }
   if (includeDayTemplates && includeDayTemplatesMacros) {
-    includeObject.dayTemplates = { include: { macros: true } };
+    includeObject.dayTemplates = {
+      include: {
+        ...(
+          includeObject.dayTemplates as {
+            include: {
+              macros?: boolean | undefined;
+              recipes?: boolean | undefined;
+            };
+          }
+        ).include,
+        macros: true,
+      },
+    };
+  }
+  if (includeDayTemplatesRecipes && includeDayTemplates) {
+    includeObject.dayTemplates = {
+      include: {
+        ...(
+          includeObject.dayTemplates as {
+            include: {
+              macros?: boolean | undefined;
+              recipes?: boolean | undefined;
+            };
+          }
+        ).include,
+        recipes: true,
+      },
+    };
   }
   if (includeInstanceTemplates) {
     includeObject.instanceTemplates = true;
@@ -69,7 +98,34 @@ const getUserById = async (req: Request, res: Response) => {
     includeObject.mealPrepPlans = true;
   }
   if (includeMealPrepPlans && includeMealPrepPlansMacros) {
-    includeObject.mealPrepPlans = { include: { macros: true } };
+    includeObject.mealPrepPlans = {
+      include: {
+        ...(
+          includeObject.mealPrepPlans as {
+            include: {
+              macros?: boolean | undefined;
+              instanceTemplates?: boolean | undefined;
+            };
+          }
+        ).include,
+        macros: true,
+      },
+    };
+  }
+  if (includeMealPrepPlans && includeMealPrepPlansInstanceTemplates) {
+    includeObject.mealPrepPlans = {
+      include: {
+        ...(
+          includeObject.mealPrepPlans as {
+            include: {
+              macros?: boolean | undefined;
+              instanceTemplates?: boolean | undefined;
+            };
+          }
+        ).include,
+        instanceTemplates: true,
+      },
+    };
   }
   if (includeMealPrepLogs) {
     includeObject.mealPrepLogs = true;

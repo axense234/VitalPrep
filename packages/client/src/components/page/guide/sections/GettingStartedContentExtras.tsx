@@ -6,12 +6,19 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 // Helpers
 import translateWithRichText from "@/helpers/translateWithRichText";
+// React
+import { FC } from "react";
+// Types
+import GettingStartedContentSectionProps from "@/core/interfaces/GettingStartedContentSectionProps";
 
-const GettingStartedContentExtras = () => {
+const GettingStartedContentExtras: FC<GettingStartedContentSectionProps> = ({
+  currentGuideSectionRef,
+}) => {
   const translateExtras = useTranslations("gettingStarted.content.extras");
   return (
     <section
       className={gettingStartedContentStyles.gettingStartedContentSection}
+      ref={currentGuideSectionRef}
     >
       <h4>{translateExtras("title")}</h4>
       <div

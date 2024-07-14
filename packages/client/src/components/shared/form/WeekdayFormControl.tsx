@@ -1,24 +1,22 @@
 // Data
 import { weekdayFormControlContent } from "@/data";
 // SCSS
-import weekdayFormControlStyles from "../../../scss/components/others/FormControls.module.scss";
+import weekdayFormControlStyles from "@/scss/components/others/FormControls.module.scss";
 // React
 import { FC } from "react";
 // Next
 import Image from "next/image";
+// Translations
+import { useTranslations } from "use-intl";
+// Types
+import WeekdayFormControlProps from "@/core/interfaces/form/WeekdayFormControlProps";
 
-type ObjectKeyValueType = {
-  key: string;
-  value: any;
-};
-
-const WeekdayFormControl: FC<{
-  labelContent: string;
-  onEntityPropertyValueChange: (weekday: string) => {
-    payload: { load: ObjectKeyValueType; index: number };
-  };
-  currentEntityValue: string | undefined;
-}> = ({ labelContent, onEntityPropertyValueChange, currentEntityValue }) => {
+const WeekdayFormControl: FC<WeekdayFormControlProps> = ({
+  labelContent,
+  onEntityPropertyValueChange,
+  currentEntityValue,
+}) => {
+  const translate = useTranslations("weekdayFormControl.imageTitles");
   return (
     <div className={weekdayFormControlStyles.weekdayFormControlContainer}>
       <label htmlFor="weekdays">{labelContent}</label>
@@ -36,8 +34,8 @@ const WeekdayFormControl: FC<{
               <Image
                 src={weekdayContent.imageUrl}
                 alt={weekdayContent.titleContent}
-                title={weekdayContent.titleContent}
-                aria-label={weekdayContent.titleContent}
+                title={translate(weekdayContent.titleContent)}
+                aria-label={translate(weekdayContent.titleContent)}
                 width={80}
                 height={80}
                 style={{
