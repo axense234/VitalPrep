@@ -3,6 +3,7 @@
 .settingsContainer {
   @include pageLayout();
   background-color: getColor("secondary-color-3.3");
+  word-break: break-all;
 }
 
 .settingsContent {
@@ -69,6 +70,5 @@
 
   button {
     margin-top: 1rem;
-    align-self: center;
   }
 }

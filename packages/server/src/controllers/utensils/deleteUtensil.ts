@@ -8,8 +8,7 @@ import { UtensilClient } from "../../db/postgres";
 import { handleCacheMutation } from "../../utils/redis";
 
 const deleteUtensil = async (req: Request, res: Response) => {
-  const { utensilId } = req.params;
-  const { userId } = req.query;
+  const { utensilId, userId } = req.params;
 
   if (!utensilId) {
     return res

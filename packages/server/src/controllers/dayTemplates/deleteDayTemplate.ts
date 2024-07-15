@@ -8,8 +8,7 @@ import { DayTemplateClient } from "../../db/postgres";
 import { handleCacheMutation } from "../../utils/redis";
 
 const deleteDayTemplate = async (req: Request, res: Response) => {
-  const { dayTemplateId } = req.params;
-  const { userId } = req.params;
+  const { dayTemplateId, userId } = req.params;
 
   if (!dayTemplateId) {
     return res

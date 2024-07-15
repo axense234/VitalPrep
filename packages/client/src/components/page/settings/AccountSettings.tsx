@@ -26,7 +26,11 @@ import {
   updateWarningOverlay,
   setTemplateProfile,
 } from "@/redux/slices/general/slice";
-import { createCloudinaryImage } from "@/redux/slices/general/thunks";
+import {
+  createCloudinaryImage,
+  deleteUser,
+  logoutUser,
+} from "@/redux/slices/general/thunks";
 // Hooks and Helpers
 import useUpdateEntityTemplateImageUrl from "@/hooks/useUpdateEntityTemplateImageUrl";
 import handleOnUpdateAccountSettingsSubmit from "@/helpers/handleOnUpdateAccountSettingsSubmit";
@@ -117,6 +121,33 @@ const AccountSettings = () => {
             }
           }}
           labelFontSize={28}
+        />
+        <PrimaryButton
+          content={translateAccountSettings(
+            "formLabels.deleteAccountButtonContent"
+          )}
+          type="functional"
+          disabled={
+            loadingCloudinaryImage === "PENDING" ||
+            loadingUpdateProfile === "PENDING"
+          }
+          onClickFunction={(e) => {
+            e.preventDefault();
+            dispatch(
+              updateWarningOverlay({
+                countdownSeconds: 5,
+                onConfirmFunction: () => {
+                  dispatch(deleteUser(profile.id))
+                    .unwrap()
+                    .then(() => logoutUser());
+                },
+                overlayMessage: translateWarningOverlayMessages(
+                  "deleteAccountSettingsMessage"
+                ),
+                showOverlay: true,
+              })
+            );
+          }}
         />
         <PrimaryButton
           content={translateAccountSettings("formLabels.submitButtonContent")}

@@ -8,8 +8,7 @@ import { RecipeClient } from "../../db/postgres";
 import { handleCacheMutation } from "../../utils/redis";
 
 const deleteRecipe = async (req: Request, res: Response) => {
-  const { recipeId } = req.params;
-  const { userId } = req.params;
+  const { recipeId, userId } = req.params;
 
   if (!recipeId) {
     return res

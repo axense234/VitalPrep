@@ -454,7 +454,7 @@
       "recipe": "Rezepte",
       "dayTemplate": "Tagespläne",
       "instanceTemplate": "Sitzungsvorlagen",
-      "mealPrepPlan": "Essenszubereitungspläne",
+      "mealPrepPlan": "\"Meal Prep\"-Plan",
       "mealPrepLog": "Sitzungsprotokoll"
     },
     "noEntitiesCase": {
@@ -583,7 +583,8 @@
         "password": "Neues Kennwort",
         "verifyPassword": "Passwort bestätigen",
         "image": "Neues Kontobild",
-        "submitButtonContent": "Kontoeinstellungen aktualisieren"
+        "submitButtonContent": "Kontoeinstellungen aktualisieren",
+        "deleteAccountButtonContent": "Lösche deinen Account"
       }
     },
     "notificationSettings": {
@@ -653,7 +654,7 @@
           "linkDest": "#sessionTemplates"
         },
         "f": {
-          "linkLabel": "Essenszubereitungspläne",
+          "linkLabel": "\"Meal Prep\"-Plan",
           "linkDest": "#mealPrepPlans"
         }
       },
@@ -796,7 +797,7 @@
           "4": {
             "title": "Tagespläne",
             "descriptions": {
-              "1": "<span>Tagespläne</span> sind die Hauptbestandteile von a <span>Sitzungsvorlage</span>.  <span>Sitzungsvorlagen</span>, und ohne <span>Sitzungsvorlagen</span> du kannst nicht erschaffen <span>Essenszubereitungspläne</span>.  <span>Sitzungsvorlage</span>.",
+              "1": "<span>Tagespläne</span> sind die Hauptbestandteile von a <span>Sitzungsvorlage</span>.  <span>Sitzungsvorlagen</span>, und ohne <span>Sitzungsvorlagen</span> du kannst nicht erschaffen <span>\"Meal Prep\"-Plan</span>.  <span>Sitzungsvorlage</span>.",
               "2": "Benutzen Sie die <createTool> Werkzeugseite erstellen</createTool> eine erstellen <span>Tagesplan</span>. ",
               "3": "Wählen Sie anschließend a aus <span>spezifisches Rezept</span> für jede verwendete Mahlzeit.",
               "4": "Zu <span>Sicht</span> all dein <span>erstellte Einheiten</span>, verwenden Sie die <multiViewTool>Multi-View-Tool-Seite</multiViewTool>.  <span>Einzelwesen</span> Klicken Sie im Detail auf eine beliebige <span>Tagesplan</span> Komponente auf der <multiViewTool> Multi-View-Tool-Seite</multiViewTool>."
@@ -811,7 +812,7 @@
           "5": {
             "title": "Sitzungsvorlagen",
             "descriptions": {
-              "1": "<span>Sitzungsvorlagen</span> sind die Hauptbestandteile von a <span>\"Meal Prep\"-Plan</span>.  <span>Essenszubereitungspläne</span>.  <span>\"Meal Prep\"-Plan</span>.",
+              "1": "<span>Sitzungsvorlagen</span> sind die Hauptbestandteile von a <span>\"Meal Prep\"-Plan</span>.  <span>\"Meal Prep\"-Plan</span>.  <span>\"Meal Prep\"-Plan</span>.",
               "2": "<span>Sitzungsvorlagen</span> werden auch von verwendet <span>Sitzungsprotokolle</span>.",
               "3": "Benutzen Sie die <createTool> Werkzeugseite erstellen</createTool> eine erstellen <span>Sitzungsvorlage</span>. ",
               "4": "Wählen Sie anschließend a aus <span>spezifischer Tagesplan</span> für jeden einzelnen abgedeckten Tag.",
@@ -825,9 +826,9 @@
             }
           },
           "6": {
-            "title": "Essenszubereitungspläne",
+            "title": "\"Meal Prep\"-Plan",
             "descriptions": {
-              "1": "<span>Essenszubereitungspläne</span> Stellen Sie die tatsächlichen Pläne dar, denen Sie folgen werden.  <span>Benachrichtigungen</span> für dein <span>\"Meal Prep\"-Plan-Sitzungen</span>, du wirst brauchen <span>aktivieren Sie</span> sagte Meal Prep Plan und auch <span>Abonnieren Sie unsere Benachrichtigungen</span>.",
+              "1": "<span>\"Meal Prep\"-Plan</span> Stellen Sie die tatsächlichen Pläne dar, denen Sie folgen werden.  <span>Benachrichtigungen</span> für dein <span>\"Meal Prep\"-Plan-Sitzungen</span>, du wirst brauchen <span>aktivieren Sie</span> sagte Meal Prep Plan und auch <span>Abonnieren Sie unsere Benachrichtigungen</span>.",
               "2": "Benutzen Sie die <createTool> Werkzeugseite erstellen</createTool> eine erstellen <span>Sitzungsvorlage</span>. ",
               "3": "Wählen Sie anschließend a aus <span>spezifische Sitzungsvorlage</span> für jede spezifische Sitzung die <span>Wochentag</span> Und <span>Stunde</span> Sie beginnen mit der Essenszubereitung.",
               "4": "Zu <span>Sicht</span> all dein <span>erstellte Einheiten</span>, verwenden Sie die <multiViewTool>Multi-View-Tool-Seite</multiViewTool>.  <span>Einzelwesen</span> Klicken Sie im Detail auf eine beliebige <span>\"Meal Prep\"-Plan</span> Komponente auf der <multiViewTool> Multi-View-Tool-Seite</multiViewTool>."
@@ -1155,6 +1156,7 @@
     "messages": {
       "deleteEntityMessage": "Sind Sie wirklich sicher, dass Sie den folgenden {entityType} dauerhaft löschen möchten: {entityName}?",
       "saveAccountSettingsMessage": "Sind Sie sicher, dass Sie Ihre Kontoeinstellungen speichern möchten?",
+      "deleteAccountSettingsMessage": "Möchten Sie Ihr Konto wirklich löschen? Diese Aktion ist dauerhaft.",
       "saveNotificationSettingsMessage": "Sind Sie sicher, dass Sie Ihre Benachrichtigungseinstellungen speichern möchten?"
     }
   },

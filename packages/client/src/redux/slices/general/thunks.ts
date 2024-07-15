@@ -190,6 +190,19 @@ export const updateUser = createAsyncThunk<
   }
 });
 
+export const deleteUser = createAsyncThunk<User | AxiosError, string>(
+  "general/deleteUser",
+  async (id) => {
+    try {
+      const { data } = await axiosInstance.delete(`users/delete/${id}`);
+      return data.user as User;
+    } catch (error) {
+      console.log(error);
+      return error as AxiosError;
+    }
+  }
+);
+
 export const loginUser = createAsyncThunk<User | AxiosError, UserTemplate>(
   "general/loginUser",
   async (userTemplate) => {

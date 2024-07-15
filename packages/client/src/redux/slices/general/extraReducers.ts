@@ -15,7 +15,9 @@ import {
   loginUser,
   logoutUser,
   createCloudinaryImage,
+  deleteUser,
 } from "./thunks";
+import { logoutOneSignal } from "@/helpers/initializeOneSignal";
 
 const generalSliceExtraReducers: (
   builder: ActionReducerMapBuilder<GeneralSliceInitialStateType>
@@ -155,7 +157,6 @@ const generalSliceExtraReducers: (
 
       const user = action.payload as UserType;
       const axiosError = action.payload as AxiosError;
-      console.log(user);
 
       if (axiosError !== undefined && !axiosError.response) {
         state.profile = user;
@@ -174,6 +175,22 @@ const generalSliceExtraReducers: (
         state.showGeneralModal = false;
         state.showFormModal = true;
         state.templateModalMessage = errorData.message;
+      }
+    })
+    .addCase(deleteUser.fulfilled, (state, action) => {
+      state.isModalUsedWhenLoading = false;
+      state.invalidJWT = false;
+
+      const user = action.payload as UserType;
+      const axiosError = action.payload as AxiosError;
+
+      if (axiosError !== undefined && !axiosError.response) {
+        state.showGeneralModal = true;
+        state.loadingUpdateProfile = "SUCCEDED";
+        if (state.typeOfUpdateAccountQuery === "account") {
+          state.templateModalMessage = `Successfully deleted user ${user.username}.`;
+          window.location.href = "/";
+        }
       }
     })
     .addCase(signinUserThroughOAuth.pending, (state, action) => {

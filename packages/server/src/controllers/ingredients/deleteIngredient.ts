@@ -8,8 +8,7 @@ import { IngredientClient } from "../../db/postgres";
 import { handleCacheMutation } from "../../utils/redis";
 
 const deleteIngredient = async (req: Request, res: Response) => {
-  const { ingredientId } = req.params;
-  const { userId } = req.query;
+  const { ingredientId, userId } = req.params;
 
   if (!ingredientId) {
     return res

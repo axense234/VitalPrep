@@ -583,7 +583,8 @@
         "password": "Nouveau mot de passe:",
         "verifyPassword": "Vérifier le mot de passe:",
         "image": "Image du nouveau compte:",
-        "submitButtonContent": "Mettre à jour les paramètres du compte"
+        "submitButtonContent": "Mettre à jour les paramètres du compte",
+        "deleteAccountButtonContent": "Supprimer votre compte"
       }
     },
     "notificationSettings": {
@@ -1155,6 +1156,7 @@
     "messages": {
       "deleteEntityMessage": "Êtes-vous vraiment sûr de vouloir supprimer définitivement le {entityType} suivant : {entityName} ?",
       "saveAccountSettingsMessage": "Êtes-vous sûr de vouloir enregistrer les paramètres de votre compte ?",
+      "deleteAccountSettingsMessage": "Êtes-vous sûr de vouloir supprimer votre compte ? Cette action est permanente.",
       "saveNotificationSettingsMessage": "Êtes-vous sûr de vouloir enregistrer vos paramètres de notification ?"
     }
   },

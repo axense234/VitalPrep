@@ -8,8 +8,7 @@ import { MealPrepLogClient } from "../../db/postgres";
 import { handleCacheMutation } from "../../utils/redis";
 
 const deleteMealPrepLog = async (req: Request, res: Response) => {
-  const { mealPrepLogId } = req.params;
-  const { userId } = req.query;
+  const { mealPrepLogId, userId } = req.params;
 
   if (!mealPrepLogId) {
     return res

@@ -8,8 +8,7 @@ import { MealPrepPlanClient } from "../../db/postgres";
 import { handleCacheMutation } from "../../utils/redis";
 
 const deleteMealPrepPlan = async (req: Request, res: Response) => {
-  const { mealPrepPlanId } = req.params;
-  const { userId } = req.query;
+  const { mealPrepPlanId, userId } = req.params;
 
   if (!mealPrepPlanId) {
     return res

@@ -6,7 +6,7 @@ import PopupModalProps from "@/core/interfaces/modals/PopupModalProps";
 // React
 import { FC, useRef } from "react";
 // SCSS
-import popupModalStyles from "../../../scss/components/others/Modals.module.scss";
+import popupModalStyles from "@/scss/components/others/Modals.module.scss";
 // Hooks
 import useModalTransition from "@/hooks/useModalTransition";
 // React Spinners

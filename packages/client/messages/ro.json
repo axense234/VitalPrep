@@ -583,7 +583,8 @@
         "password": "Parolă nouă:",
         "verifyPassword": "Verifică parolă nouă:",
         "image": "Imagine de profil nouă",
-        "submitButtonContent": "Actualizați setările contului"
+        "submitButtonContent": "Actualizați setările contului",
+        "deleteAccountButtonContent": "Eliminați-vă contul"
       }
     },
     "notificationSettings": {
@@ -1155,6 +1156,7 @@
     "messages": {
       "deleteEntityMessage": "Sunteți cu adevărat sigur că doriți să ștergeți permanent entitatea {entityType} numită {entityName}?",
       "saveAccountSettingsMessage": "Ești sigur că vrei să-ți salvezi setările contului?",
+      "deleteAccountSettingsMessage": "Sigur doriți să vă ștergeți contul? Această acțiune este permanentă.",
       "saveNotificationSettingsMessage": "Sigur doriți să vă salvați setările de notificare?"
     }
   },

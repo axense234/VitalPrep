@@ -583,7 +583,8 @@
         "password": "New Password",
         "verifyPassword": "Verify Password",
         "image": "New Account Image",
-        "submitButtonContent": "Update Account Settings"
+        "submitButtonContent": "Update Account Settings",
+        "deleteAccountButtonContent": "Delete Account"
       }
     },
     "notificationSettings": {
@@ -1155,6 +1156,7 @@
     "messages": {
       "deleteEntityMessage": "Are you really sure you want to permanently delete the following {entityType}: {entityName}?",
       "saveAccountSettingsMessage": "Are you sure you want to save your account settings?",
+      "deleteAccountSettingsMessage": "Are you sure you want to delete your account? This action is permanent.",
       "saveNotificationSettingsMessage": "Are you sure you want to save your notification settings?"
     }
   },

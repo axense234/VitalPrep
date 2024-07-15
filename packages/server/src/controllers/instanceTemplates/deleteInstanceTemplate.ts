@@ -8,8 +8,7 @@ import { InstanceTemplateClient } from "../../db/postgres";
 import { handleCacheMutation } from "../../utils/redis";
 
 const deleteInstanceTemplate = async (req: Request, res: Response) => {
-  const { instanceTemplateId } = req.params;
-  const { userId } = req.params;
+  const { instanceTemplateId, userId } = req.params;
 
   if (!instanceTemplateId) {
     return res.status(StatusCodes.BAD_REQUEST).json({

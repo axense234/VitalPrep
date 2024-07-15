@@ -24,6 +24,7 @@ const getUtensilById = async (req: Request, res: Response) => {
     includeMealPrepPlans,
     includeMealPrepPlansInstanceTemplates,
   } = req.query;
+
   const includeObject: UtensilsIncludeObject = {};
   const queryObject: GetUtensilByIdQueryObject = { id: "" };
 
