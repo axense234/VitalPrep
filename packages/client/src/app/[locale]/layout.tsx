@@ -17,6 +17,8 @@ import {
   APP_DESCRIPTION,
 } from "@/data";
 
+// Need to move this in the data.ts file
+
 export const metadata: Metadata = {
   icons: APP_ICON,
   keywords: APP_KEYWORDS,
