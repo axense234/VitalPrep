@@ -24,11 +24,11 @@ const nextConfig = {
   },
 };
 
-const withPWA = require("@ducanh2912/next-pwa").default({
-  dest: "public",
-});
+// const withPWA = require("@ducanh2912/next-pwa").default({
+//   dest: "public",
+// });
 
-const nextConfigWithPWA = withPWA(nextConfig);
+const nextConfigWithPWA = nextConfig;
 
 // Wrapper Hell
 module.exports = withNextIntl(nextConfigWithPWA);

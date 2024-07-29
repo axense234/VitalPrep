@@ -211,6 +211,7 @@ const NotificationSettings = () => {
             )
           }
         />
+        <div className={`onesignal-customlink-container`}></div>
         <PrimaryButton
           content={translateNotificationSettings(
             "formLabels.submitButtonContent"
