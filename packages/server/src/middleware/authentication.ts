@@ -48,6 +48,7 @@ const authenticationMiddleware = async (
 
   // Normal Flow
   if (!userId || userId === "null" || userId === "undefined") {
+    console.log("exactly");
     return res
       .status(StatusCodes.BAD_REQUEST)
       .json({ message: "Please provide an userId!" });
