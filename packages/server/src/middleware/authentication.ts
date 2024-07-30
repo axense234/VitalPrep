@@ -56,6 +56,7 @@ const authenticationMiddleware = async (
 
   // Cache Token
   const token = await getCache(`${userId}:jwt-vitalprep`);
+  console.log(userId, token);
 
   if (!token) {
     return res
