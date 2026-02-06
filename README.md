@@ -4,7 +4,7 @@ VitalPrep - Meal Prep helper is a fullstack web application that gives users a w
 
 # Website:
 
-https://vitalprep-helper.com
+https://vitalprep-meal.com
 
 # Design(created in Figma)
 
@@ -131,7 +131,7 @@ VitalPrep - Meal Prep helper este o aplicație web fullstack care oferă utiliza
 
 # Website:
 
-https://vitalprep-helper.com
+https://vitalprep-meal.com
 
 # Design(creat în Figma)
 

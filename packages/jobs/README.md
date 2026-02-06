@@ -4,7 +4,7 @@ The cron job scrits for the [VitalPrep - Meal Prep Helper](https://github.com/ax
 
 # Website:
 
-https://vitalprep-helper.com
+https://vitalprep-meal.com
 
 ## Dependencies
 

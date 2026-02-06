@@ -4,7 +4,7 @@ The backend for the [VitalPrep - Meal Prep Helper](https://github.com/axense234/
 
 # Website:
 
-https://vitalprep-helper.com
+https://vitalprep-meal.com
 
 ## Dependencies
 
