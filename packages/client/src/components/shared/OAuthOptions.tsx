@@ -51,7 +51,6 @@ const OAuthOptionsButton: FC<OAuthOptionContent> = ({
       title={OAuthButtonsTranslations(optionType)}
       aria-label={OAuthButtonsTranslations(optionType)}
       onClick={() => {
-        console.log(locale);
         dispatch(
           signinUserThroughOAuth({
             providerName: optionType,

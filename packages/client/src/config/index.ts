@@ -6,7 +6,7 @@ const baseServerUrl =
     : process.env.NEXT_PUBLIC_PRODUCTION_SERVER_SITE_URL;
 
 const baseSiteUrl =
-  env === "development"
+  env === "development" || env === "test"
     ? process.env.NEXT_PUBLIC_TESTING_CLIENT_SITE_URL
     : process.env.NEXT_PUBLIC_PRODUCTION_CLIENT_SITE_URL;
 
